@@ -108,7 +108,7 @@ export default {
       name: "parent",
       title: "Parent",
       type: "reference",
-      to: [{ type: "page.content" }, { type: "page.jobs" }],
+      to: [{ type: "page.content" }],
     },
     TITLE_FIELD,
     {

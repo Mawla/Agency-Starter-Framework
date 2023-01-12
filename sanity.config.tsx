@@ -3,11 +3,11 @@ import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
-import { Config, defineConfig, WorkspaceOptions } from "sanity";
+import { defineConfig, WorkspaceOptions } from "sanity";
 import { deskTool } from "sanity/desk";
 
 const CONFIG = {
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: (import.meta as any).env.SANITY_STUDIO_API_PROJECT_ID,
   plugins: [
     deskTool({
       structure,
@@ -60,7 +60,7 @@ export default defineConfig(
       ({
         ...CONFIG,
         dataset: env.dataset,
-        basePath: `/studio/${env.name}`,
+        basePath: `/cms/${env.name}`,
         name: env.name,
         title: env.title,
         icon: () => (

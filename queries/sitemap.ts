@@ -1,7 +1,6 @@
-import groq from 'groq';
-
-import { languages, LanguageType } from '../languages';
-import { SchemaName } from '../types.sanity';
+import { languages, LanguageType } from "../languages";
+import { SchemaName } from "../types.sanity";
+import groq from "groq";
 
 export type SitemapItemType = {
   _id: string;
@@ -38,7 +37,7 @@ const slugFields = groq`
  "path": "/"+ slug.current,
  "paths": {
     ${languages.map(
-      (language) => `"${language.id}": "/"+ slug.${language.id}.current`,
+      (language) => `"${language.id}": "/"+ slug.${language.id}.current`
     )}
   },
 `;
@@ -63,10 +62,6 @@ export const getSitemapQuery = () => {
     // content pages
     ...*[
       _type == "page.content"
-       || _id match "*page_jobs" 
-       || _id match "*page_job"
-       || _type == "page.location"
-       || _type == "page.department"
        || _type == "page.pressrelease"
       ] {
       ${baseFields},
@@ -75,14 +70,16 @@ export const getSitemapQuery = () => {
         (language) => `
         ${`"level0${language.id}"`}: slug.${language.id}.current,
         ${`"level1${language.id}"`}: parent -> slug.${language.id}.current,
-        ${`"level2${language.id}"`}: parent -> parent -> slug.${language.id}.current,
+        ${`"level2${language.id}"`}: parent -> parent -> slug.${
+          language.id
+        }.current,
         ${`"level3${language.id}"`}: parent -> parent -> parent -> slug.${
           language.id
         }.current,
         ${`"level4${language.id}"`}: parent -> parent -> parent -> parent -> slug.${
           language.id
         }.current
-      `,
+      `
       )}
     }
     {
@@ -98,7 +95,7 @@ export const getSitemapQuery = () => {
           defined(level1${language.id}) => "/"+ level1${language.id} +"/"+ level0${language.id},
           defined(level0${language.id}) => "/"+ level0${language.id}
         )
-        `,
+        `
       )}
     }
   }
@@ -123,7 +120,7 @@ export const getSitemapQuery = () => {
               !("${language.id}" in modules[].language)
             )
           )
-        `,
+        `
       )}
   }}`;
 

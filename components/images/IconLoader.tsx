@@ -1,10 +1,9 @@
 import { textClasses } from "../../colors";
 import { IconType, ICONS, ColorType } from "../../types";
 import cx from "classnames";
+import * as DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-
-const DOMPurify = require("dompurify");
 
 type IconLoaderProps = {
   icon?: IconType;

@@ -20,11 +20,8 @@ export const SCHEMAS = {
   "module.story": "",
   "module.textimage": "",
   "page.content": "",
-  "page.department": "",
   "page.home": "",
-  "page.location": "",
   "page.notfound": "",
-  "page.office": "",
   "page.preset": "",
   "page.pressrelease": "",
   footer: "",
@@ -40,9 +37,7 @@ export type SchemaName = keyof typeof SCHEMAS;
 export const LINKABLE_SCHEMAS = pick(
   SCHEMAS,
   "page.content",
-  "page.department",
   "page.home",
-  "page.location",
   "page.pressrelease"
 );
 
@@ -56,11 +51,8 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "footer",
   "navigation",
   "page.content",
-  "page.department",
   "page.home",
-  "page.location",
   "page.notfound",
-  "page.office",
   "page.pressrelease",
   "person"
 );

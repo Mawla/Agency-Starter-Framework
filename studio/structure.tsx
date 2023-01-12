@@ -38,10 +38,7 @@ export const structure = (
                 .filter(
                   `_type in [
                     'page.content',
-                    'page.department',
                     'page.home',
-                    'page.jobs',
-                    'page.location',
                     'page.pressrelease'
                   ] && !defined(parent)`
                 )
@@ -53,10 +50,6 @@ export const structure = (
           S.divider(),
           singleton(S, { id: "page_homepage", type: "page.home" }),
           documentList(S, { type: "page.content", title: "Content pages" }),
-
-          S.divider(),
-          documentList(S, { type: "page.department", title: "Departments" }),
-          documentList(S, { type: "page.location", title: "Locations" }),
 
           S.divider(),
           documentList(S, {
@@ -72,7 +65,6 @@ export const structure = (
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),
-          documentList(S, { type: "page.office", title: "Offices" }),
         ])
       ),
 
@@ -125,7 +117,7 @@ export const defaultDocumentNode = (
 
   // add preview iframe for pages
   const views: any[] = [S.view.form()];
-  if (schemaType.startsWith("page.") && !["page.office"].includes(schemaType)) {
+  if (schemaType.startsWith("page.")) {
     languages.forEach((language) => {
       views.push(PreviewView(S, language));
     });

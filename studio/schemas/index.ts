@@ -8,23 +8,14 @@ import footer from "./documents/footer";
 import formStatic from "./documents/form.static";
 import navigation from "./documents/navigation";
 import pageContent from "./documents/page.content";
-import pageDepartment from "./documents/page.department";
 import pageHome from "./documents/page.home";
-import pageJob from "./documents/page.job";
-import pageJobs from "./documents/page.jobs";
-import pageLocation from "./documents/page.location";
 import pageNotFound from "./documents/page.notfound";
-import pageOffice from "./documents/page.office";
 import modulePreset from "./documents/page.preset";
 import pagePressRelease from "./documents/page.pressrelease";
 import password from "./documents/password";
 import person from "./documents/person";
 import redirect from "./documents/redirect";
 import sitemap from "./documents/sitemap";
-import workableDepartment from "./documents/workable.department";
-import workableJob from "./documents/workable.job";
-import workableLocation from "./documents/workable.location";
-import workableMonitor from "./documents/workable.monitor";
 import dialogForm from "./modules/dialog.form";
 import dialogRichText from "./modules/dialog.richtext";
 import dialogVideo from "./modules/dialog.video";
@@ -91,10 +82,6 @@ export const schemaTypes = [
     studioDivider,
     styles,
     video,
-    workableDepartment,
-    workableJob,
-    workableLocation,
-    workableMonitor,
   ],
 
   ...translateFields([
@@ -104,13 +91,8 @@ export const schemaTypes = [
     footer,
     navigation,
     pageContent,
-    pageDepartment,
     pageHome,
-    pageJob,
-    pageJobs,
-    pageLocation,
     pageNotFound,
-    pageOffice,
     pagePressRelease,
     person,
   ]),
