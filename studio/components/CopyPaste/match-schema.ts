@@ -3,14 +3,17 @@
  * ['title:string', 'theme:object', 'theme.title:string']
  */
 
-export const getSchemaDefinition = (schema, parent) => {
+export const getSchemaDefinition = (schema, parent: string | null) => {
   return schema.reduce((acc, { name, type }) => {
-    let path = [`${[parent, name].filter(Boolean).join('.')}:${type.jsonType}`];
-    const parentPath = path[0].split(':')[0];
+    let path = [`${[parent, name].filter(Boolean).join(".")}:${type.jsonType}`];
+    const parentPath = path[0].split(":")[0];
     if (type.fields)
       path = [...path, ...getSchemaDefinition(type.fields, parentPath)];
     if (type.options?.fields)
-      path = [...path, ...getSchemaDefinition(type.options?.fields, parentPath)];
+      path = [
+        ...path,
+        ...getSchemaDefinition(type.options?.fields, parentPath),
+      ];
     return [...acc, ...path];
   }, []);
 };
@@ -23,14 +26,14 @@ export const getSchemaDefinition = (schema, parent) => {
 export const matchSchema = (schema, definition) => {
   const errors = schema
     .map((schemaItem) => {
-      const [path, type] = schemaItem.split(':');
+      const [path, type] = schemaItem.split(":");
       const definitionPath = definition.find(
-        (definitionPath) => definitionPath.split(':')[0] === path,
+        (definitionPath) => definitionPath.split(":")[0] === path
       );
       if (!definitionPath) {
         return `Path '${path}' not found`;
       }
-      const definitionPathType = definitionPath.split(':')[1];
+      const definitionPathType = definitionPath.split(":")[1];
       if (type !== definitionPathType) {
         return `Incompatible type for '${path}'. Got ${type}, expecting ${definitionPathType}`;
       }

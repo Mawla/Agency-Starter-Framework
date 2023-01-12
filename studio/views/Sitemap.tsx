@@ -17,11 +17,11 @@ import {
   TabPanel,
   Badge,
 } from "@sanity/ui";
-import React, { useEffect, useState } from "react";
+import React, { ComponentType, useEffect, useState } from "react";
 import { useClient } from "sanity";
 import { IntentLink } from "sanity/router";
 
-export const Sitemap = () => {
+export const Sitemap: ComponentType<any> = () => {
   const client = useClient({ apiVersion: "vX" });
 
   const [tree, setTree] = useState<SitemapItemType[]>([]);
@@ -36,7 +36,7 @@ export const Sitemap = () => {
     async function fetchTree() {
       const result = await client.fetch(getSitemapQuery());
       setResult(result);
-      setTree(result.filter((item) => Boolean(item.paths)));
+      setTree(result.filter((item: any) => Boolean(item.paths)));
       setState("ready");
     }
     fetchTree();
@@ -204,7 +204,7 @@ export const Sitemap = () => {
   );
 };
 
-const CheckUnique = ({ _id, language }) => {
+const CheckUnique = ({ _id, language }: { _id: string; language: string }) => {
   const [isUnique, setIsUnique] = useState<boolean>(true);
 
   useEffect(() => {

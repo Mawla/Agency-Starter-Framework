@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { ComponentType } from "react";
 
-export const EmbedIframe = ({ documentId, schemaType, options }) => {
+export const EmbedIframe: ComponentType<any> = ({
+  documentId,
+  schemaType,
+  options,
+}: {
+  documentId: string;
+  schemaType: { name: string };
+  options: { embedLink: string };
+}) => {
   if (!options.embedLink) return null;
   return (
     <div>
@@ -8,9 +16,9 @@ export const EmbedIframe = ({ documentId, schemaType, options }) => {
         className="previewView"
         src={options.embedLink}
         style={{
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
+          width: "100%",
+          height: "100%",
+          position: "absolute",
           inset: 0,
           border: 0,
         }}

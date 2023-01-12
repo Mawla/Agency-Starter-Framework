@@ -1,3 +1,4 @@
+import { LanguageType } from "../../../languages";
 import { getSitemapQuery, SitemapType } from "../../../queries/sitemap";
 import { StructureBuilder } from "sanity/desk";
 
@@ -24,12 +25,16 @@ export const isPathUnique = async (
   const sitemapItem = sitemap.find(({ _id }) => document._id === _id);
 
   // find all paths that match this documents path
-  const matches = sitemap.filter(
-    ({ paths, _id }) =>
+  const matches = sitemap.filter(({ paths, _id }) => {
+    const languagePath = paths?.[language as LanguageType];
+    const sitemapItemPath = sitemapItem?.paths[language as LanguageType];
+
+    return (
       _id !== `${id}` &&
       _id !== `drafts.${id}` &&
-      paths[language] === sitemapItem.paths[language]
-  );
+      languagePath === sitemapItemPath
+    );
+  });
 
   return matches.length === 0;
 };

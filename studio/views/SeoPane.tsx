@@ -3,10 +3,15 @@ import { baseLanguage, languages, LanguageType } from "../../languages";
 import { getConfigQuery } from "../../queries/config";
 import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap";
 import { Card, Stack, Text, TabList, Tab, TabPanel } from "@sanity/ui";
-import React, { useEffect, useState } from "react";
+import React, { ComponentType, useEffect, useState } from "react";
 import { useClient } from "sanity";
 
-export const SeoPane = ({ documentId, schemaType, options, document }) => {
+export const SeoPane: ComponentType<any> = ({
+  documentId,
+  schemaType,
+  options,
+  document,
+}) => {
   const client = useClient({ apiVersion: "vX" });
   const [config, setConfig] = useState(null);
   const [currentLanguage, setCurrentLanguage] =

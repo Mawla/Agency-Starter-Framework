@@ -1,6 +1,7 @@
 import { SchemaName } from "../../../types.sanity";
 import { getDocumentIcon } from "../document/getDocumentIcon";
 import { getDocumentTitle } from "../document/getDocumentTitle";
+import { StructureBuilder } from "sanity/desk";
 
 type DocumentListProps = {
   type: SchemaName;
@@ -11,7 +12,7 @@ type DocumentListProps = {
 };
 
 export function documentList(
-  S,
+  S: StructureBuilder,
   { type, title, filter, icon, createMenuTypes }: DocumentListProps
 ) {
   return S.listItem()
@@ -47,8 +48,9 @@ export function documentList(
 
       // this keeps the document position in the desk intact
       // but only works with lists with a single schematype
+
       return list.canHandleIntent(
-        S.documentTypeList(type).getCanHandleIntent()
+        S.documentTypeList(type).getCanHandleIntent() as any
       );
     });
 }

@@ -1,28 +1,26 @@
-import { Box, Flex, rgba, Stack, Text, Tooltip } from '@sanity/ui';
-import cx from 'classnames';
-import React from 'react';
-import { usePopoverState, Popover, PopoverDisclosure } from 'reakit/Popover';
-import tinycolor from 'tinycolor2';
-
-import { optionsToList } from '../../utils/fields/optionsToList';
-
-import styles from './stylespanel.module.css';
+import { optionsToList } from "../../utils/fields/optionsToList";
+import styles from "./stylespanel.module.css";
+import { Box, Flex, Stack, Text, Tooltip } from "@sanity/ui";
+import cx from "classnames";
+import React from "react";
+import { usePopoverState, Popover, PopoverDisclosure } from "reakit/Popover";
+import tinycolor from "tinycolor2";
 
 export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
-  colors = [{ title: 'Clear', value: null }, ...optionsToList(colors)];
+  colors = [{ title: "Clear", value: null }, ...optionsToList(colors)];
 
   const currentColor = value
     ? colors.find((color) => color.value === value)?.title
     : null;
 
-  const popover = usePopoverState({ placement: 'right-start', gutter: 1 });
+  const popover = usePopoverState({ placement: "right-start", gutter: 1 });
 
   // group colors by category `pink-500` -> `pink`
   const colorRows = { misc: [] };
   colors.forEach(({ title, value }) => {
-    if (!value || value.indexOf('-') === -1 || colors?.length < 12)
+    if (!value || value.indexOf("-") === -1 || colors?.length < 12)
       return colorRows.misc.push({ title, value });
-    const group = value.split('-')[0];
+    const group = value.split("-")[0];
     if (!colorRows[group]) colorRows[group] = [];
     colorRows[group].push({ title, value });
   });
@@ -41,7 +39,7 @@ export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
       <Popover {...popover} className={styles.popover}>
         <Stack space={1} padding={2}>
           {Object.values(colorRows).map((colors) => (
-            <Flex gap={1} wrap="wrap" style={{ maxWidth: '75vw' }}>
+            <Flex gap={1} wrap="wrap" style={{ maxWidth: "75vw" }}>
               {colors?.map((option) => {
                 return (
                   <Tooltip
@@ -49,7 +47,8 @@ export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
                       <Box
                         padding={4}
                         style={{
-                          backgroundColor: value === 'null' ? 'white' : option.title,
+                          backgroundColor:
+                            value === "null" ? "white" : option.title,
                         }}
                       >
                         <Text
@@ -57,13 +56,13 @@ export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
                           style={{
                             color:
                               option.value === null
-                                ? 'black'
+                                ? "black"
                                 : tinycolor(option.title).isDark()
-                                ? 'white'
-                                : 'black',
+                                ? "white"
+                                : "black",
                           }}
                         >
-                          {option.value || 'clear'}
+                          {option.value || "clear"}
                         </Text>
                       </Box>
                     }
@@ -91,7 +90,9 @@ export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
                         }
                         style={{
                           backgroundColor:
-                            option.value === null ? 'transparent' : option.title,
+                            option.value === null
+                              ? "transparent"
+                              : option.title,
                         }}
                       />
                     </button>

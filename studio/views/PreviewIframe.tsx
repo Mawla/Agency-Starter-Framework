@@ -1,6 +1,14 @@
-import React from "react";
+import React, { ComponentType } from "react";
 
-export const PreviewIframe = ({ documentId, schemaType, options }) => {
+export const PreviewIframe: ComponentType<any> = ({
+  documentId,
+  schemaType,
+  options,
+}: {
+  documentId: string;
+  schemaType: { name: string };
+  options: { language: string };
+}) => {
   const draftId = documentId.startsWith("drafts.")
     ? documentId
     : `drafts.${documentId}`;
@@ -13,7 +21,15 @@ export const PreviewIframe = ({ documentId, schemaType, options }) => {
   );
 };
 
-export const PreviewIframeComponent = ({ _id, _type, language }) => {
+export const PreviewIframeComponent = ({
+  _id,
+  _type,
+  language,
+}: {
+  _id: string;
+  _type: string;
+  language: string;
+}) => {
   const url = `${
     (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH
   }api/preview/preview?_id=${_id}&_type=${_type}&secret=${

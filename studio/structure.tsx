@@ -1,5 +1,4 @@
-// import {SeoPane} from './views/SeoPane'
-import { languages, LanguageType } from "../languages";
+import { languages, LanguagesListItemType } from "../languages";
 import { DocumentIcon } from "./utils/DocumentIcon";
 import { documentList } from "./utils/desk/documentList";
 import { group } from "./utils/desk/group";
@@ -7,6 +6,7 @@ import { list } from "./utils/desk/list";
 import { singleton } from "./utils/desk/singleton";
 import { EmbedIframe } from "./views/EmbedIframe";
 import { PreviewIframe } from "./views/PreviewIframe";
+import { SeoPane } from "./views/SeoPane";
 import {
   DefaultDocumentNodeContext,
   StructureBuilder,
@@ -20,7 +20,7 @@ export const structure = (
   S: StructureBuilder,
   context: StructureResolverContext
 ) =>
-  S.list(S)
+  S.list()
     .title("Website")
     .items([
       group(S, {
@@ -32,7 +32,7 @@ export const structure = (
             .title("All pages")
             .icon(() => <DocumentIcon type="structure" />)
             .child(
-              S.documentList(S)
+              S.documentList()
                 .title("Content pages")
                 .schemaType("page.content")
                 .filter(
@@ -123,14 +123,17 @@ export const defaultDocumentNode = (
     });
 
     if (schemaType !== "page.preset") {
-      // views.push(SeoView(S))
+      views.push(SeoView(S));
     }
   }
 
   return S.document().schemaType(schemaType).views(views);
 };
 
-export const PreviewView = (S: StructureBuilder, language: LanguageType) =>
+export const PreviewView = (
+  S: StructureBuilder,
+  language: LanguagesListItemType
+) =>
   S.view
     .component(PreviewIframe)
     .options({
@@ -171,7 +174,7 @@ async function nestedContentPageList(
   );
 
   if (hasChildren) {
-    return S.documentList(S)
+    return S.documentList()
       .title(page?.title || "Pages")
       .schemaType(page?._type)
       .filter(

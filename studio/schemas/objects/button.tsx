@@ -96,7 +96,7 @@ const schema: SchemaType = {
         "Use this for a #hash or ?querystring. This field is not automatically updated when the destination changes.",
       hidden: ({ parent, value }) =>
         !value && (parent?.external || parent?.dialog || parent?.file),
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.custom((value) => {
           if (typeof value === "undefined") return true; // Allow undefined values
           if (!value.startsWith("#") && !value.startsWith("?"))

@@ -38,7 +38,7 @@ export default {
         title: key,
         type: "string",
         description,
-        validation: (Rule) => Rule.required(),
+        validation: (Rule: any) => Rule.required(),
       })),
   ],
 };

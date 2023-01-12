@@ -17,7 +17,7 @@ export function validate({
   required,
   unique,
 }: ValidateProps) {
-  return (Rule) => {
+  return (Rule: any) => {
     const rules = [];
     isDefined(required) && rules.push(Rule.required().error());
     isDefined(min) && rules.push(Rule.min(min).error());
@@ -29,7 +29,7 @@ export function validate({
     return rules;
   };
 
-  function isDefined(field) {
-    return typeof field !== 'undefined'; // To prevent it being false on false or null
+  function isDefined(field: string) {
+    return typeof field !== "undefined"; // To prevent it being false on false or null
   }
 }

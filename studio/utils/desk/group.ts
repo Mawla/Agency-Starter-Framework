@@ -11,6 +11,6 @@ type GroupProps = {
 
 export function group(S: StructureBuilder, { type, title, icon }: GroupProps) {
   return S.listItem()
-    .title(title || getDocumentTitle(S, type))
-    .icon(icon || getDocumentIcon(S, type));
+    .title(title || getDocumentTitle(S, type || null))
+    .icon(icon || getDocumentIcon(S, type || null));
 }

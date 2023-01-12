@@ -20,7 +20,7 @@ export const SEO_FIELD = {
       title: "Title",
       type: "string",
       description: "Around 55-60 characters long.",
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.required().warning("It's good practice adding a title for SEO."),
     },
     {
@@ -29,7 +29,7 @@ export const SEO_FIELD = {
       description: "Around 150-160 characters long.",
       type: "text",
       rows: 3,
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.required().warning(
           "It's good practice adding a description for SEO."
         ),
@@ -39,7 +39,7 @@ export const SEO_FIELD = {
       title: "Image",
       type: "image",
       description: "Preferred size: 1200x630",
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.required().warning(
           "It's good practice adding an image for SEO and social sharing."
         ),

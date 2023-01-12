@@ -34,11 +34,11 @@ const languageField: { [key: string]: any } = {
 //   }
 // }
 
-export const translateFields = (docs) => {
-  const documents = docs.map((doc) => {
+export const translateFields = (docs: any) => {
+  const documents = docs.map((doc: any) => {
     // Change all the fields to object versions with properties for each
     // language, if either the document has localize: true or individual fields
-    const fields = doc.fields.map((field) => {
+    const fields = doc.fields.map((field: any) => {
       const shouldLocalize =
         // field.type !== 'reference' && // Removed this I want to localize references as well
         doc.localize ||
@@ -58,7 +58,7 @@ export const translateFields = (docs) => {
           description: null,
           options: {
             source: field.options?.source
-              ? (doc) => {
+              ? (doc: any) => {
                   return doc.title[language.id];
                 }
               : null,

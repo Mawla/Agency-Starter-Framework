@@ -31,8 +31,8 @@ export default {
       title: "Source",
       name: "source",
       type: "string",
-      validation: (Rule) =>
-        Rule.custom((name) => {
+      validation: (Rule: any) =>
+        Rule.custom((name: string) => {
           if (typeof name === "undefined") return true; // Allow undefined values
 
           if (name.startsWith("http") || name.startsWith("www"))

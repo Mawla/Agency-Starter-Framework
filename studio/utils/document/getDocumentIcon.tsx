@@ -4,8 +4,9 @@ import { StructureBuilder } from "sanity/desk";
 
 export const getDocumentIcon = (
   S: StructureBuilder,
-  schemaType: SchemaName
+  schemaType: SchemaName | null
 ): JSX.Element | null => {
+  if (!schemaType) return null;
   return (
     (getSchemas(S).find(({ name }) => schemaType === name)
       ?.icon as JSX.Element) || null
