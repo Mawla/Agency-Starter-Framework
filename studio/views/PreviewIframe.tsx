@@ -14,7 +14,11 @@ export const PreviewIframe = ({ documentId, schemaType, options }) => {
 };
 
 export const PreviewIframeComponent = ({ _id, _type, language }) => {
-  const url = `${process.env.SANITY_STUDIO_PROJECT_PATH}api/preview/preview?_id=${_id}&_type=${_type}&secret=${process.env.SANITY_STUDIO_PREVIEW_SECRET}&language=${language}`;
+  const url = `${
+    (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH
+  }api/preview/preview?_id=${_id}&_type=${_type}&secret=${
+    (import.meta as any).env.SANITY_STUDIO_PREVIEW_SECRET
+  }&language=${language}`;
   return (
     <div className="previewView">
       <style>{`
