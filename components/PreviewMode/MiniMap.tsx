@@ -227,7 +227,7 @@ const Preview = ({ html }: { html: string }) => {
   return (
     <div
       dangerouslySetInnerHTML={{ __html: html }}
-      className="pointer-events-none transform-gpu"
+      className="pointer-events-none transform-gpu w-[1680px]"
       style={{
         zoom: 0.15,
       }}
