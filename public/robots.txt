@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /*
+
+Allow: /api/sitemap
+Disallow: /api/*
+Disallow: /cms/*
+
+# Host
+Host: https://google.com
+
+# Sitemaps
+Sitemap: https://google.com/sitemap.xml

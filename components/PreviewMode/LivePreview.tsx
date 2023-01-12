@@ -1,0 +1,416 @@
+import { MiniMap, MiniMapProps } from "./MiniMap";
+import { ScreenCapture } from "./ScreenCapture";
+import { ClientConfig, SanityClient } from "@sanity/client";
+import sanityClient from "@sanity/client";
+import cx from "classnames";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+
+/**
+ * Create sanity client instance using the preview token
+ */
+
+const createLivePreviewFrontendClient = (
+  config: ClientConfig,
+  previewToken: string
+) => {
+  if (!previewToken) return null;
+  return sanityClient({
+    ...config,
+    apiVersion: "2021-03-25",
+    useCdn: false,
+    token: previewToken,
+    ignoreBrowserTokenWarning: true,
+  });
+};
+
+export type LivePreviewProps = {
+  setPageData: (page: any) => void;
+  getQuery: () => string;
+  queryParams: any;
+  pageId: string;
+  updatedAt?: string;
+  config: ClientConfig;
+  pagePath: string;
+};
+
+export const LivePreview = ({
+  setPageData,
+  getQuery,
+  queryParams,
+  pageId,
+  updatedAt,
+  config,
+  pagePath,
+}: LivePreviewProps) => {
+  const previewTools = useRef<HTMLDivElement>(null);
+
+  const [previewLoading, setPreviewLoading] = useState<boolean>(false);
+
+  const frontendClient = useRef<SanityClient | null>(null);
+  const mutationUpdatedAt = useRef<Date | null>(null);
+  const reloadTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reloadAttempts = useRef<number>(0);
+
+  const [miniModules, setMiniModules] = useState<MiniMapProps["modules"]>([]);
+  const [modules, setModules] = useState<any[]>([]);
+  const [miniHero, setMiniHero] =
+    useState<MiniMapProps["modules"][0] | null>(null);
+  const [isMiniMapVisible, setIsMiniMapVisible] = useState<boolean>(false);
+
+  const timeLog = useCallback((date: string, message: string) => {
+    console.log(`[${new Date(date).toLocaleTimeString("en-US")}]: ${message}`);
+  }, []);
+
+  /**
+   * Reload page data
+   */
+
+  const reloadPreview = useCallback(async () => {
+    if (!frontendClient.current) return;
+    if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
+
+    ++reloadAttempts.current;
+
+    /**
+     * skip the reload the page has been
+     * updated since the mutation,
+     */
+    if (
+      updatedAt &&
+      mutationUpdatedAt.current &&
+      new Date(updatedAt) > mutationUpdatedAt.current
+    ) {
+      console.log("found newer mutation, skipping reload");
+      return;
+    }
+
+    /**
+     * fetch the latest version of the page
+     * and check the date
+     */
+
+    const newUpdatedAt = await frontendClient.current.fetch(
+      `*[_id == $_id][0] { _updatedAt }._updatedAt`,
+      {
+        _id: pageId,
+      }
+    );
+
+    timeLog(newUpdatedAt, "fetched new");
+
+    /**
+     * if the latest version date doesn't match
+     * the mutation date, try again
+     */
+
+    if (
+      mutationUpdatedAt.current &&
+      new Date(newUpdatedAt) < mutationUpdatedAt.current
+    ) {
+      timeLog(newUpdatedAt, "latest updatedAt doesn't match, reloading");
+      reloadTimeout.current = setTimeout(
+        reloadPreview,
+        250 + 100 * reloadAttempts.current
+      );
+      return;
+    }
+
+    // fetch the new page
+    setPreviewLoading(true);
+    const newPage = await frontendClient.current.fetch(getQuery(), queryParams);
+
+    timeLog(newPage._updatedAt, "got new page data");
+
+    /**
+     * if the new page date doesn't match
+     * the mutation date, try again
+     */
+
+    if (
+      mutationUpdatedAt.current &&
+      new Date(newPage._updatedAt) < mutationUpdatedAt.current
+    ) {
+      timeLog(newUpdatedAt, "time on new page doesn't match, reloading");
+      reloadTimeout.current = setTimeout(
+        reloadPreview,
+        250 + 100 * reloadAttempts.current
+      );
+      return;
+    }
+
+    console.log("done");
+
+    setPageData(newPage);
+    setModules(newPage.modules);
+
+    const newMiniModules = newPage.modules.map(
+      ({
+        _key,
+        _type,
+        title,
+      }: {
+        _type: string;
+        _key: string;
+        title: string;
+      }) => ({
+        _type,
+        _key,
+        title,
+      })
+    );
+
+    setMiniModules(newMiniModules);
+    setMiniHero(newPage.hero);
+
+    setPreviewLoading(false);
+    reloadAttempts.current = 0;
+  }, [frontendClient, pageId, updatedAt]);
+
+  useEffect(() => {
+    if (!pageId) return;
+    let listener: any;
+
+    /**
+     * Get preview token from api with user credentials
+     * because we don't want to store it in the frontend
+     */
+
+    async function getPreviewToken() {
+      const userReq = await fetch(
+        `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v1/users/me`,
+        { credentials: "include" }
+      );
+      const user = await userReq.json();
+      if (!user?.id) return;
+
+      const res = await fetch(`/api/preview/get-preview-token`, {
+        method: "POST",
+        body: JSON.stringify({ user }),
+      });
+      let { previewToken } = await res.json();
+      previewToken = previewToken?.replace(user.id, "");
+      return previewToken;
+    }
+
+    /**
+     * Create a listener to ping when the data needs to be refreshed
+     */
+
+    async function setupPreviewListener() {
+      if (listener?.unsubscribe) listener.unsubscribe();
+      const previewToken = await getPreviewToken();
+      if (!previewToken) return;
+      const frontendClientInstance = await createLivePreviewFrontendClient(
+        config,
+        previewToken
+      );
+      if (!frontendClientInstance) return;
+      listener = frontendClientInstance
+        .listen(`*[_id == "${pageId}"] { _updatedAt }`, {
+          includeResult: false,
+        })
+        .subscribe((mutation: any) => {
+          // get the field name and key from the mutation
+          const finalMutation =
+            mutation.mutations[mutation.mutations.length - 1];
+          const diffMatchPatch = finalMutation?.patch?.diffMatchPatch || {};
+          const updatedPath = Object.keys(diffMatchPatch)?.[0];
+
+          const fieldName = updatedPath?.split(`[_key=="`)?.[0];
+          const key = updatedPath?.split(`[_key=="`)[1]?.split('"]')?.[0];
+
+          mutationUpdatedAt.current = new Date(mutation?.result._updatedAt);
+
+          console.log("-------");
+          setPreviewLoading(true);
+
+          if (fieldName && key) {
+            timeLog(mutation?.result._updatedAt, `Updated ${fieldName} ${key}`);
+          } else {
+            timeLog(mutation?.result._updatedAt, "received mutation");
+          }
+
+          // fetch new data
+          reloadPreview();
+        });
+
+      frontendClient.current = frontendClientInstance;
+      reloadPreview();
+    }
+
+    setupPreviewListener();
+
+    return () => {
+      if (listener?.unsubscribe) listener.unsubscribe();
+    };
+  }, [pageId, config]);
+
+  /**
+   * Always keep a draft of the page in preview mode
+   */
+
+  useEffect(() => {
+    async function reload() {
+      if (!frontendClient.current) return;
+      const doc = await frontendClient.current.fetch(
+        `*[_id == "${pageId}"] { _id }`
+      );
+      if (!doc?.length) {
+        await fetch(`/api/preview/create-draft?_id=${pageId}`);
+        reloadPreview();
+      }
+    }
+    reload();
+  }, [pageId, frontendClient, reloadPreview]);
+
+  /**
+   * Allow reordering of modules
+   */
+
+  const onReorderModules = useCallback(
+    async (
+      changedModuleKey: string,
+      replacesModuleKey: string,
+      items: string[]
+    ) => {
+      if (!frontendClient.current) return;
+
+      setPreviewLoading(true);
+
+      await fetch(`/api/preview/patch-modules`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pageId,
+          changedModuleKey,
+          replacesModuleKey,
+          newModulesOrder: items,
+        }),
+      });
+    },
+    [pageId]
+  );
+
+  return (
+    <div>
+      <div
+        className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white"
+        ref={previewTools}
+      >
+        <div className="bg-black text-white">
+          <ScreenCapture previewTools={previewTools} />
+        </div>
+
+        {/* reload */}
+        <button
+          className="shadow-lg block px-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
+          onClick={reloadPreview}
+        >
+          {previewLoading ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              viewBox="0 0 40 40"
+              className="w-5 h-5 block"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                strokeWidth="3"
+                transform="translate(2 2)"
+              >
+                <circle cx="18" cy="18" r="18" strokeOpacity="0.5"></circle>
+                <path d="M36 18c0-9.94-8.06-18-18-18">
+                  <animateTransform
+                    attributeName="transform"
+                    dur="1s"
+                    from="0 18 18"
+                    repeatCount="indefinite"
+                    to="360 18 18"
+                    type="rotate"
+                  ></animateTransform>
+                </path>
+              </g>
+            </svg>
+          ) : (
+            <svg
+              className="w-5 h-5 block"
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.84998 7.49998C1.84998 4.66458 4.05979 1.84998 7.49998 1.84998C10.2783 1.84998 11.6515 3.9064 12.2367 5H10.5C10.2239 5 10 5.22386 10 5.5C10 5.77614 10.2239 6 10.5 6H13.5C13.7761 6 14 5.77614 14 5.5V2.5C14 2.22386 13.7761 2 13.5 2C13.2239 2 13 2.22386 13 2.5V4.31318C12.2955 3.07126 10.6659 0.849976 7.49998 0.849976C3.43716 0.849976 0.849976 4.18537 0.849976 7.49998C0.849976 10.8146 3.43716 14.15 7.49998 14.15C9.44382 14.15 11.0622 13.3808 12.2145 12.2084C12.8315 11.5806 13.3133 10.839 13.6418 10.0407C13.7469 9.78536 13.6251 9.49315 13.3698 9.38806C13.1144 9.28296 12.8222 9.40478 12.7171 9.66014C12.4363 10.3425 12.0251 10.9745 11.5013 11.5074C10.5295 12.4963 9.16504 13.15 7.49998 13.15C4.05979 13.15 1.84998 10.3354 1.84998 7.49998Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          )}
+        </button>
+
+        {/* minimap */}
+        <button
+          className="shadow-lg block px-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
+          onClick={() => setIsMiniMapVisible((yesno) => !yesno)}
+        >
+          <svg
+            className="block"
+            width="22"
+            height="22"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.75432 0.819537C7.59742 0.726821 7.4025 0.726821 7.24559 0.819537L1.74559 4.06954C1.59336 4.15949 1.49996 4.32317 1.49996 4.5C1.49996 4.67683 1.59336 4.84051 1.74559 4.93046L7.24559 8.18046C7.4025 8.27318 7.59742 8.27318 7.75432 8.18046L13.2543 4.93046C13.4066 4.84051 13.5 4.67683 13.5 4.5C13.5 4.32317 13.4066 4.15949 13.2543 4.06954L7.75432 0.819537ZM7.49996 7.16923L2.9828 4.5L7.49996 1.83077L12.0171 4.5L7.49996 7.16923ZM1.5695 7.49564C1.70998 7.2579 2.01659 7.17906 2.25432 7.31954L7.49996 10.4192L12.7456 7.31954C12.9833 7.17906 13.2899 7.2579 13.4304 7.49564C13.5709 7.73337 13.4921 8.03998 13.2543 8.18046L7.75432 11.4305C7.59742 11.5232 7.4025 11.5232 7.24559 11.4305L1.74559 8.18046C1.50786 8.03998 1.42901 7.73337 1.5695 7.49564ZM1.56949 10.4956C1.70998 10.2579 2.01658 10.1791 2.25432 10.3195L7.49996 13.4192L12.7456 10.3195C12.9833 10.1791 13.2899 10.2579 13.4304 10.4956C13.5709 10.7334 13.4921 11.04 13.2543 11.1805L7.75432 14.4305C7.59742 14.5232 7.4025 14.5232 7.24559 14.4305L1.74559 11.1805C1.50785 11.04 1.42901 10.7334 1.56949 10.4956Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </button>
+
+        {/* exit preview mode */}
+        <span className="shadow-lg flex gap-4 bg-[#111] items-center">
+          <span className="pl-3 font-['Helvetica_Neue']">preview mode</span>
+
+          <a
+            className="p-3 bg-[#111] transition-color hover:underline hover:bg-[#222] border-l border-l-neutral-25"
+            href={`/api/preview/exit-preview?redirect=${pagePath}`}
+          >
+            <span className="w-5 h-5 block">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.0098 3.99001C19.6198 3.60001 18.9898 3.60001 18.5998 3.99001L11.9998 10.59L5.39977 3.99001C5.00977 3.60001 4.37977 3.60001 3.98977 3.99001C3.59977 4.38001 3.59977 5.01001 3.98977 5.40001L10.5898 12L3.98977 18.6C3.59977 18.99 3.59977 19.62 3.98977 20.01C4.37977 20.4 5.00977 20.4 5.39977 20.01L11.9998 13.41L18.5998 20.01C18.9898 20.4 19.6198 20.4 20.0098 20.01C20.3998 19.62 20.3998 18.99 20.0098 18.6L13.4098 12L20.0098 5.40001C20.3998 5.01001 20.3998 4.38001 20.0098 3.99001Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </a>
+        </span>
+      </div>
+
+      {miniModules && isMiniMapVisible && (
+        <div
+          className={cx(
+            "fixed top-20 right-4 z-60 bg-white border-2 border-black border-opacity-10 max-h-[calc(100vh-100px)] overflow-y-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+          )}
+        >
+          <MiniMap
+            hero={miniHero}
+            modules={miniModules}
+            onReorder={onReorderModules}
+            isLoading={previewLoading}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default React.memo(LivePreview);

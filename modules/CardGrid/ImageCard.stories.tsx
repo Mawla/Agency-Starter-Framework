@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/react";
+import React from "react";
+
+import { demoImage2 } from "../../stories/content";
+import { ImageCard } from "./ImageCard";
+import { ImageRatioType, IMAGE_RATIO_OPTIONS } from "./ImageCardOptions";
+
+export default {
+  component: ImageCard,
+  title: "Modules/CardGrid/ImageCard",
+} as Meta;
+
+export const Ratios = () => (
+  <div className="grid grid-cols-3 gap-10">
+    {(Object.keys(IMAGE_RATIO_OPTIONS) as ImageRatioType[]).map(
+      (ratio: ImageRatioType) => (
+        <div className="relative">
+          <span className="absolute left-6 top-6 bg-white py-2 px-4 z-10 rounded-full">
+            {ratio}
+          </span>
+          <ImageCard image={demoImage2} theme={{ image: { ratio } }} />
+        </div>
+      )
+    )}
+  </div>
+);
+
+export const Lozenges = () => (
+  <div className="grid grid-cols-3 gap-10">
+    {(Object.keys(IMAGE_RATIO_OPTIONS) as ImageRatioType[]).map(
+      (ratio: ImageRatioType, i) => (
+        <div className="relative">
+          <span className="absolute left-6 top-6 bg-white py-2 px-4 z-10 rounded-full">
+            {ratio}
+          </span>
+          <ImageCard
+            image={demoImage2}
+            theme={{ image: { ratio: "1/1" } }}
+            lozengeVariantIndex={i}
+          />
+        </div>
+      )
+    )}
+  </div>
+);

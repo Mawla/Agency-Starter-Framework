@@ -1,0 +1,130 @@
+import { One } from "../../components/Decorations/One";
+import { ButtonProps } from "../../components/buttons/Button";
+import { ButtonGroup } from "../../components/buttons/ButtonGroup";
+import PortableText from "../../components/content/PortableText";
+import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { SpaceType } from "../../components/module/SpacingOptions";
+import { Text } from "../../components/module/Text";
+import { Title } from "../../components/module/Title";
+import { Width } from "../../components/module/Width";
+import { Wrapper } from "../../components/module/Wrapper";
+import { ImageType } from "../../types";
+import { AlignType } from "./BillboardOptions";
+import cx from "classnames";
+import React from "react";
+
+export type BillboardProps = {
+  eyebrow?: string;
+  title?: string;
+  content?: React.ReactNode;
+  image?: ImageType;
+  buttons?: ButtonProps[];
+  theme?: {
+    module?: {
+      space?: SpaceType;
+    };
+    image?: {
+      align?: AlignType;
+    };
+  };
+};
+
+export const Billboard = ({
+  theme,
+  eyebrow,
+  title,
+  content,
+  image,
+  buttons,
+}: BillboardProps) => {
+  return (
+    <Wrapper
+      id={title}
+      theme={{
+        background: "neutral-base",
+        space: theme?.module?.space,
+        rounded: { top: "md", bottom: "md" },
+      }}
+      innerClassName="overflow-hidden"
+    >
+      <Width className="relative z-30 py-10 md:py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2">
+        <div
+          className={cx(
+            "flex flex-col gap-6 lg:gap-8 justify-center z-30 row-start-2 max-w-[600px]",
+            {
+              ["md:col-start-1"]: theme?.image?.align === "right",
+              ["md:col-start-2"]: theme?.image?.align === "left",
+            }
+          )}
+        >
+          {/* no content: add placeholder to size the image */}
+          {!title && !content && !buttons && (
+            <div className="w-full aspect-[16/9]" />
+          )}
+
+          {(title || eyebrow) && (
+            <Title
+              size="2xl"
+              color="white"
+              eyebrowColor="white"
+              as="h2"
+              eyebrow={eyebrow}
+            >
+              {title}
+            </Title>
+          )}
+
+          {content && (
+            <Text font="heading" size="md" color="white" as="div" align={null}>
+              <PortableText content={content as any} />
+            </Text>
+          )}
+          {buttons && (
+            <div className="mt-4">
+              <ButtonGroup
+                stretch={false}
+                direction="horizontal"
+                items={buttons}
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="relative md:static h-[200px] md:h-auto mb-4 md:mb-0">
+          <div
+            className={cx(
+              "z-10 absolute",
+              "top-0 scale-x-[70%] scale-y-[-70%] rotate-[-245deg] translate-y-[-45%] translate-x-[40%]",
+              "md:-top-32 md:scale-x-100 md:scale-y-100 md:rotate-0 md:translate-y-0 md:translate-x-0",
+              {
+                ["md:left-0"]: theme?.image?.align === "left",
+                ["md:right-32"]: theme?.image?.align !== "left",
+              }
+            )}
+          >
+            <One color="brand-base" direction="up" />
+          </div>
+
+          {image && (
+            <div
+              className={cx(
+                "h-full aspect-square pointer-events-none z-20",
+                "absolute top-0 left-1/2 -translate-x-1/2 md:-bottom-16 md:h-[90%] md:translate-x-0 md:top-auto",
+                {
+                  ["md:-left-16 lg:-left-24 xl:left-12"]:
+                    theme?.image?.align === "left",
+                  ["md:left-1/2 md:translate-x-10"]:
+                    theme?.image?.align !== "left",
+                }
+              )}
+            >
+              <ResponsiveImage {...image} fill />
+            </div>
+          )}
+        </div>
+      </Width>
+    </Wrapper>
+  );
+};
+
+export default React.memo(Billboard);

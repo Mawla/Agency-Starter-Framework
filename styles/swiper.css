@@ -1,0 +1,46 @@
+:root {
+  --swiper-pagination-color: currentColor;
+  --swiper-pagination-bullet-inactive-color: currentColor;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+  --swiper-navigation-color: #fef9ee;
+}
+
+.swiper {
+  padding-bottom: 40px !important; /* this allows us to move the pagination outside */
+}
+
+.swiper-pagination {
+  bottom: 0 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  transform: translateY(-15px) !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+/* 
+ * Make swiper visible when scrolling of the grid,
+ * - always on mobile
+ * - on desktop only if not in a module with a background
+ */
+
+.swiper {
+  overflow: visible !important;
+}
+
+*[class*="bg-"] .swiper {
+  overflow: visible !important;
+}
+
+@media only screen and (min-width: 768px) {
+  *[class*="bg-"]:not([class*="bg-white"]) .bleed {
+    overflow: hidden !important;
+  }
+  /* *[class*='bg-']:not([class*='bg-white']) .swiper {
+    overflow: hidden !important;
+  }*/
+}

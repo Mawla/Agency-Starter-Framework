@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/addon-docs';
+import resolveConfig from 'tailwindcss/lib/util/resolveConfig';
+import defaultConfig from 'tailwindcss/stubs/defaultConfig.stub';
+
+import { Tooltip } from '../components/Tooltip/Tooltip';
+import { theme } from '../tailwind.config.js';
+
+<Meta title="Framework/Colors" />
+
+# Colors
+
+<div>
+  {Object.entries(resolveConfig([theme, defaultConfig]).colors)
+    .filter(([key, value]) => !['current', 'transparent'].includes(key))
+    .map(([key, value]) => (
+      <div className="mb-4" key={key}>
+        <h2 style={{ border: 0, fontSize: 16 }}>{key}</h2>
+        <div className="flex flex-wrap gap-1 pb-8 bg-white pt-4">
+          {typeof value === 'string' ? (
+            <Tooltip title={value} key={value}>
+              <div
+                onClick={() => navigator.clipboard.writeText(value)}
+                style={{ backgroundColor: value }}
+                className="p-2 rounded-full border border-neutral-base border-opacity-10 shadow-inner w-24 h-24 flex items-center justify-center"
+              ></div>
+            </Tooltip>
+          ) : (
+            Object.entries(value).map(([key, value]) => (
+              <Tooltip title={value} key={value}>
+                <div
+                  onClick={() => navigator.clipboard.writeText(value)}
+                  style={{ backgroundColor: value }}
+                  className="p-2 rounded-full border border-neutral-base border-opacity-10 shadow-inner w-24 h-24 flex items-center justify-center"
+                >
+                  {key}
+                </div>
+              </Tooltip>
+            ))
+          )}
+        </div>
+      </div>
+    ))}
+</div>

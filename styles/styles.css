@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 10vh;
+}
+
+body {
+  @apply antialiased;
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .bg-inherit {
+    background-color: inherit;
+  }
+
+  /* images */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* 
+  Currently Tailwind default `break-words` doesn't add word-break
+  If this is ever added this can be removed
+  */
+
+  .break-words {
+    overflow-wrap: normal;
+    word-break: break-word;
+  }
+
+  /* Overflow */
+  .overflow-scrolling-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix wrapper div inside portable text destroying prose */
+  .prose-sm > div > :last-child {
+    margin-bottom: 0;
+  }
+  .prose-sm > div > :first-child {
+    margin-top: 0;
+  }
+  .prose > div > :last-child {
+    margin-bottom: 0;
+  }
+  .prose > div > :first-child {
+    margin-top: 0;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .prose .prose-media {
+      width: 1000px;
+      max-width: calc(100vw - 180px);
+    }
+
+    .mx-auto > .prose .prose-media {
+      transform: translateX(-50%);
+      margin-left: 50%;
+    }
+  }
+
+  @media only screen and (min-width: 1280px) {
+    .prose .prose-media {
+      width: 1200px;
+    }
+  }
+
+  .preview {
+    z-index: 999;
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    padding: 6px 8px;
+    background: black;
+    color: white;
+    font-size: 14px;
+  }
+
+  .preview:hover {
+    text-decoration: underline;
+  }
+}
+
+@import "./radix.css";
+@import "./swiper.css";
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+@keyframes module-placeholder-fade {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@keyframes module-placeholder-move {
+  0% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  50% {
+    transform: translate3d(30%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-30%, 0, 0);
+  }
+}
+
+.hyphens-auto {
+  hyphens: auto;
+}
+
+.hyphens-manual {
+  hyphens: manual;
+}
+
+.hyphens-none {
+  hyphens: none;
+}
+
+.transition-drop-shadow {
+  transition-property: filter;
+  transition-timing-function: cubic-bezier(0, 0, 0.38, 1);
+  transition-duration: 0.5s;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/*
+script[type='application/ld+json'] {
+  white-space: pre;
+  display: block;
+  z-index: 9999;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  color: #111;
+}
+*/
