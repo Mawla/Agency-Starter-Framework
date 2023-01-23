@@ -128,89 +128,95 @@ const schema: SchemaType = {
         {
           name: "module",
           title: "Module",
-          type: "object",
-          fields: [
-            {
-              name: "space",
-              type: "string",
-              options: {
-                list: optionsToList(SPACE_OPTIONS),
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "space",
+                title: "Space",
+                type: "space",
+                options: {
+                  list: optionsToList(SPACE_OPTIONS),
+                },
               },
-            },
-            {
-              name: "background",
-              type: "string",
-              components: {
-                input: (props) => <div>foo{props.title}</div>,
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
               },
-              options: {
-                list: optionsToList(BACKGROUND_COLOR_OPTIONS),
-              },
-            },
-          ],
+            ],
+          },
         },
         {
           name: "image",
           title: "Image",
-          type: "object",
-          fields: [
-            {
-              name: "background",
-              type: "string",
-              options: {
-                list: optionsToList(IMAGE_COLOR_OPTIONS),
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
               },
-            },
-            {
-              name: "align",
-              type: "string",
-              options: {
-                list: optionsToList(IMAGE_ALIGN_OPTIONS),
+              {
+                name: "align",
+                type: "select",
+                options: {
+                  list: optionsToList(IMAGE_ALIGN_OPTIONS),
+                },
               },
-            },
-          ],
+            ],
+          },
         },
         {
           name: "title",
           title: "Title",
-          type: "object",
-          fields: [
-            {
-              name: "size",
-              type: "string",
-              options: {
-                list: optionsToList(TITLE_SIZE_OPTIONS),
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "size",
+                type: "select",
+                options: {
+                  list: optionsToList(TITLE_SIZE_OPTIONS),
+                },
               },
-            },
-          ],
+            ],
+          },
         },
         {
           name: "decorations",
           title: "Decorations",
-          type: "object",
-          fields: [
-            {
-              name: "showLozenges",
-              title: "Show Lozenges",
-              type: "boolean",
-            },
-            {
-              name: "roundedTop",
-              type: "string",
-              title: "Rounded top",
-              options: {
-                list: optionsToList(MODULE_RADIUS_OPTIONS),
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "showLozenges",
+                title: "Show Lozenges",
+                type: "boolean",
               },
-            },
-            {
-              name: "roundedBottom",
-              type: "string",
-              title: "Rounded bottom",
-              options: {
-                list: optionsToList(MODULE_RADIUS_OPTIONS),
+              {
+                name: "roundedTop",
+                type: "select",
+                title: "Rounded top",
+                options: {
+                  list: optionsToList(MODULE_RADIUS_OPTIONS),
+                },
               },
-            },
-          ],
+              {
+                name: "roundedBottom",
+                type: "select",
+                title: "Rounded bottom",
+                options: {
+                  list: optionsToList(MODULE_RADIUS_OPTIONS),
+                },
+              },
+            ],
+          },
         },
       ],
     },
