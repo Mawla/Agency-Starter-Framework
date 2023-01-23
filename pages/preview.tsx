@@ -1,9 +1,10 @@
 import { LivePreviewProps } from "../components/PreviewMode/LivePreview";
 import { SiteContext } from "../context/SiteContext";
 import { config as sanityConfig } from "../helpers/sanity/config";
-import { LanguageType } from "../languages";
+import { getClient } from "../helpers/sanity/server";
+import { baseLanguage, LanguageType } from "../languages";
 import { Page } from "../layout/pages/Page";
-import { ConfigType } from "../queries/config";
+import { ConfigType, getConfigQuery } from "../queries/config";
 import { FooterType } from "../queries/footer";
 import { NavigationType } from "../queries/navigation";
 import { getPageQuery, PageType } from "../queries/page";
@@ -21,7 +22,13 @@ const LivePreview = dynamic<LivePreviewProps>(
   { suspense: true }
 );
 
-export default function PreviewPage({ preview }: { preview: boolean }) {
+export default function PreviewPage({
+  preview,
+  config,
+}: {
+  preview: boolean;
+  config: ConfigType;
+}) {
   const isPreviewMode = preview;
   const router = useRouter();
   const { sitemap } = useContext(SiteContext);
@@ -29,7 +36,6 @@ export default function PreviewPage({ preview }: { preview: boolean }) {
   const [page, setPage] = useState<PageType | null>(null);
   const [navigation] = useState<NavigationType | null>(null);
   const [footer] = useState<FooterType | null>(null);
-  const [config] = useState<ConfigType>({} as ConfigType);
 
   const id = Array.isArray(router.query.id)
     ? router.query.id[0]
@@ -79,6 +85,13 @@ export default function PreviewPage({ preview }: { preview: boolean }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-  return { props: { preview }, revalidate: 10 };
+export const getStaticProps: GetStaticProps = async ({
+  preview = false,
+  locale,
+}) => {
+  const config: ConfigType = await getClient(preview).fetch(
+    getConfigQuery((locale as LanguageType) || baseLanguage)
+  );
+
+  return { props: { preview, config }, revalidate: 10 };
 };
