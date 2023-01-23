@@ -277,7 +277,7 @@ export const LivePreview = ({
 
       setPreviewLoading(true);
 
-      await fetch(`/api/preview/patch-modules`, {
+      await fetch(`/api/preview/sort-modules`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

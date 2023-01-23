@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   message?: string;
+  changedModuleKey?: string;
 };
 
 export type ApiBody = {
@@ -72,9 +73,10 @@ const handler = async (
       autoGenerateArrayKeys: false,
     });
 
-  return res
-    .status(200)
-    .json({ message: `Successfully patched modules for ${pageId}` });
+  return res.status(200).json({
+    message: `Successfully patched modules for ${pageId}`,
+    changedModuleKey: moduleData._key,
+  });
 };
 
 export default withSentry(handler as any);
