@@ -29,15 +29,13 @@ export const Breadcrumb = ({ path }: BreadcrumbProps) => {
         (acc, curr) => ({ ...acc, [curr.id]: label }),
         {}
       ) as SitemapItemType["titles"],
-      path: "/",
+      path: `/${label}`,
       paths: languages.reduce(
         (acc, curr) => ({ ...acc, [curr.id]: `/${curr.id}` }),
         {}
       ) as SitemapItemType["paths"],
       _updatedAt: "",
     }));
-
-    console.log(path);
   }
 
   if (!path?.length) return null;
