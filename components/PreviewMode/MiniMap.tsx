@@ -92,7 +92,11 @@ export const MiniMap = ({
         };
       });
 
-      if (previews.some(({ preview }) => !preview?.length)) {
+      const modulesLoading = previews.some(
+        ({ preview }) => !preview || preview?.indexOf("module-placeholder") > -1
+      );
+
+      if (modulesLoading) {
         setTimeout(getModulePreviews, 250);
         return;
       }

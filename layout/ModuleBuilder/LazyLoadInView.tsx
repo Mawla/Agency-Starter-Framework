@@ -58,6 +58,7 @@ export const LazyLoadInView = ({
         children
       ) : (
         <div
+          data-id="module-placeholder"
           className={cx(
             "animate-[module-placeholder-fade_2s_linear_infinite] h-[450px] opacity-100 relative overflow-hidden",
             background !== "transparent" && backgroundClasses[background]

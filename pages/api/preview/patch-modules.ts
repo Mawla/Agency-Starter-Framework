@@ -1,5 +1,6 @@
 import { sanityClient } from "../sanity-client";
 import { withSentry } from "@sentry/nextjs";
+import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -61,14 +62,14 @@ const handler = async (
 
   console.log(changedModuleKey, position, replacesModuleKey);
 
-  delete moduleData._key;
+  moduleData._key = nanoid();
 
   await sanityClient
     .patch(pageId)
     .unset([`modules[_key=="${changedModuleKey}"]`])
     .insert(position, `modules[_key=="${replacesModuleKey}"]`, [moduleData])
     .commit({
-      autoGenerateArrayKeys: true,
+      autoGenerateArrayKeys: false,
     });
 
   return res
