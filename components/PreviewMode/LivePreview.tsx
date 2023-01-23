@@ -57,6 +57,9 @@ export const LivePreview = ({
     useState<MiniMapProps["modules"][0] | null>(null);
   const [isMiniMapVisible, setIsMiniMapVisible] = useState<boolean>(false);
 
+  const [lastChangedModuleKey, setLastChangedModuleKey] =
+    useState<string | null>(null);
+
   const timeLog = useCallback((date: string, message: string) => {
     console.log(`[${new Date(date).toLocaleTimeString("en-US")}]: ${message}`);
   }, []);
@@ -277,7 +280,7 @@ export const LivePreview = ({
 
       setPreviewLoading(true);
 
-      await fetch(`/api/preview/sort-modules`, {
+      const response = await fetch(`/api/preview/sort-modules`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -289,9 +292,31 @@ export const LivePreview = ({
           newModulesOrder: items,
         }),
       });
+
+      const body = await response.json();
+      setLastChangedModuleKey(body?.changedModuleKey);
     },
     [pageId]
   );
+
+  /**
+   * Scroll last changed module into view
+   */
+
+  useEffect(() => {
+    if (!lastChangedModuleKey) return;
+
+    const element = document.querySelector(
+      `[data-id="${lastChangedModuleKey}"]`
+    );
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      setLastChangedModuleKey(null);
+    }
+  }, [miniModules, lastChangedModuleKey]);
 
   return (
     <div>
