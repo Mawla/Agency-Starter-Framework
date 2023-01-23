@@ -42,7 +42,7 @@ const schema: SchemaType = {
       return {
         title: title,
         subtitle: prefixWithLanguage(language, eyebrow),
-        media: image,
+        media: image ? image : () => <DocumentIcon type="textimage" />,
       };
     },
   },

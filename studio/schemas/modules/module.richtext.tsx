@@ -27,7 +27,6 @@ const schema: SchemaType = {
   title: "Rich text",
   type: "object",
   description: "Generic content module with headings, images etc.",
-  icon: () => <DocumentIcon type="page" />,
   preview: {
     select: {
       title: "title",
@@ -39,6 +38,7 @@ const schema: SchemaType = {
       return {
         title: [eyebrow, title, blocksToText(content)].join(" "),
         subtitle: prefixWithLanguage(language, blocksToText(content)),
+        media: () => <DocumentIcon type="page" />,
       };
     },
   },

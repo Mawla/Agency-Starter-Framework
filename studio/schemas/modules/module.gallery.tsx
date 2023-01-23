@@ -23,7 +23,6 @@ const schema: SchemaType = {
   name: "module.gallery",
   title: "Gallery",
   type: "object",
-  icon: () => <DocumentIcon type="gallery" />,
   description: "Photo showcase slider",
   preview: {
     select: {
@@ -35,6 +34,7 @@ const schema: SchemaType = {
       return {
         title: title,
         subtitle: prefixWithLanguage(language, eyebrow),
+        media: () => <DocumentIcon type="gallery" />,
       };
     },
   },
