@@ -59,13 +59,17 @@ const handler = async (
       ? "before"
       : "after";
 
-  console.log(position, replacesModuleKey);
+  console.log(changedModuleKey, position, replacesModuleKey);
+
+  delete moduleData._key;
 
   await sanityClient
     .patch(pageId)
     .unset([`modules[_key=="${changedModuleKey}"]`])
     .insert(position, `modules[_key=="${replacesModuleKey}"]`, [moduleData])
-    .commit();
+    .commit({
+      autoGenerateArrayKeys: true,
+    });
 
   return res
     .status(200)
