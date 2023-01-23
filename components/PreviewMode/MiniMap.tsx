@@ -143,7 +143,7 @@ export const MiniMap = ({
         </SortableContext>
         <DragOverlay>
           {activeId ? (
-            <div className="opacity-50 cursor-grabbing">
+            <div className="opacity-90 cursor-grabbing">
               <Item
                 {...(modulePreviews.find(
                   ({ _key }) => _key === activeId
