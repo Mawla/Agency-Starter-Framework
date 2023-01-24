@@ -13,7 +13,7 @@ export const SeoPane: ComponentType<any> = ({
   document,
 }) => {
   const client = useClient({ apiVersion: "vX" });
-  const [config, setConfig] = useState(null);
+  const [config, setConfig] = useState<any>(null);
   const [currentLanguage, setCurrentLanguage] =
     useState<LanguageType>(baseLanguage);
   const [sitemap, setSitemap] = useState<SitemapItemType[]>([]);

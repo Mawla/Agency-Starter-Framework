@@ -3,9 +3,9 @@ import { SCRIPT_OPTIONS } from "../../../components/content/PortableTextOptions"
 import { CustomRichTextEditor } from "../../components/CustomRichTextEditor";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
-import { validate } from "../../utils/validate";
 import richTextBasicSchema from "../objects/richtext.basic";
 import React from "react";
+import { StringRule } from "sanity";
 
 export default {
   name: "richtext.full",
@@ -115,7 +115,7 @@ export default {
           name: "scriptId",
           title: "Script id",
           type: "string",
-          validation: validate({ required: true }),
+          validation: (Rule: StringRule) => Rule.required(),
           options: {
             list: optionsToList(SCRIPT_OPTIONS),
           },

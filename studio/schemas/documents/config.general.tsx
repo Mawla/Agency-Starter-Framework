@@ -1,8 +1,8 @@
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { validate } from "../../utils/validate";
 import React from "react";
+import { StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "config.general";
 
@@ -37,14 +37,14 @@ export default {
       localize: true,
       description:
         "Name of the website. Used in the page title and brand schema as brand name.",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
     },
     {
       name: "domain",
       type: "string",
       localize: true,
       title: "Domain",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
       description:
         "The website domain without slash and protocol, e.g google.com. Used for the canonical url.",
     },

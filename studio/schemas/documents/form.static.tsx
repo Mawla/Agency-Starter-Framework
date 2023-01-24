@@ -2,8 +2,8 @@ import { STATIC_FORMS, STATIC_FORM_OPTIONS } from "../../../types";
 import { SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
-import { validate } from "../../utils/validate";
 import React from "react";
+import { StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "form.static";
 
@@ -19,13 +19,13 @@ export default {
       title: "Name",
       type: "string",
       description: "Name of the form used to identify it in the cms.",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
     },
     {
       name: "formId",
       title: "Form id",
       type: "string",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
       options: {
         direction: "horizontal",
         list: optionsToList(STATIC_FORMS),

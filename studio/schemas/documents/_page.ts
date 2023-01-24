@@ -1,11 +1,4 @@
 import { languages } from "../../../languages";
-import { ArrayWithLanguageFilter } from "../../components/ArrayWithLanguageFilter";
-import ModuleSelect, {
-  ModuleSelectWrapper,
-} from "../../components/ModuleSelect";
-import PagePasswordComponent, {
-  PagePasswordWrapper,
-} from "../../components/PagePasswordComponent";
 import {
   DialogSchemaName,
   DIALOG_SCHEMAS,
@@ -14,18 +7,24 @@ import {
   ModuleSchemaName,
   MODULE_SCHEMAS,
 } from "../../../types.sanity";
+import { ArrayWithLanguageFilter } from "../../components/ArrayWithLanguageFilter";
+import ModuleSelect, {
+  ModuleSelectWrapper,
+} from "../../components/ModuleSelect";
+import PagePasswordComponent, {
+  PagePasswordWrapper,
+} from "../../components/PagePasswordComponent";
 import { getISODateString } from "../../utils/datetime";
-import { validate } from "../../utils/validate";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import { title } from "process";
-import { SlugRule } from "sanity";
+import { SlugRule, StringRule } from "sanity";
 
 export const TITLE_FIELD = {
   name: "title",
   title: "Title",
   type: "string",
-  validation: validate({ required: true }),
+  validation: (Rule: StringRule) => Rule.required(),
   localize: true,
 };
 
@@ -57,7 +56,7 @@ export const PUBLISHED_AT_FIELD = {
   initialValue: getISODateString(),
   title: "Date",
   type: "date",
-  validation: validate({ required: true }),
+  validation: (Rule: StringRule) => Rule.required(),
 };
 
 export const HERO_FIELD = {
@@ -67,7 +66,7 @@ export const HERO_FIELD = {
   components: {
     input: ArrayWithLanguageFilter,
   },
-  validation: validate({ maxWarning: languages.length }),
+  validation: (Rule: StringRule) => Rule.max(languages.length).warning(),
   description: "The hero section of the page.",
   of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
     (type: HeroSchemaName) => ({ type })

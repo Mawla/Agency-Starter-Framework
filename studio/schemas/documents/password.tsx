@@ -1,8 +1,8 @@
 import { SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { getLinkableTypes } from "../../utils/schemas/getLinkableTypes";
-import { validate } from "../../utils/validate";
 import React from "react";
+import { StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "password";
 
@@ -16,14 +16,14 @@ export default {
       name: "password",
       title: "Password",
       type: "string",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
     },
     {
       name: "page",
       title: "Page",
       type: "reference",
       to: getLinkableTypes(),
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
     },
   ],
 };

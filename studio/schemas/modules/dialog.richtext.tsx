@@ -2,8 +2,8 @@ import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
-import { validate } from "../../utils/validate";
 import React from "react";
+import { SlugRule } from "sanity";
 
 type SchemaType = SanitySchemaType & {
   type: "object";
@@ -39,7 +39,7 @@ const schema: SchemaType = {
       name: "slug",
       title: "Identifier",
       type: "slug",
-      validation: validate({ required: true }),
+      validation: (Rule: SlugRule) => Rule.required(),
       description:
         "Unique identifier used to link to this dialog from a button. Only lowercase and no special characters except -",
     },

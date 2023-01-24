@@ -1,8 +1,8 @@
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { validate } from "../../utils/validate";
 import React from "react";
+import { StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "redirect";
 
@@ -49,7 +49,7 @@ export default {
       title: "Destination",
       name: "destination",
       type: "string",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
       description: `URL that needs to be replaced. Host can be omitted (https://website.ie/). Examples: '/new-page', '/new-news/:slug' or '/new-sub-path/:slug*'.`,
     },
     {

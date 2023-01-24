@@ -9,10 +9,15 @@ import {
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { validate } from "../../utils/validate";
 import { MODULES_FIELD, MODULE_SELECT_FIELD } from "./_page";
 import React from "react";
-import { defineField, getSchemaTypeTitle, defineType } from "sanity";
+import {
+  defineField,
+  getSchemaTypeTitle,
+  defineType,
+  StringRule,
+  SlugRule,
+} from "sanity";
 
 // const schemas = require('part:@sanity/base/schema')
 
@@ -40,13 +45,13 @@ const schema = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: validate({ required: true }),
+      validation: (Rule: StringRule) => Rule.required(),
     }),
     {
       name: "slug",
       title: "Identifier",
       type: "slug",
-      validation: validate({ required: true }),
+      validation: (Rule: SlugRule) => Rule.required(),
       options: {
         source: (doc, options) => options.parent.title,
       },
@@ -61,7 +66,7 @@ const schema = defineType({
       ...MODULES_FIELD,
       title: "Module",
       description: null,
-      validation: validate({ length: 1, required: true }),
+      validation: (Rule: StringRule) => Rule.required().length(1),
       of: Object.keys({ ...MODULE_SCHEMAS, ...HERO_SCHEMAS }).map(
         (type: ModuleSchemaName | HeroSchemaName) => ({ type })
       ),
