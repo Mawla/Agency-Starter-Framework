@@ -1,33 +1,12 @@
-import { BackgroundColorType } from "../../../components/module/BackgroundOptions";
-import {
-  SpaceType,
-  SPACE_OPTIONS,
-} from "../../../components/module/SpacingOptions";
-import { BreadcrumbProps } from "../../../modules/Breadcrumb/Breadcrumb";
-import { ColorType } from "../../../types";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
+import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
+import { defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-
-  initialValue: {
-    theme?: {
-      text?: ColorType;
-      background?: BackgroundColorType;
-      space?: SpaceType;
-    };
-  };
-  fields: ({
-    name: keyof BreadcrumbProps | "language" | "preset" | "copyPaste";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "module.breadcrumb",
   title: "Breadcrumb",
   type: "object",
@@ -68,25 +47,25 @@ const schema: SchemaType = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
       group: "language",
-    },
-    {
+    }),
+    defineField({
       name: "preset",
       title: "Preset",
       type: "preset",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "copyPaste",
       title: "Copy Paste",
       type: "copyPaste",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "styles",
@@ -113,8 +92,8 @@ const schema: SchemaType = {
           },
         ],
       },
-    },
+    }),
   ],
-};
+});
 
 export default schema;

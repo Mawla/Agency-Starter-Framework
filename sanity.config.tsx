@@ -5,6 +5,8 @@ import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
 import { defineConfig, WorkspaceOptions } from "sanity";
+import { cloudinarySchemaPlugin } from "sanity-plugin-cloudinary";
+import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
 
 const CONFIG = {
@@ -27,6 +29,8 @@ const CONFIG = {
     visionTool({
       defaultApiVersion: "vX",
     }),
+    muxInput(),
+    cloudinarySchemaPlugin(),
   ],
 
   schema: {

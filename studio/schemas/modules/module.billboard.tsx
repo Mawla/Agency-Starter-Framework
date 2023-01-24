@@ -1,24 +1,13 @@
 import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
-import { BillboardProps } from "../../../modules/Billboard/Billboard";
 import { ALIGN_OPTIONS } from "../../../modules/Billboard/BillboardOptions";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
+import { defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  initialValue: {
-    theme?: BillboardProps["theme"];
-  };
-  fields: ({
-    name: keyof BillboardProps | "language" | "preset" | "copyPaste";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "module.billboard",
   title: "Billboard",
   type: "object",
@@ -61,43 +50,43 @@ const schema: SchemaType = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
       group: "language",
-    },
-    {
+    }),
+    defineField({
       name: "preset",
       title: "Preset",
       type: "preset",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "copyPaste",
       title: "Copy Paste",
       type: "copyPaste",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "richtext.simple",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "image",
       title: "Image",
       type: "image",
@@ -106,20 +95,20 @@ const schema: SchemaType = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: "buttons",
       title: "Buttons",
       type: "buttongroup",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
       fields: [
-        {
+        defineField({
           name: "module",
           title: "Module",
           type: "styles",
@@ -135,8 +124,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "image",
           title: "Image",
           type: "styles",
@@ -152,10 +141,10 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
+        }),
       ],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

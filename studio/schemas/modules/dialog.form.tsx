@@ -1,17 +1,9 @@
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import React from "react";
-import { SlugRule, StringRule } from "sanity";
+import { defineField, defineType, SlugRule } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: "form" | "slug" | "language";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "dialog.form",
   title: "Form",
   type: "object",
@@ -29,26 +21,26 @@ const schema: SchemaType = {
     },
   },
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
-    },
-    {
+    }),
+    defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
       description:
         "Unique identifier used to link to this dialog from a button. Only lowercase and no special characters except -",
-    },
-    {
+    }),
+    defineField({
       name: "form",
       title: "Form",
       type: "reference",
       to: [{ type: "form.static" }],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

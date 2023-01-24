@@ -1,14 +1,13 @@
 import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
 import { WIDTH_OPTIONS } from "../../../components/module/WidthOptions";
-import { StoryProps } from "../../../modules/Story/Story";
 import { STORY_ALIGN_OPTIONS } from "../../../modules/Story/StoryOptions";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import buttonSchema from "../objects/button";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
+import { defineType, defineField } from "sanity";
 
 const INTERNAL_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "internal"
@@ -18,14 +17,7 @@ const EXTERNAL_FIELD = buttonSchema.fields.find(
 );
 const DIALOGS_FIELD = buttonSchema.fields.find(({ name }) => name === "dialog");
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: keyof StoryProps | "language" | "preset" | "copyPaste";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "module.story",
   title: "Story",
   type: "object",
@@ -68,36 +60,36 @@ const schema: SchemaType = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "label",
       title: "Label",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "quote",
       title: "Quote",
       type: "text",
       rows: 2,
       group: "content",
       description: "Testimonial quote.",
-    },
-    {
+    }),
+    defineField({
       name: "text",
       title: "Text",
       type: "text",
       rows: 2,
       group: "content",
       description: "Short additional paragraph.",
-    },
-    {
+    }),
+    defineField({
       name: "person",
       title: "Person",
       type: "reference",
       to: [{ type: "person" }],
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "image",
       title: "Image",
       type: "image",
@@ -107,8 +99,8 @@ const schema: SchemaType = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: "backgroundImage",
       title: "Background image",
       type: "image",
@@ -118,42 +110,42 @@ const schema: SchemaType = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       type: "object",
       name: "videoLink",
       title: "Video link",
       fields: [INTERNAL_FIELD, DIALOGS_FIELD, EXTERNAL_FIELD].map((x) => ({
         ...x,
         group: null,
-      })),
+      }) as any),
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
       group: "language",
-    },
-    {
+    }),
+    defineField({
       name: "preset",
       title: "Preset",
       type: "preset",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "copyPaste",
       title: "Copy Paste",
       type: "copyPaste",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
       fields: [
-        {
+        defineField({
           name: "module",
           title: "Module",
           type: "styles",
@@ -166,13 +158,6 @@ const schema: SchemaType = {
                   list: optionsToList(SPACE_OPTIONS),
                 },
               },
-              // {
-              //   name: 'background',
-              //   type: 'color',
-              //   options: {
-              //     colors: STORY_BACKGROUND_COLOR_OPTIONS,
-              //   },
-              // },
               {
                 name: "width",
                 type: "select",
@@ -182,8 +167,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "image",
           title: "Image",
           type: "styles",
@@ -198,10 +183,10 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
+        }),
       ],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

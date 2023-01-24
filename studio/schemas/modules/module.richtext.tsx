@@ -1,28 +1,22 @@
 import { MODULE_RADIUS_OPTIONS } from "../../../components/module/BackgroundOptions";
 import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
 import { WIDTH_OPTIONS } from "../../../components/module/WidthOptions";
-import { RichTextProps } from "../../../modules/RichText/RichText";
 import {
   BACKGROUND_COLOR_OPTIONS,
   TEXT_ALIGN_OPTIONS,
   TITLE_SIZE_OPTIONS,
 } from "../../../modules/RichText/RichTextOptions";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
+import { defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: keyof RichTextProps | "language" | "preset" | "copyPaste";
-  } & SanityFieldType)[];
-};
 
-const schema: SchemaType = {
+
+const schema = defineType({
   name: "module.richtext",
   title: "Rich text",
   type: "object",
@@ -63,49 +57,49 @@ const schema: SchemaType = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
       group: "language",
-    },
-    {
+    }),
+    defineField({
       name: "preset",
       title: "Preset",
       type: "preset",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "copyPaste",
       title: "Copy Paste",
       type: "copyPaste",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "richtext.full",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
       fields: [
-        {
+        defineField({
           name: "module",
           title: "Module",
           type: "styles",
@@ -146,8 +140,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "title",
           title: "Title",
           type: "styles",
@@ -162,8 +156,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "decorations",
           title: "Decorations",
           type: "styles",
@@ -197,10 +191,10 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
+        }),
       ],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

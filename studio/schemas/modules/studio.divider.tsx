@@ -1,15 +1,8 @@
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import React from "react";
+import { defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: "description" | "language";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "studio.divider",
   title: "CMS divider",
   description:
@@ -39,17 +32,17 @@ const schema: SchemaType = {
     },
   },
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
-    },
-    {
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "string",
-    },
+    }),
   ],
-};
+});
 
 export default schema;

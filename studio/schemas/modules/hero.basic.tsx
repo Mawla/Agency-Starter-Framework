@@ -1,19 +1,10 @@
-import { HeroBasicProps } from "../../../heroes/HeroBasic";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: keyof HeroBasicProps | "language" | "preset" | "copyPaste";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = defineType({
+const schema = defineType({
   name: "hero.basic",
   title: "Hero Basic",
   type: "object",
@@ -61,7 +52,7 @@ const schema: SchemaType = defineType({
       type: "language",
       group: "language",
     }),
-    {
+    defineField({
       name: "preset",
       title: "Preset",
       type: "preset",
@@ -69,8 +60,8 @@ const schema: SchemaType = defineType({
       options: {
         updateField: "hero",
       },
-    },
-    {
+    }),
+    defineField({
       name: "copyPaste",
       title: "Copy Paste",
       type: "copyPaste",
@@ -78,56 +69,56 @@ const schema: SchemaType = defineType({
       options: {
         updateField: "hero",
       },
-    },
-    {
+    }),
+    defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "text",
       rows: 2,
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "text",
       title: "Text",
       type: "richtext.simple",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "showLozenges",
       title: "Show Lozenges",
       type: "boolean",
       description: "Sprinkle decorations on the hero.",
       group: "visual",
-    },
-    {
+    }),
+    defineField({
       name: "visual",
       title: "Visual",
       type: "object",
       group: "visual",
       fields: [
-        {
+        defineField({
           name: "image2",
           title: "Image",
           type: "image",
           options: {
             hotspot: true,
           },
-        },
-        {
+        }),
+        defineField({
           name: "image1",
           title: "Image",
           type: "image",
           options: {
             hotspot: true,
           },
-        },
-        {
+        }),
+        defineField({
           name: "colors",
           title: "Colors",
           type: "styles",
@@ -155,22 +146,22 @@ const schema: SchemaType = defineType({
               },
             ],
           },
-        },
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: "breakOutImage",
       title: "Break out image",
       type: "boolean",
       description: "Make sure the image is a 1200x1200 transparent PNG.",
       group: "visual",
-    },
-    {
+    }),
+    defineField({
       name: "buttons",
       title: "Buttons",
       type: "buttongroup",
       group: "content",
-    },
+    }),
   ],
 });
 

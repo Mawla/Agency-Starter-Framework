@@ -1,7 +1,6 @@
 import { MODULE_RADIUS_OPTIONS } from "../../..//components/module/BackgroundOptions";
 import { SLIDER_COLOR_OPTIONS } from "../../../components/Slider/SliderOptions";
 import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
-import { CardGridProps } from "../../../modules/CardGrid/CardGrid";
 import {
   ALIGN_OPTIONS,
   BACKGROUND_COLOR_OPTIONS,
@@ -11,25 +10,14 @@ import {
   TITLE_SIZE_OPTIONS,
 } from "../../../modules/CardGrid/CardGridOptions";
 import { COMPOSABLE_CARD_THEME_OPTIONS } from "../../../modules/CardGrid/ComposableCardOptions";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
-import { ConditionalPropertyCallback } from "sanity";
+import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  initialValue: {
-    theme?: CardGridProps["theme"];
-  };
-  fields: ({
-    name: keyof CardGridProps | "language" | "preset" | "copyPaste" | "feed";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "module.cardgrid",
   title: "Card Grid",
   type: "object",
@@ -86,43 +74,43 @@ const schema: SchemaType = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
       group: "language",
-    },
-    {
+    }),
+    defineField({
       name: "preset",
       title: "Preset",
       type: "preset",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "copyPaste",
       title: "Copy Paste",
       type: "copyPaste",
       group: "tools",
-    },
-    {
+    }),
+    defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "intro",
       title: "Intro",
       type: "richtext.simple",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "items",
       title: "Items",
       type: "array",
@@ -131,8 +119,8 @@ const schema: SchemaType = {
         !value && parent?.feed) as ConditionalPropertyCallback,
       group: ["content", "cards"],
       of: [{ type: "card.composable" }, { type: "card.image" }],
-    },
-    {
+    }),
+    defineField({
       name: "feed",
       title: "Feed",
       type: "object",
@@ -141,37 +129,37 @@ const schema: SchemaType = {
       hidden: (({ parent, value }) =>
         !value && parent?.items) as ConditionalPropertyCallback,
       fields: [
-        {
+        defineField({
           name: "type",
           title: "Type",
           type: "string",
           options: {
             list: optionsToList(COMPOSABLE_CARD_THEME_OPTIONS),
           },
-        },
-        {
+        }),
+        defineField({
           name: "items",
           title: "Items",
           type: "array",
           hidden: (({ parent, value }) =>
             !value && parent?.type !== "person") as ConditionalPropertyCallback,
           of: [{ type: "reference", to: [{ type: "person" }] }],
-        },
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: "buttons",
       title: "Buttons",
       type: "buttongroup",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
       fields: [
-        {
+        defineField({
           name: "module",
           title: "Module",
           type: "styles",
@@ -200,8 +188,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "grid",
           title: "Grid",
           type: "styles",
@@ -235,8 +223,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "title",
           title: "Title",
           type: "styles",
@@ -251,8 +239,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "buttons",
           title: "Buttons",
           type: "styles",
@@ -267,8 +255,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "slider",
           title: "Slider",
           type: "styles",
@@ -291,8 +279,8 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "decorations",
           title: "Decorations",
           type: "styles",
@@ -326,10 +314,10 @@ const schema: SchemaType = {
               },
             ],
           },
-        },
+        }),
       ],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

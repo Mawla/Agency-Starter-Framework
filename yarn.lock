@@ -2287,18 +2287,26 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@mux/playback-core@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@mux/playback-core/-/playback-core-0.11.0.tgz#e48babf71a1015d12635ac595b5920fa03544643"
-  integrity sha512-ByarSktAKJ9MU4Xsos+GQI5sbnejRsItGBd47RVfrvu6oZ40VeqT2U7TSSSz6vEGEZNr722Akrug8lVfVvQfnw==
+"@mux/mux-video-react@^0.7":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@mux/mux-video-react/-/mux-video-react-0.7.3.tgz#ef75c5a6e91aca2e4d35349301532e44fe423e44"
+  integrity sha512-e0rDfEzWBsUZTQJ9+YNyq+5MmAixjWR6CPVU5YAcOG/9jTjN7zPb/lPnivcbBNCp/IbtFqntVSm11qKDS4Fp+Q==
+  dependencies:
+    "@mux/playback-core" "0.15.1"
+    prop-types "^15.7.2"
+
+"@mux/playback-core@0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@mux/playback-core/-/playback-core-0.15.1.tgz#b5ec5ebcc11b26c5e12f6b6fb390422b552b721f"
+  integrity sha512-1e2rtTA5CGBao8kk2USZRHRkvrU3VBJjsoYp7Mp9xNp4IrPmTzka54mg+zaiA2phRRrDJaycAdcVy/2oAJVETg==
   dependencies:
     hls.js "1.2.3"
-    mux-embed "^4.7.0"
+    mux-embed "^4.14.0"
 
-"@mux/upchunk@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@mux/upchunk/-/upchunk-3.0.0.tgz#657d88241e24776b9b9c53365ded3b70cf60c4c8"
-  integrity sha512-Aan5CzCcQSjVBOa2KxyMZiQVvh+D6vfnfcM4JXayQCTQ1bipK8jukmuXwC/ipd8IzBVAVyaLmXMuDX4LAk5mXA==
+"@mux/upchunk@^3":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@mux/upchunk/-/upchunk-3.0.1.tgz#081fee8abcc1987171bee5c0bc9fc0b08acb72f8"
+  integrity sha512-8dcuNudn/7tfg7x9MjtLpCfIP6VpRYohZNpUwPFVtH8TteCuQv9L7joJUwGP22XU/1UVSQm6Yti382+NLzyt0Q==
   dependencies:
     event-target-shim "^6.0.2"
     xhr "^2.6.0"
@@ -7005,6 +7013,11 @@ compute-scroll-into-view@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-2.0.2.tgz"
   integrity sha512-W+4Iti92hktsTtNPNeRM1vE0JdqCBk5qIabRafpr5pGrQhQ+xzCv0NGnFzTCKmW4yGLm9Aovbw8YNxloe2z9tQ==
+
+compute-scroll-into-view@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-2.0.4.tgz#2b444b2b9e4724819d2531efacb7ac094155fdf6"
+  integrity sha512-y/ZA3BGnxoM/QHHQ2Uy49CLtnWPbt4tTPpEEZiEmmiWBFKjej7nEyH8Ryz54jH0MLXflUYA3Er2zUxPSJu5R+g==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -11773,10 +11786,10 @@ mdurl@^1.0.0:
   resolved "https://registry.npmjs.org/mdurl/-/mdurl-1.0.1.tgz"
   integrity sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==
 
-media-chrome@^0.16.0:
-  version "0.16.3"
-  resolved "https://registry.yarnpkg.com/media-chrome/-/media-chrome-0.16.3.tgz#aa647f0f75dfb2f376858b0b7274daf9af84bfa6"
-  integrity sha512-Mvl74dvQAFx4j+nV7Gvam8fVqtm61LoIX+yvYZKYx4QGKv8nEseQVT1mXHbwBtx/5IdKdWnCIPpnhTE2npTn0Q==
+media-chrome@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/media-chrome/-/media-chrome-0.17.1.tgz#f68c2d3d15babdcacd6d58b579120254d5925513"
+  integrity sha512-3QMKMb6q4Qs+EZ5Wai47ux99ocrUMqhLTKro/JWfmOcwMO3wjLt74lEXsekU5WIPALXW488iC8scgrSy2jalFw==
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -12110,7 +12123,7 @@ moment@^2.29.4:
   resolved "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
-motion@^10.14.3:
+motion@^10:
   version "10.15.5"
   resolved "https://registry.yarnpkg.com/motion/-/motion-10.15.5.tgz#d336ddbdd37bc28bb99fbb243fe309df6c685ad6"
   integrity sha512-ejP6KioN4pigTGxL93APzOnvtLklParL59UQB2T3HWXQBxFcIp5/7YXFmkgiA6pNKKzjvnLhnonRBN5iSFMnNw==
@@ -12164,7 +12177,7 @@ ms@2.1.3, ms@^2.1.1:
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-mux-embed@^4.7.0:
+mux-embed@^4.14.0:
   version "4.18.0"
   resolved "https://registry.yarnpkg.com/mux-embed/-/mux-embed-4.18.0.tgz#6c5ef0e4d7e9ebd875a9c58420926db9429428e0"
   integrity sha512-9tgHLg8plmJAOiOzG2Tvi1MO7LO44DaC4V9W67kxrfzqco37UmreiKBwvrykncW4VUwU7+nectz8AUjcYBCz4g==
@@ -14381,26 +14394,26 @@ sanity-plugin-cloudinary@^1.0.1:
     styled-components "^5.2.1"
     video.js "^7.11.7"
 
-sanity-plugin-mux-input@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/sanity-plugin-mux-input/-/sanity-plugin-mux-input-2.0.4.tgz#9f623dcd32814029e58ebb38b5f6b04d0d253474"
-  integrity sha512-L20i0CAEe8afrXI0+uHUsMO5yapp0NOea5tLIBQz7QrepHsQ0rSAwZ2e147zmGGQ7y6G5jw/diCtBfpxK++RSQ==
+sanity-plugin-mux-input@2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/sanity-plugin-mux-input/-/sanity-plugin-mux-input-2.0.8.tgz#2f970c1038f28d7cebafd47afeb0a8f09dfc71ab"
+  integrity sha512-FjZHC8LpSsRCw5cOUfiZJL7iybeEYk1YKVSXr+u4SMorUsWfH28D9M0O5iwXDVMjVVOENqi7o+6XBB9q3gIdIQ==
   dependencies:
-    "@mux/playback-core" "^0.11.0"
-    "@mux/upchunk" "^3.0.0"
+    "@mux/mux-video-react" "^0.7"
+    "@mux/upchunk" "^3"
     "@sanity/icons" "^2"
     "@sanity/incompatible-plugin" "^1"
     "@sanity/ui" "^1"
     "@sanity/uuid" "^3"
     classnames "^2.3.2"
     jsonwebtoken-esm "^1.0.3"
-    media-chrome "^0.16.0"
-    motion "^10.14.3"
+    media-chrome "^0.17.1"
+    motion "^10"
     rxjs "^7"
-    scroll-into-view-if-needed "^3.0.3"
-    suspend-react "^0.0.8"
-    swr "^1.3.0"
-    use-device-pixel-ratio "^1.1.0"
+    scroll-into-view-if-needed "^3"
+    suspend-react "^0.0.9"
+    swr "^2.0.1"
+    use-device-pixel-ratio "^1.1.2"
     use-error-boundary "^2.0.6"
 
 sanity@^3.2.4:
@@ -14581,6 +14594,13 @@ scroll-into-view-if-needed@^2.2.20:
   integrity sha512-dGCXy99wZQivjmjIqihaBQNjryrz5rueJY7eHfTdyWEiR4ttYpsajb14rn9s5d4DY4EcY6+4+U/maARBXJedkA==
   dependencies:
     compute-scroll-into-view "^1.0.20"
+
+scroll-into-view-if-needed@^3:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.0.4.tgz#4b3101712f0ac8ec982c0a7ab4d071e393241e21"
+  integrity sha512-s+/F50jwTOUt+u5oEIAzum9MN2lUQNvWBe/zfEsVQcbaERjGkKLq1s+2wCHkahMLC8nMLbzMVKivx9JhunXaZg==
+  dependencies:
+    compute-scroll-into-view "^2.0.4"
 
 scroll-into-view-if-needed@^3.0.3:
   version "3.0.3"
@@ -15303,11 +15323,6 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-suspend-react@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/suspend-react/-/suspend-react-0.0.8.tgz#b0740c1386b4eb652f17affe4339915ee268bd31"
-  integrity sha512-ZC3r8Hu1y0dIThzsGw0RLZplnX9yXwfItcvaIzJc2VQVi8TGyGDlu92syMB5ulybfvGLHAI5Ghzlk23UBPF8xg==
-
 suspend-react@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/suspend-react/-/suspend-react-0.0.9.tgz#329072e330be9dc5cc97d1e3a563d542460c3ee5"
@@ -15339,10 +15354,12 @@ swiper@^8.4.5:
     dom7 "^4.0.4"
     ssr-window "^4.0.2"
 
-swr@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/swr/-/swr-1.3.0.tgz#c6531866a35b4db37b38b72c45a63171faf9f4e8"
-  integrity sha512-dkghQrOl2ORX9HYrMDtPa7LTVHJjCTeZoB1dqTbnnEDlSvN8JEKpYIYurDfvbQFUUS8Cg8PceFVZNkW0KNNYPw==
+swr@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-2.0.1.tgz#8b4c132269fadcd845df4d44bd8722eba484ff71"
+  integrity sha512-6z4FpS9dKAay7axedlStsPahEw25nuMlVh4GHkuPpGptbmEEP8v/+kr0GkAE/7ErUs25U2VFOnZQz3AWfkmXdw==
+  dependencies:
+    use-sync-external-store "^1.2.0"
 
 symbol-tree@^3.2.4:
   version "3.2.4"
@@ -16110,7 +16127,7 @@ use-callback-ref@^1.3.0:
   dependencies:
     tslib "^2.0.0"
 
-use-device-pixel-ratio@^1.1.0:
+use-device-pixel-ratio@^1.1.0, use-device-pixel-ratio@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/use-device-pixel-ratio/-/use-device-pixel-ratio-1.1.2.tgz"
   integrity sha512-nFxV0HwLdRUt20kvIgqHYZe6PK/v4mU1X8/eLsT1ti5ck0l2ob0HDRziaJPx+YWzBo6dMm4cTac3mcyk68Gh+A==

@@ -134,15 +134,18 @@ const schema: SchemaType = {
       title: "Sanity",
       type: "file",
       name: "sanity",
+      description:
+        "Hosting videos on Sanity itself is discouraged. The video can't be optimised by the frontend and hosting costs will increase. Choosing a dedicated video provider like Youtube, Vimeo, Mux or Cloudinary is encouraged.",
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "sanity") as ConditionalPropertyCallback,
     },
-    // {
-    //   title: 'Cloudinary Video',
-    //   type: 'cloudinary.asset',
-    //   name: 'cloudinary',
-    //   hidden: ({parent, value}) => !value && parent?.provider !== 'cloudinary',
-    // },
+    {
+      title: "Cloudinary Video",
+      type: "cloudinary.asset",
+      name: "cloudinary",
+      hidden: ({ parent, value }) =>
+        !value && parent?.provider !== "cloudinary",
+    },
     {
       title: "Youtube URL",
       type: "url",
@@ -161,13 +164,14 @@ const schema: SchemaType = {
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "vimeo") as ConditionalPropertyCallback,
     },
-    // {
-    //   title: 'Mux',
-    //   type: 'mux.video',
-    //   name: 'mux',
-    //   description: 'Mux video ID',
-    //   hidden: (({parent, value}) => !value && parent?.provider !== 'mux') as ConditionalPropertyCallback,
-    // },
+    {
+      title: "Mux",
+      type: "mux.video",
+      name: "mux",
+      description: "Mux video ID",
+      hidden: (({ parent, value }) =>
+        !value && parent?.provider !== "mux") as ConditionalPropertyCallback,
+    },
     {
       title: "Static",
       type: "string",

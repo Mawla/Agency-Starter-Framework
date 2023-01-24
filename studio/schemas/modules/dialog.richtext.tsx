@@ -1,18 +1,10 @@
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
 import React from "react";
-import { SlugRule } from "sanity";
+import { SlugRule, defineType, defineField } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: "content" | "slug" | "language";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "dialog.richtext",
   title: "Rich Text Dialog",
   type: "object",
@@ -30,25 +22,25 @@ const schema: SchemaType = {
     },
   },
   fields: [
-    {
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
-    },
-    {
+    }),
+    defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
       description:
         "Unique identifier used to link to this dialog from a button. Only lowercase and no special characters except -",
-    },
-    {
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "richtext.full",
-    },
+    }),
   ],
-};
+});
 
 export default schema;
