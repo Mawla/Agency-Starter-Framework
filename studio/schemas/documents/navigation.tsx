@@ -56,7 +56,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Navigation",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="navigation" />,
   initialValue: {},
   options: { localize: true } as any,

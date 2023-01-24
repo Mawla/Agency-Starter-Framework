@@ -47,7 +47,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Footer",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="footer" />,
   initialValue: {},
   options: { localize: true } as any,

@@ -11,7 +11,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Translations",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="translations" />,
   preview: {
     prepare() {

@@ -10,7 +10,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "General",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="config" />,
   initialValue: {},
   preview: {

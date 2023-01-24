@@ -10,7 +10,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Social media",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="social" />,
   initialValue: {},
   preview: {

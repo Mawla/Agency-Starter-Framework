@@ -17,7 +17,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "404 page",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="notfound" />,
   preview: {
     select: {

@@ -10,7 +10,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Integrations",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="integrations" />,
   initialValue: {},
   preview: {

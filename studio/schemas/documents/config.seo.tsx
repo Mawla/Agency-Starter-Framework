@@ -59,7 +59,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "SEO",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="search" />,
   initialValue: {},
   preview: {

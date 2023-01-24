@@ -22,7 +22,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Press release",
   type: "document",
-  singleton: false,
   orderings: [ORDER_PUBLISHED_DESC],
   preview: {
     select: {

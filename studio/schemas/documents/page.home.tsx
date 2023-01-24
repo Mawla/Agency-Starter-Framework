@@ -11,7 +11,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Homepage",
   type: "document",
-  singleton: true,
   icon: () => <DocumentIcon type="homepage" />,
   preview: {
     select: {
