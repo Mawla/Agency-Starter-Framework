@@ -51,7 +51,7 @@ type OptionType = {
   initialValue?: {};
 };
 
-type PropsType = {
+export type ModuleSelectProps = {
   onChange?: () => void;
   document?: { _type: string; _id: string };
   schemaType: {
@@ -63,7 +63,7 @@ type PropsType = {
   };
 };
 
-const ModuleSelect: ComponentType<any> = (props: PropsType) => {
+const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
   const { schemaType, onChange } = props;
   const document = useFormValue([]) as {
     _id?: string;

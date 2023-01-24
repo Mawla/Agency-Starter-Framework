@@ -9,6 +9,7 @@ import {
 } from "../../../types.sanity";
 import { ArrayWithLanguageFilter } from "../../components/ArrayWithLanguageFilter";
 import ModuleSelect, {
+  ModuleSelectProps,
   ModuleSelectWrapper,
 } from "../../components/ModuleSelect";
 import PagePasswordComponent, {
@@ -78,9 +79,6 @@ export const HERO_FIELD = defineField({
   of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
     (type: HeroSchemaName) => ({ type })
   ),
-  options: {
-    id: "hero",
-  },
 });
 
 export const MODULES_FIELD = defineField({
@@ -99,9 +97,6 @@ export const MODULES_FIELD = defineField({
     ),
     { type: "studio.divider" },
   ],
-  options: {
-    id: "modules",
-  },
 });
 
 export const MODULE_SELECT_FIELD = defineField({
@@ -116,7 +111,7 @@ export const MODULE_SELECT_FIELD = defineField({
     filterType: /module|studio\./,
     updateField: "modules",
     placeholder: "Add a module…",
-  },
+  } as any,
 });
 
 export const HERO_SELECT_FIELD = defineField({
@@ -131,7 +126,7 @@ export const HERO_SELECT_FIELD = defineField({
     filterType: /hero\./,
     updateField: "hero",
     placeholder: "Add a hero…",
-  },
+  } as any,
 });
 
 export const DIALOG_SELECT_FIELD = defineField({
@@ -146,7 +141,7 @@ export const DIALOG_SELECT_FIELD = defineField({
     filterType: /dialog.video|dialog.richtext/,
     updateField: "dialogs",
     placeholder: "Add a dialog…",
-  },
+  } as any,
 });
 
 export const DIALOGS_FIELD = defineField({
@@ -161,9 +156,6 @@ export const DIALOGS_FIELD = defineField({
   of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
     (type: DialogSchemaName) => ({ type })
   ),
-  options: {
-    id: "dialogs",
-  },
 });
 
 export const ORDER_PUBLISHED_DESC: SortOrdering = {

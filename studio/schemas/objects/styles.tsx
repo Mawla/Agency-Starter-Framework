@@ -9,15 +9,13 @@ export const schema = defineField({
   type: "object",
   icon: () => <DocumentIcon type="paint" />,
   components: {
-    field: ({ children }: { children?: React.ReactElement }) => (
-      <div>{children}</div>
-    ),
+    field: ({ children }) => <div>{children}</div>,
     input: StylesPanel,
   },
   options: {
     title: "Theme",
     fields: [],
-  },
+  } as any,
   fields: [
     {
       name: "void",

@@ -140,24 +140,24 @@ export default defineType({
           type: "object",
           title: "Button",
           fields: [
-            { ...LABEL_FIELD, group: null },
+            { ...LABEL_FIELD, group: null as any },
             {
               ...INTERNAL_FIELD,
               hidden: (({ parent, value }) =>
                 !value && parent?.external) as ConditionalPropertyCallback,
-              group: null,
+              group: null as any,
             },
             {
               ...LANGUAGE_FIELD,
               hidden: (({ parent, value }) =>
                 !value && parent?.external) as ConditionalPropertyCallback,
-              group: null,
+              group: null as any,
             },
             {
               ...EXTERNAL_FIELD,
               hidden: (({ parent, value }) =>
                 !value && parent?.internal) as ConditionalPropertyCallback,
-              group: null,
+              group: null as any,
             },
             {
               name: "icon",
