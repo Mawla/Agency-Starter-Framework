@@ -1252,6 +1252,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/runtime@^7.18.6":
+  version "7.20.13"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
+  integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
 "@babel/runtime@~7.5.4":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
@@ -1384,6 +1391,93 @@
   dependencies:
     exec-sh "^0.3.2"
     minimist "^1.2.0"
+
+"@codemirror/autocomplete@^6.0.0", "@codemirror/autocomplete@^6.1.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/autocomplete/-/autocomplete-6.4.0.tgz#76ac9a2a411a4cc6e13103014dba5e0fe601da5a"
+  integrity sha512-HLF2PnZAm1s4kGs30EiqKMgD7XsYaQ0XJnMR0rofEWQ5t5D60SfqpDIkIh1ze5tiEbyUWm8+VJ6W1/erVvBMIA==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.6.0"
+    "@lezer/common" "^1.0.0"
+
+"@codemirror/commands@^6.0.0", "@codemirror/commands@^6.0.1", "@codemirror/commands@^6.1.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-6.2.0.tgz#e575b7542406be8bc61efb56f1827c71587bb5f8"
+  integrity sha512-+00smmZBradoGFEkRjliN7BjqPh/Hx0KCHWOEibUmflUqZz2RwBTU0MrVovEEHozhx3AUSGcO/rl3/5f9e9Biw==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.2.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+
+"@codemirror/lang-javascript@^6.0.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@codemirror/lang-javascript/-/lang-javascript-6.1.2.tgz#a11812ca1d21301cdeb80e51b4c007edcf55f813"
+  integrity sha512-OcwLfZXdQ1OHrLiIcKCn7MqZ7nx205CMKlhe+vL88pe2ymhT9+2P+QhwkYGxMICj8TDHyp8HFKVwpiisUT7iEQ==
+  dependencies:
+    "@codemirror/autocomplete" "^6.0.0"
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/lint" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+    "@lezer/javascript" "^1.0.0"
+
+"@codemirror/language@^6.0.0", "@codemirror/language@^6.2.1":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-6.4.0.tgz#803990e0f07bbb619e915651d3a57d143765dbcc"
+  integrity sha512-Wzb7GnNj8vnEtbPWiOy9H0m1fBtE28kepQNGLXekU2EEZv43BF865VKITUn+NoV8OpW6gRtvm29YEhqm46927Q==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+    "@lezer/highlight" "^1.0.0"
+    "@lezer/lr" "^1.0.0"
+    style-mod "^4.0.0"
+
+"@codemirror/lint@^6.0.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/lint/-/lint-6.1.0.tgz#f006142d3a580fdb8ffc2faa3361b2232c08e079"
+  integrity sha512-mdvDQrjRmYPvQ3WrzF6Ewaao+NWERYtpthJvoQ3tK3t/44Ynhk8ZGjTSL9jMEv8CgSMogmt75X8ceOZRDSXHtQ==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    crelt "^1.0.5"
+
+"@codemirror/search@^6.0.0", "@codemirror/search@^6.0.1":
+  version "6.2.3"
+  resolved "https://registry.yarnpkg.com/@codemirror/search/-/search-6.2.3.tgz#fab933fef1b1de8ef40cda275c73d9ac7a1ff40f"
+  integrity sha512-V9n9233lopQhB1dyjsBK2Wc1i+8hcCqxl1wQ46c5HWWLePoe4FluV3TGHoZ04rBRlGjNyz9DTmpJErig8UE4jw==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    crelt "^1.0.5"
+
+"@codemirror/state@^6.0.0", "@codemirror/state@^6.1.1", "@codemirror/state@^6.1.4", "@codemirror/state@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-6.2.0.tgz#a0fb08403ced8c2a68d1d0acee926bd20be922f2"
+  integrity sha512-69QXtcrsc3RYtOtd+GsvczJ319udtBf1PTrr2KbLWM/e2CXUPnh0Nz9AUo8WfhSQ7GeL8dPVNUmhQVgpmuaNGA==
+
+"@codemirror/theme-one-dark@^6.0.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/theme-one-dark/-/theme-one-dark-6.1.0.tgz#6f8b3c7fc22e9fec59edd573f4ba9546db42e007"
+  integrity sha512-AiTHtFRu8+vWT9wWUWDM+cog6ZwgivJogB1Tm/g40NIpLwph7AnmxrSzWfvJN5fBVufsuwBxecQCNmdcR5D7Aw==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/highlight" "^1.0.0"
+
+"@codemirror/view@^6.0.0", "@codemirror/view@^6.1.1", "@codemirror/view@^6.6.0":
+  version "6.7.3"
+  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-6.7.3.tgz#be2f9d0e6fc8882fb192041bf78425ca04999827"
+  integrity sha512-Lt+4POnhXrZFfHOdPzXEHxrzwdy7cjqYlMkOWvoFGi6/bAsjzlFfr0NY3B15B/PGx+cDFgM1hlc12wvYeZbGLw==
+  dependencies:
+    "@codemirror/state" "^6.1.4"
+    style-mod "^4.0.0"
+    w3c-keyname "^2.2.4"
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -2029,6 +2123,33 @@
   version "3.4.0"
   resolved "https://registry.npmjs.org/@juggle/resize-observer/-/resize-observer-3.4.0.tgz"
   integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
+
+"@lezer/common@^1.0.0":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@lezer/common/-/common-1.0.2.tgz#8fb9b86bdaa2ece57e7d59e5ffbcb37d71815087"
+  integrity sha512-SVgiGtMnMnW3ActR8SXgsDhw7a0w0ChHSYAyAUxxrOiJ1OqYWEKk/xJd84tTSPo1mo6DXLObAJALNnd0Hrv7Ng==
+
+"@lezer/highlight@^1.0.0", "@lezer/highlight@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@lezer/highlight/-/highlight-1.1.3.tgz#bf5a36c2ee227f526d74997ac91f7777e29bd25d"
+  integrity sha512-3vLKLPThO4td43lYRBygmMY18JN3CPh9w+XS2j8WC30vR4yZeFG4z1iFe4jXE43NtGqe//zHW5q8ENLlHvz9gw==
+  dependencies:
+    "@lezer/common" "^1.0.0"
+
+"@lezer/javascript@^1.0.0":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@lezer/javascript/-/javascript-1.4.1.tgz#97a15042c76b5979af6a069fac83cf6485628cbf"
+  integrity sha512-Hqx36DJeYhKtdpc7wBYPR0XF56ZzIp0IkMO/zNNj80xcaFOV4Oj/P7TQc/8k2TxNhzl7tV5tXS8ZOCPbT4L3nA==
+  dependencies:
+    "@lezer/highlight" "^1.1.3"
+    "@lezer/lr" "^1.3.0"
+
+"@lezer/lr@^1.0.0", "@lezer/lr@^1.3.0":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@lezer/lr/-/lr-1.3.1.tgz#f1e6c82860a3499d2f718217dc1c3e5719b8a319"
+  integrity sha512-+GymJB/+3gThkk2zHwseaJTI5oa4AuOuj1I2LCslAVq1dFZLSX8SAe4ZlJq1TjezteDXtF/+d4qeWz9JvnrG9Q==
+  dependencies:
+    "@lezer/common" "^1.0.0"
 
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
@@ -3069,6 +3190,30 @@
     date-fns "^2.26.1"
     lodash "^4.17.21"
     rxjs "^7.8.0"
+
+"@sanity/vision@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-3.0.0.tgz#4fe306fc66d078c5f10b31cab451613cd337a70d"
+  integrity sha512-Dr18Iugz2xHEavag4asOzYBIjwnj+5SEB7DlbyNow0mQ5fQWYh8eRES2OBDvrOLbBJ5rVuZMIzrcokQ+nzmrBw==
+  dependencies:
+    "@codemirror/autocomplete" "^6.1.0"
+    "@codemirror/commands" "^6.0.1"
+    "@codemirror/lang-javascript" "^6.0.2"
+    "@codemirror/language" "^6.2.1"
+    "@codemirror/search" "^6.0.1"
+    "@codemirror/view" "^6.1.1"
+    "@juggle/resize-observer" "^3.3.1"
+    "@lezer/highlight" "^1.0.0"
+    "@rexxars/react-json-inspector" "^8.0.1"
+    "@sanity/color" "^2.1.20"
+    "@sanity/icons" "^2.0.0"
+    "@sanity/ui" "^1.0.0"
+    "@uiw/react-codemirror" "^4.11.4"
+    hashlru "^2.3.0"
+    is-hotkey "^0.1.6"
+    json5 "^1.0.1"
+    lodash "^4.17.21"
+    react-split-pane "^0.1.84"
 
 "@sanity/webhook@^2.0.0":
   version "2.0.0"
@@ -4916,6 +5061,31 @@
     "@typescript-eslint/types" "5.48.0"
     eslint-visitor-keys "^3.3.0"
 
+"@uiw/codemirror-extensions-basic-setup@4.19.7":
+  version "4.19.7"
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-extensions-basic-setup/-/codemirror-extensions-basic-setup-4.19.7.tgz#e50c542a1563f3194a64e1a272f5f33b0a3a9145"
+  integrity sha512-pk0JTFJAZOGxouBB1pdBtb59qKibO9DW4hER4VSFGBGW3TBDeXUwL/gKujhRpySHG2MtG09cgt4a3XOFIWwXTw==
+  dependencies:
+    "@codemirror/autocomplete" "^6.0.0"
+    "@codemirror/commands" "^6.0.0"
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/lint" "^6.0.0"
+    "@codemirror/search" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+
+"@uiw/react-codemirror@^4.11.4":
+  version "4.19.7"
+  resolved "https://registry.yarnpkg.com/@uiw/react-codemirror/-/react-codemirror-4.19.7.tgz#33fbcaa876bb0e66367b2b06d88b833599574379"
+  integrity sha512-IHvpYWVSdiaHX0Fk6oY6YyAJigDnyvSpWKNUTRzsMNxB+8/wqZ8lior4TprXH0zyLxW5F1+bTyifFFTeg+X3Sw==
+  dependencies:
+    "@babel/runtime" "^7.18.6"
+    "@codemirror/commands" "^6.1.0"
+    "@codemirror/state" "^6.1.1"
+    "@codemirror/theme-one-dark" "^6.0.0"
+    "@uiw/codemirror-extensions-basic-setup" "4.19.7"
+    codemirror "^6.0.0"
+
 "@vercel/og@^0.0.21":
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/@vercel/og/-/og-0.0.21.tgz#9d2421a241a0cfbdc3841b88bf323d980339da40"
@@ -6674,6 +6844,19 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha512-RpAVKQA5T63xEj6/giIbUEtZwJ4UFIc3ZtvEkiaUERylqe8xb5IvqcgOurZLahv93CLKfxcw5YI+DZcUBRyLXA==
 
+codemirror@^6.0.0:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-6.0.1.tgz#62b91142d45904547ee3e0e0e4c1a79158035a29"
+  integrity sha512-J8j+nZ+CdWmIeFIGXEFbFPtpiYacFMDR8GlHK3IyHQJMCaVRfGx9NT+Hxivv1ckLWPvNdZqndbr/7lVhrf/Svg==
+  dependencies:
+    "@codemirror/autocomplete" "^6.0.0"
+    "@codemirror/commands" "^6.0.0"
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/lint" "^6.0.0"
+    "@codemirror/search" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+
 collapse-white-space@^1.0.2:
   version "1.0.6"
   resolved "https://registry.npmjs.org/collapse-white-space/-/collapse-white-space-1.0.6.tgz"
@@ -7080,6 +7263,11 @@ create-react-class@^15.6.0:
   dependencies:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
+
+crelt@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/crelt/-/crelt-1.0.5.tgz#57c0d52af8c859e354bace1883eb2e1eb182bb94"
+  integrity sha512-+BO9wPPi+DWTDcNYhr/W90myha8ptzftZT+LwcmUbbok0rcP/fequmFYCw8NMoH7pkAZQzU78b3kYrlua5a9eA==
 
 cross-spawn@^6.0.0:
   version "6.0.5"
@@ -13217,7 +13405,7 @@ prompts@^2.0.1, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.0.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -13504,6 +13692,11 @@ react-is@^18.0.0, react-is@^18.2.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
 react-merge-refs@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
@@ -13564,6 +13757,22 @@ react-rx@^2.1.3:
   dependencies:
     observable-callback "^1.0.2"
     use-sync-external-store "^1.2.0"
+
+react-split-pane@^0.1.84:
+  version "0.1.92"
+  resolved "https://registry.yarnpkg.com/react-split-pane/-/react-split-pane-0.1.92.tgz#68242f72138aed95dd5910eeb9d99822c4fc3a41"
+  integrity sha512-GfXP1xSzLMcLJI5BM36Vh7GgZBpy+U/X0no+VM3fxayv+p1Jly5HpMofZJraeaMl73b3hvlr+N9zJKvLB/uz9w==
+  dependencies:
+    prop-types "^15.7.2"
+    react-lifecycles-compat "^3.0.4"
+    react-style-proptype "^3.2.2"
+
+react-style-proptype@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.2.tgz#d8e998e62ce79ec35b087252b90f19f1c33968a0"
+  integrity sha512-ywYLSjNkxKHiZOqNlso9PZByNEY+FTyh3C+7uuziK0xFXu9xzdyfHwg4S9iyiRRoPCR4k2LqaBBsWVmSBwCWYQ==
+  dependencies:
+    prop-types "^15.5.4"
 
 react-style-singleton@^2.2.1:
   version "2.2.1"
@@ -15013,6 +15222,11 @@ style-loader@^2.0.0:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+style-mod@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/style-mod/-/style-mod-4.0.0.tgz#97e7c2d68b592975f2ca7a63d0dd6fcacfe35a01"
+  integrity sha512-OPhtyEjyyN9x3nhPsu76f52yUGXiZcgvsrFVtvTkyGRQJ0XK+GPc6ov1z+lRpbeabka+MYEQxOYRnt5nF30aMw==
+
 style-to-object@0.3.0, style-to-object@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/style-to-object/-/style-to-object-0.3.0.tgz"
@@ -16090,6 +16304,11 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+w3c-keyname@^2.2.4:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/w3c-keyname/-/w3c-keyname-2.2.6.tgz#8412046116bc16c5d73d4e612053ea10a189c85f"
+  integrity sha512-f+fciywl1SJEniZHD6H+kUO8gOnwIr7f4ijKA6+ZvJFjeGi1r4PDLl53Ayud9O/rk64RqgoQine0feoeOU0kXg==
 
 w3c-xmlserializer@^4.0.0:
   version "4.0.0"

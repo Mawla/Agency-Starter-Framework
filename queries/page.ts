@@ -22,7 +22,7 @@ export type PageType = {
   _type: SchemaName;
   _id: string;
   _updatedAt: string;
-  hero?: HeroBasicProps;
+  hero?: HeroBasicProps | null;
   image?: ImageType;
   description?: string;
   title: string;

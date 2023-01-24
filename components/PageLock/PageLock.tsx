@@ -68,7 +68,7 @@ export const PageLock = () => {
               </label>
               <div className="flex relative">
                 {status === "error" && (
-                  <div className="absolute inset-0 bg-[#f00] pointer-events-none" />
+                  <div className="absolute inset-0 bg-[rgba(255,0,0,.1)] pointer-events-none" />
                 )}
                 <input
                   type="text"

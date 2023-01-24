@@ -34,6 +34,7 @@
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
     "@sanity/language-filter": "^3.0.0",
+    "@sanity/vision": "^3.0.0",
     "@sanity/webhook": "^2.0.0",
     "@sentry/nextjs": "^7.28.1",
     "@storybook/addon-viewport": "^6.5.15",

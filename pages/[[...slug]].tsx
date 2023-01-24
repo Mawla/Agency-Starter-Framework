@@ -145,7 +145,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   // if page is locked let no page data leak through
   if (page.locked) {
-    props.page.hero = undefined;
+    props.page.hero = null;
     props.page.modules = [];
     props.page.dialogs = [];
     props.page.seo = { excludeFromSitemap: true };
