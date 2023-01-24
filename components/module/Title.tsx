@@ -54,7 +54,7 @@ export const Title = ({
   className,
   color = "neutral-base",
   eyebrow,
-  eyebrowColor = "brand-base",
+  eyebrowColor = "coral-base",
 }: TitleProps) => {
   const Element = as;
   const titleWords = children?.toString()?.trim().split(" ");
