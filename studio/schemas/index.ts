@@ -15,7 +15,6 @@ import pagePressRelease from "./documents/page.pressrelease";
 import password from "./documents/password";
 import person from "./documents/person";
 import redirect from "./documents/redirect";
-import sitemap from "./documents/sitemap";
 import dialogForm from "./modules/dialog.form";
 import dialogRichText from "./modules/dialog.richtext";
 import dialogVideo from "./modules/dialog.video";
@@ -78,7 +77,6 @@ export const schemaTypes = [
     richtextBasic,
     richtextFull,
     richtextSimple,
-    sitemap,
     studioDivider,
     styles,
     video,

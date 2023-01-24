@@ -90,7 +90,9 @@ export const structure = (
           }),
         ])
       ),
-      // singleton(S, { id: "sitemap", type: "sitemap" }),
+      documentList(S, { type: "redirect", title: "Redirects" }),
+      S.divider(),
+      singleton(S, { id: "page_notfound", type: "page.notfound" }),
       S.listItem()
         .title("Sitemap")
         .icon(() => <DocumentIcon type="sitemap" />)
@@ -101,10 +103,6 @@ export const structure = (
             })
             .id("sitemap")
         ),
-
-      documentList(S, { type: "redirect", title: "Redirects" }),
-      S.divider(),
-      singleton(S, { id: "page_notfound", type: "page.notfound" }),
       S.divider(),
       S.documentTypeListItem("page.preset").title("Presets"),
       S.divider(),
