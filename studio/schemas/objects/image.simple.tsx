@@ -9,8 +9,8 @@ type SchemaType = SanitySchemaType & {
   } & SanityFieldType)[];
 };
 
-const ImagePreview = ({ value }) => {
-  if (!value?.media?.asset?.url)
+const ImagePreview = (props: any) => {
+  if (!props?.media?.asset?.url)
     return (
       <div
         style={{
@@ -23,7 +23,7 @@ const ImagePreview = ({ value }) => {
     );
   return (
     <img
-      src={`${value?.media?.asset?.url}?w=550`}
+      src={`${props?.media?.asset?.url}?w=550`}
       style={{ maxWidth: "100%" }}
     />
   );
@@ -33,6 +33,9 @@ const schema: SchemaType = {
   name: "image.simple",
   title: "Image",
   type: "object",
+  components: {
+    preview: ImagePreview,
+  },
   preview: {
     select: {
       alt: "alt",
@@ -40,7 +43,6 @@ const schema: SchemaType = {
       media: "source",
       src: "source.asset.url",
     },
-    component: ImagePreview,
     prepare({ alt = "", caption = "", type = "", media }) {
       return {
         title: `${alt} ${caption}`,
