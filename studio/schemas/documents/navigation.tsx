@@ -3,7 +3,7 @@ import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import buttonSchema from "../objects/button";
 import React from "react";
-import { ConditionalPropertyCallback } from "sanity";
+import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "navigation";
 
@@ -52,7 +52,7 @@ const PREVIEW = {
   },
 };
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   title: "Navigation",
   type: "document",
@@ -68,7 +68,7 @@ export default {
     },
   },
   fields: [
-    {
+    defineField({
       name: "items",
       title: "Items",
       type: "array",
@@ -131,7 +131,7 @@ export default {
           ],
         },
       ],
-    },
+    }),
     {
       name: "buttons",
       title: "Buttons",
@@ -171,4 +171,4 @@ export default {
       ],
     },
   ],
-};
+});

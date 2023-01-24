@@ -16,10 +16,11 @@ import {
 } from "./_page";
 import { SEO_FIELD } from "./config.seo";
 import React from "react";
+import { defineField, defineType } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "page.content";
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   title: "Content page",
   type: "document",
@@ -104,12 +105,12 @@ export default {
   fieldsets: [...pageBase.fieldsets],
   fields: [
     PASSWORD,
-    {
+    defineField({
       name: "parent",
       title: "Parent",
       type: "reference",
       to: [{ type: "page.content" }],
-    },
+    }),
     TITLE_FIELD,
     {
       ...SLUG_FIELD,
@@ -126,19 +127,19 @@ export default {
     DIALOGS_FIELD,
     DIALOG_SELECT_FIELD,
     SEO_FIELD,
-    {
+    defineField({
       name: "hideNav",
       title: "Hide navigation",
       type: "boolean",
       description: "Option to hide the navigation",
       initialValue: false,
-    },
-    {
+    }),
+    defineField({
       name: "hideFooter",
       title: "Hide footer",
       type: "boolean",
       description: "Option to hide the footer",
       initialValue: false,
-    },
+    }),
   ],
-};
+});

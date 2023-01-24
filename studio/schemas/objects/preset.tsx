@@ -1,19 +1,20 @@
-import Preset, {PresetWrapper} from '../../components/Presets/Preset'
+import Preset, { PresetWrapper } from "../../components/Presets/Preset";
+import { defineField } from "sanity";
 
-export const schema = {
-  name: 'preset',
-  title: 'Preset',
-  type: 'reference',
+export const schema = defineField({
+  name: "preset",
+  title: "Preset",
+  type: "reference",
   weak: true,
-  to: [{type: 'page.preset'}],
+  to: [{ type: "page.preset" }],
   components: {
     field: PresetWrapper,
     input: Preset,
   },
-  group: 'tools',
+  group: "tools",
   options: {
-    updateField: 'modules',
-  },
-}
+    updateField: "modules",
+  } as any,
+});
 
-export default schema
+export default schema;

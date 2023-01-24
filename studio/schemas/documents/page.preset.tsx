@@ -62,7 +62,7 @@ const schema = defineType({
         filterType: /module|hero|studio\./,
         updateField: "modules",
         placeholder: "Add a module…",
-      },
+      } as any,
     }),
     defineField({
       name: "image",

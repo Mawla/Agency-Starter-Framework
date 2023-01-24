@@ -1,25 +1,35 @@
-import React from 'react'
+import { DocumentIcon } from "../../utils/DocumentIcon";
+import buttonSchema from "../objects/button";
+import React from "react";
+import { defineType } from "sanity";
 
-import {DocumentIcon} from '../../utils/DocumentIcon'
-import buttonSchema from '../objects/button'
+const INTERNAL_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "internal"
+);
+const LANGUAGE_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "language"
+);
+const EXTERNAL_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "external"
+);
+const DIALOG_FIELD = buttonSchema.fields.find(({ name }) => name === "dialog");
+const FILE_FIELD = buttonSchema.fields.find(({ name }) => name === "file");
+const DOWNLOAD_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "download"
+);
+const PARAMS_FIELD = buttonSchema.fields.find(({ name }) => name === "params");
+const NEW_WINDOW_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "newWindow"
+);
 
-const INTERNAL_FIELD = buttonSchema.fields.find(({name}) => name === 'internal')
-const LANGUAGE_FIELD = buttonSchema.fields.find(({name}) => name === 'language')
-const EXTERNAL_FIELD = buttonSchema.fields.find(({name}) => name === 'external')
-const DIALOG_FIELD = buttonSchema.fields.find(({name}) => name === 'dialog')
-const FILE_FIELD = buttonSchema.fields.find(({name}) => name === 'file')
-const DOWNLOAD_FIELD = buttonSchema.fields.find(({name}) => name === 'download')
-const PARAMS_FIELD = buttonSchema.fields.find(({name}) => name === 'params')
-const NEW_WINDOW_FIELD = buttonSchema.fields.find(({name}) => name === 'newWindow')
-
-export default {
-  name: 'link',
-  title: 'Link',
-  type: 'object',
+export default defineType({
+  name: "link",
+  title: "Link",
+  type: "object",
   groups: [
     {
-      name: 'link',
-      title: 'Link',
+      name: "link",
+      title: "Link",
     },
   ],
   icon: () => <DocumentIcon type="link" />,
@@ -33,4 +43,4 @@ export default {
     DOWNLOAD_FIELD,
     NEW_WINDOW_FIELD,
   ],
-}
+});

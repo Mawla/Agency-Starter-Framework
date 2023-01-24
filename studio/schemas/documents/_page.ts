@@ -18,17 +18,24 @@ import { getISODateString } from "../../utils/datetime";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import { title } from "process";
-import { SlugRule, StringRule } from "sanity";
+import {
+  ArrayRule,
+  DateRule,
+  defineField,
+  SlugRule,
+  SortOrdering,
+  StringRule,
+} from "sanity";
 
-export const TITLE_FIELD = {
+export const TITLE_FIELD = defineField({
   name: "title",
   title: "Title",
   type: "string",
   validation: (Rule: StringRule) => Rule.required(),
   localize: true,
-};
+});
 
-export const SLUG_FIELD = {
+export const SLUG_FIELD = defineField({
   name: "slug",
   title: "Slug",
   type: "slug",
@@ -49,24 +56,24 @@ export const SLUG_FIELD = {
         return "Invalid slug: Only numbers, lowercase letters, and dashes are permitted.";
       }
     }),
-};
+});
 
-export const PUBLISHED_AT_FIELD = {
+export const PUBLISHED_AT_FIELD = defineField({
   name: "publishedAt",
   initialValue: getISODateString(),
   title: "Date",
   type: "date",
-  validation: (Rule: StringRule) => Rule.required(),
-};
+  validation: (Rule: DateRule) => Rule.required(),
+});
 
-export const HERO_FIELD = {
+export const HERO_FIELD = defineField({
   name: "hero",
   title: "Hero",
   type: "array",
   components: {
     input: ArrayWithLanguageFilter,
   },
-  validation: (Rule: StringRule) => Rule.max(languages.length).warning(),
+  validation: (Rule: ArrayRule<any>) => Rule.max(languages.length).warning(),
   description: "The hero section of the page.",
   of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
     (type: HeroSchemaName) => ({ type })
@@ -74,9 +81,9 @@ export const HERO_FIELD = {
   options: {
     id: "hero",
   },
-};
+});
 
-export const MODULES_FIELD = {
+export const MODULES_FIELD = defineField({
   name: "modules",
   title: "Modules",
   type: "array",
@@ -95,9 +102,9 @@ export const MODULES_FIELD = {
   options: {
     id: "modules",
   },
-};
+});
 
-export const MODULE_SELECT_FIELD = {
+export const MODULE_SELECT_FIELD = defineField({
   name: "moduleSelect",
   title: "Add a module",
   type: "string",
@@ -110,9 +117,9 @@ export const MODULE_SELECT_FIELD = {
     updateField: "modules",
     placeholder: "Add a module…",
   },
-};
+});
 
-export const HERO_SELECT_FIELD = {
+export const HERO_SELECT_FIELD = defineField({
   name: "heroSelect",
   title: "Add a hero",
   type: "string",
@@ -125,9 +132,9 @@ export const HERO_SELECT_FIELD = {
     updateField: "hero",
     placeholder: "Add a hero…",
   },
-};
+});
 
-export const DIALOG_SELECT_FIELD = {
+export const DIALOG_SELECT_FIELD = defineField({
   name: "dialogSelect",
   title: "Add a dialog",
   type: "string",
@@ -140,9 +147,9 @@ export const DIALOG_SELECT_FIELD = {
     updateField: "dialogs",
     placeholder: "Add a dialog…",
   },
-};
+});
 
-export const DIALOGS_FIELD = {
+export const DIALOGS_FIELD = defineField({
   name: "dialogs",
   title: "Dialogs",
   type: "array",
@@ -157,9 +164,9 @@ export const DIALOGS_FIELD = {
   options: {
     id: "dialogs",
   },
-};
+});
 
-export const ORDER_PUBLISHED_DESC = {
+export const ORDER_PUBLISHED_DESC: SortOrdering = {
   title: "Created ↑",
   name: "publishedAtDesc",
   by: [{ field: "publishedAt", direction: "desc" }],
@@ -187,7 +194,7 @@ export const EMPTY_RICHTEXT_MODULE = {
   ],
 };
 
-export const PASSWORD = {
+export const PASSWORD = defineField({
   name: "locked",
   title: "Locked",
   type: "object",
@@ -202,7 +209,7 @@ export const PASSWORD = {
       title,
     })),
   ],
-};
+});
 
 export const pageBase = {
   initialValue: {},

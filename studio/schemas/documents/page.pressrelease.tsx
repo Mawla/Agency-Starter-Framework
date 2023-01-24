@@ -4,6 +4,7 @@ import { DocumentIcon } from "../../utils/DocumentIcon";
 import { ORDER_PUBLISHED_DESC, pageBase, PUBLISHED_AT_FIELD } from "./_page";
 import contentPage from "./page.content";
 import React from "react";
+import { defineType, SortOrdering } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "page.pressrelease";
 
@@ -17,7 +18,7 @@ fields.splice(parentFieldIndex + 1, 0, {
   description: "Used in the press releases grid module",
 });
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   title: "Press release",
   type: "document",
@@ -44,4 +45,4 @@ export default {
   },
   fieldsets: [...pageBase.fieldsets],
   fields: [...fields, PUBLISHED_AT_FIELD],
-};
+});

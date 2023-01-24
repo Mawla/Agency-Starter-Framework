@@ -2,8 +2,9 @@ import { IMAGE_RATIO_OPTIONS } from "../../../modules/CardGrid/ImageCardOptions"
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import React from "react";
+import { defineType,defineField } from "sanity";
 
-export const schema = {
+export const schema = defineType({
   title: "Image card",
   name: "card.image",
   type: "document",
@@ -26,7 +27,7 @@ export const schema = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "image",
       title: "Image",
       type: "image",
@@ -34,8 +35,8 @@ export const schema = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
@@ -58,8 +59,8 @@ export const schema = {
           },
         },
       ],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

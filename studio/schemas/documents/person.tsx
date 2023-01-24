@@ -1,17 +1,9 @@
 import { baseLanguage } from "../../../languages";
-import { PersonType } from "../../../types";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import React from "react";
+import { defineField, defineType } from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "document";
-  fields: ({
-    name: keyof PersonType;
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "person",
   title: "Person",
   type: "document",
@@ -31,7 +23,7 @@ const schema: SchemaType = {
     },
   },
   fields: [
-    {
+    defineField({
       name: "image",
       title: "Image",
       type: "image",
@@ -39,29 +31,29 @@ const schema: SchemaType = {
         hotspot: true,
       },
       description: "Photo of the person. Used in the card grids.",
-    },
-    {
+    }),
+    defineField({
       name: "name",
       title: "Name",
       type: "string",
       description: "Name and surname.",
-    },
-    {
+    }),
+    defineField({
       name: "position",
       title: "Position",
       type: "string",
       description: "Job title.",
       localize: true,
-    },
-    {
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "text",
       rows: 2,
       description: "Short bio.",
       localize: true,
-    },
+    }),
   ],
-};
+});
 
 export default schema;

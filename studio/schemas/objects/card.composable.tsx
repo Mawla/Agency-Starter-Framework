@@ -22,11 +22,10 @@ import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
-import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
-import { ConditionalPropertyCallback } from "sanity";
+import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 
-export const schema = {
+export const schema = defineType({
   title: "Composable card",
   name: "card.composable",
   type: "document",
@@ -67,7 +66,7 @@ export const schema = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "cover",
       title: "Cover",
       type: "image",
@@ -79,8 +78,8 @@ export const schema = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: "image",
       title: "Image",
       type: "image",
@@ -92,8 +91,8 @@ export const schema = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: "icon",
       title: "Icon",
       type: "string",
@@ -103,45 +102,45 @@ export const schema = {
         !value &&
         (parent?.cover || parent?.image)) as ConditionalPropertyCallback,
       components: { input: IconPicker },
-    },
-    {
+    }),
+    defineField({
       name: "badge",
       title: "Badge",
       type: "string",
       description: "Used to highlight a date, very short text and/or numbers.",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "subtitle",
       title: "Subtitle",
       type: "string",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "text",
       title: "Text",
       type: "richtext.simple",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "buttons",
       title: "Buttons",
       type: "buttongroup",
       group: "content",
-    },
-    {
+    }),
+    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
       fields: [
-        {
+        defineField({
           name: "card",
           title: "Card",
           type: "styles",
@@ -189,8 +188,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "image",
           title: "Image",
           type: "styles",
@@ -219,8 +218,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "icon",
           title: "Icon",
           type: "styles",
@@ -242,8 +241,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "badge",
           title: "Badge",
           type: "styles",
@@ -262,8 +261,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "title",
           title: "Title",
           type: "styles",
@@ -292,8 +291,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "subtitle",
           title: "Subtitle",
           type: "styles",
@@ -322,8 +321,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "text",
           title: "Text",
           type: "styles",
@@ -345,8 +344,8 @@ export const schema = {
               },
             ],
           },
-        },
-        {
+        }),
+        defineField({
           name: "buttons",
           title: "Buttons",
           type: "styles",
@@ -358,10 +357,10 @@ export const schema = {
               },
             ],
           },
-        },
+        }),
       ],
-    },
+    }),
   ],
-};
+});
 
 export default schema;

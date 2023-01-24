@@ -1,6 +1,7 @@
 import { languages } from "../../../languages";
+import { defineType } from "sanity";
 
-export default {
+export default defineType({
   name: "language",
   title: "Language",
   type: "string",
@@ -9,4 +10,4 @@ export default {
     // layout: 'radio', // not radio, because you can't unset it
     direction: "horizontal",
   },
-};
+});

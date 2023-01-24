@@ -3,7 +3,12 @@ import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import buttonSchema from "../objects/button";
 import React from "react";
-import { ConditionalPropertyCallback } from "sanity";
+import {
+  ConditionalPropertyCallback,
+  defineArrayMember,
+  defineField,
+  defineType,
+} from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "footer";
 
@@ -38,7 +43,7 @@ const PREVIEW = {
   },
 };
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   title: "Footer",
   type: "document",
@@ -54,21 +59,21 @@ export default {
     },
   },
   fields: [
-    {
+    defineField({
       name: "links",
       title: "Links",
       type: "array",
       of: [
-        {
+        defineArrayMember({
           type: "object",
           ...PREVIEW,
           fields: [
-            {
+            defineField({
               name: "title",
               title: "Title",
               type: "string",
-            },
-            {
+            }),
+            defineField({
               type: "object",
               name: "link",
               title: "Link",
@@ -84,14 +89,14 @@ export default {
               },
               ...PREVIEW,
               fields: [INTERNAL_FIELD, LANGUAGE_FIELD, EXTERNAL_FIELD],
-            },
-            {
+            }),
+            defineField({
               name: "items",
               title: "Items",
               type: "array",
               description: "List of menu buttons.",
               of: [
-                {
+                defineField({
                   type: "object",
                   title: "Items",
                   groups: [
@@ -107,23 +112,23 @@ export default {
                     LANGUAGE_FIELD,
                     EXTERNAL_FIELD,
                   ],
-                },
+                }),
               ],
               hidden: (({ parent, value }) =>
                 !value &&
                 (parent?.internal ||
                   parent?.external)) as ConditionalPropertyCallback,
-            },
+            }),
           ],
-        },
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: "socials",
       title: "Socials",
       type: "array",
       of: [
-        {
+        defineField({
           type: "object",
           title: "Item",
           groups: [
@@ -138,33 +143,33 @@ export default {
             INTERNAL_FIELD,
             LANGUAGE_FIELD,
             EXTERNAL_FIELD,
-            {
+            defineField({
               name: "icon",
               title: "Icon",
               type: "string",
               components: { input: IconPicker },
-            },
+            }),
           ],
-        },
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: "copyright",
       title: "Copyright",
       type: "string",
-    },
-    {
+    }),
+    defineField({
       name: "legal",
       title: "Legal",
       type: "string",
-    },
-    {
+    }),
+    defineField({
       name: "legalLinks",
       title: "Legal links",
       type: "array",
       description: "List of additional links.",
       of: [
-        {
+        defineField({
           type: "object",
           title: "Items",
           groups: [
@@ -175,8 +180,8 @@ export default {
           ],
           ...PREVIEW,
           fields: [LABEL_FIELD, INTERNAL_FIELD, LANGUAGE_FIELD, EXTERNAL_FIELD],
-        },
+        }),
       ],
-    },
+    }),
   ],
-};
+});

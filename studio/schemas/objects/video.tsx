@@ -1,9 +1,8 @@
-import { VideoType, VIDEO_PROVIDERS } from "../../../types";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
+import { VIDEO_PROVIDERS } from "../../../types";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import getYoutubeId from "get-youtube-id";
 import React from "react";
-import { ConditionalPropertyCallback } from "sanity";
+import { ConditionalPropertyCallback, defineType, defineField } from "sanity";
 
 export const getVideoPreview = (prefix = "") => ({
   select: {
@@ -94,18 +93,7 @@ export const getVideoPreviewThumbnail = ({
   return image;
 };
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  initialValue: {
-    loop: VideoType["loop"];
-    autoPlay: VideoType["autoPlay"];
-  };
-  fields: ({
-    name: VideoType;
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "video",
   title: "Video",
   type: "object",
@@ -118,19 +106,19 @@ const schema: SchemaType = {
     {
       name: "videoOptions",
       title: "Video options",
-      options: { collapsed: true, collapsable: true },
+      options: { collapsed: true, collapsible: true },
     },
   ],
   fields: [
-    {
+    defineField({
       name: "provider",
       title: "Provider",
       type: "string",
       options: {
         list: Object.keys(VIDEO_PROVIDERS),
       },
-    },
-    {
+    }),
+    defineField({
       title: "Sanity",
       type: "file",
       name: "sanity",
@@ -138,15 +126,15 @@ const schema: SchemaType = {
         "Hosting videos on Sanity itself is discouraged. The video can't be optimised by the frontend and hosting costs will increase. Choosing a dedicated video provider like Youtube, Vimeo, Mux or Cloudinary is encouraged.",
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "sanity") as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       title: "Cloudinary Video",
       type: "cloudinary.asset",
       name: "cloudinary",
       hidden: ({ parent, value }) =>
         !value && parent?.provider !== "cloudinary",
-    },
-    {
+    }),
+    defineField({
       title: "Youtube URL",
       type: "url",
       name: "youtube",
@@ -155,24 +143,24 @@ const schema: SchemaType = {
       hidden: (({ parent, value }) =>
         !value &&
         parent?.provider !== "youtube") as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       title: "Vimeo URL",
       type: "url",
       name: "vimeo",
       description: "Link of the Vimeo video, e.g https://vimeo.com/1084537",
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "vimeo") as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       title: "Mux",
       type: "mux.video",
       name: "mux",
       description: "Mux video ID",
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "mux") as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       title: "Static",
       type: "string",
       name: "static",
@@ -180,42 +168,42 @@ const schema: SchemaType = {
         "Path to a video on the web, or a static video uploaded in the next.js public folder, e.g /video/movie.mp4",
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "static") as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "loop",
       title: "Loop",
       type: "boolean",
       fieldset: "videoOptions",
       description: "Replay the video when it ends.",
-    },
-    {
+    }),
+    defineField({
       name: "autoPlay",
       title: "Auto play",
       type: "boolean",
       fieldset: "videoOptions",
       description: "Start playing the video automatically.",
-    },
-    {
+    }),
+    defineField({
       name: "frameless",
       title: "Frameless",
       type: "boolean",
       fieldset: "videoOptions",
       description:
         "Remove controls from video. This may not work very well with Youtube or Vimeo.",
-    },
-    {
+    }),
+    defineField({
       name: "caption",
       title: "Caption",
       type: "string",
       description:
         "Optional caption to display with the video. Only shown on the website when layout allows for it.",
-    },
-    {
+    }),
+    defineField({
       name: "poster",
       title: "Poster",
       type: "image",
-    },
+    }),
   ],
-};
+});
 
 export default schema;

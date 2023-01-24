@@ -5,9 +5,9 @@ import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import richTextBasicSchema from "../objects/richtext.basic";
 import React from "react";
-import { StringRule } from "sanity";
+import { defineField } from "sanity";
 
-export default {
+export default defineField({
   name: "richtext.full",
   title: "Rich Text",
   type: "array",
@@ -19,14 +19,14 @@ export default {
       type: "block",
       title: "Rich text",
       styles: [
-        ...richTextBasicSchema.of[0].styles,
+        ...(richTextBasicSchema.of[0] as any).styles,
         { title: "H2", value: "h2" },
         { title: "H5", value: "h5" },
       ].sort((a, b) => a.title.localeCompare(b.title)),
-      lists: [...richTextBasicSchema.of[0].lists],
+      lists: [...(richTextBasicSchema.of[0] as any).lists],
       marks: {
-        decorators: [...richTextBasicSchema.of[0].marks.decorators],
-        annotations: [...richTextBasicSchema.of[0].marks.annotations],
+        decorators: [...(richTextBasicSchema.of[0] as any).marks.decorators],
+        annotations: [...(richTextBasicSchema.of[0] as any).marks.annotations],
       },
     },
     { type: "image.simple" },
@@ -117,7 +117,7 @@ export default {
           name: "scriptId",
           title: "Script id",
           type: "string",
-          validation: (Rule: StringRule) => Rule.required(),
+          validation: (Rule) => Rule.required(),
           options: {
             list: optionsToList(SCRIPT_OPTIONS),
           },
@@ -125,4 +125,4 @@ export default {
       ],
     },
   ],
-};
+});

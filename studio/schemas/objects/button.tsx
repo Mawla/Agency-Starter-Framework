@@ -1,10 +1,7 @@
-import { ButtonProps } from "../../../components/buttons/Button";
 import {
   ICON_POSITION_OPTIONS,
-  IconPositionType,
   VARIANT_OPTIONS,
 } from "../../../components/buttons/ButtonOptions";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import DialogSelect, {
   DialogSelectWrapper,
 } from "../../components/DialogSelect";
@@ -13,28 +10,14 @@ import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { getLinkableTypes } from "../../utils/schemas/getLinkableTypes";
 import React from "react";
-import { ConditionalPropertyCallback } from "sanity";
+import {
+  ConditionalPropertyCallback,
+  defineField,
+  defineType,
+  StringRule,
+} from "sanity";
 
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  initialValue: {
-    variant?: ButtonProps["variant"];
-    iconPosition?: IconPositionType;
-  };
-  fields: ({
-    name:
-      | keyof ButtonProps
-      | "external"
-      | "internal"
-      | "dialog"
-      | "params"
-      | "file"
-      | "language"
-      | "newWindow";
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
+const schema = defineType({
   name: "button",
   title: "Button",
   type: "object",
@@ -54,13 +37,13 @@ const schema: SchemaType = {
     },
   ],
   fields: [
-    {
+    defineField({
       name: "label",
       title: "Label",
       type: "string",
       group: "link",
-    },
-    {
+    }),
+    defineField({
       name: "external",
       title: "External link",
       description: "Link to a website, e.g https://www.example.com.",
@@ -71,8 +54,8 @@ const schema: SchemaType = {
         (parent?.internal ||
           parent?.dialog ||
           parent?.file)) as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "internal",
       title: "Internal link",
       type: "reference",
@@ -84,8 +67,8 @@ const schema: SchemaType = {
         (parent?.external ||
           parent?.dialog ||
           parent?.file)) as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "language",
       title: "Language",
       type: "language",
@@ -96,8 +79,8 @@ const schema: SchemaType = {
         (parent?.external ||
           parent?.dialog ||
           parent?.file)) as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "params",
       title: "Extra url parameters",
       type: "string",
@@ -106,15 +89,15 @@ const schema: SchemaType = {
         "Use this for a #hash or ?querystring. This field is not automatically updated when the destination changes.",
       hidden: ({ parent, value }) =>
         !value && (parent?.external || parent?.dialog || parent?.file),
-      validation: (Rule: any) =>
-        Rule.custom((value) => {
+      validation: (Rule: StringRule) =>
+        Rule.custom((value: any) => {
           if (typeof value === "undefined") return true; // Allow undefined values
           if (!value.startsWith("#") && !value.startsWith("?"))
             return `This field must start with either # or ?.`;
           return true;
         }),
-    },
-    {
+    }),
+    defineField({
       name: "dialog",
       title: "Dialog",
       type: "string",
@@ -129,8 +112,8 @@ const schema: SchemaType = {
         (parent?.internal ||
           parent?.external ||
           parent?.file)) as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "file",
       title: "File",
       type: "file",
@@ -140,8 +123,8 @@ const schema: SchemaType = {
         (parent?.external ||
           parent?.dialog ||
           parent?.internal)) as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "download",
       title: "Download",
       type: "boolean",
@@ -151,16 +134,16 @@ const schema: SchemaType = {
       hidden: (({ parent, value }) =>
         !value &&
         !(parent?.file || parent?.external)) as ConditionalPropertyCallback,
-    },
-    {
+    }),
+    defineField({
       name: "newWindow",
       title: "Open in new window",
       type: "boolean",
       group: "link",
       initialValue: false,
       description: "Make the button open in a new browser window",
-    },
-    {
+    }),
+    defineField({
       name: "variant",
       title: "Variant",
       type: "string",
@@ -169,22 +152,22 @@ const schema: SchemaType = {
       options: {
         list: optionsToList(VARIANT_OPTIONS),
       },
-    },
-    {
+    }),
+    defineField({
       name: "alt",
       title: "Alt",
       type: "boolean",
       group: "theme",
       description: "Remove background color.",
-    },
-    {
+    }),
+    defineField({
       name: "icon",
       title: "Icon",
       type: "string",
       group: "theme",
       components: { input: IconPicker },
-    },
-    {
+    }),
+    defineField({
       name: "iconPosition",
       title: "Icon position",
       type: "string",
@@ -196,7 +179,7 @@ const schema: SchemaType = {
       initialValue: "after",
       group: "theme",
       description: "Make the button stretch as wide as it can go.",
-    },
+    }),
   ],
   preview: {
     select: {
@@ -211,6 +194,6 @@ const schema: SchemaType = {
       };
     },
   },
-};
+});
 
 export default schema;

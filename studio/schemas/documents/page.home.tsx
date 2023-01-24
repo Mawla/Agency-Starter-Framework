@@ -3,10 +3,11 @@ import { SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { pageBase } from "./_page";
 import React from "react";
+import { defineType } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "page.home";
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   title: "Homepage",
   type: "document",
@@ -30,4 +31,4 @@ export default {
   },
   fieldsets: [...pageBase.fieldsets],
   fields: [...pageBase.fields.filter(({ name }) => name !== "slug")],
-};
+});

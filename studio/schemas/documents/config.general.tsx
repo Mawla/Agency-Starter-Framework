@@ -2,11 +2,11 @@ import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import React from "react";
-import { StringRule } from "sanity";
+import { defineField, defineType, StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "config.general";
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   title: "General",
   type: "document",
@@ -21,7 +21,7 @@ export default {
     },
   },
   fields: [
-    {
+    defineField({
       name: "warning",
       title: "Warning",
       type: "string",
@@ -29,8 +29,8 @@ export default {
       components: { field: Warning },
       message:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
-    },
-    {
+    }),
+    defineField({
       name: "name",
       title: "Name",
       type: "string",
@@ -38,8 +38,8 @@ export default {
       description:
         "Name of the website. Used in the page title and brand schema as brand name.",
       validation: (Rule: StringRule) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: "domain",
       type: "string",
       localize: true,
@@ -47,6 +47,6 @@ export default {
       validation: (Rule: StringRule) => Rule.required(),
       description:
         "The website domain without slash and protocol, e.g google.com. Used for the canonical url.",
-    },
+    }),
   ],
-};
+});

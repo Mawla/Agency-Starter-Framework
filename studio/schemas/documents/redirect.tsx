@@ -2,32 +2,32 @@ import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import React from "react";
-import { StringRule } from "sanity";
+import { defineField, defineType, StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "redirect";
 
-export default {
+export default defineType({
   name: SCHEMA_NAME,
   type: "document",
   title: "Redirect",
   icon: () => <DocumentIcon type="redirect" />,
   fields: [
-    {
+    defineField({
       name: "warning",
       title: "Warning",
       type: "string",
       components: { field: Warning },
       message:
         "Publishing a redirect will trigger a new deployment on the build server and will take a few minutes to be in effect.",
-    },
-    {
+    }),
+    defineField({
       title: "Description",
       name: "description",
       description:
         "Human readable description, used only to easily identify redirects",
       type: "string",
-    },
-    {
+    }),
+    defineField({
       title: "Source",
       name: "source",
       type: "string",
@@ -44,22 +44,22 @@ export default {
           return true;
         }),
       description: `URL that needs to be replaced. Host must be omitted (https://website.ie/). Examples: '/old-page', '/old-news/:slug' or '/old-sub-path/:slug*'.`,
-    },
-    {
+    }),
+    defineField({
       title: "Destination",
       name: "destination",
       type: "string",
       validation: (Rule: StringRule) => Rule.required(),
       description: `URL that needs to be replaced. Host can be omitted (https://website.ie/). Examples: '/new-page', '/new-news/:slug' or '/new-sub-path/:slug*'.`,
-    },
-    {
+    }),
+    defineField({
       name: "permanent",
       title: "Permanent",
       type: "boolean",
       description:
         "Is this redirect permanent? If true will use the 308 status code which instructs clients/search engines to cache the redirect forever, if false will use the 307 status code which is temporary and is not cached.",
       initialValue: false,
-    },
+    }),
   ],
 
   preview: {
@@ -77,4 +77,4 @@ export default {
       } ${permanent ? "(permanent)" : "(temporary)"}`,
     }),
   },
-};
+});

@@ -1,7 +1,7 @@
 import { CustomRichTextEditor } from "../../components/CustomRichTextEditor";
-import React from "react";
+import { defineField } from "sanity";
 
-export default {
+export default defineField({
   name: "richtext.basic",
   title: "Rich Text",
   type: "array",
@@ -39,4 +39,4 @@ export default {
       },
     },
   ],
-};
+});

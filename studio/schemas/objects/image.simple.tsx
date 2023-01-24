@@ -1,13 +1,5 @@
-import { ImageType } from "../../../types";
-import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import React from "react";
-
-type SchemaType = SanitySchemaType & {
-  type: "object";
-  fields: ({
-    name: "source" | keyof ImageType;
-  } & SanityFieldType)[];
-};
+import { defineField, defineType } from "sanity";
 
 const ImagePreview = (props: any) => {
   if (!props?.media?.asset?.url)
@@ -29,7 +21,7 @@ const ImagePreview = (props: any) => {
   );
 };
 
-const schema: SchemaType = {
+const schema = defineType({
   name: "image.simple",
   title: "Image",
   type: "object",
@@ -55,40 +47,40 @@ const schema: SchemaType = {
     {
       name: "imageOptions",
       title: "Image options",
-      options: { collapsed: true, collapsable: true },
+      options: { collapsed: true, collapsible: true },
     },
   ],
   fields: [
-    {
+    defineField({
       name: "source",
       title: "Source",
       type: "image",
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: "alt",
       type: "string",
       title: "Alternative text",
       description:
         "The alternative text is used to describe the image for screen readers.",
-    },
-    {
+    }),
+    defineField({
       name: "caption",
       title: "Caption",
       type: "string",
       description:
         "Optional caption to display with the image. Only shown on the website when layout allows for it.",
-    },
-    {
+    }),
+    defineField({
       name: "preventResize",
       title: "Prevent resize",
       type: "boolean",
       description:
         "If enabled, the image will maintain its aspect ratio when scaled.",
-    },
+    }),
   ],
-};
+});
 
 export default schema;
