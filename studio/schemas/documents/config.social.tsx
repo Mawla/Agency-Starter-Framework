@@ -25,34 +25,32 @@ export default defineType({
       name: "warning",
       title: "Warning",
       type: "string",
-      localize: false,
+      options: { localize: false } as any,
       components: { field: Warning },
-      message:
+      description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
     defineField({
       name: "twitter",
       title: "Twitter",
       type: "object",
-
       fields: [
-        {
+        defineField({
           name: "handle",
           title: "Handle",
           type: "string",
-        },
-        {
+        }),
+        defineField({
           name: "url",
           title: "URL",
           type: "url",
-        },
+        }),
       ],
     }),
     defineField({
       name: "socials",
       title: "Social links",
       type: "array",
-
       of: [{ type: "string" }],
     }),
   ],

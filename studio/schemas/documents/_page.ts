@@ -32,20 +32,20 @@ export const TITLE_FIELD = defineField({
   title: "Title",
   type: "string",
   validation: (Rule: StringRule) => Rule.required(),
-  localize: true,
+  options: { localize: true } as any,
 });
 
 export const SLUG_FIELD = defineField({
   name: "slug",
   title: "Slug",
   type: "slug",
-  localize: true,
   description:
     "The unique identifying part of a web address at the end of the URL. Only lowercase and no special characters except -.",
   options: {
     source: title,
     maxLength: 96,
-  },
+    localize: true,
+  } as any,
   validation: (Rule: SlugRule) =>
     Rule.required().custom(async (slug, context) => {
       if (typeof slug === "undefined") return true;

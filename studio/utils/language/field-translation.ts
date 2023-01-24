@@ -46,7 +46,12 @@ export const translateFields = (docs: any) => {
         doc.options?.localize ||
         field.options?.localize;
       // Use the field defined as-is if its not to be translated
-      if (!shouldLocalize || field.localize === false) return field;
+      if (
+        !shouldLocalize ||
+        field.localize === false ||
+        field.options?.localize === false
+      )
+        return field;
 
       return {
         ...languageField,
@@ -57,6 +62,7 @@ export const translateFields = (docs: any) => {
           ...field,
           description: null,
           options: {
+            ...field.options,
             source: field.options?.source
               ? (doc: any) => {
                   return doc.title[language.id];

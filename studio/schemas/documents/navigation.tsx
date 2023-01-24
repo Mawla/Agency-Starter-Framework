@@ -59,7 +59,7 @@ export default defineType({
   singleton: true,
   icon: () => <DocumentIcon type="navigation" />,
   initialValue: {},
-  localize: true,
+  options: { localize: true } as any,
   preview: {
     prepare() {
       return {

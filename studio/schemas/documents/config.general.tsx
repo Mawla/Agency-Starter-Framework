@@ -25,16 +25,16 @@ export default defineType({
       name: "warning",
       title: "Warning",
       type: "string",
-      localize: false,
+      options: { localize: false } as any,
       components: { field: Warning },
-      message:
+      description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
     defineField({
       name: "name",
       title: "Name",
       type: "string",
-      localize: true,
+      options: { localize: true } as any,
       description:
         "Name of the website. Used in the page title and brand schema as brand name.",
       validation: (Rule: StringRule) => Rule.required(),
@@ -42,7 +42,7 @@ export default defineType({
     defineField({
       name: "domain",
       type: "string",
-      localize: true,
+      options: { localize: true } as any,
       title: "Domain",
       validation: (Rule: StringRule) => Rule.required(),
       description:

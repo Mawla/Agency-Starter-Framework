@@ -60,7 +60,6 @@ export default defineType({
   title: "SEO",
   type: "document",
   singleton: true,
-  localize: true,
   icon: () => <DocumentIcon type="search" />,
   initialValue: {},
   preview: {
@@ -75,9 +74,9 @@ export default defineType({
       name: "warning",
       title: "Warning",
       type: "string",
-      localize: false,
+      options: { localize: false } as any,
       components: { field: Warning },
-      message:
+      description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
     ...SEO_FIELD.fields.filter((x) => x.name !== "excludeFromSitemap"),

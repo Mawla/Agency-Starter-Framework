@@ -12,7 +12,6 @@ export default defineType({
   title: "Translations",
   type: "document",
   singleton: true,
-  localize: true,
   icon: () => <DocumentIcon type="translations" />,
   preview: {
     prepare() {
@@ -26,9 +25,9 @@ export default defineType({
       name: "warning",
       title: "Warning",
       type: "string",
-      localize: false,
+      options: { localize: false } as any,
       components: { field: Warning },
-      message:
+      description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
 
@@ -41,6 +40,7 @@ export default defineType({
           type: "string",
           description,
           validation: (Rule: any) => Rule.required(),
+          options: { localize: true } as any,
         })
       ),
   ],

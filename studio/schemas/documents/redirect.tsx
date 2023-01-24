@@ -17,7 +17,7 @@ export default defineType({
       title: "Warning",
       type: "string",
       components: { field: Warning },
-      message:
+      description:
         "Publishing a redirect will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
     defineField({

@@ -43,7 +43,7 @@ const schema = defineType({
       title: "Position",
       type: "string",
       description: "Job title.",
-      localize: true,
+      options: { localize: true } as any,
     }),
     defineField({
       name: "description",
@@ -51,7 +51,7 @@ const schema = defineType({
       type: "text",
       rows: 2,
       description: "Short bio.",
-      localize: true,
+      options: { localize: true } as any,
     }),
   ],
 });
