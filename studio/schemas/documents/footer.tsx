@@ -12,16 +12,18 @@ import {
 
 export const SCHEMA_NAME: SchemaName = "footer";
 
-const LABEL_FIELD = buttonSchema.fields.find(({ name }) => name === "label");
+const LABEL_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "label"
+) as any;
 const INTERNAL_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "internal"
-);
+) as any;
 const LANGUAGE_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "language"
-);
+) as any;
 const EXTERNAL_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "external"
-);
+) as any;
 
 const PREVIEW = {
   preview: {
@@ -95,7 +97,7 @@ export default defineType({
               type: "array",
               description: "List of menu buttons.",
               of: [
-                defineField({
+                defineArrayMember({
                   type: "object",
                   title: "Items",
                   groups: [
@@ -127,7 +129,7 @@ export default defineType({
       title: "Socials",
       type: "array",
       of: [
-        defineField({
+        defineArrayMember({
           type: "object",
           title: "Item",
           groups: [
@@ -168,7 +170,7 @@ export default defineType({
       type: "array",
       description: "List of additional links.",
       of: [
-        defineField({
+        defineArrayMember({
           type: "object",
           title: "Items",
           groups: [

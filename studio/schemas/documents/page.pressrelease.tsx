@@ -1,5 +1,5 @@
 import { baseLanguage } from "../../../languages";
-import { SanityFieldType, SchemaName } from "../../../types.sanity";
+import { SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { ORDER_PUBLISHED_DESC, pageBase, PUBLISHED_AT_FIELD } from "./_page";
 import contentPage from "./page.content";
@@ -8,7 +8,7 @@ import { defineType, SortOrdering } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "page.pressrelease";
 
-const fields = [...contentPage.fields] as SanityFieldType[];
+const fields = [...contentPage.fields];
 const parentFieldIndex = fields.findIndex(({ name }) => name === "parent");
 
 fields.splice(parentFieldIndex + 1, 0, {
