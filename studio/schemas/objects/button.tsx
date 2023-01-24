@@ -13,6 +13,7 @@ import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { getLinkableTypes } from "../../utils/schemas/getLinkableTypes";
 import React from "react";
+import { ConditionalPropertyCallback } from "sanity";
 
 type SchemaType = SanitySchemaType & {
   type: "object";
@@ -65,8 +66,11 @@ const schema: SchemaType = {
       description: "Link to a website, e.g https://www.example.com.",
       type: "string",
       group: "link",
-      hidden: ({ parent, value }) =>
-        !value && (parent?.internal || parent?.dialog || parent?.file),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.internal ||
+          parent?.dialog ||
+          parent?.file)) as ConditionalPropertyCallback,
     },
     {
       name: "internal",
@@ -75,8 +79,11 @@ const schema: SchemaType = {
       group: "link",
       description: "Internal link to a page or article.",
       to: getLinkableTypes(),
-      hidden: ({ parent, value }) =>
-        !value && (parent?.external || parent?.dialog || parent?.file),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.external ||
+          parent?.dialog ||
+          parent?.file)) as ConditionalPropertyCallback,
     },
     {
       name: "language",
@@ -84,8 +91,11 @@ const schema: SchemaType = {
       type: "language",
       group: "link",
       description: "Switch to a different language version of the page.",
-      hidden: ({ parent, value }) =>
-        !value && (parent?.external || parent?.dialog || parent?.file),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.external ||
+          parent?.dialog ||
+          parent?.file)) as ConditionalPropertyCallback,
     },
     {
       name: "params",
@@ -114,16 +124,22 @@ const schema: SchemaType = {
         field: DialogSelectWrapper,
         input: DialogSelect,
       },
-      hidden: ({ parent, value }) =>
-        !value && (parent?.internal || parent?.external || parent?.file),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.internal ||
+          parent?.external ||
+          parent?.file)) as ConditionalPropertyCallback,
     },
     {
       name: "file",
       title: "File",
       type: "file",
       group: "link",
-      hidden: ({ parent, value }) =>
-        !value && (parent?.external || parent?.dialog || parent?.internal),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.external ||
+          parent?.dialog ||
+          parent?.internal)) as ConditionalPropertyCallback,
     },
     {
       name: "download",
@@ -132,8 +148,9 @@ const schema: SchemaType = {
       group: "link",
       initialValue: false,
       description: "Make the button download the file",
-      hidden: ({ parent, value }) =>
-        !value && !(parent?.file || parent?.external),
+      hidden: (({ parent, value }) =>
+        !value &&
+        !(parent?.file || parent?.external)) as ConditionalPropertyCallback,
     },
     {
       name: "newWindow",

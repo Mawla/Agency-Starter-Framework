@@ -3,6 +3,7 @@ import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import getYoutubeId from "get-youtube-id";
 import React from "react";
+import { ConditionalPropertyCallback } from "sanity";
 
 export const getVideoPreview = (prefix = "") => ({
   select: {
@@ -133,7 +134,8 @@ const schema: SchemaType = {
       title: "Sanity",
       type: "file",
       name: "sanity",
-      hidden: ({ parent, value }) => !value && parent?.provider !== "sanity",
+      hidden: (({ parent, value }) =>
+        !value && parent?.provider !== "sanity") as ConditionalPropertyCallback,
     },
     // {
     //   title: 'Cloudinary Video',
@@ -147,21 +149,24 @@ const schema: SchemaType = {
       name: "youtube",
       description:
         "Link of the Youtube video, e.g https://www.youtube.com/watch?v=aqz-KE-bpKQ",
-      hidden: ({ parent, value }) => !value && parent?.provider !== "youtube",
+      hidden: (({ parent, value }) =>
+        !value &&
+        parent?.provider !== "youtube") as ConditionalPropertyCallback,
     },
     {
       title: "Vimeo URL",
       type: "url",
       name: "vimeo",
       description: "Link of the Vimeo video, e.g https://vimeo.com/1084537",
-      hidden: ({ parent, value }) => !value && parent?.provider !== "vimeo",
+      hidden: (({ parent, value }) =>
+        !value && parent?.provider !== "vimeo") as ConditionalPropertyCallback,
     },
     // {
     //   title: 'Mux',
     //   type: 'mux.video',
     //   name: 'mux',
     //   description: 'Mux video ID',
-    //   hidden: ({parent, value}) => !value && parent?.provider !== 'mux',
+    //   hidden: (({parent, value}) => !value && parent?.provider !== 'mux') as ConditionalPropertyCallback,
     // },
     {
       title: "Static",
@@ -169,7 +174,8 @@ const schema: SchemaType = {
       name: "static",
       description:
         "Path to a video on the web, or a static video uploaded in the next.js public folder, e.g /video/movie.mp4",
-      hidden: ({ parent, value }) => !value && parent?.provider !== "static",
+      hidden: (({ parent, value }) =>
+        !value && parent?.provider !== "static") as ConditionalPropertyCallback,
     },
     {
       name: "loop",

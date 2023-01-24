@@ -3,6 +3,7 @@ import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import buttonSchema from "../objects/button";
 import React from "react";
+import { ConditionalPropertyCallback } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "footer";
 
@@ -25,12 +26,12 @@ const PREVIEW = {
       external: "external",
       items: "items",
     },
-    prepare({ title, label, items = [], external }) {
+    prepare({ title, label, items = [], external }: any) {
       return {
         title: title || label || "[Empty]",
         subtitle: external
           ? external
-          : items?.map(({ label }) => label).join(", "),
+          : items?.map(({ label }: any) => label).join(", "),
         media: <DocumentIcon type="link" />,
       };
     },
@@ -108,8 +109,10 @@ export default {
                   ],
                 },
               ],
-              hidden: ({ parent, value }) =>
-                !value && (parent?.internal || parent?.external),
+              hidden: (({ parent, value }) =>
+                !value &&
+                (parent?.internal ||
+                  parent?.external)) as ConditionalPropertyCallback,
             },
           ],
         },

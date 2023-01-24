@@ -1,9 +1,9 @@
 import { SchemaName } from "../../../types.sanity";
 import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { getLinkableTypes } from "../../utils/schemas/getLinkableTypes";
 import buttonSchema from "../objects/button";
 import React from "react";
+import { ConditionalPropertyCallback } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "navigation";
 
@@ -13,17 +13,20 @@ const LABEL_FIELD = {
 
 const INTERNAL_FIELD = {
   ...buttonSchema.fields.filter(({ name }) => name === "internal")[0],
-  hidden: ({ parent, value }) => !value && parent?.external,
+  hidden: (({ parent, value }) =>
+    !value && parent?.external) as ConditionalPropertyCallback,
 };
 
 const LANGUAGE_FIELD = {
   ...buttonSchema.fields.filter(({ name }) => name === "language")[0],
-  hidden: ({ parent, value }) => !value && parent?.external,
+  hidden: (({ parent, value }) =>
+    !value && parent?.external) as ConditionalPropertyCallback,
 };
 
 const EXTERNAL_FIELD = {
   ...buttonSchema.fields.filter(({ name }) => name === "external")[0],
-  hidden: ({ parent, value }) => !value && parent?.internal,
+  hidden: (({ parent, value }) =>
+    !value && parent?.internal) as ConditionalPropertyCallback,
 };
 
 const PREVIEW = {
@@ -33,12 +36,12 @@ const PREVIEW = {
       external: "external",
       children: "children",
     },
-    prepare({ label, children = [], external }) {
+    prepare({ label, children = [], external }: any) {
       return {
         title: label || "[Empty]",
         subtitle: external
           ? external
-          : children?.map(({ label }) => label).join(", "),
+          : children?.map(({ label }: { label: string }) => label).join(", "),
         media: label?.trim().length ? (
           <DocumentIcon type="link" />
         ) : (
@@ -105,15 +108,21 @@ export default {
                     LABEL_FIELD,
                     {
                       ...INTERNAL_FIELD,
-                      hidden: ({ parent, value }) => !value && parent?.external,
+                      hidden: (({ parent, value }) =>
+                        !value &&
+                        parent?.external) as ConditionalPropertyCallback,
                     },
                     {
                       ...LANGUAGE_FIELD,
-                      hidden: ({ parent, value }) => !value && parent?.external,
+                      hidden: (({ parent, value }) =>
+                        !value &&
+                        parent?.external) as ConditionalPropertyCallback,
                     },
                     {
                       ...EXTERNAL_FIELD,
-                      hidden: ({ parent, value }) => !value && parent?.internal,
+                      hidden: (({ parent, value }) =>
+                        !value &&
+                        parent?.internal) as ConditionalPropertyCallback,
                     },
                   ],
                 },
@@ -135,17 +144,20 @@ export default {
             { ...LABEL_FIELD, group: null },
             {
               ...INTERNAL_FIELD,
-              hidden: ({ parent, value }) => !value && parent?.external,
+              hidden: (({ parent, value }) =>
+                !value && parent?.external) as ConditionalPropertyCallback,
               group: null,
             },
             {
               ...LANGUAGE_FIELD,
-              hidden: ({ parent, value }) => !value && parent?.external,
+              hidden: (({ parent, value }) =>
+                !value && parent?.external) as ConditionalPropertyCallback,
               group: null,
             },
             {
               ...EXTERNAL_FIELD,
-              hidden: ({ parent, value }) => !value && parent?.internal,
+              hidden: (({ parent, value }) =>
+                !value && parent?.internal) as ConditionalPropertyCallback,
               group: null,
             },
             {

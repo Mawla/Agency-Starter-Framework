@@ -24,6 +24,7 @@ import { optionsToList } from "../../utils/fields/optionsToList";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
+import { ConditionalPropertyCallback } from "sanity";
 
 export const schema = {
   title: "Composable card",
@@ -65,7 +66,9 @@ export const schema = {
       type: "image",
       description: "Full-width 16/9 cover photo.",
       group: "content",
-      hidden: ({ parent, value }) => !value && (parent?.image || parent?.icon),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.image || parent?.icon)) as ConditionalPropertyCallback,
       options: {
         hotspot: true,
       },
@@ -76,7 +79,9 @@ export const schema = {
       type: "image",
       description: "Photo that can be sized, rounded and positioned.",
       group: "content",
-      hidden: ({ parent, value }) => !value && (parent?.cover || parent?.icon),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.cover || parent?.icon)) as ConditionalPropertyCallback,
       options: {
         hotspot: true,
       },
@@ -87,7 +92,9 @@ export const schema = {
       type: "string",
       group: "content",
       description: "Symbol from the icon set.",
-      hidden: ({ parent, value }) => !value && (parent?.cover || parent?.image),
+      hidden: (({ parent, value }) =>
+        !value &&
+        (parent?.cover || parent?.image)) as ConditionalPropertyCallback,
       components: { input: IconPicker },
     },
     {

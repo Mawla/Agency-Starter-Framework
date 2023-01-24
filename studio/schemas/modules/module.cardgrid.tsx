@@ -17,6 +17,7 @@ import { optionsToList } from "../../utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
+import { ConditionalPropertyCallback } from "sanity";
 
 type SchemaType = SanitySchemaType & {
   type: "object";
@@ -126,7 +127,8 @@ const schema: SchemaType = {
       title: "Items",
       type: "array",
       description: "Manually put together a list of cards.",
-      hidden: ({ parent, value }) => !value && parent?.feed,
+      hidden: (({ parent, value }) =>
+        !value && parent?.feed) as ConditionalPropertyCallback,
       group: ["content", "cards"],
       of: [{ type: "card.composable" }, { type: "card.image" }],
     },
@@ -136,7 +138,8 @@ const schema: SchemaType = {
       type: "object",
       group: ["content", "cards"],
       description: "Automatically let a list of predefined cards flow in.",
-      hidden: ({ parent, value }) => !value && parent?.items,
+      hidden: (({ parent, value }) =>
+        !value && parent?.items) as ConditionalPropertyCallback,
       fields: [
         {
           name: "type",
@@ -150,7 +153,8 @@ const schema: SchemaType = {
           name: "items",
           title: "Items",
           type: "array",
-          hidden: ({ parent, value }) => !value && parent?.type !== "person",
+          hidden: (({ parent, value }) =>
+            !value && parent?.type !== "person") as ConditionalPropertyCallback,
           of: [{ type: "reference", to: [{ type: "person" }] }],
         },
       ],
