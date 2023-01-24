@@ -1,15 +1,19 @@
-import { CheckIcon, BorderSolidIcon } from '@radix-ui/react-icons';
-import React, { useState } from 'react';
-import { Button } from 'reakit/Button';
-import { Checkbox } from 'reakit/Checkbox';
+import styles from "./stylespanel.module.css";
+import { CheckIcon, BorderSolidIcon } from "@radix-ui/react-icons";
+import React, { useState } from "react";
+import { Button } from "reakit/Button";
+import { Checkbox } from "reakit/Checkbox";
 
-import styles from './stylespanel.module.css';
+type ToggleProps = {
+  value: null | boolean;
+  onChange: (value: null | boolean) => void;
+};
 
-export const Toggle = ({ value, onChange = (value) => {} }) => {
-  const [checked, setChecked] = useState(value);
+export const Toggle = ({ value, onChange = () => {} }: ToggleProps) => {
+  const [checked, setChecked] = useState<boolean | null>(value);
 
   const toggle = () => {
-    let newChecked = !checked;
+    let newChecked: null | boolean = !checked;
     if (checked === false) newChecked = null;
     setChecked(newChecked);
     onChange(newChecked);
@@ -18,7 +22,7 @@ export const Toggle = ({ value, onChange = (value) => {} }) => {
   return (
     <Checkbox
       as={Button}
-      checked={checked}
+      checked={Boolean(checked)}
       onChange={toggle}
       className={styles.preview}
     >

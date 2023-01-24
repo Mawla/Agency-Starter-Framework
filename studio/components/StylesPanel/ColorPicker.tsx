@@ -6,19 +6,34 @@ import React from "react";
 import { usePopoverState, Popover, PopoverDisclosure } from "reakit/Popover";
 import tinycolor from "tinycolor2";
 
-export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
-  colors = [{ title: "Clear", value: null }, ...optionsToList(colors)];
+type ColorPickerProps = {
+  colors: { [key: string]: string };
+  value: string;
+  onChange: (value: null | string) => void;
+};
+
+export const ColorPicker = ({
+  colors,
+  value,
+  onChange = () => {},
+}: ColorPickerProps) => {
+  const colorList: { title: string; value: null | string }[] = [
+    { title: "Clear", value: null },
+    ...optionsToList(colors),
+  ];
 
   const currentColor = value
-    ? colors.find((color) => color.value === value)?.title
+    ? colorList.find((color) => color.value === value)?.title
     : null;
 
   const popover = usePopoverState({ placement: "right-start", gutter: 1 });
 
   // group colors by category `pink-500` -> `pink`
-  const colorRows = { misc: [] };
-  colors.forEach(({ title, value }) => {
-    if (!value || value.indexOf("-") === -1 || colors?.length < 12)
+  const colorRows: {
+    [key: string]: { title: string; value: string | null }[];
+  } = { misc: [] };
+  colorList.forEach(({ title, value }) => {
+    if (!value || value.indexOf("-") === -1 || colorList?.length < 12)
       return colorRows.misc.push({ title, value });
     const group = value.split("-")[0];
     if (!colorRows[group]) colorRows[group] = [];
@@ -31,16 +46,16 @@ export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
         <span
           className={cx(!value && styles.previewColorEmpty, styles.preview)}
           style={{
-            backgroundColor: currentColor,
+            backgroundColor: currentColor || "",
           }}
         />
       </PopoverDisclosure>
 
       <Popover {...popover} className={styles.popover}>
         <Stack space={1} padding={2}>
-          {Object.values(colorRows).map((colors) => (
+          {Object.values(colorRows).map((colorList) => (
             <Flex gap={1} wrap="wrap" style={{ maxWidth: "75vw" }}>
-              {colors?.map((option) => {
+              {colorList?.map((option) => {
                 return (
                   <Tooltip
                     content={
@@ -75,7 +90,7 @@ export const ColorPicker = ({ colors, value, onChange = (value) => {} }) => {
                         onChange(option.value);
                       }}
                       type="button"
-                      aria-label={option.value}
+                      aria-label={option.value || ""}
                       className={styles.colorItemWrapper}
                     >
                       <span

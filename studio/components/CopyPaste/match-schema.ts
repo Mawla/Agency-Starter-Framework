@@ -3,19 +3,36 @@
  * ['title:string', 'theme:object', 'theme.title:string']
  */
 
-export const getSchemaDefinition = (schema, parent: string | null) => {
-  return schema.reduce((acc, { name, type }) => {
-    let path = [`${[parent, name].filter(Boolean).join(".")}:${type.jsonType}`];
-    const parentPath = path[0].split(":")[0];
-    if (type.fields)
-      path = [...path, ...getSchemaDefinition(type.fields, parentPath)];
-    if (type.options?.fields)
-      path = [
-        ...path,
-        ...getSchemaDefinition(type.options?.fields, parentPath),
+export const getSchemaDefinition = (
+  schema: any,
+  parent: string | null
+): string[] => {
+  return schema.reduce(
+    (
+      acc: any,
+      {
+        name,
+        type,
+      }: {
+        name: string;
+        type: { jsonType: string; fields?: {}[]; options?: { fields: {}[] } };
+      }
+    ) => {
+      let path = [
+        `${[parent, name].filter(Boolean).join(".")}:${type.jsonType}`,
       ];
-    return [...acc, ...path];
-  }, []);
+      const parentPath = path[0].split(":")[0];
+      if (type.fields)
+        path = [...path, ...getSchemaDefinition(type.fields, parentPath)];
+      if (type.options?.fields)
+        path = [
+          ...path,
+          ...getSchemaDefinition(type.options?.fields, parentPath),
+        ];
+      return [...acc, ...path];
+    },
+    []
+  );
 };
 
 /**
@@ -23,12 +40,12 @@ export const getSchemaDefinition = (schema, parent: string | null) => {
  * ['title:string', 'nomatch:object', 'theme.title:nomatch']
  */
 
-export const matchSchema = (schema, definition) => {
+export const matchSchema = (schema: any, definition: string[]) => {
   const errors = schema
-    .map((schemaItem) => {
+    .map((schemaItem: string) => {
       const [path, type] = schemaItem.split(":");
       const definitionPath = definition.find(
-        (definitionPath) => definitionPath.split(":")[0] === path
+        (definitionPath: string) => definitionPath.split(":")[0] === path
       );
       if (!definitionPath) {
         return `Path '${path}' not found`;
