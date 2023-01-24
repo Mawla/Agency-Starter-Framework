@@ -116,7 +116,7 @@ export default {
       options: {
         source: "title",
         maxLength: 96,
-        // isUnique: isPathUnique,
+        isUnique: isPathUnique,
       },
     },
     HERO_FIELD,

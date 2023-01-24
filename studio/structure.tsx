@@ -7,6 +7,7 @@ import { singleton } from "./utils/desk/singleton";
 import { EmbedIframe } from "./views/EmbedIframe";
 import { PreviewIframe } from "./views/PreviewIframe";
 import { SeoPane } from "./views/SeoPane";
+import { Sitemap } from "./views/Sitemap";
 import {
   DefaultDocumentNodeContext,
   StructureBuilder,
@@ -89,7 +90,18 @@ export const structure = (
           }),
         ])
       ),
-      singleton(S, { id: "sitemap", type: "sitemap" }),
+      // singleton(S, { id: "sitemap", type: "sitemap" }),
+      S.listItem()
+        .title("Sitemap")
+        .icon(() => <DocumentIcon type="sitemap" />)
+        .child(
+          S.component(Sitemap)
+            .options({
+              S: S,
+            })
+            .id("sitemap")
+        ),
+
       documentList(S, { type: "redirect", title: "Redirects" }),
       S.divider(),
       singleton(S, { id: "page_notfound", type: "page.notfound" }),

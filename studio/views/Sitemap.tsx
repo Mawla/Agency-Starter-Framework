@@ -19,9 +19,10 @@ import {
 } from "@sanity/ui";
 import React, { ComponentType, useEffect, useState } from "react";
 import { useClient } from "sanity";
+import { StructureBuilder } from "sanity/desk";
 import { IntentLink } from "sanity/router";
 
-export const Sitemap: ComponentType<any> = () => {
+export const Sitemap: ComponentType<any> = ({ options }) => {
   const client = useClient({ apiVersion: "vX" });
 
   const [tree, setTree] = useState<SitemapItemType[]>([]);
@@ -43,7 +44,7 @@ export const Sitemap: ComponentType<any> = () => {
   }, []);
 
   return (
-    <div className="sitemap">
+    <div className="sitemap" style={{ padding: 40 }}>
       {state === "loading" && <Spinner muted />}
 
       {state === "ready" && (
@@ -153,6 +154,7 @@ export const Sitemap: ComponentType<any> = () => {
                                 <CheckUnique
                                   _id={_id}
                                   language={currentLanguage}
+                                  S={options?.S as StructureBuilder}
                                 />
                               </Stack>
                             ) : (
@@ -204,13 +206,21 @@ export const Sitemap: ComponentType<any> = () => {
   );
 };
 
-const CheckUnique = ({ _id, language }: { _id: string; language: string }) => {
+const CheckUnique = ({
+  _id,
+  language,
+  S,
+}: {
+  _id: string;
+  language: string;
+  S: StructureBuilder;
+}) => {
   const [isUnique, setIsUnique] = useState<boolean>(true);
 
   useEffect(() => {
     async function checkUnique() {
       setIsUnique(
-        await isPathUnique("", {
+        await isPathUnique(S, "", {
           document: { _id },
           path: ["x", language],
         })
