@@ -21,7 +21,7 @@ const schema: SchemaType = {
       description: "description",
       language: "language",
     },
-    prepare({ description = "", language }) {
+    prepare({ description = "", language }: any) {
       return {
         title: `〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰`,
         subtitle: description,

@@ -3,21 +3,13 @@ import {
   HERO_SCHEMAS,
   ModuleSchemaName,
   MODULE_SCHEMAS,
-  SanityFieldType,
-  SanitySchemaType,
 } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { MODULES_FIELD, MODULE_SELECT_FIELD } from "./_page";
 import React from "react";
-import {
-  defineField,
-  getSchemaTypeTitle,
-  defineType,
-  StringRule,
-  SlugRule,
-} from "sanity";
+import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
 // const schemas = require('part:@sanity/base/schema')
 

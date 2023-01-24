@@ -1,8 +1,8 @@
-import { getCurrentLanguages } from './get-current-languages';
+import { getCurrentLanguages } from "./get-current-languages";
 
 export const prefixWithLanguage = (
-  language: string,
-  content: string = '',
+  language?: string,
+  content: string = ""
 ): string => {
   if (!language) return content;
   const currentLanguages = getCurrentLanguages();

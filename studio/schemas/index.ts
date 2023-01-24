@@ -27,7 +27,6 @@ import moduleRichText from "./modules/module.richtext";
 import moduleSlides from "./modules/module.slides";
 import moduleStory from "./modules/module.story";
 import moduleTextImage from "./modules/module.textimage";
-import moduleWorkableApplicationForm from "./modules/module.workableapplicationform";
 import studioDivider from "./modules/studio.divider";
 import button from "./objects/button";
 import buttongroup from "./objects/buttongroup";
@@ -70,7 +69,6 @@ export const schemaTypes = [
     moduleSlides,
     moduleStory,
     moduleTextImage,
-    moduleWorkableApplicationForm,
     password,
     preset,
     redirect,

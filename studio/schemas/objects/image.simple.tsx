@@ -1,5 +1,5 @@
-import { ImageType } from "../../types";
-import { SanityFieldType, SanitySchemaType } from "../../types.sanity";
+import { ImageType } from "../../../types";
+import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import React from "react";
 
 type SchemaType = SanitySchemaType & {
@@ -43,7 +43,7 @@ const schema: SchemaType = {
       media: "source",
       src: "source.asset.url",
     },
-    prepare({ alt = "", caption = "", type = "", media }) {
+    prepare({ alt = "", caption = "", type = "", media }: any) {
       return {
         title: `${alt} ${caption}`,
         subtitle: type,

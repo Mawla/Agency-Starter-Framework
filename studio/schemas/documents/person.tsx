@@ -1,7 +1,7 @@
 import { baseLanguage } from "../../../languages";
-import { SanityFieldType, SanitySchemaType } from "../../types.sanity";
+import { PersonType } from "../../../types";
+import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { PersonType } from "../types";
 import React from "react";
 
 type SchemaType = SanitySchemaType & {
@@ -22,7 +22,7 @@ const schema: SchemaType = {
       subtitle: `position.${baseLanguage}`,
       media: "image",
     },
-    prepare({ title, subtitle, media }) {
+    prepare({ title, subtitle, media }: any) {
       return {
         title: `${title}`,
         subtitle: `${subtitle}`,

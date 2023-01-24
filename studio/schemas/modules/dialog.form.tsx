@@ -21,7 +21,7 @@ const schema: SchemaType = {
       title: "form.name",
       language: "language",
     },
-    prepare({ title = "", language }) {
+    prepare({ title = "", language }: any) {
       return {
         title: `Form: ${title}`,
         subtitle: prefixWithLanguage(language),

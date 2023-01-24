@@ -22,7 +22,7 @@ const schema: SchemaType = {
       content: "content",
       language: "language",
     },
-    prepare({ content = [], language }) {
+    prepare({ content = [], language }: any) {
       return {
         title: blocksToText(content),
         subtitle: prefixWithLanguage(language),

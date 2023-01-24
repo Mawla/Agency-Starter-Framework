@@ -1,5 +1,5 @@
 import { baseLanguage } from "../../../languages";
-import { SchemaName } from "../../types.sanity";
+import { SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { pageBase } from "./_page";
 import React from "react";
@@ -17,7 +17,7 @@ export default {
       title: `title.${baseLanguage}`,
       media: "hero.0.visual.image1",
     },
-    prepare({ title, media }) {
+    prepare({ title, media }: any) {
       return {
         title: `Home - ${title}`,
         subtitle: `/`,

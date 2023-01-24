@@ -1,5 +1,5 @@
 import { baseLanguage } from "../../../languages";
-import { SchemaName } from "../../types.sanity";
+import { SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import {
   DIALOGS_FIELD,

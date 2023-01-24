@@ -34,7 +34,7 @@ const schema: SchemaType = {
       content: "content",
       language: "language",
     },
-    prepare({ eyebrow = "", title = "", content = [], language }) {
+    prepare({ eyebrow = "", title = "", content = [], language }: any) {
       return {
         title: [eyebrow, title, blocksToText(content)].join(" "),
         subtitle: prefixWithLanguage(language, blocksToText(content)),

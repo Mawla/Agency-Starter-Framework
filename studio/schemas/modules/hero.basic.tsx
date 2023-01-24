@@ -26,7 +26,7 @@ const schema: SchemaType = defineType({
       image2: "visual.image2",
       language: "language",
     },
-    prepare({ title = "", eyebrow = "", image1, image2, language }) {
+    prepare({ title = "", eyebrow = "", image1, image2, language }: any) {
       return {
         title: `${title}`,
         subtitle: prefixWithLanguage(language, eyebrow),

@@ -2,6 +2,7 @@ import { SanityFieldType, SanitySchemaType } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { getVideoPreview } from "../objects/video";
 import React from "react";
+import { SlugRule } from "sanity";
 
 type SchemaType = SanitySchemaType & {
   type: "object";

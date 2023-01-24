@@ -40,7 +40,14 @@ export const schema = {
       image: "image",
       cover: "cover",
     },
-    prepare({ badge = "", title = "", subtitle = "", text, image, cover }) {
+    prepare({
+      badge = "",
+      title = "",
+      subtitle = "",
+      text,
+      image,
+      cover,
+    }: any) {
       return {
         title: `${badge} ${title} ${subtitle}`,
         subtitle: blocksToText(text),

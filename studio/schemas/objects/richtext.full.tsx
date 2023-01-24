@@ -45,10 +45,12 @@ export default {
         select: {
           items: "items",
         },
-        prepare({ items }) {
+        prepare({ items }: any) {
           return {
             title: "Button group",
-            subtitle: items?.map(({ label }) => label).join(", ") || "",
+            subtitle:
+              items?.map(({ label }: { label: string }) => label).join(", ") ||
+              "",
             media: <DocumentIcon type="link" />,
           };
         },
@@ -79,7 +81,7 @@ export default {
           file: "file.asset.url",
           filename: "file.asset.originalFilename",
         },
-        prepare({ file, filename }) {
+        prepare({ file, filename }: any) {
           return {
             title: filename,
             subtitle: file,
@@ -104,9 +106,9 @@ export default {
         select: {
           scriptId: "scriptId",
         },
-        prepare({ scriptId }) {
+        prepare({ scriptId }: any) {
           return {
-            title: SCRIPT_OPTIONS[scriptId],
+            title: (SCRIPT_OPTIONS as any)[scriptId],
           };
         },
       },

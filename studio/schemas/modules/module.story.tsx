@@ -39,7 +39,7 @@ const schema: SchemaType = {
       image: "image",
       backgroundImage: "backgroundImage",
     },
-    prepare({ quote, person, language, image, backgroundImage }) {
+    prepare({ quote, person, language, image, backgroundImage }: any) {
       return {
         title: quote,
         subtitle: prefixWithLanguage(language, person),

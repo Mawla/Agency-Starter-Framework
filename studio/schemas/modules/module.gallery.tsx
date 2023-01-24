@@ -30,7 +30,7 @@ const schema: SchemaType = {
       language: "language",
       eyebrow: "eyebrow",
     },
-    prepare({ eyebrow = "", title = "Gallery", language }) {
+    prepare({ eyebrow = "", title = "Gallery", language }: any) {
       return {
         title: title,
         subtitle: prefixWithLanguage(language, eyebrow),

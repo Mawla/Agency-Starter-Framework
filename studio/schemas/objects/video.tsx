@@ -27,7 +27,7 @@ export const getVideoPreview = (prefix = "") => ({
     muxPlaybackId,
     sanity,
     language,
-  }) {
+  }: any) {
     const videoThumbnail = getVideoPreviewThumbnail({
       cloudinary,
       muxPlaybackId,
@@ -59,7 +59,7 @@ export const getVideoPreviewTitle = ({
   vimeo,
   muxPlaybackId,
   sanity,
-}) => {
+}: any) => {
   return `${[
     staticFile,
     sanity ? "sanity video" : null,
@@ -76,7 +76,7 @@ export const getVideoPreviewThumbnail = ({
   cloudinary,
   muxPlaybackId,
   youtube,
-}) => {
+}: any) => {
   let image = null;
 
   if (cloudinary) image = cloudinary.url?.replace(".mp4", ".jpg");

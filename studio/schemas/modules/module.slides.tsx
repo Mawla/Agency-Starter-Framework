@@ -25,7 +25,7 @@ const schema: SchemaType = {
       title: "title",
       language: "language",
     },
-    prepare({ title = "Slides", language }) {
+    prepare({ title = "Slides", language }: any) {
       return {
         title: title,
         subtitle: prefixWithLanguage(language),

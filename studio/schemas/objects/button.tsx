@@ -203,7 +203,7 @@ const schema: SchemaType = {
       label: "label",
       external: "external",
     },
-    prepare({ label = "", external }) {
+    prepare({ label = "", external }: any) {
       return {
         title: label,
         subtitle: external ? external : null,

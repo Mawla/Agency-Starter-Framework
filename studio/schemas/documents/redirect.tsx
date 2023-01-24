@@ -70,7 +70,7 @@ export default {
       permanent: "permanent",
     },
 
-    prepare: ({ title, source, destination, permanent }) => ({
+    prepare: ({ title, source, destination, permanent }: any) => ({
       title,
       subtitle: `${source ?? "no source"} -> ${
         destination ?? "no destination"

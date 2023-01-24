@@ -83,7 +83,7 @@ export default {
       level3Slug,
       level4Slug,
       level5Slug,
-    }) {
+    }: any) {
       return {
         title: `${title}`,
         subtitle: [

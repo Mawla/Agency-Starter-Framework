@@ -1,5 +1,5 @@
 import { baseLanguage } from "../../../languages";
-import { SanityFieldType, SchemaName } from "../../types.sanity";
+import { SanityFieldType, SchemaName } from "../../../types.sanity";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { ORDER_PUBLISHED_DESC, pageBase, PUBLISHED_AT_FIELD } from "./_page";
 import contentPage from "./page.content";
@@ -30,7 +30,7 @@ export default {
       heroImage: "hero.0.visual.image1",
       date: "publishedAt",
     },
-    prepare({ title, date, image, heroImage }) {
+    prepare({ title, date, image, heroImage }: any) {
       return {
         title: `${title}`,
         subtitle: `${date}`,
