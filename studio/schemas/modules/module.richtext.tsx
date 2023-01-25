@@ -14,13 +14,12 @@ import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
-
-
 const schema = defineType({
   name: "module.richtext",
   title: "Rich text",
   type: "object",
   description: "Generic content module with headings, images etc.",
+  icon: () => <DocumentIcon type="page" />,
   preview: {
     select: {
       title: "title",

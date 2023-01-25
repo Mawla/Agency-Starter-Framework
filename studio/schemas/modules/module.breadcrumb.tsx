@@ -11,6 +11,7 @@ const schema = defineType({
   title: "Breadcrumb",
   type: "object",
   description: "Navigation path",
+  icon: () => <DocumentIcon type="breadcrumb" />,
   initialValue: {
     theme: {
       background: "white",

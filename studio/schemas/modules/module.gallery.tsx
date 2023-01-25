@@ -11,6 +11,7 @@ const schema = defineType({
   title: "Gallery",
   type: "object",
   description: "Photo showcase slider",
+  icon: () => <DocumentIcon type="gallery" />,
   preview: {
     select: {
       title: "title",
