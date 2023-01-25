@@ -118,7 +118,7 @@ export const MiniMap = ({
     <div className="select-none">
       {heroPreview && (
         <div
-          className="select-auto cursor-grab"
+          className="select-auto cursor-grab border-2 border-transparent hover:border-[#111 duration-150"
           onClick={() => hero && focusElement(hero._key)}
         >
           <Preview html={heroPreview} />
@@ -223,7 +223,7 @@ const Item = forwardRef<HTMLDivElement>(({ ...props }: any, ref) => {
       {...props}
       ref={ref}
       className={cx(
-        "bg-white border-2 border-transparent hover:border-black transition-colors hover:z-10",
+        "bg-white border-2 border-transparent hover:border-[#111] transition-colors duration-150 hover:z-10",
         {
           ["cursor-wait"]: props.isLoading,
           ["cursor-grab"]: !props.isLoading,
