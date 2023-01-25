@@ -3,33 +3,7 @@ import { useLanguageFilter } from "../utils/language/useLanguageFilter";
 import { ComponentType, useEffect } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
-  const { renderItem, renderDefault } = props;
-
-  const selectedLanguages = useLanguageFilter();
-
-  return renderDefault({
-    ...props,
-    renderItem: (item: any) => {
-      // If no language is selected, show all items with no language set
-      if (selectedLanguages.length === 0) {
-        if (!item.value.language || !item.value.language?.trim().length) {
-          return renderItem(item);
-        }
-      }
-
-      // If all languages are selected, show all items
-      if (selectedLanguages.length === languages.length) {
-        return renderItem(item);
-      }
-
-      // If the item has a language and it is selected, show the item
-      if (selectedLanguages.includes(item.value.language)) {
-        return renderItem(item);
-      }
-
-      return null;
-    },
-  });
+  return <div>{props.renderDefault(props)}</div>;
 };
 
 /**
@@ -38,6 +12,26 @@ export const PageBuilder: ComponentType<any> = (props) => {
  */
 
 export const PageBuilderItem: React.ComponentType<any> = (props) => {
+  const selectedLanguages = useLanguageFilter();
+  let makeHidden = true;
+
+  // If no language is selected, show all items with no language set
+  if (selectedLanguages.length === 0) {
+    if (!props.value?.language || !props.value?.language?.trim().length) {
+      makeHidden = false;
+    }
+  }
+
+  // If all languages are selected, show all items
+  if (selectedLanguages.length === languages.length) {
+    makeHidden = false;
+  }
+
+  // If the item has a language and it is selected, show the item
+  if (selectedLanguages.includes(props.value?.language)) {
+    makeHidden = false;
+  }
+
   /**
    * When the form is opened: scroll preview iframe to element
    */
@@ -89,6 +83,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     <div
       style={{
         borderBottom: "1px solid rgba(0,0,0,.1)",
+        display: makeHidden ? "none" : "block",
       }}
       data-type="module"
       data-key={props.value?._key}
