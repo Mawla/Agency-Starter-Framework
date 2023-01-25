@@ -71,6 +71,7 @@ export const LivePreview = ({
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
+    if (!pageId) return;
 
     ++reloadAttempts.current;
 
@@ -121,6 +122,10 @@ export const LivePreview = ({
     // fetch the new page
     setPreviewLoading(true);
     const newPage = await frontendClient.current.fetch(getQuery(), queryParams);
+    if (!newPage) {
+      setPreviewLoading(false);
+      return;
+    }
 
     timeLog(newPage._updatedAt, "got new page data");
 
