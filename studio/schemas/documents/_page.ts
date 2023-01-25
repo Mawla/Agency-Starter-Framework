@@ -7,14 +7,14 @@ import {
   ModuleSchemaName,
   MODULE_SCHEMAS,
 } from "../../../types.sanity";
-import {
-  ModuleBuilder,
-  ModuleBuilderItem,
-  ModuleBuilderItemPreview,
-} from "../../components/ModuleBuilder";
 import ModuleSelect, {
   ModuleSelectWrapper,
 } from "../../components/ModuleSelect";
+import {
+  PageBuilder,
+  PageBuilderItem,
+  PageBuilderItemPreview,
+} from "../../components/PageBuilder";
 import PagePasswordComponent, {
   PagePasswordWrapper,
 } from "../../components/PagePasswordComponent";
@@ -75,7 +75,7 @@ export const HERO_FIELD = defineField({
   title: "Hero",
   type: "array",
   components: {
-    input: ModuleBuilder,
+    input: PageBuilder,
   },
   validation: (Rule: ArrayRule<any>) => Rule.max(languages.length).warning(),
   description: "The hero section of the page.",
@@ -83,8 +83,8 @@ export const HERO_FIELD = defineField({
     (type: HeroSchemaName) => ({
       type,
       components: {
-        preview: ModuleBuilderItemPreview,
-        item: ModuleBuilderItem,
+        preview: PageBuilderItemPreview,
+        item: PageBuilderItem,
       },
     })
   ),
@@ -95,7 +95,7 @@ export const MODULES_FIELD = defineField({
   title: "Modules",
   type: "array",
   components: {
-    input: ModuleBuilder,
+    input: PageBuilder,
   },
   description: "Modules are the building blocks of a page.",
   of: [
@@ -103,8 +103,8 @@ export const MODULES_FIELD = defineField({
       (type: ModuleSchemaName) => ({
         type,
         components: {
-          preview: ModuleBuilderItemPreview,
-          item: ModuleBuilderItem,
+          preview: PageBuilderItemPreview,
+          item: PageBuilderItem,
         },
       })
     ),
@@ -162,7 +162,7 @@ export const DIALOGS_FIELD = defineField({
   title: "Dialogs",
   type: "array",
   components: {
-    input: ModuleBuilder,
+    input: PageBuilder,
   },
   description:
     "Dialogs are the modal windows, used to present extra information. A dialog must be created before it can be linked to from a button inside module.",
@@ -170,8 +170,8 @@ export const DIALOGS_FIELD = defineField({
     (type: DialogSchemaName) => ({
       type,
       components: {
-        preview: ModuleBuilderItemPreview,
-        item: ModuleBuilderItem,
+        preview: PageBuilderItemPreview,
+        item: PageBuilderItem,
       },
     })
   ),

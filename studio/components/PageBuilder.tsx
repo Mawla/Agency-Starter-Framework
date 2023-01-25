@@ -1,8 +1,8 @@
 import { languages } from "../../languages";
 import { useLanguageFilter } from "../utils/language/useLanguageFilter";
-import { ComponentType, useCallback, useEffect } from "react";
+import { ComponentType, useEffect } from "react";
 
-export const ModuleBuilder: ComponentType<any> = (props) => {
+export const PageBuilder: ComponentType<any> = (props) => {
   const { renderItem, renderDefault } = props;
 
   const selectedLanguages = useLanguageFilter();
@@ -37,7 +37,7 @@ export const ModuleBuilder: ComponentType<any> = (props) => {
  * and responds to clicks from the preview iframe
  */
 
-export const ModuleBuilderItem: React.ComponentType<any> = (props) => {
+export const PageBuilderItem: React.ComponentType<any> = (props) => {
   /**
    * When the form is opened: scroll preview iframe to element
    */
@@ -102,7 +102,7 @@ export const ModuleBuilderItem: React.ComponentType<any> = (props) => {
  * Stylistic wrapper around the preview
  */
 
-export const ModuleBuilderItemPreview: React.ComponentType<any> = (props) => (
+export const PageBuilderItemPreview: React.ComponentType<any> = (props) => (
   <div style={{ padding: "8px 0" }} data-type="module-preview">
     {props.renderDefault(props)}
   </div>
