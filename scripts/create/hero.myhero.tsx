@@ -1,124 +1,100 @@
-import { EllipsisVerticalIcon } from '@sanity/icons';
-import React from 'react';
+import { BACKGROUND_COLOR_OPTIONS } from "../../../components/module/BackgroundOptions";
+import { DocumentIcon } from "../../utils/DocumentIcon";
+import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
+import { EllipsisVerticalIcon } from "@sanity/icons";
+import React from "react";
+import { defineField, defineType } from "sanity";
 
-import { BackgroundColorType } from '../../../components/module/BackgroundOptions';
-import { MyHeroProps } from '../../../heroes/MyHero';
-import { ColorType } from '../../../types';
-import { SanityFieldType, SanitySchemaType } from '../../../types.sanity';
-import { DocumentIcon } from '../../utils/DocumentIcon';
-import { optionsToList } from '../../utils/fields/optionsToList';
-import { prefixWithLanguage } from '../../utils/language/prefix-with-language';
-
-type SchemaType = SanitySchemaType & {
-  type: 'object';
-  initialValue: {
-    theme?: {
-      title?: ColorType;
-      text?: ColorType;
-      background?: BackgroundColorType;
-    };
-  };
-  fields: ({
-    name: keyof MyHeroProps | 'language' | 'preset' | 'copyPaste';
-  } & SanityFieldType)[];
-};
-
-const schema: SchemaType = {
-  name: 'MyHeroSchema',
-  title: 'MyHero',
-  type: 'object',
+const schema = defineType({
+  name: "MyHeroSchema",
+  title: "MyHero",
+  type: "object",
   icon: () => <DocumentIcon type="image" />,
-  initialValue: {
-    theme: {
-      background: 'white',
-      title: 'black',
-      text: 'black',
-    },
-  },
+  description: "/*DESCRIPTION*/",
   preview: {
     select: {
-      title: 'title',
-      language: 'language',
+      title: "title",
+      language: "language",
+      image: "image",
     },
-    prepare({ title, language }) {
+    prepare({ title = "MyModuleTitle", language }: any) {
       return {
-        title: `${title}`,
+        title: title,
         subtitle: prefixWithLanguage(language),
       };
     },
   },
   groups: [
     {
-      name: 'content',
-      title: 'Content',
+      name: "content",
+      title: "Content",
       default: true,
     },
     {
-      name: 'theme',
-      title: 'Theme',
+      name: "theme",
+      title: "Theme",
     },
     {
-      name: 'language',
-      title: 'Language',
+      name: "language",
+      title: "Language",
     },
     {
-      name: 'tools',
-      title: ' ',
+      name: "tools",
+      title: " ",
       icon: EllipsisVerticalIcon,
     },
   ],
   fields: [
-    {
-      name: 'language',
-      title: 'Language',
-      type: 'language',
-      group: 'language',
-    },
-    {
-      name: 'preset',
-      title: 'Preset',
-      type: 'preset',
-      group: 'tools',
+    defineField({
+      name: "language",
+      title: "Language",
+      type: "language",
+      group: "language",
+    }),
+    defineField({
+      name: "preset",
+      title: "Preset",
+      type: "preset",
+      group: "tools",
       options: {
-        updateField: 'hero',
+        updateField: "hero",
       },
-    },
-    {
-      name: 'copyPaste',
-      title: 'Copy Paste',
-      type: 'copyPaste',
-      group: 'tools',
+    }),
+    defineField({
+      name: "copyPaste",
+      title: "Copy Paste",
+      type: "copyPaste",
+      group: "tools",
       options: {
-        updateField: 'hero',
+        updateField: "hero",
       },
-    },
+    }),
     /*FIELDS*/
-    {
-      name: 'theme',
-      title: 'Theme',
-      type: 'styles',
-      group: 'theme',
-      options: {
-        fields: [
-          {
-            name: 'title',
-            title: 'Title',
-            type: 'color',
+    defineField({
+      name: "theme",
+      title: "Theme",
+      type: "object",
+      group: "theme",
+      fields: [
+        defineField({
+          name: "module",
+          title: "Module",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+            ],
           },
-          {
-            name: 'text',
-            title: 'Text',
-            type: 'color',
-          },
-          {
-            name: 'background',
-            title: 'Background',
-            type: 'color',
-          },
-        ],
-      },
-    },
+        }),
+      ],
+    }),
   ],
-};
+});
 
 export default schema;

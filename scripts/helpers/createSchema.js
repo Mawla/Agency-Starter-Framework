@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const { prettierFile } = require('../helpers/prettierFile');
-const { cyan } = require('../helpers/terminal');
-const { addLine } = require('../helpers/addLine');
-const { sortLines } = require('../helpers/sortLines');
+const fs = require("fs");
+const path = require("path");
+const { prettierFile } = require("../helpers/prettierFile");
+const { cyan } = require("../helpers/terminal");
+const { addLine } = require("../helpers/addLine");
+const { sortLines } = require("../helpers/sortLines");
 
 /**
  * Insert schema import at the alphabetically sorted correct position
@@ -20,7 +20,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
   const filePath = `${__dirname}/../../studio/schemas/schema.ts`;
   const schemaFilePath = `${__dirname}/../../studio/schemas/${options.schemaDir}/${schemaName}.tsx`;
   const file = fs.readFileSync(filePath).toString();
-  let lines = file.split('\n');
+  let lines = file.split("\n");
 
   /**
    * Add to all schema imports
@@ -35,7 +35,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
   lines = addLine(`    ${schemaImportName},`, lines, fromNeedle);
   lines = sortLines(lines, fromNeedle, toNeedle);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
 
   /**
@@ -44,77 +44,77 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
 
   const fieldLines = [];
 
-  if (options.fields?.indexOf('title') > -1) {
+  if (options.fields?.indexOf("title") > -1) {
     fieldLines.push(`
-      {
+      defineField({
         name: 'eyebrow',
         title: 'Eyebrow',
         type: 'string',
         group: 'content',
-      }`);
+      })`);
 
     fieldLines.push(`
-      {
+      defineField({
         name: 'title',
         title: 'Title',
         type: 'text',
         rows: 2,
         group: 'content',
-      }`);
+      })`);
   }
 
-  if (options.fields?.indexOf('intro') > -1) {
+  if (options.fields?.indexOf("intro") > -1) {
     fieldLines.push(`
-      {
+      defineField({
         name: 'intro',
         title: 'Intro',
         type: 'richtext.simple',
         group: 'content',
-      }`);
+      })`);
   }
 
-  if (options.fields?.indexOf('image') > -1) {
+  if (options.fields?.indexOf("image") > -1) {
     fieldLines.push(`
-      {
+      defineField({
         name: 'image',
         title: 'Image',
         type: 'image',
         group: 'content',
-      }`);
+      })`);
   }
 
-  if (options.fields?.indexOf('items') > -1) {
+  if (options.fields?.indexOf("items") > -1) {
     fieldLines.push(`
-      {
+      defineField({
         name: 'items',
         title: 'Items',
         group: 'content',
         type: 'array',
         of: [
-          {
+          defineField({
             title: 'Item',
             name: 'item',
             type: 'object',
             fields: [
-              {
+              defineField({
                 name: 'title',
                 title: 'Title',
                 type: 'string',
-              }
+              })
             ],
-          },
+          }),
         ],
-      }`);
+      })`);
   }
 
-  if (options.fields?.indexOf('buttons') > -1) {
+  if (options.fields?.indexOf("buttons") > -1) {
     fieldLines.push(`
-      {
+     defineField({
         name: 'buttons',
         title: 'Buttons',
         type: 'buttongroup',
         group: 'content',
-      }`);
+      })`);
   }
 
   // create schema file
@@ -122,18 +122,18 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
     .readFileSync(options.prototypeFile)
     .toString()
     .replace(
-      new RegExp(`${options.replacer}Title`, 'g'),
-      pascalName.replace(/([A-Z])/g, ' $1').trim(),
+      new RegExp(`${options.replacer}Title`, "g"),
+      pascalName.replace(/([A-Z])/g, " $1").trim()
     )
-    .replace(new RegExp(`${options.replacer}Schema`, 'g'), schemaName)
-    .replace(new RegExp(`${options.replacer}`, 'g'), pascalName)
-    .replace('/*FIELDS*/', `${fieldLines.join(',\n')},`)
-    .replace('/*DESCRIPTION*/', options.description || '');
+    .replace(new RegExp(`${options.replacer}Schema`, "g"), schemaName)
+    .replace(new RegExp(`${options.replacer}`, "g"), pascalName)
+    .replace("/*FIELDS*/", `${fieldLines.join(",\n")},`)
+    .replace("/*DESCRIPTION*/", options.description || "");
 
-  if (options.schemaImportPrefix === 'hero') {
+  if (options.schemaImportPrefix === "hero") {
     schemaContent = schemaContent.replace(
-      new RegExp(`../modules/${pascalName}`, 'g'),
-      `../heroes`,
+      new RegExp(`../modules/${pascalName}`, "g"),
+      `../heroes`
     );
   }
 
@@ -141,7 +141,9 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
   prettierFile(schemaFilePath);
 
   console.log(
-    `› Added import in ${cyan(path.relative(process.cwd(), schemaFilePath))}`,
+    `› Added import in ${cyan(path.relative(process.cwd(), schemaFilePath))}`
   );
-  console.log(`› Added schema in ${cyan(path.relative(process.cwd(), filePath))}`);
+  console.log(
+    `› Added schema in ${cyan(path.relative(process.cwd(), filePath))}`
+  );
 };
