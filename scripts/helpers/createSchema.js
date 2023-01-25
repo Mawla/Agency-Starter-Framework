@@ -17,7 +17,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
   const schemaEditFn = options.schemaEditFn || ((x) => x);
   const schemaImportName = `${options.schemaImportPrefix}${pascalName}`;
 
-  const filePath = `${__dirname}/../../studio/schemas/schema.ts`;
+  const filePath = `${__dirname}/../../studio/schemas/index.ts`;
   const schemaFilePath = `${__dirname}/../../studio/schemas/${options.schemaDir}/${schemaName}.tsx`;
   const file = fs.readFileSync(filePath).toString();
   let lines = file.split("\n");
