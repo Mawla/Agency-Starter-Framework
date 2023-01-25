@@ -17,17 +17,17 @@
 
 */
 
-const fs = require('fs');
-const path = require('path');
-const { pascalCase } = require('../helpers/pascalCase');
-const { prettierFile } = require('../helpers/prettierFile');
-const { addLine } = require('../helpers/addLine');
-const { createSchema } = require('../helpers/createSchema');
-const { createType } = require('../helpers/createType');
-const { question } = require('../helpers/question');
-const { cyan } = require('../helpers/terminal');
+const fs = require("fs");
+const path = require("path");
+const { pascalCase } = require("../helpers/pascalCase");
+const { prettierFile } = require("../helpers/prettierFile");
+const { addLine } = require("../helpers/addLine");
+const { createSchema } = require("../helpers/createSchema");
+const { createType } = require("../helpers/createType");
+const { question } = require("../helpers/question");
+const { cyan } = require("../helpers/terminal");
 
-const readline = require('readline').createInterface({
+const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
@@ -42,9 +42,9 @@ readline.question(question(ask, description), (name) => {
 
   answers.name = name;
   answers.pascalName = `${pascalCase(name)}`;
-  answers.schemaName = `hero.${name.toLowerCase().replace(/\s/g, '')}`;
+  answers.schemaName = `hero.${name.toLowerCase().replace(/\s/g, "")}`;
 
-  console.log('');
+  console.log("");
 
   build();
 
@@ -57,11 +57,11 @@ function build() {
   createHero();
 
   createSchema(name, pascalName, schemaName, {
-    replacer: 'MyHero',
-    schemaDir: 'modules',
+    replacer: "MyHero",
+    schemaDir: "modules",
     prototypeFile: `${__dirname}/hero.myhero.tsx`,
-    schemaImportPrefix: 'hero',
-    fields: ['title', 'image'],
+    schemaImportPrefix: "hero",
+    fields: ["title", "image"],
   });
 
   createQuery();
@@ -80,8 +80,8 @@ function createHero() {
 
   const fileDir = `${__dirname}/../../heroes`;
   const filePath = `${fileDir}/${pascalName}.tsx`;
-  const storiesFilePath = filePath.replace('.tsx', '.stories.tsx');
-  const optionsFilePath = filePath.replace('.tsx', 'Options.ts');
+  const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
+  const optionsFilePath = filePath.replace(".tsx", "Options.ts");
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   // create hero file
@@ -89,22 +89,22 @@ function createHero() {
     .readFileSync(`${__dirname}/MyModule.tsx`)
     .toString()
     .replace(/MyModule/g, pascalName)
-    .replace(/\.\.\/\.\.\//g, '../')
-    .replace('../modules/', 'heroes/')
+    .replace(/\.\.\/\.\.\//g, "../")
+    .replace("../modules/", "heroes/")
     .replace(
-      '/*IMPORT*/',
+      "/*IMPORT*/",
       `
       import { ImageType } from '../types';
       import { Title } from '../components/module/Title';
-      import { ResponsiveImage } from '../components/images/ResponsiveImage';`,
+      import { ResponsiveImage } from '../components/images/ResponsiveImage';`
     )
-    .replace('/*TYPE*/', 'title?: string; image?: ImageType')
-    .replace('/*PROPS*/', ', title, image')
+    .replace("/*TYPE*/", "title?: string; image?: ImageType")
+    .replace("/*PROPS*/", ", title, image")
     .replace(
-      '/*JSX*/',
+      "/*JSX*/",
       `
       <Title as="h1">{title}</Title>
-      <ResponsiveImage {...image} priority />`,
+      <ResponsiveImage {...image} priority />`
     );
   fs.writeFileSync(filePath, heroContent);
   prettierFile(filePath);
@@ -116,26 +116,26 @@ function createHero() {
     .readFileSync(`${__dirname}/MyModule.stories.tsx`)
     .toString()
     .replace(/MyModule/g, pascalName)
-    .replace(/\.\.\/\.\.\//g, '../')
-    .replace('Modules/', 'Hero/');
+    .replace(/\.\.\/\.\.\//g, "../")
+    .replace("Modules/", "Hero/");
   fs.writeFileSync(storiesFilePath, storyContent);
   prettierFile(storiesFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), storiesFilePath))}`,
+    `› Created file ${cyan(path.relative(process.cwd(), storiesFilePath))}`
   );
   // create options file
   const optionsContent = fs
     .readFileSync(`${__dirname}/MyModuleOptions.ts`)
     .toString()
-    .replace('../../', '../')
-    .replace('../../types', '../types')
+    .replace("../../", "../")
+    .replace("../../types", "../types")
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(optionsFilePath, optionsContent);
   prettierFile(filePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), optionsFilePath))}`,
+    `› Created file ${cyan(path.relative(process.cwd(), optionsFilePath))}`
   );
 }
 
@@ -146,7 +146,7 @@ function createHero() {
 function createQuery() {
   const { name, schemaName } = answers;
   const filePath = `${__dirname}/../../queries/page.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   const newQuery = `
 
@@ -158,8 +158,10 @@ function createQuery() {
     `;
 
   lines = addLine(newQuery, lines, '"modules":', -3);
-  fs.writeFileSync(filePath, lines.join('\n'));
-  console.log(`› Added query in ${cyan(path.relative(process.cwd(), filePath))}`);
+  fs.writeFileSync(filePath, lines.join("\n"));
+  console.log(
+    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`
+  );
 }
 
 /**
@@ -170,7 +172,7 @@ function createBuilder() {
   const { name, pascalName, schemaName } = answers;
 
   const filePath = `${__dirname}/../../layout/ModuleBuilder/HeroBuilder.tsx`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add import
   lines = [
@@ -189,13 +191,15 @@ function createBuilder() {
 
   // add to render loop
   const jsx = `\n{/* ${name} */}{hero._type === '${schemaName}' && <${pascalName} {...hero} />}`;
-  lines = addLine(jsx, lines, '</ModuleErrorBoundary>', 0);
+  lines = addLine(jsx, lines, "</Suspense>", 0);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
 
-  console.log(`› Added import to ${cyan(path.relative(process.cwd(), filePath))}`);
   console.log(
-    `› Added hero render to ${cyan(path.relative(process.cwd(), filePath))}`,
+    `› Added import to ${cyan(path.relative(process.cwd(), filePath))}`
+  );
+  console.log(
+    `› Added hero render to ${cyan(path.relative(process.cwd(), filePath))}`
   );
 }
