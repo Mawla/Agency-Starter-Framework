@@ -312,7 +312,7 @@ export const LivePreview = ({
         );
 
         if (element) {
-          window.scrollBy({ top: element?.getBoundingClientRect().top });
+          window.scrollBy({ top: element?.getBoundingClientRect().top - 60 });
         }
       }
     }
