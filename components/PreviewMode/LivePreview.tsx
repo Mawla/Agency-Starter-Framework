@@ -300,23 +300,26 @@ export const LivePreview = ({
   );
 
   /**
-   * Scroll last changed module into view
+   * Scroll module in view when form dialog is opened
+   * in the Sanity studio
    */
 
   useEffect(() => {
-    if (!lastChangedModuleKey) return;
+    function onMessage(e: MessageEvent) {
+      if (e.data.type == "preview-view-scroll-to-module" && e.data.moduleKey) {
+        const element = document.querySelector(
+          `[data-id="${e.data.moduleKey}"]`
+        );
 
-    const element = document.querySelector(
-      `[data-id="${lastChangedModuleKey}"]`
-    );
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      setLastChangedModuleKey(null);
+        if (element) {
+          window.scrollBy({ top: element?.getBoundingClientRect().top });
+        }
+      }
     }
-  }, [miniModules, lastChangedModuleKey]);
+
+    window.addEventListener("message", onMessage, false);
+    () => window.removeEventListener("message", onMessage);
+  }, []);
 
   return (
     <div>

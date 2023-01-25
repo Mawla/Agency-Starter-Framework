@@ -175,15 +175,27 @@ export const MiniMap = ({
       onReorder(active.id, over.id, items);
     }
 
-    setActiveId(null);
+    if (!over || active.id === over.id) {
+      // scroll to module
+      const element = document.querySelector(`[data-id="${active.id}"]`);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
 
-    const element = document.querySelector(`[data-id="${active.id}"]`);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      // open form in sanity
+      (window as any).parent.postMessage(
+        {
+          type: "preview-studio-open-module-dialog",
+          moduleKey: active.id,
+        },
+        "*"
+      );
     }
+
+    setActiveId(null);
   }
 };
 

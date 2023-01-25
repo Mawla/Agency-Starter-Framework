@@ -7,9 +7,12 @@ import {
   ModuleSchemaName,
   MODULE_SCHEMAS,
 } from "../../../types.sanity";
-import { ArrayWithLanguageFilter } from "../../components/ArrayWithLanguageFilter";
+import {
+  ModuleBuilder,
+  ModuleBuilderItem,
+  ModuleBuilderItemPreview,
+} from "../../components/ModuleBuilder";
 import ModuleSelect, {
-  ModuleSelectProps,
   ModuleSelectWrapper,
 } from "../../components/ModuleSelect";
 import PagePasswordComponent, {
@@ -72,12 +75,18 @@ export const HERO_FIELD = defineField({
   title: "Hero",
   type: "array",
   components: {
-    input: ArrayWithLanguageFilter,
+    input: ModuleBuilder,
   },
   validation: (Rule: ArrayRule<any>) => Rule.max(languages.length).warning(),
   description: "The hero section of the page.",
   of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
-    (type: HeroSchemaName) => ({ type })
+    (type: HeroSchemaName) => ({
+      type,
+      components: {
+        preview: ModuleBuilderItemPreview,
+        item: ModuleBuilderItem,
+      },
+    })
   ),
 });
 
@@ -86,13 +95,17 @@ export const MODULES_FIELD = defineField({
   title: "Modules",
   type: "array",
   components: {
-    input: ArrayWithLanguageFilter,
+    input: ModuleBuilder,
   },
   description: "Modules are the building blocks of a page.",
   of: [
     ...(Object.keys(MODULE_SCHEMAS) as ModuleSchemaName[]).map(
       (type: ModuleSchemaName) => ({
         type,
+        components: {
+          preview: ModuleBuilderItemPreview,
+          item: ModuleBuilderItem,
+        },
       })
     ),
     { type: "studio.divider" },
@@ -149,12 +162,18 @@ export const DIALOGS_FIELD = defineField({
   title: "Dialogs",
   type: "array",
   components: {
-    input: ArrayWithLanguageFilter,
+    input: ModuleBuilder,
   },
   description:
     "Dialogs are the modal windows, used to present extra information. A dialog must be created before it can be linked to from a button inside module.",
   of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
-    (type: DialogSchemaName) => ({ type })
+    (type: DialogSchemaName) => ({
+      type,
+      components: {
+        preview: ModuleBuilderItemPreview,
+        item: ModuleBuilderItem,
+      },
+    })
   ),
 });
 
