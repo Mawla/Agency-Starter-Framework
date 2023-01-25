@@ -37,7 +37,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
    */
 
   useEffect(() => {
-    if (!open) return;
+    if (!props.open) return;
     if (!props?.value?._key) return;
 
     // find iframe

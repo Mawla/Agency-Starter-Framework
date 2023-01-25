@@ -117,7 +117,10 @@ export const MiniMap = ({
   return (
     <div className="select-none">
       {heroPreview && (
-        <div className="cursor-not-allowed">
+        <div
+          className="select-auto cursor-grab"
+          onClick={() => hero && focusElement(hero._key)}
+        >
           <Preview html={heroPreview} />
         </div>
       )}
@@ -176,26 +179,21 @@ export const MiniMap = ({
     }
 
     if (!over || active.id === over.id) {
-      // scroll to module
-      const element = document.querySelector(`[data-id="${active.id}"]`);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-
-      // open form in sanity
-      (window as any).parent.postMessage(
-        {
-          type: "preview-studio-open-module-dialog",
-          moduleKey: active.id,
-        },
-        "*"
-      );
+      focusElement(active.id);
     }
 
     setActiveId(null);
+  }
+
+  // open form in sanity
+  function focusElement(moduleKey: string) {
+    window.parent.postMessage(
+      {
+        type: "preview-studio-open-module-dialog",
+        moduleKey: moduleKey,
+      },
+      "*"
+    );
   }
 };
 

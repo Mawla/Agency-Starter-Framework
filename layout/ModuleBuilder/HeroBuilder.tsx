@@ -15,7 +15,9 @@ export type HeroBuilderProps = {
 export const HeroBuilder = ({ hero }: HeroBuilderProps) => {
   return (
     <Suspense fallback={``}>
-      {hero._type == "hero.basic" && <HeroBasic {...hero} />}
+      <div data-module={hero?._type} data-id={hero._key}>
+        {hero._type == "hero.basic" && <HeroBasic {...hero} />}
+      </div>
     </Suspense>
   );
 };
