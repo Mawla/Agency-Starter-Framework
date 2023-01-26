@@ -66,7 +66,7 @@ async function init() {
     const pascalName = `${pascalCase(name)}`;
     const schemaName = `module.${name.toLowerCase().replace(/\s/g, "")}`;
 
-    createModule(pascalName, fields);
+    createModule(pascalName, schemaName, fields);
 
     createSchema(name, pascalName, schemaName, {
       replacer: "MyModule",
@@ -101,7 +101,7 @@ async function init() {
  * b. create modules/[pascalName]/Module.stories.tsx
  */
 
-function createModule(pascalName, fields, description = "") {
+function createModule(pascalName, schemaName, fields, description = "") {
   const fileDir = `${__dirname}/../../modules`;
   const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
   const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
@@ -253,6 +253,7 @@ function createModule(pascalName, fields, description = "") {
   const moduleContent = fs
     .readFileSync(`${__dirname}/MyModule.tsx`)
     .toString()
+    .replace(/MyModuleSchema/g, schemaName)
     .replace(/MyModule/g, pascalName)
     .replace("/*TYPE*/", `${typescriptLines.join("\n")}`)
     .replace("/*IMPORT*/", `${importLines.join("\n")}`)
