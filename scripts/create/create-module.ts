@@ -77,7 +77,7 @@ async function init() {
       description,
     });
 
-    createQuery(name, schemaName, fields);
+    createQuery(name, pascalName, schemaName, fields);
     createType(schemaName, { module: true });
     createBuilder(name, pascalName, schemaName, fields);
 
@@ -323,13 +323,18 @@ function createModule(pascalName, fields, description = "") {
  * Add query
  */
 
-function createQuery(name, schemaName, fields) {
+function createQuery(name, pascalName, schemaName, fields) {
   const filePath = `${__dirname}/../../queries/page.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  lines = addLine(`\${get${name}Query(language)}`, lines, '"dialogs":', -3);
+  lines = addLine(
+    `\${get${pascalName}Query(language)}`,
+    lines,
+    '"dialogs":',
+    -3
+  );
   lines.push(
-    `import { get${name}Query } from "../modules/${name}/${name}.query";`
+    `import { get${pascalName}Query } from "../modules/${pascalName}/${pascalName}.query";`
   );
   fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
