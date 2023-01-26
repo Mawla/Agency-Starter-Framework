@@ -30,7 +30,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
     ...lines,
   ];
   const fromNeedle = options.translatable ? `translateFields([` : `...[`;
-  const toNeedle = options.translatable ? `]),` : `])`;
+  const toNeedle = options.translatable ? `]),` : `],`;
 
   lines = addLine(`    ${schemaImportName},`, lines, fromNeedle);
   lines = sortLines(lines, fromNeedle, toNeedle);
