@@ -90,14 +90,12 @@ function createHero() {
     .readFileSync(`${__dirname}/MyModule.tsx`)
     .toString()
     .replace(/MyModule/g, pascalName)
-    .replace(/\.\.\/\.\.\//g, "../")
-    .replace("../modules/", "heroes/")
     .replace(
       "/*IMPORT*/",
       `
-      import { ImageType } from '../types';
-      import { Title } from '../components/module/Title';
-      import { ResponsiveImage } from '../components/images/ResponsiveImage';`,
+      import { ImageType } from '../../types';
+      import { Title } from '../../components/module/Title';
+      import { ResponsiveImage } from '../../components/images/ResponsiveImage';`,
     )
     .replace("/*TYPE*/", "title?: string; image?: ImageType")
     .replace("/*PROPS*/", ", title, image")
@@ -117,7 +115,6 @@ function createHero() {
     .readFileSync(`${__dirname}/MyModule.stories.tsx`)
     .toString()
     .replace(/MyModule/g, pascalName)
-    .replace(/\.\.\/\.\.\//g, "../")
     .replace("Modules/", "Hero/");
   fs.writeFileSync(storiesFilePath, storyContent);
   prettierFile(storiesFilePath);
@@ -129,8 +126,6 @@ function createHero() {
   const optionsContent = fs
     .readFileSync(`${__dirname}/MyModuleOptions.ts`)
     .toString()
-    .replace("../../", "../")
-    .replace("../../types", "../types")
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(optionsFilePath, optionsContent);
   prettierFile(filePath);
@@ -145,7 +140,7 @@ function createHero() {
     .toString()
     .replace(
       "/*IMPORT*/",
-      `import { imageQuery } from "../queries/components/image";`,
+      `import { imageQuery } from "../../queries/components/image";`,
     )
     .replace(
       "/*FIELDS*/",
@@ -153,8 +148,7 @@ function createHero() {
   "image": \${imageQuery},`,
     )
     .replace(/MyModuleSchema/g, schemaName)
-    .replace(/MyModule/g, pascalName)
-    .replace("../../languages", "../languages");
+    .replace(/MyModule/g, pascalName);
   fs.writeFileSync(queryFilePath, queryContent);
   prettierFile(queryFilePath);
 
@@ -173,7 +167,7 @@ function createQuery() {
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines.push(
-    `import { get${pascalName}Query } from "../heroes/${pascalName}.query";`,
+    `import { get${pascalName}Query } from "../heroes/${pascalName}/${pascalName}.query";`,
   );
   lines = addLine(
     `    \${get${pascalName}Query(language)},`,
@@ -204,11 +198,10 @@ function createBuilder() {
   // add import
   lines = [
     `
-    import { ${pascalName}Props } from '../../heroes/${pascalName}';
-    const ${pascalName} = dynamic<${pascalName}Props>(
+    const ${pascalName} = dynamic<GenericModuleProps>(
       () =>
         import(
-          /* webpackChunkName: "${pascalName}" */ '../../heroes/${pascalName}'
+          /* webpackChunkName: "${pascalName}" */ '../../heroes/${pascalName}/${pascalName}'
         ) as any,
       { suspense: true },
     );
