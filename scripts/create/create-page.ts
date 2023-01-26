@@ -242,7 +242,7 @@ function createDeskStructure(
 
   lines = addLine(str, lines, `type: "page.content"`, -1);
   lines = addLine(
-    `,\n                    ${schemaName}`,
+    `,\n                    '${schemaName}'`,
     lines,
     `] && !defined(parent)`,
     0,
