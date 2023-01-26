@@ -1,5 +1,4 @@
 import { PageContext } from "../../context/PageContext";
-import { SiteContext } from "../../context/SiteContext";
 import { getClient } from "../../helpers/sanity/server";
 import { LanguageType } from "../../languages";
 import { DefaultPage } from "../../layout/pages/DefaultPage";
