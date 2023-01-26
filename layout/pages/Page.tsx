@@ -1,4 +1,5 @@
 import { PageLock } from "../../components/PageLock/PageLock";
+import { PreviewButton } from "../../components/PreviewMode/PreviewButton";
 import { Seo } from "../../components/meta/Seo";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
@@ -38,7 +39,6 @@ export const Page = ({
 }: PageProps) => {
   const router = useRouter();
   const pagePath = usePathname() || "";
-  const previewTools = useRef<HTMLDivElement>(null);
 
   // set active state
   const navItems = navigation?.items?.map((item) => ({
@@ -83,6 +83,12 @@ export const Page = ({
         )}
 
         <DefaultPage {...page} />
+
+        {isPreviewMode && (
+          <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
+            <PreviewButton pagePath={pagePath} />
+          </div>
+        )}
 
         {locked && !isPreviewMode && <PageLock />}
 

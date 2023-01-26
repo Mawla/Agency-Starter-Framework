@@ -1,4 +1,5 @@
 import { MiniMap, MiniMapProps } from "./MiniMap";
+import { PreviewButton } from "./PreviewButton";
 import { ScreenCapture } from "./ScreenCapture";
 import { ClientConfig, SanityClient } from "@sanity/client";
 import sanityClient from "@sanity/client";
@@ -11,7 +12,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const createLivePreviewFrontendClient = (
   config: ClientConfig,
-  previewToken: string
+  previewToken: string,
 ) => {
   if (!previewToken) return null;
   return sanityClient({
@@ -97,7 +98,7 @@ export const LivePreview = ({
       `*[_id == $_id][0] { _updatedAt }._updatedAt`,
       {
         _id: pageId,
-      }
+      },
     );
 
     timeLog(newUpdatedAt, "fetched new");
@@ -114,7 +115,7 @@ export const LivePreview = ({
       timeLog(newUpdatedAt, "latest updatedAt doesn't match, reloading");
       reloadTimeout.current = setTimeout(
         reloadPreview,
-        250 + 100 * reloadAttempts.current
+        250 + 100 * reloadAttempts.current,
       );
       return;
     }
@@ -141,7 +142,7 @@ export const LivePreview = ({
       timeLog(newUpdatedAt, "time on new page doesn't match, reloading");
       reloadTimeout.current = setTimeout(
         reloadPreview,
-        250 + 100 * reloadAttempts.current
+        250 + 100 * reloadAttempts.current,
       );
       return;
     }
@@ -164,7 +165,7 @@ export const LivePreview = ({
         _type,
         _key,
         title,
-      })
+      }),
     );
 
     setMiniModules(newMiniModules);
@@ -186,7 +187,7 @@ export const LivePreview = ({
     async function getPreviewToken() {
       const userReq = await fetch(
         `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v1/users/me`,
-        { credentials: "include" }
+        { credentials: "include" },
       );
       const user = await userReq.json();
       if (!user?.id) return;
@@ -210,7 +211,7 @@ export const LivePreview = ({
       if (!previewToken) return;
       const frontendClientInstance = await createLivePreviewFrontendClient(
         config,
-        previewToken
+        previewToken,
       );
       if (!frontendClientInstance) return;
       listener = frontendClientInstance
@@ -261,7 +262,7 @@ export const LivePreview = ({
     async function reload() {
       if (!frontendClient.current) return;
       const doc = await frontendClient.current.fetch(
-        `*[_id == "${pageId}"] { _id }`
+        `*[_id == "${pageId}"] { _id }`,
       );
       if (!doc?.length) {
         await fetch(`/api/preview/create-draft?_id=${pageId}`);
@@ -279,7 +280,7 @@ export const LivePreview = ({
     async (
       changedModuleKey: string,
       replacesModuleKey: string,
-      items: string[]
+      items: string[],
     ) => {
       if (!frontendClient.current) return;
 
@@ -301,7 +302,7 @@ export const LivePreview = ({
       const body = await response.json();
       setLastChangedModuleKey(body?.changedModuleKey);
     },
-    [pageId]
+    [pageId],
   );
 
   /**
@@ -313,7 +314,7 @@ export const LivePreview = ({
     function onMessage(e: MessageEvent) {
       if (e.data.type == "preview-view-scroll-to-module" && e.data.moduleKey) {
         const element = document.querySelector(
-          `[data-id="${e.data.moduleKey}"]`
+          `[data-id="${e.data.moduleKey}"]`,
         );
 
         if (element) {
@@ -404,34 +405,13 @@ export const LivePreview = ({
           </svg>
         </button>
 
-        {/* exit preview mode */}
-        <span className="shadow-lg flex gap-4 bg-[#111] items-center">
-          <span className="pl-3 font-['Helvetica_Neue']">preview mode</span>
-
-          <a
-            className="p-3 bg-[#111] transition-color hover:underline hover:bg-[#222] border-l border-l-neutral-25"
-            href={`/api/preview/exit-preview?redirect=${pagePath}`}
-          >
-            <span className="w-5 h-5 block">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.0098 3.99001C19.6198 3.60001 18.9898 3.60001 18.5998 3.99001L11.9998 10.59L5.39977 3.99001C5.00977 3.60001 4.37977 3.60001 3.98977 3.99001C3.59977 4.38001 3.59977 5.01001 3.98977 5.40001L10.5898 12L3.98977 18.6C3.59977 18.99 3.59977 19.62 3.98977 20.01C4.37977 20.4 5.00977 20.4 5.39977 20.01L11.9998 13.41L18.5998 20.01C18.9898 20.4 19.6198 20.4 20.0098 20.01C20.3998 19.62 20.3998 18.99 20.0098 18.6L13.4098 12L20.0098 5.40001C20.3998 5.01001 20.3998 4.38001 20.0098 3.99001Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-          </a>
-        </span>
+        <PreviewButton pagePath={pagePath} />
       </div>
 
       {miniModules && isMiniMapVisible && (
         <div
           className={cx(
-            "fixed top-20 right-4 z-60 bg-white border-2 border-black border-opacity-10 max-h-[calc(100vh-100px)] overflow-y-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+            "fixed top-20 right-4 z-60 bg-white border-2 border-black border-opacity-10 max-h-[calc(100vh-100px)] overflow-y-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]",
           )}
         >
           <MiniMap

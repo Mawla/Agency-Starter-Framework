@@ -26,7 +26,7 @@ const SlugPage = ({
   navigation,
   footer,
   page,
-  isPreviewMode,
+  preview,
   sitemap,
   sitemapItem,
   locked,
@@ -39,7 +39,7 @@ const SlugPage = ({
     <Page
       navigation={navigation}
       page={page}
-      isPreviewMode={isPreviewMode}
+      isPreviewMode={preview}
       footer={footer}
       config={config}
       sitemap={sitemap}
