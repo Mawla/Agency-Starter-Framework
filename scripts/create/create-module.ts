@@ -107,6 +107,7 @@ function createModule(pascalName, fields, description = "") {
   const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
   const optionsFilePath = filePath.replace(".tsx", "Options.ts");
   const testFilePath = filePath.replace(".tsx", ".test.tsx");
+  const queryFilePath = filePath.replace(".tsx", ".query.ts");
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   const importLines = [];
@@ -114,6 +115,9 @@ function createModule(pascalName, fields, description = "") {
   const jsxLines = [];
   const propsLines = [];
   const testsLines = [];
+
+  const queryImportLines = [];
+  const queryFieldLines = [];
 
   if (fields.indexOf("title") > -1) {
     typescriptLines.push("eyebrow?: string;");
@@ -134,6 +138,8 @@ function createModule(pascalName, fields, description = "") {
         expect(screen.getByText('Hello', { selector: 'h2' })).toBeInTheDocument();
       });
       `);
+    queryFieldLines.push(`title`);
+    queryFieldLines.push(`eyebrow`);
   }
 
   if (fields.indexOf("intro") > -1) {
@@ -158,6 +164,11 @@ function createModule(pascalName, fields, description = "") {
         expect(screen.getByText('Hello', { selector: 'p' })).toBeInTheDocument();
       });
       `);
+
+    queryFieldLines.push(`intro[] ${richTextQuery}`);
+    queryImportLines.push(
+      `import { richTextQuery } from "../../queries/components/richText";`
+    );
   }
 
   if (fields.indexOf("image") > -1) {
@@ -183,6 +194,11 @@ function createModule(pascalName, fields, description = "") {
         expect(screen.getAllByAltText('hello'));
       });
       `);
+
+    queryFieldLines.push(`"image": ${imageQuery}`);
+    queryImportLines.push(
+      `import { imageQuery } from "../../queries/components/image";`
+    );
   }
 
   if (fields.indexOf("items") > -1) {
@@ -203,6 +219,8 @@ function createModule(pascalName, fields, description = "") {
         expect(screen.getByText('hello')).toBeInTheDocument();
       });
       `);
+
+    queryFieldLines.push(`items`);
   }
 
   if (fields.indexOf("buttons") > -1) {
@@ -224,6 +242,11 @@ function createModule(pascalName, fields, description = "") {
         expect(screen.getByText('hello')).toBeInTheDocument();
       });
       `);
+
+    queryFieldLines.push(`buttons[] ${buttonQuery}`);
+    queryImportLines.push(
+      `import { buttonQuery } from "../../queries/components/button";`
+    );
   }
 
   // create module file
@@ -280,6 +303,20 @@ function createModule(pascalName, fields, description = "") {
   console.log(
     `› Created file ${cyan(path.relative(process.cwd(), testFilePath))}`
   );
+
+  // create query file
+  const queryContent = fs
+    .readFileSync(`${__dirname}/MyModule.query.ts`)
+    .toString()
+    .replace("/*IMPORT*/", queryImportLines.join("\n"))
+    .replace("/*FIELDS*/", queryFieldLines.join(",\n  "))
+    .replace(/MyModule/g, pascalName);
+  fs.writeFileSync(queryFilePath, queryContent);
+  prettierFile(queryFilePath);
+
+  console.log(
+    `› Created file ${cyan(path.relative(process.cwd(), queryFilePath))}`
+  );
 }
 
 /**
@@ -290,30 +327,17 @@ function createQuery(name, schemaName, fields) {
   const filePath = `${__dirname}/../../queries/page.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  const fieldsQuery = [];
-  if (fields.indexOf("title") > -1) {
-    fieldsQuery.push("title");
-    fieldsQuery.push("eyebrow");
-  }
-  if (fields.indexOf("intro") > -1)
-    fieldsQuery.push("intro[] ${richTextQuery}");
-  if (fields.indexOf("image") > -1) fieldsQuery.push('"image": ${imageQuery}');
-  if (fields.indexOf("buttons") > -1)
-    fieldsQuery.push("buttons[] ${buttonQuery}");
-  if (fields.indexOf("items") > -1) fieldsQuery.push("items[]");
-
-  const newQuery = `
-        // ${name}
-        _type == "${schemaName}" => {
-          ${fieldsQuery.join(",\n        ")}
-        },
-      `;
-
-  lines = addLine(newQuery, lines, '"dialogs":', -3);
+  lines = addLine(`\${get${name}Query(language)}`, lines, '"dialogs":', -3);
+  lines.push(
+    `import { get${name}Query } from "../modules/${name}/${name}.query";`
+  );
   fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`
   );
+  prettierFile(filePath);
+
+  console.log(`› Created file ${cyan(path.relative(process.cwd(), filePath))}`);
 }
 
 /**
