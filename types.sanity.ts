@@ -38,7 +38,7 @@ export const LINKABLE_SCHEMAS = pick(
   SCHEMAS,
   "page.content",
   "page.home",
-  "page.pressrelease"
+  "page.pressrelease",
 );
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
@@ -54,7 +54,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "page.home",
   "page.notfound",
   "page.pressrelease",
-  "person"
+  "person",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
@@ -68,7 +68,7 @@ export const MODULE_SCHEMAS = pick(
   "module.richtext",
   "module.slides",
   "module.story",
-  "module.textimage"
+  "module.textimage",
 );
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
