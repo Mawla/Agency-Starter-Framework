@@ -150,11 +150,11 @@ function createHero() {
     .replace(
       "/*FIELDS*/",
       `title,
-"image": \${imageQuery},
-    `,
+  "image": \${imageQuery},`,
     )
     .replace(/MyModuleSchema/g, schemaName)
-    .replace(/MyModule/g, pascalName);
+    .replace(/MyModule/g, pascalName)
+    .replace("../../languages", "../languages");
   fs.writeFileSync(queryFilePath, queryContent);
   prettierFile(queryFilePath);
 
@@ -182,10 +182,7 @@ function createQuery() {
     -3,
   );
 
-  fs.writeFileSync(
-    filePath,
-    lines.join("\n").replace("../../languages", "../languages"),
-  );
+  fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
   );
