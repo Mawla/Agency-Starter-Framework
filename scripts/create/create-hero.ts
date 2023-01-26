@@ -79,7 +79,7 @@ function createHero() {
   const { pascalName, schemaName } = answers;
 
   const fileDir = `${__dirname}/../../heroes`;
-  const filePath = `${fileDir}/${pascalName}.tsx`;
+  const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
   const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
   const optionsFilePath = filePath.replace(".tsx", "Options.ts");
   const queryFilePath = filePath.replace(".tsx", ".query.ts");
