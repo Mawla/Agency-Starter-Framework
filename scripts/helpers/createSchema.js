@@ -29,7 +29,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
     `import ${schemaImportName} from './${options.schemaDir}/${schemaName}';`,
     ...lines,
   ];
-  const fromNeedle = options.translatable ? `translateFields([` : `.concat([`;
+  const fromNeedle = options.translatable ? `translateFields([` : `...[`;
   const toNeedle = options.translatable ? `]),` : `])`;
 
   lines = addLine(`    ${schemaImportName},`, lines, fromNeedle);
