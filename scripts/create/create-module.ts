@@ -327,14 +327,14 @@ function createQuery(name, pascalName, schemaName, fields) {
   const filePath = `${__dirname}/../../queries/page.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
+  lines.push(
+    `import { get${pascalName}Query } from "../modules/${pascalName}/${pascalName}.query";`
+  );
   lines = addLine(
-    `\${get${pascalName}Query(language)}`,
+    `    \${get${pascalName}Query(language)}`,
     lines,
     '"dialogs":',
     -3
-  );
-  lines.push(
-    `import { get${pascalName}Query } from "../modules/${pascalName}/${pascalName}.query";`
   );
   fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
