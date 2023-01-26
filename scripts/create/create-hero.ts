@@ -175,7 +175,7 @@ function createQuery() {
     `import { get${pascalName}Query } from "../heroes/${pascalName}.query";`,
   );
   lines = addLine(
-    `    \${get${pascalName}Query(language)}`,
+    `    \${get${pascalName}Query(language)},`,
     lines,
     '"modules":',
     -3,
