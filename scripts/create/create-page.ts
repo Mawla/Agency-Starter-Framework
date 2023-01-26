@@ -240,12 +240,12 @@ function createDeskStructure(
     }
   }
 
-  lines = addLine(str, lines, `type: 'page.content'`, -1);
+  lines = addLine(str, lines, `type: "page.content"`, -1);
   lines = addLine(
     `,\n                    ${schemaName}`,
     lines,
     `] && !defined(parent)`,
-    -1,
+    0,
   );
 
   fs.writeFileSync(filePath, lines.join("\n"));
