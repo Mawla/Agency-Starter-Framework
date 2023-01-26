@@ -76,7 +76,7 @@ function build() {
  */
 
 function createHero() {
-  const { pascalName } = answers;
+  const { pascalName, schemaName } = answers;
 
   const fileDir = `${__dirname}/../../heroes`;
   const filePath = `${fileDir}/${pascalName}.tsx`;
@@ -150,9 +150,10 @@ function createHero() {
     .replace(
       "/*FIELDS*/",
       `title,
-    "image": \${imageQuery},
+"image": \${imageQuery},
     `,
     )
+    .replace(/MyModuleSchema/g, schemaName)
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(queryFilePath, queryContent);
   prettierFile(queryFilePath);
@@ -180,7 +181,11 @@ function createQuery() {
     '"modules":',
     -3,
   );
-  fs.writeFileSync(filePath, lines.join("\n"));
+
+  fs.writeFileSync(
+    filePath,
+    lines.join("\n").replace("../../languages", "../languages"),
+  );
   console.log(
     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
   );
