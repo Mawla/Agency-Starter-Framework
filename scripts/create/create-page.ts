@@ -1,5 +1,5 @@
-import { languages } from '../../languages';
-import { SCHEMAS } from '../../types.sanity';
+import { languages } from "../../languages";
+import { SCHEMAS } from "../../types.sanity";
 
 /**
  *
@@ -17,18 +17,18 @@ import { SCHEMAS } from '../../types.sanity';
  * › add to sitemap query
  */
 
-const fs = require('fs');
-const path = require('path');
-const { pascalCase } = require('../helpers/pascalCase');
-const { prettierFile } = require('../helpers/prettierFile');
-const { addLine } = require('../helpers/addLine');
-const { createSchema } = require('../helpers/createSchema');
-const { createType } = require('../helpers/createType');
-const { cyan } = require('../helpers/terminal');
-const { question } = require('../helpers/question');
-const { yesno } = require('../helpers/yesno');
+const fs = require("fs");
+const path = require("path");
+const { pascalCase } = require("../helpers/pascalCase");
+const { prettierFile } = require("../helpers/prettierFile");
+const { addLine } = require("../helpers/addLine");
+const { createSchema } = require("../helpers/createSchema");
+const { createType } = require("../helpers/createType");
+const { cyan } = require("../helpers/terminal");
+const { question } = require("../helpers/question");
+const { yesno } = require("../helpers/yesno");
 
-const readline = require('readline').createInterface({
+const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
@@ -55,10 +55,10 @@ function askName() {
 function askSingleton() {
   const ask = `Is it a single use item, like the homepage or blog overview?`;
   const description = `If so a singleton schema is created.`;
-  const options = ['Y', 'n'];
+  const options = ["Y", "n"];
 
   readline.question(question(ask, description, options), (answer) => {
-    answers.singleton = yesno(answer || 'Y');
+    answers.singleton = yesno(answer || "Y");
     askChildren();
   });
 }
@@ -72,7 +72,7 @@ function askChildren() {
 
   readline.question(question(ask, description, options), (answer) => {
     answers.parentType = answer;
-    answers.parentId = answer.replace('page.', 'page_');
+    answers.parentId = answer.replace("page.", "page_");
     askDesk();
   });
 }
@@ -80,10 +80,10 @@ function askChildren() {
 function askDesk() {
   const ask = `Add to desk structure?`;
   const description = `Say no if you plan to do this manually. If the page doesn't exist in the database yet you probably want to say yes and remove it later.`;
-  const options = ['Y', 'n'];
+  const options = ["Y", "n"];
 
   readline.question(question(ask, description, options), (answer) => {
-    answers.addDesk = yesno(answer || 'Y');
+    answers.addDesk = yesno(answer || "Y");
     finish();
   });
 }
@@ -92,7 +92,7 @@ function finish() {
   readline.close();
   build(answers);
 
-  console.log('\nNext steps: ');
+  console.log("\nNext steps: ");
 
   console.log(
     `› Create an icon for the desk structure in ${cyan(
@@ -100,7 +100,7 @@ function finish() {
         process.cwd(),
         `${__dirname}/../../studio/utils/desk/DocumentIcon.tsx`,
       ),
-    )} or use an existing icon ${cyan('http://localhost:3333/cms/engine')}`,
+    )} or use an existing icon ${cyan("http://localhost:3333/cms/engine")}`,
   );
 
   if (answers.parentType) {
@@ -118,24 +118,18 @@ const build = (answers) => {
   if (!name.trim().length) return readline.close();
 
   const pascalName = `${pascalCase(name)}`;
-  const schemaName = `page.${name.toLowerCase().replace(/\s/g, '')}`;
-  const documentId = schemaName.replace('page.', 'page_');
+  const schemaName = `page.${name.toLowerCase().replace(/\s/g, "")}`;
+  const documentId = schemaName.replace("page.", "page_");
 
-  console.log('');
+  console.log("");
   createType(schemaName, { linkable: true, translatable: true });
 
   createSchema(name, pascalName, schemaName, {
-    replacer: 'MyPage',
-    schemaDir: 'documents',
+    replacer: "MyPage",
+    schemaDir: "documents",
     prototypeFile: `${__dirname}/page.mypage.tsx`,
-    schemaImportPrefix: 'page',
+    schemaImportPrefix: "page",
     translatable: true,
-    schemaEditFn: (content) => {
-      return content.replace(
-        'singleton: true,',
-        singleton ? 'singleton: true,' : 'singleton: false,',
-      );
-    },
   });
 
   createQuery(name, schemaName, documentId, answers);
@@ -159,7 +153,7 @@ function createQuery(name, schemaName, documentId, answers) {
   const { singleton, parentType, parentId } = answers;
 
   const filePath = `${__dirname}/../../queries/sitemap.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let str;
 
@@ -201,20 +195,28 @@ function createQuery(name, schemaName, documentId, answers) {
     }
   }
 
-  lines = addLine(str, lines, '// content pages', -1);
-  fs.writeFileSync(filePath, lines.join('\n'));
-  console.log(`› Added query in ${cyan(path.relative(process.cwd(), filePath))}`);
+  lines = addLine(str, lines, "// content pages", -1);
+  fs.writeFileSync(filePath, lines.join("\n"));
+  console.log(
+    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
+  );
 }
 
 /**
  * Add to desk
  */
 
-function createDeskStructure(name, pascalName, schemaName, documentId, answers) {
+function createDeskStructure(
+  name,
+  pascalName,
+  schemaName,
+  documentId,
+  answers,
+) {
   const { singleton, parentType, parentId } = answers;
 
   const filePath = `${__dirname}/../../studio/deskStructure.tsx`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let str;
 
@@ -239,9 +241,11 @@ function createDeskStructure(name, pascalName, schemaName, documentId, answers) 
   }
 
   lines = addLine(str, lines, `type: 'page.content'`, -1);
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
   console.log(
-    `› Added to desk structure in ${cyan(path.relative(process.cwd(), filePath))}`,
+    `› Added to desk structure in ${cyan(
+      path.relative(process.cwd(), filePath),
+    )}`,
   );
 }
