@@ -99,7 +99,7 @@ export const Sitemap: ComponentType<any> = ({ options }) => {
                       if (!b.paths[currentLanguage]) return 1;
 
                       return a.paths[currentLanguage].localeCompare(
-                        b.paths[currentLanguage]
+                        b.paths[currentLanguage],
                       );
                     })
                     .map(({ title, titles, paths, _id, _type }) => {
@@ -220,10 +220,10 @@ const CheckUnique = ({
   useEffect(() => {
     async function checkUnique() {
       setIsUnique(
-        await isPathUnique(S, "", {
+        await isPathUnique("", {
           document: { _id },
           path: ["x", language],
-        })
+        }),
       );
     }
 
