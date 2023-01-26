@@ -215,19 +215,19 @@ function createDeskStructure(
 ) {
   const { singleton, parentType, parentId } = answers;
 
-  const filePath = `${__dirname}/../../studio/deskStructure.tsx`;
+  const filePath = `${__dirname}/../../studio/structure.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let str;
 
   if (singleton) {
     str = `
-      singleton({ id: '${documentId}', type: '${schemaName}' }),
+      singleton(S, { id: '${documentId}', type: '${schemaName}' }),
     `;
   } else {
     if (parentId) {
       str = `
-        documentList({
+        documentList(S, {
           type: '${schemaName}',
           title: '${pascalName}',
           filter: '_type == "${parentType}" || _type == "${schemaName}"',
@@ -235,12 +235,19 @@ function createDeskStructure(
       `;
     } else {
       str = `
-        documentList({ type: '${schemaName}', title: '${name}' }),
+        documentList(S, { type: '${schemaName}', title: '${name}' }),
       `;
     }
   }
 
   lines = addLine(str, lines, `type: 'page.content'`, -1);
+  lines = addLine(
+    `,\n                    ${schemaName}`,
+    lines,
+    `] && !defined(parent)`,
+    -1,
+  );
+
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
   console.log(
