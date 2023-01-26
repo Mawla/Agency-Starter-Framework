@@ -11,7 +11,10 @@ describe.skip("Button", () => {
     mockRouter.setCurrentUrl("/");
 
     render(
-      <Button onClick={() => mockRouter.setCurrentUrl("/foo")} label={"Foo"} />,
+      <Button
+        // onClick={() => mockRouter.setCurrentUrl("/foo")}
+        label={"Foo"}
+      />,
     );
 
     fireEvent.click(screen.getByText("Foo"));
@@ -24,7 +27,7 @@ describe.skip("Button", () => {
     render(
       <Button
         disabled
-        onClick={() => mockRouter.setCurrentUrl("/foo")}
+        // onClick={() => mockRouter.setCurrentUrl("/foo")}
         label={"Foo"}
       />,
     );
