@@ -59,7 +59,7 @@ export const getPageQuery = (language: LanguageType) => groq`*[_id == $_id][0]{
     _type,
     _key,
 
-    ${getHeroBasicQuery(language)}
+    ${getHeroBasicQuery(language)},
 
   }[0],
 
