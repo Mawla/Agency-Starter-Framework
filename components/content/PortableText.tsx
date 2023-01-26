@@ -15,7 +15,7 @@ const Video = dynamic<VideoType>(
     import(
       /* webpackChunkName: "VideoComponent" */ "../../components/video/Video"
     ) as any,
-  { suspense: true }
+  { suspense: true },
 );
 
 export type PortableTextProps = {
@@ -23,6 +23,7 @@ export type PortableTextProps = {
 };
 
 export const PortableText = ({ content = [] }) => {
+  if (React.isValidElement(content)) return content;
   if (!content) return null;
   return (
     <PortableTextReact
