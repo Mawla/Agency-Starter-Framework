@@ -165,7 +165,7 @@ function createModule(pascalName, fields, description = "") {
       });
       `);
 
-    queryFieldLines.push(`intro[] ${richTextQuery}`);
+    queryFieldLines.push('intro[] \${richTextQuery}`);
     queryImportLines.push(
       `import { richTextQuery } from "../../queries/components/richText";`
     );
@@ -195,7 +195,7 @@ function createModule(pascalName, fields, description = "") {
       });
       `);
 
-    queryFieldLines.push(`"image": ${imageQuery}`);
+    queryFieldLines.push(`"image": \${imageQuery}`);
     queryImportLines.push(
       `import { imageQuery } from "../../queries/components/image";`
     );
@@ -243,7 +243,7 @@ function createModule(pascalName, fields, description = "") {
       });
       `);
 
-    queryFieldLines.push(`buttons[] ${buttonQuery}`);
+    queryFieldLines.push(`buttons[] \${buttonQuery}`);
     queryImportLines.push(
       `import { buttonQuery } from "../../queries/components/button";`
     );
