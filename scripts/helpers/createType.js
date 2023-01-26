@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const { addLine } = require('../helpers/addLine');
-const { cyan } = require('../helpers/terminal');
-const { prettierFile } = require('../helpers/prettierFile');
-const { sortLines } = require('../helpers/sortLines');
+const fs = require("fs");
+const path = require("path");
+const { addLine } = require("../helpers/addLine");
+const { cyan } = require("../helpers/terminal");
+const { prettierFile } = require("../helpers/prettierFile");
+const { sortLines } = require("../helpers/sortLines");
 
 /**
  * Add page to the list of sanity schema types
@@ -11,10 +11,10 @@ const { sortLines } = require('../helpers/sortLines');
 
 module.exports.createType = (schemaName, options) => {
   const filePath = `${__dirname}/../../types.sanity.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  const fromNeedle = 'export const SCHEMAS';
-  const toNeedle = '};';
+  const fromNeedle = "export const SCHEMAS";
+  const toNeedle = "};";
   lines = addLine(`  '${schemaName}': '',`, lines, fromNeedle);
   lines = sortLines(lines, fromNeedle, toNeedle);
 
@@ -25,7 +25,7 @@ module.exports.createType = (schemaName, options) => {
   if (options.hero) lines = createHeroType(lines, schemaName, filePath);
   if (options.dialog) lines = createDialogType(lines, schemaName, filePath);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
 
   console.log(
@@ -36,8 +36,8 @@ module.exports.createType = (schemaName, options) => {
 };
 
 const createLinkableType = (lines, schemaName, filePath) => {
-  const fromNeedle2 = 'export const LINKABLE_SCHEMAS';
-  const toNeedle2 = ');';
+  const fromNeedle2 = "export const LINKABLE_SCHEMAS";
+  const toNeedle2 = ");";
   lines = addLine(`  '${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
   lines = sortLines(lines, fromNeedle2, toNeedle2, 1);
 
@@ -50,8 +50,8 @@ const createLinkableType = (lines, schemaName, filePath) => {
 };
 
 const createTranslatableType = (lines, schemaName, filePath) => {
-  const fromNeedle2 = 'export const TRANSLATABLE_SCHEMAS';
-  const toNeedle2 = ');';
+  const fromNeedle2 = "export const TRANSLATABLE_SCHEMAS";
+  const toNeedle2 = ");";
   lines = addLine(`  '${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
   lines = sortLines(lines, fromNeedle2, toNeedle2, 1);
 
@@ -64,8 +64,8 @@ const createTranslatableType = (lines, schemaName, filePath) => {
 };
 
 const createModuleType = (lines, schemaName, filePath) => {
-  const fromNeedle2 = 'export const MODULE_SCHEMAS';
-  const toNeedle2 = ');';
+  const fromNeedle2 = "export const MODULE_SCHEMAS";
+  const toNeedle2 = ");";
   lines = addLine(`  '${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
   lines = sortLines(lines, fromNeedle2, toNeedle2, 1);
 
@@ -78,9 +78,9 @@ const createModuleType = (lines, schemaName, filePath) => {
 };
 
 const createHeroType = (lines, schemaName, filePath) => {
-  const fromNeedle2 = 'export const HERO_SCHEMAS';
-  const toNeedle2 = ');';
-  lines = addLine(`  '${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
+  const fromNeedle2 = "export const HERO_SCHEMAS";
+  const toNeedle2 = ");";
+  lines = addLine(`  ',${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
   lines = sortLines(lines, fromNeedle2, toNeedle2, 1);
 
   console.log(
@@ -92,8 +92,8 @@ const createHeroType = (lines, schemaName, filePath) => {
 };
 
 const createDialogType = (lines, schemaName, filePath) => {
-  const fromNeedle2 = 'export const DIALOG_SCHEMAS';
-  const toNeedle2 = ');';
+  const fromNeedle2 = "export const DIALOG_SCHEMAS";
+  const toNeedle2 = ");";
   lines = addLine(`  '${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
   lines = sortLines(lines, fromNeedle2, toNeedle2, 1);
 
