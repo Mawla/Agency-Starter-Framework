@@ -14,7 +14,7 @@ import { Nav } from "../Nav/Nav";
 import { DefaultPage } from "./DefaultPage";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
-import React, { useRef } from "react";
+import React from "react";
 
 export type PageProps = {
   isPreviewMode: boolean;
