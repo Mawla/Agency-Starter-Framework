@@ -253,7 +253,6 @@ function createModule(pascalName, schemaName, fields, description = "") {
   const moduleContent = fs
     .readFileSync(`${__dirname}/MyModule.tsx`)
     .toString()
-    .replace(/MyModuleSchema/g, schemaName)
     .replace(/MyModule/g, pascalName)
     .replace("/*TYPE*/", `${typescriptLines.join("\n")}`)
     .replace("/*IMPORT*/", `${importLines.join("\n")}`)
@@ -311,6 +310,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
     .toString()
     .replace("/*IMPORT*/", queryImportLines.join("\n"))
     .replace("/*FIELDS*/", queryFieldLines.join(",\n  "))
+    .replace(/MyModuleSchema/g, schemaName)
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(queryFilePath, queryContent);
   prettierFile(queryFilePath);
