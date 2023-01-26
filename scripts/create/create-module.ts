@@ -165,7 +165,7 @@ function createModule(pascalName, fields, description = "") {
       });
       `);
 
-    queryFieldLines.push('intro[] \${richTextQuery}`);
+    queryFieldLines.push(`intro[] \${richTextQuery}`);
     queryImportLines.push(
       `import { richTextQuery } from "../../queries/components/richText";`
     );
