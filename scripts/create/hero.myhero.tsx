@@ -17,7 +17,7 @@ const schema = defineType({
       language: "language",
       image: "image",
     },
-    prepare({ title = "MyModuleTitle", language }: any) {
+    prepare({ title = "MyHero", language }: any) {
       return {
         title: title,
         subtitle: prefixWithLanguage(language),
