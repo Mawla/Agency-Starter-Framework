@@ -215,7 +215,7 @@ function createBuilder() {
   ];
 
   // add to render loop
-  const jsx = `\n{/* ${name} */}{hero._type === '${schemaName}' && <${pascalName} {...hero} />}`;
+  const jsx = `{hero._type === '${schemaName}' && <${pascalName} {...hero} />}`;
   lines = addLine(jsx, lines, "</Suspense>", 0);
 
   fs.writeFileSync(filePath, lines.join("\n"));
