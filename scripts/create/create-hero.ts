@@ -149,9 +149,8 @@ function createHero() {
     )
     .replace(
       "/*FIELDS*/",
-      `
-    title,
-    "image": \${getImageQuery("image2")},
+      `title,
+    "image": \${imageQuery},
     `,
     )
     .replace(/MyModule/g, pascalName);
