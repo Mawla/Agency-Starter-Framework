@@ -172,7 +172,7 @@ function createQuery() {
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines.push(
-    `import { get${pascalName}Query } from "../heroes/{pascalName}.query";`,
+    `import { get${pascalName}Query } from "../heroes/${pascalName}.query";`,
   );
   lines = addLine(
     `    \${get${pascalName}Query(language)}`,
