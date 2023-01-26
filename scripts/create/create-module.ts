@@ -16,45 +16,45 @@
  * › add schema to module type types.sanity.ts
  */
 
-const fs = require('fs');
-const path = require('path');
-const { pascalCase } = require('../helpers/pascalCase');
-const { prettierFile } = require('../helpers/prettierFile');
-const { addLine } = require('../helpers/addLine');
-const { createSchema } = require('../helpers/createSchema');
-const { createType } = require('../helpers/createType');
-const { question } = require('../helpers/question');
-const { cyan } = require('../helpers/terminal');
-const { MultiSelect, Input } = require('enquirer');
+const fs = require("fs");
+const path = require("path");
+const { pascalCase } = require("../helpers/pascalCase");
+const { prettierFile } = require("../helpers/prettierFile");
+const { addLine } = require("../helpers/addLine");
+const { createSchema } = require("../helpers/createSchema");
+const { createType } = require("../helpers/createType");
+const { question } = require("../helpers/question");
+const { cyan } = require("../helpers/terminal");
+const { MultiSelect, Input } = require("enquirer");
 
 async function init() {
   try {
     const nameInput = new Input({
-      type: 'input',
-      name: 'name',
+      type: "input",
+      name: "name",
       message: `${cyan(
-        'What is the name of the module?',
+        "What is the name of the module?"
       )}\nHuman readable form. 'My Module' will become schema name 'module.mymodule'.\n`,
     });
 
     const descriptionInput = new Input({
-      type: 'input',
-      name: 'description',
+      type: "input",
+      name: "description",
       message: `${cyan(
-        'Provide a short description of the module',
+        "Provide a short description of the module"
       )}\nUsed for the module select search. This makes it easier for editors to find modules.\n`,
     });
 
     const fieldsInput = new MultiSelect({
-      name: 'value',
-      message: 'Do you want to set up basic fields?',
+      name: "value",
+      message: "Do you want to set up basic fields?",
       limit: 7,
       choices: [
-        { name: 'title', value: 'Title' },
-        { name: 'intro', value: 'Intro' },
-        { name: 'image', value: 'Image' },
-        { name: 'buttons', value: 'Buttons' },
-        { name: 'items', value: 'Items' },
+        { name: "title", value: "Title" },
+        { name: "intro", value: "Intro" },
+        { name: "image", value: "Image" },
+        { name: "buttons", value: "Buttons" },
+        { name: "items", value: "Items" },
       ],
     });
 
@@ -64,15 +64,15 @@ async function init() {
     const fields = await fieldsInput.run();
 
     const pascalName = `${pascalCase(name)}`;
-    const schemaName = `module.${name.toLowerCase().replace(/\s/g, '')}`;
+    const schemaName = `module.${name.toLowerCase().replace(/\s/g, "")}`;
 
     createModule(pascalName, fields);
 
     createSchema(name, pascalName, schemaName, {
-      replacer: 'MyModule',
-      schemaDir: 'modules',
+      replacer: "MyModule",
+      schemaDir: "modules",
       prototypeFile: `${__dirname}/module.mymodule.tsx`,
-      schemaImportPrefix: 'module',
+      schemaImportPrefix: "module",
       fields,
       description,
     });
@@ -81,15 +81,15 @@ async function init() {
     createType(schemaName, { module: true });
     createBuilder(name, pascalName, schemaName, fields);
 
-    console.log('\nNext steps: ');
+    console.log("\nNext steps: ");
 
     console.log(
       `› Create an icon for the desk structure in ${cyan(
         path.relative(
           process.cwd(),
-          `${__dirname}/../../studio/utils/desk/DocumentIcon.tsx`,
-        ),
-      )} or use an existing icon ${cyan('http://localhost:3333/cms/engine')}`,
+          `${__dirname}/../../studio/utils/desk/DocumentIcon.tsx`
+        )
+      )} or use an existing icon ${cyan("http://localhost:3333/cms/engine")}`
     );
   } catch (err) {
     console.log(err);
@@ -101,12 +101,12 @@ async function init() {
  * b. create modules/[pascalName]/Module.stories.tsx
  */
 
-function createModule(pascalName, fields, description = '') {
+function createModule(pascalName, fields, description = "") {
   const fileDir = `${__dirname}/../../modules`;
   const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
-  const storiesFilePath = filePath.replace('.tsx', '.stories.tsx');
-  const optionsFilePath = filePath.replace('.tsx', 'Options.ts');
-  const testFilePath = filePath.replace('.tsx', '.test.tsx');
+  const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
+  const optionsFilePath = filePath.replace(".tsx", "Options.ts");
+  const testFilePath = filePath.replace(".tsx", ".test.tsx");
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   const importLines = [];
@@ -115,11 +115,11 @@ function createModule(pascalName, fields, description = '') {
   const propsLines = [];
   const testsLines = [];
 
-  if (fields.indexOf('title') > -1) {
-    typescriptLines.push('eyebrow?: string;');
-    typescriptLines.push('title?: string;');
-    propsLines.push('eyebrow');
-    propsLines.push('title');
+  if (fields.indexOf("title") > -1) {
+    typescriptLines.push("eyebrow?: string;");
+    typescriptLines.push("title?: string;");
+    propsLines.push("eyebrow");
+    propsLines.push("title");
     importLines.push(`import { Title } from '../../components/module/Title';`);
     jsxLines.push(`
       {title && (
@@ -136,9 +136,9 @@ function createModule(pascalName, fields, description = '') {
       `);
   }
 
-  if (fields.indexOf('intro') > -1) {
-    typescriptLines.push('intro?: React.ReactNode;');
-    propsLines.push('intro');
+  if (fields.indexOf("intro") > -1) {
+    typescriptLines.push("intro?: React.ReactNode;");
+    propsLines.push("intro");
     importLines.push(`import { Text } from '../../components/module/Text';`);
     jsxLines.push(`
       {intro && (
@@ -155,9 +155,9 @@ function createModule(pascalName, fields, description = '') {
       `);
   }
 
-  if (fields.indexOf('image') > -1) {
-    typescriptLines.push('image?: ImageType');
-    propsLines.push('image');
+  if (fields.indexOf("image") > -1) {
+    typescriptLines.push("image?: ImageType");
+    propsLines.push("image");
     importLines.push(`
       import { ImageType } from '../../types';
       import { ResponsiveImage } from '../../components/images/ResponsiveImage';`);
@@ -180,9 +180,9 @@ function createModule(pascalName, fields, description = '') {
       `);
   }
 
-  if (fields.indexOf('items') > -1) {
-    typescriptLines.push('items?: { _key?:string;title?:string }[];');
-    propsLines.push('items');
+  if (fields.indexOf("items") > -1) {
+    typescriptLines.push("items?: { _key?:string;title?:string }[];");
+    propsLines.push("items");
     jsxLines.push(`
       {Boolean(items?.length) && (
         <ul className="pt-7 divide-y divide-grey-50">
@@ -200,9 +200,9 @@ function createModule(pascalName, fields, description = '') {
       `);
   }
 
-  if (fields.indexOf('buttons') > -1) {
-    typescriptLines.push('buttons?: ButtonProps[];');
-    propsLines.push('buttons');
+  if (fields.indexOf("buttons") > -1) {
+    typescriptLines.push("buttons?: ButtonProps[];");
+    propsLines.push("buttons");
     importLines.push(`
         import { ButtonProps } from '../../components/buttons/Button';
         import { ButtonGroup } from '../../components/buttons/ButtonGroup';`);
@@ -226,10 +226,10 @@ function createModule(pascalName, fields, description = '') {
     .readFileSync(`${__dirname}/MyModule.tsx`)
     .toString()
     .replace(/MyModule/g, pascalName)
-    .replace('/*TYPE*/', `${typescriptLines.join('\n')}`)
-    .replace('/*IMPORT*/', `${importLines.join('\n')}`)
-    .replace('/*JSX*/', `${jsxLines.join('\n')}`)
-    .replace('/*PROPS*/', `, ${propsLines.join(',')}`);
+    .replace("/*TYPE*/", `${typescriptLines.join("\n")}`)
+    .replace("/*IMPORT*/", `${importLines.join("\n")}`)
+    .replace("/*JSX*/", `${jsxLines.join("\n")}`)
+    .replace("/*PROPS*/", `, ${propsLines.join(",")}`);
   fs.writeFileSync(filePath, moduleContent);
   prettierFile(filePath);
 
@@ -244,7 +244,7 @@ function createModule(pascalName, fields, description = '') {
   prettierFile(storiesFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), storiesFilePath))}`,
+    `› Created file ${cyan(path.relative(process.cwd(), storiesFilePath))}`
   );
 
   // create options file
@@ -256,7 +256,7 @@ function createModule(pascalName, fields, description = '') {
   prettierFile(optionsFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), optionsFilePath))}`,
+    `› Created file ${cyan(path.relative(process.cwd(), optionsFilePath))}`
   );
 
   if (!testsLines.length) {
@@ -267,12 +267,14 @@ function createModule(pascalName, fields, description = '') {
   const testContent = fs
     .readFileSync(`${__dirname}/MyModule.test.tsx`)
     .toString()
-    .replace('/*TESTS*/', testsLines.join('\n\n'))
+    .replace("/*TESTS*/", testsLines.join("\n\n"))
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(testFilePath, testContent);
   prettierFile(testFilePath);
 
-  console.log(`› Created file ${cyan(path.relative(process.cwd(), testFilePath))}`);
+  console.log(
+    `› Created file ${cyan(path.relative(process.cwd(), testFilePath))}`
+  );
 }
 
 /**
@@ -281,28 +283,32 @@ function createModule(pascalName, fields, description = '') {
 
 function createQuery(name, schemaName, fields) {
   const filePath = `${__dirname}/../../queries/page.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   const fieldsQuery = [];
-  if (fields.indexOf('title') > -1) {
-    fieldsQuery.push('title');
-    fieldsQuery.push('eyebrow');
+  if (fields.indexOf("title") > -1) {
+    fieldsQuery.push("title");
+    fieldsQuery.push("eyebrow");
   }
-  if (fields.indexOf('intro') > -1) fieldsQuery.push('intro[] ${richTextQuery}');
-  if (fields.indexOf('image') > -1) fieldsQuery.push('"image": ${imageQuery}');
-  if (fields.indexOf('buttons') > -1) fieldsQuery.push('buttons[] ${buttonQuery}');
-  if (fields.indexOf('items') > -1) fieldsQuery.push('items[]');
+  if (fields.indexOf("intro") > -1)
+    fieldsQuery.push("intro[] ${richTextQuery}");
+  if (fields.indexOf("image") > -1) fieldsQuery.push('"image": ${imageQuery}');
+  if (fields.indexOf("buttons") > -1)
+    fieldsQuery.push("buttons[] ${buttonQuery}");
+  if (fields.indexOf("items") > -1) fieldsQuery.push("items[]");
 
   const newQuery = `
         // ${name}
         _type == "${schemaName}" => {
-          ${fieldsQuery.join(',\n        ')}
+          ${fieldsQuery.join(",\n        ")}
         },
       `;
 
   lines = addLine(newQuery, lines, '"dialogs":', -3);
-  fs.writeFileSync(filePath, lines.join('\n'));
-  console.log(`› Added query in ${cyan(path.relative(process.cwd(), filePath))}`);
+  fs.writeFileSync(filePath, lines.join("\n"));
+  console.log(
+    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`
+  );
 }
 
 /**
@@ -311,12 +317,12 @@ function createQuery(name, schemaName, fields) {
 
 function createBuilder(name, pascalName, schemaName, fields) {
   const filePath = `${__dirname}/../../layout/ModuleBuilder/ModuleBuilder.tsx`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add import
   lines = [
     `
-      import { type ${pascalName}Props } from '../../modules/${pascalName}/${pascalName}';
+      import { ${pascalName}Props } from '../../modules/${pascalName}/${pascalName}';
       const ${pascalName} = dynamic<${pascalName}Props>(
         () =>
           import(
@@ -329,22 +335,24 @@ function createBuilder(name, pascalName, schemaName, fields) {
   ];
 
   const props = [];
-  if (fields.indexOf('intro') > -1) {
+  if (fields.indexOf("intro") > -1) {
     props.push(`intro={<PortableText content={item.intro} />}`);
   }
 
   // add to render loop
   const jsx = `\n{/* ${name} */}{item._type === '${schemaName}' && <${pascalName} {...item} ${props.join(
-    ' ',
+    " "
   )}/>}`;
-  lines = addLine(jsx, lines, '</LazyLoadInView>', 0);
+  lines = addLine(jsx, lines, "</LazyLoadInView>", 0);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
 
-  console.log(`› Added import to ${cyan(path.relative(process.cwd(), filePath))}`);
   console.log(
-    `› Added module render to ${cyan(path.relative(process.cwd(), filePath))}`,
+    `› Added import to ${cyan(path.relative(process.cwd(), filePath))}`
+  );
+  console.log(
+    `› Added module render to ${cyan(path.relative(process.cwd(), filePath))}`
   );
 }
 
