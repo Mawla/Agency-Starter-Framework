@@ -1,4 +1,5 @@
 import { HeroBasicProps } from "../heroes/HeroBasic";
+import { getHeroBasicQuery } from "../heroes/HeroBasic.query";
 import { LanguageType } from "../languages";
 import { getBillboardQuery } from "../modules/Billboard/Billboard.query";
 import { getBreadcrumbQuery } from "../modules/Breadcrumb/Breadcrumb.query";
@@ -10,8 +11,7 @@ import { getStoryQuery } from "../modules/Story/Story.query";
 import { getTextImageQuery } from "../modules/TextImage/TextImage.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
-import { buttonQuery } from "./components/button";
-import { getImageQuery, imageQuery } from "./components/image";
+import { imageQuery } from "./components/image";
 import { richTextQuery } from "./components/richText";
 import { staticFormQuery } from "./components/staticForm";
 import { videoQuery } from "./components/video";
@@ -59,20 +59,7 @@ export const getPageQuery = (language: LanguageType) => groq`*[_id == $_id][0]{
     _type,
     _key,
 
-    // Hero Basic
-    _type == "hero.basic" => {
-       title,
-       eyebrow,
-       visual {
-        "image1": ${getImageQuery("image1")},
-        "image2": ${getImageQuery("image2")},
-        colors
-       },
-       showLozenges,
-       breakOutImage,
-       text[] ${richTextQuery},
-       buttons[] ${buttonQuery},
-     },
+    ${getHeroBasicQuery(language)}
 
   }[0],
 
