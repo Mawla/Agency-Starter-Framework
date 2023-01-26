@@ -86,7 +86,7 @@ export const HERO_FIELD = defineField({
         preview: PageBuilderItemPreview,
         item: PageBuilderItem,
       },
-    })
+    }),
   ),
 });
 
@@ -106,7 +106,7 @@ export const MODULES_FIELD = defineField({
           preview: PageBuilderItemPreview,
           item: PageBuilderItem,
         },
-      })
+      }),
     ),
     { type: "studio.divider" },
   ],
@@ -151,7 +151,7 @@ export const DIALOG_SELECT_FIELD = defineField({
     field: ModuleSelectWrapper,
   },
   options: {
-    filterType: /dialog.video|dialog.richtext/,
+    filterType: /dialog.*/,
     updateField: "dialogs",
     placeholder: "Add a dialog…",
   } as any,
@@ -173,7 +173,7 @@ export const DIALOGS_FIELD = defineField({
         preview: PageBuilderItemPreview,
         item: PageBuilderItem,
       },
-    })
+    }),
   ),
 });
 
