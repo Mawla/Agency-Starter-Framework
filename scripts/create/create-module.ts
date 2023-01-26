@@ -33,7 +33,7 @@ async function init() {
       type: "input",
       name: "name",
       message: `${cyan(
-        "What is the name of the module?"
+        "What is the name of the module?",
       )}\nHuman readable form. 'My Module' will become schema name 'module.mymodule'.\n`,
     });
 
@@ -41,7 +41,7 @@ async function init() {
       type: "input",
       name: "description",
       message: `${cyan(
-        "Provide a short description of the module"
+        "Provide a short description of the module",
       )}\nUsed for the module select search. This makes it easier for editors to find modules.\n`,
     });
 
@@ -87,9 +87,9 @@ async function init() {
       `› Create an icon for the desk structure in ${cyan(
         path.relative(
           process.cwd(),
-          `${__dirname}/../../studio/utils/desk/DocumentIcon.tsx`
-        )
-      )} or use an existing icon ${cyan("http://localhost:3333/cms/engine")}`
+          `${__dirname}/../../studio/utils/desk/DocumentIcon.tsx`,
+        ),
+      )} or use an existing icon ${cyan("http://localhost:3333/cms/engine")}`,
     );
   } catch (err) {
     console.log(err);
@@ -147,7 +147,7 @@ function createModule(pascalName, fields, description = "") {
     propsLines.push("intro");
     importLines.push(`import { Text } from '../../components/module/Text';`);
     importLines.push(
-      `import PortableText from "../../components/content/PortableText";`
+      `import PortableText from "../../components/content/PortableText";`,
     );
     jsxLines.push(`
       {intro && (
@@ -167,7 +167,7 @@ function createModule(pascalName, fields, description = "") {
 
     queryFieldLines.push(`intro[] \${richTextQuery}`);
     queryImportLines.push(
-      `import { richTextQuery } from "../../queries/components/richText";`
+      `import { richTextQuery } from "../../queries/components/richText";`,
     );
   }
 
@@ -197,7 +197,7 @@ function createModule(pascalName, fields, description = "") {
 
     queryFieldLines.push(`"image": \${imageQuery}`);
     queryImportLines.push(
-      `import { imageQuery } from "../../queries/components/image";`
+      `import { imageQuery } from "../../queries/components/image";`,
     );
   }
 
@@ -245,7 +245,7 @@ function createModule(pascalName, fields, description = "") {
 
     queryFieldLines.push(`buttons[] \${buttonQuery}`);
     queryImportLines.push(
-      `import { buttonQuery } from "../../queries/components/button";`
+      `import { buttonQuery } from "../../queries/components/button";`,
     );
   }
 
@@ -272,7 +272,7 @@ function createModule(pascalName, fields, description = "") {
   prettierFile(storiesFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), storiesFilePath))}`
+    `› Created file ${cyan(path.relative(process.cwd(), storiesFilePath))}`,
   );
 
   // create options file
@@ -284,7 +284,7 @@ function createModule(pascalName, fields, description = "") {
   prettierFile(optionsFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), optionsFilePath))}`
+    `› Created file ${cyan(path.relative(process.cwd(), optionsFilePath))}`,
   );
 
   if (!testsLines.length) {
@@ -301,7 +301,7 @@ function createModule(pascalName, fields, description = "") {
   prettierFile(testFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), testFilePath))}`
+    `› Created file ${cyan(path.relative(process.cwd(), testFilePath))}`,
   );
 
   // create query file
@@ -315,7 +315,7 @@ function createModule(pascalName, fields, description = "") {
   prettierFile(queryFilePath);
 
   console.log(
-    `› Created file ${cyan(path.relative(process.cwd(), queryFilePath))}`
+    `› Created file ${cyan(path.relative(process.cwd(), queryFilePath))}`,
   );
 }
 
@@ -328,17 +328,17 @@ function createQuery(name, pascalName, schemaName, fields) {
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines.push(
-    `import { get${pascalName}Query } from "../modules/${pascalName}/${pascalName}.query";`
+    `import { get${pascalName}Query } from "../modules/${pascalName}/${pascalName}.query";`,
   );
   lines = addLine(
-    `    \${get${pascalName}Query(language)}`,
+    `    \${get${pascalName}Query(language)},`,
     lines,
     '"dialogs":',
-    -3
+    -3,
   );
   fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
-    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`
+    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
   );
   prettierFile(filePath);
 
@@ -375,10 +375,10 @@ function createBuilder(name, pascalName, schemaName, fields) {
   prettierFile(filePath);
 
   console.log(
-    `› Added import to ${cyan(path.relative(process.cwd(), filePath))}`
+    `› Added import to ${cyan(path.relative(process.cwd(), filePath))}`,
   );
   console.log(
-    `› Added module render to ${cyan(path.relative(process.cwd(), filePath))}`
+    `› Added module render to ${cyan(path.relative(process.cwd(), filePath))}`,
   );
 }
 
