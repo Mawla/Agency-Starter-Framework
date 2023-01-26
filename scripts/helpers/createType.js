@@ -80,7 +80,7 @@ const createModuleType = (lines, schemaName, filePath) => {
 const createHeroType = (lines, schemaName, filePath) => {
   const fromNeedle2 = "export const HERO_SCHEMAS";
   const toNeedle2 = ");";
-  lines = addLine(`  ',${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
+  lines = addLine(`  '${schemaName}',`, lines, fromNeedle2, 2, toNeedle2);
   lines = sortLines(lines, fromNeedle2, toNeedle2, 1);
 
   console.log(
