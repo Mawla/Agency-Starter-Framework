@@ -5,7 +5,9 @@ import { Suspense } from "react";
 
 const HeroBasic = dynamic<GenericModuleProps>(
   () =>
-    import(/* webpackChunkName: "HeroBasic" */ "../../heroes/HeroBasic") as any
+    import(
+      /* webpackChunkName: "HeroBasic" */ "../../heroes/HeroBasic/HeroBasic"
+    ) as any,
 );
 
 export type HeroBuilderProps = {

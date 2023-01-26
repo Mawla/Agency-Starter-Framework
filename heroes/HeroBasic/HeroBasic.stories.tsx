@@ -1,10 +1,9 @@
+import { STORYBOOK_COLORS_SUBSET } from "../../colors";
+import { demoImage, demoImage2, demoImage8 } from "../../stories/content";
+import { ColorType } from "../../types";
+import { HeroBasic } from "./HeroBasic";
 import { Meta } from "@storybook/react";
 import React from "react";
-
-import { STORYBOOK_COLORS_SUBSET } from "../colors";
-import { demoImage, demoImage2, demoImage8 } from "../stories/content";
-import { ColorType } from "../types";
-import { HeroBasic } from "./HeroBasic";
 
 export default {
   component: HeroBasic,

@@ -1,15 +1,15 @@
-import { backgroundClasses } from "../colors";
-import { Lozenge } from "../components/Decorations/Lozenge";
-import { ButtonProps } from "../components/buttons/Button";
-import { ButtonGroup } from "../components/buttons/ButtonGroup";
-import PortableText from "../components/content/PortableText";
-import { ResponsiveImage } from "../components/images/ResponsiveImage";
-import { Bleed } from "../components/module/Bleed";
-import { Text } from "../components/module/Text";
-import { Title } from "../components/module/Title";
-import { Width } from "../components/module/Width";
-// import { useWindowSize, WindowSize } from "../hooks/useWindowSize";
-import { ColorType, ImageType } from "../types";
+import { backgroundClasses } from "../../colors";
+import { Lozenge } from "../../components/Decorations/Lozenge";
+import { ButtonProps } from "../../components/buttons/Button";
+import { ButtonGroup } from "../../components/buttons/ButtonGroup";
+import PortableText from "../../components/content/PortableText";
+import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { Bleed } from "../../components/module/Bleed";
+import { Text } from "../../components/module/Text";
+import { Title } from "../../components/module/Title";
+import { Width } from "../../components/module/Width";
+// import { useWindowSize, WindowSize } from "../../hooks/useWindowSize";
+import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
 import React from "react";
 
@@ -126,7 +126,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
     if (width < MAX_MOBILE_SIZE && visual?.colors?.color1) {
       mobileColor1 = visual?.colors?.color1.replace(
         /dark|base/,
-        "light"
+        "light",
       ) as ColorType;
     }
   }
@@ -142,7 +142,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
           className={cx(
             "absolute",
             "tablet:hidden",
-            "right-0 top-0 translate-x-1/2"
+            "right-0 top-0 translate-x-1/2",
           )}
         >
           <Lozenge size="xl" color="brand-light" rotation={8} />
@@ -159,7 +159,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
           {
             ["tablet:pt-[120px] 2xl:pt-[260px]"]: !showLozenges,
             ["tablet:pt-[200px] 2xl:pt-[360px]"]: showLozenges,
-          }
+          },
         )}
       >
         <Bleed bleed="md">
@@ -171,7 +171,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                     "absolute",
                     "hidden tablet:block",
                     "left-0 top-0 ",
-                    "tablet:-translate-y-[80%] lg:-translate-y-[85%] xl:-translate-y-full -translate-x-1/2"
+                    "tablet:-translate-y-[80%] lg:-translate-y-[85%] xl:-translate-y-full -translate-x-1/2",
                   )}
                 >
                   <Lozenge size="xl" color="neutral-95" rotation={2} />
@@ -203,7 +203,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
         className={cx(
           "overflow-hidden z-10 pointer-events-none",
           "tablet:absolute tablet:top-0 tablet:right-0 tablet:bottom-0 tablet:left-[45%]",
-          "h-[520px] tablet:h-auto"
+          "h-[520px] tablet:h-auto",
         )}
       >
         <div
@@ -211,7 +211,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
             "absolute inset-0",
             "origin-bottom-left",
             "-translate-x-[75px] tablet:translate-x-[100px] xl:translate-x-0",
-            "scale-[40%] tablet:scale-[60%] lg:scale-75 xl:scale-90 2xl:scale-100"
+            "scale-[40%] tablet:scale-[60%] lg:scale-75 xl:scale-90 2xl:scale-100",
           )}
         >
           {/* 1 */}
@@ -220,7 +220,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
               SHARED_LEG_CLASSES,
               visual?.colors?.color1 &&
                 `tablet:${backgroundClasses[visual?.colors?.color1]}`,
-              mobileColor1 && backgroundClasses[mobileColor1]
+              mobileColor1 && backgroundClasses[mobileColor1],
             )}
             style={{
               ...LEG_STYLES.first,
@@ -250,7 +250,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
             className={cx(
               SHARED_LEG_CLASSES,
               visual?.colors?.color2 &&
-                backgroundClasses[visual?.colors?.color2]
+                backgroundClasses[visual?.colors?.color2],
             )}
             style={{
               ...LEG_STYLES.second,
@@ -266,7 +266,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                 backgroundClasses[visual?.colors?.color3],
               {
                 ["overflow-visible"]: breakOutImage,
-              }
+              },
             )}
             style={{
               ...LEG_STYLES.third,
@@ -301,7 +301,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                 className={cx(
                   "absolute z-10",
                   "lg:left-[85%] lg:bottom-[65%]",
-                  "hidden lg:block"
+                  "hidden lg:block",
                 )}
               >
                 <Lozenge size="sm" color="neutral-base" rotation={10} />
@@ -314,7 +314,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
             className={cx(
               SHARED_LEG_CLASSES,
               visual?.colors?.color4 &&
-                backgroundClasses[visual?.colors?.color4]
+                backgroundClasses[visual?.colors?.color4],
             )}
             style={{
               ...LEG_STYLES.fourth,
@@ -338,7 +338,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                 "2xl:left-[calc(45%+760px)] 2xl:bottom-[500px]",
                 "xl:left-[calc(45%+690px)] xl:bottom-[440px]",
                 "lg:left-[calc(45%+680px)] lg:bottom-[350px]",
-                "hidden lg:block"
+                "hidden lg:block",
               )}
             >
               <Lozenge size="sm" color="neutral-base" rotation={10} />
@@ -351,7 +351,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
               "xl:left-[calc(45%+260px)] xl:bottom-[180px]",
               "lg:left-[calc(45%+290px)] lg:bottom-[80px]",
               "tablet:left-[calc(45%+260px)] tablet:bottom-[40px]",
-              "hidden tablet:block"
+              "hidden tablet:block",
             )}
           >
             <Lozenge size="md" color="action-light" rotation={10} />
@@ -361,7 +361,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
             className={cx(
               "absolute",
               "tablet:hidden",
-              "right-[50px] bottom-[270px]"
+              "right-[50px] bottom-[270px]",
             )}
           >
             <Lozenge size="md" color="neutral-95" rotation={4} />

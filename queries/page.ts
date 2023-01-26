@@ -1,5 +1,5 @@
-import { HeroBasicProps } from "../heroes/HeroBasic";
-import { getHeroBasicQuery } from "../heroes/HeroBasic.query";
+import { HeroBasicProps } from "../heroes/HeroBasic/HeroBasic";
+import { getHeroBasicQuery } from "../heroes/HeroBasic/HeroBasic.query";
 import { LanguageType } from "../languages";
 import { getBillboardQuery } from "../modules/Billboard/Billboard.query";
 import { getBreadcrumbQuery } from "../modules/Breadcrumb/Breadcrumb.query";
