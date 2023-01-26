@@ -117,6 +117,7 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        localize: true,
         isUnique: isPathUnique,
       },
     },
