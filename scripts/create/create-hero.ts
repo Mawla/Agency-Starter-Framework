@@ -145,7 +145,7 @@ function createHero() {
     .toString()
     .replace(
       "/*IMPORT*/",
-      `import { imageQuery } from "../../queries/components/image";`,
+      `import { imageQuery } from "../queries/components/image";`,
     )
     .replace(
       "/*FIELDS*/",
