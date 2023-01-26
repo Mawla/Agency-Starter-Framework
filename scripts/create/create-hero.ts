@@ -177,7 +177,7 @@ function createBuilder() {
   // add import
   lines = [
     `
-    import { type ${pascalName}Props } from '../../heroes/${pascalName}';
+    import { ${pascalName}Props } from '../../heroes/${pascalName}';
     const ${pascalName} = dynamic<${pascalName}Props>(
       () =>
         import(
