@@ -140,10 +140,15 @@ function createModule(pascalName, fields, description = "") {
     typescriptLines.push("intro?: React.ReactNode;");
     propsLines.push("intro");
     importLines.push(`import { Text } from '../../components/module/Text';`);
+    importLines.push(
+      `import PortableText from "../../components/content/PortableText";`
+    );
     jsxLines.push(`
       {intro && (
         <div className="mb-10 md:mb-14">
-          <Text color={theme?.text}>{intro}</Text>
+          <Text color={theme?.text}>
+            <PortableText content={intro as any} />
+          </Text>
         </div>
       )}
       `);
@@ -322,8 +327,7 @@ function createBuilder(name, pascalName, schemaName, fields) {
   // add import
   lines = [
     `
-      import { ${pascalName}Props } from '../../modules/${pascalName}/${pascalName}';
-      const ${pascalName} = dynamic<${pascalName}Props>(
+      const ${pascalName} = dynamic<GenericModuleProps>(
         () =>
           import(
             /* webpackChunkName: "${pascalName}" */ '../../modules/${pascalName}/${pascalName}'
@@ -334,15 +338,8 @@ function createBuilder(name, pascalName, schemaName, fields) {
     ...lines,
   ];
 
-  const props = [];
-  if (fields.indexOf("intro") > -1) {
-    props.push(`intro={<PortableText content={item.intro} />}`);
-  }
-
   // add to render loop
-  const jsx = `\n{/* ${name} */}{item._type === '${schemaName}' && <${pascalName} {...item} ${props.join(
-    " "
-  )}/>}`;
+  const jsx = `{item._type === '${schemaName}' && <${pascalName} {...item} />}`;
   lines = addLine(jsx, lines, "</LazyLoadInView>", 0);
 
   fs.writeFileSync(filePath, lines.join("\n"));
