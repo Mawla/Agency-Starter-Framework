@@ -1,3 +1,6 @@
+import { PageContext } from "./context/PageContext";
+import { SiteContext } from "./context/SiteContext";
+import { SitemapItemType } from "./queries/sitemap";
 // test-utils.js
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
@@ -6,9 +9,80 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
+const DEMO_SITEMAP: SitemapItemType[] = [
+  {
+    _id: "xx",
+    _type: "page.content",
+    _updatedAt: "2022-01-04T14:26:24Z",
+    path: "/page1",
+    title: "Page 1",
+    paths: {
+      en: "/",
+      it: "/",
+      es: "/",
+    },
+    titles: {
+      en: "/",
+      it: "/",
+      es: "/",
+    },
+  },
+  {
+    _id: "xx",
+    _type: "page.content",
+    _updatedAt: "2022-01-04T15:03:13Z",
+    path: "/page1/page2",
+    title: "Page 2",
+    paths: {
+      en: "/",
+      it: "/",
+      es: "/",
+    },
+    titles: {
+      en: "/",
+      it: "/",
+      es: "/",
+    },
+  },
+  {
+    _id: "xxx",
+    _type: "page.content",
+    _updatedAt: "2022-01-04T15:03:13Z",
+    path: "/page1/page2/page3",
+    title: "Page 3",
+    paths: {
+      en: "/",
+      it: "/",
+      es: "/",
+    },
+    titles: {
+      en: "/",
+      it: "/",
+      es: "/",
+    },
+  },
+];
+
 const Wrapper = ({ children }: { children: React.ReactElement }) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <SiteContext.Provider
+      value={{
+        config: { general: {} },
+        sitemap: DEMO_SITEMAP,
+      }}
+    >
+      <PageContext.Provider
+        value={{
+          isPreviewMode: false,
+          language: "en",
+          sitemapItem: DEMO_SITEMAP[0],
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </PageContext.Provider>
+    </SiteContext.Provider>
   );
 };
 
@@ -18,7 +92,7 @@ const customRender = (ui: React.ReactElement) =>
 export * from "@testing-library/react";
 export { customRender as render };
 
-// jest.mock('swiper/css', jest.fn());
-// jest.mock('swiper/css/navigation', jest.fn());
+jest.mock("swiper/css", jest.fn());
+jest.mock("swiper/css/navigation", jest.fn());
 
 export {};
