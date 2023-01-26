@@ -1,6 +1,7 @@
 import { ButtonProps } from "../components/buttons/Button";
 import { LanguageType } from "../languages";
 import { buttonQuery, buttonWithChildrenQuery } from "./components/button";
+import { getSitemapQuery } from "./sitemap";
 import groq from "groq";
 
 export type NavigationItemType = ButtonProps & {
@@ -14,8 +15,13 @@ export type NavigationType = {
 };
 
 export const getNavigationQuery = (language: LanguageType) => groq`
-*[_id == 'navigation'][0] {
-  "items": items.${language}[] ${buttonWithChildrenQuery},
-  "buttons": buttons.${language}[] ${buttonQuery},
-}
+{
+  "sitemap": ${getSitemapQuery()}
+} {
+  sitemap,
+  "navigation": *[_id == 'navigation'][0] {
+    "items": items.${language}[] ${buttonWithChildrenQuery},
+    "buttons": buttons.${language}[] ${buttonQuery},
+  }
+}.navigation
 `;

@@ -16,6 +16,7 @@ import { richTextQuery } from "./components/richText";
 import { staticFormQuery } from "./components/staticForm";
 import { videoQuery } from "./components/video";
 import { ConfigType } from "./config";
+import { getSitemapQuery } from "./sitemap";
 import groq from "groq";
 
 export type PageType = {
@@ -34,7 +35,12 @@ export type PageType = {
   locked?: boolean;
 };
 
-export const getPageQuery = (language: LanguageType) => groq`*[_id == $_id][0]{
+export const getPageQuery = (language: LanguageType) => groq`
+{
+  "sitemap": ${getSitemapQuery()}
+} {
+  sitemap,
+  "page": *[_id == $_id][0]{
   _id,
   _type,
   _updatedAt,
@@ -100,4 +106,5 @@ export const getPageQuery = (language: LanguageType) => groq`*[_id == $_id][0]{
       form${staticFormQuery}    
     },
   },
-}`;
+  }
+}.page`;

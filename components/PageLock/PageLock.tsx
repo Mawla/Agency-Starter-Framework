@@ -12,7 +12,6 @@ import React, { useEffect, useState, useContext } from "react";
 
 export const PageLock = () => {
   const { sitemapItem } = useContext(PageContext);
-  const { sitemap } = useContext(SiteContext);
 
   const [status, setStatus] =
     useState<"loading" | "error" | "locked" | "unlocked">("locked");
@@ -27,7 +26,7 @@ export const PageLock = () => {
     setStatus("loading");
 
     const { password } = Object.fromEntries(
-      new FormData(e.currentTarget).entries()
+      new FormData(e.currentTarget).entries(),
     );
 
     const res = await fetch(`/api/page-password/login`, {
@@ -44,12 +43,11 @@ export const PageLock = () => {
       const pageData = await getClient(false).fetch(getPageQuery(language), {
         ...sitemapItem,
         language,
-        sitemap,
       });
       setPage(pageData);
     }
     if (status === "unlocked") getPage();
-  }, [status, sitemapItem, sitemap, language]);
+  }, [status, sitemapItem, language]);
 
   if (status === "unlocked" && page) return <DefaultPage {...page} />;
 

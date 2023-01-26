@@ -19,7 +19,7 @@ const LivePreview = dynamic<LivePreviewProps>(
     import(
       /* webpackChunkName: "LivePreview" */ "../components/PreviewMode/LivePreview"
     ) as any,
-  { suspense: true }
+  { suspense: true },
 );
 
 export default function PreviewPage({
@@ -64,7 +64,6 @@ export default function PreviewPage({
           queryParams={{
             _id: id,
             _type: type,
-            sitemap,
             language,
           }}
           pagePath={pagePath}
@@ -90,7 +89,7 @@ export const getStaticProps: GetStaticProps = async ({
   locale,
 }) => {
   const config: ConfigType = await getClient(preview).fetch(
-    getConfigQuery((locale as LanguageType) || baseLanguage)
+    getConfigQuery((locale as LanguageType) || baseLanguage),
   );
 
   return { props: { preview, config }, revalidate: 10 };

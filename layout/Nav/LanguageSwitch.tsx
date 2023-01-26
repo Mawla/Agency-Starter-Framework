@@ -40,7 +40,7 @@ export const LanguageSwitch = ({
   const breadcrumb = getBreadCrumbForPath(
     pathname,
     sitemap,
-    language as LanguageType
+    language as LanguageType,
   );
   const availableLanguagePages: Record<LanguageType, string> = useMemo(() => {
     return languages.reduce((acc, { id }) => {
@@ -86,7 +86,7 @@ export const LanguageSwitch = ({
           "py-[8px] pl-2.5 pr-3",
           "whitespace-nowrap",
           "border-neutral-75 border-2  duration-75",
-          "hover:bg-neutral-95 group-hover:bg-neutral-95 group-focus-within:bg-neutral-95"
+          "hover:bg-neutral-95 group-hover:bg-neutral-95 group-focus-within:bg-neutral-95",
         )}
       >
         <span className="w-5 aspect-square">
@@ -115,7 +115,7 @@ export const LanguageSwitch = ({
           className={cx(
             "translate-y-4 p-1",
             "shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)]",
-            "bg-white border-2 border-neutral-85 rounded-md"
+            "bg-white border-2 border-neutral-85 rounded-md",
           )}
         >
           {languages.map(({ id, title }) => (
@@ -134,7 +134,7 @@ export const LanguageSwitch = ({
                   "p-3",
                   {
                     ["font-bold bg-action-light rounded-sm"]: language === id,
-                  }
+                  },
                 )}
               >
                 <IconLoader

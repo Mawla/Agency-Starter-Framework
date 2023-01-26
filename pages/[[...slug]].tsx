@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async ({
   const sitemapItem = preview
     ? sitemap.find(
         (item) =>
-          item.paths[language] === path && item._id.startsWith(`drafts.`)
+          item.paths[language] === path && item._id.startsWith(`drafts.`),
       ) || sitemap.find((item) => item.paths[language] === path)
     : // get published page in production mode
       sitemap?.find((item) => item?.paths?.[language] === path);
@@ -102,31 +102,28 @@ export const getStaticProps: GetStaticProps = async ({
 
   // fetch config
   const config: ConfigType = await getClient(preview).fetch(
-    getConfigQuery(language)
+    getConfigQuery(language),
   );
 
   // fetch navigation
   let navigation: NavigationType = await getClient(preview).fetch(
     getNavigationQuery(language),
     {
-      sitemap,
       language,
-    }
+    },
   );
 
   // fetch navigation
   const footer: FooterType = await getClient(preview).fetch(
     getFooterQuery(language),
     {
-      sitemap,
       language,
-    }
+    },
   );
 
   // fetch page
   const page = await getClient(preview).fetch(getPageQuery(language), {
     ...sitemapItem,
-    sitemap,
     language,
     slug: finalSlug,
   });
@@ -156,7 +153,7 @@ export const getStaticProps: GetStaticProps = async ({
   if (!page?.hero && !page?.modules?.length && !page.locked) {
     if (!IS_PRODUCION)
       console.log(
-        `No hero or modules, rendering 404. The page exists, it just has no content.`
+        `No hero or modules, rendering 404. The page exists, it just has no content.`,
       );
     return { notFound: true };
   }
@@ -183,7 +180,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         })),
         ...acc,
       ],
-      [] as { params: { slug: string[] }; locale: LanguageType }[]
+      [] as { params: { slug: string[] }; locale: LanguageType }[],
     )
     .filter((path) => path.params.slug?.length);
 

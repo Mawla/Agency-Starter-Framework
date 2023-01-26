@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   // fetch sitemap
   const sitemap: SitemapType = await getClient(isPreviewMode).fetch(
-    getSitemapQuery()
+    getSitemapQuery(),
   );
 
   // fetch config
@@ -60,13 +60,13 @@ export const getStaticProps: GetStaticProps = async ({
     getConfigQuery(language),
     {
       language,
-    }
+    },
   );
 
   // fetch navigation
   const navigation: NavigationType = await getClient(isPreviewMode).fetch(
     getNavigationQuery(language),
-    { sitemap, language }
+    { language },
   );
 
   // fetch page
@@ -78,15 +78,14 @@ export const getStaticProps: GetStaticProps = async ({
     _updatedAt: "",
     paths: languages.reduce(
       (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>
+      {} as Record<LanguageType, string>,
     ),
     titles: languages.reduce(
       (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>
+      {} as Record<LanguageType, string>,
     ),
   };
   const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
-    sitemap,
     language,
     ...notFoundPage,
   });
@@ -95,9 +94,8 @@ export const getStaticProps: GetStaticProps = async ({
   const footer: FooterType = await getClient(isPreviewMode).fetch(
     getFooterQuery(language),
     {
-      sitemap,
       language,
-    }
+    },
   );
 
   // return object

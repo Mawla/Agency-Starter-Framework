@@ -1,6 +1,5 @@
 import { LanguageType } from "../../../languages";
 import { getSitemapQuery, SitemapType } from "../../../queries/sitemap";
-import { StructureBuilder } from "sanity/desk";
 
 export const isPathUnique = async (slug: string, context: any) => {
   const client = context.getClient({
