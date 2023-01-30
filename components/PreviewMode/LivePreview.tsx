@@ -48,18 +48,15 @@ export const LivePreview = ({
   const [previewLoading, setPreviewLoading] = useState<boolean>(false);
 
   const frontendClient = useRef<SanityClient | null>(null);
-  const mutationUpdatedAt = useRef<Date | null>(null);
+  const mutationRevision = useRef<string | null>(null);
+  const currentRevision = useRef<string | null>(null);
   const reloadTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reloadAttempts = useRef<number>(0);
 
   const [miniModules, setMiniModules] = useState<MiniMapProps["modules"]>([]);
-  const [modules, setModules] = useState<any[]>([]);
   const [miniHero, setMiniHero] =
     useState<MiniMapProps["modules"][0] | null>(null);
   const [isMiniMapVisible, setIsMiniMapVisible] = useState<boolean>(false);
-
-  const [lastChangedModuleKey, setLastChangedModuleKey] =
-    useState<string | null>(null);
 
   const timeLog = useCallback((date: string, message: string) => {
     console.log(`[${new Date(date).toLocaleTimeString("en-US")}]: ${message}`);
@@ -71,54 +68,22 @@ export const LivePreview = ({
 
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
-    if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
     if (!pageId) return;
 
-    ++reloadAttempts.current;
+    // clear timeout
+    if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
 
-    /**
-     * skip the reload the page has been
-     * updated since the mutation,
-     */
+    // already up to date
     if (
-      updatedAt &&
-      mutationUpdatedAt.current &&
-      new Date(updatedAt) > mutationUpdatedAt.current
+      currentRevision.current &&
+      currentRevision.current === mutationRevision.current
     ) {
-      console.log("found newer mutation, skipping reload");
+      setPreviewLoading(false);
       return;
     }
 
-    /**
-     * fetch the latest version of the page
-     * and check the date
-     */
-
-    const newUpdatedAt = await frontendClient.current.fetch(
-      `*[_id == $_id][0] { _updatedAt }._updatedAt`,
-      {
-        _id: pageId,
-      },
-    );
-
-    timeLog(newUpdatedAt, "fetched new");
-
-    /**
-     * if the latest version date doesn't match
-     * the mutation date, try again
-     */
-
-    if (
-      mutationUpdatedAt.current &&
-      new Date(newUpdatedAt) < mutationUpdatedAt.current
-    ) {
-      timeLog(newUpdatedAt, "latest updatedAt doesn't match, reloading");
-      reloadTimeout.current = setTimeout(
-        reloadPreview,
-        250 + 100 * reloadAttempts.current,
-      );
-      return;
-    }
+    // stop after 15 tries
+    if (reloadAttempts.current > 15) return;
 
     // fetch the new page
     setPreviewLoading(true);
@@ -128,29 +93,21 @@ export const LivePreview = ({
       return;
     }
 
-    timeLog(newPage._updatedAt, "got new page data");
+    // revision mismatch
+    if (mutationRevision.current && newPage._rev !== mutationRevision.current) {
+      console.log(`Revisions don't match`);
+      console.log(`- Expecing ${mutationRevision.current} got ${newPage._rev}`);
+      console.log(`- Reloading`);
 
-    /**
-     * if the new page date doesn't match
-     * the mutation date, try again
-     */
+      const nextTry = 250 + 250 * reloadAttempts.current;
+      reloadTimeout.current = setTimeout(reloadPreview, nextTry);
 
-    if (
-      mutationUpdatedAt.current &&
-      new Date(newPage._updatedAt) < mutationUpdatedAt.current
-    ) {
-      timeLog(newUpdatedAt, "time on new page doesn't match, reloading");
-      reloadTimeout.current = setTimeout(
-        reloadPreview,
-        250 + 100 * reloadAttempts.current,
-      );
       return;
     }
 
-    console.log("done");
-
+    timeLog(newPage._updatedAt, "got new page data");
+    currentRevision.current = newPage._rev;
     setPageData(newPage);
-    setModules(newPage.modules);
 
     const newMiniModules = newPage.modules.map(
       ({
@@ -220,24 +177,17 @@ export const LivePreview = ({
         })
         .subscribe((mutation: any) => {
           // get the field name and key from the mutation
-          const finalMutation =
-            mutation.mutations[mutation.mutations.length - 1];
-          const diffMatchPatch = finalMutation?.patch?.diffMatchPatch || {};
-          const updatedPath = Object.keys(diffMatchPatch)?.[0];
-
-          const fieldName = updatedPath?.split(`[_key=="`)?.[0];
-          const key = updatedPath?.split(`[_key=="`)[1]?.split('"]')?.[0];
-
-          mutationUpdatedAt.current = new Date(mutation?.result._updatedAt);
+          // const finalMutation =
+          //   mutation.mutations[mutation.mutations.length - 1];
+          // const diffMatchPatch = finalMutation?.patch?.diffMatchPatch || {};
+          // const updatedPath = Object.keys(diffMatchPatch)?.[0];
+          // const fieldName = updatedPath?.split(`[_key=="`)?.[0];
+          // const key = updatedPath?.split(`[_key=="`)[1]?.split('"]')?.[0];
 
           console.log("-------");
+          console.log("mutation", mutation.resultRev);
+          mutationRevision.current = mutation.resultRev;
           setPreviewLoading(true);
-
-          if (fieldName && key) {
-            timeLog(mutation?.result._updatedAt, `Updated ${fieldName} ${key}`);
-          } else {
-            timeLog(mutation?.result._updatedAt, "received mutation");
-          }
 
           // fetch new data
           reloadPreview();
@@ -300,7 +250,6 @@ export const LivePreview = ({
       });
 
       const body = await response.json();
-      setLastChangedModuleKey(body?.changedModuleKey);
     },
     [pageId],
   );
