@@ -170,13 +170,15 @@ export const LivePreview = ({
       if (listener?.unsubscribe) listener.unsubscribe();
       const previewToken = await getPreviewToken();
       if (!previewToken) return;
-      const frontendClientInstance = await createLivePreviewFrontendClient(
+      if (frontendClient.current) return;
+
+      frontendClient.current = await createLivePreviewFrontendClient(
         config,
         previewToken,
       );
-      if (!frontendClientInstance) return;
-      listener = frontendClientInstance
-        .listen(`*[_id == "${pageId}"] { _updatedAt }`, {
+
+      listener = frontendClient?.current
+        ?.listen(`*[_id == "${pageId}"] { _updatedAt }`, {
           includeResult: false,
         })
         .subscribe((mutation: any) => {
@@ -197,7 +199,6 @@ export const LivePreview = ({
           reloadPreview();
         });
 
-      frontendClient.current = frontendClientInstance;
       reloadPreview();
     }
 
@@ -232,9 +233,9 @@ export const LivePreview = ({
         const result = await fetch(`/api/preview/create-draft?_id=${pageId}`);
         const obj = await result.json();
         initialRevision.current = obj._rev;
-
-        reloadPreview();
       }
+
+      reloadPreview();
     }
     reload();
   }, [pageId, frontendClient, reloadPreview]);
@@ -301,11 +302,11 @@ export const LivePreview = ({
           <ScreenCapture previewTools={previewTools} />
         </div>
 
-        {currentRevision.current && (
+        {/* {currentRevision.current && (
           <div className="px-3 bg-[#111] flex items-center">
             {currentRevision.current}
           </div>
-        )}
+        )} */}
 
         {/* reload */}
         <button
