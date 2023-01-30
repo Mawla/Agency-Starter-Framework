@@ -56,14 +56,6 @@ function build() {
 
   createHero();
 
-  createSchema(name, pascalName, schemaName, {
-    replacer: "MyHero",
-    schemaDir: "modules",
-    prototypeFile: `${__dirname}/hero.myhero.tsx`,
-    schemaImportPrefix: "hero",
-    fields: ["title", "image"],
-  });
-
   createQuery();
   createType(schemaName, { hero: true });
   createBuilder();
@@ -76,14 +68,23 @@ function build() {
  */
 
 function createHero() {
-  const { pascalName, schemaName } = answers;
+  const { pascalName, schemaName, name } = answers;
 
   const fileDir = `${__dirname}/../../heroes`;
   const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
   const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
   const optionsFilePath = filePath.replace(".tsx", "Options.ts");
   const queryFilePath = filePath.replace(".tsx", ".query.ts");
+  const schemaFilePath = filePath.replace(".tsx", ".schema.tsx");
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+  createSchema(pascalName, schemaName, {
+    replacer: "MyHero",
+    schemaFilePath,
+    prototypeFile: `${__dirname}/hero.myhero.tsx`,
+    schemaImportPrefix: "hero",
+    fields: ["title", "image"],
+  });
 
   // create hero file
   const heroContent = fs

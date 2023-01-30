@@ -13,20 +13,30 @@ const { sortLines } = require("../helpers/sortLines");
  * d. add selected fields
  */
 
-module.exports.createSchema = (name, pascalName, schemaName, options) => {
+module.exports.createSchema = (pascalName, schemaName, options) => {
   const schemaEditFn = options.schemaEditFn || ((x) => x);
   const schemaImportName = `${options.schemaImportPrefix}${pascalName}`;
 
   const filePath = `${__dirname}/../../studio/schemas/index.ts`;
-  const schemaFilePath = `${__dirname}/../../studio/schemas/${options.schemaDir}/${schemaName}.tsx`;
+  const schemaFilePath =
+    options?.schemaFilePath ||
+    `${__dirname}/../../studio/schemas/documents/${schemaName}.tsx`;
   const file = fs.readFileSync(filePath).toString();
   let lines = file.split("\n");
+
+  const relativeSchemaPath = path.relative(
+    path.resolve(filePath),
+    schemaFilePath,
+  );
 
   /**
    * Add to all schema imports
    */
   lines = [
-    `import ${schemaImportName} from './${options.schemaDir}/${schemaName}';`,
+    `import ${schemaImportName} from '${relativeSchemaPath.replace(
+      ".tsx",
+      "",
+    )}';`,
     ...lines,
   ];
   const fromNeedle = options.translatable ? `translateFields([` : `...[`;
@@ -123,7 +133,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
     .toString()
     .replace(
       new RegExp(`${options.replacer}Title`, "g"),
-      pascalName.replace(/([A-Z])/g, " $1").trim()
+      pascalName.replace(/([A-Z])/g, " $1").trim(),
     )
     .replace(new RegExp(`${options.replacer}Schema`, "g"), schemaName)
     .replace(new RegExp(`${options.replacer}`, "g"), pascalName)
@@ -133,7 +143,7 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
   if (options.schemaImportPrefix === "hero") {
     schemaContent = schemaContent.replace(
       new RegExp(`../modules/${pascalName}`, "g"),
-      `../heroes`
+      `../heroes`,
     );
   }
 
@@ -141,9 +151,9 @@ module.exports.createSchema = (name, pascalName, schemaName, options) => {
   prettierFile(schemaFilePath);
 
   console.log(
-    `› Added import in ${cyan(path.relative(process.cwd(), schemaFilePath))}`
+    `› Added import in ${cyan(path.relative(process.cwd(), schemaFilePath))}`,
   );
   console.log(
-    `› Added schema in ${cyan(path.relative(process.cwd(), filePath))}`
+    `› Added schema in ${cyan(path.relative(process.cwd(), filePath))}`,
   );
 };

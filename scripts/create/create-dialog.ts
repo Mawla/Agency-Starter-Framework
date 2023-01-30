@@ -14,17 +14,17 @@
 
  */
 
-const fs = require('fs');
-const path = require('path');
-const { pascalCase } = require('../helpers/pascalCase');
-const { prettierFile } = require('../helpers/prettierFile');
-const { addLine } = require('../helpers/addLine');
-const { createSchema } = require('../helpers/createSchema');
-const { createType } = require('../helpers/createType');
-const { question } = require('../helpers/question');
-const { cyan } = require('../helpers/terminal');
+const fs = require("fs");
+const path = require("path");
+const { pascalCase } = require("../helpers/pascalCase");
+const { prettierFile } = require("../helpers/prettierFile");
+const { addLine } = require("../helpers/addLine");
+const { createSchema } = require("../helpers/createSchema");
+const { createType } = require("../helpers/createType");
+const { question } = require("../helpers/question");
+const { cyan } = require("../helpers/terminal");
 
-const readline = require('readline').createInterface({
+const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
@@ -39,9 +39,9 @@ readline.question(question(ask, description), (name) => {
 
   answers.name = name;
   answers.pascalName = `${pascalCase(name)}`;
-  answers.schemaName = `dialog.${name.toLowerCase().replace(/\s/g, '')}`;
+  answers.schemaName = `dialog.${name.toLowerCase().replace(/\s/g, "")}`;
 
-  console.log('');
+  console.log("");
 
   build();
 
@@ -51,11 +51,10 @@ readline.question(question(ask, description), (name) => {
 function build() {
   const { name, pascalName, schemaName } = answers;
 
-  createSchema(name, pascalName, schemaName, {
-    replacer: 'MyDialog',
-    schemaDir: 'modules',
+  createSchema(pascalName, schemaName, {
+    replacer: "MyDialog",
     prototypeFile: `${__dirname}/dialog.mydialog.tsx`,
-    schemaImportPrefix: 'dialog',
+    schemaImportPrefix: "dialog",
   });
 
   createQuery();
@@ -70,7 +69,7 @@ function build() {
 function createQuery() {
   const { name, schemaName } = answers;
   const filePath = `${__dirname}/../../queries/page.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   const newQuery = `
     // ${name}
@@ -80,8 +79,10 @@ function createQuery() {
     `;
 
   lines = addLine(newQuery, lines, '"dialogs":', 4);
-  fs.writeFileSync(filePath, lines.join('\n'));
-  console.log(`› Added query in ${cyan(path.relative(process.cwd(), filePath))}`);
+  fs.writeFileSync(filePath, lines.join("\n"));
+  console.log(
+    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
+  );
 }
 
 /**
@@ -92,16 +93,18 @@ function createBuilder() {
   const { name, pascalName, schemaName } = answers;
 
   const filePath = `${__dirname}/../../layout/ModuleBuilder/DialogBuilder.tsx`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add to render loop
   const jsx = `\n{/* ${name} */}{item._type === '${schemaName}' && '${pascalName}'}`;
-  lines = addLine(jsx, lines, '</Dialog>', 0);
+  lines = addLine(jsx, lines, "</Dialog>", 0);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
 
-  console.log(`› Added import to ${cyan(path.relative(process.cwd(), filePath))}`);
+  console.log(
+    `› Added import to ${cyan(path.relative(process.cwd(), filePath))}`,
+  );
   console.log(
     `› Added dialog render to ${cyan(path.relative(process.cwd(), filePath))}`,
   );

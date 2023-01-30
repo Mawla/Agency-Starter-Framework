@@ -68,15 +68,6 @@ async function init() {
 
     createModule(pascalName, schemaName, fields);
 
-    createSchema(name, pascalName, schemaName, {
-      replacer: "MyModule",
-      schemaDir: "modules",
-      prototypeFile: `${__dirname}/module.mymodule.tsx`,
-      schemaImportPrefix: "module",
-      fields,
-      description,
-    });
-
     createQuery(name, pascalName, schemaName, fields);
     createType(schemaName, { module: true });
     createBuilder(name, pascalName, schemaName, fields);
@@ -108,7 +99,17 @@ function createModule(pascalName, schemaName, fields, description = "") {
   const optionsFilePath = filePath.replace(".tsx", "Options.ts");
   const testFilePath = filePath.replace(".tsx", ".test.tsx");
   const queryFilePath = filePath.replace(".tsx", ".query.ts");
+  const schemaFilePath = filePath.replace(".tsx", ".schema.tsx");
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+  createSchema(pascalName, schemaName, {
+    replacer: "MyModule",
+    schemaFilePath,
+    prototypeFile: `${__dirname}/module.mymodule.tsx`,
+    schemaImportPrefix: "module",
+    fields,
+    description,
+  });
 
   const importLines = [];
   const typescriptLines = [];

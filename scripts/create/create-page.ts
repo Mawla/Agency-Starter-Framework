@@ -124,9 +124,8 @@ const build = (answers) => {
   console.log("");
   createType(schemaName, { linkable: true, translatable: true });
 
-  createSchema(name, pascalName, schemaName, {
+  createSchema(pascalName, schemaName, {
     replacer: "MyPage",
-    schemaDir: "documents",
     prototypeFile: `${__dirname}/page.mypage.tsx`,
     schemaImportPrefix: "page",
     translatable: true,
