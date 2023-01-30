@@ -1,5 +1,4 @@
 import { LivePreviewProps } from "../components/PreviewMode/LivePreview";
-import { SiteContext } from "../context/SiteContext";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
@@ -12,7 +11,7 @@ import type { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const LivePreview = dynamic<LivePreviewProps>(
   () =>
