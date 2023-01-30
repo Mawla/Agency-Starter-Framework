@@ -1,6 +1,9 @@
-import { MODULE_RADIUS_OPTIONS } from "../../..//components/module/BackgroundOptions";
-import { SLIDER_COLOR_OPTIONS } from "../../../components/Slider/SliderOptions";
-import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
+import { SLIDER_COLOR_OPTIONS } from "../../components/Slider/SliderOptions";
+import { MODULE_RADIUS_OPTIONS } from "../../components/module/BackgroundOptions";
+import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import {
   ALIGN_OPTIONS,
   BACKGROUND_COLOR_OPTIONS,
@@ -8,11 +11,8 @@ import {
   COLUMN_OPTIONS,
   GAP_OPTIONS,
   TITLE_SIZE_OPTIONS,
-} from "../../../modules/CardGrid/CardGridOptions";
-import { COMPOSABLE_CARD_THEME_OPTIONS } from "../../../modules/CardGrid/ComposableCardOptions";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
+} from "./CardGridOptions";
+import { COMPOSABLE_CARD_THEME_OPTIONS } from "./ComposableCardOptions";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";

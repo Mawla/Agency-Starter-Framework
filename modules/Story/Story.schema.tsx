@@ -1,19 +1,19 @@
-import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
-import { WIDTH_OPTIONS } from "../../../components/module/WidthOptions";
-import { STORY_ALIGN_OPTIONS } from "../../../modules/Story/StoryOptions";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
-import buttonSchema from "../objects/button";
+import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { WIDTH_OPTIONS } from "../../components/module/WidthOptions";
+import buttonSchema from "../../studio/schemas/objects/button";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { STORY_ALIGN_OPTIONS } from "./StoryOptions";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineType, defineField } from "sanity";
 
 const INTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "internal"
+  ({ name }) => name === "internal",
 );
 const EXTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "external"
+  ({ name }) => name === "external",
 );
 const DIALOGS_FIELD = buttonSchema.fields.find(({ name }) => name === "dialog");
 
@@ -115,10 +115,13 @@ const schema = defineType({
       type: "object",
       name: "videoLink",
       title: "Video link",
-      fields: [INTERNAL_FIELD, DIALOGS_FIELD, EXTERNAL_FIELD].map((x) => ({
-        ...x,
-        group: null,
-      }) as any),
+      fields: [INTERNAL_FIELD, DIALOGS_FIELD, EXTERNAL_FIELD].map(
+        (x) =>
+          ({
+            ...x,
+            group: null,
+          } as any),
+      ),
       group: "content",
     }),
     defineField({

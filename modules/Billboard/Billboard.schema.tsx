@@ -1,8 +1,8 @@
-import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
-import { ALIGN_OPTIONS } from "../../../modules/Billboard/BillboardOptions";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
+import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { ALIGN_OPTIONS } from "./BillboardOptions";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";

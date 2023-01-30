@@ -1,15 +1,15 @@
-import { MODULE_RADIUS_OPTIONS } from "../../../components/module/BackgroundOptions";
-import { SPACE_OPTIONS } from "../../../components/module/SpacingOptions";
-import { WIDTH_OPTIONS } from "../../../components/module/WidthOptions";
+import { MODULE_RADIUS_OPTIONS } from "../../components/module/BackgroundOptions";
+import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { WIDTH_OPTIONS } from "../../components/module/WidthOptions";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
   BACKGROUND_COLOR_OPTIONS,
   TEXT_ALIGN_OPTIONS,
   TITLE_SIZE_OPTIONS,
-} from "../../../modules/RichText/RichTextOptions";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
-import { blocksToText } from "../../utils/portableText/portableTextToText";
+} from "./RichTextOptions";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
