@@ -11,7 +11,11 @@ import { getStoryQuery } from "../modules/Story/Story.query";
 import { getTextImageQuery } from "../modules/TextImage/TextImage.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
-import { FlatBreadcrumbType, getBreadcrumbQuery } from "./breadcrumb";
+import {
+  FlatBreadcrumbItemType,
+  FlatBreadcrumbType,
+  getBreadcrumbQuery,
+} from "./breadcrumb";
 import { imageQuery } from "./components/image";
 import { richTextQuery } from "./components/richText";
 import { staticFormQuery } from "./components/staticForm";
@@ -34,6 +38,7 @@ export type PageType = {
   modules: {}[];
   dialogs: {}[];
   locked?: boolean;
+  homepage: FlatBreadcrumbItemType;
   breadcrumb: FlatBreadcrumbType;
 };
 
@@ -51,7 +56,7 @@ export const getPageQuery = (language: LanguageType) => groq`
   hideNav,
   hideFooter,
   "locked": locked.${language},
-  "homepage": ^.sitemap[_id == 'page_homepage'][0] {
+  "homepage": ^.sitemap[_id match "*page_homepage"][0] {
     "path": paths.${language}, 
     "title": titles.${language},
   },

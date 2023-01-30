@@ -1,7 +1,5 @@
 import { PageContext } from "../../context/PageContext";
-import { languages } from "../../languages";
 import { FlatBreadcrumbType } from "../../queries/breadcrumb";
-import { SitemapItemType } from "../../queries/sitemap";
 import cx from "classnames";
 import Link from "next/link";
 import React from "react";
@@ -11,26 +9,8 @@ export type BreadcrumbProps = {
 };
 
 export const Breadcrumb = ({ path }: BreadcrumbProps) => {
-  const { isPreviewMode, breadcrumb } = React.useContext(PageContext);
+  const { breadcrumb } = React.useContext(PageContext);
   path = path || breadcrumb;
-
-  if (isPreviewMode) {
-    path = "Path to page".split(" ").map((label) => ({
-      _id: "",
-      _type: "page.content",
-      title: label,
-      titles: languages.reduce(
-        (acc, curr) => ({ ...acc, [curr.id]: label }),
-        {},
-      ) as SitemapItemType["titles"],
-      path: `/${label}`,
-      paths: languages.reduce(
-        (acc, curr) => ({ ...acc, [curr.id]: `/${curr.id}` }),
-        {},
-      ) as SitemapItemType["paths"],
-      _updatedAt: "",
-    }));
-  }
 
   if (!path?.length) return null;
 

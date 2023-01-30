@@ -1,3 +1,5 @@
+import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
+import { NestedBreadcrumbType } from "../../queries/breadcrumb";
 import { MiniMap, MiniMapProps } from "./MiniMap";
 import { PreviewButton } from "./PreviewButton";
 import { ScreenCapture } from "./ScreenCapture";
@@ -111,6 +113,16 @@ export const LivePreview = ({
 
     timeLog(newPage._updatedAt, "got new page data");
     currentRevision.current = newPage._rev;
+
+    if (newPage?.breadcrumb) {
+      newPage.breadcrumb = [
+        ...getFlatBreadcrumb(newPage?.breadcrumb),
+        newPage?.homepage,
+      ]
+        .filter(Boolean)
+        .reverse();
+    }
+
     setPageData(newPage);
 
     const newMiniModules = newPage.modules.map(

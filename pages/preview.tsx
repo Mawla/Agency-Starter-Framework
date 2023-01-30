@@ -38,9 +38,6 @@ export default function PreviewPage({
   const id = Array.isArray(router.query.id)
     ? router.query.id[0]
     : router.query.id;
-  const type = Array.isArray(router.query.type)
-    ? router.query.type[0]
-    : router.query.type;
   const language = router.query.language as LanguageType;
   const pagePath = usePathname() || "";
 
@@ -61,7 +58,6 @@ export default function PreviewPage({
           getQuery={() => getPageQuery(language)}
           queryParams={{
             _id: id,
-            _type: type,
             language,
           }}
           pagePath={pagePath}
