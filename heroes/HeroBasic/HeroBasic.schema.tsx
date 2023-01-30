@@ -90,11 +90,12 @@ const schema = defineType({
       group: "content",
     }),
     defineField({
-      name: "showLozenges",
-      title: "Show Lozenges",
-      type: "boolean",
-      description: "Sprinkle decorations on the hero.",
-      group: "visual",
+      name: "image",
+      title: "Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: "visual",
