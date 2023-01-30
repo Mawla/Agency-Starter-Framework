@@ -24,10 +24,9 @@ module.exports.createSchema = (pascalName, schemaName, options) => {
   const file = fs.readFileSync(filePath).toString();
   let lines = file.split("\n");
 
-  const relativeSchemaPath = path.relative(
-    path.resolve(filePath),
-    schemaFilePath,
-  );
+  const relativeSchemaPath = path
+    .relative(path.resolve(filePath), schemaFilePath)
+    .replace("../", "./");
 
   /**
    * Add to all schema imports
