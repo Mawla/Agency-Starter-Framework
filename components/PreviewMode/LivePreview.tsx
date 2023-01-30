@@ -1,5 +1,4 @@
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
-import { NestedBreadcrumbType } from "../../queries/breadcrumb";
 import { MiniMap, MiniMapProps } from "./MiniMap";
 import { PreviewButton } from "./PreviewButton";
 import { ScreenCapture } from "./ScreenCapture";

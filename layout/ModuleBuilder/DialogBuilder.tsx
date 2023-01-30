@@ -1,8 +1,3 @@
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { Suspense } from "react";
-
 import { DialogProps } from "../../components/Dialog/Dialog";
 import { PortableTextProps } from "../../components/content/PortableText";
 import { VideoType } from "../../types";
@@ -10,29 +5,29 @@ import { DialogSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import { StaticFormBuilder } from "./StaticFormBuilder";
+import { useRouter } from "next/router";
+import React, { ComponentType, lazy, useEffect, useState } from "react";
+import { Suspense } from "react";
 
-const PortableText = dynamic<PortableTextProps>(
+const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
     ) as any,
-  { suspense: true }
 );
 
-const Video = dynamic<VideoType>(
+const Video = lazy<ComponentType<VideoType>>(
   () =>
     import(
       /* webpackChunkName: "VideoComponent" */ "../../components/video/Video"
     ) as any,
-  { suspense: true }
 );
 
-const Dialog = dynamic<DialogProps>(
+const Dialog = lazy<ComponentType<DialogProps>>(
   () =>
     import(
       /* webpackChunkName: "Dialog" */ "../../components/Dialog/Dialog"
     ) as any,
-  { suspense: true }
 );
 
 export type DialogBuilderProps = {
@@ -79,7 +74,7 @@ export const DialogBuilder = ({
 
   useEffect(
     () => onDialogOpenChange(Boolean(currentOpenSlug)),
-    [onDialogOpenChange, currentOpenSlug]
+    [onDialogOpenChange, currentOpenSlug],
   );
 
   const DIALOG_MODES = {

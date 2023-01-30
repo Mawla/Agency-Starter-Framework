@@ -1,72 +1,65 @@
 import { PageContext } from "../../context/PageContext";
+import { BillboardProps } from "../../modules/Billboard/Billboard";
+import { BreadcrumbProps } from "../../modules/Breadcrumb/Breadcrumb";
+import { CardGridProps } from "../../modules/CardGrid/CardGrid";
+import { GalleryProps } from "../../modules/Gallery/Gallery";
+import { RichTextProps } from "../../modules/RichText/RichText";
+import { SlidesProps } from "../../modules/Slides/Slides";
+import { StoryProps } from "../../modules/Story/Story";
+import { TextImageProps } from "../../modules/TextImage/TextImage";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
-import dynamic from "next/dynamic";
-import React, { useContext } from "react";
-import { Suspense } from "react";
+import React, { ComponentType, useContext } from "react";
+import { Suspense, lazy } from "react";
 
-const Story = dynamic<GenericModuleProps>(
-  () =>
-    import(/* webpackChunkName: "Story" */ "../../modules/Story/Story") as any,
-  { suspense: true }
+const Story = lazy<ComponentType<StoryProps>>(
+  () => import(/* webpackChunkName: "Story" */ "../../modules/Story/Story"),
 );
 
-const Slides = dynamic<GenericModuleProps>(
-  () =>
-    import(
-      /* webpackChunkName: "Slides" */ "../../modules/Slides/Slides"
-    ) as any,
-  { suspense: true }
+const Slides = lazy<ComponentType<SlidesProps>>(
+  () => import(/* webpackChunkName: "Slides" */ "../../modules/Slides/Slides"),
 );
 
-const Gallery = dynamic<GenericModuleProps>(
+const Gallery = lazy<ComponentType<GalleryProps>>(
   () =>
-    import(
-      /* webpackChunkName: "Gallery" */ "../../modules/Gallery/Gallery"
-    ) as any,
-  { suspense: true }
+    import(/* webpackChunkName: "Gallery" */ "../../modules/Gallery/Gallery"),
 );
 
-const TextImage = dynamic<GenericModuleProps>(
+const TextImage = lazy<ComponentType<TextImageProps>>(
   () =>
     import(
       /* webpackChunkName: "TextImage" */ "../../modules/TextImage/TextImage"
-    ) as any,
-  { suspense: true }
+    ),
 );
 
-const Billboard = dynamic<GenericModuleProps>(
+const Billboard = lazy<ComponentType<BillboardProps>>(
   () =>
     import(
       /* webpackChunkName: "Billboard" */ "../../modules/Billboard/Billboard"
-    ) as any,
-  { suspense: true }
+    ),
 );
 
-const Breadcrumb = dynamic<GenericModuleProps>(
+const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
   () =>
     import(
       /* webpackChunkName: "Breadcrumb" */ "../../modules/Breadcrumb/Breadcrumb"
-    ) as any,
-  { suspense: true }
+    ),
 );
 
-const CardGrid = dynamic<GenericModuleProps>(
+const CardGrid = lazy<ComponentType<CardGridProps>>(
   () =>
     import(
       /* webpackChunkName: "CardGrid" */ "../../modules/CardGrid/CardGrid"
-    ) as any,
-  { suspense: true }
+    ),
 );
 
-const RichText = dynamic<GenericModuleProps>(
+const RichText = lazy<ComponentType<RichTextProps>>(
   () =>
     import(
       /* webpackChunkName: "RichText" */ "../../modules/RichText/RichText"
-    ) as any,
-  { suspense: true }
+    ),
 );
 
 export type ModuleBuilderProps = {
@@ -107,14 +100,30 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               module={item._type}
               id={item._key}
             >
-              {item._type === "module.richtext" && <RichText {...item} />}
-              {item._type === "module.breadcrumb" && <Breadcrumb {...item} />}
-              {item._type === "module.cardgrid" && <CardGrid {...item} />}
-              {item._type === "module.billboard" && <Billboard {...item} />}
-              {item._type === "module.textimage" && <TextImage {...item} />}
-              {item._type === "module.gallery" && <Gallery {...item} />}
-              {item._type === "module.slides" && <Slides {...item} />}
-              {item._type === "module.story" && <Story {...item} />}
+              {item._type === "module.richtext" && (
+                <RichText {...(item as RichTextProps)} />
+              )}
+              {item._type === "module.breadcrumb" && (
+                <Breadcrumb {...(item as BreadcrumbProps)} />
+              )}
+              {item._type === "module.cardgrid" && (
+                <CardGrid {...(item as CardGridProps)} />
+              )}
+              {item._type === "module.billboard" && (
+                <Billboard {...(item as BillboardProps)} />
+              )}
+              {item._type === "module.textimage" && (
+                <TextImage {...(item as TextImageProps)} />
+              )}
+              {item._type === "module.gallery" && (
+                <Gallery {...(item as GalleryProps)} />
+              )}
+              {item._type === "module.slides" && (
+                <Slides {...(item as SlidesProps)} />
+              )}
+              {item._type === "module.story" && (
+                <Story {...(item as StoryProps)} />
+              )}
             </LazyLoadInView>
           </ModuleErrorBoundary>
         </Suspense>

@@ -8,17 +8,15 @@ import { FooterType } from "../queries/footer";
 import { NavigationType } from "../queries/navigation";
 import { getPageQuery, PageType } from "../queries/page";
 import type { GetStaticProps } from "next";
-import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { ComponentType, lazy, useEffect, useState } from "react";
 
-const LivePreview = dynamic<LivePreviewProps>(
+const LivePreview = lazy<ComponentType<LivePreviewProps>>(
   () =>
     import(
       /* webpackChunkName: "LivePreview" */ "../components/PreviewMode/LivePreview"
-    ) as any,
-  { suspense: true },
+    ),
 );
 
 export default function PreviewPage({

@@ -6,16 +6,14 @@ import FigCaption from "../images/FigCaption";
 import { ResponsiveImage } from "../images/ResponsiveImage";
 import { SCRIPTS, ScriptType } from "./PortableTextOptions";
 import { PortableText as PortableTextReact } from "@portabletext/react";
-import dynamic from "next/dynamic";
 import Script from "next/script";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
 
-const Video = dynamic<VideoType>(
+const Video = lazy<ComponentType<VideoType>>(
   () =>
     import(
       /* webpackChunkName: "VideoComponent" */ "../../components/video/Video"
-    ) as any,
-  { suspense: true },
+    ),
 );
 
 export type PortableTextProps = {

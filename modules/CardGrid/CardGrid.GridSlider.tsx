@@ -10,25 +10,19 @@ import { ColumnType, GapType } from "./CardGridOptions";
 import { ComposableCardProps } from "./ComposableCard";
 import { ImageCardProps } from "./ImageCard";
 import cx from "classnames";
-import dynamic from "next/dynamic";
-import React, { CSSProperties } from "react";
+import React, { ComponentType, CSSProperties, lazy } from "react";
 
-const Slider = dynamic<SliderProps>(
+const Slider = lazy<ComponentType<SliderProps>>(
   () =>
-    import(
-      /* webpackChunkName: "Slider" */ "../../components/Slider/Slider"
-    ) as any,
+    import(/* webpackChunkName: "Slider" */ "../../components/Slider/Slider"),
 );
 
-const ComposableCard = dynamic<ComposableCardProps>(
-  () =>
-    import(/* webpackChunkName: "ComposableCard" */ "./ComposableCard") as any,
-  { suspense: false },
+const ComposableCard = lazy<ComponentType<ComposableCardProps>>(
+  () => import(/* webpackChunkName: "ComposableCard" */ "./ComposableCard"),
 );
 
-const ImageCard = dynamic<ImageCardProps>(
-  () => import(/* webpackChunkName: "ImageCard" */ "./ImageCard") as any,
-  { suspense: false },
+const ImageCard = lazy<ComponentType<ImageCardProps>>(
+  () => import(/* webpackChunkName: "ImageCard" */ "./ImageCard"),
 );
 
 type CardGridGridSliderProps = {

@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+
+import React, { lazy, useState } from 'react';
 import { Suspense } from 'react';
 
 import { PortableTextProps } from '../../components/content/PortableText';
@@ -26,20 +26,18 @@ export type StaticFormBuilderProps = {
   className?: string;
 };
 
-const PortableText = dynamic<PortableTextProps>(
+const PortableText = lazy<React.ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ '../../components/content/PortableText'
     ) as any,
-  { suspense: true },
 );
 
-const NewsLetterSignUpForm = dynamic<NewsLetterSignUpFormProps>(
+const NewsLetterSignUpForm = lazy<React.ComponentType<NewsLetterSignUpFormProps>>(
   () =>
     import(
       /* webpackChunkName: "NewsLetterSignUpForm" */ '../../forms/NewsLetterSignUpForm'
-    ) as any,
-  { suspense: true },
+    ) ,
 );
 
 export type StaticFormState = 'loading' | 'idle' | 'success' | 'error';
