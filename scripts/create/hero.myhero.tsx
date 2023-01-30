@@ -1,6 +1,6 @@
-import { BACKGROUND_COLOR_OPTIONS } from "../../../components/module/BackgroundOptions";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
+import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/BackgroundOptions";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
