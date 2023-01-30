@@ -1,6 +1,3 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import {
   SpaceTopType,
   SpaceType,
@@ -18,6 +15,8 @@ import {
   TITLE_SIZE_OPTIONS,
   TitleSizeType,
 } from "./TextImageOptions";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: TextImage,
@@ -31,17 +30,6 @@ export const Default = () => (
     intro={<p>prima</p>}
     buttons={[{ label: "hello" }]}
     image={demoImage2}
-  />
-);
-
-export const Lozenges = () => (
-  <TextImage
-    eyebrow="hello"
-    title="Prima"
-    intro={<p>prima</p>}
-    buttons={[{ label: "hello" }]}
-    image={demoImage2}
-    theme={{ decorations: { showLozenges: true } }}
   />
 );
 
@@ -82,7 +70,7 @@ export const ImageColors = () => (
             image={demoImage2}
           />
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -99,7 +87,7 @@ export const Align = () => (
             image={demoImage2}
           />
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -118,7 +106,7 @@ export const Backgrounds = () => (
             theme={{ module: { background } }}
           />
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -171,7 +159,7 @@ export const Spacing = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -191,7 +179,7 @@ export const TitleSizes = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </>
 );

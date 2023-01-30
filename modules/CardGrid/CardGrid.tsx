@@ -56,8 +56,6 @@ export type CardGridProps = {
       color?: SliderColorType;
     };
     decorations?: {
-      showOnes?: boolean;
-      showLozenges?: boolean;
       roundedTop?: ModuleRadiusType;
       roundedBottom?: ModuleRadiusType;
     };

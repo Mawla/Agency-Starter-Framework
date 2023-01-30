@@ -1,4 +1,3 @@
-import { One } from "../../components/Decorations/One";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
@@ -54,7 +53,7 @@ export const Billboard = ({
             {
               ["md:col-start-1"]: theme?.image?.align === "right",
               ["md:col-start-2"]: theme?.image?.align === "left",
-            }
+            },
           )}
         >
           {/* no content: add placeholder to size the image */}
@@ -91,20 +90,6 @@ export const Billboard = ({
         </div>
 
         <div className="relative md:static h-[200px] md:h-auto mb-4 md:mb-0">
-          <div
-            className={cx(
-              "z-10 absolute",
-              "top-0 scale-x-[70%] scale-y-[-70%] rotate-[-245deg] translate-y-[-45%] translate-x-[40%]",
-              "md:-top-32 md:scale-x-100 md:scale-y-100 md:rotate-0 md:translate-y-0 md:translate-x-0",
-              {
-                ["md:left-0"]: theme?.image?.align === "left",
-                ["md:right-32"]: theme?.image?.align !== "left",
-              }
-            )}
-          >
-            <One color="brand-base" direction="up" />
-          </div>
-
           {image && (
             <div
               className={cx(
@@ -115,7 +100,7 @@ export const Billboard = ({
                     theme?.image?.align === "left",
                   ["md:left-1/2 md:translate-x-10"]:
                     theme?.image?.align !== "left",
-                }
+                },
               )}
             >
               <ResponsiveImage {...image} fill />

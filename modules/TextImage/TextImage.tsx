@@ -1,5 +1,4 @@
 import { backgroundClasses } from "../../colors";
-import { Lozenge } from "../../components/Decorations/Lozenge";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
@@ -36,7 +35,6 @@ export type TextImageProps = {
       size?: TitleSizeType;
     };
     decorations?: {
-      showLozenges?: boolean;
       roundedTop?: ModuleRadiusType;
       roundedBottom?: ModuleRadiusType;
     };
@@ -80,25 +78,6 @@ export const TextImage = ({
         })}
       >
         <Width width="inner" className="relative">
-          {theme?.decorations?.showLozenges && (
-            <span
-              className={cx(
-                "absolute z-20",
-                "right-0 top-1/2 -translate-y-full"
-              )}
-            >
-              <Lozenge
-                size="lg"
-                color={
-                  theme?.module?.background === "neutral-95"
-                    ? "white"
-                    : "neutral-95"
-                }
-                rotation={11}
-              />
-            </span>
-          )}
-
           <div className="grid grid-cols-1 md:grid-cols-12 items-center md:items-start lg:items-center gap-10 lg:gap-16 xl:gap-20 relative z-30">
             <div
               className={cx("order-2 flex flex-col gap-6 md:col-span-7", {
@@ -132,7 +111,7 @@ export const TextImage = ({
                   "xl:-translate-y-6",
                   theme?.image?.align === "right"
                     ? "order-1 md:order-3"
-                    : "order-1 md:order-1"
+                    : "order-1 md:order-1",
                 )}
               >
                 <div className="max-w-[70%] xs:max-w-[60%] sm:max-w-1/2 min-w-[160px] md:max-w-none aspect-[540/380] md:aspect-[380/540] relative">
@@ -144,7 +123,7 @@ export const TextImage = ({
                       "translate-y-5 translate-x-2 md:translate-x-0 md:translate-y-10",
                       backgroundClasses[
                         theme?.image?.background || "brand-base"
-                      ]
+                      ],
                     )}
                     style={{
                       background:
@@ -160,19 +139,6 @@ export const TextImage = ({
                     className="rounded-lg md:rounded-3xl lg:rounded-4xl overflow-hidden z-20"
                   />
                 </div>
-
-                {theme?.decorations?.showLozenges && (
-                  <span
-                    className={cx(
-                      "absolute z-20",
-                      "-translate-y-1/2",
-                      "top-1/2",
-                      "left-[70%] xs:left-[60%] sm:left-1/2 md:left-auto md:-right-5 tablet:right-0"
-                    )}
-                  >
-                    <Lozenge size="md" color="action-light" rotation={2} />
-                  </span>
-                )}
               </div>
             )}
           </div>

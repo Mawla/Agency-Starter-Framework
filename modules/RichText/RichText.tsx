@@ -1,5 +1,3 @@
-import { Lozenge, LozengeProps } from "../../components/Decorations/Lozenge";
-import { One } from "../../components/Decorations/One";
 import PortableText from "../../components/content/PortableText";
 import { ModuleRadiusType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
@@ -32,8 +30,6 @@ export type RichTextProps = {
       size?: TitleSizeType;
     };
     decorations?: {
-      showOnes?: boolean;
-      showLozenges?: boolean;
       roundedTop?: ModuleRadiusType;
       roundedBottom?: ModuleRadiusType;
     };
@@ -65,14 +61,6 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
     }
   }
 
-  let oneColor: LozengeProps["color"] = "brand-base";
-  if (theme?.module?.background === "blue-dark") {
-    oneColor = "blue-base";
-  }
-  if (theme?.module?.background === "green-dark") {
-    oneColor = "green-base";
-  }
-
   return (
     <Wrapper
       theme={{
@@ -91,56 +79,6 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
           theme?.module?.background === "brand-base",
       })}
     >
-      {(theme?.decorations?.showOnes || theme?.decorations?.showLozenges) && (
-        <div className="absolute inset-0 hidden md:block pointer-events-none">
-          {theme?.decorations?.showOnes && (
-            <>
-              <One
-                direction="up"
-                color={oneColor}
-                className="absolute top-20 left-0 scale-75 xl:scale-100 -translate-x-[95%] xl:-translate-x-[100%] 2xl:-translate-x-[77%]"
-              />
-              <One
-                direction="down"
-                color={oneColor}
-                className="absolute right-0 -bottom-16 scale-75 xl:scale-100 translate-x-[100%] 2xl:translate-x-[88%]"
-              />
-            </>
-          )}
-          {theme?.decorations?.showLozenges && (
-            <>
-              <Lozenge
-                color={
-                  theme?.module?.background === "neutral-95"
-                    ? "white"
-                    : "neutral-95"
-                }
-                size="lg"
-                rotation={11}
-                className={cx(
-                  "absolute right-0 md:right-[10%] top-0 md:top-[10%]",
-                  {
-                    ["opacity-10"]: isDarkBackground,
-                  }
-                )}
-              />
-              <Lozenge
-                color={
-                  theme?.module?.background === "brand-dark"
-                    ? "white"
-                    : "action-light"
-                }
-                size="md"
-                rotation={2}
-                className={cx("absolute hidden md:block left-[10%] top-[50%]", {
-                  ["opacity-10"]: isDarkBackground,
-                })}
-              />
-            </>
-          )}
-        </div>
-      )}
-
       <div
         className={cx("z-20 relative", {
           ["py-8 sm:py-10 lg:py-16 xl:py-30"]: theme?.module?.background,

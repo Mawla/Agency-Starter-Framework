@@ -98,66 +98,6 @@ const schema = defineType({
       },
     }),
     defineField({
-      name: "visual",
-      title: "Visual",
-      type: "object",
-      group: "visual",
-      fields: [
-        defineField({
-          name: "image2",
-          title: "Image",
-          type: "image",
-          options: {
-            hotspot: true,
-          },
-        }),
-        defineField({
-          name: "image1",
-          title: "Image",
-          type: "image",
-          options: {
-            hotspot: true,
-          },
-        }),
-        defineField({
-          name: "colors",
-          title: "Colors",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color1",
-                title: "Color 1",
-                type: "color",
-              },
-              {
-                name: "color2",
-                title: "Color 2",
-                type: "color",
-              },
-              {
-                name: "color3",
-                title: "Color 3",
-                type: "color",
-              },
-              {
-                name: "color4",
-                title: "Color 4",
-                type: "color",
-              },
-            ],
-          },
-        }),
-      ],
-    }),
-    defineField({
-      name: "breakOutImage",
-      title: "Break out image",
-      type: "boolean",
-      description: "Make sure the image is a 1200x1200 transparent PNG.",
-      group: "visual",
-    }),
-    defineField({
       name: "buttons",
       title: "Buttons",
       type: "buttongroup",

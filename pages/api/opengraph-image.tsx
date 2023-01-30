@@ -1,5 +1,4 @@
 import { config as sanityConfig } from "../../helpers/sanity/config";
-import { getImageQuery } from "../../queries/components/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";

@@ -9,13 +9,7 @@ export const getHeroBasicQuery = (
 ) => groq`_type == "hero.basic" => {
   title,
   eyebrow,
-  visual {
-    "image1": ${getImageQuery("image1")},
-    "image2": ${getImageQuery("image2")},
-    colors
-  },
-  showLozenges,
-  breakOutImage,
+  "image": ${getImageQuery("image")},
   text[] ${richTextQuery},
   buttons[] ${buttonQuery},
 }`;

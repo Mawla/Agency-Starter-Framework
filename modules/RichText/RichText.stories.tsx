@@ -1,8 +1,4 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
-import { WidthType, WIDTH_OPTIONS } from "../../components/module/WidthOptions";
 import { demoImage2 } from "../../stories/content";
 import { RichText } from "./RichText";
 import {
@@ -11,6 +7,8 @@ import {
   TextAlignType,
   TEXT_ALIGN_OPTIONS,
 } from "./RichTextOptions";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: RichText,
@@ -78,7 +76,7 @@ export const ModuleBackgrounds = () => (
           title="prima"
           theme={{ module: { background: color } }}
         />
-      )
+      ),
     )}
   </>
 );
@@ -106,41 +104,9 @@ export const ModuleDecorationsOnes = () => (
           title="Descriptive statement lorem ipsum dolor sit amet"
           theme={{
             module: { background: color, align: "center" },
-            decorations: { showOnes: true },
           }}
         />
-      )
-    )}
-  </>
-);
-
-export const ModuleDecorationsLozenges = () => (
-  <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color: BackgroundColorType) => (
-        <RichText
-          content={
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-              turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-              nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-              tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-              feugiat lectus. Class aptent taciti sociosqu ad litora torquent
-              per conubia nostra, per inceptos himenaeos. Praesent auctor purus
-              luctus enim egestas , ac scelerisque ante pulvinar. Donec ut
-              rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur
-              vel bibendum lorem. Morbi convallis convallis diam sit amet
-              lacinia. Aliquam in elementum tellus.
-            </p>
-          }
-          eyebrow="Corporate"
-          title="Descriptive statement lorem ipsum dolor sit amet"
-          theme={{
-            module: { background: color, align: "center" },
-            decorations: { showLozenges: true },
-          }}
-        />
-      )
+      ),
     )}
   </>
 );
@@ -155,22 +121,8 @@ export const Alignments = () => (
           }}
           content={demoContent}
         />
-      )
+      ),
     )}
-  </div>
-);
-
-export const Widths = () => (
-  <div>
-    {(Object.keys(WIDTH_OPTIONS) as WidthType[]).map((width: WidthType) => (
-      <RichText
-        theme={{
-          module: { width, background: "brand-base" },
-          decorations: { showOnes: true },
-        }}
-        content={<p>{width}</p>}
-      />
-    ))}
   </div>
 );
 
@@ -179,7 +131,7 @@ export const ModuleSpacing = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <>
@@ -215,75 +167,4 @@ export const ModuleSpacing = () => (
       </>
     ))}
   </>
-);
-
-export const PullUp = () => (
-  <div>
-    <RichText
-      eyebrow="Institutional brief description"
-      title="Descriptive statement lorem ipsum dolor sit amet"
-      content={
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-          turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-          fringilla accumsan, risus sem sollicitudin lacus. Class aptent taciti
-          sociosqu ad litora torquent per conubia nostra, per inceptos
-          himenaeos. Praesent auctor purus luctus enim egestas , ac scelerisque
-          ante pulvinar
-        </p>
-      }
-      theme={{
-        module: {
-          background: "neutral-95",
-          pullUp: true,
-          align: "center",
-          space: { top: "none", bottom: "none" },
-        },
-        decorations: { showOnes: true },
-      }}
-    />
-    <RichText
-      eyebrow="People / structure"
-      title="Descriptive statement lorem ipsum dolor sit amet"
-      content={
-        <>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus. Class aptent
-            taciti sociosqu ad litora torquent per conubia nostra.
-          </p>
-          <p>
-            <img src={demoImage2.src} />
-          </p>
-        </>
-      }
-      theme={{
-        module: {
-          width: "inner",
-          pullUp: true,
-          align: "center",
-          background: "brand-base",
-          space: { top: "none", bottom: "none" },
-        },
-      }}
-    />
-    <RichText
-      content={
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-          turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-          fringilla
-        </p>
-      }
-      theme={{
-        module: {
-          width: "outer",
-          align: "center",
-          background: "blue-dark",
-          space: { top: "none", bottom: "none" },
-        },
-      }}
-    />
-  </div>
 );

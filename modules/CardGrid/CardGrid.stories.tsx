@@ -78,7 +78,7 @@ export const ModuleBackgrounds = () => (
     {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
       (color: BackgroundColorType) => (
         <CardGrid {...DEMO_CONTENT} theme={{ module: { background: color } }} />
-      )
+      ),
     )}
   </>
 );
@@ -143,31 +143,9 @@ export const ModuleDecorationsOnes = () => (
               background: color,
               align: "center",
             },
-            decorations: { showOnes: true },
           }}
         />
-      )
-    )}
-  </>
-);
-
-export const ModuleDecorationsLozenges = () => (
-  <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color: BackgroundColorType) => (
-        <CardGrid
-          {...DEMO_CONTENT}
-          theme={{
-            module: {
-              background: color,
-              align: "center",
-              space: { top: "none", bottom: "none" },
-            },
-            grid: { stagger: false },
-            decorations: { showLozenges: true },
-          }}
-        />
-      )
+      ),
     )}
   </>
 );
@@ -177,7 +155,7 @@ export const ModuleSpacing = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <>
@@ -239,7 +217,7 @@ export const GridColumns = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -264,7 +242,7 @@ export const GridStagger = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -283,7 +261,7 @@ export const TitleSizes = () => (
             },
           }}
         />
-      )
+      ),
     )}
   </>
 );
@@ -300,7 +278,7 @@ export const ButtonPosition = () => (
               theme={{ buttons: { position }, module: { align } }}
             />
           </div>
-        ))
+        )),
     )}
   </>
 );
@@ -324,7 +302,7 @@ export const Slider = () => (
           }}
           items={DEMO_ITEMS}
         />
-      )
+      ),
     )}
 
     <CardGrid

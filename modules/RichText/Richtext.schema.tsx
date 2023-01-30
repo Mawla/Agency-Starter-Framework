@@ -163,16 +163,6 @@ const schema = defineType({
           options: {
             fields: [
               {
-                name: "showOnes",
-                title: "Show ones",
-                type: "boolean",
-              },
-              {
-                name: "showLozenges",
-                title: "Show lozenges",
-                type: "boolean",
-              },
-              {
                 name: "roundedTop",
                 type: "select",
                 title: "Rounded top",

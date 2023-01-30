@@ -1,4 +1,3 @@
-import { Lozenge } from "../../components/Decorations/Lozenge";
 import { Slider } from "../../components/Slider/Slider";
 import PortableText from "../../components/content/PortableText";
 import { ResponsiveImage } from "../../components/images/ResponsiveImage";
@@ -72,7 +71,7 @@ export const Gallery = ({
                     ["aspect-square"]: i % 2 === 0,
                     ["aspect-[13/8]"]: i % 2 === 1,
                     ["-mr-20"]: i === items.length - 1, // this fixes swiper not firing onReachEnd on last slide leaving some white space to the right
-                  }
+                  },
                 )}
               >
                 {image && (
@@ -83,20 +82,6 @@ export const Gallery = ({
               </div>
             ))}
           />
-          <div className="absolute inset-0 pointer-events-none z-0">
-            <Lozenge
-              color="action-light"
-              size="md"
-              rotation={11}
-              className="absolute right-[1%] top-[-20%] lg:top-[-10%]"
-            />
-            <Lozenge
-              color="neutral-95"
-              size="lg"
-              rotation={1}
-              className="absolute left-[5%] bottom-[-2%]"
-            />
-          </div>
         </div>
       )}
     </Wrapper>

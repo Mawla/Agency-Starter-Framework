@@ -5,11 +5,10 @@ import { richTextQuery } from "../../queries/components/richText";
 import groq from "groq";
 
 export const getTextImageQuery = (
-  language: LanguageType
+  language: LanguageType,
 ) => groq`_type == "module.textimage" => {
   title,
   eyebrow,
-  showLozenges,
   intro[] ${richTextQuery},
   "image": ${imageQuery},
   buttons[] ${buttonQuery}

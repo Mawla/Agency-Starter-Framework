@@ -17,18 +17,18 @@ const Slider = dynamic<SliderProps>(
   () =>
     import(
       /* webpackChunkName: "Slider" */ "../../components/Slider/Slider"
-    ) as any
+    ) as any,
 );
 
 const ComposableCard = dynamic<ComposableCardProps>(
   () =>
     import(/* webpackChunkName: "ComposableCard" */ "./ComposableCard") as any,
-  { suspense: false }
+  { suspense: false },
 );
 
 const ImageCard = dynamic<ImageCardProps>(
   () => import(/* webpackChunkName: "ImageCard" */ "./ImageCard") as any,
-  { suspense: false }
+  { suspense: false },
 );
 
 type CardGridGridSliderProps = {
@@ -98,7 +98,7 @@ export const CardGridGridSlider = ({
   // read the gap size from the tailwind classes to make grid gaps stay in sync between slider and grid layouts
   const sliderGapSize: number = getSliderGapSize(
     breakpoint,
-    theme?.grid?.gapHorizontal || "xs"
+    theme?.grid?.gapHorizontal || "xs",
   );
 
   if (slider) {
@@ -137,7 +137,7 @@ export const CardGridGridSlider = ({
         gapVerticalClasses[theme?.grid?.gapVertical || "xs"],
         {
           ["pb-20"]: theme?.grid?.stagger,
-        }
+        },
       )}
     >
       {items?.map((item, i) => {
@@ -153,14 +153,7 @@ export const CardGridGridSlider = ({
           <div key={item._key} className="h-full" style={staggerStyle}>
             <CardWrapper>
               {item?.type === "card.composable" && <ComposableCard {...item} />}
-              {item?.type === "card.image" && (
-                <ImageCard
-                  {...item}
-                  lozengeVariantIndex={
-                    theme?.decorations?.showLozenges ? i : undefined
-                  }
-                />
-              )}
+              {item?.type === "card.image" && <ImageCard {...item} />}
             </CardWrapper>
           </div>
         );
@@ -177,7 +170,7 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => (
 
 const getSliderGapSize = (
   breakpoint: BreakpointType,
-  gapHorizontal: GapType
+  gapHorizontal: GapType,
 ): number => {
   const sliderGapSizes: Record<BreakpointType, number> = gapHorizontalClasses[
     gapHorizontal
