@@ -30,7 +30,7 @@ export const TextInput = ({
         </span>
       </PopoverDisclosure>
 
-      <Popover {...popover} className={styles.popover}>
+      <Popover {...popover} className={styles.popover} aria-label="popover">
         <div className={styles.textInput}>
           <SanityTextInput
             fontSize={1}

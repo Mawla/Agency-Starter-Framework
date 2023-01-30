@@ -51,7 +51,7 @@ export const ColorPicker = ({
         />
       </PopoverDisclosure>
 
-      <Popover {...popover} className={styles.popover}>
+      <Popover {...popover} className={styles.popover} aria-label="popover">
         <Stack space={1} padding={2}>
           {Object.values(colorRows).map((colorList) => (
             <Flex gap={1} wrap="wrap" style={{ maxWidth: "75vw" }}>
