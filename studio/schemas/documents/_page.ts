@@ -53,7 +53,7 @@ export const SLUG_FIELD = defineField({
   validation: (Rule: SlugRule) =>
     Rule.required().custom(async (slug, context) => {
       if (typeof slug === "undefined") return true;
-      const regex = /(^[a-z0-9-]+$)/; // Regex pattern goes here
+      const regex = /(^[a-z0-9-]+$)/;
       if (regex.test(slug.current || "")) {
         return true;
       } else {
