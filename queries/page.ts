@@ -48,6 +48,14 @@ export const getPageQuery = (language: LanguageType) => groq`
   hideNav,
   hideFooter,
   "locked": locked.${language},
+  "breadcrumb": [
+    ^.sitemap[_id == $_id][0] { "path": paths.${language}, "title": titles.${language} },
+    ^.sitemap[_id == ^.parent._ref][0] { "path": paths.${language}, "title": titles.${language} },
+    ^.sitemap[_id == ^.parent->parent._ref][0] { "path": paths.${language}, "title": titles.${language} },
+    ^.sitemap[_id == ^.parent->parent->parent._ref][0] { "path": paths.${language}, "title": titles.${language} },
+    ^.sitemap[_id == ^.parent->parent->parent->parent._ref][0] { "path": paths.${language}, "title": titles.${language} },
+    ^.sitemap[_id == ^.parent->parent->parent->parent-parent._ref][0] { "path": paths.${language}, "title": titles.${language} },
+  ],
 
   // article intro and image
   publishedAt,
