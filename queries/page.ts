@@ -46,6 +46,7 @@ export const getPageQuery = (language: LanguageType) => groq`
   _id,
   _type,
   _updatedAt,
+  _rev,
   "title": title.${language},
   hideNav,
   hideFooter,
