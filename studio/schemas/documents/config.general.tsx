@@ -43,7 +43,17 @@ export default defineType({
       type: "string",
       options: { localize: true } as any,
       title: "Domain",
-      validation: (Rule: StringRule) => Rule.required(),
+      validation: (Rule: StringRule) =>
+        Rule.required().custom(async (value, context) => {
+          if (typeof value === "undefined") return true;
+          const regex =
+            /^(?!:\/\/)([a-zA-Z0-9]+\.)?[a-zA-Z0-9][a-zA-Z0-9-]+\.[a-zA-Z]{2,6}?$/i;
+          if (regex.test(value || "")) {
+            return true;
+          } else {
+            return "Invalid value: The website domain without should not contain a trailing slash or the protocol.";
+          }
+        }),
       description:
         "The website domain without slash and protocol, e.g google.com. Used for the canonical url.",
     }),
