@@ -48,8 +48,11 @@ export const LivePreview = ({
   const [previewLoading, setPreviewLoading] = useState<boolean>(false);
 
   const frontendClient = useRef<SanityClient | null>(null);
+
+  const initialRevision = useRef<string | null>(null);
   const mutationRevision = useRef<string | null>(null);
   const currentRevision = useRef<string | null>(null);
+
   const reloadTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reloadAttempts = useRef<number>(0);
 
@@ -69,6 +72,7 @@ export const LivePreview = ({
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
     if (!pageId) return;
+    if (!pageId.startsWith("drafts.")) return;
 
     // clear timeout
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -209,13 +213,26 @@ export const LivePreview = ({
    */
 
   useEffect(() => {
+    let reloadTimeout: ReturnType<typeof setTimeout>;
     async function reload() {
-      if (!frontendClient.current) return;
+      clearTimeout(reloadTimeout);
+
+      // wait for frontend client to be ready
+      if (!frontendClient.current) {
+        reloadTimeout = setTimeout(reload, 100);
+        return;
+      }
+
+      // fetch minimal document
       const doc = await frontendClient.current.fetch(
         `*[_id == "${pageId}"] { _id }`,
       );
+
       if (!doc?.length) {
-        await fetch(`/api/preview/create-draft?_id=${pageId}`);
+        const result = await fetch(`/api/preview/create-draft?_id=${pageId}`);
+        const obj = await result.json();
+        initialRevision.current = obj._rev;
+
         reloadPreview();
       }
     }
@@ -236,7 +253,7 @@ export const LivePreview = ({
 
       setPreviewLoading(true);
 
-      const response = await fetch(`/api/preview/sort-modules`, {
+      await fetch(`/api/preview/sort-modules`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -248,8 +265,6 @@ export const LivePreview = ({
           newModulesOrder: items,
         }),
       });
-
-      const body = await response.json();
     },
     [pageId],
   );
@@ -285,6 +300,12 @@ export const LivePreview = ({
         <div className="bg-black text-white">
           <ScreenCapture previewTools={previewTools} />
         </div>
+
+        {currentRevision.current && (
+          <div className="px-3 bg-[#111] flex items-center">
+            {currentRevision.current}
+          </div>
+        )}
 
         {/* reload */}
         <button

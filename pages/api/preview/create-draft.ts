@@ -9,7 +9,7 @@ export const client = sanityClient({
   token: process.env.SANITY_API_WRITE_TOKEN,
 });
 
-type Data = string;
+type Data = string | { _rev: string };
 
 function warning(msg: string) {
   return `<p style="
@@ -38,9 +38,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     return res.status(400).send(warning("no document found."));
   }
 
-  await client.createIfNotExists({ ...doc, _id: `drafts.${doc._id}` });
+  const result = await client.createIfNotExists({
+    ...doc,
+    _id: `drafts.${doc._id}`,
+  });
 
-  res.end();
+  return res.json({ _rev: result._rev });
 };
 
 export default withSentry(handler);
