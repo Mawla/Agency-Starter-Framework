@@ -199,12 +199,11 @@ function createBuilder() {
   // add import
   lines = [
     `
-    const ${pascalName} = dynamic<GenericModuleProps>(
+    const ${pascalName} = lazy<ComponentType<${pascalName}Props>>(
       () =>
         import(
           /* webpackChunkName: "${pascalName}" */ '../../heroes/${pascalName}/${pascalName}'
-        ) as any,
-      { suspense: true },
+        ),
     );
     `,
     ...lines,

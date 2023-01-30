@@ -358,7 +358,7 @@ function createBuilder(name, pascalName, schemaName, fields) {
   // add import
   lines = [
     `
-      const ${pascalName} = dynamic<GenericModuleProps>(
+      const ${pascalName} = lazy<ComponentType<${pascalName}Props>>(
         () =>
           import(
             /* webpackChunkName: "${pascalName}" */ '../../modules/${pascalName}/${pascalName}'
