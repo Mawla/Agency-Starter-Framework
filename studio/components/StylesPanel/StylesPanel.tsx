@@ -33,7 +33,7 @@ const StylesPanel = (props: ObjectInputProps) => {
       };
       onChange(set(newValue));
     },
-    [onChange, value]
+    [onChange, value],
   );
 
   if (!schemaType?.options?.fields?.length)
@@ -85,6 +85,7 @@ const StylesPanel = (props: ObjectInputProps) => {
                 ?.map((item: StyleItemProps) => {
                   return (
                     <StyleItem
+                      key={item.title}
                       {...item}
                       onChange={handleChange}
                       value={value}
@@ -97,7 +98,7 @@ const StylesPanel = (props: ObjectInputProps) => {
 
         {Boolean(
           schemaType.options.fields?.filter((x: any) => !Boolean(x.group))
-            .length
+            .length,
         ) && (
           <Stack space={2}>
             {groups.length > 0 && (
@@ -117,6 +118,7 @@ const StylesPanel = (props: ObjectInputProps) => {
                   ?.map((item: StyleItemProps) => {
                     return (
                       <StyleItem
+                        key={item.title}
                         {...item}
                         onChange={handleChange}
                         value={value}
