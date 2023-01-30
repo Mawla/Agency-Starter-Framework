@@ -54,10 +54,16 @@ export const ColorPicker = ({
       <Popover {...popover} className={styles.popover} aria-label="popover">
         <Stack space={1} padding={2}>
           {Object.values(colorRows).map((colorList) => (
-            <Flex gap={1} wrap="wrap" style={{ maxWidth: "75vw" }}>
+            <Flex
+              gap={1}
+              wrap="wrap"
+              style={{ maxWidth: "75vw" }}
+              key={JSON.stringify(colorList)}
+            >
               {colorList?.map((option) => {
                 return (
                   <Tooltip
+                    key={option.value || "clear"}
                     content={
                       <Box
                         padding={4}
