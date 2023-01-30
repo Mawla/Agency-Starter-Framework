@@ -17,6 +17,7 @@ export type SitemapItemType = {
   excludeFromSitemap?: {
     [key in LanguageType]: boolean;
   };
+  parent?: string;
 };
 
 export type SitemapType = SitemapItemType[];
@@ -28,6 +29,7 @@ const baseFields = groq`
   seo, 
   _updatedAt, 
   locked,
+  parent,
   "modules": modules[] { language },
   "hero": hero[] { language }
 `;
@@ -37,7 +39,7 @@ const slugFields = groq`
  "path": "/"+ slug.current,
  "paths": {
     ${languages.map(
-      (language) => `"${language.id}": "/"+ slug.${language.id}.current`
+      (language) => `"${language.id}": "/"+ slug.${language.id}.current`,
     )}
   },
 `;
@@ -79,7 +81,7 @@ export const getSitemapQuery = () => {
         ${`"level4${language.id}"`}: parent -> parent -> parent -> parent -> slug.${
           language.id
         }.current
-      `
+      `,
       )}
     }
     {
@@ -95,7 +97,7 @@ export const getSitemapQuery = () => {
           defined(level1${language.id}) => "/"+ level1${language.id} +"/"+ level0${language.id},
           defined(level0${language.id}) => "/"+ level0${language.id}
         )
-        `
+        `,
       )}
     }
   }
@@ -105,6 +107,7 @@ export const getSitemapQuery = () => {
     "titles": title, 
     _updatedAt,
     paths,
+    "parent": parent._ref,
     "excludeFromSitemap": {
       ${languages.map(
         (language) => `
@@ -120,7 +123,7 @@ export const getSitemapQuery = () => {
               !("${language.id}" in modules[].language)
             )
           )
-        `
+        `,
       )}
   }}`;
 
