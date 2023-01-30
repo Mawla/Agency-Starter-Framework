@@ -2,7 +2,7 @@ import { HeroBasicProps } from "../heroes/HeroBasic/HeroBasic";
 import { getHeroBasicQuery } from "../heroes/HeroBasic/HeroBasic.query";
 import { LanguageType } from "../languages";
 import { getBillboardQuery } from "../modules/Billboard/Billboard.query";
-import { getBreadcrumbQuery } from "../modules/Breadcrumb/Breadcrumb.query";
+import { getBreadcrumbModuleQuery } from "../modules/Breadcrumb/Breadcrumb.query";
 import { getCardGridQuery } from "../modules/CardGrid/CardGrid.query";
 import { getGalleryQuery } from "../modules/Gallery/Gallery.query";
 import { getRichTextQuery } from "../modules/RichText/RichText.query";
@@ -11,8 +11,8 @@ import { getStoryQuery } from "../modules/Story/Story.query";
 import { getTextImageQuery } from "../modules/TextImage/TextImage.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
+import { FlatBreadcrumbType, getBreadcrumbQuery } from "./breadcrumb";
 import { imageQuery } from "./components/image";
-import { getPagePathQuery } from "./components/pagePath";
 import { richTextQuery } from "./components/richText";
 import { staticFormQuery } from "./components/staticForm";
 import { videoQuery } from "./components/video";
@@ -34,6 +34,7 @@ export type PageType = {
   modules: {}[];
   dialogs: {}[];
   locked?: boolean;
+  breadcrumb: FlatBreadcrumbType;
 };
 
 export const getPageQuery = (language: LanguageType) => groq`
@@ -49,7 +50,12 @@ export const getPageQuery = (language: LanguageType) => groq`
   hideNav,
   hideFooter,
   "locked": locked.${language},
-  "breadcrumb": ${getPagePathQuery(language)},
+  "homepage": ^.sitemap[_id == 'page_homepage'][0] {
+    "path": paths.${language}, 
+    "title": titles.${language},
+  },
+  "breadcrumb": ${getBreadcrumbQuery(language)},
+  "sitemapItem": ^.sitemap[_id == $_id][0],
 
   // article intro and image
   publishedAt,
@@ -82,7 +88,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     theme,
 
     ${getRichTextQuery(language)},
-    ${getBreadcrumbQuery(language)},
+    ${getBreadcrumbModuleQuery(language)},
     ${getCardGridQuery(language)},
     ${getBillboardQuery(language)},
     ${getTextImageQuery(language)},

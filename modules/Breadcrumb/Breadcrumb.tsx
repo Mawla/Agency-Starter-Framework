@@ -1,11 +1,10 @@
-import React from 'react';
-
-import { Breadcrumb as BreadcrumbComponent } from '../../components/Breadcrumb/Breadcrumb';
-import { BackgroundColorType } from '../../components/module/BackgroundOptions';
-import { SpaceType } from '../../components/module/SpacingOptions';
-import { Wrapper } from '../../components/module/Wrapper';
-import { SitemapType } from '../../queries/sitemap';
-import { ColorType } from '../../types';
+import { Breadcrumb as BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
+import { BackgroundColorType } from "../../components/module/BackgroundOptions";
+import { SpaceType } from "../../components/module/SpacingOptions";
+import { Wrapper } from "../../components/module/Wrapper";
+import { FlatBreadcrumbType } from "../../queries/breadcrumb";
+import { ColorType } from "../../types";
+import React from "react";
 
 export type BreadcrumbProps = {
   theme?: {
@@ -13,7 +12,7 @@ export type BreadcrumbProps = {
     background?: BackgroundColorType;
     space?: SpaceType;
   };
-  path?: SitemapType;
+  path?: FlatBreadcrumbType;
 };
 
 export const Breadcrumb = ({ theme, path }: BreadcrumbProps) => {
@@ -22,8 +21,8 @@ export const Breadcrumb = ({ theme, path }: BreadcrumbProps) => {
       theme={{
         ...theme,
         space: {
-          top: theme?.space?.top || 'sm',
-          bottom: theme?.space?.bottom || 'sm',
+          top: theme?.space?.top || "sm",
+          bottom: theme?.space?.bottom || "sm",
         },
       }}
       id="breadcrumb"

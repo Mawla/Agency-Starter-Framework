@@ -1,24 +1,18 @@
 import { PageContext } from "../../context/PageContext";
-import { SiteContext } from "../../context/SiteContext";
-import { getBreadCrumbForPath } from "../../helpers/sitemap/getBreadCrumbForPath";
-import { languages, LanguageType } from "../../languages";
+import { languages } from "../../languages";
+import { FlatBreadcrumbType } from "../../queries/breadcrumb";
 import { SitemapItemType } from "../../queries/sitemap";
 import cx from "classnames";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 
 export type BreadcrumbProps = {
-  path?: SitemapItemType[];
+  path?: FlatBreadcrumbType;
 };
 
 export const Breadcrumb = ({ path }: BreadcrumbProps) => {
-  const { isPreviewMode, language } = React.useContext(PageContext);
-  const { sitemap } = React.useContext(SiteContext);
-  const pathname = usePathname();
-
-  path =
-    path || getBreadCrumbForPath(pathname, sitemap, language as LanguageType);
+  const { isPreviewMode, breadcrumb } = React.useContext(PageContext);
+  path = path || breadcrumb;
 
   if (isPreviewMode) {
     path = "Path to page".split(" ").map((label) => ({
@@ -27,12 +21,12 @@ export const Breadcrumb = ({ path }: BreadcrumbProps) => {
       title: label,
       titles: languages.reduce(
         (acc, curr) => ({ ...acc, [curr.id]: label }),
-        {}
+        {},
       ) as SitemapItemType["titles"],
       path: `/${label}`,
       paths: languages.reduce(
         (acc, curr) => ({ ...acc, [curr.id]: `/${curr.id}` }),
-        {}
+        {},
       ) as SitemapItemType["paths"],
       _updatedAt: "",
     }));
@@ -64,8 +58,9 @@ export const Breadcrumb = ({ path }: BreadcrumbProps) => {
               className={cx(
                 "opacity-75 underline-offset-2 hover:underline hover:opacity-100 transition-opacity text-current",
                 {
-                  ["font-bold"]: index === (path || []).length - 1,
-                }
+                  ["font-bold pointer-events-none"]:
+                    index === (path || []).length - 1,
+                },
               )}
             >
               <span itemProp="name">{item.title}</span>

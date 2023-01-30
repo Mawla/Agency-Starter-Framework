@@ -5,11 +5,7 @@ import { ConfigType, getConfigQuery } from "../queries/config";
 import { getFooterQuery, FooterType } from "../queries/footer";
 import { getNavigationQuery, NavigationType } from "../queries/navigation";
 import { getPageQuery, PageType } from "../queries/page";
-import {
-  SitemapItemType,
-  getSitemapQuery,
-  SitemapType,
-} from "../queries/sitemap";
+import { SitemapItemType } from "../queries/sitemap";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
 
@@ -18,7 +14,6 @@ export default function Custom404({
   navigation,
   footer,
   isPreviewMode,
-  sitemap,
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -28,7 +23,6 @@ export default function Custom404({
       isPreviewMode={isPreviewMode}
       footer={footer}
       config={config}
-      sitemap={sitemap}
     />
   );
 }
@@ -40,7 +34,6 @@ type StaticProps = {
   page: PageType;
   isPreviewMode?: boolean;
   revalidate?: number;
-  sitemap: SitemapType;
 };
 
 export const getStaticProps: GetStaticProps = async ({
@@ -49,11 +42,6 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const isPreviewMode = preview;
   const language = locale as LanguageType;
-
-  // fetch sitemap
-  const sitemap: SitemapType = await getClient(isPreviewMode).fetch(
-    getSitemapQuery(),
-  );
 
   // fetch config
   const config: ConfigType = await getClient(isPreviewMode).fetch(
@@ -105,7 +93,6 @@ export const getStaticProps: GetStaticProps = async ({
     navigation,
     page,
     isPreviewMode,
-    sitemap,
   };
 
   return { props, revalidate: 10 };

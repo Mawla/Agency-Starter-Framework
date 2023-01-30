@@ -1,14 +1,12 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
-import { SiteContext } from "../../context/SiteContext";
-import { getBreadCrumbForPath } from "../../helpers/sitemap/getBreadCrumbForPath";
 import { languages, LanguageType } from "../../languages";
 import { IconType } from "../../types";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
-import { usePathname } from "next/navigation";
-import { useContext, useMemo } from "react";
+import { useRouter } from "next/router";
+import { useContext } from "react";
 
 type LanguageSwitchProps = {
   align?: "left" | "right";
@@ -25,49 +23,27 @@ export const LanguageSwitch = ({
   align = "right",
   position = "below",
 }: LanguageSwitchProps) => {
-  const { sitemap } = useContext(SiteContext);
-  const { language } = useContext(PageContext);
-
-  const pathname = usePathname();
+  const { sitemapItem, language } = useContext(PageContext);
 
   if (languages?.length === 1) return null;
 
-  /**
-   * Find the nearest page in the breadcrumb that has a path for the current locale
-   * falling back to the root path if none is found
-   */
+  const links = languages
+    .filter(({ id }) => sitemapItem?.excludeFromSitemap?.[id] !== true)
+    .map(({ id, title }) => ({
+      title,
+      href: sitemapItem?.paths?.[id],
+      languageId: id,
+    }));
 
-  const breadcrumb = getBreadCrumbForPath(
-    pathname,
-    sitemap,
-    language as LanguageType,
-  );
-  const availableLanguagePages: Record<LanguageType, string> = useMemo(() => {
-    return languages.reduce((acc, { id }) => {
-      acc[id] = `/${id}`;
-      breadcrumb.forEach((item) => {
-        if (item.paths?.[id] && item.excludeFromSitemap?.[id] !== true) {
-          acc[id] = item.paths[id];
-        }
-      });
-      return acc;
-    }, {} as Record<LanguageType, string>);
-  }, [breadcrumb, language, sitemap]);
+  if (!links.length || links.length === 1) return null;
 
   return (
     <RadixNavigationMenu.Item className="relative">
       <noscript>
         <ul>
-          {languages.map(({ id, title }) => (
-            <li key={id}>
-              <Link
-                href={
-                  availableLanguagePages && availableLanguagePages[id]
-                    ? availableLanguagePages[id]
-                    : "/"
-                }
-                locale={id}
-              >
+          {links.map(({ title, href, languageId }) => (
+            <li key={languageId}>
+              <Link href={href} locale={languageId}>
                 {title}
               </Link>
             </li>
@@ -90,16 +66,14 @@ export const LanguageSwitch = ({
         )}
       >
         <span className="w-5 aspect-square">
-          {language && (
-            <IconLoader
-              icon={FLAGS[language as LanguageType]}
-              path="flags/"
-              removeColors={false}
-              className="w-4 h-4"
-            />
-          )}
+          <IconLoader
+            icon={FLAGS[language]}
+            path="flags/"
+            removeColors={false}
+            className="w-4 h-4"
+          />
         </span>
-        <span>{language?.toUpperCase()}</span>
+        <span>{language.toUpperCase()}</span>
         <IconLoader icon="chevron" className="w-4 h-4 text-neutral-50" />
       </RadixNavigationMenu.Trigger>
 
@@ -118,27 +92,24 @@ export const LanguageSwitch = ({
             "bg-white border-2 border-neutral-85 rounded-md",
           )}
         >
-          {languages.map(({ id, title }) => (
-            <RadixNavigationMenu.Item key={id}>
+          {links.map(({ title, href, languageId }) => (
+            <RadixNavigationMenu.Item key={languageId}>
               <Link
-                href={
-                  availableLanguagePages && availableLanguagePages[id]
-                    ? availableLanguagePages[id]
-                    : "/"
-                }
-                locale={id}
+                href={href}
+                locale={languageId}
                 className={cx(
                   "hover:underline flex underline-offset-4 gap-3",
                   "text-neutral-base",
                   "text-md",
                   "p-3",
                   {
-                    ["font-bold bg-action-light rounded-sm"]: language === id,
+                    ["font-bold bg-action-light rounded-sm"]:
+                      language === languageId,
                   },
                 )}
               >
                 <IconLoader
-                  icon={FLAGS[id]}
+                  icon={FLAGS[languageId]}
                   path="flags/"
                   removeColors={false}
                   className="w-5 aspect-square"

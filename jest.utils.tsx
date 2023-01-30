@@ -1,6 +1,7 @@
 import { PageContext } from "./context/PageContext";
 import { SiteContext } from "./context/SiteContext";
 import { SitemapItemType } from "./queries/sitemap";
+import { DEMO_FLAT_BREADCRUMB } from "./test/fixtures/breadcrumb";
 // test-utils.js
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
@@ -68,7 +69,6 @@ const Wrapper = ({ children }: { children: React.ReactElement }) => {
     <SiteContext.Provider
       value={{
         config: { general: {} },
-        sitemap: DEMO_SITEMAP,
       }}
     >
       <PageContext.Provider
@@ -76,6 +76,7 @@ const Wrapper = ({ children }: { children: React.ReactElement }) => {
           isPreviewMode: false,
           language: "en",
           sitemapItem: DEMO_SITEMAP[0],
+          breadcrumb: DEMO_FLAT_BREADCRUMB,
         }}
       >
         <QueryClientProvider client={queryClient}>

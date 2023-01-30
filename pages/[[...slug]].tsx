@@ -1,7 +1,12 @@
 import { getClient } from "../helpers/sanity/server";
+import { getFlatBreadcrumb } from "../helpers/sitemap/getFlatBreadcrumb";
 import { baseLanguage, languages, LanguageType } from "../languages";
 import { LoadingPage } from "../layout/pages/LoadingPage";
 import { Page } from "../layout/pages/Page";
+import {
+  FlatBreadcrumbType,
+  NestedBreadcrumbType,
+} from "../queries/breadcrumb";
 import { ConfigType, getConfigQuery } from "../queries/config";
 import { getFooterQuery, FooterType } from "../queries/footer";
 import { getNavigationQuery, NavigationType } from "../queries/navigation";
@@ -27,7 +32,6 @@ const SlugPage = ({
   footer,
   page,
   preview,
-  sitemap,
   sitemapItem,
   locked,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -42,7 +46,6 @@ const SlugPage = ({
       isPreviewMode={preview}
       footer={footer}
       config={config}
-      sitemap={sitemap}
       sitemapItem={sitemapItem}
       locked={locked}
     />
@@ -59,8 +62,8 @@ type StaticProps = {
   page: PageType;
   preview?: boolean;
   revalidate?: number;
-  sitemap: SitemapType;
   sitemapItem?: SitemapItemType;
+  breadcrumb?: FlatBreadcrumbType;
   locked?: boolean;
 };
 
@@ -130,13 +133,18 @@ export const getStaticProps: GetStaticProps = async ({
 
   if (page.navigation) navigation = page.navigation;
 
+  if (page?.breadcrumb)
+    page.breadcrumb = [
+      page?.homepage,
+      ...getFlatBreadcrumb(page.breadcrumb as NestedBreadcrumbType).reverse(),
+    ].filter(Boolean);
+
   const props: StaticProps = {
     config,
     footer,
     navigation,
     page,
     preview,
-    sitemap,
     sitemapItem,
   };
 

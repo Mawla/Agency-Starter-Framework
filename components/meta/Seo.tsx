@@ -1,10 +1,8 @@
 import { PageContext } from "../../context/PageContext";
-import { getBreadCrumbForPath } from "../../helpers/sitemap/getBreadCrumbForPath";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
 import { LanguageType } from "../../languages";
 import { ConfigType } from "../../queries/config";
 import { PageType } from "../../queries/page";
-import { SitemapType } from "../../queries/sitemap";
 import { ScriptJsonLd } from "./ScriptJsonLd";
 import { BreadcrumbJsonLd, LogoJsonLd, NextSeo } from "next-seo";
 import NextHead from "next/head";
@@ -17,11 +15,10 @@ const TagManager = require("react-gtm-module");
 export type SeoProps = {
   config?: ConfigType;
   page?: PageType;
-  sitemap?: SitemapType;
   isPreviewMode?: boolean;
 };
 
-export const Seo = ({ config, page, sitemap, isPreviewMode }: SeoProps) => {
+export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
   const router = useRouter();
   const { sitemapItem } = useContext(PageContext);
   const pagePath = usePathname() || "/";
@@ -35,7 +32,7 @@ export const Seo = ({ config, page, sitemap, isPreviewMode }: SeoProps) => {
       TagManager.initialize({ gtmId: config?.integrations?.gtmid });
   }, [config?.integrations?.gtmid, isPreviewMode]);
 
-  if (!config?.seo || !page || !sitemap || !sitemapItem) return null;
+  if (!config?.seo || !page || !sitemapItem) return null;
 
   const language = router.locale as LanguageType;
   const sitemapItemPaths = sitemapItem?.paths;
@@ -66,8 +63,6 @@ export const Seo = ({ config, page, sitemap, isPreviewMode }: SeoProps) => {
     URL: baseUrl,
     sameAs: config?.social?.socials,
   };
-
-  const breadCrumb = getBreadCrumbForPath(pagePath, sitemap, language);
 
   const excludeFromSitemap = sitemapItem?.excludeFromSitemap?.[language];
 
@@ -115,9 +110,9 @@ export const Seo = ({ config, page, sitemap, isPreviewMode }: SeoProps) => {
 
       <LogoJsonLd logo={`${baseUrl}/logo.svg`} url={baseUrl} />
 
-      {Boolean(breadCrumb?.length) && (
+      {Boolean(page?.breadcrumb?.length) && (
         <BreadcrumbJsonLd
-          itemListElements={breadCrumb.map(({ title, path }, index) => ({
+          itemListElements={page.breadcrumb.map(({ title, path }, index) => ({
             position: index + 1,
             name: title,
             item: getURLForPath(config?.general?.domain, path),

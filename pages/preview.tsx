@@ -31,7 +31,6 @@ export default function PreviewPage({
 }) {
   const isPreviewMode = preview;
   const router = useRouter();
-  const { sitemap } = useContext(SiteContext);
 
   const [page, setPage] = useState<PageType | null>(null);
   const [navigation] = useState<NavigationType | null>(null);
@@ -77,7 +76,6 @@ export default function PreviewPage({
           isPreviewMode={isPreviewMode}
           footer={footer as FooterType}
           config={config}
-          sitemap={sitemap}
         />
       )}
     </div>

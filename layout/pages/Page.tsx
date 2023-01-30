@@ -8,7 +8,7 @@ import { ConfigType } from "../../queries/config";
 import { FooterType } from "../../queries/footer";
 import { NavigationType } from "../../queries/navigation";
 import { PageType } from "../../queries/page";
-import { SitemapItemType, SitemapType } from "../../queries/sitemap";
+import { SitemapItemType } from "../../queries/sitemap";
 import { Footer } from "../Footer/Footer";
 import { Nav } from "../Nav/Nav";
 import { DefaultPage } from "./DefaultPage";
@@ -22,7 +22,6 @@ export type PageProps = {
   page: PageType;
   footer: FooterType;
   config: ConfigType;
-  sitemap: SitemapType;
   sitemapItem?: SitemapItemType;
   locked?: boolean;
 };
@@ -33,7 +32,6 @@ export const Page = ({
   page,
   footer,
   config,
-  sitemap,
   sitemapItem,
   locked,
 }: PageProps) => {
@@ -56,7 +54,6 @@ export const Page = ({
   return (
     <SiteContext.Provider
       value={{
-        sitemap,
         config,
       }}
     >
@@ -65,14 +62,10 @@ export const Page = ({
           isPreviewMode,
           sitemapItem: sitemapItem || ({} as SitemapItemType),
           language: router.locale as LanguageType,
+          breadcrumb: page?.breadcrumb,
         }}
       >
-        <Seo
-          page={page}
-          config={config}
-          sitemap={sitemap}
-          isPreviewMode={isPreviewMode}
-        />
+        <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
 
         {page && navigation && !isPreviewMode && (
           <Nav
