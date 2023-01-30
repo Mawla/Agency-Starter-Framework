@@ -178,7 +178,7 @@ export const LivePreview = ({
       );
 
       listener = frontendClient?.current
-        ?.listen(`*[_id == "${pageId}"] { _updatedAt }`, {
+        ?.listen(`*[_id == "${pageId}"] { _rev }`, {
           includeResult: false,
         })
         .subscribe((mutation: any) => {
