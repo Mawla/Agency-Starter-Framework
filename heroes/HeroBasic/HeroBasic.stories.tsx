@@ -11,7 +11,7 @@ export default {
 
 export const Default = () => (
   <HeroBasic
-    title="Hello Prima"
+    title="Hello"
     text={
       <p>
         Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -37,7 +37,7 @@ export const Colors = () => (
           (color2: ColorType) => (
             <div key={color1 + color2} className="mb-10">
               <HeroBasic
-                title="Hello prima."
+                title="Hello."
                 buttons={[
                   {
                     label: "get some inspiration",
