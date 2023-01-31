@@ -51,9 +51,9 @@ const schema = defineType({
       ...MODULES_FIELD,
       title: "Module",
       description: null as any,
-      validation: (Rule: StringRule) => Rule.required().length(1),
+      validation: (Rule: StringRule) => Rule.required(),
       of: Object.keys({ ...MODULE_SCHEMAS, ...HERO_SCHEMAS }).map(
-        (type: any) => ({ type })
+        (type: any) => ({ type }),
       ),
     } as any),
     defineField({
