@@ -25,6 +25,9 @@ export type StoryProps = {
     image?: {
       align?: StoryAlignType;
     };
+    quote?: {
+      showQuotes: boolean;
+    };
   };
   label?: string;
   quote?: string;
@@ -58,7 +61,7 @@ export const Story = ({
       name: config?.general?.name,
       description: config?.seo?.description,
       logo: `${getURLForPath(config?.general?.domain, "/logo.svg")}`,
-      url: getURLForPath(config?.general?.domain, router?.asPath),
+      url: getURLForPath(config?.general?.domain, router?.asPath, language),
       sameAs: config?.social?.socials,
     },
     name: quote,
@@ -113,58 +116,77 @@ export const Story = ({
 
           {backgroundImage && <span className="block h-10 md:h-8" />}
 
-          {quote && (
-            <p className="relative text-title-md-sm md:text-title-xl-md lg:text-title-2xl-lg font-bold leading-relaxed sm:max-w-[75%] md:max-w-none">
-              {theme?.module?.width !== "inner" &&
-              theme?.image?.align === "right" ? (
-                <span className="absolute top-0 -left-0 -translate-x-[120%]">
-                  &ldquo;
-                </span>
-              ) : (
-                <>&ldquo;</>
-              )}
-              {quote}&rdquo;
-            </p>
-          )}
+          <div
+            className={cx(
+              "min-h-[15vw] md:min-h-[min(30vw,500px)] flex flex-col justify-center gap-6 lg:gap-8 ",
+              {
+                ["md:text-right md:items-end"]: theme?.image?.align === "left",
+              },
+            )}
+          >
+            {quote && (
+              <p className="relative text-title-md-sm md:text-title-xl-md lg:text-title-2xl-lg font-bold leading-relaxed sm:max-w-[75%] md:max-w-none">
+                {theme?.quote?.showQuotes !== false && (
+                  <>
+                    {theme?.module?.width !== "inner" &&
+                    theme?.image?.align !== "left" ? (
+                      <span className="absolute top-0 -left-0 -translate-x-[120%]">
+                        &ldquo;
+                      </span>
+                    ) : (
+                      <>&ldquo;</>
+                    )}
+                  </>
+                )}
+                {quote}
+                {theme?.quote?.showQuotes !== false && <>&rdquo;</>}
+              </p>
+            )}
 
-          {text && (
-            <p className="opacity-75 max-w-[450px] text-title-sm-sm md:text-title-sm-md lg:text-title-sm-lg">
-              {text}
-            </p>
-          )}
+            {text && (
+              <p className="opacity-75 max-w-[450px] text-title-sm-sm md:text-title-sm-md lg:text-title-sm-lg">
+                {text}
+              </p>
+            )}
 
-          {(person?.name || person?.position) && (
-            <span className="text-title-sm-sm md:text-title-md-md lg:text-title-md-lg">
-              <strong>{person?.name}</strong>
-              {person?.position && <span>, {person?.position}</span>}
-            </span>
-          )}
-
-          {backgroundImage && <span className="hidden md:block h-8" />}
-
-          {videoLink && (
-            <Link href={videoLink}>
-              <span className="group inline-flex gap-4 flex-row items-center">
-                <span className="order-1 text-title-sm-sm md:text-title-md-md lg:text-title-md-lg font-bold group-hover:underline underline-offset-4">
-                  {translations?.watch_video?.[language]}
-                </span>
-                <span
-                  className={cx(
-                    "bg-action-base group-hover:bg-action-light group-hover:scale-105 transition-all rounded-full w-10 md:w-16 lg:w-20 h-10 md:h-16 lg:h-20 grid",
-                    {
-                      ["md:order-1"]: theme?.image?.align === "left",
-                      ["md:order-0"]: theme?.image?.align === "right",
-                    },
-                  )}
-                >
-                  <IconLoader
-                    icon="play"
-                    className="text-white group-hover:text-action-dark place-self-center w-4 md:w-6 lg:w-8 h-4 md:h-6 lg:h-8 translate-x-[1px] md:translate-x-[2px] lg:translate-x-[3px]"
-                  />
-                </span>
+            {(person?.name || person?.position) && (
+              <span className="text-title-sm-sm md:text-title-md-md lg:text-title-md-lg">
+                <strong>{person?.name}</strong>
+                {person?.position && (
+                  <span>
+                    {person?.name ? ", " : ""}
+                    {person?.position}
+                  </span>
+                )}
               </span>
-            </Link>
-          )}
+            )}
+
+            {backgroundImage && <span className="hidden md:block h-8" />}
+
+            {videoLink && (
+              <Link href={videoLink}>
+                <span className="group inline-flex gap-4 flex-row items-center">
+                  <span className="order-1 text-title-sm-sm md:text-title-md-md lg:text-title-md-lg font-bold group-hover:underline underline-offset-4">
+                    {translations?.watch_video?.[language]}
+                  </span>
+                  <span
+                    className={cx(
+                      "bg-action-base group-hover:bg-action-light group-hover:scale-105 transition-all rounded-full w-10 md:w-16 lg:w-20 h-10 md:h-16 lg:h-20 grid",
+                      {
+                        ["md:order-1"]: theme?.image?.align === "left",
+                        ["md:order-0"]: theme?.image?.align === "right",
+                      },
+                    )}
+                  >
+                    <IconLoader
+                      icon="play"
+                      className="text-white group-hover:text-action-dark place-self-center w-4 md:w-6 lg:w-8 h-4 md:h-6 lg:h-8 translate-x-[1px] md:translate-x-[2px] lg:translate-x-[3px]"
+                    />
+                  </span>
+                </span>
+              </Link>
+            )}
+          </div>
         </blockquote>
 
         {image && (
