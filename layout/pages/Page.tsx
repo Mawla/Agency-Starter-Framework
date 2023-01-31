@@ -77,7 +77,7 @@ export const Page = ({
 
         <DefaultPage {...page} />
 
-        {isPreviewMode && (
+        {isPreviewMode && pagePath !== "/preview" && (
           <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
             <PreviewButton pagePath={pagePath} />
           </div>
