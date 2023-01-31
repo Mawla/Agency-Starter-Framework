@@ -576,7 +576,7 @@ export const DemoPersonCard = () => (
         image: demoImage,
         theme: {
           title: { size: "md", color: "brand-base" },
-          subtitle: { size: "md", color: "neutral-base", weight: "book" },
+          subtitle: { size: "md", color: "neutral-base", weight: "regular" },
           image: { rounded: "xl", ratio: "3/2", height: "lg" },
           text: { color: "neutral-25" },
         },

@@ -1,9 +1,8 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import { demoImage2, demoImage4, demoImage5 } from "../../stories/content";
 import { Billboard } from "./Billboard";
 import { AlignType, ALIGN_OPTIONS } from "./BillboardOptions";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: Billboard,
@@ -24,7 +23,7 @@ export const Default = () => (
         </p>
       }
       image={demoImage5}
-      buttons={[{ label: "Button", variant: "white" }]}
+      buttons={[{ label: "Button", variant: "primary" }]}
     />
     <Billboard
       eyebrow="Sports sponsorships"
@@ -38,7 +37,7 @@ export const Default = () => (
         </p>
       }
       image={demoImage5}
-      buttons={[{ label: "Button", variant: "white" }]}
+      buttons={[{ label: "Button", variant: "primary" }]}
       theme={{
         image: { align: "left" },
       }}
@@ -90,7 +89,7 @@ export const LongContent = () => (
       </>
     }
     image={demoImage5}
-    buttons={[{ label: "Button", variant: "white" }]}
+    buttons={[{ label: "Button", variant: "primary" }]}
   />
 );
 

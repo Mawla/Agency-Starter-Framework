@@ -13,11 +13,11 @@ export const SIZE_OPTIONS = pick(
   "xl",
   "2xl",
   "3xl",
-  "4xl"
+  "4xl",
 );
 export type SizeType = keyof typeof SIZE_OPTIONS;
 
-export const WEIGHT_OPTIONS = pick(FONT_WEIGHTS, "book", "bold");
+export const WEIGHT_OPTIONS = pick(FONT_WEIGHTS, "regular", "bold");
 export type WeightType = keyof typeof WEIGHT_OPTIONS;
 
 export type TitleProps = {
@@ -42,7 +42,7 @@ const sizeClasses: Record<SizeType, string> = {
 };
 
 const weightClasses: Record<WeightType, string> = {
-  book: "font-book",
+  regular: "font-regular",
   bold: "font-bold",
 };
 
@@ -69,7 +69,7 @@ export const Title = ({
         textClasses[color],
         sizeClasses[size],
         weightClasses[weight],
-        className
+        className,
       )}
     >
       {eyebrow && (
@@ -80,7 +80,7 @@ export const Title = ({
             textClasses[eyebrowColor],
             {
               ["opacity-75"]: eyebrowColor === "white",
-            }
+            },
           )}
         >
           {eyebrow}&nbsp;
