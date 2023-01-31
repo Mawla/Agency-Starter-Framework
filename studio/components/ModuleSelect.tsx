@@ -34,7 +34,7 @@ export function useDebounce(value: any, delay: number) {
 }
 
 type OptionType = {
-  _type: ModuleSchemaName;
+  _type: ModuleSchemaName | "page.preset";
   schemaTitle: string;
   value: ModuleSchemaName | string;
   icon: React.ReactElement;
@@ -43,12 +43,8 @@ type OptionType = {
   hidden?: (pageType: string) => boolean;
   borderTop?: boolean;
   image?: string;
-  preset?: {
-    _type: ModuleSchemaName;
-    _id: string;
-    language: LanguageType;
-  };
   initialValue?: {};
+  modules?: any[];
 };
 
 export type ModuleSelectProps = {
@@ -103,7 +99,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
 
       const moduleTypes = Object.keys(allSchemas)
         .filter((type) =>
-          typeFilter ? new RegExp(typeFilter).test(type) : true
+          typeFilter ? new RegExp(typeFilter).test(type) : true,
         )
         .filter((type) => !type.startsWith("studio."))
         .map((type) => allSchemas[type].get(type))
@@ -124,34 +120,37 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
       let presets: {
         title?: string;
         _id?: string;
-        _type?: string;
+        _type?: "page.preset";
         name?: string;
         description?: string;
-        preset?: any;
+        modules?: any[];
         usedBy?: number;
         image?: string;
       }[] = await client.fetch(`
         *[_type == 'page.preset' && defined(modules) && !(_id in path("drafts.*"))] {
           title,
           _id,
-          "_type": modules[0]._type,
+          _type,
           "name": _id,
           description,
-          "preset": modules[0],
           "usedBy": count(*[references(^._id)]),
-          "image": image.asset->url
+          "image": image.asset->url,
+          modules[]
         } | order(usedBy desc)`);
 
-      presets = presets
-        .map((preset) => ({
-          ...preset,
-          icon: allSchemas[preset.preset?._type]?.get()?.icon,
-          hidden: allSchemas[preset.preset?._type]?.get()?.hidden,
-          initialValue: preset.preset,
-        }))
-        .filter(({ preset }) =>
-          typeFilter ? new RegExp(typeFilter).test(preset?._type) : true
-        );
+      presets = presets.map((preset) => ({
+        ...preset,
+        modules: preset?.modules
+          ?.map((module) => ({
+            ...module,
+            icon: allSchemas[module?._type]?.get()?.icon,
+            hidden: allSchemas[module?._type]?.get()?.hidden,
+            initialValue: module,
+          }))
+          .filter(({ _type }) =>
+            typeFilter ? new RegExp(typeFilter).test(_type) : true,
+          ),
+      }));
 
       /**
        * Make list of options
@@ -169,9 +168,9 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           icon,
           description,
           initialValue,
-          preset,
           image,
           hidden,
+          modules,
         }) => {
           // for the current page type (unless we're looking at presets) call the hide function on the option schema
           if (document._type !== "page.preset" && hidden?.(document._type)) {
@@ -186,16 +185,16 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
             label: title,
             description,
             initialValue,
-            preset,
             image,
+            modules,
           };
 
           return obj;
-        }
+        },
       );
 
       const filteredOptions: OptionType[] = options.filter(
-        Boolean
+        Boolean,
       ) as OptionType[];
 
       /**
@@ -203,10 +202,10 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
        */
 
       const firstStudioModuleIndex = filteredOptions.findIndex(({ _type }) =>
-        _type.startsWith("studio.")
+        _type.startsWith("studio."),
       );
-      const firstPresetIndex = filteredOptions.findIndex(({ preset }) =>
-        Boolean(preset)
+      const firstPresetIndex = filteredOptions.findIndex(({ _type }) =>
+        Boolean(_type == "page.preset"),
       );
 
       if (firstStudioModuleIndex > -1) {
@@ -240,35 +239,38 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
       if (!selectedValue) return setState("default");
 
       const selectedOption = options.find(
-        ({ value }) => value === selectedValue
+        ({ value }) => value === selectedValue,
       );
-      const selectedType: ModuleSchemaName | undefined = selectedOption?._type;
+      if (!selectedOption) return;
+
+      const selectedType: ModuleSchemaName | "page.preset" | undefined =
+        selectedOption?._type;
+      const presetId =
+        selectedOption._type == "page.preset" ? selectedValue : null;
 
       if (!selectedType) return;
 
-      const moduleSchema = allSchemas[selectedType]?.get();
-
-      const presetId = selectedOption?.preset ? selectedValue : null;
-
-      const obj: {
+      let newModules: {
         _key?: string;
         _type: ModuleSchemaName;
         preset?: { _ref: string; _weak: boolean };
         language?: LanguageType;
-      } = {
-        _type: selectedType as ModuleSchemaName,
-        ...selectedOption?.initialValue,
-      };
+      }[] = [];
 
-      if (
-        moduleSchema.fields.find(
-          (field: { name: string }) => field.name === "language"
-        )
-      ) {
-        obj.language =
-          getCurrentLanguages().length === 1
-            ? (getCurrentLanguages()[0] as LanguageType)
-            : baseLanguage;
+      console.log(selectedOption, presetId);
+
+      if (presetId) {
+        newModules = (selectedOption?.modules || []).map((module) => ({
+          _type: selectedType as ModuleSchemaName,
+          ...module,
+        }));
+      } else {
+        newModules = [
+          {
+            _type: selectedType as ModuleSchemaName,
+            ...selectedOption?.initialValue,
+          },
+        ];
       }
 
       // want to have sanity generate fresh keys so removing them here
@@ -279,13 +281,30 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
         }
       }
 
-      freshKeys(obj);
-      obj._key = nanoid();
+      newModules = newModules.map((module) => {
+        const moduleSchema = allSchemas[module._type]?.get();
 
-      // add back link to preset
-      if (presetId) {
-        obj.preset = { _ref: presetId, _weak: true };
-      }
+        if (
+          moduleSchema.fields.find(
+            (field: { name: string }) => field.name === "language",
+          )
+        ) {
+          module.language =
+            getCurrentLanguages().length === 1
+              ? (getCurrentLanguages()[0] as LanguageType)
+              : baseLanguage;
+        }
+
+        freshKeys(module);
+        module._key = nanoid();
+
+        // add back link to preset
+        if (presetId) {
+          module.preset = { _ref: presetId, _weak: true };
+        }
+
+        return module;
+      });
 
       try {
         /**
@@ -302,7 +321,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
         await client
           .patch(draftId)
           .setIfMissing({ [updateField]: [] })
-          .insert("after", `${updateField}[-1]`, [obj])
+          .insert("after", `${updateField}[-1]`, newModules)
           .commit({
             /**
              * setting this to true leads to a bug when other modules are duplicated
@@ -320,13 +339,13 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           });
 
         // click the last item in the list to open the editor dialog
-        setTimeout(() => {
-          const items = window.document.querySelectorAll(
-            `[id="${updateField}"] [data-testid="default-preview"]`
-          ) as NodeList;
-          const lastItem = items[items.length - 1] as HTMLElement;
-          lastItem?.click();
-        }, 0);
+        // setTimeout(() => {
+        //   const items = window.document.querySelectorAll(
+        //     `[id="${updateField}"] [data-testid="default-preview"]`,
+        //   ) as NodeList;
+        //   const lastItem = items[items.length - 1] as HTMLElement;
+        //   lastItem?.click();
+        // }, 0);
 
         try {
           onChange?.();
@@ -372,7 +391,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
     <Autocomplete
       id="moduleSelect"
       filterOption={search}
-      disabled={!document._id}
       fontSize={2}
       radius={0}
       icon={SearchIcon}
@@ -421,15 +439,23 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
                 <Stack space={2}>
                   <Text size={2}>{option.label}</Text>
                   <Text size={1} muted>
-                    {option.preset?.language && (
-                      <span>[{option.preset.language}]</span>
+                    {option.modules?.[0]?.language && (
+                      <span>
+                        [
+                        {option.modules
+                          ?.map(({ language }) => language)
+                          .join(", ")}
+                        ]
+                      </span>
                     )}{" "}
                     {option.description}
                   </Text>
                 </Stack>
               </Box>
 
-              {option.preset && <Badge mode="outline">preset</Badge>}
+              {option._type == "page.preset" && (
+                <Badge mode="outline">preset</Badge>
+              )}
             </Flex>
           </Card>
         );
