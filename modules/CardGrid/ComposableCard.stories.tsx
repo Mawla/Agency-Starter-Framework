@@ -1,6 +1,3 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import {
   VariantType,
   VARIANT_OPTIONS as BADGE_VARIANT_OPTIONS,
@@ -48,6 +45,8 @@ import {
   TitleColorType,
   TITLE_COLOR_OPTIONS,
 } from "./ComposableCardOptions";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: ComposableCard,
@@ -109,7 +108,7 @@ export const Badges = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -130,8 +129,8 @@ export const Icons = () => (
                 }}
               />
             </div>
-          )
-        )
+          ),
+        ),
     )}
   </div>
 );
@@ -148,7 +147,7 @@ export const BorderColors = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -165,7 +164,7 @@ export const TitleColors = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -182,7 +181,7 @@ export const TitleSizes = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -214,7 +213,7 @@ export const SubtitleColors = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -231,7 +230,7 @@ export const SubtitleSizes = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -264,7 +263,7 @@ export const TextColors = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -281,7 +280,7 @@ export const TextSizes = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -303,7 +302,7 @@ export const Alignments = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -394,7 +393,7 @@ export const CardSpacing = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -422,10 +421,10 @@ export const ImageSizes = () => (
                   },
                 }}
               />
-            )
+            ),
           )}
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -445,7 +444,7 @@ export const ImageRounded = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -473,7 +472,7 @@ export const CardEffects = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </div>
 );
@@ -655,33 +654,6 @@ export const DemoDepartmentCard = () => (
           title: { size: "lg", color: "neutral-base" },
           text: { size: "md", color: "neutral-25" },
           image: { height: "sm", ratio: "1/1", rounded: "full" },
-        },
-      }}
-    />
-  </div>
-);
-
-export const DemoPressReleaseCard = () => (
-  <div className="w-96">
-    <ComposableCard
-      {...{
-        type: "card.composable",
-        title: "Press release title two lorem ipsum dolor sit amet",
-        badge: "26 Sept 2022",
-        cover: demoImage3,
-        buttons: [
-          {
-            label: "Read press release",
-            href: "/",
-            variant: "tertiary",
-            alt: true,
-          },
-        ],
-        theme: {
-          card: { background: "neutral-95" },
-          title: { size: "md", color: "neutral-base" },
-          text: { size: "md", color: "neutral-25" },
-          badge: { variant: "neutral", alt: true },
         },
       }}
     />

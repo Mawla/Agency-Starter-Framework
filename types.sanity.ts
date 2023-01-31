@@ -23,7 +23,6 @@ export const SCHEMAS = {
   "page.home": "",
   "page.notfound": "",
   "page.preset": "",
-  "page.pressrelease": "",
   footer: "",
   navigation: "",
   password: "",
@@ -34,12 +33,7 @@ export const SCHEMAS = {
 
 export type SchemaName = keyof typeof SCHEMAS;
 
-export const LINKABLE_SCHEMAS = pick(
-  SCHEMAS,
-  "page.content",
-  "page.home",
-  "page.pressrelease",
-);
+export const LINKABLE_SCHEMAS = pick(SCHEMAS, "page.content", "page.home");
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
 
@@ -53,7 +47,6 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "page.content",
   "page.home",
   "page.notfound",
-  "page.pressrelease",
   "person",
 );
 

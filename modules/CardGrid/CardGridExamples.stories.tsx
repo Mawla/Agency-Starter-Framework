@@ -515,43 +515,6 @@ export const DemoPeopleCardGrid = () => (
   />
 );
 
-export const DemoPressReleasesCardGrid = () => (
-  <CardGrid
-    title="Lorem ipsum"
-    eyebrow="Press releases"
-    theme={{
-      grid: {
-        stagger: true,
-        gapHorizontal: "md",
-        gapVertical: "md",
-        columns: 3,
-      },
-    }}
-    items={
-      new Array(6).fill({
-        type: "card.composable",
-        title: "Press release title two lorem ipsum dolor sit amet",
-        badge: "26 Sept 2022",
-        cover: demoImage3,
-        buttons: [
-          {
-            label: "Read press release",
-            href: "/",
-            variant: "tertiary",
-            alt: true,
-          },
-        ],
-        theme: {
-          card: { background: "neutral-95" },
-          title: { size: "md", color: "neutral-base" },
-          text: { size: "md", color: "neutral-25" },
-          badge: { variant: "neutral", alt: true },
-        },
-      }) as ComposableCardProps[]
-    }
-  />
-);
-
 export const DemoObjectivesCardGrid = () => (
   <CardGrid
     title="Lorem ipsum"

@@ -64,7 +64,6 @@ export const getSitemapQuery = () => {
     // content pages
     ...*[
       _type == "page.content"
-       || _type == "page.pressrelease"
       ] {
       ${baseFields},
 

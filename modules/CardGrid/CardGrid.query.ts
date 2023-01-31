@@ -50,24 +50,6 @@ _type == "module.cardgrid" => {
       "text": description.${language},
       "image": ${imageQuery},
     },
-    
-    // press release cards
-    feed.type == 'pressrelease' => *[_type == 'page.pressrelease' && !(_id in path("drafts.**")) && defined(publishedAt) && dateTime(publishedAt + 'T00:00:00Z') < dateTime(now())] {
-      "type": 'card.composable',
-      _id,
-      publishedAt,
-      "_key": _id,
-      "themeName": "${COMPOSABLE_CARD_THEME_OPTIONS.pressrelease}",
-      "title": title.${language},
-      "badge": publishedAt,
-      "text": description.${language},
-      "cover": ${imageQuery},
-      "buttons": [{ 
-        "label": ${getTranslationQuery("read_more", language)},
-        "variant": 'secondary',
-        "href": ${resolveIdHrefQuery}
-      }]
-    } | order(publishedAt desc, _updatedAt desc) [0...3],
 
     // free form cards
     items[] {

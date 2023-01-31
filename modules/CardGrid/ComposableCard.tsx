@@ -127,12 +127,7 @@ export const COMPOSABLE_CARD_THEMES: Record<
     text: { size: "md", color: "neutral-25" },
     image: { height: "sm", ratio: "1/1", rounded: "full" },
   },
-  pressrelease: {
-    card: { background: "neutral-95" },
-    title: { size: "md", color: "neutral-base" },
-    text: { size: "md", color: "neutral-25" },
-    badge: { variant: "neutral", alt: true },
-  },
+
   person: {
     title: { size: "md", color: "brand-base" },
     subtitle: { size: "md", color: "neutral-base", weight: "book" },
@@ -206,7 +201,7 @@ export const ComposableCard = ({
               theme?.card?.shadow,
             ["transition-drop-shadow group-hover:drop-shadow-[10px_16px_5px_rgba(89,93,106,0.05)] md:group-hover:drop-shadow-[10px_16px_32px_rgba(89,93,106,0.15)]"]:
               cardClickable,
-          }
+          },
         )}
       >
         {cover && (
@@ -255,7 +250,7 @@ export const ComposableCard = ({
                   className={cx(
                     "relative inline-flex overflow-hidden max-w-full",
                     imageHeightClasses[theme?.image?.height || "sm"],
-                    ratioClasses[theme?.image?.ratio || "16/9"]
+                    ratioClasses[theme?.image?.ratio || "16/9"],
                   )}
                   style={{
                     aspectRatio:
@@ -290,7 +285,7 @@ export const ComposableCard = ({
                     {
                       ["grayscale group-hover:grayscale-0 transition-all"]:
                         theme?.card?.effect === "grayscale",
-                    }
+                    },
                   )}
                 />
               </div>

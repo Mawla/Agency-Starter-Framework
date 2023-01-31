@@ -23,7 +23,6 @@ import pageContent from "./documents/page.content";
 import pageHome from "./documents/page.home";
 import pageNotFound from "./documents/page.notfound";
 import modulePreset from "./documents/page.preset";
-import pagePressRelease from "./documents/page.pressrelease";
 import password from "./documents/password";
 import person from "./documents/person";
 import redirect from "./documents/redirect";
@@ -89,7 +88,6 @@ export const schemaTypes = [
     pageContent,
     pageHome,
     pageNotFound,
-    pagePressRelease,
     person,
   ]),
 ];

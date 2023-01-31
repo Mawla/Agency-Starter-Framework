@@ -19,7 +19,7 @@ import {
 
 export const structure = (
   S: StructureBuilder,
-  context: StructureResolverContext
+  context: StructureResolverContext,
 ) =>
   S.list()
     .title("Website")
@@ -40,12 +40,11 @@ export const structure = (
                   `_type in [
                     'page.content',
                     'page.home',
-                    'page.pressrelease'
-                  ] && !defined(parent)`
+                  ] && !defined(parent)`,
                 )
                 .child(
-                  (id: string) => nestedContentPageList(S, id, context) as any
-                )
+                  (id: string) => nestedContentPageList(S, id, context) as any,
+                ),
             ),
 
           S.divider(),
@@ -53,12 +52,8 @@ export const structure = (
           documentList(S, { type: "page.content", title: "Content pages" }),
 
           S.divider(),
-          documentList(S, {
-            type: "page.pressrelease",
-            title: "Press releases",
-          }),
           S.divider(),
-        ])
+        ]),
       ),
       group(S, {
         title: "Collections",
@@ -66,7 +61,7 @@ export const structure = (
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),
-        ])
+        ]),
       ),
 
       singleton(S, { id: "navigation", type: "navigation" }),
@@ -88,7 +83,7 @@ export const structure = (
             id: "config_translations",
             type: "config.translations",
           }),
-        ])
+        ]),
       ),
       S.documentTypeListItem("page.preset").title("Presets"),
       documentList(S, { type: "redirect", title: "Redirects" }),
@@ -102,7 +97,7 @@ export const structure = (
             .options({
               S: S,
             })
-            .id("sitemap")
+            .id("sitemap"),
         ),
       S.divider(),
       S.listItem()
@@ -114,13 +109,13 @@ export const structure = (
               embedLink: "https://hello-prima-cms-docs.super.site/",
             })
 
-            .id("guides")
+            .id("guides"),
         ),
     ]);
 
 export const defaultDocumentNode = (
   S: StructureBuilder,
-  context: DefaultDocumentNodeContext
+  context: DefaultDocumentNodeContext,
 ): DocumentBuilder => {
   const schemaType = context?.schemaType;
 
@@ -141,7 +136,7 @@ export const defaultDocumentNode = (
 
 export const PreviewView = (
   S: StructureBuilder,
-  language: LanguagesListItemType
+  language: LanguagesListItemType,
 ) =>
   S.view
     .component(PreviewIframe)
@@ -164,14 +159,14 @@ export const SeoView = (S: StructureBuilder) =>
 async function nestedContentPageList(
   S: StructureBuilder,
   id: string,
-  context: StructureResolverContext
+  context: StructureResolverContext,
 ): Promise<StructureBuilder | DocumentListBuilder | DocumentBuilder | Child> {
   const client = context.getClient({
     apiVersion: "vX",
   });
   const page = await client.fetch(
     `*[_id == $id || _id == "drafts.${id}"][0] { "title": title.en, _id, _type }`,
-    { id }
+    { id },
   );
 
   const hasChildren = await client.fetch(
@@ -179,7 +174,7 @@ async function nestedContentPageList(
      parent._ref == $id || 
      parent._ref == "drafts.${id}"
    ]) > 0`,
-    { id }
+    { id },
   );
 
   if (hasChildren) {
@@ -193,7 +188,7 @@ async function nestedContentPageList(
        $id == parent.parent._ref || "drafts.${id}" == parent.parent._ref ||
        $id == parent.parent.parent._ref || "drafts.${id}" == parent.parent.parent._ref ||
        $id == parent.parent.parent.parent._ref || "drafts.${id}" == parent.parent.parent.parent._ref
-       `
+       `,
       )
       .params({ id })
       .child((id: string): DocumentBuilder => {
