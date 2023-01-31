@@ -26,8 +26,8 @@ export default {
 export const Default = () => (
   <TextImage
     eyebrow="hello"
-    title="Prima"
-    intro={<p>prima</p>}
+    title="Hello"
+    intro={<p>Hello</p>}
     buttons={[{ label: "hello" }]}
     image={demoImage2}
   />
