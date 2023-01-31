@@ -106,7 +106,7 @@ export const structure = (
         .child(
           S.component(EmbedIframe)
             .options({
-              embedLink: "https://hello-prima-cms-docs.super.site/",
+              embedLink: "https://mawla-cms-docs.super.site/",
             })
 
             .id("guides"),
