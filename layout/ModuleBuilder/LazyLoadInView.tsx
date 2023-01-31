@@ -53,7 +53,7 @@ export const LazyLoadInView = ({
   }, [forceLoad, networkIdle]);
 
   return (
-    <div ref={wrapperRef} data-module={module} data-id={id}>
+    <section ref={wrapperRef} data-module={module} data-id={id}>
       {doLoad || forceLoad ? (
         children
       ) : (
@@ -61,7 +61,7 @@ export const LazyLoadInView = ({
           data-id="module-placeholder"
           className={cx(
             "animate-[module-placeholder-fade_2s_linear_infinite] h-[450px] opacity-100 relative overflow-hidden",
-            background !== "transparent" && backgroundClasses[background]
+            background !== "transparent" && backgroundClasses[background],
           )}
         >
           <div
@@ -69,11 +69,11 @@ export const LazyLoadInView = ({
               "animate-[module-placeholder-move_2s_linear_infinite]",
               "h-full top-0 right-0 bottom-0 left-1/2 z-10 w-[500%] -ml-[250%]",
               "pointer-events-none",
-              "mix-blend-difference bg-gradient-to-r from-[rgba(255,255,255,0)] via-[rgba(255,255,255,.05)] to-[rgba(255,255,255,0)]"
+              "mix-blend-difference bg-gradient-to-r from-[rgba(255,255,255,0)] via-[rgba(255,255,255,.05)] to-[rgba(255,255,255,0)]",
             )}
           />
         </div>
       )}
-    </div>
+    </section>
   );
 };
