@@ -1,11 +1,10 @@
-import { Meta } from '@storybook/react';
-import React from 'react';
-
-import { SIZE_OPTIONS, Title, WEIGHT_OPTIONS } from './Title';
+import { SIZE_OPTIONS, Title, WEIGHT_OPTIONS } from "./Title";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: Title,
-  title: 'Components/Module/Title',
+  title: "Components/Module/Title",
 } as Meta;
 
 export const TitleExample = () => (
@@ -27,7 +26,7 @@ export const TitleAsSpan = () => (
 );
 
 export const WithEyebrow = () => (
-  <Title eyebrow="Hello prima">Ready to dive in? Start your free trial.</Title>
+  <Title eyebrow="Hello">Ready to dive in? Start your free trial.</Title>
 );
 
 export const Sizes = () => (
