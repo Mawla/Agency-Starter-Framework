@@ -225,6 +225,19 @@ const schema = defineType({
           },
         }),
         defineField({
+          name: "eyebrow",
+          title: "Eyebrow",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "color",
+                type: "color",
+              },
+            ],
+          },
+        }),
+        defineField({
           name: "title",
           title: "Title",
           type: "styles",
@@ -236,6 +249,23 @@ const schema = defineType({
                 options: {
                   list: optionsToList(TITLE_SIZE_OPTIONS),
                 },
+              },
+              {
+                name: "color",
+                type: "color",
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "text",
+          title: "Text",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "color",
+                type: "color",
               },
             ],
           },
