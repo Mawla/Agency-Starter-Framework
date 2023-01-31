@@ -1,4 +1,3 @@
-import { backgroundClasses } from "../../colors";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
@@ -13,11 +12,7 @@ import { Title } from "../../components/module/Title";
 import { Width } from "../../components/module/Width";
 import { Wrapper } from "../../components/module/Wrapper";
 import { ImageType } from "../../types";
-import {
-  ImageAlignType,
-  ImageColorType,
-  TitleSizeType,
-} from "./TextImageOptions";
+import { ImageAlignType, TitleSizeType } from "./TextImageOptions";
 import cx from "classnames";
 import React from "react";
 
@@ -29,7 +24,6 @@ export type TextImageProps = {
     };
     image?: {
       align?: ImageAlignType;
-      background?: ImageColorType;
     };
     title?: {
       size?: TitleSizeType;
@@ -54,14 +48,6 @@ export const TextImage = ({
   image,
   buttons,
 }: TextImageProps) => {
-  const IMAGE_BACKGROUND_STYLES: Record<ImageColorType, string | null> = {
-    white: null,
-    "lilac-base": null,
-    "green-base": null,
-    "blue-base": null,
-    "brand-base": "linear-gradient(243.9deg, #8334C2 0%, #5B2488 100%)",
-  };
-
   return (
     <Wrapper
       theme={{
@@ -80,10 +66,14 @@ export const TextImage = ({
         <Width width="inner" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-12 items-center md:items-start lg:items-center gap-10 lg:gap-16 xl:gap-20 relative z-30">
             <div
-              className={cx("order-2 flex flex-col gap-6 md:col-span-7", {
-                ["-mt-3"]: eyebrow,
-                ["-mt-2"]: !eyebrow,
-              })}
+              className={cx(
+                "order-2 flex flex-col gap-6 md:col-span-7",
+                "md:pt-20 lg:pt-0", // add padding top on tablet to replace flowing out from top with flex items center
+                {
+                  ["-mt-3"]: eyebrow,
+                  ["-mt-2"]: !eyebrow,
+                },
+              )}
             >
               {(title || eyebrow) && (
                 <Title
@@ -107,31 +97,13 @@ export const TextImage = ({
             {image && (
               <div
                 className={cx(
-                  "md:col-span-5 relative h-full md:px-5 tablet:px-16 lg:px-5 xl:px-10 2xl:px-[72px]",
-                  "xl:-translate-y-6",
+                  "md:col-span-5 relative h-full",
                   theme?.image?.align === "right"
                     ? "order-1 md:order-3"
                     : "order-1 md:order-1",
                 )}
               >
-                <div className="max-w-[70%] xs:max-w-[60%] sm:max-w-1/2 min-w-[160px] md:max-w-none aspect-[540/380] md:aspect-[380/540] relative">
-                  <div
-                    className={cx(
-                      "absolute w-full h-full z-10 overflow-hidden",
-                      "rounded-lg md:rounded-3xl lg:rounded-4xl",
-                      "origin-top-left -rotate-[12deg] md:origin-center md:-rotate-[8deg]",
-                      "translate-y-5 translate-x-2 md:translate-x-0 md:translate-y-10",
-                      backgroundClasses[
-                        theme?.image?.background || "brand-base"
-                      ],
-                    )}
-                    style={{
-                      background:
-                        IMAGE_BACKGROUND_STYLES[
-                          theme?.image?.background || "brand-base"
-                        ] || undefined,
-                    }}
-                  />
+                <div className="min-w-[160px] md:max-w-none aspect-[540/380] md:aspect-[380/540] relative">
                   <ResponsiveImage
                     {...image}
                     roundSize={25}
