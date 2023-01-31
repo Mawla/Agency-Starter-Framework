@@ -7,6 +7,9 @@ export const TRANSLATION_FIELDS = {
   previous_slide: {
     description: "Label for previous slide button.",
   },
+  read_more: {
+    description: "Used on buttons in card grids.",
+  },
   watch_video: {
     description: "Label on video play button.",
   },
