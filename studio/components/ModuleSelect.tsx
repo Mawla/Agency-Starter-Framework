@@ -443,15 +443,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
                 <Stack space={2}>
                   <Text size={2}>{option.label}</Text>
                   <Text size={1} muted>
-                    {option.modules?.[0]?.language && (
-                      <span>
-                        [
-                        {option.modules
-                          ?.map(({ language }) => language)
-                          .join(", ")}
-                        ]
-                      </span>
-                    )}{" "}
                     {option.description}
                   </Text>
                 </Stack>
