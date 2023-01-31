@@ -341,13 +341,15 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           });
 
         // click the last item in the list to open the editor dialog
-        // setTimeout(() => {
-        //   const items = window.document.querySelectorAll(
-        //     `[id="${updateField}"] [data-testid="default-preview"]`,
-        //   ) as NodeList;
-        //   const lastItem = items[items.length - 1] as HTMLElement;
-        //   lastItem?.click();
-        // }, 0);
+        if (newModules?.length === 1) {
+          setTimeout(() => {
+            const items = window.document.querySelectorAll(
+              `[id="${updateField}"] [data-testid="default-preview"]`,
+            ) as NodeList;
+            const lastItem = items[items.length - 1] as HTMLElement;
+            lastItem?.click();
+          }, 0);
+        }
 
         try {
           onChange?.();
