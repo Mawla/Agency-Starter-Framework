@@ -8,7 +8,6 @@ jest.mock("next/dist/client/router", () => require("next-router-mock"));
 const DEMO_CONTENT = {
   type: "card.composable",
   title: "title",
-  badge: "badge",
   subtitle: "subtitle",
   text: <p>text</p>,
   cover: demoImage,
@@ -31,7 +30,6 @@ const DEMO_CONTENT = {
     title: { size: "md", color: "white" },
     text: { size: "md", color: "white" },
     icon: { size: "lg", color: "white" },
-    badge: { variant: "action" },
     image: { height: "lg", ratio: "16/9", rounded: "xl" },
   },
 } as ComposableCardProps;
@@ -46,7 +44,6 @@ describe("Composable card", () => {
       screen.getByText("subtitle", { selector: "span" }),
     ).toBeInTheDocument();
     expect(screen.getByText("text", { selector: "p" })).toBeInTheDocument();
-    expect(screen.getByText("badge", { selector: "span" })).toBeInTheDocument();
     expect(
       screen.getByText("button 1", { selector: "a span" }),
     ).toBeInTheDocument();

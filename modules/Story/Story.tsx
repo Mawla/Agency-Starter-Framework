@@ -1,4 +1,3 @@
-import { Gradient } from "../../components/Gradient/Gradient";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { ResponsiveImage } from "../../components/images/ResponsiveImage";
@@ -86,7 +85,6 @@ export const Story = ({
       {backgroundImage && (
         <div className="absolute pointer-events-none z-0 inset-0">
           <ResponsiveImage {...backgroundImage} fill roundSize={25} />
-          <Gradient from={0} to={1} className="z-10 top-0 md:opacity-40" />
         </div>
       )}
 
@@ -99,7 +97,7 @@ export const Story = ({
               ["md:col-start-1"]: theme?.image?.align === "right",
               ["md:col-start-2 md:text-right md:items-end"]:
                 theme?.image?.align === "left",
-            }
+            },
           )}
         >
           {/* no content: add placeholder to size the image */}
@@ -156,7 +154,7 @@ export const Story = ({
                     {
                       ["md:order-1"]: theme?.image?.align === "left",
                       ["md:order-0"]: theme?.image?.align === "right",
-                    }
+                    },
                   )}
                 >
                   <IconLoader
@@ -180,7 +178,7 @@ export const Story = ({
                   ["md:-left-24 lg:-left-1/4 xl:-left-32 2xl:left-0"]:
                     theme?.image?.align === "left",
                   ["md:left-1/2"]: theme?.image?.align !== "left",
-                }
+                },
               )}
             >
               <ResponsiveImage {...image} fill />

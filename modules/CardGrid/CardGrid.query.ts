@@ -60,7 +60,6 @@ _type == "module.cardgrid" => {
         "cover": ${getImageQuery("cover")},
         "image": ${imageQuery},
         icon,
-        badge,
         title,
         subtitle,
         text[] ${richTextQuery},

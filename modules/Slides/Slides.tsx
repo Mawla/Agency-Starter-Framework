@@ -1,4 +1,3 @@
-import { Gradient } from "../../components/Gradient/Gradient";
 import { Slider } from "../../components/Slider/Slider";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
@@ -81,7 +80,7 @@ export const Slides = ({
                   "relative",
                   "overflow-hidden rounded-3xl md:rounded-4xl lg:rounded-5xl",
                   "grid grid-cols-1 gap-16 justify-end",
-                  "w-[90vw] 2xs:w-[68vw] sm:w-[50vw] md:[w-25vw] lg:w-[80vw] max-w-[1140px] h-full"
+                  "w-[90vw] 2xs:w-[68vw] sm:w-[50vw] md:[w-25vw] lg:w-[80vw] max-w-[1140px] h-full",
                 )}
               >
                 <div className="z-0 absolute inset-0">
@@ -101,7 +100,7 @@ export const Slides = ({
                       className={cx(
                         "m-5 md:m-10 lg:m-20 px-4 mb-0 md:mb-0 lg:mb-0 lg:px-6 h-[64px] min-w-[64px] lg:h-[120px] lg:min-w-[120px] inline-grid place-content-center",
                         "rounded-xl md:rounded-2xl lg:rounded-3xl",
-                        "bg-neutral-base"
+                        "bg-neutral-base",
                       )}
                     >
                       {label}
@@ -111,7 +110,6 @@ export const Slides = ({
 
                 {(title || text) && (
                   <div className="relative z-10 self-end">
-                    <Gradient from={0} to={1} className="z-10 -top-40" />
                     <div className="flex flex-col gap-2 md:gap-3 lg:gap-5 relative z-20 m-5 md:m-10 lg:m-20 pb-2 md:pb-0 text-white">
                       {title && (
                         <h3 className="text-title-md-sm md:text-title-md-lg lg:text-title-3xl-lg font-bold lg:max-w-[20ch]">

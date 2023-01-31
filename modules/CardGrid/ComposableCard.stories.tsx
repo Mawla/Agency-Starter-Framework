@@ -1,8 +1,4 @@
 import {
-  VariantType,
-  VARIANT_OPTIONS as BADGE_VARIANT_OPTIONS,
-} from "../../components/Badge/Badge";
-import {
   SizeType as TextSizeType,
   SIZE_OPTIONS as TEXT_SIZE_OPTIONS,
 } from "../../components/module/Text";
@@ -92,24 +88,6 @@ export const BackgroundColors = () => (
         />
       </div>
     ))}
-  </div>
-);
-
-export const Badges = () => (
-  <div className="grid grid-cols-5 gap-2">
-    {(Object.keys(BADGE_VARIANT_OPTIONS) as VariantType[]).map(
-      (variant: VariantType) => (
-        <div key={variant}>
-          <ComposableCard
-            {...DEMO_CONTENT}
-            badge="hello prima"
-            theme={{
-              badge: { variant },
-            }}
-          />
-        </div>
-      ),
-    )}
   </div>
 );
 
@@ -460,7 +438,6 @@ export const CardEffects = () => (
             icon="demo"
             cover={demoImage2}
             image={demoImage4}
-            badge="badge"
             buttons={[{ label: "button", href: "/" }]}
             theme={{
               card: { effect, border: "neutral-85" },
@@ -468,7 +445,6 @@ export const CardEffects = () => (
               subtitle: { color: "action-base" },
               text: { color: "neutral-25" },
               image: { height: "sm" },
-              badge: { variant: "brand-gradient" },
             }}
           />
         </div>
@@ -483,7 +459,7 @@ export const DemoFullFeaturedCard = () => (
       {...{
         type: "card.composable",
         title: "title",
-        badge: "badge",
+
         subtitle: "subtitle",
         text: <p>text</p>,
         cover: demoImage,
@@ -506,7 +482,6 @@ export const DemoFullFeaturedCard = () => (
           title: { size: "md", color: "white" },
           text: { size: "md", color: "white" },
           icon: { size: "lg", color: "white" },
-          badge: { variant: "action" },
           image: { height: "lg", ratio: "16/9", rounded: "xl" },
         },
       }}

@@ -31,7 +31,6 @@ describe("Composable card", () => {
                 _key: "card",
                 type: "card.composable",
                 title: "card title",
-                badge: "card badge",
                 subtitle: "card subtitle",
                 text: <p>card text</p>,
                 cover: demoImage,
@@ -54,7 +53,6 @@ describe("Composable card", () => {
                   title: { size: "md", color: "white" },
                   text: { size: "md", color: "white" },
                   icon: { size: "lg", color: "white" },
-                  badge: { variant: "action" },
                   image: { height: "lg", ratio: "16/9", rounded: "xl" },
                 },
               },
@@ -78,9 +76,6 @@ describe("Composable card", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText("card text", { selector: "p" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("card badge", { selector: "span" }),
     ).toBeInTheDocument();
     expect(
       screen.getByText("card button 1", { selector: "a span" }),

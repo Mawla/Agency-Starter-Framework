@@ -1,4 +1,4 @@
-import { VARIANT_OPTIONS as BADGE_VARIANT_OPTIONS } from "../../../components/Badge/Badge";
+
 import { SIZE_OPTIONS as TEXT_SIZE_OPTIONS } from "../../../components/module/Text";
 import {
   SIZE_OPTIONS as TITLE_SIZE_OPTIONS,
@@ -33,14 +33,12 @@ export const schema = defineType({
   preview: {
     select: {
       title: "title",
-      badge: "badge",
       subtitle: "subtitle",
       text: "text",
       image: "image",
       cover: "cover",
     },
     prepare({
-      badge = "",
       title = "",
       subtitle = "",
       text,
@@ -48,7 +46,7 @@ export const schema = defineType({
       cover,
     }: any) {
       return {
-        title: `${badge} ${title} ${subtitle}`,
+        title: `${title} ${subtitle}`,
         subtitle: blocksToText(text),
         media: image || cover,
       };
@@ -102,13 +100,6 @@ export const schema = defineType({
         !value &&
         (parent?.cover || parent?.image)) as ConditionalPropertyCallback,
       components: { input: IconPicker },
-    }),
-    defineField({
-      name: "badge",
-      title: "Badge",
-      type: "string",
-      description: "Used to highlight a date, very short text and/or numbers.",
-      group: "content",
     }),
     defineField({
       name: "title",
@@ -238,26 +229,6 @@ export const schema = defineType({
                 options: {
                   colors: ICON_COLOR_OPTIONS,
                 },
-              },
-            ],
-          },
-        }),
-        defineField({
-          name: "badge",
-          title: "Badge",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "variant",
-                type: "select",
-                options: {
-                  list: optionsToList(BADGE_VARIANT_OPTIONS),
-                },
-              },
-              {
-                name: "alt",
-                type: "boolean",
               },
             ],
           },

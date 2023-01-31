@@ -1,5 +1,4 @@
 import { backgroundClasses, borderClasses } from "../../colors";
-import { Badge, VariantType } from "../../components/Badge/Badge";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
@@ -36,7 +35,6 @@ export type ComposableCardProps = {
   cover?: ImageType;
   image?: ImageType;
   icon?: IconType;
-  badge?: string;
   title?: string;
   subtitle?: string;
   text?: React.ReactElement;
@@ -59,10 +57,6 @@ export type ComposableCardProps = {
     icon?: {
       size?: IconSizeType;
       color?: IconColorType;
-    };
-    badge?: {
-      variant?: VariantType;
-      alt?: boolean;
     };
     title?: {
       size?: TitleSizeType;
@@ -137,7 +131,6 @@ export const COMPOSABLE_CARD_THEMES: Record<
 };
 
 export const ComposableCard = ({
-  badge,
   title,
   subtitle,
   text,
@@ -163,13 +156,7 @@ export const ComposableCard = ({
     theme.card.background = "white";
 
   const hasContent =
-    badge ||
-    subtitle ||
-    title ||
-    text ||
-    icon ||
-    image ||
-    Boolean(buttons?.length);
+    subtitle || title || text || icon || image || Boolean(buttons?.length);
 
   return (
     <div className="h-full relative group">
@@ -287,19 +274,6 @@ export const ComposableCard = ({
                         theme?.card?.effect === "grayscale",
                     },
                   )}
-                />
-              </div>
-            )}
-            {badge && (
-              <div>
-                <Badge
-                  label={badge}
-                  variant={theme?.badge?.variant}
-                  alt={theme?.badge?.alt}
-                  className={cx({
-                    ["opacity-80 saturate-0 group-hover:saturate-100 group-hover:opacity-100 transition-all"]:
-                      theme?.card?.effect === "grayscale",
-                  })}
                 />
               </div>
             )}
