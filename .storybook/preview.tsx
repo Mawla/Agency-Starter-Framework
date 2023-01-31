@@ -3,9 +3,11 @@ import { SiteContext } from "../context/SiteContext";
 import "../styles/plyr-custom.css";
 import "../styles/plyr.css";
 import "../styles/styles.css";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { WithNextRouter } from "storybook-addon-next-router/dist/decorators";
 
 const OriginalNextImage = NextImage.default;
 Object.defineProperty(NextImage, "default", {
@@ -14,6 +16,21 @@ Object.defineProperty(NextImage, "default", {
     <OriginalNextImage {...props} unoptimized loader={({ src }) => src} />
   ),
 });
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
+    },
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
+    asPath: "/page1/page2/page3",
+    locale: "en",
+  },
+};
 
 const queryClient = new QueryClient();
 
@@ -56,4 +73,5 @@ export const decorators = [
       </QueryClientProvider>
     );
   },
+  WithNextRouter,
 ];
