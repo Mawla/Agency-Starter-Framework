@@ -138,19 +138,21 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           modules[]
         } | order(usedBy desc)`);
 
-      presets = presets.map((preset) => ({
-        ...preset,
-        modules: preset?.modules
-          ?.map((module) => ({
-            ...module,
-            icon: allSchemas[module?._type]?.get()?.icon,
-            hidden: allSchemas[module?._type]?.get()?.hidden,
-            initialValue: module,
-          }))
-          .filter(({ _type }) =>
-            typeFilter ? new RegExp(typeFilter).test(_type) : true,
-          ),
-      }));
+      presets = presets
+        .map((preset) => ({
+          ...preset,
+          modules: preset?.modules
+            ?.map((module) => ({
+              ...module,
+              icon: allSchemas[module?._type]?.get()?.icon,
+              hidden: allSchemas[module?._type]?.get()?.hidden,
+              initialValue: module,
+            }))
+            .filter(({ _type }) =>
+              typeFilter ? new RegExp(typeFilter).test(_type) : true,
+            ),
+        }))
+        .filter(({ modules }) => Boolean(modules?.length));
 
       /**
        * Make list of options
