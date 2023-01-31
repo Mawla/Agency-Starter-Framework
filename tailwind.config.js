@@ -124,7 +124,6 @@ module.exports = {
       0: "0",
       base: "1rem",
 
-      // https://prima.design/3794e337c/p/75f415-typography/b/96e2e1
       // text
       sm: `${12 / 16}rem`,
       md: `${14 / 16}rem`,
@@ -335,8 +334,8 @@ module.exports = {
                 classNode.parent.insertBefore(
                   classNode,
                   selectorParser().astSync(
-                    `.${prefixClass("group")}:${pseudoClass} `
-                  )
+                    `.${prefixClass("group")}:${pseudoClass} `,
+                  ),
                 );
               });
             }).processSync(selector);
