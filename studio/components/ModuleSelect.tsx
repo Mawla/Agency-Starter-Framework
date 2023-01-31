@@ -146,7 +146,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
               ...module,
               icon: allSchemas[module?._type]?.get()?.icon,
               hidden: allSchemas[module?._type]?.get()?.hidden,
-              initialValue: module,
             }))
             .filter(({ _type }) =>
               typeFilter ? new RegExp(typeFilter).test(_type) : true,
