@@ -1,29 +1,50 @@
-import { SliderColorType } from "../../components/Slider/SliderOptions";
-import { ButtonProps } from "../../components/buttons/Button";
-import PortableText from "../../components/content/PortableText";
+import cx from 'classnames';
+import dynamic from 'next/dynamic';
+import React, { CSSProperties } from 'react';
+
+import { Slider } from '../../components/Slider/Slider';
+import { SliderColorType } from '../../components/Slider/SliderOptions';
+import { ButtonProps } from '../../components/buttons/Button';
+import { ButtonGroup } from '../../components/buttons/ButtonGroup';
 import {
   ModuleRadiusType,
   ModuleRoundedType,
-} from "../../components/module/BackgroundOptions";
-import { SpaceType } from "../../components/module/SpacingOptions";
-import { Text } from "../../components/module/Text";
-import { Title } from "../../components/module/Title";
-import { Wrapper } from "../../components/module/Wrapper";
-import { ColorType } from "../../types";
-import { CardGridButtons } from "./CardGrid.Buttons";
-import { CardGridGridSlider } from "./CardGrid.GridSlider";
+} from '../../components/module/BackgroundOptions';
+import { SpaceType } from '../../components/module/SpacingOptions';
+import { AlignType, Text } from '../../components/module/Text';
+import { Title } from '../../components/module/Title';
+import { Wrapper } from '../../components/module/Wrapper';
 import {
-  AlignType,
+  BREAKPOINTS,
+  BreakpointType,
+  useBreakpoint,
+} from '../../hooks/useBreakpoint';
+import ErrorBoundary from '../../layout/ModuleBuilder/ErrorBoundary';
+import {
   BackgroundColorType,
   ButtonPositionType,
   ColumnType,
   GapType,
   TitleSizeType,
-} from "./CardGridOptions";
-import { ComposableCardProps } from "./ComposableCard";
-import { ImageCardProps } from "./ImageCard";
-import cx from "classnames";
-import React from "react";
+} from './CardGridOptions';
+import { type ComposableCardProps } from './ComposableCard';
+import { ImageCardProps } from './ImageCard';
+import { ColorType } from '../../types';
+import PortableText from '../../components/content/PortableText';
+
+const ComposableCard = dynamic<ComposableCardProps>(
+  () => import(/* webpackChunkName: "ComposableCard" */ './ComposableCard') as any,
+  { suspense: false },
+);
+
+const ImageCard = dynamic<ImageCardProps>(
+  () => import(/* webpackChunkName: "ImageCard" */ './ImageCard') as any,
+  { suspense: false },
+);
+
+export type CardGridCardProps = {
+  _key?: string;
+};
 
 export type CardGridProps = {
   eyebrow?: string;
@@ -44,8 +65,15 @@ export type CardGridProps = {
       gapVertical?: GapType;
       stagger?: boolean;
     };
+    eyebrow?: {
+      color?: ColorType
+    };
     title?: {
       size?: TitleSizeType;
+      color?: ColorType
+    };
+    text?: {
+      color?: ColorType
     };
     buttons?: {
       position?: ButtonPositionType;
@@ -62,6 +90,61 @@ export type CardGridProps = {
   };
 };
 
+const gridClasses: Record<ColumnType, string> = {
+  1: 'grid-cols-1',
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+};
+
+// css grid doesn't have centering abilities for left over
+// child items. Using nth child selectors and translates combined
+// with col-start we can achieve that effect.
+//
+// created a tailwind pen https://play.tailwindcss.com/f9vDSGiuvA
+// see GridCenterCards in Storybook for a test case
+//
+// There's no need to center below medium breakpoint because the other
+// module items (title, intro etc) are left aligned on mobile.
+const gridCenterClasses: Record<ColumnType, string> = {
+  1: '',
+  2: `md:[&>*:last-child:nth-child(2n-1)]:translate-x-1/2`,
+  3: `md:max-lg:[&>*:last-child:nth-child(2n-1)]:translate-x-1/2 
+    lg:[&>*:last-child:nth-child(2n-1)]:translate-x-none
+    lg:[&>*:last-child:nth-child(3n-1)]:col-start-3 
+    lg:[&>*:last-child:nth-child(3n-1)]:-translate-x-1/2 
+    lg:[&>*:nth-last-child(2):nth-child(3n+1)]:col-start-2 
+    lg:[&>*:nth-last-child(2):nth-child(3n+1)]:-translate-x-1/2 
+    lg:[&>*:last-child:nth-child(3n-2)]:col-start-2`.replace(/\n/g, ''),
+  4: `md:max-lg:[&>*:last-child:nth-child(2n-1)]:translate-x-1/2 
+    lg:[&>*:last-child:nth-child(4n-1)]:translate-x-1/2 
+    lg:[&>*:nth-last-child(2):nth-child(4n+2)]:translate-x-1/2 
+    lg:[&>*:nth-last-child(3):nth-child(4n+1)]:translate-x-1/2
+    lg:[&>*:nth-last-child(2):nth-child(4n+1)]:col-start-2
+    lg:[&>*:nth-last-child(1):nth-child(4n+1)]:col-start-3 
+    lg:[&>*:nth-last-child(1):nth-child(4n+1)]:-translate-x-1/2
+  `.replace(/\n/g, ''),
+};
+
+// need all breakpoints defined in these classes to calculate the slider gap
+const gapHorizontalClasses: Record<GapType, string> = {
+  none: 'gap-x-0',
+  xs: 'gap-x-3 sm:gap-x-4 md:gap-x-6 lg:gap-x-6 xl:gap-x-6 2xl:gap-x-6',
+  sm: 'gap-x-4 sm:gap-x-4 md:gap-x-4 lg:gap-x-8 xl:gap-x-8 2xl:gap-x-8',
+  md: 'gap-x-5 sm:gap-x-5 md:gap-x-6 lg:gap-x-10 xl:gap-x-10 2xl:gap-x-10',
+  lg: 'gap-x-6 sm:gap-x-6 md:gap-x-10 lg:gap-x-16 xl:gap-x-20 2xl:gap-x-22',
+  xl: 'gap-x-10 sm:gap-x-10 md:gap-x-20 lg:gap-x-24 xl:gap-x-32 2xl:gap-x-40',
+};
+
+const gapVerticalClasses: Record<GapType, string> = {
+  none: 'gap-y-0',
+  xs: 'gap-y-3 sm:gap-y-4 md:gap-y-6 lg:gap-y-6 xl:gap-y-6 2xl:gap-y-6',
+  sm: 'gap-y-4 sm:gap-y-4 md:gap-y-4 lg:gap-y-8 xl:gap-y-8 2xl:gap-y-8',
+  md: 'gap-y-5 sm:gap-y-5 md:gap-y-6 lg:gap-y-10 xl:gap-y-10 2xl:gap-y-10',
+  lg: 'gap-y-8 sm:gap-y-8 md:gap-y-10 lg:gap-y-16 xl:gap-y-20 2xl:gap-y-24',
+  xl: 'gap-y-10 sm:gap-y-10 md:gap-y-20 lg:gap-y-24 xl:gap-y-32 2xl:gap-y-40',
+};
+
 export const CardGrid = ({
   eyebrow,
   title,
@@ -70,20 +153,41 @@ export const CardGrid = ({
   buttons,
   theme,
 }: CardGridProps) => {
-  // purple background scenario: change overal colouring
-  let titleColor: ColorType = "neutral-base";
-  let textColor: ColorType = "neutral-25";
-  let eyebrowColor: ColorType = "brand-base";
-  if (theme?.module?.background === "brand-dark") {
-    titleColor = "white";
-    textColor = "white";
-    eyebrowColor = "brand-light";
+  const { screenWidth, breakpoint } = useBreakpoint();
+
+  if (!theme) theme = {};
+  if (!theme.grid) theme.grid = {};
+
+  let slideColumns = 1;
+  if (screenWidth > BREAKPOINTS.xs) slideColumns = 1;
+  if (screenWidth > BREAKPOINTS.sm) slideColumns = 2;
+  if (screenWidth > BREAKPOINTS.md)
+    slideColumns = theme?.grid?.columns && theme?.grid?.columns < 3 ? theme?.grid?.columns : 3;
+  if (screenWidth > BREAKPOINTS.lg) slideColumns = theme?.grid?.columns || 3;
+
+  // show half of an extra slide if needed
+  if (items?.length && items?.length > slideColumns) {
+    slideColumns = +slideColumns + (screenWidth > BREAKPOINTS.md ? 0.25 : 0.5);
   }
+
+  // slider on mobile by default, adjustable by theme
+  let slider = false;
+  if (screenWidth < BREAKPOINTS.lg && theme?.slider?.mobile !== false) slider = true;
+  if (screenWidth > BREAKPOINTS.lg && theme?.slider?.desktop === true) slider = true;
+
+  if (theme?.grid?.columns && +theme?.grid?.columns === 1) theme.grid.stagger = false;
+
+
+  // read the gap size from the tailwind classes to make grid gaps stay in sync between slider and grid layouts
+  const sliderGapSize: number = getSliderGapSize(
+    breakpoint,
+    theme?.grid?.gapHorizontal || 'xs',
+  );
 
   const hasContentBeforeGrid =
     title ||
     intro ||
-    (Boolean(buttons?.length) && theme?.buttons?.position !== "after");
+    (Boolean(buttons?.length) && theme?.buttons?.position !== 'after');
 
   return (
     <div className="overflow-hidden relative">
@@ -99,68 +203,129 @@ export const CardGrid = ({
         }}
         innerClassName="overflow-hidden"
       >
+
+
         <div
-          className={cx({
-            ["py-8 sm:py-10 lg:py-16 xl:py-30 relative z-20"]:
-              theme?.module?.background,
+          className={cx('z-20 relative', {
+            ['py-8 sm:py-10 lg:py-16 xl:py-30']: theme?.module?.background,
           })}
         >
           <div
-            className={cx("max-w-title flex flex-col gap-8", {
-              ["md:text-left"]: theme?.module?.align === "left",
-              ["md:text-center md:mx-auto"]: theme?.module?.align === "center",
-              ["md:text-right md:ml-auto"]: theme?.module?.align === "right",
+            className={cx('max-w-title flex flex-col gap-8', {
+              ['md:text-left']: theme?.module?.align === 'left',
+              ['md:text-center md:mx-auto']: theme?.module?.align === 'center',
+              ['md:text-right md:ml-auto']: theme?.module?.align === 'right',
             })}
           >
-            {(Boolean(title?.trim().length) ||
-              Boolean(eyebrow?.trim().length)) && (
+            {(Boolean(title?.trim().length) || Boolean(eyebrow?.trim().length)) && (
               <Title
-                size={theme?.title?.size || "3xl"}
+                size={theme?.title?.size || '3xl'}
                 eyebrow={eyebrow}
-                color={titleColor}
-                eyebrowColor={eyebrowColor}
+                color={theme?.title?.color}
+                eyebrowColor={theme?.eyebrow?.color}
               >
                 {title}
               </Title>
             )}
             {intro && (
               <Text
-                className={cx({
-                  ["md:text-left md:[&>*]:mr-auto"]:
-                    theme?.module?.align === "left",
-                  ["md:text-center md:[&>*]:mx-auto"]:
-                    theme?.module?.align === "center",
-                  ["md:text-right md:[&>*]:ml-auto"]:
-                    theme?.module?.align === "right",
-                })}
                 size="lg"
-                color={textColor}
+                color={theme?.text?.color}
                 as="div"
-                align={null}
+                align={
+                  screenWidth < BREAKPOINTS.md
+                    ? 'left'
+                    : theme?.module?.align === 'center'
+                    ? 'center'
+                    : theme?.module?.align === 'right'
+                    ? 'right'
+                    : 'left'
+                }
               >
                 <PortableText content={intro as any} />
               </Text>
             )}
 
-            {buttons && theme?.buttons?.position !== "after" && (
+            {buttons && theme?.buttons?.position !== 'after' && (
               <CardGridButtons buttons={buttons} theme={theme} />
             )}
           </div>
 
           {Boolean(items?.length) && (
             <div
-              className={cx("text-left", {
-                ["mt-10 sm:mt-12 md:mt-16 xl:mt-20"]: hasContentBeforeGrid,
+              className={cx('text-left', {
+                ['mt-10 sm:mt-12 md:mt-16 xl:mt-20']: hasContentBeforeGrid,
               })}
             >
-              <CardGridGridSlider items={items} theme={theme} />
+              {slider ? (
+                <Slider
+                  gap={sliderGapSize}
+                  columns={slideColumns}
+                  slides={items?.map((item) => {
+                    if (item?.type === 'card.composable')
+                      return (
+                        <CardWrapper>
+                          <ComposableCard {...item} key={item._key} />
+                        </CardWrapper>
+                      );
+                    if (item?.type === 'card.image')
+                      return (
+                        <CardWrapper>
+                          <ImageCard {...item} key={item._key} />
+                        </CardWrapper>
+                      );
+                      return null
+                  })}
+                  controlsColor={theme?.slider?.color}
+                />
+              ) : (
+                <div
+                  className={cx(
+                    'grid',
+                    gridClasses[theme?.grid?.columns || 2],
+                    gapHorizontalClasses[theme?.grid?.gapHorizontal || 'xs'],
+                    gapVerticalClasses[theme?.grid?.gapVertical || 'xs'],
+                    {
+                      ['pb-20']: theme?.grid?.stagger,
+                      [gridCenterClasses[theme?.grid?.columns || 2]]:
+                        theme?.module?.align === 'center',
+                    },
+                  )}
+                >
+                  {items?.map((item, i) => {
+                    const staggerStyle: CSSProperties = theme?.grid?.stagger
+                      ? {
+                          transform: `translateY(${
+                            80 + (i % (Math.floor(slideColumns) || 2)) * -80
+                          }px)`,
+                        }
+                      : {};
+
+                    return (
+                      <div key={item._key} className="h-full" style={staggerStyle}>
+                        <CardWrapper>
+                          {item?.type === 'card.composable' && (
+                            <ComposableCard {...item} />
+                          )}
+                          {item?.type === 'card.image' && (
+                            <ImageCard
+                              {...item}
+                  
+                            />
+                          )}
+                        </CardWrapper>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
-          {buttons && theme?.buttons?.position === "after" && (
+          {buttons && theme?.buttons?.position === 'after' && (
             <div
               className={cx({
-                ["mt-10 md:mt-12 lg:mt-16 xl:mt-20"]: !items?.length,
+                ['mt-10 md:mt-12 lg:mt-16 xl:mt-20']: !slider || !items?.length,
               })}
             >
               <CardGridButtons buttons={buttons} theme={theme} />
@@ -173,3 +338,61 @@ export const CardGrid = ({
 };
 
 export default React.memo(CardGrid);
+
+type CardGridButtonsProps = {
+  buttons?: CardGridProps['buttons'];
+  theme?: CardGridProps['theme'];
+};
+
+const CardGridButtons = ({ buttons, theme }: CardGridButtonsProps) => {
+  const { screenWidth } = useBreakpoint();
+  if (!buttons) return null;
+
+  return (
+    <div
+      className={cx('flex', {
+        ['md:justify-start']: theme?.module?.align === 'left',
+        ['md:justify-center']: theme?.module?.align === 'center',
+        ['md:justify-end']: theme?.module?.align === 'right',
+      })}
+    >
+      <ButtonGroup
+        items={buttons}
+        stretch={false}
+        direction="horizontal"
+        align={
+          // this is needed to control the wrapping of multiple buttons
+          screenWidth < BREAKPOINTS.md
+            ? 'left'
+            : theme?.module?.align === 'center'
+            ? 'center'
+            : theme?.module?.align === 'right'
+            ? 'right'
+            : 'left'
+        }
+      />
+    </div>
+  );
+};
+
+const CardWrapper = ({ children }: { children: React.ReactNode }) => (
+  <React.Suspense>
+    <ErrorBoundary>{children}</ErrorBoundary>
+  </React.Suspense>
+);
+
+const getSliderGapSize = (
+  breakpoint: BreakpointType,
+  gapHorizontal: GapType,
+): number => {
+  const sliderGapSizes: Record<BreakpointType, number> = gapHorizontalClasses[
+    gapHorizontal
+  ]
+    .split(' ')
+    .reduce((acc, curr) => {
+      const breakpoint = (curr.match(/(.*):/)?.[1] || 'xs') as BreakpointType;
+      const gap = +curr.match(/\d+$/)![0] * 4;
+      return { ...acc, [breakpoint]: gap };
+    }, {} as Record<BreakpointType, number>);
+  return sliderGapSizes[breakpoint];
+};
