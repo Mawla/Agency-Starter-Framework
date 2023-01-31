@@ -7,9 +7,6 @@ import {
   ModuleSchemaName,
   MODULE_SCHEMAS,
 } from "../../../types.sanity";
-import ModuleSelect, {
-  ModuleSelectWrapper,
-} from "../../components/ModuleSelect";
 import {
   PageBuilder,
   PageBuilderItem,

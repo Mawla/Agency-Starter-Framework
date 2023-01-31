@@ -1,7 +1,5 @@
 import {
-  ICON_POSITION_OPTIONS,
-  VARIANT_OPTIONS,
-} from "../../../components/buttons/ButtonOptions";
+  ICON_POSITION_OPTIONS, VARIANT_OPTIONS,} from "../../../components/buttons/ButtonOptions";
 import DialogSelect, {
   DialogSelectWrapper,
 } from "../../components/DialogSelect";

@@ -17,7 +17,6 @@ export const Variants = () => (
           <Button label={variant} variant={variant} />
           <Button label="loading" variant={variant} loading />
           <Button label="disabled" variant={variant} disabled />
-          <Button label="alt" variant={variant} alt />
         </div>
       )
     )}

@@ -163,9 +163,16 @@ export type SizeType = keyof typeof SIZES;
 export type SizesType = { [key in keyof typeof SIZES]: string };
 
 export const FONT_WEIGHTS = {
-  light: "Light",
-  book: "Book",
-  bold: "bold",
+  thin: 'Thin',
+  extralight: 'Extralight',
+  light: 'Light',
+  normal: 'Normal',
+  regular: 'Regular',
+  medium: 'Medium',
+  semibold: 'Semibold',
+  bold: 'Bold',
+  extrabold: 'Extrabold',
+  black: 'Black',
 };
 
 export type FontWeightType = keyof typeof FONT_WEIGHTS;
