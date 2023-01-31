@@ -171,7 +171,7 @@ export const Story = ({
                   </span>
                   <span
                     className={cx(
-                      "bg-action-base group-hover:bg-action-light group-hover:scale-105 transition-all rounded-full w-10 md:w-16 lg:w-20 h-10 md:h-16 lg:h-20 grid",
+                      "bg-black group-hover:bg-black group-hover:scale-105 transition-all rounded-full w-10 md:w-16 lg:w-20 h-10 md:h-16 lg:h-20 grid",
                       {
                         ["md:order-1"]: theme?.image?.align === "left",
                         ["md:order-0"]: theme?.image?.align === "right",
