@@ -436,3 +436,42 @@ export const ImageCardGrid = () => (
     ]}
   />
 );
+
+export const GridCenterCards = () => (
+  <div style={{ zoom: 0.3 }}>
+    {(Object.entries(COLUMN_OPTIONS) as [key: string, label: string][])
+      .filter(([columns]) => +columns > 1)
+      .map(([columns, label]) =>
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((numItems) => (
+          <div key={label} className="border-b">
+            <CardGrid
+              title={columns}
+              items={new Array(+numItems).fill({
+                type: "card.composable",
+                title: "Title",
+                text: <p>Text</p>,
+                theme: {
+                  card: {
+                    border: "neutral-85",
+                  },
+                },
+              } as ComposableCardProps)}
+              theme={{
+                module: {
+                  align: "center",
+                  space: { top: "none", bottom: "none" },
+                },
+                slider: {
+                  mobile: false,
+                  desktop: false,
+                },
+                grid: {
+                  columns: columns as any,
+                },
+              }}
+            />
+          </div>
+        )),
+      )}
+  </div>
+);
