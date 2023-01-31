@@ -62,7 +62,7 @@ const demoContent = (
 );
 
 export const Default = () => (
-  <RichText eyebrow="hello" title="Prima" content={demoContent} />
+  <RichText eyebrow="hello" title="Hello" content={demoContent} />
 );
 
 export const ModuleBackgrounds = () => (
@@ -73,7 +73,7 @@ export const ModuleBackgrounds = () => (
           key={color}
           content={demoContent}
           eyebrow="hello"
-          title="prima"
+          title="Hello"
           theme={{ module: { background: color } }}
         />
       ),
