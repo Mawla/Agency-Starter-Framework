@@ -1,11 +1,22 @@
-import { Meta } from '@storybook/react';
-import React from 'react';
-
-import { Slider } from './Slider';
+import { Slider } from "./Slider";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: Slider,
-  title: 'Components/Slider',
+  title: "Components/Slider",
 } as Meta;
 
-export const Default = () => <Slider />;
+export const Default = () => (
+  <Slider
+    slides={[
+      <div className="border">hello</div>,
+      <div className="border">hello</div>,
+      <div className="border">hello</div>,
+      <div className="border">hello</div>,
+      <div className="border">hello</div>,
+      <div className="border">hello</div>,
+    ]}
+    columns={3}
+  />
+);
