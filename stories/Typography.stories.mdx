@@ -1,8 +1,7 @@
-import { Meta } from '@storybook/addon-docs';
-import resolveConfig from 'tailwindcss/lib/util/resolveConfig';
-import defaultConfig from 'tailwindcss/stubs/defaultConfig.stub';
-
-import { theme } from '../tailwind.config.js';
+import { theme } from "../tailwind.config.js";
+import { Meta } from "@storybook/addon-docs";
+import resolveConfig from "tailwindcss/lib/util/resolveConfig";
+import defaultConfig from "tailwindcss/stubs/defaultConfig.stub";
 
 <Meta title="Framework/Typography" />
 
@@ -31,25 +30,28 @@ import { theme } from '../tailwind.config.js';
 
 <div style={{ marginBottom: 100 }}>
   {Object.entries(resolveConfig([theme, defaultConfig]).fontSize)
-    .filter(([key, value]) => key !== '0')
-    .map(([key, value]) => (
-      <dl key={key} style={{ marginBottom: 40 }}>
-        <dt className="size">
-          {key} - {value}
-        </dt>
-        {[400, 500, 600, 700].map((fontWeight) => (
-          <dd
-            key={fontWeight}
-            className="text-preview"
-            style={{
-              fontSize: value || value[0],
-              lineHeight: value[1].lineHeight,
-              fontWeight,
-            }}
-          >
-            The quick brown fox jumped over the lazy dog.
-          </dd>
-        ))}
-      </dl>
-    ))}
+    .filter(([key, value]) => key !== "0")
+    .map(([key, value]) => {
+      console.log(key, value);
+      return (
+        <dl key={key} style={{ marginBottom: 40 }}>
+          <dt className="size">
+            {key} - {value}
+          </dt>
+          {[400, 500, 600, 700].map((fontWeight) => (
+            <dd
+              key={fontWeight}
+              className="text-preview"
+              style={{
+                fontSize: Array.isArray(value) ? value[0] : value,
+                lineHeight: Array.isArray(value) ? value[1] : 1,
+                fontWeight,
+              }}
+            >
+              The quick brown fox jumped over the lazy dog.
+            </dd>
+          ))}
+        </dl>
+      );
+    })}
 </div>
