@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // go to https://teenyicons.com/ and copy / paste path
 export const ICONS = {
@@ -21,7 +21,9 @@ export const ICONS = {
       stroke="currentColor"
     />
   ),
-  cookies: <path d="M.5 7.5a7 7 0 1014 0 7 7 0 00-14 0z" stroke="currentColor" />,
+  cookies: (
+    <path d="M.5 7.5a7 7 0 1014 0 7 7 0 00-14 0z" stroke="currentColor" />
+  ),
   footer: (
     <path
       d="M1 1.5h1m5 0h1m2 0h1m2 0h1m-1 3h1m-7 0h1m5 3h1m-4 0h1m-4 0h1m5 3h1m-7 0h1m-7 0h1m-1-3h1m2 0h1m-4-3h1m2-3h1m-4 12h13"
@@ -94,7 +96,10 @@ export const ICONS = {
     ></path>
   ),
   product: (
-    <path d="M.5 2v11m5-11v11m2-11v11m7-11v11m-4-11v11" stroke="currentColor"></path>
+    <path
+      d="M.5 2v11m5-11v11m2-11v11m7-11v11m-4-11v11"
+      stroke="currentColor"
+    ></path>
   ),
   products: (
     <path
@@ -447,6 +452,12 @@ export const ICONS = {
       stroke="currentColor"
     ></path>
   ),
+  folders: (
+    <path
+      d="M3.5 8.5v-7a1 1 0 011-1h3l2 2h4a1 1 0 011 1v5a1 1 0 01-1 1h-9m-1-1a1 1 0 001 1m-1-1v-3h-2a1 1 0 00-1 1v7a1 1 0 001 1h9a1 1 0 001-1v-4h-7"
+      stroke="currentColor"
+    ></path>
+  ),
 };
 
 export type IconType = keyof typeof ICONS;
@@ -455,7 +466,7 @@ export type IconProps = {
   type: IconType;
 };
 
-export const DocumentIcon = ({ type = 'warning' }: IconProps) => (
+export const DocumentIcon = ({ type = "warning" }: IconProps) => (
   <span style={{ width: 15, height: 15 }}>
     <svg
       viewBox="0 0 15 15"
