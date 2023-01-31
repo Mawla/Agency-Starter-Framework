@@ -142,13 +142,6 @@ const schema = defineType({
           options: {
             fields: [
               {
-                name: "background",
-                type: "color",
-                options: {
-                  colors: BACKGROUND_COLOR_OPTIONS,
-                },
-              },
-              {
                 name: "align",
                 type: "select",
                 options: {
