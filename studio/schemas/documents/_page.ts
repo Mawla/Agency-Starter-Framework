@@ -88,6 +88,12 @@ export const HERO_FIELD = defineField({
       },
     }),
   ),
+
+  options: {
+    filterType: /hero\./,
+    updateField: "hero",
+    placeholder: "Add a hero…",
+  } as any,
 });
 
 export const MODULES_FIELD = defineField({
@@ -110,50 +116,10 @@ export const MODULES_FIELD = defineField({
     ),
     { type: "studio.divider" },
   ],
-});
-
-export const MODULE_SELECT_FIELD = defineField({
-  name: "moduleSelect",
-  title: "Add a module",
-  type: "string",
-  components: {
-    input: ModuleSelect,
-    field: ModuleSelectWrapper,
-  },
   options: {
     filterType: /module|studio\./,
     updateField: "modules",
     placeholder: "Add a module…",
-  } as any,
-});
-
-export const HERO_SELECT_FIELD = defineField({
-  name: "heroSelect",
-  title: "Add a hero",
-  type: "string",
-  components: {
-    input: ModuleSelect,
-    field: ModuleSelectWrapper,
-  },
-  options: {
-    filterType: /hero\./,
-    updateField: "hero",
-    placeholder: "Add a hero…",
-  } as any,
-});
-
-export const DIALOG_SELECT_FIELD = defineField({
-  name: "dialogSelect",
-  title: "Add a dialog",
-  type: "string",
-  components: {
-    input: ModuleSelect,
-    field: ModuleSelectWrapper,
-  },
-  options: {
-    filterType: /dialog.*/,
-    updateField: "dialogs",
-    placeholder: "Add a dialog…",
   } as any,
 });
 
@@ -175,6 +141,11 @@ export const DIALOGS_FIELD = defineField({
       },
     }),
   ),
+  options: {
+    filterType: /dialog.*/,
+    updateField: "dialogs",
+    placeholder: "Add a dialog…",
+  } as any,
 });
 
 export const ORDER_PUBLISHED_DESC: SortOrdering = {
@@ -239,11 +210,8 @@ export const pageBase = {
     TITLE_FIELD,
     SLUG_FIELD,
     HERO_FIELD,
-    HERO_SELECT_FIELD,
     MODULES_FIELD,
-    MODULE_SELECT_FIELD,
     DIALOGS_FIELD,
-    DIALOG_SELECT_FIELD,
     SEO_FIELD,
   ],
 };

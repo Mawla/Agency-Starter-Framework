@@ -1,9 +1,29 @@
 import { languages } from "../../languages";
 import { useLanguageFilter } from "../utils/language/useLanguageFilter";
+import ModuleSelect from "./ModuleSelect";
 import { ComponentType, useEffect } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
-  return <div>{props.renderDefault(props)}</div>;
+  return (
+    <div>
+      {props.renderDefault(props)}
+
+      <div
+        style={{
+          transform: "translateY(-100%)",
+          background: "white",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
+        <ModuleSelect
+          onChange={props.onChange}
+          options={props.options}
+          schemaType={props.schemaType}
+        />
+      </div>
+    </div>
+  );
 };
 
 /**
@@ -42,14 +62,14 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
 
     // find iframe
     const previewIframe = window.document.querySelector(
-      ".previewView iframe"
+      ".previewView iframe",
     ) as HTMLIFrameElement;
     if (!previewIframe?.contentWindow) return;
 
     // post message to iframe to scroll to module
     previewIframe.contentWindow.postMessage(
       { type: "preview-view-scroll-to-module", moduleKey: props.value._key },
-      (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH
+      (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH,
     );
   }, [props.open, props.value?._key]);
 
@@ -66,7 +86,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
         e.data.moduleKey === props.value?._key
       ) {
         const moduleFormOpenButton = document.querySelector(
-          `[data-key="${e.data.moduleKey}"] [data-type="module-preview"]`
+          `[data-key="${e.data.moduleKey}"] [data-type="module-preview"]`,
         ) as HTMLButtonElement;
 
         if (moduleFormOpenButton) {

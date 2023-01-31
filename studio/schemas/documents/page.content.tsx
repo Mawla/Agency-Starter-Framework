@@ -4,11 +4,8 @@ import { DocumentIcon } from "../../utils/DocumentIcon";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import {
   DIALOGS_FIELD,
-  DIALOG_SELECT_FIELD,
   HERO_FIELD,
-  HERO_SELECT_FIELD,
   MODULES_FIELD,
-  MODULE_SELECT_FIELD,
   pageBase,
   PASSWORD,
   SLUG_FIELD,
@@ -122,11 +119,8 @@ export default defineType({
       },
     },
     HERO_FIELD,
-    HERO_SELECT_FIELD,
     MODULES_FIELD,
-    MODULE_SELECT_FIELD,
     DIALOGS_FIELD,
-    DIALOG_SELECT_FIELD,
     SEO_FIELD,
     defineField({
       name: "hideNav",

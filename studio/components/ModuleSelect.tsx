@@ -103,7 +103,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
         )
         .filter((type) => !type.startsWith("studio."))
         .map((type) => allSchemas[type].get(type))
-        .sort((a, b) => a.title.localeCompare(b.title));
+        .sort((a, b) => a.title?.localeCompare(b.title));
 
       /**
        * Studio modules
@@ -463,19 +463,3 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
 };
 
 export default ModuleSelect;
-
-export const ModuleSelectWrapper: ComponentType<any> = (props) => {
-  return (
-    <div
-      style={{
-        marginTop: -32,
-        transform: "translateY(-100%)",
-        background: "white",
-        position: "relative",
-        zIndex: 10,
-      }}
-    >
-      {props.children}
-    </div>
-  );
-};

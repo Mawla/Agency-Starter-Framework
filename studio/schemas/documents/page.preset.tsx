@@ -2,7 +2,7 @@ import { HERO_SCHEMAS, MODULE_SCHEMAS } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { MODULES_FIELD, MODULE_SELECT_FIELD } from "./_page";
+import { MODULES_FIELD } from "./_page";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
@@ -55,15 +55,12 @@ const schema = defineType({
       of: Object.keys({ ...MODULE_SCHEMAS, ...HERO_SCHEMAS }).map(
         (type: any) => ({ type }),
       ),
-    } as any),
-    defineField({
-      ...MODULE_SELECT_FIELD,
       options: {
         filterType: /module|hero|studio\./,
         updateField: "modules",
         placeholder: "Add a module…",
       } as any,
-    }),
+    } as any),
     defineField({
       name: "image",
       title: "Image",
