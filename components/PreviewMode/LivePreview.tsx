@@ -1,6 +1,5 @@
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
 import { MiniMap, MiniMapProps } from "./MiniMap";
-import { PreviewButton } from "./PreviewButton";
 import { ScreenCapture } from "./ScreenCapture";
 import { ClientConfig, SanityClient } from "@sanity/client";
 import sanityClient from "@sanity/client";
@@ -313,15 +312,9 @@ export const LivePreview = ({
           <ScreenCapture previewTools={previewTools} />
         </div>
 
-        {/* {currentRevision.current && (
-          <div className="px-3 bg-[#111] flex items-center">
-            {currentRevision.current}
-          </div>
-        )} */}
-
         {/* reload */}
         <button
-          className="shadow-lg block px-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
+          className="shadow-lg block p-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
           onClick={reloadPreview}
         >
           {previewLoading ? (
@@ -369,7 +362,7 @@ export const LivePreview = ({
 
         {/* minimap */}
         <button
-          className="shadow-lg block px-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
+          className="shadow-lg block p-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
           onClick={() => setIsMiniMapVisible((yesno) => !yesno)}
         >
           <svg
@@ -386,8 +379,6 @@ export const LivePreview = ({
             ></path>
           </svg>
         </button>
-
-        <PreviewButton pagePath={pagePath} />
       </div>
 
       {miniModules && isMiniMapVisible && (
