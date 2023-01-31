@@ -123,7 +123,7 @@ export const LivePreview = ({
 
     setPageData(newPage);
 
-    const newMiniModules = newPage.modules.map(
+    const newMiniModules = newPage?.modules?.map(
       ({
         _key,
         _type,
