@@ -4,7 +4,7 @@ export const imageQueryFields = groq`
   "src": url,
   "width": metadata.dimensions.width,
   "height": metadata.dimensions.height,
-  alt,
+  "alt": coalesce(alt, altText),
 `;
 
 export const imageSimpleQuery = groq`
@@ -14,7 +14,7 @@ export const imageSimpleQuery = groq`
     "crop": ^.image.source.crop,
     ${imageQueryFields}
     "caption": ^.image.caption,
-    "alt": ^.image.alt,
+    "alt": coalesce(^.image.alt, ^.image.altText),
   }
 `;
 
@@ -25,7 +25,7 @@ export const imageSourceQuery = groq`
     "crop": image.crop,
     "caption": image.caption,
     ${imageQueryFields}
-    "alt": image.alt,
+    "alt": coalesce(image.alt, image.altText),
   }
 `;
 
