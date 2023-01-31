@@ -51,7 +51,7 @@ export const IconLoader = ({
         const html = await res.text();
         if (!html.startsWith("<svg")) return "";
 
-        let cleanHTML = DOMPurify?.sanitize?.(html);
+        let cleanHTML = DOMPurify?.sanitize?.(html); //
         cleanHTML = cleanUpAttributes(cleanHTML);
         if (removeColors) {
           cleanHTML = replaceColorsWithCurrentColor(cleanHTML);
