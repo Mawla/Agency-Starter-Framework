@@ -87,6 +87,7 @@ export const structure = (
       ),
       S.documentTypeListItem("page.preset").title("Presets"),
       documentList(S, { type: "redirect", title: "Redirects" }),
+      documentList(S, { type: "form.static", title: "Forms" }),
       S.divider(),
       singleton(S, { id: "page_notfound", type: "page.notfound" }),
       S.listItem()
