@@ -1,65 +1,64 @@
-import { Meta } from '@storybook/react';
-import React from 'react';
-
-import { ButtonProps } from '../../components/buttons/Button';
-import { MobileNav } from './MobileNav';
-import { NavItem } from './Nav';
+import { ButtonProps } from "../../components/buttons/Button";
+import { MobileNav } from "./MobileNav";
+import { NavItem } from "./Nav";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: MobileNav,
-  title: 'Components/MobileNav',
+  title: "Components/MobileNav",
 } as Meta;
 
 const items: NavItem[] = [
   {
-    label: 'Product',
+    label: "Product",
     children: [
       {
-        label: 'Product 1',
-        href: '',
+        label: "Product 1",
+        href: "/",
       },
       {
-        label: 'Product 2',
-        href: '',
+        label: "Product 2",
+        href: "/",
       },
     ],
   },
   {
-    label: 'Pricing',
-    href: '/',
+    label: "Pricing",
+    href: "/",
   },
   {
-    label: 'Solutions',
+    label: "Solutions",
     children: [
       {
-        label: 'Business cases',
-        href: '',
+        label: "Business cases",
+        href: "/",
         current: true,
       },
       {
-        label: 'Industries',
-        href: '',
+        label: "Industries",
+        href: "/",
       },
     ],
   },
   {
-    label: 'Resources',
-    href: '/',
+    label: "Resources",
+    href: "/",
   },
   {
-    label: 'Support',
-    href: '/',
+    label: "Support",
+    href: "/",
   },
 ];
 
 const buttons: ButtonProps[] = [
   {
-    label: 'Download now',
-    href: '/download',
+    label: "Download now",
+    href: "/download",
   },
   {
-    label: 'Sign in',
-    href: '/',
+    label: "Sign in",
+    href: "/",
   },
 ];
 
