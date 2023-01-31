@@ -1,11 +1,10 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import {
   BackgroundColorType,
   BACKGROUND_COLOR_OPTIONS,
 } from "../../components/module/BackgroundOptions";
 import { Footer, FooterProps } from "./Footer";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: Footer,
@@ -90,7 +89,7 @@ export const Colors = () => (
         <div key={color} className="mb-10">
           <Footer socials={socials} links={links} copyright={copyright} />
         </div>
-      )
+      ),
     )}
   </>
 );

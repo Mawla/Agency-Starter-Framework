@@ -34,7 +34,7 @@ export const Footer = ({
         <div className="flex flex-col xl:flex-row gap-8">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-x-8 md:gap-x-8 md:gap-y-10 flex-grow">
             {links?.map(({ title, ...rest }) => (
-              <FooterMenu key={title} {...rest} />
+              <FooterMenu key={title} title={title} {...rest} />
             ))}
           </div>
         </div>
