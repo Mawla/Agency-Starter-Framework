@@ -1,47 +1,11 @@
 import { COLORS } from "./colors";
-import { LanguageType } from "./languages";
-import { SitemapType } from "./queries/sitemap";
-import { ModuleSchemaName } from "./types.sanity";
 
 export const TRANSLATION_FIELDS = {
-  all_departments: {
-    description:
-      "Label for option to show all departments in the job finder filter dropdown.",
-  },
-  all_office_locations: {
-    description:
-      "Label for option to show all offices in the job finder filter dropdown.",
-  },
-  all_countries: {
-    description: "Label for button to select all countries in the job finder.",
-  },
-  department: {
-    description: "Default select label in the job finder departments filter.",
-  },
-  full_remote: {
-    description: "Label in job listing for remote jobs.",
-  },
   next_slide: {
     description: "Label for next slide button.",
   },
-  no_jobs_found: {
-    description: "Text shown when the job finder returns no results.",
-  },
-  office_location: {
-    description: "Default select label in the job finder offices filter.",
-  },
-  positions_in: {
-    description:
-      "Label for country selector in job finder, e.g positions in [Italy].",
-  },
   previous_slide: {
     description: "Label for previous slide button.",
-  },
-  read_more: {
-    description: "Used on buttons in card grids.",
-  },
-  remote: {
-    description: "Label shown on the job detail page for remote jobs.",
   },
   watch_video: {
     description: "Label on video play button.",
@@ -163,16 +127,16 @@ export type SizeType = keyof typeof SIZES;
 export type SizesType = { [key in keyof typeof SIZES]: string };
 
 export const FONT_WEIGHTS = {
-  thin: 'Thin',
-  extralight: 'Extralight',
-  light: 'Light',
-  normal: 'Normal',
-  regular: 'Regular',
-  medium: 'Medium',
-  semibold: 'Semibold',
-  bold: 'Bold',
-  extrabold: 'Extrabold',
-  black: 'Black',
+  thin: "Thin",
+  extralight: "Extralight",
+  light: "Light",
+  normal: "Normal",
+  regular: "Regular",
+  medium: "Medium",
+  semibold: "Semibold",
+  bold: "Bold",
+  extrabold: "Extrabold",
+  black: "Black",
 };
 
 export type FontWeightType = keyof typeof FONT_WEIGHTS;
