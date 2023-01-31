@@ -27,10 +27,10 @@ const CONFIG = {
         );
       },
     }),
+    media(),
     visionTool({
       defaultApiVersion: "vX",
     }),
-    media(),
     muxInput(),
     cloudinarySchemaPlugin(),
   ],
