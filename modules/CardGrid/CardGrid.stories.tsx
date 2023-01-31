@@ -132,24 +132,6 @@ export const Rounded = () => (
   </div>
 );
 
-export const ModuleDecorationsOnes = () => (
-  <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color: BackgroundColorType) => (
-        <CardGrid
-          {...DEMO_CONTENT}
-          theme={{
-            module: {
-              background: color,
-              align: "center",
-            },
-          }}
-        />
-      ),
-    )}
-  </>
-);
-
 export const ModuleSpacing = () => (
   <>
     {(
