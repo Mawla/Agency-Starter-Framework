@@ -7,7 +7,6 @@ import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
 import { Width } from "../../components/module/Width";
 import { ImageType } from "../../types";
-import cx from "classnames";
 import React from "react";
 
 export type HeroBasicProps = {
@@ -25,14 +24,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
 
   return (
     <header className="relative z-0 overflow-hidden text-neutral-base">
-      <div
-        className={cx(
-          "relative flex flex-row items-center z-30",
-          "tablet:min-h-[545px]",
-          "pt-[90px]",
-          "tablet:pb-[140px] xl:pb-[280px] tablet:pt-[120px] 2xl:pt-[260px]",
-        )}
-      >
+      <div className="relative flex flex-row items-center z-30">
         <Bleed bleed="md">
           <Width width="inner">
             <div className="relative flex flex-col tablet:max-w-[75%] lg:max-w-[790px] gap-4">
