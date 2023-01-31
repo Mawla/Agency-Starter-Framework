@@ -1,6 +1,3 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
 import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./BackgroundOptions";
@@ -8,6 +5,8 @@ import { Spacing as SpacingComponent } from "./Spacing";
 import { SPACE_OPTIONS } from "./SpacingOptions";
 import { WidthType, WIDTH_OPTIONS } from "./WidthOptions";
 import { Wrapper as WrapperComponent } from "./Wrapper";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: WrapperComponent,
@@ -70,7 +69,7 @@ export const Spacing = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <div key={label} className="border mb-4 px-4">
@@ -100,7 +99,7 @@ export const WithContent = () => (
       }}
     >
       <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
-        <div className="font-bold text-title-2xl-lg">Hello Prima</div>
+        <div className="font-bold text-title-2xl-lg">…</div>
       </SpacingComponent>
     </WrapperComponent>
   </div>
@@ -141,7 +140,7 @@ export const Rounded = () => (
             </SpacingComponent>
           </WrapperComponent>
         </div>
-      )
+      ),
     )}
   </div>
 );

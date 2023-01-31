@@ -20,12 +20,14 @@ export const Breadcrumb = ({ theme, path }: BreadcrumbProps) => {
     <Wrapper
       theme={{
         ...theme,
+        width: "full",
         space: {
-          top: theme?.space?.top || "sm",
-          bottom: theme?.space?.bottom || "sm",
+          top: theme?.space?.top || "none",
+          bottom: theme?.space?.bottom || "none",
         },
       }}
       id="breadcrumb"
+      innerClassName="py-10"
     >
       <BreadcrumbComponent path={path} />
     </Wrapper>

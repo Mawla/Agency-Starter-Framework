@@ -1,5 +1,3 @@
-import React from "react";
-
 import { slugify } from "../../helpers/utils/string";
 import { ColorType } from "../../types";
 import { Background } from "./Background";
@@ -9,6 +7,7 @@ import { Spacing, SpacingProps } from "./Spacing";
 import { SpaceType } from "./SpacingOptions";
 import { Width } from "./Width";
 import { WidthType } from "./WidthOptions";
+import React from "react";
 
 export type WrapperProps = {
   id?: string;
@@ -58,9 +57,20 @@ export const Wrapper = ({
       };
     }
 
+    if (!theme?.width || theme?.width === "full") {
+      theme.rounded = {
+        top: theme?.rounded?.top || "none",
+        bottom: theme?.rounded?.bottom || "none",
+      };
+    }
+
     return (
-      <Bleed bleed="sm" id={id ? slugify(id) : ""} className={className}>
-        <Spacing space={theme?.space || { top: "none", bottom: "xl" }}>
+      <Bleed
+        bleed={theme?.width === "full" ? "none" : "sm"}
+        id={id ? slugify(id) : ""}
+        className={className}
+      >
+        <Spacing space={theme?.space || { top: "none", bottom: "lg" }}>
           <Width width={theme?.width || "outer"}>
             <Background
               theme={{
