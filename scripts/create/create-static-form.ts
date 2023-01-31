@@ -1,5 +1,5 @@
-import { slugify } from '../../helpers/utils/string';
-import { sortLines } from '../helpers/sortLines';
+import { slugify } from "../../helpers/utils/string";
+import { sortLines } from "../helpers/sortLines";
 
 /**
  *
@@ -12,15 +12,15 @@ import { sortLines } from '../helpers/sortLines';
  * ? add options to types
  */
 
-const fs = require('fs');
-const path = require('path');
-const { pascalCase } = require('../helpers/pascalCase');
-const { prettierFile } = require('../helpers/prettierFile');
-const { addLine } = require('../helpers/addLine');
-const { cyan } = require('../helpers/terminal');
-const { question } = require('../helpers/question');
+const fs = require("fs");
+const path = require("path");
+const { pascalCase } = require("../helpers/pascalCase");
+const { prettierFile } = require("../helpers/prettierFile");
+const { addLine } = require("../helpers/addLine");
+const { cyan } = require("../helpers/terminal");
+const { question } = require("../helpers/question");
 
-const readline = require('readline').createInterface({
+const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
@@ -44,7 +44,7 @@ function finish() {
   readline.close();
   build();
 
-  console.log('\nNext steps: ');
+  console.log("\nNext steps: ");
   console.log(`› Start building the form`);
   console.log(
     `› Add options in the cms inside ${cyan(
@@ -71,14 +71,14 @@ function build() {
 function addType() {
   const { name, slug } = answers;
   const filePath = `${__dirname}/../../types.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  const fromNeedle = 'export const STATIC_FORMS';
-  const toNeedle = '};';
+  const fromNeedle = "export const STATIC_FORMS";
+  const toNeedle = "};";
   lines = addLine(`  '${slug}': '${name}',`, lines, fromNeedle);
   lines = sortLines(lines, fromNeedle, toNeedle);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
 
   console.log(
     `› Added ${slug} to static forms ${cyan(
@@ -96,7 +96,7 @@ function createForm() {
 
   const fileDir = `${__dirname}/../../forms`;
   const filePath = `${fileDir}/${pascalName}.tsx`;
-  const storiesFilePath = filePath.replace('.tsx', '.stories.tsx');
+  const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   // create module file
@@ -128,18 +128,17 @@ function createBuilder() {
   const { pascalName, slug } = answers;
 
   const filePath = `${__dirname}/../../layout/ModuleBuilder/StaticFormBuilder.tsx`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add import
   lines = [
     `
-    import { ${pascalName}Values, type ${pascalName}Props } from '../../forms/${pascalName}';
-    const ${pascalName} = dynamic<${pascalName}Props>(
+    import { ${pascalName}Values, ${pascalName}Props } from '../../forms/${pascalName}';
+    const ${pascalName} = lazy<ComponentType<${pascalName}Props>>(
       () =>
         import(
           /* webpackChunkName: "${pascalName}" */ '../../forms/${pascalName}'
-        ) as any,
-      { suspense: true },
+        )
     );
     `,
     ...lines,
@@ -147,16 +146,18 @@ function createBuilder() {
 
   // add to render loop
   const jsx = `\n{formId === '${slug}' && <${pascalName} {...formProps} />}`;
-  lines = addLine(jsx, lines, '</LazyLoadInView>', 0);
+  lines = addLine(jsx, lines, "</LazyLoadInView>", 0);
 
   // add values type
-  let doc = lines.join('\n');
-  doc = doc.replace('async (values: ', `async (values: ${pascalName}Values | `);
+  let doc = lines.join("\n");
+  doc = doc.replace("async (values: ", `async (values: ${pascalName}Values | `);
 
   fs.writeFileSync(filePath, doc);
   prettierFile(filePath);
 
-  console.log(`› Added import to ${cyan(path.relative(process.cwd(), filePath))}`);
+  console.log(
+    `› Added import to ${cyan(path.relative(process.cwd(), filePath))}`,
+  );
   console.log(
     `› Added form render to ${cyan(path.relative(process.cwd(), filePath))}`,
   );
@@ -170,7 +171,7 @@ function createApi() {
   const { name, slug } = answers;
 
   const filePath = `${__dirname}/../../pages/api/static-form.ts`;
-  let lines = fs.readFileSync(filePath).toString().split('\n');
+  let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add import
   const snippet = `
@@ -181,7 +182,7 @@ function createApi() {
 
   lines = addLine(snippet, lines, `if ('success' in status)`, -1);
 
-  fs.writeFileSync(filePath, lines.join('\n'));
+  fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
 
   console.log(
