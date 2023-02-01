@@ -22,7 +22,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 
 const handler = async (
   req: ExtendedNextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) => {
   if (req.method !== "POST") return res.status(405).end();
 
