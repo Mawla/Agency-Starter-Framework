@@ -10,12 +10,24 @@ export default {
 export const Default = () => (
   <Slider
     slides={[
-      <div className="border">hello</div>,
-      <div className="border">hello</div>,
-      <div className="border">hello</div>,
-      <div className="border">hello</div>,
-      <div className="border">hello</div>,
-      <div className="border">hello</div>,
+      <div className="border" key={1}>
+        hello
+      </div>,
+      <div className="border" key={2}>
+        hello
+      </div>,
+      <div className="border" key={3}>
+        hello
+      </div>,
+      <div className="border" key={4}>
+        hello
+      </div>,
+      <div className="border" key={5}>
+        hello
+      </div>,
+      <div className="border" key={6}>
+        hello
+      </div>,
     ]}
     columns={3}
   />
