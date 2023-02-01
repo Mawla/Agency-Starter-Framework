@@ -1,6 +1,7 @@
 import { render, screen } from "../../jest.utils";
 import Story from "./Story";
 import "@testing-library/jest-dom";
+import "@testing-library/jest-dom";
 
 jest.mock("next/dist/client/router", () => require("next-router-mock"));
 
@@ -11,8 +12,8 @@ describe("Story", () => {
   });
 
   it("renders quote", () => {
-    render(<Story quote="quote" />);
-    expect(screen.getByText(`“quote”`, { selector: "p" })).toBeInTheDocument();
+    render(<Story quote="quote" theme={{ quote: { showQuotes: false } }} />);
+    expect(screen.getByText(`quote`, { selector: "p" })).toBeInTheDocument();
   });
 
   it("renders text", () => {
