@@ -1,7 +1,7 @@
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { SimpleImage } from "../../components/images/SimpleImage";
 import { Bleed } from "../../components/module/Bleed";
 import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
@@ -43,15 +43,14 @@ export const HeroBasic = (data: HeroBasicProps) => {
               {buttons && (
                 <ButtonGroup className="mt-4 md:mt-6 lg:mt-8" items={buttons} />
               )}
-
               {image && (
-                <div className="aspect-video w-full relative">
-                  <ResponsiveImage
+                <div className="relative">
+                  <SimpleImage
                     {...image}
-                    className="absolute inset-0"
                     priority
-                    roundSize={50}
                     loading="eager"
+                    width={500}
+                    height={500}
                   />
                 </div>
               )}
