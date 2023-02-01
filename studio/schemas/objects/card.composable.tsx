@@ -1,4 +1,3 @@
-
 import { SIZE_OPTIONS as TEXT_SIZE_OPTIONS } from "../../../components/module/Text";
 import {
   SIZE_OPTIONS as TITLE_SIZE_OPTIONS,
@@ -18,6 +17,7 @@ import {
   TEXT_COLOR_OPTIONS,
   TITLE_COLOR_OPTIONS,
 } from "../../../modules/CardGrid/ComposableCardOptions";
+import { ICONS } from "../../../types";
 import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
@@ -38,13 +38,7 @@ export const schema = defineType({
       image: "image",
       cover: "cover",
     },
-    prepare({
-      title = "",
-      subtitle = "",
-      text,
-      image,
-      cover,
-    }: any) {
+    prepare({ title = "", subtitle = "", text, image, cover }: any) {
       return {
         title: `${title} ${subtitle}`,
         subtitle: blocksToText(text),
@@ -100,6 +94,9 @@ export const schema = defineType({
         !value &&
         (parent?.cover || parent?.image)) as ConditionalPropertyCallback,
       components: { input: IconPicker },
+      options: {
+        icons: ICONS,
+      } as any,
     }),
     defineField({
       name: "title",

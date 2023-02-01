@@ -1,3 +1,4 @@
+import { ICONS } from "../../../types";
 import { SchemaName } from "../../../types.sanity";
 import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
@@ -13,16 +14,16 @@ import {
 export const SCHEMA_NAME: SchemaName = "footer";
 
 const LABEL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "label"
+  ({ name }) => name === "label",
 ) as any;
 const INTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "internal"
+  ({ name }) => name === "internal",
 ) as any;
 const LANGUAGE_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "language"
+  ({ name }) => name === "language",
 ) as any;
 const EXTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "external"
+  ({ name }) => name === "external",
 ) as any;
 
 const PREVIEW = {
@@ -149,6 +150,9 @@ export default defineType({
               title: "Icon",
               type: "string",
               components: { input: IconPicker },
+              options: {
+                icons: ICONS,
+              } as any,
             }),
           ],
         }),

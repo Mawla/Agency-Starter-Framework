@@ -1,5 +1,8 @@
 import {
-  ICON_POSITION_OPTIONS, VARIANT_OPTIONS,} from "../../../components/buttons/ButtonOptions";
+  ICON_POSITION_OPTIONS,
+  VARIANT_OPTIONS,
+} from "../../../components/buttons/ButtonOptions";
+import { ICONS } from "../../../types";
 import DialogSelect, {
   DialogSelectWrapper,
 } from "../../components/DialogSelect";
@@ -164,6 +167,9 @@ const schema = defineType({
       type: "string",
       group: "theme",
       components: { input: IconPicker },
+      options: {
+        icons: ICONS,
+      } as any,
     }),
     defineField({
       name: "iconPosition",

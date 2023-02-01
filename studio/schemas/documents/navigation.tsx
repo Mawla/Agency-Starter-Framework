@@ -1,3 +1,4 @@
+import { ICONS } from "../../../types";
 import { SchemaName } from "../../../types.sanity";
 import IconPicker from "../../components/IconPicker";
 import { DocumentIcon } from "../../utils/DocumentIcon";
@@ -164,6 +165,9 @@ export default defineType({
               title: "Icon",
               type: "string",
               components: { input: IconPicker },
+              options: {
+                icons: ICONS,
+              } as any,
             },
           ],
         },

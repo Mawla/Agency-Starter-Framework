@@ -58,23 +58,6 @@ export const LongContent = () => (
   />
 );
 
-export const ImageColors = () => (
-  <>
-    {(Object.keys(IMAGE_COLOR_OPTIONS) as ImageColorType[]).map(
-      (background: ImageColorType) => (
-        <div key={background} className="mb-10 border">
-          <TextImage
-            title="Text image"
-            eyebrow={background}
-            theme={{ image: { background } }}
-            image={demoImage2}
-          />
-        </div>
-      ),
-    )}
-  </>
-);
-
 export const Align = () => (
   <>
     {(Object.keys(IMAGE_ALIGN_OPTIONS) as ImageAlignType[]).map(
