@@ -46,7 +46,13 @@ export const HeroBasic = (data: HeroBasicProps) => {
 
               {image && (
                 <div className="aspect-video w-full relative">
-                  <ResponsiveImage {...image} className="absolute inset-0" />
+                  <ResponsiveImage
+                    {...image}
+                    className="absolute inset-0"
+                    priority
+                    roundSize={50}
+                    loading="eager"
+                  />
                 </div>
               )}
             </div>
