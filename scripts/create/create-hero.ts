@@ -104,7 +104,7 @@ function createHero() {
       "/*JSX*/",
       `
       <Title as="h1">{title}</Title>
-      <ResponsiveImage {...image} priority />`,
+      <ResponsiveImage {...image} priority roundSize={50} loading="eager" />`,
     );
   fs.writeFileSync(filePath, heroContent);
   prettierFile(filePath);
