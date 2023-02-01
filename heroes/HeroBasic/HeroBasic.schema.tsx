@@ -13,15 +13,14 @@ const schema = defineType({
     select: {
       title: "title",
       eyebrow: "eyebrow",
-      image1: "visual.image1",
-      image2: "visual.image2",
+      image: "image",
       language: "language",
     },
-    prepare({ title = "", eyebrow = "", image1, image2, language }: any) {
+    prepare({ title = "", eyebrow = "", image, language }: any) {
       return {
         title: `${title}`,
         subtitle: prefixWithLanguage(language, eyebrow),
-        media: image1 || image2,
+        media: image,
       };
     },
   },
