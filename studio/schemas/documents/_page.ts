@@ -85,7 +85,6 @@ export const HERO_FIELD = defineField({
       },
     }),
   ),
-
   options: {
     filterType: /hero\./,
     updateField: "hero",
