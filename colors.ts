@@ -5,7 +5,7 @@ export const COLORS = {
   white: "#fff",
   black: "#000000",
 
-  "neutral-500": "#f8fafc",
+  "neutral-50": "#f8fafc",
   "neutral-100": "#f1f5f9",
   "neutral-200": "#e2e8f0",
   "neutral-300": "#cbd5e1",
