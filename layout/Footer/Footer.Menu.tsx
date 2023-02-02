@@ -1,6 +1,14 @@
 import { Link } from "../../components/buttons/Link";
-import { IconLoader } from "../../components/images/IconLoader";
+import { IconLoaderProps } from "../../components/images/IconLoader";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { ComponentType, lazy } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
+);
 
 export const FooterMenu = ({
   title,

@@ -1,4 +1,4 @@
-import { IconLoader } from "../components/images/IconLoader";
+import { IconLoaderProps } from "../components/images/IconLoader";
 import { getClient } from "../helpers/sanity/server";
 import { languages, LanguageType } from "../languages";
 import { Page } from "../layout/pages/Page";
@@ -13,7 +13,14 @@ import {
 } from "../queries/sitemap";
 import type { GetStaticProps } from "next";
 import Link from "next/link";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../components/images/IconLoader"
+    ),
+);
 
 export default function Sitemap({
   config,

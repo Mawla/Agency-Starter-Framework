@@ -1,11 +1,15 @@
 import { useDebounce } from "../../hooks/useDebounce";
 import { useInView } from "../../hooks/useInView";
 import { VideoType } from "../../types";
-import { IconLoader } from "../images/IconLoader";
+import { IconLoaderProps } from "../images/IconLoader";
 import cx from "classnames";
 import Plyr from "plyr";
 import PlyrJS, { Options as PlyrOptions } from "plyr";
-import React, { useEffect, useRef, useState } from "react";
+import React, { ComponentType, lazy, useEffect, useRef, useState } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
+);
 
 export const Video = ({
   provider,
@@ -21,7 +25,7 @@ export const Video = ({
   const [windowWidth, setWindowWidth] = useState<number>(1024);
   const debouncedWindowWidth = useDebounce(windowWidth, 500);
   const [responsiveSrc, setResponsiveSrc] = useState<string | null>(
-    videoId || null
+    videoId || null,
   );
 
   const [videoPlaybackState, setVideoPlaybackState] = useState<
@@ -29,7 +33,7 @@ export const Video = ({
   >(autoPlay ? "playing" : "paused");
 
   const [allowYoutube, setAllowYoutube] = useState<boolean>(
-    process.env.NEXT_PUBLIC_VERCEL_ENV !== "production"
+    process.env.NEXT_PUBLIC_VERCEL_ENV !== "production",
   );
 
   const [PlyrInstance, setPlyrInstance] = useState<Plyr | null>(null);
@@ -71,7 +75,7 @@ export const Video = ({
 
     const plyr = new PlyrJS(
       (videoRef.current || videoDivRef.current) as any,
-      options
+      options,
     );
     plyr.muted = autoPlay || false; // autoplay won't work on chrome without this, seems a bug that it's not accepting the muted option
     setPlyrInstance(plyr);
@@ -121,7 +125,7 @@ export const Video = ({
       `https://res.cloudinary.com/${
         process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
         process.env.STORYBOOK_CLOUDINARY_CLOUD_NAME
-      }/video/upload/q_99/w_${newWidth}/h_${newHeight}/${videoId}.mp4`
+      }/video/upload/q_99/w_${newWidth}/h_${newHeight}/${videoId}.mp4`,
     );
   }, [provider, videoId, debouncedWindowWidth]);
 

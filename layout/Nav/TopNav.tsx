@@ -1,12 +1,19 @@
 import { Link } from "../../components/buttons/Link";
-import { IconLoader } from "../../components/images/IconLoader";
+import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { Logo } from "./Logo";
 import { NavProps } from "./Nav";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
-import React, { useContext, useRef } from "react";
+import React, { ComponentType, lazy, useContext, useRef } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
+);
 
 export type TopNavProps = {
   showNav?: boolean;

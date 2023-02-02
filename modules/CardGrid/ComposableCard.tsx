@@ -2,7 +2,7 @@ import { backgroundClasses, borderClasses } from "../../colors";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
-import { IconLoader } from "../../components/images/IconLoader";
+import { IconLoaderProps } from "../../components/images/IconLoader";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import {
   SizeType as TextSizeType,
@@ -45,6 +45,13 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
     ),
 );
 

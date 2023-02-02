@@ -3,11 +3,21 @@ import { getClient } from "../../helpers/sanity/server";
 import { LanguageType } from "../../languages";
 import { PageBody } from "../../layout/pages/PageBody";
 import { getPageQuery, PageType } from "../../queries/page";
-import { IconLoader } from "../images/IconLoader";
+import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Background } from "../module/Background";
 import { useRouter } from "next/router";
-import React, { useEffect, useState, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  lazy,
+  ComponentType,
+} from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
+);
 
 export const PageLock = () => {
   const { sitemapItem } = useContext(PageContext);

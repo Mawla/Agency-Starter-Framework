@@ -1,9 +1,13 @@
 import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
 import { LanguageType } from "../../languages";
-import { IconLoader } from "../images/IconLoader";
+import { IconLoaderProps } from "../images/IconLoader";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
+);
 
 export type LinkProps = {
   href: string;

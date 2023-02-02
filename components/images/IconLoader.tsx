@@ -5,7 +5,7 @@ import * as DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
-type IconLoaderProps = {
+export type IconLoaderProps = {
   icon?: IconType;
   className?: string;
   color?: ColorType;
@@ -98,6 +98,8 @@ export const IconLoader = ({
     />
   );
 };
+
+export default React.memo(IconLoader);
 
 /**
  * Remove width / height / style

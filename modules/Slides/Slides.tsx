@@ -21,7 +21,7 @@ const Text = lazy<ComponentType<TextProps>>(
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
-      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
     ),
 );
 

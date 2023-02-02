@@ -1,19 +1,28 @@
-import cx from 'classnames';
-import React from 'react';
+import { backgroundClasses, borderClasses, textClasses } from "../../colors";
+import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
+import { LanguageType } from "../../languages";
+import { ColorType, IconType } from "../../types";
+import { IconLoaderProps } from "../images/IconLoader";
+import { Spinner } from "../loaders/Spinner";
+import {
+  AlignType,
+  SizeType,
+  IconPositionType,
+  WeightType,
+  VariantType,
+} from "./ButtonOptions";
+import { Link } from "./Link";
+import cx from "classnames";
+import React, { ComponentType, lazy } from "react";
 
-import { backgroundClasses, borderClasses, textClasses } from '../../colors';
-import { isInternalLink } from '../../helpers/sitemap/isInternalLink';
-import { LanguageType } from '../../languages';
-import { ColorType, IconType } from '../../types';
-import { IconLoader } from '../images/IconLoader';
-import { Spinner } from '../loaders/Spinner';
-import { AlignType, SizeType, IconPositionType,WeightType, VariantType } from './ButtonOptions';
-import { Link } from './Link';
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
+);
 
 export type ButtonProps = {
   align?: AlignType;
   ariaLabel?: string;
-  as?: 'button' | 'a' | 'div' | 'span' | 'submit';
+  as?: "button" | "a" | "div" | "span" | "submit";
   compact?: boolean;
   href?: string;
   icon?: IconType;
@@ -24,7 +33,7 @@ export type ButtonProps = {
   round?: boolean;
   size?: SizeType;
   stretch?: boolean;
-  target?: '_blank';
+  target?: "_blank";
   theme?: { text?: ColorType; background?: ColorType; border?: ColorType };
   disabled?: boolean;
   loading?: boolean;
@@ -36,34 +45,34 @@ export type ButtonProps = {
 };
 
 const sizeClasses: Record<SizeType, string> = {
-  sm: 'text-base md:text-lg',
-  md: 'text-lg md:text-xl',
+  sm: "text-base md:text-lg",
+  md: "text-lg md:text-xl",
 };
 
 const spaceClasses: Record<SizeType, string> = {
-  sm: 'px-4 py-2 md:px-4',
-  md: 'px-5 py-[9px] md:px-6',
+  sm: "px-4 py-2 md:px-4",
+  md: "px-5 py-[9px] md:px-6",
 };
 
 const iconSizeClasses: Record<SizeType, string> = {
-  sm: 'w-5 h-5',
-  md: 'w-5 h-5',
+  sm: "w-5 h-5",
+  md: "w-5 h-5",
 };
 
 const iconOnlySizeClasses: Record<SizeType, string> = {
-  sm: 'w-10 h-10 md:w-10 md:h-10',
-  md: 'w-10 h-10 md:w-11 md:h-11',
+  sm: "w-10 h-10 md:w-10 md:h-10",
+  md: "w-10 h-10 md:w-11 md:h-11",
 };
 
 const alignClasses: Record<AlignType, string> = {
-  left: 'justify-start',
-  center: 'justify-center',
-  right: 'justify-end',
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
 };
 
 const weightClasses: Record<WeightType, string> = {
-  regular: 'font-normal',
-  medium: 'font-medium',
+  regular: "font-normal",
+  medium: "font-medium",
 };
 
 const variantClasses: Record<VariantType, string> = {
@@ -87,29 +96,29 @@ export const Button = (props: ButtonProps) => {
 export const ButtonMemo = React.memo(Button);
 
 const ButtonInner = ({
-  align = 'center',
+  align = "center",
   ariaLabel,
-  as = 'a',
+  as = "a",
   compact = false,
   disabled = false,
   download = false,
   hideLabel = false,
   href,
   icon,
-  iconPosition = 'after',
-  label = '',
+  iconPosition = "after",
+  label = "",
   loading = false,
   onClick,
   plain = false,
   round = true,
-  size = 'md',
+  size = "md",
   stretch = false,
   target,
   theme,
   variant = "primary",
-  weight = 'medium',
+  weight = "medium",
 }: ButtonProps) => {
-  const Element = as === 'submit' ? 'button' : as;
+  const Element = as === "submit" ? "button" : as;
   const props: {
     type?: "button" | "reset" | "submit" | undefined;
     href?: string | undefined;
@@ -119,74 +128,78 @@ const ButtonInner = ({
     disabled?: boolean;
   } = {};
 
-  if (target === '_blank') {
-    icon = 'external-link';
-    iconPosition = 'after';
+  if (target === "_blank") {
+    icon = "external-link";
+    iconPosition = "after";
   }
 
   if (hideLabel) {
     ariaLabel = label;
     props.title = label;
-    label = '';
+    label = "";
   }
 
-  label = label || '';
-  iconPosition = iconPosition || 'after';
+  label = label || "";
+  iconPosition = iconPosition || "after";
 
   // prevent orphan icon by adding first / last word to icon
-  const labelWords = label?.split(' ');
+  const labelWords = label?.split(" ");
 
-  if (as === 'button') {
-    props.type = 'button';
+  if (as === "button") {
+    props.type = "button";
   }
 
-  if (as === 'submit') {
-    props.type = 'button';
+  if (as === "submit") {
+    props.type = "button";
   }
 
-  if (as === 'a') {
+  if (as === "a") {
     props.href = href;
     props.target = target;
   }
 
   if (download) {
     props.download = true;
-    if (props.href && props.href?.indexOf('.sanity.io') > -1) props.href = `${props.href}?dl`;
+    if (props.href && props.href?.indexOf(".sanity.io") > -1)
+      props.href = `${props.href}?dl`;
   }
 
   const handleClick = (e: React.MouseEvent) =>
     disabled ? () => {} : onClick ? onClick(e) : () => {};
 
   const ButtonIcon = icon
-    ? ({ wordBefore, wordAfter }: { wordBefore?: string; wordAfter?: string }) => (
+    ? ({
+        wordBefore,
+        wordAfter,
+      }: {
+        wordBefore?: string;
+        wordAfter?: string;
+      }) => (
         <span className=" whitespace-nowrap break-all">
           {wordBefore && ` ${wordBefore}`}
           <IconLoader
-              icon={icon}
-              className={cx(
-                "inline-block translate-y-1",
-                iconSizeClasses[size]
-              )}
-            />
+            icon={icon}
+            className={cx("inline-block translate-y-1", iconSizeClasses[size])}
+          />
           {wordAfter && `${wordAfter} `}
         </span>
       )
     : null;
 
   const sharedClasses = {
-    ['cursor-pointer']: true,
-    ['border']: theme?.border,
-    ['transition-colors duration-200']: true,
-    ['rounded-full']: round,
-    [backgroundClasses[theme?.background || 'white']]: true,
-    [borderClasses[theme?.border || 'white']]: theme?.border,
-    [textClasses[theme?.text || 'black']]: true,
-    ['inline-flex items-center justify-center']: !stretch,
-    ['bg-opacity-0 border-opacity-0']: plain,
-    ['hover:bg-opacity-0 focus:bg-opacity-0']: plain,
-    ['hover:underline focus:underline underline-offset-4 decoration-from-font']:
+    ["cursor-pointer"]: true,
+    ["border"]: theme?.border,
+    ["transition-colors duration-200"]: true,
+    ["rounded-full"]: round,
+    [backgroundClasses[theme?.background || "white"]]: true,
+    [borderClasses[theme?.border || "white"]]: theme?.border,
+    [textClasses[theme?.text || "black"]]: true,
+    ["inline-flex items-center justify-center"]: !stretch,
+    ["bg-opacity-0 border-opacity-0"]: plain,
+    ["hover:bg-opacity-0 focus:bg-opacity-0"]: plain,
+    ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
       true,
-    ['pointer-events-none opacity-75']: disabled,
+    ["pointer-events-none opacity-75"]: disabled,
     [weightClasses[weight]]: true,
     [variantClasses[variant]]: true,
   };
@@ -201,7 +214,9 @@ const ButtonInner = ({
         className="btn"
       >
         <span
-          className={cx(sharedClasses, { [iconOnlySizeClasses[size]]: !compact })}
+          className={cx(sharedClasses, {
+            [iconOnlySizeClasses[size]]: !compact,
+          })}
         >
           {ButtonIcon && <ButtonIcon />}
           {loading && <ButtonLoader />}
@@ -223,21 +238,21 @@ const ButtonInner = ({
           sharedClasses,
           sizeClasses[size],
           alignClasses[align],
-          { ['w-full flex']: stretch },
-          { ['rounded-full']: round },
+          { ["w-full flex"]: stretch },
+          { ["rounded-full"]: round },
           { [spaceClasses[size]]: !compact },
         )}
       >
         <span className="no-underline text-left break-words">
           {ButtonIcon ? (
             <>
-              {ButtonIcon && iconPosition === 'before' && (
+              {ButtonIcon && iconPosition === "before" && (
                 <ButtonIcon wordAfter={labelWords[0]} />
               )}
-              {iconPosition === 'before'
-                ? labelWords.slice(1).join(' ')
-                : labelWords.slice(0, -1).join(' ')}
-              {ButtonIcon && iconPosition === 'after' && (
+              {iconPosition === "before"
+                ? labelWords.slice(1).join(" ")
+                : labelWords.slice(0, -1).join(" ")}
+              {ButtonIcon && iconPosition === "after" && (
                 <ButtonIcon wordBefore={labelWords[labelWords.length - 1]} />
               )}
               {loading && <ButtonLoader />}

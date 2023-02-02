@@ -1,7 +1,11 @@
-import { IconLoader } from "../images/IconLoader";
+import { IconLoaderProps } from "../images/IconLoader";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
+);
 
 export type DialogProps = {
   children: React.ReactNode | React.ReactElement;
