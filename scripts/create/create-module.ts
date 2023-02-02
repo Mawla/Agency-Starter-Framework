@@ -423,7 +423,7 @@ function createBuilder(name, pascalName, schemaName, fields, isHero) {
   // add to render loop
   const jsx = isHero
     ? `{hero._type === '${schemaName}' && <${pascalName} {...(hero as ${pascalName}Props)} />}`
-    : `{item._type === '${schemaName}' && <${pascalName} {...item} />}`;
+    : `{item._type === '${schemaName}' && <${pascalName} {...(item as ${pascalName}Props)} />}`;
   lines = addLine(jsx, lines, isHero ? "</section>" : "</LazyLoadInView>", 0);
 
   fs.writeFileSync(filePath, lines.join("\n"));
