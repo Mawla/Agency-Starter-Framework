@@ -104,10 +104,30 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
       style={{
         borderBottom: "1px solid rgba(0,0,0,.1)",
         display: makeHidden ? "none" : "block",
+        position: "relative",
       }}
       data-type="module"
       data-key={props.value?._key}
     >
+      <div
+        style={{
+          marginLeft: 2,
+          marginTop: -4,
+          marginBottom: -2,
+        }}
+      >
+        <span
+          style={{
+            fontSize: 9,
+            fontWeight: 500,
+            textTransform: "uppercase",
+            display: "inline-block",
+            padding: 2,
+          }}
+        >
+          {props.schemaType?.title}
+        </span>
+      </div>
       {props.renderDefault(props)}
     </div>
   );
