@@ -25,7 +25,7 @@ const { createSchema } = require("../helpers/createSchema");
 const { createType } = require("../helpers/createType");
 const { question } = require("../helpers/question");
 const { cyan } = require("../helpers/terminal");
-const { MultiSelect, Input } = require("enquirer");
+const { MultiSelect, Input, Confirm } = require("enquirer");
 
 async function init() {
   try {
@@ -45,6 +45,12 @@ async function init() {
       )}\nUsed for the module select search. This makes it easier for editors to find modules.\n`,
     });
 
+    const heroInput = new Confirm({
+      type: "input",
+      name: "isHero",
+      message: `${cyan("Is this the page hero?")}\n`,
+    });
+
     const fieldsInput = new MultiSelect({
       name: "value",
       message: "Do you want to set up basic fields?",
@@ -62,15 +68,16 @@ async function init() {
     if (!name) return;
     const description = await descriptionInput.run();
     const fields = await fieldsInput.run();
+    const isHero = await heroInput.run();
 
     const pascalName = `${pascalCase(name)}`;
     const schemaName = `module.${name.toLowerCase().replace(/\s/g, "")}`;
 
     createModule(pascalName, schemaName, fields);
 
-    createQuery(name, pascalName, schemaName, fields);
-    createType(schemaName, { module: true });
-    createBuilder(name, pascalName, schemaName, fields);
+    createQuery(name, pascalName, schemaName, fields, isHero);
+    createType(schemaName, { module: !isHero, hero: isHero });
+    createBuilder(name, pascalName, schemaName, fields, isHero);
 
     console.log("\nNext steps: ");
 
@@ -92,8 +99,16 @@ async function init() {
  * b. create modules/[pascalName]/Module.stories.tsx
  */
 
-function createModule(pascalName, schemaName, fields, description = "") {
-  const fileDir = `${__dirname}/../../modules`;
+function createModule(
+  pascalName,
+  schemaName,
+  fields,
+  description = "",
+  isHero = false,
+) {
+  const fileDir = isHero
+    ? `${__dirname}/../../heroes`
+    : `${__dirname}/../../modules`;
   const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
   const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
   const optionsFilePath = filePath.replace(".tsx", "Options.ts");
@@ -106,7 +121,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
     replacer: "MyModule",
     schemaFilePath,
     prototypeFile: `${__dirname}/MyModule.schema.tsx`,
-    schemaImportPrefix: "module",
+    schemaImportPrefix: isHero ? "hero" : "module",
     fields,
     description,
   });
@@ -376,27 +391,35 @@ function createQuery(name, pascalName, schemaName, fields) {
  * Add module to the module builder
  */
 
-function createBuilder(name, pascalName, schemaName, fields) {
-  const filePath = `${__dirname}/../../layout/ModuleBuilder/ModuleBuilder.tsx`;
+function createBuilder(name, pascalName, schemaName, fields, isHero) {
+  const filePath = `${__dirname}/../../layout/ModuleBuilder/${
+    isHero ? "HeroBuilder" : "ModuleBuilder"
+  }.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add import
   lines = [
+    `import { ${pascalName}Props } from '../../${
+      isHero ? "heroes" : "modules"
+    }/${pascalName}/${pascalName}'`,
     `
       const ${pascalName} = lazy<ComponentType<${pascalName}Props>>(
         () =>
           import(
-            /* webpackChunkName: "${pascalName}" */ '../../modules/${pascalName}/${pascalName}'
-          ) as any,
-        { suspense: true },
+            /* webpackChunkName: "${pascalName}" */ '../../${
+      isHero ? "heroes" : "modules"
+    }/${pascalName}/${pascalName}'
+          )
       );
       `,
     ...lines,
   ];
 
   // add to render loop
-  const jsx = `{item._type === '${schemaName}' && <${pascalName} {...item} />}`;
-  lines = addLine(jsx, lines, "</LazyLoadInView>", 0);
+  const jsx = isHero
+    ? `{hero._type === '${schemaName}' && <${pascalName} {...(hero as ${pascalName}Props)} />}`
+    : `{item._type === '${schemaName}' && <${pascalName} {...item} />}`;
+  lines = addLine(jsx, lines, isHero ? "</section>" : "</LazyLoadInView>", 0);
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
