@@ -1,6 +1,11 @@
 import { textClasses } from "../../colors";
 import { pick } from "../../helpers/utils/object";
-import { SIZES, TextElement, FONT_WEIGHTS } from "../../types";
+import {
+  SIZES,
+  TextElement,
+  FONT_WEIGHTS,
+  HeadingLevelType,
+} from "../../types";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import React from "react";
@@ -24,7 +29,7 @@ export type WeightType = keyof typeof WEIGHT_OPTIONS;
 
 export type TitleProps = {
   children: React.ReactElement | React.ReactNode;
-  as?: TextElement;
+  as?: HeadingLevelType;
   size?: SizeType;
   weight?: WeightType;
   className?: string;

@@ -7,7 +7,7 @@ import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
 import { Width } from "../../components/module/Width";
 import { Wrapper } from "../../components/module/Wrapper";
-import { ImageType } from "../../types";
+import { HeadingLevelType, ImageType } from "../../types";
 import { AlignType } from "./BillboardOptions";
 import cx from "classnames";
 import React from "react";
@@ -21,6 +21,9 @@ export type BillboardProps = {
   theme?: {
     module?: {
       space?: SpaceType;
+    };
+    title?: {
+      level?: HeadingLevelType;
     };
     image?: {
       align?: AlignType;
@@ -66,7 +69,7 @@ export const Billboard = ({
               size="2xl"
               color="white"
               eyebrowColor="white"
-              as="h2"
+              as={theme?.title?.level}
               eyebrow={eyebrow}
             >
               {title}

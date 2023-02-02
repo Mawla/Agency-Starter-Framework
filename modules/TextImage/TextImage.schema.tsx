@@ -3,6 +3,7 @@ import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { HEADING_LEVELS } from "../../types";
 import {
   BACKGROUND_COLOR_OPTIONS,
   IMAGE_ALIGN_OPTIONS,
@@ -162,6 +163,13 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(TITLE_SIZE_OPTIONS),
+                },
+              },
+              {
+                name: "level",
+                type: "select",
+                options: {
+                  list: optionsToList(HEADING_LEVELS),
                 },
               },
             ],

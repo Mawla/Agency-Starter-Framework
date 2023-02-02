@@ -29,7 +29,7 @@ import {
 } from './CardGridOptions';
 import { type ComposableCardProps } from './ComposableCard';
 import { ImageCardProps } from './ImageCard';
-import { ColorType } from '../../types';
+import { ColorType, HeadingLevelType } from '../../types';
 import PortableText from '../../components/content/PortableText';
 
 const ComposableCard = dynamic<ComposableCardProps>(
@@ -70,7 +70,8 @@ export type CardGridProps = {
     };
     title?: {
       size?: TitleSizeType;
-      color?: ColorType
+      color?: ColorType;
+      level?: HeadingLevelType
     };
     text?: {
       color?: ColorType
@@ -223,6 +224,7 @@ export const CardGrid = ({
                 eyebrow={eyebrow}
                 color={theme?.title?.color}
                 eyebrowColor={theme?.eyebrow?.color}
+                as={theme?.title?.level}
               >
                 {title}
               </Title>

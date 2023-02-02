@@ -55,7 +55,7 @@ export const LanguageSwitch = ({
           "group",
           "bg-white",
           "flex items-center gap-2",
-          "text-md  text-neutral-5000",
+          "text-md  text-neutral-500",
           "rounded-full",
           "font-bold",
           "py-[8px] pl-2.5 pr-3",
@@ -98,7 +98,7 @@ export const LanguageSwitch = ({
                 locale={languageId}
                 className={cx(
                   "hover:underline flex underline-offset-4 gap-3",
-                  "text-neutral-5000",
+                  "text-neutral-500",
                   "text-md",
                   "p-3",
                   {

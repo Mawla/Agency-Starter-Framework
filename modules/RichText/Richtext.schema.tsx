@@ -5,6 +5,7 @@ import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
+import { HEADING_LEVELS } from "../../types";
 import {
   BACKGROUND_COLOR_OPTIONS,
   TEXT_ALIGN_OPTIONS,
@@ -151,6 +152,13 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(TITLE_SIZE_OPTIONS),
+                },
+              },
+              {
+                name: "level",
+                type: "select",
+                options: {
+                  list: optionsToList(HEADING_LEVELS),
                 },
               },
             ],

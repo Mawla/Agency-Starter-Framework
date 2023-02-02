@@ -6,13 +6,18 @@ import { SpaceType } from "../../components/module/SpacingOptions";
 import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
 import { Wrapper } from "../../components/module/Wrapper";
-import { ImageType } from "../../types";
+import { HeadingLevelType, ImageType } from "../../types";
 import cx from "classnames";
 import React from "react";
 
 export type SlidesProps = {
   theme?: {
-    space?: SpaceType;
+    module?: {
+      space?: SpaceType;
+    };
+    title?: {
+      level?: HeadingLevelType;
+    };
   };
   eyebrow?: string;
   title?: string;
@@ -36,11 +41,16 @@ export const Slides = ({
   buttons,
 }: SlidesProps) => {
   return (
-    <Wrapper theme={theme} className="relative overflow-hidden">
+    <Wrapper
+      theme={{
+        space: theme?.module?.space,
+      }}
+      className="relative overflow-hidden"
+    >
       {(title || intro) && (
         <div className="relative z-20 max-w-title flex flex-col gap-8 md:text-center md:mx-auto mb-10 sm:mb-12 md:mb-16 xl:mb-20">
           {title && (
-            <Title size="4xl" eyebrow={eyebrow}>
+            <Title size="4xl" eyebrow={eyebrow} as={theme?.title?.level}>
               {title}
             </Title>
           )}

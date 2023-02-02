@@ -39,7 +39,7 @@ export const Footer = ({
           </div>
         </div>
 
-        <div className="mt-10 md:mt-[100px] text-md text-neutral-5000">
+        <div className="mt-10 md:mt-[100px] text-md text-neutral-500">
           <div className="flex gap-10 flex-wrap">
             <div className="flex gap-3 md:gap-10 flex-col md:flex-row flex-wrap">
               <div className="translate-y-1 block">
@@ -63,10 +63,7 @@ export const Footer = ({
                       className="border-r border-neutral-200 pr-4 md:pr-6"
                     >
                       {href && (
-                        <Link
-                          href={href}
-                          className="font-bold text-neutral-900"
-                        >
+                        <Link href={href} className="text-neutral-900">
                           {label}
                         </Link>
                       )}
@@ -78,7 +75,7 @@ export const Footer = ({
                       {href && (
                         <Link
                           href={href}
-                          className="block w-7 h-7 overflow-hidden text-neutral-5000"
+                          className="block w-7 h-7 overflow-hidden text-neutral-500"
                           rel="noopener noreferrer"
                           target="_blank"
                         >

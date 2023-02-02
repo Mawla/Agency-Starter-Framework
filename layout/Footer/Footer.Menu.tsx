@@ -24,7 +24,7 @@ export const FooterMenu = ({
     >
       <span className="pointer-events-none absolute -inset-x-4 -top-3 border border-white bottom-0 hidden group-open:block md:group-open:hidden group-open:bg-neutral-100 rounded-lg -z-10" />
       <summary
-        className="text-neutral-5000 font-bold text-xl mb-4 list-none relative"
+        className="text-neutral-500 text-xl mb-4 list-none relative"
         onClick={(e) => {
           if (width && width > MAX_MOBILE_SIZE) e.preventDefault();
         }}
@@ -48,7 +48,7 @@ export const FooterMenu = ({
           return (
             <li
               key={href || label}
-              className="text-neutral-900 text-md font-bold relative"
+              className="text-neutral-900 text-md relative"
             >
               {href ? (
                 <Link

@@ -2,23 +2,36 @@ import React from 'react';
 
 import { Wrapper } from '../../components/module/Wrapper';
 import { BackgroundColorType } from '../../components/module/BackgroundOptions';
-import { ColorType } from '../../types';
+import { ColorType, HeadingLevelType } from '../../types';
 import { SpaceType } from '../../components/module/SpacingOptions';
+import { TitleSizeType } from './MyModuleOptions';
 /*IMPORT*/
 
 export type MyModuleProps = {
   theme?: {
-    title?: ColorType;
-    text?: ColorType;
-    background?: BackgroundColorType;
-    space?: SpaceType;
+    module?: {
+      background?: BackgroundColorType;
+      space?: SpaceType;
+    }
+    title?: {
+      color?: ColorType;
+      size?: TitleSizeType;
+      level?: HeadingLevelType
+    },
+    text?: {
+      color?: ColorType;
+    },
   };
   /*TYPE*/
 };
 
 export const MyModule = ({ theme/*PROPS*/ }: MyModuleProps) => {
   return (
-    <Wrapper theme={theme}>
+    <Wrapper
+      theme={{
+        ...theme?.module
+      }}
+    >
       /*JSX*/
     </Wrapper>
   );

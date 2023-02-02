@@ -23,7 +23,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
   const { eyebrow, title, buttons, text, image }: HeroBasicProps = data;
 
   return (
-    <header className="relative z-0 overflow-hidden text-neutral-5000">
+    <header className="relative z-0 overflow-hidden text-neutral-500">
       <div className="relative flex flex-row items-center z-30">
         <Bleed bleed="md">
           <Width width="inner">

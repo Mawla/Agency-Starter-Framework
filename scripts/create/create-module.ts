@@ -129,7 +129,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
     jsxLines.push(`
       {title && (
         <div className="mb-4 md:mb-6">
-          <Title size="lg" eyebrow={eyebrow}>{title}</Title>
+          <Title size={theme?.title?.size || 'lg'} as={theme?.title?.level} color={theme?.title?.color} eyebrow={eyebrow}>{title}</Title>
         </div>
       )}
       `);
@@ -153,7 +153,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
     jsxLines.push(`
       {intro && (
         <div className="mb-10 md:mb-14">
-          <Text color={theme?.text}>
+          <Text color={theme?.text?.color}>
             <PortableText content={intro as any} />
           </Text>
         </div>

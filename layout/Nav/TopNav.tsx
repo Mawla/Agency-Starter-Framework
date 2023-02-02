@@ -36,7 +36,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
           <RadixNavigationMenu.Root
             className={cx(
               "radix-topnav flex gap-6 items-center",
-              "py-2 md:py-3 lg:py-4 xl:py-5",
+              "py-2 md:py-3 lg:py-4",
               "max-w-outer mx-auto",
               "px-5 sm:px-8 lg:px-8 xl:px-8",
               "border-b border-b-black/10",
@@ -44,10 +44,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             role="navigation"
           >
             {/* logo */}
-            <div className="flex-1">
+            <div className="flex-1 flex items-center">
               <Link
                 href={`/${language}`}
-                className="inline-block translate-y-2"
+                className="inline-block"
                 aria-label="Homepage"
               >
                 <Logo />
@@ -149,7 +149,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                           locale={language}
                                           className={cx(
                                             "bg-white hover:bg-neutral-100 flex transition-colors",
-                                            "text-neutral-5000",
+                                            "text-neutral-500",
                                             "text-md",
                                             "p-3 rounded-xs",
                                             {
@@ -193,10 +193,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           href={button.href}
                           locale={button.language}
                           className={cx(
-                            "bg-action-500",
+                            "bg-neutral-300",
                             "hover:underline underline-offset-4",
                             "flex items-center gap-2",
-                            "text-white rounded-full text-md font-bold",
+                            "text-neutral-800 rounded-full text-md",
                             "py-[10px] pl-4 pr-3",
                             "whitespace-nowrap",
                           )}

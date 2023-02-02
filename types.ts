@@ -68,6 +68,20 @@ export type TextElement =
   | "cite"
   | "blockquote";
 
+export const HEADING_LEVELS = {
+  h2: "Heading 2",
+  h3: "Heading 3",
+  h4: "Heading 4",
+  h5: "Heading 5",
+  h6: "Heading 6",
+  span: "Span",
+};
+
+export type HeadingLevelType = keyof typeof HEADING_LEVELS;
+export type HeadingLevelsType = {
+  [key in keyof typeof HEADING_LEVELS]: string;
+};
+
 export type ImageType = {
   src: string;
   preventResize?: boolean;

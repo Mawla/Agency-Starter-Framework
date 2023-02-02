@@ -1,21 +1,22 @@
 import { Slider } from "../../components/Slider/Slider";
 import PortableText from "../../components/content/PortableText";
 import { ResponsiveImage } from "../../components/images/ResponsiveImage";
-import { BackgroundColorType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
 import { Wrapper } from "../../components/module/Wrapper";
-import { ColorType, ImageType } from "../../types";
+import { HeadingLevelType, ImageType } from "../../types";
 import cx from "classnames";
 import React from "react";
 
 export type GalleryProps = {
   theme?: {
-    title?: ColorType;
-    text?: ColorType;
-    background?: BackgroundColorType;
-    space?: SpaceType;
+    module?: {
+      space?: SpaceType;
+    };
+    title?: {
+      level?: HeadingLevelType;
+    };
   };
   eyebrow?: string;
   title?: string;
@@ -31,11 +32,17 @@ export const Gallery = ({
   items,
 }: GalleryProps) => {
   return (
-    <Wrapper theme={theme} className="relative overflow-hidden">
+    <Wrapper
+      id={title}
+      theme={{
+        space: theme?.module?.space,
+      }}
+      innerClassName="relative overflow-hidden"
+    >
       {(title || intro) && (
         <div className="relative z-20 max-w-title flex flex-col gap-8 md:text-center md:mx-auto mb-10 sm:mb-12 md:mb-16 xl:mb-20">
           {title && (
-            <Title size="4xl" eyebrow={eyebrow}>
+            <Title size="4xl" eyebrow={eyebrow} as={theme?.title?.level}>
               {title}
             </Title>
           )}

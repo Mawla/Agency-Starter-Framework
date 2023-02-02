@@ -5,7 +5,7 @@ import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
 import { WidthType } from "../../components/module/WidthOptions";
 import { Wrapper } from "../../components/module/Wrapper";
-import { ColorType } from "../../types";
+import { ColorType, HeadingLevelType } from "../../types";
 import {
   BackgroundColorType,
   TextAlignType,
@@ -28,6 +28,7 @@ export type RichTextProps = {
     };
     title?: {
       size?: TitleSizeType;
+      level?: HeadingLevelType;
     };
     decorations?: {
       roundedTop?: ModuleRadiusType;
@@ -38,7 +39,7 @@ export type RichTextProps = {
 
 export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
   // dark background scenario: change overal colouring
-  let titleColor: ColorType = "neutral-5000";
+  let titleColor: ColorType = "neutral-500";
   let textColor: ColorType = "neutral-400";
   let eyebrowColor: ColorType = "brand-500";
   let isDarkBackground = false;
@@ -80,6 +81,7 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
               eyebrow={eyebrow}
               color={titleColor}
               eyebrowColor={eyebrowColor}
+              as={theme?.title?.level}
             >
               {title}
             </Title>

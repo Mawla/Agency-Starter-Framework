@@ -2,6 +2,7 @@ import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { HEADING_LEVELS } from "../../types";
 import { ALIGN_OPTIONS } from "./BillboardOptions";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
@@ -120,6 +121,22 @@ const schema = defineType({
                 type: "space",
                 options: {
                   list: optionsToList(SPACE_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "level",
+                type: "select",
+                options: {
+                  list: optionsToList(HEADING_LEVELS),
                 },
               },
             ],

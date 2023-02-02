@@ -31,7 +31,7 @@ export const MobileNav = ({
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="z-60 py-3 px-3 text-neutral-5000 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
+              <RadixDialog.Close className="z-60 py-3 px-3 text-neutral-500 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
                 <IconLoader
                   icon="close"
                   className="text-current w-6 h-6 block"
@@ -60,7 +60,7 @@ export const MobileNav = ({
                                 <Link
                                   href={href}
                                   locale={language}
-                                  className="hover:underline text-xl font-bold text-neutral-5000"
+                                  className="hover:underline text-xl font-bold text-neutral-500"
                                 >
                                   {label}
                                 </Link>

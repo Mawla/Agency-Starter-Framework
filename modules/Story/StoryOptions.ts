@@ -7,7 +7,7 @@ export type StoryAlignType = keyof typeof STORY_ALIGN_OPTIONS;
 
 export const STORY_BACKGROUND_COLOR_OPTIONS = pick(
   COLORS,
-  "neutral-5000",
+  "neutral-500",
   "neutral-800",
 );
 export type StoryBackgroundColorType =

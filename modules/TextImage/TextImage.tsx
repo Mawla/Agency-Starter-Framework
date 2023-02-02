@@ -11,7 +11,7 @@ import { Text } from "../../components/module/Text";
 import { Title } from "../../components/module/Title";
 import { Width } from "../../components/module/Width";
 import { Wrapper } from "../../components/module/Wrapper";
-import { ImageType } from "../../types";
+import { HeadingLevelType, ImageType } from "../../types";
 import { ImageAlignType, TitleSizeType } from "./TextImageOptions";
 import cx from "classnames";
 import React from "react";
@@ -27,6 +27,7 @@ export type TextImageProps = {
     };
     title?: {
       size?: TitleSizeType;
+      level?: HeadingLevelType;
     };
     decorations?: {
       roundedTop?: ModuleRadiusType;
@@ -80,6 +81,7 @@ export const TextImage = ({
                   size={theme?.title?.size || "3xl"}
                   color="neutral-500"
                   eyebrow={eyebrow}
+                  as={theme?.title?.level}
                 >
                   {title}
                 </Title>

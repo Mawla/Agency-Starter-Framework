@@ -4,6 +4,7 @@ import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { HEADING_LEVELS } from "../../types";
 import {
   ALIGN_OPTIONS,
   BACKGROUND_COLOR_OPTIONS,
@@ -253,6 +254,13 @@ const schema = defineType({
               {
                 name: "color",
                 type: "color",
+              },
+              {
+                name: "level",
+                type: "select",
+                options: {
+                  list: optionsToList(HEADING_LEVELS),
+                },
               },
             ],
           },
