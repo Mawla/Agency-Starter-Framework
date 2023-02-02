@@ -223,7 +223,7 @@ function createBuilder() {
 
   // add to render loop
   const jsx = `{hero._type === '${schemaName}' && <${pascalName} {...hero} />}`;
-  lines = addLine(jsx, lines, "</Suspense>", 0);
+  lines = addLine(jsx, lines, "</section>", 0);
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
