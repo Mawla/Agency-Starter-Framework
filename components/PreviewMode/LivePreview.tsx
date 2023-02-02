@@ -314,7 +314,7 @@ export const LivePreview = ({
 
         {/* reload */}
         <button
-          className="shadow-lg block p-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
+          className="shadow-lg block p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222]"
           onClick={reloadPreview}
         >
           {previewLoading ? (
@@ -362,7 +362,7 @@ export const LivePreview = ({
 
         {/* minimap */}
         <button
-          className="shadow-lg block p-3 bg-[#111] transition-color hover:underline hover:bg-[#222]"
+          className="shadow-lg block p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222]"
           onClick={() => setIsMiniMapVisible((yesno) => !yesno)}
         >
           <svg
