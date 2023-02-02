@@ -55,6 +55,7 @@ async function init() {
       name: "value",
       message: "Do you want to set up basic fields?",
       limit: 7,
+      initial: ["title", "intro", "image"],
       choices: [
         { name: "title", value: "Title" },
         { name: "intro", value: "Intro" },
