@@ -39,12 +39,13 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
         loader={({ src, width, quality }) => {
           const imageURL = getResponsiveImageUrl({
             src,
-            width,
-            height: width / originalRatio,
+            width: Math.min(originalWidth, width),
+            height: Math.min(originalWidth, width) / originalRatio,
             crop,
             hotspot,
             quality,
           });
+
           if (!imageURL) return "";
           return imageURL;
         }}
