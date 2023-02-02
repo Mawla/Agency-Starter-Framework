@@ -123,7 +123,6 @@ module.exports = {
     fontSize: {
       0: "0",
       base: "1rem",
-
       sm: `${12 / 16}rem`,
       md: `${14 / 16}rem`,
       lg: `${16 / 16}rem`,
