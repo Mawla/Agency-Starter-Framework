@@ -57,7 +57,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             <div className="flex-1">
               {/* main menu */}
               {Boolean(items?.length) && (
-                <RadixNavigationMenu.List className="hidden lg:flex justify-center">
+                <RadixNavigationMenu.List className="hidden lg:flex justify-center gap-px">
                   {items?.map(
                     ({ label, href, children, current, language }) => {
                       const Element = Boolean(children?.length)
@@ -72,12 +72,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           <Element
                             className={cx(
                               "flex items-center gap-2",
-                              "text-md text-neutral-5000 rounded-full font-bold",
-                              "py-[10px] px-4",
+                              "text-md text-neutral-700 rounded-xs",
+                              "py-[6px] px-3",
                               "whitespace-nowrap",
                               "hover:bg-neutral-100 group-hover:bg-neutral-100 group-focus-within:bg-neutral-100",
                               {
-                                ["bg-neutral-800 text-neutral-900"]:
+                                ["bg-neutral-100 text-neutral-900"]:
                                   current ||
                                   Boolean(
                                     children?.filter(({ current }) =>
@@ -91,7 +91,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               <Link
                                 href={href}
                                 locale={language}
-                                className="font-bold text-md hover:underline underline-offset-4"
+                                className="hover:underline underline-offset-4"
                               >
                                 {label}
                               </Link>
