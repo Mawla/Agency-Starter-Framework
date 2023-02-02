@@ -1,7 +1,10 @@
+import { LoadingAnimation } from "../components/loaders/LoadingAnimation";
+import { Wrapper } from "../components/module/Wrapper";
 import { getClient } from "../helpers/sanity/server";
 import { getFlatBreadcrumb } from "../helpers/sitemap/getFlatBreadcrumb";
 import { baseLanguage, languages, LanguageType } from "../languages";
-import { LoadingPage } from "../layout/pages/LoadingPage";
+import { Footer } from "../layout/Footer/Footer";
+import { Nav } from "../layout/Nav/Nav";
 import { Page } from "../layout/pages/Page";
 import {
   FlatBreadcrumbType,
@@ -37,7 +40,18 @@ const SlugPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
-  if (!page || router.isFallback) return <LoadingPage />;
+  // fallback page
+  if (!page || router.isFallback) {
+    return (
+      <>
+        <Nav items={[]} buttons={[]} />
+        <Wrapper>
+          <LoadingAnimation />
+        </Wrapper>
+        <Footer links={[]} socials={[]} copyright="" />
+      </>
+    );
+  }
 
   return (
     <Page

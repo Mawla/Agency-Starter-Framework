@@ -22,12 +22,11 @@ export type NavItem = {
 };
 
 export type NavProps = {
-  showSearch?: boolean;
   items: NavItem[];
   buttons: ButtonProps[];
 };
 
-export const Nav = ({ items, buttons, showSearch }: NavProps) => {
+export const Nav = ({ items, buttons }: NavProps) => {
   // const router = useRouter();
   const { screenWidth, breakpoint } = useBreakpoint();
   const scrollDirection = useScrollDirection();

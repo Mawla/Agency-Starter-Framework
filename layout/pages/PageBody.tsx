@@ -5,7 +5,7 @@ import { HeroBuilder } from "../ModuleBuilder/HeroBuilder";
 import { ModuleBuilder } from "../ModuleBuilder/ModuleBuilder";
 import React, { useContext } from "react";
 
-export const DefaultPage = (props: PageType) => {
+export const PageBody = (props: PageType) => {
   const { sitemapItem, language } = useContext(PageContext);
 
   return (

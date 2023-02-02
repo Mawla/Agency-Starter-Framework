@@ -11,7 +11,7 @@ import { PageType } from "../../queries/page";
 import { SitemapItemType } from "../../queries/sitemap";
 import { Footer } from "../Footer/Footer";
 import { Nav } from "../Nav/Nav";
-import { DefaultPage } from "./DefaultPage";
+import { PageBody } from "./PageBody";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -71,11 +71,10 @@ export const Page = ({
           <Nav
             items={page.hideNav === true ? [] : navItems}
             buttons={page.hideNav === true ? [] : navigation.buttons}
-            showSearch={page.hideNav !== true}
           />
         )}
 
-        <DefaultPage {...page} />
+        <PageBody {...page} />
 
         {isPreviewMode && pagePath !== "/preview" && (
           <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
