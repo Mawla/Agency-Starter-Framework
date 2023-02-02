@@ -49,7 +49,7 @@ export const IconLoader = ({
         if (res.status !== 200) return "";
 
         const html = await res.text();
-        if (!html.startsWith("<svg")) return "";
+        if (!html.startsWith("<svg") && !html.startsWith("<?xml")) return "";
 
         let cleanHTML = DOMPurify?.sanitize?.(html); //
         cleanHTML = cleanUpAttributes(cleanHTML);
@@ -124,5 +124,13 @@ const cleanUpAttributes = (str: string) => {
  */
 
 const replaceColorsWithCurrentColor = (str: string) => {
-  return str.replace(/((stroke|fill)=")(\w+)/g, "$1currentColor");
+  return str.replace(
+    /((stroke|fill|color)=")(#?\w+)/g,
+    (match, start, attr, color) => {
+      if (color === "none") {
+        return `${start}none`;
+      }
+      return `${start}currentColor`;
+    },
+  );
 };

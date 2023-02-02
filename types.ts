@@ -19,7 +19,6 @@ export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;
 
 export const ICONS = {
   "external-link": "external-link.svg",
-  "magnifying-glass": "magnifying-glass.svg",
   arrow: "arrow.svg",
   chevron: "chevron.svg",
   close: "close.svg",
@@ -34,8 +33,6 @@ export const ICONS = {
   pause: "pause.svg",
   play: "play.svg",
   quote: "quote.svg",
-  remote: "remote.svg",
-  trash: "trash.svg",
   twitter: "twitter.svg",
   youtube: "youtube.svg",
   "map-marker": "map-marker.svg",
