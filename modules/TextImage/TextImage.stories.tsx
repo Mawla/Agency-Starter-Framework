@@ -1,6 +1,5 @@
 import {
   SpaceTopType,
-  SpaceType,
   SPACE_OPTIONS,
 } from "../../components/module/SpacingOptions";
 import { demoImage2 } from "../../stories/content";
@@ -10,8 +9,6 @@ import {
   IMAGE_ALIGN_OPTIONS,
   BackgroundColorType,
   BACKGROUND_COLOR_OPTIONS,
-  ImageColorType,
-  IMAGE_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
   TitleSizeType,
 } from "./TextImageOptions";
