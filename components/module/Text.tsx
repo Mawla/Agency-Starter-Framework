@@ -93,4 +93,4 @@ export const Text = ({
   );
 };
 
-export const TextMemo = React.memo(Text);
+export default React.memo(Text);

@@ -10,7 +10,7 @@ import {
   ModuleRoundedType,
 } from '../../components/module/BackgroundOptions';
 import { SpaceType } from '../../components/module/SpacingOptions';
-import { AlignType, Text } from '../../components/module/Text';
+import { AlignType, TextProps } from '../../components/module/Text';
 import { TitleProps } from '../../components/module/Title';
 import { Wrapper } from '../../components/module/Wrapper';
 import {
@@ -34,6 +34,11 @@ import PortableText from '../../components/content/PortableText';
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
 );
+
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
+);
+
 const ComposableCard = lazy<ComponentType<ComposableCardProps>>(
   () => import(/* webpackChunkName: "ComposableCard" */ './ComposableCard') ,
 );

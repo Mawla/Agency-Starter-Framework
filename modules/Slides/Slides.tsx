@@ -3,12 +3,20 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImage } from "../../components/images/ResponsiveImage";
 import { SpaceType } from "../../components/module/SpacingOptions";
-import { Text } from "../../components/module/Text";
-import { Title } from "../../components/module/Title";
+import { TextProps } from "../../components/module/Text";
+import { TitleProps } from "../../components/module/Title";
 import { Wrapper } from "../../components/module/Wrapper";
 import { HeadingLevelType, ImageType } from "../../types";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
+
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
+);
 
 export type SlidesProps = {
   theme?: {

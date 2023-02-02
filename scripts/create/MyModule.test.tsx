@@ -1,8 +1,7 @@
-import '@testing-library/jest-dom';
+import { act, render, screen } from "../../jest.utils";
+import MyModule from "./MyModule";
+import "@testing-library/jest-dom";
 
-import { render, screen } from '../../jest.utils';
-import MyModule from './MyModule';
-
-describe('MyModule', () => {
+describe("MyModule", () => {
   /*TESTS*/
 });

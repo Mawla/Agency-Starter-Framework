@@ -1,7 +1,7 @@
 import PortableText from "../../components/content/PortableText";
 import { ModuleRadiusType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
-import { Text } from "../../components/module/Text";
+import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
 import { WidthType } from "../../components/module/WidthOptions";
 import { Wrapper } from "../../components/module/Wrapper";
@@ -16,6 +16,10 @@ import React, { ComponentType, lazy } from "react";
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
+
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
 );
 
 export type RichTextProps = {

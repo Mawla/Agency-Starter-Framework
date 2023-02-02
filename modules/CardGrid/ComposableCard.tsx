@@ -4,7 +4,10 @@ import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
 import { IconLoader } from "../../components/images/IconLoader";
 import { ResponsiveImage } from "../../components/images/ResponsiveImage";
-import { SizeType as TextSizeType, Text } from "../../components/module/Text";
+import {
+  SizeType as TextSizeType,
+  TextProps,
+} from "../../components/module/Text";
 import {
   SizeType as TitleSizeType,
   TitleProps,
@@ -32,6 +35,10 @@ import React, { ComponentType, lazy } from "react";
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
+
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
 );
 
 export type ComposableCardProps = {
