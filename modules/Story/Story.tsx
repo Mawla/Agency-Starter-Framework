@@ -1,6 +1,6 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ScriptJsonLd } from "../../components/meta/ScriptJsonLd";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { Width } from "../../components/module/Width";
@@ -13,7 +13,14 @@ import { ImageType, PersonType } from "../../types";
 import { StoryAlignType, StoryBackgroundColorType } from "./StoryOptions";
 import cx from "classnames";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { ComponentType, lazy, useContext } from "react";
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
+);
 
 export type StoryProps = {
   theme?: {

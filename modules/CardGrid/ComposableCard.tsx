@@ -3,7 +3,7 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
 import { IconLoader } from "../../components/images/IconLoader";
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import {
   SizeType as TextSizeType,
   TextProps,
@@ -39,6 +39,13 @@ const Title = lazy<ComponentType<TitleProps>>(
 
 const Text = lazy<ComponentType<TextProps>>(
   () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
+);
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
 );
 
 export type ComposableCardProps = {

@@ -1,7 +1,7 @@
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import {
   BackgroundColorType,
   ModuleRadiusType,
@@ -18,6 +18,13 @@ import React, { ComponentType, lazy } from "react";
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
 );
 
 export type TextImageProps = {

@@ -1,6 +1,6 @@
 import { Slider } from "../../components/Slider/Slider";
 import PortableText from "../../components/content/PortableText";
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
@@ -15,6 +15,13 @@ const Title = lazy<ComponentType<TitleProps>>(
 
 const Text = lazy<ComponentType<TextProps>>(
   () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
+);
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
 );
 
 export type GalleryProps = {

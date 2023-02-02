@@ -126,6 +126,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
     propsLines.push("eyebrow");
     propsLines.push("title");
     importLines.push(`
+    import { TitleProps } from "../../components/module/Title";
     const Title = lazy<ComponentType<TitleProps>>(
       () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
     );`);
@@ -152,6 +153,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
     typescriptLines.push("intro?: React.ReactNode;");
     propsLines.push("intro");
     importLines.push(`
+    import { TextProps } from "../../components/module/Text";
     const Text = lazy<ComponentType<TextProps>>(
       () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );`);
@@ -187,7 +189,14 @@ function createModule(pascalName, schemaName, fields, description = "") {
     propsLines.push("image");
     importLines.push(`
       import { ImageType } from '../../types';
-      import { ResponsiveImage } from '../../components/images/ResponsiveImage';`);
+      import { ResponsiveImageProps } from '../../components/images/ResponsiveImage';
+      const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+        () =>
+          import(
+            /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+          ),
+      );
+      `);
     jsxLines.push(`
       {image && (
         <div className="w-96 h-96">

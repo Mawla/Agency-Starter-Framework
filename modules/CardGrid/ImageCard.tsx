@@ -1,8 +1,15 @@
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ImageType } from "../../types";
 import { ImageRatioType } from "./ImageCardOptions";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
+);
 
 export type ImageCardProps = {
   type?: "card.image";

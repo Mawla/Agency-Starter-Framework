@@ -11,7 +11,7 @@ import Head from "next/head";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-type ResponsiveImageProps = {
+export type ResponsiveImageProps = {
   crop?: ImageType["crop"];
   hotspot?: ImageType["hotspot"];
   preventResize?: boolean;
@@ -216,4 +216,4 @@ export const ResponsiveImage = ({
   );
 };
 
-export const ImageMemo = React.memo(ResponsiveImage);
+export default React.memo(ResponsiveImage);

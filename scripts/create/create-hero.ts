@@ -94,14 +94,21 @@ function createHero() {
     .replace(
       "/*IMPORT*/",
       `
+      import { TextProps } from '../../components/module/Text';
+      import { TitleProps } from '../../components/module/Title';
       import { ImageType } from '../../types';
       const Title = lazy<ComponentType<TitleProps>>(
         () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
       );
-      const Title = lazy<ComponentType<TitleProps>>(
-        () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
+      const Text = lazy<ComponentType<TextProps>>(
+        () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
       );
-      import { ResponsiveImage } from '../../components/images/ResponsiveImage';`,
+      import { ResponsiveImageProps } from '../../components/images/ResponsiveImage';
+      const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+        () => import(/* webpackChunkName: "Text" */ '../../components/images/ResponsiveImage') 
+      );
+      
+      `,
     )
     .replace("/*TYPE*/", "title?: string; image?: ImageType")
     .replace("/*PROPS*/", ", title, image")
