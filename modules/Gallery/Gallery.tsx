@@ -3,11 +3,15 @@ import PortableText from "../../components/content/PortableText";
 import { ResponsiveImage } from "../../components/images/ResponsiveImage";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { Text } from "../../components/module/Text";
-import { Title } from "../../components/module/Title";
+import { TitleProps } from "../../components/module/Title";
 import { Wrapper } from "../../components/module/Wrapper";
 import { HeadingLevelType, ImageType } from "../../types";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
 
 export type GalleryProps = {
   theme?: {

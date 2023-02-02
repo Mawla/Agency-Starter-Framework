@@ -95,7 +95,12 @@ function createHero() {
       "/*IMPORT*/",
       `
       import { ImageType } from '../../types';
-      import { Title } from '../../components/module/Title';
+      const Title = lazy<ComponentType<TitleProps>>(
+        () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
+      );
+      const Title = lazy<ComponentType<TitleProps>>(
+        () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
+      );
       import { ResponsiveImage } from '../../components/images/ResponsiveImage';`,
     )
     .replace("/*TYPE*/", "title?: string; image?: ImageType")

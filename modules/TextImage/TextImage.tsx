@@ -8,13 +8,17 @@ import {
 } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { Text } from "../../components/module/Text";
-import { Title } from "../../components/module/Title";
+import { TitleProps } from "../../components/module/Title";
 import { Width } from "../../components/module/Width";
 import { Wrapper } from "../../components/module/Wrapper";
 import { HeadingLevelType, ImageType } from "../../types";
 import { ImageAlignType, TitleSizeType } from "./TextImageOptions";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
 
 export type TextImageProps = {
   theme?: {

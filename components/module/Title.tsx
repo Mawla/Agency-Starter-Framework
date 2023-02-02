@@ -95,4 +95,4 @@ export const Title = ({
   );
 };
 
-export const TitleMemo = React.memo(Title);
+export default React.memo(Title);

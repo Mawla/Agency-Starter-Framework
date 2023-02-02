@@ -1,6 +1,5 @@
 import cx from 'classnames';
-import dynamic from 'next/dynamic';
-import React, { CSSProperties } from 'react';
+import React, { ComponentType, CSSProperties, lazy } from 'react';
 
 import { Slider } from '../../components/Slider/Slider';
 import { SliderColorType } from '../../components/Slider/SliderOptions';
@@ -12,7 +11,7 @@ import {
 } from '../../components/module/BackgroundOptions';
 import { SpaceType } from '../../components/module/SpacingOptions';
 import { AlignType, Text } from '../../components/module/Text';
-import { Title } from '../../components/module/Title';
+import { TitleProps } from '../../components/module/Title';
 import { Wrapper } from '../../components/module/Wrapper';
 import {
   BREAKPOINTS,
@@ -32,14 +31,15 @@ import { ImageCardProps } from './ImageCard';
 import { ColorType, HeadingLevelType } from '../../types';
 import PortableText from '../../components/content/PortableText';
 
-const ComposableCard = dynamic<ComposableCardProps>(
-  () => import(/* webpackChunkName: "ComposableCard" */ './ComposableCard') as any,
-  { suspense: false },
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
+);
+const ComposableCard = lazy<ComponentType<ComposableCardProps>>(
+  () => import(/* webpackChunkName: "ComposableCard" */ './ComposableCard') ,
 );
 
-const ImageCard = dynamic<ImageCardProps>(
-  () => import(/* webpackChunkName: "ImageCard" */ './ImageCard') as any,
-  { suspense: false },
+const ImageCard = lazy<ComponentType<ImageCardProps>>(
+  () => import(/* webpackChunkName: "ImageCard" */ './ImageCard') ,
 );
 
 export type CardGridCardProps = {

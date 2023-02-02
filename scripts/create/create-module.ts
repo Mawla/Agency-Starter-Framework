@@ -125,7 +125,10 @@ function createModule(pascalName, schemaName, fields, description = "") {
     typescriptLines.push("title?: string;");
     propsLines.push("eyebrow");
     propsLines.push("title");
-    importLines.push(`import { Title } from '../../components/module/Title';`);
+    importLines.push(`
+    const Title = lazy<ComponentType<TitleProps>>(
+      () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
+    );`);
     jsxLines.push(`
       {title && (
         <div className="mb-4 md:mb-6">

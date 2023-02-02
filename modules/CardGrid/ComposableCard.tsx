@@ -7,7 +7,7 @@ import { ResponsiveImage } from "../../components/images/ResponsiveImage";
 import { SizeType as TextSizeType, Text } from "../../components/module/Text";
 import {
   SizeType as TitleSizeType,
-  Title,
+  TitleProps,
   WeightType,
 } from "../../components/module/Title";
 import { IconType, ImageType } from "../../types";
@@ -28,7 +28,11 @@ import {
 } from "./ComposableCardOptions";
 import cx from "classnames";
 import Link from "next/link";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
 
 export type ComposableCardProps = {
   type?: "card.composable";

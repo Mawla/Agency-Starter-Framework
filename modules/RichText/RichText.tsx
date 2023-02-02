@@ -2,7 +2,7 @@ import PortableText from "../../components/content/PortableText";
 import { ModuleRadiusType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { Text } from "../../components/module/Text";
-import { Title } from "../../components/module/Title";
+import { TitleProps } from "../../components/module/Title";
 import { WidthType } from "../../components/module/WidthOptions";
 import { Wrapper } from "../../components/module/Wrapper";
 import { ColorType, HeadingLevelType } from "../../types";
@@ -12,7 +12,11 @@ import {
   TitleSizeType,
 } from "./RichTextOptions";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
 
 export type RichTextProps = {
   eyebrow?: string;

@@ -4,10 +4,14 @@ import PortableText from "../../components/content/PortableText";
 import { SimpleImage } from "../../components/images/SimpleImage";
 import { Bleed } from "../../components/module/Bleed";
 import { Text } from "../../components/module/Text";
-import { Title } from "../../components/module/Title";
+import { TitleProps } from "../../components/module/Title";
 import { Width } from "../../components/module/Width";
 import { ImageType } from "../../types";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
+);
 
 export type HeroBasicProps = {
   eyebrow?: string;

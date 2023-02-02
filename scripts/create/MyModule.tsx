@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentType, lazy } from "react";
 
 import { Wrapper } from '../../components/module/Wrapper';
 import { BackgroundColorType } from '../../components/module/BackgroundOptions';
