@@ -35,39 +35,32 @@ export default function Sitemap({
       sitemapItem={sitemapItem}
     >
       <ul className="max-w-inner mx-auto py-20">
-        {sitemap
-          ?.sort((a: SitemapItemType, b: SitemapItemType) => {
-            if (!a.paths?.[language]) return 1;
-            if (!b.paths?.[language]) return 1;
-            return a.paths[language].localeCompare(b.paths[language]);
-          })
+        {sitemap.map(({ titles, paths, _id }: SitemapItemType) => {
+          const depth = paths[language]
+            ? paths[language].split("/").length - 2
+            : 0;
 
-          .map(({ titles, paths, _id }: SitemapItemType) => {
-            const depth = paths[language]
-              ? paths[language].split("/").length - 2
-              : 0;
-
-            return (
-              <li
-                key={_id}
-                className="mb-1"
-                style={{
-                  paddingLeft: 10 * depth,
-                }}
+          return (
+            <li
+              key={_id}
+              className="mb-1"
+              style={{
+                paddingLeft: 10 * depth,
+              }}
+            >
+              <IconLoader
+                icon="chevron"
+                className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
+              />
+              <Link
+                href={paths?.[language as LanguageType]}
+                className="underline hover:no-underline"
               >
-                <IconLoader
-                  icon="chevron"
-                  className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
-                />
-                <Link
-                  href={paths?.[language as LanguageType]}
-                  className="underline hover:no-underline"
-                >
-                  {titles?.[language as LanguageType]}
-                </Link>
-              </li>
-            );
-          })}
+                {titles?.[language as LanguageType]}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </Page>
   );
@@ -150,6 +143,11 @@ export const getStaticProps: GetStaticProps = async ({
       if (!paths?.[language as LanguageType]) return false;
       if (excludeFromSitemap?.[language as LanguageType]) return false;
       return true;
+    })
+    ?.sort((a: SitemapItemType, b: SitemapItemType) => {
+      if (!a.paths?.[language]) return 1;
+      if (!b.paths?.[language]) return 1;
+      return a.paths[language].localeCompare(b.paths[language]);
     });
 
   // return object
