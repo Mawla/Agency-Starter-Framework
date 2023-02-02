@@ -380,7 +380,7 @@ function createQuery(name, pascalName, schemaName, fields, isHero) {
   lines = addLine(
     `    \${get${pascalName}Query(language)},`,
     lines,
-    '"dialogs":',
+    isHero ? '"modules":' : '"dialogs":',
     -3,
   );
   fs.writeFileSync(filePath, lines.join("\n"));
