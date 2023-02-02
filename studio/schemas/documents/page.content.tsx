@@ -107,6 +107,20 @@ export default defineType({
       title: "Parent",
       type: "reference",
       to: [{ type: "page.content" }],
+      options: {
+        filter: ({ document }) => {
+          if (!document._id) return {};
+
+          return {
+            filter: `
+              _id != $id
+            `,
+            params: {
+              id: document._id,
+            },
+          };
+        },
+      },
     }),
     TITLE_FIELD,
     {
