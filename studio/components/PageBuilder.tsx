@@ -114,6 +114,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
           marginLeft: 2,
           marginTop: -4,
           marginBottom: -2,
+          opacity: 0.65,
         }}
       >
         <span
