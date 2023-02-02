@@ -29,7 +29,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             "bg-white/90 backdrop-blur-[25px]",
             {
               ["-translate-y-full ease-in-out-cubic"]: !showNav,
-            }
+            },
           )}
           ref={navRef}
         >
@@ -38,7 +38,8 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               "radix-topnav flex gap-6 items-center",
               "py-2 md:py-3 lg:py-4 xl:py-5",
               "max-w-outer mx-auto",
-              "px-5 sm:px-8 lg:px-8 xl:px-8"
+              "px-5 sm:px-8 lg:px-8 xl:px-8",
+              "border-b border-b-black/10",
             )}
             role="navigation"
           >
@@ -80,10 +81,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                   current ||
                                   Boolean(
                                     children?.filter(({ current }) =>
-                                      Boolean(current)
-                                    ).length
+                                      Boolean(current),
+                                    ).length,
                                   ),
-                              }
+                              },
                             )}
                           >
                             {href && (
@@ -103,7 +104,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                   "w-3 h-3 text-inherit text-neutral-50",
                                   "hover:text-neutral-25 transition-colors duration-75",
                                   "group-hover:rotate-180 group-focus-within:rotate-180",
-                                  "group-hover:text-action-base group-focus-within:text-action-base"
+                                  "group-hover:text-action-base group-focus-within:text-action-base",
                                 )}
                               />
                             )}
@@ -129,14 +130,14 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               className={cx(
                                 "w-[200px]",
                                 "absolute bottom-0 left-1/2",
-                                "translate-y-full -translate-x-1/2"
+                                "translate-y-full -translate-x-1/2",
                               )}
                             >
                               <RadixNavigationMenu.List
                                 className={cx(
                                   "translate-y-2 p-3",
                                   "shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)]",
-                                  "bg-white border-2 border-neutral-85 rounded-md"
+                                  "bg-white border-2 border-neutral-85 rounded-md",
                                 )}
                               >
                                 {children?.map(
@@ -154,21 +155,21 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                             {
                                               ["font-bold bg-action-light hover:bg-action-light text-action-base"]:
                                                 current,
-                                            }
+                                            },
                                           )}
                                         >
                                           {label}
                                         </Link>
                                       )}
                                     </RadixNavigationMenu.Item>
-                                  )
+                                  ),
                                 )}
                               </RadixNavigationMenu.List>
                             </RadixNavigationMenu.Content>
                           )}
                         </RadixNavigationMenu.Item>
                       );
-                    }
+                    },
                   )}
                 </RadixNavigationMenu.List>
               )}
@@ -197,7 +198,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                             "flex items-center gap-2",
                             "text-white rounded-full text-md font-bold",
                             "py-[10px] pl-4 pr-3",
-                            "whitespace-nowrap"
+                            "whitespace-nowrap",
                           )}
                         >
                           <span>{button.label}</span>
@@ -235,5 +236,5 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
         </div>
       </div>
     );
-  }
+  },
 );
