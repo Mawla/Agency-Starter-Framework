@@ -140,6 +140,7 @@ export default defineType({
         {
           type: "object",
           title: "Button",
+          ...PREVIEW,
           fields: [
             { ...LABEL_FIELD, group: null as any },
             {
