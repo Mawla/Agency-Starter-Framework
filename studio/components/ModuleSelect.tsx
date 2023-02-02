@@ -258,8 +258,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
         language?: LanguageType;
       }[] = [];
 
-      console.log(selectedOption, presetId);
-
       if (presetId) {
         newModules = (selectedOption?.modules || []).map((module) => ({
           _type: selectedType as ModuleSchemaName,
@@ -313,14 +311,14 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
          * (if the state of the document is published)
          */
 
-        await client.createIfNotExists({
+        const draftDoc = await client.createIfNotExists({
           ...document,
           _type: document._type,
           _id: draftId,
         });
 
         await client
-          .patch(draftId)
+          .patch(draftDoc._id)
           .setIfMissing({ [updateField]: [] })
           .insert("after", `${updateField}[-1]`, newModules)
           .commit({
