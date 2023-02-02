@@ -67,14 +67,14 @@ async function init() {
 
     const name = await nameInput.run();
     if (!name) return;
+    const isHero = await heroInput.run();
     const description = await descriptionInput.run();
     const fields = await fieldsInput.run();
-    const isHero = await heroInput.run();
 
     const pascalName = `${pascalCase(name)}`;
     const schemaName = `module.${name.toLowerCase().replace(/\s/g, "")}`;
 
-    createModule(pascalName, schemaName, fields);
+    createModule(pascalName, schemaName, fields, description, isHero);
 
     createQuery(name, pascalName, schemaName, fields, isHero);
     createType(schemaName, { module: !isHero, hero: isHero });
