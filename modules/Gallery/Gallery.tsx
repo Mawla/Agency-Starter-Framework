@@ -37,7 +37,7 @@ export const Gallery = ({
       theme={{
         space: theme?.module?.space,
       }}
-      innerClassName="relative overflow-hidden"
+      className="relative overflow-hidden"
     >
       {(title || intro) && (
         <div className="relative z-20 max-w-title flex flex-col gap-8 md:text-center md:mx-auto mb-10 sm:mb-12 md:mb-16 xl:mb-20">
