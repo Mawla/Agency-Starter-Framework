@@ -36,7 +36,7 @@ export type MiniMapProps = {
   onReorder: (
     changedModuleKey: string,
     replacesModuleKey: string,
-    items: string[]
+    items: string[],
   ) => void;
 };
 
@@ -93,7 +93,8 @@ export const MiniMap = ({
       });
 
       const modulesLoading = previews.some(
-        ({ preview }) => !preview || preview?.indexOf("module-placeholder") > -1
+        ({ preview }) =>
+          !preview || preview?.indexOf("module-placeholder") > -1,
       );
 
       if (modulesLoading) {
@@ -111,14 +112,14 @@ export const MiniMap = ({
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   return (
     <div className="select-none">
       {heroPreview && (
         <div
-          className="select-auto cursor-grab border-2 border-transparent hover:border-[#111 duration-150"
+          className="select-auto cursor-grab border-2 border-transparent hover:border-[#1f2937] duration-150"
           onClick={() => hero && focusElement(hero._key)}
         >
           <Preview html={heroPreview} />
@@ -149,7 +150,7 @@ export const MiniMap = ({
             <div className="opacity-90 cursor-grabbing">
               <Item
                 {...(modulePreviews.find(
-                  ({ _key }) => _key === activeId
+                  ({ _key }) => _key === activeId,
                 ) as any)}
               />
             </div>
@@ -192,7 +193,7 @@ export const MiniMap = ({
         type: "preview-studio-open-module-dialog",
         moduleKey: moduleKey,
       },
-      "*"
+      "*",
     );
   }
 };
@@ -223,11 +224,11 @@ const Item = forwardRef<HTMLDivElement>(({ ...props }: any, ref) => {
       {...props}
       ref={ref}
       className={cx(
-        "bg-white border-2 border-transparent hover:border-[#111] transition-colors duration-150 hover:z-10",
+        "bg-white border-2 border-transparent hover:border-[#1f2937] transition-colors duration-150 hover:z-10",
         {
           ["cursor-wait"]: props.isLoading,
           ["cursor-grab"]: !props.isLoading,
-        }
+        },
       )}
     >
       <Preview html={props.preview} />
