@@ -365,12 +365,14 @@ function createModule(
  * Add query
  */
 
-function createQuery(name, pascalName, schemaName, fields) {
+function createQuery(name, pascalName, schemaName, fields, isHero) {
   const filePath = `${__dirname}/../../queries/page.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines.push(
-    `import { get${pascalName}Query } from "../modules/${pascalName}/${pascalName}.query";`,
+    `import { get${pascalName}Query } from "../${
+      isHero ? "heroes" : "modules"
+    }/${pascalName}/${pascalName}.query";`,
   );
   lines = addLine(
     `    \${get${pascalName}Query(language)},`,
