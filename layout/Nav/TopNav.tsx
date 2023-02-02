@@ -39,7 +39,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               "py-2 md:py-3 lg:py-4",
               "max-w-outer mx-auto",
               "px-5 sm:px-8 lg:px-8 xl:px-8",
-              "border-b border-b-black/10",
+              "border-b border-b-neutral-200",
             )}
             role="navigation"
           >
@@ -97,14 +97,14 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               </Link>
                             )}
 
-                            {children && (
+                            {Boolean(children?.length) && (
                               <IconLoader
                                 icon="chevron"
                                 className={cx(
-                                  "w-3 h-3 text-inherit text-neutral-500",
+                                  "w-4 h-4 text-inherit text-neutral-600",
                                   "hover:text-neutral-900 transition-colors duration-75",
                                   "group-hover:rotate-180 group-focus-within:rotate-180",
-                                  "group-hover:text-action-500 group-focus-within:text-action-500",
+                                  "group-hover:text-neutral-600 group-focus-within:text-neutral-600",
                                 )}
                               />
                             )}
@@ -125,6 +125,8 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               </ul>
                             </noscript>
                           )}
+
+                          {/* submenu */}
                           {Boolean(children?.length) && (
                             <RadixNavigationMenu.Content
                               className={cx(
@@ -135,9 +137,9 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                             >
                               <RadixNavigationMenu.List
                                 className={cx(
-                                  "translate-y-2 p-3",
-                                  "shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)]",
-                                  "bg-white border-2 border-neutral-200 rounded-md",
+                                  "translate-y-2 p-1",
+                                  "shadow-md",
+                                  "bg-white border border-neutral-300 rounded-xs",
                                 )}
                               >
                                 {children?.map(
@@ -151,7 +153,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                             "bg-white hover:bg-neutral-100 flex transition-colors",
                                             "text-neutral-500",
                                             "text-md",
-                                            "p-3 rounded-xs",
+                                            "p-3 rounded-2xs",
                                             {
                                               ["font-bold bg-neutral-800 hover:bg-neutral-800 text-neutral-600"]:
                                                 current,
@@ -193,7 +195,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           href={button.href}
                           locale={button.language}
                           className={cx(
-                            "bg-neutral-300",
+                            "bg-neutral-100",
                             "hover:underline underline-offset-4",
                             "flex items-center gap-2",
                             "text-neutral-800 rounded-full text-md",
@@ -225,7 +227,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                     className="flex"
                   >
                     <span className="w-6 h-6 block relative">
-                      <IconLoader icon="menu" />
+                      <IconLoader icon="menu" className="text-neutral-600" />
                       <span className="absolute -inset-2 bg-white opacity-0" />
                     </span>
                   </button>
