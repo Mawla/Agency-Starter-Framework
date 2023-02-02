@@ -62,13 +62,13 @@ export const HeroBasic = (data: HeroBasicProps) => {
               )}
             </div>
             {image && (
-              <div className="relative inline-block mx-auto overflow-hidden rounded-lg mt-10">
+              <div className="relative block mx-auto overflow-hidden rounded-lg mt-10">
                 <SimpleImage
                   {...image}
                   priority
                   loading="eager"
-                  width={160 * 15}
-                  height={90 * 15}
+                  width={1374}
+                  height={774}
                 />
               </div>
             )}
