@@ -112,12 +112,12 @@ export const Slides = ({
                   <div className="relative z-10 self-end">
                     <div className="flex flex-col gap-2 md:gap-3 lg:gap-5 relative z-20 m-5 md:m-10 lg:m-20 pb-2 md:pb-0 text-white">
                       {title && (
-                        <h3 className="text-title-md-sm md:text-title-md-lg lg:text-title-3xl-lg font-bold lg:max-w-[20ch]">
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold lg:max-w-[20ch]">
                           {title}
                         </h3>
                       )}
                       {text && (
-                        <p className="text-text-xl md:text-title-md-md lg:text-title-md-lg m-0 lg:max-w-[40ch]">
+                        <p className="text-text-xl md:text-2xl lg:text-3xl m-0 lg:max-w-[40ch]">
                           {text}
                         </p>
                       )}

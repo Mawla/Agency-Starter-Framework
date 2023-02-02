@@ -99,7 +99,7 @@ export const WithContent = () => (
       }}
     >
       <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
-        <div className="font-bold text-title-2xl-lg">…</div>
+        <div className="font-bold text-2xl">…</div>
       </SpacingComponent>
     </WrapperComponent>
   </div>
@@ -121,7 +121,7 @@ export const Rounded = () => (
             }}
           >
             <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
-              <div className="font-bold text-title-2xl-lg">{radius}</div>
+              <div className="font-bold text-2xl">{radius}</div>
             </SpacingComponent>
           </WrapperComponent>
           <WrapperComponent
@@ -136,7 +136,7 @@ export const Rounded = () => (
             }}
           >
             <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
-              <div className="font-bold text-title-2xl-lg">{radius}</div>
+              <div className="font-bold text-2xl">{radius}</div>
             </SpacingComponent>
           </WrapperComponent>
         </div>
@@ -157,7 +157,7 @@ export const Widths = () => (
         }}
       >
         <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
-          <div className="font-bold text-title-2xl-lg">{width}</div>
+          <div className="font-bold text-2xl">{width}</div>
         </SpacingComponent>
       </WrapperComponent>
     ))}

@@ -14,6 +14,8 @@ export const SIZE_OPTIONS = pick(
   "2xl",
   "3xl",
   "4xl",
+  "5xl",
+  "6xl",
 );
 export type SizeType = keyof typeof SIZE_OPTIONS;
 
@@ -32,13 +34,15 @@ export type TitleProps = {
 };
 
 const sizeClasses: Record<SizeType, string> = {
-  sm: "text-title-sm-sm md:text-title-sm-md lg:text-title-sm-lg",
-  md: "text-title-md-sm md:text-title-md-md lg:text-title-md-lg",
-  lg: "text-title-lg-sm md:text-title-lg-md lg:text-title-lg-lg",
-  xl: "text-title-xl-sm md:text-title-xl-md lg:text-title-xl-lg",
-  "2xl": "text-title-2xl-sm md:text-title-2xl-md lg:text-title-2xl-lg",
-  "3xl": "text-title-3xl-sm md:text-title-3xl-md lg:text-title-3xl-lg",
-  "4xl": "text-title-4xl-sm md:text-title-4xl-md lg:text-title-4xl-lg",
+  sm: "text-sm",
+  md: "text-md",
+  lg: "text-lg",
+  xl: "text-lg lg:text-xl",
+  "2xl": "text-lg md:text-xl text-2xl",
+  "3xl": "text-xl md:text-2xl lg:text-3xl",
+  "4xl": "text-2xl md:text-3xl lg:text-4xl",
+  "5xl": "text-3xl md:text-4xl lg:text-5xl",
+  "6xl": "text-4xl md:text-5xl lg:text-6xl",
 };
 
 const weightClasses: Record<WeightType, string> = {

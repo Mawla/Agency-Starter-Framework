@@ -60,7 +60,7 @@ export const MobileNav = ({
                                 <Link
                                   href={href}
                                   locale={language}
-                                  className="hover:underline text-title-md-sm font-bold text-neutral-base"
+                                  className="hover:underline text-xl font-bold text-neutral-base"
                                 >
                                   {label}
                                 </Link>
@@ -87,7 +87,7 @@ export const MobileNav = ({
                                             "text-md font-bold text-neutral-25 hover:underline relative",
                                             {
                                               ["text-action-base"]: current,
-                                            }
+                                            },
                                           )}
                                         >
                                           {current && (
@@ -97,13 +97,13 @@ export const MobileNav = ({
                                         </Link>
                                       )}
                                     </li>
-                                  )
+                                  ),
                                 )}
                               </ul>
                             )}
                           </details>
                         </RadixNavigationMenu.Item>
-                      )
+                      ),
                     )}
                   </RadixNavigationMenu.List>
                 )}
@@ -123,7 +123,7 @@ export const MobileNav = ({
                               "flex items-center gap-2",
                               "text-white rounded-full text-md font-bold",
                               "py-[10px] pl-4 pr-3",
-                              "whitespace-nowrap"
+                              "whitespace-nowrap",
                             )}
                           >
                             <span>{button.label}</span>

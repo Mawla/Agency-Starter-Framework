@@ -109,9 +109,7 @@ export const Story = ({
           )}
 
           {label && (
-            <span className="text-title-sm-sm md:text-title-md-md lg:text-title-md-lg font-bold md:opacity-75">
-              {label}
-            </span>
+            <span className="text-lg font-bold md:opacity-75">{label}</span>
           )}
 
           {backgroundImage && <span className="block h-10 md:h-8" />}
@@ -125,7 +123,7 @@ export const Story = ({
             )}
           >
             {quote && (
-              <p className="relative text-title-md-sm md:text-title-xl-md lg:text-title-2xl-lg font-bold leading-relaxed sm:max-w-[75%] md:max-w-none">
+              <p className="relative text-2xl md:text-3xl lg:text-4xl font-bold leading-relaxed sm:max-w-[75%] md:max-w-none">
                 {theme?.quote?.showQuotes !== false && (
                   <>
                     {theme?.module?.width !== "inner" &&
@@ -144,13 +142,13 @@ export const Story = ({
             )}
 
             {text && (
-              <p className="opacity-75 max-w-[450px] text-title-sm-sm md:text-title-sm-md lg:text-title-sm-lg">
+              <p className="opacity-75 max-w-[450px] text-lg md:text-xl">
                 {text}
               </p>
             )}
 
             {(person?.name || person?.position) && (
-              <span className="text-title-sm-sm md:text-title-md-md lg:text-title-md-lg">
+              <span className="text-lg md:text-xl">
                 <strong>{person?.name}</strong>
                 {person?.position && (
                   <span>
@@ -166,7 +164,7 @@ export const Story = ({
             {videoLink && (
               <Link href={videoLink}>
                 <span className="group inline-flex gap-4 flex-row items-center">
-                  <span className="order-1 text-title-sm-sm md:text-title-md-md lg:text-title-md-lg font-bold group-hover:underline underline-offset-4">
+                  <span className="order-1 text-xl md:text-2xl lg:text-3xl font-bold group-hover:underline underline-offset-4">
                     {translations?.watch_video?.[language]}
                   </span>
                   <span

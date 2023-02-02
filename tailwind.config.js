@@ -124,42 +124,15 @@ module.exports = {
       0: "0",
       base: "1rem",
 
-      // text
       sm: `${12 / 16}rem`,
       md: `${14 / 16}rem`,
       lg: `${16 / 16}rem`,
-
-      // from design
       xl: [`${20 / 16}rem`, "1.6"],
-
-      // titles
-      "title-sm-sm": [`${16 / 16}rem`, "1.6"],
-      "title-sm-md": [`${18 / 16}rem`, "1.6"],
-      "title-sm-lg": [`${20 / 16}rem`, "1.6"],
-
-      "title-md-sm": [`${20 / 16}rem`, "1.6"],
-      "title-md-md": [`${22 / 16}rem`, "1.6"],
-      "title-md-lg": [`${24 / 16}rem`, "1.6"],
-
-      "title-lg-sm": [`${24 / 16}rem`, "1.6"],
-      "title-lg-md": [`${26 / 16}rem`, "1.6"],
-      "title-lg-lg": [`${32 / 16}rem`, "1.6"],
-
-      "title-xl-sm": [`${28 / 16}rem`, "1.5"],
-      "title-xl-md": [`${32 / 16}rem`, "1.5"],
-      "title-xl-lg": [`${40 / 16}rem`, "1.5"],
-
-      "title-2xl-sm": [`${28 / 16}rem`, "1.19"],
-      "title-2xl-md": [`${32 / 16}rem`, "1.19"],
-      "title-2xl-lg": [`${52 / 16}rem`, "1.19"], // from design
-
-      "title-3xl-sm": [`${36 / 16}rem`, "1.19"],
-      "title-3xl-md": [`${44 / 16}rem`, "1.19"],
-      "title-3xl-lg": [`${64 / 16}rem`, "1.19"], // from design
-
-      "title-4xl-sm": [`${44 / 16}rem`, "1.3"], // from design
-      "title-4xl-md": [`${64 / 16}rem`, "1.2"],
-      "title-4xl-lg": [`${80 / 16}rem`, "1.2"], // from design
+      "2xl": [`${24 / 16}rem`, "1.6"],
+      "3xl": [`${32 / 16}rem`, "1.6"],
+      "4xl": [`${40 / 16}rem`, "1.5"],
+      "5xl": [`${64 / 16}rem`, "1.19"],
+      "6xl": [`${80 / 16}rem`, "1.2"],
     },
     screens: {
       "2xs": "375px",

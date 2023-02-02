@@ -124,6 +124,8 @@ export const SIZES = {
   "2xl": "2XL",
   "3xl": "3XL",
   "4xl": "4XL",
+  "5xl": "5XL",
+  "6xl": "6XL",
 };
 
 export type SizeType = keyof typeof SIZES;
