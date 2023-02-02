@@ -34,7 +34,7 @@ async function init() {
       name: "name",
       message: `${cyan(
         "What is the name of the module?",
-      )}\nHuman readable form. 'My Module' will become schema name 'module.mymodule'.\n\n`,
+      )}\n\nHuman readable form. 'My Module' will become schema name 'module.mymodule'.\n`,
     });
 
     const descriptionInput = new Input({
@@ -42,18 +42,18 @@ async function init() {
       name: "description",
       message: `${cyan(
         "Provide a short description of the module",
-      )}\nUsed for the module select search. This makes it easier for editors to find modules.\n\n`,
+      )}\n\nUsed for the module select search. This makes it easier for editors to find modules.\n`,
     });
 
     const heroInput = new Confirm({
       type: "input",
       name: "isHero",
-      message: `${cyan("Is this the page hero?")}\n\n`,
+      message: `\n${cyan("Is this the page hero?")}\n`,
     });
 
     const fieldsInput = new MultiSelect({
       name: "value",
-      message: "Do you want to set up basic fields?\n\n",
+      message: "\nDo you want to set up basic fields?",
       limit: 7,
       initial: ["title", "intro", "image"],
       choices: [
