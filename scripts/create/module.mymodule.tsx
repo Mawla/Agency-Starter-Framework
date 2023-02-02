@@ -116,7 +116,7 @@ const schema = defineType({
                 name: "level",
                 type: "select",
                 options: {
-                  list: HEADING_LEVELS,
+                  list: optionsToList(HEADING_LEVELS),
                 },
               },
               {
