@@ -78,7 +78,7 @@ export const TextImage = ({
               {(title || eyebrow) && (
                 <Title
                   size={theme?.title?.size || "3xl"}
-                  color="neutral-base"
+                  color="neutral-500"
                   eyebrow={eyebrow}
                 >
                   {title}
@@ -86,7 +86,7 @@ export const TextImage = ({
               )}
 
               {intro && (
-                <Text color="neutral-25" size="lg">
+                <Text color="neutral-900" size="lg">
                   <PortableText content={intro as any} />
                 </Text>
               )}

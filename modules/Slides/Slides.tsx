@@ -47,7 +47,7 @@ export const Slides = ({
 
           {intro && (
             <Text
-              color="neutral-25"
+              color="neutral-900"
               align={null}
               className="md:text-center md:[&>*]:mx-auto"
             >
@@ -100,7 +100,7 @@ export const Slides = ({
                       className={cx(
                         "m-5 md:m-10 lg:m-20 px-4 mb-0 md:mb-0 lg:mb-0 lg:px-6 h-[64px] min-w-[64px] lg:h-[120px] lg:min-w-[120px] inline-grid place-content-center",
                         "rounded-xl md:rounded-2xl lg:rounded-3xl",
-                        "bg-neutral-base",
+                        "bg-neutral-500",
                       )}
                     >
                       {label}

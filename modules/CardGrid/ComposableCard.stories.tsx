@@ -102,7 +102,7 @@ export const Icons = () => (
                 title={size}
                 icon="demo"
                 theme={{
-                  card: { background: "neutral-95" },
+                  card: { background: "neutral-100" },
                   icon: { size, color },
                 }}
               />
@@ -237,7 +237,7 @@ export const TextColors = () => (
             text={DEMO_CONTENT["text"]}
             theme={{
               text: { color },
-              card: { background: "neutral-95" },
+              card: { background: "neutral-100" },
             }}
           />
         </div>
@@ -294,7 +294,7 @@ export const Clickable = () => (
     <ComposableCard
       {...DEMO_CONTENT}
       theme={{
-        card: { border: "neutral-85" },
+        card: { border: "neutral-200" },
       }}
       buttons={[{ label: "click me", href: "/" }]}
     />
@@ -303,7 +303,7 @@ export const Clickable = () => (
       title="Card not clickable"
       subtitle="when there is more than 1 button"
       theme={{
-        card: { border: "neutral-85" },
+        card: { border: "neutral-200" },
       }}
       buttons={[
         { label: "click me", href: "/" },
@@ -323,7 +323,7 @@ export const Cover = () => (
     <ComposableCard
       {...DEMO_CONTENT}
       cover={demoImage2}
-      theme={{ card: { border: "neutral-85" } }}
+      theme={{ card: { border: "neutral-200" } }}
       buttons={[{ label: "click me", href: "/" }]}
     />
     <ComposableCard
@@ -335,7 +335,7 @@ export const Cover = () => (
     <ComposableCard
       {...DEMO_CONTENT}
       cover={demoImage2}
-      theme={{ card: { background: "brand-base" } }}
+      theme={{ card: { background: "brand-500" } }}
       buttons={[{ label: "click me", href: "/" }]}
     />
   </div>
@@ -346,12 +346,12 @@ export const ButtonsHidden = () => (
     <ComposableCard
       title="Button visible"
       buttons={[{ label: "click me", href: "/" }]}
-      theme={{ buttons: { hidden: false }, card: { border: "neutral-85" } }}
+      theme={{ buttons: { hidden: false }, card: { border: "neutral-200" } }}
     />
     <ComposableCard
       title="Button hidden"
       buttons={[{ label: "click me", href: "/" }]}
-      theme={{ buttons: { hidden: true }, card: { border: "neutral-85" } }}
+      theme={{ buttons: { hidden: true }, card: { border: "neutral-200" } }}
     />
   </div>
 );
@@ -366,7 +366,7 @@ export const CardSpacing = () => (
             title={spacing}
             image={demoImage2}
             theme={{
-              card: { align: "center", spacing, border: "neutral-85" },
+              card: { align: "center", spacing, border: "neutral-200" },
               image: { height: "sm", ratio: "1/1" },
             }}
           />
@@ -389,13 +389,13 @@ export const ImageSizes = () => (
                   title: [height, ratio].join(", "),
                   image: demoImage,
                   theme: {
-                    card: { background: "neutral-95" },
-                    title: { size: "md", color: "neutral-base" },
+                    card: { background: "neutral-100" },
+                    title: { size: "md", color: "neutral-500" },
                     image: {
                       ratio,
                       height,
                     },
-                    text: { color: "neutral-25" },
+                    text: { color: "neutral-900" },
                   },
                 }}
               />
@@ -418,7 +418,7 @@ export const ImageRounded = () => (
             image={demoImage2}
             theme={{
               image: { height: "lg", rounded, ratio: "1/1" },
-              card: { background: "blue-light" },
+              card: { background: "neutral-800" },
             }}
           />
         </div>
@@ -440,10 +440,10 @@ export const CardEffects = () => (
             image={demoImage4}
             buttons={[{ label: "button", href: "/" }]}
             theme={{
-              card: { effect, border: "neutral-85" },
-              title: { color: "action-base" },
-              subtitle: { color: "action-base" },
-              text: { color: "neutral-25" },
+              card: { effect, border: "neutral-200" },
+              title: { color: "action-500" },
+              subtitle: { color: "action-500" },
+              text: { color: "neutral-900" },
               image: { height: "sm" },
             }}
           />
@@ -478,7 +478,7 @@ export const DemoFullFeaturedCard = () => (
           },
         ],
         theme: {
-          card: { background: "brand-base", align: "right" },
+          card: { background: "brand-500", align: "right" },
           title: { size: "md", color: "white" },
           text: { size: "md", color: "white" },
           icon: { size: "lg", color: "white" },
@@ -504,7 +504,7 @@ export const DemoStatCard = () => (
       theme={{
         title: {
           size: "4xl",
-          color: "brand-base",
+          color: "brand-500",
         },
         subtitle: {
           size: "lg",
@@ -529,10 +529,10 @@ export const DemoIconCard = () => (
         ),
         icon: "demo",
         theme: {
-          card: { background: "neutral-95" },
-          title: { size: "md", color: "neutral-base" },
-          icon: { size: "sm", color: "brand-base" },
-          text: { color: "neutral-25" },
+          card: { background: "neutral-100" },
+          title: { size: "md", color: "neutral-500" },
+          icon: { size: "sm", color: "brand-500" },
+          text: { color: "neutral-900" },
         },
       }}
     />
@@ -547,9 +547,9 @@ export const DemoImageCard = () => (
         title: "Facility title",
         cover: demoImage,
         theme: {
-          card: { background: "neutral-95" },
-          title: { size: "md", color: "neutral-base" },
-          text: { color: "neutral-25" },
+          card: { background: "neutral-100" },
+          title: { size: "md", color: "neutral-500" },
+          text: { color: "neutral-900" },
         },
       }}
     />
@@ -575,10 +575,10 @@ export const DemoPersonCard = () => (
         ),
         image: demoImage,
         theme: {
-          title: { size: "md", color: "brand-base" },
-          subtitle: { size: "md", color: "neutral-base", weight: "regular" },
+          title: { size: "md", color: "brand-500" },
+          subtitle: { size: "md", color: "neutral-500", weight: "regular" },
           image: { rounded: "xl", ratio: "3/2", height: "lg" },
-          text: { color: "neutral-25" },
+          text: { color: "neutral-900" },
         },
       }}
     />
@@ -598,10 +598,10 @@ export const DemoCertificateCard = () => (
             align: "center",
             effect: "grayscale",
             background: "white",
-            border: "neutral-85",
+            border: "neutral-200",
             spacing: "lg",
           },
-          title: { size: "md", color: "action-base" },
+          title: { size: "md", color: "action-500" },
           image: { height: "sm" },
           buttons: { hidden: true },
         },
@@ -625,9 +625,9 @@ export const DemoDepartmentCard = () => (
         image: demoImage3,
         buttons: [{ label: "Learn more", href: "/", variant: "secondary" }],
         theme: {
-          card: { border: "neutral-85" },
-          title: { size: "lg", color: "neutral-base" },
-          text: { size: "md", color: "neutral-25" },
+          card: { border: "neutral-200" },
+          title: { size: "lg", color: "neutral-500" },
+          text: { size: "md", color: "neutral-900" },
           image: { height: "sm", ratio: "1/1", rounded: "full" },
         },
       }}

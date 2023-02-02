@@ -55,7 +55,7 @@ export const NewsLetterSignUpForm = ({
                     type="email"
                     name="email"
                     placeholder="Join our blog"
-                    className="border bg-white border-neutral-95 placeholder-neutral-50 md:text-md w-full"
+                    className="border bg-white border-neutral-100 placeholder-neutral-500 md:text-md w-full"
                   />
                 </div>
                 <span className="flex-shrink-0">

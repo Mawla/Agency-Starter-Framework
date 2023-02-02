@@ -42,7 +42,7 @@ export const Gallery = ({
 
           {intro && (
             <Text
-              color="neutral-25"
+              color="neutral-900"
               align={null}
               className="md:text-center md:[&>*]:mx-auto"
             >

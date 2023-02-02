@@ -16,7 +16,7 @@ describe("Composable card", () => {
           buttons={[{ label: "button", href: "/" }]}
           theme={{
             module: {
-              background: "neutral-95",
+              background: "neutral-100",
               align: "center",
             },
             grid: {
@@ -49,7 +49,7 @@ describe("Composable card", () => {
                   },
                 ],
                 theme: {
-                  card: { background: "brand-base", align: "right" },
+                  card: { background: "brand-500", align: "right" },
                   title: { size: "md", color: "white" },
                   text: { size: "md", color: "white" },
                   icon: { size: "lg", color: "white" },

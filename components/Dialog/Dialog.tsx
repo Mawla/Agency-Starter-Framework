@@ -35,12 +35,12 @@ export const Dialog = ({
               ["max-h-75vh aspect-ratio-16-9 max-w-inner"]: mode === "video",
               ["max-w-90vw md:max-w-75vw lg:max-w-text"]: mode === "content",
               ["inline-flex justify-center"]: mode === "form",
-            }
+            },
           )}
         >
           <div
             className={cx({
-              ["text-neutral-50 overflow-y-auto overflow-scrolling-touch filter shadow-md bg-white p-10 h-auto max-h-75vh "]:
+              ["text-neutral-500 overflow-y-auto overflow-scrolling-touch filter shadow-md bg-white p-10 h-auto max-h-75vh "]:
                 mode === "content",
               ["overflow-y-auto overflow-scrolling-touch h-auto max-h-75vh relative"]:
                 mode === "form",
@@ -58,7 +58,7 @@ export const Dialog = ({
                 </RadixDialog.Description>
               )}
 
-              <RadixDialog.Close className="py-3 px-3 text-neutral-10 hover:text-neutral-25 bg-white hover:bg-neutral-95 transition-colors absolute top-0 right-0 z-10">
+              <RadixDialog.Close className="py-3 px-3 text-neutral-10 hover:text-neutral-900 bg-white hover:bg-neutral-100 transition-colors absolute top-0 right-0 z-10">
                 <IconLoader
                   icon="close"
                   className="text-current w-8 h-8 block"

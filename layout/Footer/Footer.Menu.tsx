@@ -22,9 +22,9 @@ export const FooterMenu = ({
       open={!width || width > MAX_MOBILE_SIZE ? true : current}
       className="group relative"
     >
-      <span className="pointer-events-none absolute -inset-x-4 -top-3 border border-white bottom-0 hidden group-open:block md:group-open:hidden group-open:bg-neutral-95 rounded-lg -z-10" />
+      <span className="pointer-events-none absolute -inset-x-4 -top-3 border border-white bottom-0 hidden group-open:block md:group-open:hidden group-open:bg-neutral-100 rounded-lg -z-10" />
       <summary
-        className="text-neutral-base font-bold text-xl mb-4 list-none relative"
+        className="text-neutral-5000 font-bold text-xl mb-4 list-none relative"
         onClick={(e) => {
           if (width && width > MAX_MOBILE_SIZE) e.preventDefault();
         }}
@@ -39,7 +39,7 @@ export const FooterMenu = ({
 
         <IconLoader
           icon="chevron"
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden text-action-base transition-transform duration-75 group-open:rotate-180"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden text-action-500 transition-transform duration-75 group-open:rotate-180"
         />
       </summary>
 
@@ -48,7 +48,7 @@ export const FooterMenu = ({
           return (
             <li
               key={href || label}
-              className="text-neutral-25 text-md font-bold relative"
+              className="text-neutral-900 text-md font-bold relative"
             >
               {href ? (
                 <Link
@@ -62,7 +62,7 @@ export const FooterMenu = ({
               )}
 
               {current && (
-                <span className="md:hidden bg-action-base w-0.5 h-5 absolute -left-2 top-0" />
+                <span className="md:hidden bg-action-500 w-0.5 h-5 absolute -left-2 top-0" />
               )}
             </li>
           );

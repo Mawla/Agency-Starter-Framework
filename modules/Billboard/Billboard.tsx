@@ -40,7 +40,7 @@ export const Billboard = ({
     <Wrapper
       id={title}
       theme={{
-        background: "neutral-base",
+        background: "neutral-500",
         space: theme?.module?.space,
         rounded: { top: "md", bottom: "md" },
       }}

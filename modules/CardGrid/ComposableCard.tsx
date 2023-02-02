@@ -116,17 +116,17 @@ export const COMPOSABLE_CARD_THEMES: Record<
   ComposableCardProps["theme"]
 > = {
   department: {
-    card: { border: "neutral-85" },
-    title: { size: "lg", color: "neutral-base" },
-    text: { size: "md", color: "neutral-25" },
+    card: { border: "neutral-200" },
+    title: { size: "lg", color: "neutral-500" },
+    text: { size: "md", color: "neutral-900" },
     image: { height: "sm", ratio: "1/1", rounded: "full" },
   },
 
   person: {
-    title: { size: "md", color: "brand-base" },
-    subtitle: { size: "md", color: "neutral-base", weight: "regular" },
+    title: { size: "md", color: "brand-500" },
+    subtitle: { size: "md", color: "neutral-500", weight: "regular" },
     image: { rounded: "xl", ratio: "3/2", height: "lg" },
-    text: { color: "neutral-25", size: "lg" },
+    text: { color: "neutral-900", size: "lg" },
   },
 };
 
@@ -262,7 +262,7 @@ export const ComposableCard = ({
               <div className="mb-4 md:mb-7 lg:mb-9 xl:mb-11">
                 <IconLoader
                   icon={icon}
-                  color={theme?.icon?.color || "brand-base"}
+                  color={theme?.icon?.color || "brand-500"}
                   title={["icon", icon, theme?.icon?.color]
                     .filter(Boolean)
                     .join(" ")}
@@ -314,7 +314,7 @@ export const ComposableCard = ({
               <Text
                 as="div"
                 size={theme?.text?.size || "md"}
-                color={theme?.text?.color || "neutral-25"}
+                color={theme?.text?.color || "neutral-900"}
                 align={theme?.card?.align}
                 className={cx("underline-links break-words", {
                   ["opacity-75"]: theme?.text?.color === "white",

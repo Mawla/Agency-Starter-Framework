@@ -51,7 +51,7 @@ export const PageLock = () => {
   if (status === "unlocked" && page) return <DefaultPage {...page} />;
 
   return (
-    <Background theme={{ background: "white", text: "neutral-base" }}>
+    <Background theme={{ background: "white", text: "neutral-500" }}>
       <div className="h-[75vh] grid">
         <div className="place-self-center">
           <form autoComplete="off" onSubmit={onSubmit}>
@@ -60,7 +60,7 @@ export const PageLock = () => {
                 <span className="sr-only">Password</span>
                 <IconLoader
                   icon="lock"
-                  className="w-6 h-6 text-neutral-base block"
+                  className="w-6 h-6 text-neutral-5000 block"
                 />
               </label>
               <div className="flex relative">
@@ -70,11 +70,11 @@ export const PageLock = () => {
                 <input
                   type="text"
                   name="password"
-                  className="border border-neutral-base text-neutral-base block"
+                  className="border border-neutral-500 text-neutral-5000 block"
                 />
                 <button
                   type="submit"
-                  className="bg-white -ml-px px-2 border border-neutral-base text-neutral-base"
+                  className="bg-white -ml-px px-2 border border-neutral-500 text-neutral-5000"
                   disabled={status === "loading"}
                 >
                   {status !== "loading" ? (

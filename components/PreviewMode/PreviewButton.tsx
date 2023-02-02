@@ -3,7 +3,7 @@ export const PreviewButton = ({ pagePath }: { pagePath: string }) => (
     <span className="pl-3 font-['Helvetica_Neue']">preview mode</span>
 
     <a
-      className="p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222] border-l border-l-neutral-25"
+      className="p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222] border-l border-l-neutral-900"
       href={`/api/preview/exit-preview?redirect=${pagePath}`}
     >
       <span className="w-5 h-5 block">

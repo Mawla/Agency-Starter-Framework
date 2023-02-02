@@ -11,12 +11,9 @@ export type CardAlignType = keyof typeof CARD_ALIGN_OPTIONS;
 export const CARD_BACKGROUND_COLOR_OPTIONS = pick(
   COLORS,
   "white",
-  "neutral-95",
-  "brand-light",
-  "brand-base",
-  "brand-dark",
-  "green-light",
-  "blue-light",
+  "brand-500",
+  "neutral-100",
+  "neutral-800",
 );
 export type CardBackgroundColorType =
   keyof typeof CARD_BACKGROUND_COLOR_OPTIONS;
@@ -33,9 +30,9 @@ export type CardEffectType = keyof typeof CARD_EFFECT_OPTIONS;
 export const ICON_COLOR_OPTIONS = pick(
   COLORS,
   "white",
-  "neutral-base",
-  "brand-base",
-  "brand-dark",
+  "neutral-500",
+  "brand-500",
+  "brand-700",
 );
 export type IconColorType = keyof typeof ICON_COLOR_OPTIONS;
 
@@ -45,17 +42,17 @@ export type IconSizeType = keyof typeof ICON_SIZE_OPTIONS;
 export const TITLE_COLOR_OPTIONS = pick(
   COLORS,
   "white",
-  "neutral-base",
-  "brand-base",
-  "brand-dark",
-  "action-base",
+  "neutral-500",
+  "brand-500",
+  "brand-700",
+  "action-500",
 );
 export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
 
-export const TEXT_COLOR_OPTIONS = pick(COLORS, "white", "neutral-25");
+export const TEXT_COLOR_OPTIONS = pick(COLORS, "white", "neutral-900");
 export type TextColorType = keyof typeof TEXT_COLOR_OPTIONS;
 
-export const BORDER_COLOR_OPTIONS = pick(COLORS, "neutral-85");
+export const BORDER_COLOR_OPTIONS = pick(COLORS, "neutral-200");
 export type BorderColorType = keyof typeof BORDER_COLOR_OPTIONS;
 
 export const IMAGE_HEIGHT_OPTIONS = {

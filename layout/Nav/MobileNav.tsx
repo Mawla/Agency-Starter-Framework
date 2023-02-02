@@ -23,7 +23,7 @@ export const MobileNav = ({
     <div className={cx("radix-dialog", { ["hidden"]: !open })}>
       <RadixDialog.Root onOpenChange={onOpenChange} open={open}>
         <RadixDialog.Overlay className="relative z-60">
-          <div className="fixed inset-0 bg-neutral-base w-screen h-screen" />
+          <div className="fixed inset-0 bg-neutral-500 w-screen h-screen" />
         </RadixDialog.Overlay>
         <RadixDialog.Content className="z-60 fixed top-0 right-0 w-screen max-w-sm h-screen">
           <div className="h-full">
@@ -31,7 +31,7 @@ export const MobileNav = ({
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="z-60 py-3 px-3 text-neutral-base hover:text-black bg-white hover:bg-neutral-95 transition-colors absolute top-2 right-2">
+              <RadixDialog.Close className="z-60 py-3 px-3 text-neutral-5000 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
                 <IconLoader
                   icon="close"
                   className="text-current w-6 h-6 block"
@@ -53,14 +53,14 @@ export const MobileNav = ({
                         <RadixNavigationMenu.Item key={label}>
                           <details
                             open={current}
-                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-neutral-95 bg-white transition-colors duration-75"
+                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-neutral-100 bg-white transition-colors duration-75"
                           >
                             <summary className="list-none relative">
                               {href ? (
                                 <Link
                                   href={href}
                                   locale={language}
-                                  className="hover:underline text-xl font-bold text-neutral-base"
+                                  className="hover:underline text-xl font-bold text-neutral-5000"
                                 >
                                   {label}
                                 </Link>
@@ -70,7 +70,7 @@ export const MobileNav = ({
 
                               <IconLoader
                                 icon="chevron"
-                                className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-base transition-transform duration-75 group-open:rotate-180"
+                                className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
                               />
                             </summary>
 
@@ -84,14 +84,14 @@ export const MobileNav = ({
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "text-md font-bold text-neutral-25 hover:underline relative",
+                                            "text-md font-bold text-neutral-900 hover:underline relative",
                                             {
-                                              ["text-action-base"]: current,
+                                              ["text-action-500"]: current,
                                             },
                                           )}
                                         >
                                           {current && (
-                                            <span className="bg-action-base w-0.5 h-5 absolute -left-2 -top-0.5" />
+                                            <span className="bg-action-500 w-0.5 h-5 absolute -left-2 -top-0.5" />
                                           )}
                                           {label}
                                         </Link>
@@ -118,7 +118,7 @@ export const MobileNav = ({
                             href={button.href}
                             locale={button.language}
                             className={cx(
-                              "bg-action-base",
+                              "bg-action-500",
                               "hover:underline underline-offset-4",
                               "flex items-center gap-2",
                               "text-white rounded-full text-md font-bold",

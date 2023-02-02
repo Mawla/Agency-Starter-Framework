@@ -1,17 +1,16 @@
-import cx from "classnames";
-import React from "react";
-
 import { proseClasses, textClasses } from "../../colors";
 import { pick } from "../../helpers/utils/object";
 import { ALIGNMENTS, FONTS, SIZES, TextElement } from "../../types";
 import { ColorType } from "../../types";
+import cx from "classnames";
+import React from "react";
 
 export const ALIGN_OPTIONS = pick(
   ALIGNMENTS,
   "left",
   "center",
   "right",
-  "auto"
+  "auto",
 );
 export type AlignType = keyof typeof ALIGN_OPTIONS;
 
@@ -81,11 +80,11 @@ export const Text = ({
             ? proseClasses[background]
             : "text-current",
           {
-            ["prose-a:text-action-base"]:
+            ["prose-a:text-action-500"]:
               !background ||
               background === "white" ||
-              background === "neutral-95",
-          }
+              background === "neutral-100",
+          },
         )}
       >
         {children}

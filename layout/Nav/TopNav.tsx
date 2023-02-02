@@ -72,12 +72,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           <Element
                             className={cx(
                               "flex items-center gap-2",
-                              "text-md text-neutral-base rounded-full font-bold",
+                              "text-md text-neutral-5000 rounded-full font-bold",
                               "py-[10px] px-4",
                               "whitespace-nowrap",
-                              "hover:bg-neutral-95 group-hover:bg-neutral-95 group-focus-within:bg-neutral-95",
+                              "hover:bg-neutral-100 group-hover:bg-neutral-100 group-focus-within:bg-neutral-100",
                               {
-                                ["bg-action-light text-action-base"]:
+                                ["bg-neutral-800 text-neutral-900"]:
                                   current ||
                                   Boolean(
                                     children?.filter(({ current }) =>
@@ -101,10 +101,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               <IconLoader
                                 icon="chevron"
                                 className={cx(
-                                  "w-3 h-3 text-inherit text-neutral-50",
-                                  "hover:text-neutral-25 transition-colors duration-75",
+                                  "w-3 h-3 text-inherit text-neutral-500",
+                                  "hover:text-neutral-900 transition-colors duration-75",
                                   "group-hover:rotate-180 group-focus-within:rotate-180",
-                                  "group-hover:text-action-base group-focus-within:text-action-base",
+                                  "group-hover:text-action-500 group-focus-within:text-action-500",
                                 )}
                               />
                             )}
@@ -137,7 +137,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                 className={cx(
                                   "translate-y-2 p-3",
                                   "shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)]",
-                                  "bg-white border-2 border-neutral-85 rounded-md",
+                                  "bg-white border-2 border-neutral-200 rounded-md",
                                 )}
                               >
                                 {children?.map(
@@ -148,12 +148,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "bg-white hover:bg-neutral-95 flex transition-colors",
-                                            "text-neutral-base",
+                                            "bg-white hover:bg-neutral-100 flex transition-colors",
+                                            "text-neutral-5000",
                                             "text-md",
                                             "p-3 rounded-xs",
                                             {
-                                              ["font-bold bg-action-light hover:bg-action-light text-action-base"]:
+                                              ["font-bold bg-neutral-800 hover:bg-neutral-800 text-neutral-600"]:
                                                 current,
                                             },
                                           )}
@@ -193,7 +193,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           href={button.href}
                           locale={button.language}
                           className={cx(
-                            "bg-action-base",
+                            "bg-action-500",
                             "hover:underline underline-offset-4",
                             "flex items-center gap-2",
                             "text-white rounded-full text-md font-bold",

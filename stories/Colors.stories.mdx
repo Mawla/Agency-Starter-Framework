@@ -18,7 +18,7 @@ import defaultConfig from "tailwindcss/stubs/defaultConfig.stub";
             <div
               onClick={() => navigator.clipboard.writeText(value)}
               style={{ backgroundColor: value }}
-              className="p-2 rounded-full border border-neutral-base border-opacity-10 shadow-inner w-24 h-24 flex items-center justify-center"
+              className="p-2 rounded-full border border-neutral-500 border-opacity-10 shadow-inner w-24 h-24 flex items-center justify-center"
             ></div>
           ) : (
             Object.entries(value).map(([key, value]) => (
@@ -26,7 +26,7 @@ import defaultConfig from "tailwindcss/stubs/defaultConfig.stub";
                 key={value}
                 onClick={() => navigator.clipboard.writeText(value)}
                 style={{ backgroundColor: value }}
-                className="p-2 rounded-full border border-neutral-base border-opacity-10 shadow-inner w-24 h-24 flex items-center justify-center"
+                className="p-2 rounded-full border border-neutral-500 border-opacity-10 shadow-inner w-24 h-24 flex items-center justify-center"
               >
                 {key}
               </div>

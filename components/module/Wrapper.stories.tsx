@@ -33,7 +33,7 @@ export const WithBackground = () => (
   <div className="border">
     <WrapperComponent
       theme={{
-        background: "lilac-light",
+        background: "neutral-900",
         space: {
           top: "none",
           bottom: "none",
@@ -76,7 +76,7 @@ export const Spacing = () => (
         <WrapperComponent
           theme={{
             space: { top: size, bottom: size },
-            background: "action-light",
+            background: "action-100",
           }}
         >
           Module space {label}
@@ -90,7 +90,7 @@ export const WithContent = () => (
   <div className="border">
     <WrapperComponent
       theme={{
-        background: "brand-base",
+        background: "neutral-800",
         text: "white",
         space: {
           top: "lg",
@@ -112,7 +112,7 @@ export const Rounded = () => (
         <div key={radius}>
           <WrapperComponent
             theme={{
-              background: "brand-base",
+              background: "neutral-800",
               text: "white",
               rounded: {
                 top: radius,
@@ -126,7 +126,7 @@ export const Rounded = () => (
           </WrapperComponent>
           <WrapperComponent
             theme={{
-              background: "brand-base",
+              background: "neutral-800",
               text: "white",
               width: "inner",
               rounded: {
@@ -151,7 +151,7 @@ export const Widths = () => (
       <WrapperComponent
         key={width}
         theme={{
-          background: "brand-base",
+          background: "neutral-800",
           text: "white",
           width,
         }}

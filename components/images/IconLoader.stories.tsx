@@ -1,8 +1,7 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import { IconType, ICONS } from "../../types";
 import { IconLoader } from "./IconLoader";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: IconLoader,
@@ -17,7 +16,7 @@ export const Sources = () => (
         icon={icon}
         key={icon}
         className="w-10 h-10"
-        color="action-base"
+        color="action-500"
       />
     ))}
   </div>

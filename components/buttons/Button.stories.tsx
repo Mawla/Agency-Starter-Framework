@@ -1,8 +1,7 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import { Button } from "./Button";
 import { SIZE_OPTIONS, VariantType, VARIANT_OPTIONS } from "./ButtonOptions";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: Button,
@@ -18,7 +17,7 @@ export const Variants = () => (
           <Button label="loading" variant={variant} loading />
           <Button label="disabled" variant={variant} disabled />
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -28,7 +27,7 @@ export const Sizes = () => (
     {(
       Object.entries(SIZE_OPTIONS) as [
         key: keyof typeof SIZE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <div key={label} className="flex gap-2 mr-2 mb-2">
@@ -65,7 +64,7 @@ export const IconOnly = () => (
     {(
       Object.entries(SIZE_OPTIONS) as [
         key: keyof typeof SIZE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <div key={label} className="flex gap-2 mr-2 mb-2">
@@ -88,10 +87,7 @@ export const IconOnly = () => (
 );
 
 export const OrphanIcons = () => (
-  <div
-    style={{ maxWidth: 200 }}
-    className="grid gap-4 border border-blue-500 p-0.5"
-  >
+  <div style={{ maxWidth: 200 }} className="grid gap-4 border p-0.5">
     <Button label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " />
 
     <Button
@@ -113,10 +109,7 @@ export const OrphanIcons = () => (
 );
 
 export const Target = () => (
-  <div
-    style={{ maxWidth: 200 }}
-    className="grid gap-4 border border-blue-500 p-0.5"
-  >
+  <div style={{ maxWidth: 200 }} className="grid gap-4 border p-0.5">
     <Button label="External" target="_blank" href="https://www.google.com" />
     <Button label="Internal" href="https://www.google.com" />
     <Button

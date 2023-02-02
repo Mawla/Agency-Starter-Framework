@@ -1,10 +1,9 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
 import { Background as ModuleBackground } from "./Background";
 import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./BackgroundOptions";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: ModuleBackground,
@@ -20,7 +19,7 @@ export const Background = () => (
             <div className="p-8">Module background {color}</div>
           </ModuleBackground>
         </div>
-      )
+      ),
     )}
   </>
 );
@@ -32,13 +31,13 @@ export const Rounded = () => (
         <ModuleBackground
           key={radius}
           theme={{
-            background: "brand-base",
+            background: "brand-500",
             rounded: { top: radius, bottom: radius },
           }}
         >
           <div className="p-40">{radius}</div>
         </ModuleBackground>
-      )
+      ),
     )}
   </div>
 );

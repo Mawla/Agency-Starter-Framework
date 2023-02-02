@@ -26,7 +26,7 @@ const DEMO_CONTENT = {
     },
   ],
   theme: {
-    card: { background: "brand-base", align: "right" },
+    card: { background: "brand-500", align: "right" },
     title: { size: "md", color: "white" },
     text: { size: "md", color: "white" },
     icon: { size: "lg", color: "white" },

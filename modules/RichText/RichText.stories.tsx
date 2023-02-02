@@ -116,7 +116,7 @@ export const ModuleSpacing = () => (
             content={<p>{label} / inner</p>}
             theme={{
               module: {
-                background: "neutral-95",
+                background: "neutral-100",
                 width: "inner",
                 space: { top: size, bottom: size },
               },
@@ -128,7 +128,7 @@ export const ModuleSpacing = () => (
             content={<p>{label} / full</p>}
             theme={{
               module: {
-                background: "neutral-95",
+                background: "neutral-100",
                 space: { top: size, bottom: size },
               },
             }}

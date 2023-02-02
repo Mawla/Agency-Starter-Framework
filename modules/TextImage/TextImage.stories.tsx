@@ -96,27 +96,27 @@ export const Rounded = () => (
     <TextImage
       title="Default"
       theme={{
-        module: { background: "brand-base" },
+        module: { background: "brand-500" },
       }}
     />
     <TextImage
       title="Square"
       theme={{
-        module: { background: "brand-base" },
+        module: { background: "brand-500" },
         decorations: { roundedTop: "none", roundedBottom: "none" },
       }}
     />
     <TextImage
       title="Top rounded"
       theme={{
-        module: { background: "brand-base" },
+        module: { background: "brand-500" },
         decorations: { roundedTop: "lg", roundedBottom: "none" },
       }}
     />
     <TextImage
       title="Bottom rounded"
       theme={{
-        module: { background: "brand-base" },
+        module: { background: "brand-500" },
         decorations: { roundedTop: "none", roundedBottom: "lg" },
       }}
     />
@@ -133,7 +133,7 @@ export const Spacing = () => (
             eyebrow={space}
             theme={{
               module: {
-                background: "neutral-95",
+                background: "neutral-100",
                 space: { top: space, bottom: space },
               },
             }}

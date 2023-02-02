@@ -29,7 +29,7 @@ const DEMO_ITEMS: CardGridProps["items"] = new Array(6).fill({
   text: <p>Text</p>,
   theme: {
     card: {
-      border: "neutral-85",
+      border: "neutral-200",
     },
   },
 } as ComposableCardProps);
@@ -89,7 +89,7 @@ export const Rounded = () => (
       {...DEMO_CONTENT}
       theme={{
         module: {
-          background: "brand-dark",
+          background: "brand-700",
         },
       }}
     />
@@ -97,7 +97,7 @@ export const Rounded = () => (
       {...DEMO_CONTENT}
       theme={{
         module: {
-          background: "brand-dark",
+          background: "brand-700",
         },
         decorations: {
           roundedTop: "none",
@@ -109,7 +109,7 @@ export const Rounded = () => (
       {...DEMO_CONTENT}
       theme={{
         module: {
-          background: "brand-dark",
+          background: "brand-700",
         },
         decorations: {
           roundedTop: "lg",
@@ -121,7 +121,7 @@ export const Rounded = () => (
       {...DEMO_CONTENT}
       theme={{
         module: {
-          background: "brand-dark",
+          background: "brand-700",
         },
         decorations: {
           roundedTop: "none",
@@ -152,7 +152,7 @@ export const ModuleSpacing = () => (
             {...DEMO_CONTENT}
             theme={{
               module: {
-                background: "neutral-95",
+                background: "neutral-100",
                 space: { top: size, bottom: size },
               },
             }}
@@ -315,7 +315,7 @@ export const Slider = () => (
       }
       theme={{
         module: {
-          background: "neutral-95",
+          background: "neutral-100",
           space: { top: "none", bottom: "none" },
         },
         grid: {
@@ -434,7 +434,7 @@ export const GridCenterCards = () => (
                 text: <p>Text</p>,
                 theme: {
                   card: {
-                    border: "neutral-85",
+                    border: "neutral-200",
                   },
                 },
               } as ComposableCardProps)}

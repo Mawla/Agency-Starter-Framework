@@ -5,7 +5,6 @@ import { languages, LanguageType } from "../../languages";
 import { IconType } from "../../types";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 
 type LanguageSwitchProps = {
@@ -56,13 +55,13 @@ export const LanguageSwitch = ({
           "group",
           "bg-white",
           "flex items-center gap-2",
-          "text-md  text-neutral-base",
+          "text-md  text-neutral-5000",
           "rounded-full",
           "font-bold",
           "py-[8px] pl-2.5 pr-3",
           "whitespace-nowrap",
-          "border-neutral-75 border-2  duration-75",
-          "hover:bg-neutral-95 group-hover:bg-neutral-95 group-focus-within:bg-neutral-95",
+          "border-neutral-300 border-2  duration-75",
+          "hover:bg-neutral-100 group-hover:bg-neutral-100 group-focus-within:bg-neutral-100",
         )}
       >
         <span className="w-5 aspect-square">
@@ -74,7 +73,7 @@ export const LanguageSwitch = ({
           />
         </span>
         <span>{language.toUpperCase()}</span>
-        <IconLoader icon="chevron" className="w-4 h-4 text-neutral-50" />
+        <IconLoader icon="chevron" className="w-4 h-4 text-neutral-500" />
       </RadixNavigationMenu.Trigger>
 
       <RadixNavigationMenu.Content
@@ -89,7 +88,7 @@ export const LanguageSwitch = ({
           className={cx(
             "translate-y-4 p-1",
             "shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)]",
-            "bg-white border-2 border-neutral-85 rounded-md",
+            "bg-white border-2 border-neutral-200 rounded-md",
           )}
         >
           {links.map(({ title, href, languageId }) => (
@@ -99,11 +98,11 @@ export const LanguageSwitch = ({
                 locale={languageId}
                 className={cx(
                   "hover:underline flex underline-offset-4 gap-3",
-                  "text-neutral-base",
+                  "text-neutral-5000",
                   "text-md",
                   "p-3",
                   {
-                    ["font-bold bg-action-light rounded-sm"]:
+                    ["font-bold bg-neutral-800 rounded-sm"]:
                       language === languageId,
                   },
                 )}

@@ -39,7 +39,7 @@ export const Footer = ({
           </div>
         </div>
 
-        <div className="mt-10 md:mt-[100px] text-md text-neutral-base">
+        <div className="mt-10 md:mt-[100px] text-md text-neutral-5000">
           <div className="flex gap-10 flex-wrap">
             <div className="flex gap-3 md:gap-10 flex-col md:flex-row flex-wrap">
               <div className="translate-y-1 block">
@@ -47,7 +47,7 @@ export const Footer = ({
               </div>
 
               {(legal || copyright) && (
-                <p className="text-neutral-25 text-sm leading-relaxed">
+                <p className="text-neutral-900 text-sm leading-relaxed">
                   {copyright && <strong className="block">{copyright}</strong>}
                   {legal && <span className="block">{legal}</span>}
                 </p>
@@ -60,10 +60,13 @@ export const Footer = ({
                   {legalLinks?.map(({ label, href }) => (
                     <li
                       key={label}
-                      className="border-r border-neutral-85 pr-4 md:pr-6"
+                      className="border-r border-neutral-200 pr-4 md:pr-6"
                     >
                       {href && (
-                        <Link href={href} className="font-bold text-neutral-25">
+                        <Link
+                          href={href}
+                          className="font-bold text-neutral-900"
+                        >
                           {label}
                         </Link>
                       )}
@@ -75,7 +78,7 @@ export const Footer = ({
                       {href && (
                         <Link
                           href={href}
-                          className="block w-7 h-7 overflow-hidden text-neutral-base"
+                          className="block w-7 h-7 overflow-hidden text-neutral-5000"
                           rel="noopener noreferrer"
                           target="_blank"
                         >

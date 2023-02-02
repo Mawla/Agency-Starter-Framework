@@ -23,19 +23,19 @@ export const HeroBasic = (data: HeroBasicProps) => {
   const { eyebrow, title, buttons, text, image }: HeroBasicProps = data;
 
   return (
-    <header className="relative z-0 overflow-hidden text-neutral-base">
+    <header className="relative z-0 overflow-hidden text-neutral-5000">
       <div className="relative flex flex-row items-center z-30">
         <Bleed bleed="md">
           <Width width="inner">
             <div className="relative flex flex-col tablet:max-w-[75%] lg:max-w-[790px] gap-4">
               {(title || eyebrow) && (
-                <Title as="h1" size="4xl" color="neutral-10" eyebrow={eyebrow}>
+                <Title as="h1" size="4xl" color="neutral-800" eyebrow={eyebrow}>
                   {title}
                 </Title>
               )}
 
               {text && (
-                <Text size="2xl" className="mt-2" color="neutral-25">
+                <Text size="2xl" className="mt-2" color="neutral-900">
                   <PortableText content={text as any} />
                 </Text>
               )}

@@ -76,14 +76,14 @@ export const Story = ({
     <Wrapper
       theme={{
         ...theme?.module,
-        background: theme?.module?.background || "neutral-base",
+        background: theme?.module?.background || "neutral-800",
         rounded: {
           top: "md",
           bottom: "md",
         },
       }}
       className="relative "
-      innerClassName="overflow-hidden bg-gradient-to-tr from-neutral-base/50 to-neutral-base/0"
+      innerClassName="overflow-hidden bg-gradient-to-tr from-neutral-500/50 to-neutral-500/0"
     >
       {backgroundImage && (
         <div className="absolute pointer-events-none z-0 inset-0">
@@ -178,7 +178,7 @@ export const Story = ({
                   >
                     <IconLoader
                       icon="play"
-                      className="text-white group-hover:text-action-dark place-self-center w-4 md:w-6 lg:w-8 h-4 md:h-6 lg:h-8 translate-x-[1px] md:translate-x-[2px] lg:translate-x-[3px]"
+                      className="text-white group-hover:text-neutral-800 place-self-center w-4 md:w-6 lg:w-8 h-4 md:h-6 lg:h-8 translate-x-[1px] md:translate-x-[2px] lg:translate-x-[3px]"
                     />
                   </span>
                 </span>
@@ -191,7 +191,7 @@ export const Story = ({
           <div className="relative md:static h-20 md:h-auto mb-4 md:mb-0">
             <div
               className={cx(
-                "rounded-full md:rounded-none overflow-hidden bg-neutral-95 md:bg-transparent",
+                "rounded-full md:rounded-none overflow-hidden bg-neutral-100 md:bg-transparent",
                 "h-full aspect-square pointer-events-none z-20",
                 "absolute top-0 left-0 md:-bottom-0 md:top-auto",
                 {

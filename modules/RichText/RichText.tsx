@@ -38,27 +38,15 @@ export type RichTextProps = {
 
 export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
   // dark background scenario: change overal colouring
-  let titleColor: ColorType = "neutral-base";
-  let textColor: ColorType = "neutral-25";
-  let eyebrowColor: ColorType = "brand-base";
+  let titleColor: ColorType = "neutral-5000";
+  let textColor: ColorType = "neutral-400";
+  let eyebrowColor: ColorType = "brand-500";
   let isDarkBackground = false;
-  if (
-    theme?.module?.background === "brand-dark" ||
-    theme?.module?.background === "brand-base" ||
-    theme?.module?.background === "blue-dark" ||
-    theme?.module?.background === "green-dark"
-  ) {
+  if (theme?.module?.background === "neutral-900") {
     isDarkBackground = true;
     titleColor = "white";
     textColor = "white";
-
-    eyebrowColor = "brand-light";
-    if (
-      theme?.module?.background === "blue-dark" ||
-      theme?.module?.background === "green-dark"
-    ) {
-      eyebrowColor = "white";
-    }
+    eyebrowColor = "white";
   }
 
   return (
@@ -73,11 +61,6 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
           bottom: theme?.decorations?.roundedBottom,
         },
       }}
-      className="relative"
-      innerClassName={cx("overflow-hidden", {
-        ["bg-gradient-to-tr from-brand-dark to-brand-base"]:
-          theme?.module?.background === "brand-base",
-      })}
     >
       <div
         className={cx("z-20 relative", {
