@@ -199,8 +199,8 @@ function createModule(pascalName, schemaName, fields, description = "") {
       `);
     jsxLines.push(`
       {image && (
-        <div className="w-96 h-96">
-          <ResponsiveImage {...image} layout="fill" />
+        <div className="w-96 relative aspect-video">
+          <ResponsiveImage {...image} fill className="absolute inset-0" />
         </div>
       )}
       `);
