@@ -81,7 +81,7 @@ function createHero() {
   createSchema(pascalName, schemaName, {
     replacer: "MyHero",
     schemaFilePath,
-    prototypeFile: `${__dirname}/hero.myhero.tsx`,
+    prototypeFile: `${__dirname}/MyHero.schema.tsx`,
     schemaImportPrefix: "hero",
     fields: ["title", "image"],
   });

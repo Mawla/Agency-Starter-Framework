@@ -105,7 +105,7 @@ function createModule(pascalName, schemaName, fields, description = "") {
   createSchema(pascalName, schemaName, {
     replacer: "MyModule",
     schemaFilePath,
-    prototypeFile: `${__dirname}/module.mymodule.tsx`,
+    prototypeFile: `${__dirname}/MyModule.schema.tsx`,
     schemaImportPrefix: "module",
     fields,
     description,
