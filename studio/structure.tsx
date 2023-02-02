@@ -90,16 +90,8 @@ export const structure = (
       documentList(S, { type: "form.static", title: "Forms" }),
       S.divider(),
       singleton(S, { id: "page_notfound", type: "page.notfound" }),
-      S.listItem()
-        .title("Sitemap")
-        .icon(() => <DocumentIcon type="sitemap" />)
-        .child(
-          S.component(Sitemap)
-            .options({
-              S: S,
-            })
-            .id("sitemap"),
-        ),
+      singleton(S, { id: "page_sitemap", type: "page.sitemap" }),
+
       S.divider(),
       S.listItem()
         .title("Guide")
@@ -127,8 +119,15 @@ export const defaultDocumentNode = (
       views.push(PreviewView(S, language));
     });
 
-    if (schemaType !== "page.preset") {
+    if (
+      schemaType.startsWith("page.") &&
+      !["page.preset", "page.notfound", "page.sitemap"].includes(schemaType)
+    ) {
       views.push(SeoView(S));
+    }
+
+    if (schemaType === "page.sitemap") {
+      views.push(S.view.component(Sitemap).title("Sitemap"));
     }
   }
 

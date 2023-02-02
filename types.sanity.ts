@@ -22,6 +22,7 @@ export const SCHEMAS = {
   "page.content": "",
   "page.home": "",
   "page.notfound": "",
+  "page.sitemap": "",
   "page.preset": "",
   footer: "",
   navigation: "",
@@ -47,6 +48,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "page.content",
   "page.home",
   "page.notfound",
+  "page.sitemap",
   "person",
 );
 

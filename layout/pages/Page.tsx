@@ -24,6 +24,7 @@ export type PageProps = {
   config: ConfigType;
   sitemapItem?: SitemapItemType;
   locked?: boolean;
+  children?: React.ReactNode | React.ReactElement;
 };
 
 export const Page = ({
@@ -34,6 +35,7 @@ export const Page = ({
   config,
   sitemapItem,
   locked,
+  children,
 }: PageProps) => {
   const router = useRouter();
   const pagePath = usePathname() || "";
@@ -75,6 +77,8 @@ export const Page = ({
         )}
 
         <PageBody {...page} />
+
+        {children}
 
         {isPreviewMode && pagePath !== "/preview" && (
           <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
