@@ -210,7 +210,7 @@ function createModule(
 
     queryFieldLines.push(`intro[] \${richTextQuery}`);
     queryImportLines.push(
-      `import { richTextQuery } from "../../queries/components/richText";`,
+      `import { richTextQuery } from "../../components/portabletext/portabletext.query";`,
     );
   }
 
@@ -249,7 +249,7 @@ function createModule(
 
     queryFieldLines.push(`"image": \${imageQuery}`);
     queryImportLines.push(
-      `import { imageQuery } from "../../queries/components/image";`,
+      `import { imageQuery } from "../../components/images/image.query";`,
     );
   }
 
