@@ -457,7 +457,7 @@ function createModule(
 
   addSchema(
     isHero ? `hero${pascalName}` : `module${pascalName}`,
-    schemaFilePath,
+    `../../${isHero ? "heroes" : "modules"}/${lowerName}/${lowerName}.schema`,
     true,
   );
 }
