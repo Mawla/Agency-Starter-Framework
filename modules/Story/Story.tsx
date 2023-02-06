@@ -1,11 +1,11 @@
-import { Link } from "../../components/buttons/Link";
-import { IconLoader } from "../../components/images/IconLoader";
+import { LinkProps } from "../../components/buttons/Link";
+import { IconLoaderProps } from "../../components/images/IconLoader";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ScriptJsonLd } from "../../components/meta/ScriptJsonLd";
 import { SpaceType } from "../../components/module/SpacingOptions";
-import { Width } from "../../components/module/Width";
+import { WidthProps } from "../../components/module/Width";
 import { WidthType } from "../../components/module/WidthOptions";
-import { Wrapper } from "../../components/module/Wrapper";
+import { WrapperProps } from "../../components/module/Wrapper";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
@@ -20,6 +20,26 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     import(
       /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
     ),
+);
+
+const Link = lazy<ComponentType<LinkProps>>(
+  () => import(/* webpackChunkName: "Link" */ "../../components/buttons/Link"),
+);
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
+);
+
+const Width = lazy<ComponentType<WidthProps>>(
+  () => import(/* webpackChunkName: "Width" */ "../../components/module/Width"),
+);
+
+const Wrapper = lazy<ComponentType<WrapperProps>>(
+  () =>
+    import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
 );
 
 export type StoryProps = {

@@ -1,7 +1,10 @@
-import cx from 'classnames';
-import React from 'react';
-
-import { SpaceType, spaceTopClasses, spaceBottomClasses } from './SpacingOptions';
+import {
+  SpaceType,
+  spaceTopClasses,
+  spaceBottomClasses,
+} from "./SpacingOptions";
+import cx from "classnames";
+import React from "react";
 
 export type SpacingProps = {
   space: SpaceType;
@@ -12,8 +15,8 @@ export const Spacing = ({ space, children }: SpacingProps) => {
   return (
     <div
       className={cx(
-        spaceTopClasses[space?.top || 'xl'],
-        spaceBottomClasses[space?.bottom || 'xl'],
+        spaceTopClasses[space?.top || "xl"],
+        spaceBottomClasses[space?.bottom || "xl"],
       )}
     >
       {children}
@@ -21,4 +24,4 @@ export const Spacing = ({ space, children }: SpacingProps) => {
   );
 };
 
-export const SpacingMemo = React.memo(Spacing);
+export default React.memo(Spacing);

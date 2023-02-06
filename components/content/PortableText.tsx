@@ -24,7 +24,7 @@ const Video = lazy<ComponentType<VideoType>>(
 );
 
 export type PortableTextProps = {
-  content: any[];
+  content: any;
 };
 
 export const PortableText = ({ content = [] }) => {

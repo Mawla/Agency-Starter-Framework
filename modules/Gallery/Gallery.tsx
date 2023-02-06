@@ -1,10 +1,10 @@
-import { Slider } from "../../components/Slider/Slider";
-import PortableText from "../../components/content/PortableText";
+import { SliderProps } from "../../components/Slider/Slider";
+import { PortableTextProps } from "../../components/content/PortableText";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
-import { Wrapper } from "../../components/module/Wrapper";
+import { WrapperProps } from "../../components/module/Wrapper";
 import { HeadingLevelType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -17,10 +17,27 @@ const Text = lazy<ComponentType<TextProps>>(
   () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
 );
 
+const Wrapper = lazy<ComponentType<WrapperProps>>(
+  () =>
+    import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
+);
+
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const Slider = lazy<ComponentType<SliderProps>>(
+  () =>
+    import(/* webpackChunkName: "Slider" */ "../../components/Slider/Slider"),
+);
+
+const PortableText = lazy<ComponentType<PortableTextProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
     ),
 );
 

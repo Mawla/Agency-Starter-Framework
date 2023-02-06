@@ -1,12 +1,12 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroup } from "../../components/buttons/ButtonGroup";
-import PortableText from "../../components/content/PortableText";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { PortableTextProps } from "../../components/content/PortableText";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
-import { Width } from "../../components/module/Width";
-import { Wrapper } from "../../components/module/Wrapper";
+import { WidthProps } from "../../components/module/Width";
+import { WrapperProps } from "../../components/module/Wrapper";
 import { HeadingLevelType, ImageType } from "../../types";
 import { AlignType } from "./BillboardOptions";
 import cx from "classnames";
@@ -24,6 +24,29 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const Width = lazy<ComponentType<WidthProps>>(
+  () => import(/* webpackChunkName: "Width" */ "../../components/module/Width"),
+);
+
+const Wrapper = lazy<ComponentType<WrapperProps>>(
+  () =>
+    import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
+);
+
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+    ),
+);
+
+const PortableText = lazy<ComponentType<PortableTextProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
     ),
 );
 

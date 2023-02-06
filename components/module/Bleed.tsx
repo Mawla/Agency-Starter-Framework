@@ -1,7 +1,6 @@
+import { BleedSpaceType } from "./BleedOptions";
 import cx from "classnames";
 import React from "react";
-
-import { BleedSpaceType } from "./BleedOptions";
 
 export type BleedProps = {
   bleed?: BleedSpaceType;
@@ -28,4 +27,4 @@ export const Bleed = ({ children, bleed, className, id }: BleedProps) => {
   );
 };
 
-export const BleedMemo = React.memo(Bleed);
+export default React.memo(Bleed);

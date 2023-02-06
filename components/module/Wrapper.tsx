@@ -123,4 +123,4 @@ export const Wrapper = ({
   return null;
 };
 
-export const WrapperMemo = React.memo(Wrapper);
+export default React.memo(Wrapper);

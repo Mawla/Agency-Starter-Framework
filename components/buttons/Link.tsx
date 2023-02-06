@@ -64,4 +64,4 @@ export const Link = ({
   );
 };
 
-export const LinkMemo = React.memo(Link);
+export default React.memo(Link);

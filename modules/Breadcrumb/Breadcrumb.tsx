@@ -1,10 +1,10 @@
 import { Breadcrumb as BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
 import { BackgroundColorType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
-import { Wrapper } from "../../components/module/Wrapper";
+import { WrapperProps } from "../../components/module/Wrapper";
 import { FlatBreadcrumbType } from "../../queries/breadcrumb";
 import { ColorType } from "../../types";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
 
 export type BreadcrumbProps = {
   theme?: {
@@ -14,6 +14,11 @@ export type BreadcrumbProps = {
   };
   path?: FlatBreadcrumbType;
 };
+
+const Wrapper = lazy<ComponentType<WrapperProps>>(
+  () =>
+    import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
+);
 
 export const Breadcrumb = ({ theme, path }: BreadcrumbProps) => {
   return (

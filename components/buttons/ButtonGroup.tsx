@@ -1,8 +1,7 @@
-import cx from 'classnames';
-import React from 'react';
-
-import { Button, ButtonProps } from './Button';
-import { AlignType, DIRECTION_OPTIONS } from './ButtonGroupOptions';
+import { Button, ButtonProps } from "./Button";
+import { AlignType, DIRECTION_OPTIONS } from "./ButtonGroupOptions";
+import cx from "classnames";
+import React from "react";
 
 export type DirectionType = keyof typeof DIRECTION_OPTIONS;
 
@@ -24,17 +23,17 @@ export const ButtonGroup = ({
   return (
     <div
       className={cx(
-        'flex-wrap gap-3 md:gap-4',
+        "flex-wrap gap-3 md:gap-4",
         {
-          ['flex-col']: direction === 'vertical',
-          ['inline-flex']: !stretch,
-          ['flex w-full']: stretch,
-          ['justify-start']: direction === 'horizontal' && align === 'left',
-          ['justify-center']: direction === 'horizontal' && align === 'center',
-          ['justify-end']: direction === 'horizontal' && align === 'right',
-          ['items-start']: direction === 'vertical' && align === 'left',
-          ['items-center']: direction === 'vertical' && align === 'center',
-          ['items-end']: direction === 'vertical' && align === 'right',
+          ["flex-col"]: direction === "vertical",
+          ["inline-flex"]: !stretch,
+          ["flex w-full"]: stretch,
+          ["justify-start"]: direction === "horizontal" && align === "left",
+          ["justify-center"]: direction === "horizontal" && align === "center",
+          ["justify-end"]: direction === "horizontal" && align === "right",
+          ["items-start"]: direction === "vertical" && align === "left",
+          ["items-center"]: direction === "vertical" && align === "center",
+          ["items-end"]: direction === "vertical" && align === "right",
         },
         className,
       )}
@@ -42,8 +41,8 @@ export const ButtonGroup = ({
       {items?.map((item) => (
         <div
           key={item.label}
-          className={cx('flex-shrink-0 max-w-full', {
-            ['w-full']: item.stretch,
+          className={cx("flex-shrink-0 max-w-full", {
+            ["w-full"]: item.stretch,
           })}
         >
           <Button {...item} />
@@ -53,4 +52,4 @@ export const ButtonGroup = ({
   );
 };
 
-export const ButtonGroupMemo = React.memo(ButtonGroup);
+export default React.memo(ButtonGroup);

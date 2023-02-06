@@ -1,10 +1,9 @@
 import cx from 'classnames';
 import React, { ComponentType, CSSProperties, lazy } from 'react';
 
-import { Slider } from '../../components/Slider/Slider';
 import { SliderColorType } from '../../components/Slider/SliderOptions';
 import { ButtonProps } from '../../components/buttons/Button';
-import { ButtonGroup } from '../../components/buttons/ButtonGroup';
+import {  ButtonGroupProps } from '../../components/buttons/ButtonGroup';
 import {
   ModuleRadiusType,
   ModuleRoundedType,
@@ -12,7 +11,7 @@ import {
 import { SpaceType } from '../../components/module/SpacingOptions';
 import { AlignType, TextProps } from '../../components/module/Text';
 import { TitleProps } from '../../components/module/Title';
-import { Wrapper } from '../../components/module/Wrapper';
+import {  WrapperProps } from '../../components/module/Wrapper';
 import {
   BREAKPOINTS,
   BreakpointType,
@@ -29,7 +28,8 @@ import {
 import { type ComposableCardProps } from './ComposableCard';
 import { ImageCardProps } from './ImageCard';
 import { ColorType, HeadingLevelType } from '../../types';
-import PortableText from '../../components/content/PortableText';
+import  { PortableTextProps } from '../../components/content/PortableText';
+import { SliderProps } from '../../components/Slider/Slider';
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
@@ -45,6 +45,31 @@ const ComposableCard = lazy<ComponentType<ComposableCardProps>>(
 
 const ImageCard = lazy<ComponentType<ImageCardProps>>(
   () => import(/* webpackChunkName: "ImageCard" */ './ImageCard') ,
+);
+
+
+const Wrapper = lazy<ComponentType<WrapperProps>>(
+  () =>
+    import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
+);
+
+const Slider = lazy<ComponentType<SliderProps>>(
+  () =>
+    import(/* webpackChunkName: "Slider" */ "../../components/Slider/Slider"),
+);
+
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+    ),
+);
+
+const PortableText = lazy<ComponentType<PortableTextProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
+    ),
 );
 
 export type CardGridCardProps = {

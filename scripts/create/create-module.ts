@@ -269,8 +269,11 @@ function createModule(
     typescriptLines.push("buttons?: ButtonProps[];");
     propsLines.push("buttons");
     importLines.push(`
-        import { ButtonProps } from '../../components/buttons/Button';
-        import { ButtonGroup } from '../../components/buttons/ButtonGroup';`);
+      import { ButtonProps } from '../../components/buttons/Button';
+      
+      const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+        () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/module/ButtonGroup"),
+      );
     jsxLines.push(`
       {buttons && (
         <div className="mt-8 lg:mt-12">

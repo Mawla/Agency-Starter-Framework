@@ -46,7 +46,7 @@ export const Background = ({
         },
         theme?.background && backgroundClasses[theme?.background],
         theme?.text && textClasses[theme?.text],
-        className
+        className,
       )}
     >
       <div className={cx("relative z-1")}>{children}</div>
@@ -54,4 +54,4 @@ export const Background = ({
   );
 };
 
-export const BackgroundMemo = React.memo(Background);
+export default React.memo(Background);

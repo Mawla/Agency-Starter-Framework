@@ -1,8 +1,15 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroup } from "../../components/buttons/ButtonGroup";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+    ),
+);
 
 type CardGridButtonsProps = {
   buttons?: ButtonProps[];
