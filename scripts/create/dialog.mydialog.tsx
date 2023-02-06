@@ -5,7 +5,7 @@ import { defineField, defineType, SlugRule } from "sanity";
 
 const schema = defineType({
   name: "MyDialogSchema",
-  title: "MyDialogTitle",
+  title: "MyDialog",
   type: "object",
   icon: () => <DocumentIcon type="dialog" />,
   preview: {
