@@ -11,14 +11,16 @@ const { sortLines } = require("./sortLines");
  */
 
 module.exports.addSchema = (schemaImportName, schemaFilePath, translatable) => {
-  const dir = path.relative(__dirname, ".");
-  const indexFilePath = `${dir}/../../studio/schemas/index.ts`;
+  const indexFilePath = path.resolve(
+    `${__dirname}../../../studio/schemas/index.ts`,
+  );
   const file = fs.readFileSync(indexFilePath).toString();
   let lines = file.split("\n");
 
-  const relativeSchemaPath = path
-    .relative(path.resolve(indexFilePath), schemaFilePath)
-    .replace("../", "./");
+  const relativeSchemaPath = path.relative(
+    "../../",
+    path.resolve(schemaFilePath),
+  );
 
   /**
    * Add to all schema imports
