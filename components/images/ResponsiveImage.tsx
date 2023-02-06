@@ -24,6 +24,7 @@ export type ResponsiveImageProps = {
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
+  loading: "eager" | "lazy" | "auto";
 };
 
 const IMAGE_QUALITY = 85;
@@ -53,6 +54,7 @@ export const ResponsiveImage = ({
   ratio,
   roundSize = 0,
   fill = false,
+  loading = "lazy",
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
@@ -210,6 +212,7 @@ export const ResponsiveImage = ({
           width={fill ? undefined : width}
           height={fill ? undefined : height}
           onLoad={onImageLoad}
+          loading={loading}
         />
       )}
       <ScriptJsonLd data={imageJsonLd} />
