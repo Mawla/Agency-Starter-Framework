@@ -7,7 +7,6 @@ import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
 import { defineConfig, WorkspaceOptions } from "sanity";
-import { cloudinarySchemaPlugin } from "sanity-plugin-cloudinary";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
@@ -34,7 +33,6 @@ const CONFIG = {
       defaultApiVersion: "vX",
     }),
     muxInput(),
-    cloudinarySchemaPlugin(),
   ],
 
   document: {

@@ -1,6 +1,6 @@
 import { VideoType } from "../../types";
 import getYouTubeID from "get-youtube-id";
-import { lazy } from "react";
+import { lazy, useEffect, useRef } from "react";
 import React from "react";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
@@ -14,21 +14,36 @@ export const YoutubePlayer = ({
   loop,
   autoPlay,
   frameless,
-  poster,
 }: VideoType) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!videoId) return;
+    if (!wrapperRef.current) return;
+    if (!autoPlay) return;
+
+    wrapperRef.current.querySelector("button")?.click();
+  }, [videoId, autoPlay]);
+
   if (!videoId) return null;
   const youtubeId = getYouTubeID(videoId);
   if (!youtubeId) return null;
 
   return (
-    <YoutubeLight
-      id={youtubeId}
-      title=""
-      poster="maxresdefault"
-      noCookie={true}
-      muted
-      params={`?autoPlay=${autoPlay ? 1 : 0}&loop=${loop ? 1 : 0}&rel=0&mute=1`}
-    />
+    <div ref={wrapperRef}>
+      <YoutubeLight
+        id={youtubeId}
+        title=""
+        poster="maxresdefault"
+        noCookie={true}
+        muted
+        params={`?autoPlay=${autoPlay ? 1 : 0}&loop=${
+          loop ? 1 : 0
+        }&rel=0&mute=1&controls=${
+          frameless ? 0 : 1
+        }&modestbranding=1&playsinline=1`}
+      />
+    </div>
   );
 };
 

@@ -1,7 +1,5 @@
 import { PageContext } from "../context/PageContext";
 import { SiteContext } from "../context/SiteContext";
-import "../styles/plyr-custom.css";
-import "../styles/plyr.css";
 import "../styles/styles.css";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";

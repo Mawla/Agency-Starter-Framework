@@ -118,7 +118,6 @@ export type VideoType = {
   videoId?: string;
   src?: string;
   frameless?: boolean;
-  poster?: ImageType;
 };
 
 export const SIZES = {

@@ -12,12 +12,13 @@ export const MuxPlayer = ({
   loop,
   autoPlay,
   frameless,
-  poster,
 }: VideoType) => {
   const style = frameless
     ? ({
         "--controls": "none",
         "--media-object-fit": "cover",
+        position: "absolute",
+        inset: 0,
       } as React.CSSProperties)
     : {};
 

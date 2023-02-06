@@ -40,7 +40,7 @@ const moduleExports = {
   },
   async redirects() {
     const redirects = await client.fetch(
-      `*[_type == "redirect"]{ source, destination, permanent }`
+      `*[_type == "redirect"]{ source, destination, permanent }`,
     );
     return redirects;
   },
@@ -84,12 +84,6 @@ const moduleExports = {
         "@sentry": {
           test: /[\\/]node_modules[\\/](@sentry)[\\/]/,
           name: "@sentry",
-          priority: 10,
-          reuseExistingChunk: false,
-        },
-        plyr: {
-          test: /[\\/]node_modules[\\/](plyr)[\\/]/,
-          name: "plyr",
           priority: 10,
           reuseExistingChunk: false,
         },

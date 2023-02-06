@@ -156,11 +156,6 @@ const schema = defineType({
       description:
         "Optional caption to display with the video. Only shown on the website when layout allows for it.",
     }),
-    defineField({
-      name: "poster",
-      title: "Poster",
-      type: "image",
-    }),
   ],
 });
 
