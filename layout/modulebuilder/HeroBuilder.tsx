@@ -5,7 +5,7 @@ import React, { lazy, Suspense, ComponentType } from "react";
 const HeroBasic = lazy<ComponentType<HeroBasicProps>>(
   () =>
     import(
-      /* webpackChunkName: "HeroBasic" */ "../../heroes/HeroBasic/HeroBasic"
+      /* webpackChunkName: "HeroBasic" */ "../../heroes/herobasic/HeroBasic"
     ),
 );
 
