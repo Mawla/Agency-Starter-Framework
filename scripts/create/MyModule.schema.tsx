@@ -1,11 +1,11 @@
 import { COLORS } from "../../colors";
-import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/BackgroundOptions";
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
-import { TITLE_SIZE_OPTIONS } from "./MyModuleOptions";
+import { TITLE_SIZE_OPTIONS } from "./MyModule.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
