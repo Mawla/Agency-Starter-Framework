@@ -89,6 +89,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                   {...image}
                   priority
                   loading="eager"
+                  roundSize={50}
                   width={1374}
                   height={774}
                   fill
