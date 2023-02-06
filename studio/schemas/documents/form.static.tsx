@@ -34,12 +34,12 @@ export default defineType({
     defineField({
       name: "success",
       title: "Success message",
-      type: "richtext.simple",
+      type: "portabletext.simple",
     }),
     defineField({
       name: "error",
       title: "Error message",
-      type: "richtext.simple",
+      type: "portabletext.simple",
     }),
     defineField({
       name: "options",

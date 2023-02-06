@@ -1,7 +1,7 @@
 import { getPathForId } from "../../helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "../../languages";
-import { getConfigQuery } from "../../queries/config";
-import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap";
+import { getConfigQuery } from "../../queries/config.query";
+import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap.query";
 import { Card, Stack, Text, TabList, Tab, TabPanel } from "@sanity/ui";
 import React, { ComponentType, useEffect, useState } from "react";
 import { useClient } from "sanity";

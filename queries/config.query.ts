@@ -1,6 +1,6 @@
+import { getImageQuery } from "../components/images/Image.query";
 import { LanguageType } from "../languages";
 import { ImageType, TranslationFieldType } from "../types";
-import { getImageQuery } from "./components/image";
 import groq from "groq";
 
 export type SeoType = {

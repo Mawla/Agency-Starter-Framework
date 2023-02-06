@@ -1,6 +1,6 @@
 import { getPathForId } from "./helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "./languages";
-import { getSitemapQuery, SitemapItemType } from "./queries/sitemap";
+import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";

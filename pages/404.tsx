@@ -1,11 +1,14 @@
 import { getClient } from "../helpers/sanity/server";
 import { languages, LanguageType } from "../languages";
+import { getFooterQuery, FooterType } from "../layout/Footer/Footer.query";
+import {
+  getNavigationQuery,
+  NavigationType,
+} from "../layout/Nav/Navigation.query";
 import { Page } from "../layout/pages/Page";
-import { ConfigType, getConfigQuery } from "../queries/config";
-import { getFooterQuery, FooterType } from "../queries/footer";
-import { getNavigationQuery, NavigationType } from "../queries/navigation";
-import { getPageQuery, PageType } from "../queries/page";
-import { SitemapItemType } from "../queries/sitemap";
+import { ConfigType, getConfigQuery } from "../queries/config.query";
+import { getPageQuery, PageType } from "../queries/page.query";
+import { SitemapItemType } from "../queries/sitemap.query";
 import type { GetStaticProps } from "next";
 import React from "react";
 

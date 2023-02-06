@@ -1,14 +1,14 @@
-import { DIRECTION_OPTIONS } from "../../../components/buttons/ButtonGroupOptions";
-import { SCRIPT_OPTIONS } from "../../../components/content/PortableTextOptions";
-import { CustomRichTextEditor } from "../../components/CustomRichTextEditor";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import richTextBasicSchema from "../objects/richtext.basic";
+import { CustomRichTextEditor } from "../../studio/components/CustomRichTextEditor";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { DIRECTION_OPTIONS } from "../buttons/ButtonGroupOptions";
+import richTextBasicSchema from "./PortableTextBasic.schema";
+import { SCRIPT_OPTIONS } from "./PortableTextOptions";
 import React from "react";
 import { defineField } from "sanity";
 
 export default defineField({
-  name: "richtext.full",
+  name: "portabletext.full",
   title: "Rich Text",
   type: "array",
   components: {

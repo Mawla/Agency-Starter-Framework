@@ -1,5 +1,5 @@
+import { NestedBreadcrumbType } from "../../components/Breadcrumb/breadcrumb.query";
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
-import { NestedBreadcrumbType } from "../../queries/breadcrumb";
 
 export const DEMO_NESTED_BREADCRUMB: NestedBreadcrumbType = {
   title: "page 4",

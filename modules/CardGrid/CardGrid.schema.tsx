@@ -108,7 +108,7 @@ const schema = defineType({
     defineField({
       name: "intro",
       title: "Intro",
-      type: "richtext.simple",
+      type: "portabletext.simple",
       group: "content",
     }),
     defineField({

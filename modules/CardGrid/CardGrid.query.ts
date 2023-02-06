@@ -1,11 +1,11 @@
-import { LanguageType } from "../../languages";
+import { richTextQuery } from "../../components/PortableText/PortableText.query";
 import {
   buttonQuery,
   resolveIdHrefQuery,
-} from "../../queries/components/button";
-import { getImageQuery, imageQuery } from "../../queries/components/image";
-import { richTextQuery } from "../../queries/components/richText";
-import { getTranslationQuery } from "../../queries/components/translations";
+} from "../../components/buttons/Button.query";
+import { getImageQuery, imageQuery } from "../../components/images/Image.query";
+import { LanguageType } from "../../languages";
+import { getTranslationQuery } from "../../queries/translations.query";
 import { COMPOSABLE_CARD_THEME_OPTIONS } from "./ComposableCardOptions";
 import groq from "groq";
 

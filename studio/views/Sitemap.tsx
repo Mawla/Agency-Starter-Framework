@@ -4,7 +4,7 @@ import {
   languages,
   LanguageType,
 } from "../../languages";
-import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap";
+import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap.query";
 import { isPathUnique } from "../utils/desk/isPathUnique";
 import { WarningOutlineIcon } from "@sanity/icons";
 import {

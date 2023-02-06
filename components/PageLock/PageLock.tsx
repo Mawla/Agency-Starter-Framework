@@ -2,7 +2,7 @@ import { PageContext } from "../../context/PageContext";
 import { getClient } from "../../helpers/sanity/server";
 import { LanguageType } from "../../languages";
 import { PageBody } from "../../layout/pages/PageBody";
-import { getPageQuery, PageType } from "../../queries/page";
+import { getPageQuery, PageType } from "../../queries/page.query";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Background } from "../module/Background";

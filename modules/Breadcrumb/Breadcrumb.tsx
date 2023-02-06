@@ -1,8 +1,8 @@
 import { Breadcrumb as BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
+import { FlatBreadcrumbType } from "../../components/Breadcrumb/breadcrumb.query";
 import { BackgroundColorType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { WrapperProps } from "../../components/module/Wrapper";
-import { FlatBreadcrumbType } from "../../queries/breadcrumb";
 import { ColorType } from "../../types";
 import React, { ComponentType, lazy } from "react";
 

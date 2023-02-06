@@ -1,6 +1,6 @@
+import { PortableTextProps } from "../../components/PortableText/PortableText";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
-import { PortableTextProps } from "../../components/content/PortableText";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { BleedProps } from "../../components/module/Bleed";
 import { TextProps } from "../../components/module/Text";
@@ -35,7 +35,7 @@ const Bleed = lazy<ComponentType<BleedProps>>(
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
     ),
 );
 

@@ -1,4 +1,4 @@
-import { getImageQuery } from "./image";
+import { getImageQuery } from "../images/Image.query";
 import groq from "groq";
 
 export const videoQueryFields = groq`

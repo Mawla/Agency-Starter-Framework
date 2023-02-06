@@ -1,5 +1,5 @@
 import { LanguageType } from "../../../languages";
-import { getSitemapQuery, SitemapType } from "../../../queries/sitemap";
+import { getSitemapQuery, SitemapType } from "../../../queries/sitemap.query";
 
 export const isPathUnique = async (slug: string, context: any) => {
   const client = context.getClient({

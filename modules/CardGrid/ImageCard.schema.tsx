@@ -1,8 +1,8 @@
-import { IMAGE_RATIO_OPTIONS } from "../../../modules/CardGrid/ImageCardOptions";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { IMAGE_RATIO_OPTIONS } from "./ImageCardOptions";
 import React from "react";
-import { defineType,defineField } from "sanity";
+import { defineType, defineField } from "sanity";
 
 export const schema = defineType({
   title: "Image card",

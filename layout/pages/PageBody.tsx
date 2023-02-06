@@ -1,5 +1,5 @@
 import { PageContext } from "../../context/PageContext";
-import { PageType } from "../../queries/page";
+import { PageType } from "../../queries/page.query";
 import { DialogBuilder } from "../ModuleBuilder/DialogBuilder";
 import { HeroBuilder } from "../ModuleBuilder/HeroBuilder";
 import { ModuleBuilder } from "../ModuleBuilder/ModuleBuilder";

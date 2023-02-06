@@ -1,6 +1,6 @@
+import { FlatBreadcrumbType } from "../components/Breadcrumb/breadcrumb.query";
 import { baseLanguage, LanguageType } from "../languages";
-import { FlatBreadcrumbType } from "../queries/breadcrumb";
-import { SitemapItemType } from "../queries/sitemap";
+import { SitemapItemType } from "../queries/sitemap.query";
 import React from "react";
 
 export const PageContext = React.createContext({

@@ -1,5 +1,5 @@
+import { PortableTextProps } from "../../components/PortableText/PortableText";
 import { SliderProps } from "../../components/Slider/Slider";
-import { PortableTextProps } from "../../components/content/PortableText";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
@@ -37,7 +37,7 @@ const Slider = lazy<ComponentType<SliderProps>>(
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
     ),
 );
 

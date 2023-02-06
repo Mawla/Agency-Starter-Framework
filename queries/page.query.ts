@@ -1,6 +1,15 @@
+import {
+  FlatBreadcrumbItemType,
+  FlatBreadcrumbType,
+  getBreadcrumbQuery,
+} from "../components/Breadcrumb/breadcrumb.query";
+import { richTextQuery } from "../components/PortableText/PortableText.query";
+import { imageQuery } from "../components/images/Image.query";
+import { videoQuery } from "../components/video/Video.query";
 import { HeroBasicProps } from "../heroes/HeroBasic/HeroBasic";
 import { getHeroBasicQuery } from "../heroes/HeroBasic/HeroBasic.query";
 import { LanguageType } from "../languages";
+import { staticFormQuery } from "../layout/ModuleBuilder/StaticFormBuilder.query";
 import { getBillboardQuery } from "../modules/Billboard/Billboard.query";
 import { getBreadcrumbModuleQuery } from "../modules/Breadcrumb/Breadcrumb.query";
 import { getCardGridQuery } from "../modules/CardGrid/CardGrid.query";
@@ -11,17 +20,8 @@ import { getStoryQuery } from "../modules/Story/Story.query";
 import { getTextImageQuery } from "../modules/TextImage/TextImage.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
-import {
-  FlatBreadcrumbItemType,
-  FlatBreadcrumbType,
-  getBreadcrumbQuery,
-} from "./breadcrumb";
-import { imageQuery } from "./components/image";
-import { richTextQuery } from "./components/richText";
-import { staticFormQuery } from "./components/staticForm";
-import { videoQuery } from "./components/video";
-import { ConfigType } from "./config";
-import { getSitemapQuery } from "./sitemap";
+import { ConfigType } from "./config.query";
+import { getSitemapQuery } from "./sitemap.query";
 import groq from "groq";
 
 export type PageType = {
@@ -62,8 +62,6 @@ export const getPageQuery = (language: LanguageType) => groq`
   },
   "breadcrumb": ${getBreadcrumbQuery(language)},
   "sitemapItem": ^.sitemap[_id == $_id][0],
-
-  // article intro and image
   publishedAt,
   description,
   "image": ${imageQuery},
@@ -117,7 +115,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     },
 
     _type == "dialog.form" => {
-      form${staticFormQuery}    
+      "form": ${staticFormQuery}    
     },
   },
   }

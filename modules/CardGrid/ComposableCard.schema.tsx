@@ -1,8 +1,13 @@
-import { SIZE_OPTIONS as TEXT_SIZE_OPTIONS } from "../../../components/module/Text";
+import { SIZE_OPTIONS as TEXT_SIZE_OPTIONS } from "../../components/module/Text";
 import {
   SIZE_OPTIONS as TITLE_SIZE_OPTIONS,
   WEIGHT_OPTIONS as TITLE_WEIGHT_OPTIONS,
-} from "../../../components/module/Title";
+} from "../../components/module/Title";
+import IconPicker from "../../studio/components/IconPicker";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
+import { ICONS } from "../../types";
 import {
   BORDER_COLOR_OPTIONS,
   CARD_ALIGN_OPTIONS,
@@ -16,12 +21,7 @@ import {
   IMAGE_ROUNDED_OPTIONS,
   TEXT_COLOR_OPTIONS,
   TITLE_COLOR_OPTIONS,
-} from "../../../modules/CardGrid/ComposableCardOptions";
-import { ICONS } from "../../../types";
-import IconPicker from "../../components/IconPicker";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import { blocksToText } from "../../utils/portableText/portableTextToText";
+} from "./ComposableCardOptions";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 
@@ -113,7 +113,7 @@ export const schema = defineType({
     defineField({
       name: "text",
       title: "Text",
-      type: "richtext.simple",
+      type: "portabletext.simple",
       group: "content",
     }),
     defineField({

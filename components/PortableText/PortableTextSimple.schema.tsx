@@ -1,8 +1,8 @@
-import richTextBasicSchema from "../objects/richtext.basic";
+import richTextBasicSchema from "./PortableTextBasic.schema";
 import { defineType } from "sanity";
 
 export default defineType({
-  name: "richtext.simple",
+  name: "portabletext.simple",
   title: "Rich Text",
   type: "array",
   of: [

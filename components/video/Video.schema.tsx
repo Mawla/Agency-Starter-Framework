@@ -1,5 +1,5 @@
-import { VIDEO_PROVIDERS } from "../../../types";
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
+import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
+import { VIDEO_PROVIDERS } from "../../types";
 import getYoutubeId from "get-youtube-id";
 import React from "react";
 import { ConditionalPropertyCallback, defineType, defineField } from "sanity";

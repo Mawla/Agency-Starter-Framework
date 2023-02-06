@@ -1,12 +1,11 @@
+import { config as sanityConfig } from "../../helpers/sanity/config";
+import { getPathForId } from "../../helpers/sitemap/getPathForId";
+import { languages } from "../../languages";
+import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import sanityClient from "@sanity/client";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
-
-import { config as sanityConfig } from "../../helpers/sanity/config";
-import { getPathForId } from "../../helpers/sitemap/getPathForId";
-import { languages } from "../../languages";
-import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap";
 
 export const client = sanityClient({
   ...sanityConfig,
@@ -23,7 +22,7 @@ const secret = process.env.SANITY_WEBHOOK_SECRET;
 // curl -X POST -H "Content-Type: text/plain" --data "{ _id: 'test', _type: 'test' }" http://localhost:3000/api/revalidate
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   let signature = req.headers[SIGNATURE_HEADER_NAME];
   signature = Array.isArray(signature) ? signature[0] : signature;

@@ -1,4 +1,4 @@
-import { SitemapType } from "../../queries/sitemap";
+import { SitemapType } from "../../queries/sitemap.query";
 
 export const DEMO_SITEMAP: SitemapType = [
   {

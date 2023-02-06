@@ -1,10 +1,10 @@
+import { buttonQuery } from "../../components/buttons/Button.query";
+import { getImageQuery, imageQuery } from "../../components/images/Image.query";
 import { LanguageType } from "../../languages";
-import { buttonQuery } from "../../queries/components/button";
-import { getImageQuery, imageQuery } from "../../queries/components/image";
 import groq from "groq";
 
 export const getStoryQuery = (
-  language: LanguageType
+  language: LanguageType,
 ) => groq`_type == "module.story" => {
     label,
     quote,

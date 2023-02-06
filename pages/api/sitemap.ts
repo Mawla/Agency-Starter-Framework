@@ -1,8 +1,8 @@
 import { getClient } from "../../helpers/sanity/server";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
 import { languages } from "../../languages";
-import { ConfigType } from "../../queries/config";
-import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap";
+import { ConfigType } from "../../queries/config.query";
+import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -12,11 +12,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
 
   const domain: ConfigType["general"]["domain"] =
     (await getClient(false).fetch(
-      '*[_type == "config.general"] { "domain": domain.en }[0].domain'
+      '*[_type == "config.general"] { "domain": domain.en }[0].domain',
     )) || "";
 
   const pages: SitemapItemType[] = await getClient(false).fetch(
-    getSitemapQuery()
+    getSitemapQuery(),
   );
 
   const items: string[] = [...pages]
@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
     </url>
     `;
         })
-        .join("\n")
+        .join("\n"),
     );
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

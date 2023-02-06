@@ -1,9 +1,9 @@
-import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { VideoType } from "../../types";
 import { Table } from "../Table/Table";
 import { ButtonGroup } from "../buttons/ButtonGroup";
 import { Link } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
+import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { SCRIPTS, ScriptType } from "./PortableTextOptions";
 import { PortableText as PortableTextReact } from "@portabletext/react";
 import Script from "next/script";
@@ -12,15 +12,12 @@ import React, { ComponentType, lazy } from "react";
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
-      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+      /* webpackChunkName: "ResponsiveImageProps" */ "../images/ResponsiveImage"
     ),
 );
 
 const Video = lazy<ComponentType<VideoType>>(
-  () =>
-    import(
-      /* webpackChunkName: "VideoComponent" */ "../../components/video/Video"
-    ),
+  () => import(/* webpackChunkName: "VideoComponent" */ "../video/Video"),
 );
 
 export type PortableTextProps = {

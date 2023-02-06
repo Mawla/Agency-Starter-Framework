@@ -1,4 +1,4 @@
-import { PortableTextProps } from "../../components/content/PortableText";
+import { PortableTextProps } from "../../components/PortableText/PortableText";
 import { ModuleRadiusType } from "../../components/module/BackgroundOptions";
 import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
@@ -30,7 +30,7 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
     ),
 );
 

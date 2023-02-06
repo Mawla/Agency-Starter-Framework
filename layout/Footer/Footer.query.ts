@@ -1,7 +1,10 @@
-import { LanguageType } from "../languages";
-import { IconType } from "../types";
-import { buttonFieldsQuery, buttonQuery } from "./components/button";
-import { getSitemapQuery } from "./sitemap";
+import {
+  buttonFieldsQuery,
+  buttonQuery,
+} from "../../components/buttons/Button.query";
+import { LanguageType } from "../../languages";
+import { getSitemapQuery } from "../../queries/sitemap.query";
+import { IconType } from "../../types";
 import groq from "groq";
 
 export type FooterItemType = {

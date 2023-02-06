@@ -1,7 +1,10 @@
-import { ButtonProps } from "../components/buttons/Button";
-import { LanguageType } from "../languages";
-import { buttonQuery, buttonWithChildrenQuery } from "./components/button";
-import { getSitemapQuery } from "./sitemap";
+import { ButtonProps } from "../../components/buttons/Button";
+import {
+  buttonQuery,
+  buttonWithChildrenQuery,
+} from "../../components/buttons/Button.query";
+import { LanguageType } from "../../languages";
+import { getSitemapQuery } from "../../queries/sitemap.query";
 import groq from "groq";
 
 export type NavigationItemType = ButtonProps & {

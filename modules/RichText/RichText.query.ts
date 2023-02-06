@@ -1,9 +1,9 @@
+import { richTextQuery } from "../../components/PortableText/PortableText.query";
 import { LanguageType } from "../../languages";
-import { richTextQuery } from "../../queries/components/richText";
 import groq from "groq";
 
 export const getRichTextQuery = (
-  language: LanguageType
+  language: LanguageType,
 ) => groq`_type == "module.richtext" => {
   eyebrow,
   title,

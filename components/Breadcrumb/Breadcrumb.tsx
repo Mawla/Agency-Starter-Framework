@@ -1,5 +1,5 @@
 import { PageContext } from "../../context/PageContext";
-import { FlatBreadcrumbType } from "../../queries/breadcrumb";
+import { FlatBreadcrumbType } from "./breadcrumb.query";
 import cx from "classnames";
 import Link from "next/link";
 import React from "react";

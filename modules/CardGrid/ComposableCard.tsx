@@ -1,7 +1,7 @@
 import { backgroundClasses, borderClasses } from "../../colors";
+import PortableText from "../../components/PortableText/PortableText";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
-import PortableText from "../../components/content/PortableText";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import {

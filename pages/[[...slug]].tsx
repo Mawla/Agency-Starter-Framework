@@ -1,24 +1,27 @@
+import {
+  FlatBreadcrumbType,
+  NestedBreadcrumbType,
+} from "../components/Breadcrumb/breadcrumb.query";
 import { LoadingAnimation } from "../components/loaders/LoadingAnimation";
 import { Wrapper } from "../components/module/Wrapper";
 import { getClient } from "../helpers/sanity/server";
 import { getFlatBreadcrumb } from "../helpers/sitemap/getFlatBreadcrumb";
 import { baseLanguage, languages, LanguageType } from "../languages";
 import { Footer } from "../layout/Footer/Footer";
+import { getFooterQuery, FooterType } from "../layout/Footer/Footer.query";
 import { Nav } from "../layout/Nav/Nav";
-import { Page } from "../layout/pages/Page";
 import {
-  FlatBreadcrumbType,
-  NestedBreadcrumbType,
-} from "../queries/breadcrumb";
-import { ConfigType, getConfigQuery } from "../queries/config";
-import { getFooterQuery, FooterType } from "../queries/footer";
-import { getNavigationQuery, NavigationType } from "../queries/navigation";
-import { getPageQuery, PageType } from "../queries/page";
+  getNavigationQuery,
+  NavigationType,
+} from "../layout/Nav/Navigation.query";
+import { Page } from "../layout/pages/Page";
+import { ConfigType, getConfigQuery } from "../queries/config.query";
+import { getPageQuery, PageType } from "../queries/page.query";
 import {
   getSitemapQuery,
   SitemapItemType,
   SitemapType,
-} from "../queries/sitemap";
+} from "../queries/sitemap.query";
 import type {
   GetStaticPaths,
   GetStaticProps,

@@ -1,7 +1,7 @@
 import {
   FlatBreadcrumbType,
   NestedBreadcrumbType,
-} from "../../queries/breadcrumb";
+} from "../../components/Breadcrumb/breadcrumb.query";
 
 export const getFlatBreadcrumb = (breadcrumb: NestedBreadcrumbType) => {
   const flatBreadcrumb: FlatBreadcrumbType = [

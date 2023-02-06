@@ -1,6 +1,6 @@
+import buttonSchema from "../../components/buttons/Button.schema";
 import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
 import { WIDTH_OPTIONS } from "../../components/module/WidthOptions";
-import buttonSchema from "../../studio/schemas/objects/button";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";

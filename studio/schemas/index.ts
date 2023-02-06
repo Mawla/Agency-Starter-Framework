@@ -1,7 +1,19 @@
+import portableTextBasic from "../../components/PortableText/PortableTextBasic.schema";
+import portableTextFull from "../../components/PortableText/PortableTextFull.schema";
+import portableTextSimple from "../../components/PortableText/PortableTextSimple.schema";
+import button from "../../components/buttons/Button.schema";
+import buttongroup from "../../components/buttons/ButtonGroup.schema";
+import link from "../../components/buttons/Link.schema";
+import imageSimple from "../../components/images/Image.schema";
+import video from "../../components/video/Video.schema";
 import heroBasic from "../../heroes/HeroBasic/HeroBasic.schema";
+import footer from "../../layout/Footer/Footer.schema";
+import navigation from "../../layout/Nav/Nav.schema";
 import moduleBillboard from "../../modules/Billboard/Billboard.schema";
 import moduleBreadcrumb from "../../modules/Breadcrumb/Breadcrumb.schema";
 import moduleCardGrid from "../../modules/CardGrid/CardGrid.schema";
+import cardComposable from "../../modules/CardGrid/ComposableCard.schema";
+import cardImage from "../../modules/CardGrid/ImageCard.schema";
 import moduleGallery from "../../modules/Gallery/Gallery.schema";
 import moduleRichText from "../../modules/RichText/Richtext.schema";
 import moduleSlides from "../../modules/Slides/Slides.schema";
@@ -16,9 +28,7 @@ import configTranslations from "./documents/config.translations";
 import dialogForm from "./documents/dialog.form";
 import dialogRichText from "./documents/dialog.richtext";
 import dialogVideo from "./documents/dialog.video";
-import footer from "./documents/footer";
 import formStatic from "./documents/form.static";
-import navigation from "./documents/navigation";
 import pageContent from "./documents/page.content";
 import pageHome from "./documents/page.home";
 import pageNotFound from "./documents/page.notfound";
@@ -28,20 +38,10 @@ import password from "./documents/password";
 import person from "./documents/person";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
-import button from "./objects/button";
-import buttongroup from "./objects/buttongroup";
-import cardComposable from "./objects/card.composable";
-import cardImage from "./objects/card.image";
 import copypaste from "./objects/copypaste";
-import imageSimple from "./objects/image.simple";
 import language from "./objects/language";
-import link from "./objects/link";
 import preset from "./objects/preset";
-import richtextBasic from "./objects/richtext.basic";
-import richtextFull from "./objects/richtext.full";
-import richtextSimple from "./objects/richtext.simple";
 import styles from "./objects/styles";
-import video from "./objects/video";
 
 export const schemaTypes = [
   ...[
@@ -72,9 +72,9 @@ export const schemaTypes = [
     password,
     preset,
     redirect,
-    richtextBasic,
-    richtextFull,
-    richtextSimple,
+    portableTextBasic,
+    portableTextFull,
+    portableTextSimple,
     studioDivider,
     styles,
     video,

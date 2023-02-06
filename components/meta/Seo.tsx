@@ -1,8 +1,8 @@
 import { PageContext } from "../../context/PageContext";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
 import { LanguageType } from "../../languages";
-import { ConfigType } from "../../queries/config";
-import { PageType } from "../../queries/page";
+import { ConfigType } from "../../queries/config.query";
+import { PageType } from "../../queries/page.query";
 import { ScriptJsonLd } from "./ScriptJsonLd";
 import { BreadcrumbJsonLd, LogoJsonLd, NextSeo } from "next-seo";
 import NextHead from "next/head";

@@ -1,11 +1,11 @@
+import { richTextQuery } from "../../components/PortableText/PortableText.query";
+import { buttonQuery } from "../../components/buttons/Button.query";
+import { imageQuery } from "../../components/images/Image.query";
 import { LanguageType } from "../../languages";
-import { buttonQuery } from "../../queries/components/button";
-import { imageQuery } from "../../queries/components/image";
-import { richTextQuery } from "../../queries/components/richText";
 import groq from "groq";
 
 export const getSlidesQuery = (
-  language: LanguageType
+  language: LanguageType,
 ) => groq`_type == "module.slides" => {
   title,
   eyebrow,

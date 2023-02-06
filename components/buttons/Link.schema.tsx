@@ -1,31 +1,31 @@
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import buttonSchema from "../objects/button";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import buttonSchema from "./Button.schema";
 import React from "react";
 import { defineType } from "sanity";
 
 const INTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "internal"
+  ({ name }) => name === "internal",
 ) as any;
 const LANGUAGE_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "language"
+  ({ name }) => name === "language",
 ) as any;
 const EXTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "external"
+  ({ name }) => name === "external",
 ) as any;
 const DIALOG_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "dialog"
+  ({ name }) => name === "dialog",
 ) as any;
 const FILE_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "file"
+  ({ name }) => name === "file",
 ) as any;
 const DOWNLOAD_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "download"
+  ({ name }) => name === "download",
 ) as any;
 const PARAMS_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "params"
+  ({ name }) => name === "params",
 ) as any;
 const NEW_WINDOW_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "newWindow"
+  ({ name }) => name === "newWindow",
 ) as any;
 
 export default defineType({

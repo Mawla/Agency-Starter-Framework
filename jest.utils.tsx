@@ -1,6 +1,6 @@
 import { PageContext } from "./context/PageContext";
 import { SiteContext } from "./context/SiteContext";
-import { SitemapItemType } from "./queries/sitemap";
+import { SitemapItemType } from "./queries/sitemap.query";
 import { DEMO_FLAT_BREADCRUMB } from "./test/fixtures/breadcrumb";
 // test-utils.js
 import "@testing-library/jest-dom/extend-expect";

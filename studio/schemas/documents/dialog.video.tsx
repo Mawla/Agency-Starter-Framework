@@ -1,5 +1,5 @@
+import { getVideoPreview } from "../../../components/video/Video.schema";
 import { DocumentIcon } from "../../utils/DocumentIcon";
-import { getVideoPreview } from "../objects/video";
 import React from "react";
 import { defineField, defineType, SlugRule } from "sanity";
 

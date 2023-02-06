@@ -1,8 +1,8 @@
-import { ICONS } from "../../../types";
-import { SchemaName } from "../../../types.sanity";
-import IconPicker from "../../components/IconPicker";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import buttonSchema from "../objects/button";
+import buttonSchema from "../../components/buttons/Button.schema";
+import IconPicker from "../../studio/components/IconPicker";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { ICONS } from "../../types";
+import { SchemaName } from "../../types.sanity";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 

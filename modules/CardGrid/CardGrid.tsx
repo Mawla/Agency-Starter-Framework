@@ -28,7 +28,7 @@ import {
 import { type ComposableCardProps } from './ComposableCard';
 import { ImageCardProps } from './ImageCard';
 import { ColorType, HeadingLevelType } from '../../types';
-import  { PortableTextProps } from '../../components/content/PortableText';
+import  { PortableTextProps } from '../../components/PortableText/PortableText';
 import { SliderProps } from '../../components/Slider/Slider';
 
 const Title = lazy<ComponentType<TitleProps>>(
@@ -68,7 +68,7 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/content/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
     ),
 );
 

@@ -1,15 +1,12 @@
-import {
-  ICON_POSITION_OPTIONS,
-  VARIANT_OPTIONS,
-} from "../../../components/buttons/ButtonOptions";
-import { ICONS } from "../../../types";
 import DialogSelect, {
   DialogSelectWrapper,
-} from "../../components/DialogSelect";
-import IconPicker from "../../components/IconPicker";
-import { DocumentIcon } from "../../utils/DocumentIcon";
-import { optionsToList } from "../../utils/fields/optionsToList";
-import { getLinkableTypes } from "../../utils/schemas/getLinkableTypes";
+} from "../../studio/components/DialogSelect";
+import IconPicker from "../../studio/components/IconPicker";
+import { DocumentIcon } from "../../studio/utils/DocumentIcon";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
+import { ICONS } from "../../types";
+import { ICON_POSITION_OPTIONS, VARIANT_OPTIONS } from "./ButtonOptions";
 import React from "react";
 import {
   ConditionalPropertyCallback,
