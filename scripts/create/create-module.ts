@@ -72,11 +72,19 @@ async function init() {
     const fields = await fieldsInput.run();
 
     const pascalName = `${pascalCase(name)}`;
+    const lowerName = name.toLowerCase();
     const schemaName = `${isHero ? "hero" : "module"}.${name
       .toLowerCase()
       .replace(/\s/g, "")}`;
 
-    createModule(pascalName, schemaName, fields, description, isHero);
+    createModule(
+      lowerName,
+      pascalName,
+      schemaName,
+      fields,
+      description,
+      isHero,
+    );
 
     createQuery(name, pascalName, schemaName, fields, isHero);
     createType(schemaName, { module: !isHero, hero: isHero });
@@ -103,6 +111,7 @@ async function init() {
  */
 
 function createModule(
+  lowerName,
   pascalName,
   schemaName,
   fields,
@@ -112,7 +121,7 @@ function createModule(
   const fileDir = isHero
     ? `${__dirname}/../../heroes`
     : `${__dirname}/../../modules`;
-  const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
+  const filePath = `${fileDir}/${lowerName}/${pascalName}.tsx`;
   const storiesFilePath = filePath
     .replace(".tsx", ".stories.tsx")
     .toLowerCase();
