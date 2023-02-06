@@ -450,7 +450,7 @@ function createModule(
     .readFileSync(`${__dirname}/MyModule.schema.tsx`)
     .toString()
     .replace("/*DESCRIPTION*/", description)
-    .replace("/*FIELDS*/", schemaLines.join(",\n  "))
+    .replace("/*FIELDS*/", schemaLines.join(",\n  ") + ",")
     .replace(/MyModuleSchema/g, schemaName)
     .replace(/mymodule/g, lowerName)
     .replace(/MyModule/g, pascalName);
