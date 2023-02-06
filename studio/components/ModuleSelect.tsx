@@ -14,7 +14,7 @@ import {
 } from "@sanity/ui";
 import { nanoid } from "nanoid";
 import React, { ComponentType, useCallback, useEffect, useState } from "react";
-import { useClient, useFormValue, useSchema } from "sanity";
+import { FormSetPatch, set, useClient, useFormValue, useSchema } from "sanity";
 
 /**
  * Usage:
@@ -48,7 +48,8 @@ type OptionType = {
 };
 
 export type ModuleSelectProps = {
-  onChange?: () => void;
+  onChange?: (set: FormSetPatch) => void;
+  value?: any;
   document?: { _type: string; _id: string };
   schemaType: {
     options?: {
@@ -60,7 +61,7 @@ export type ModuleSelectProps = {
 };
 
 const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
-  const { schemaType, onChange } = props;
+  const { schemaType, onChange, value } = props;
   const document = useFormValue([]) as {
     _id?: string;
     _type: string;
@@ -78,8 +79,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
 
   const [options, setOptions] = useState<OptionType[]>([]);
   const [state, setState] = useState<"default" | "loading">("default");
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
-  const debouncedselectedValue = useDebounce(selectedValue, 100);
 
   const typeFilter: RegExp = schemaType?.options?.filterType || /.*/;
   const updateField: string = schemaType?.options?.updateField || "modules";
@@ -228,145 +227,104 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
 
   function onSelect(value: string) {
     setState("loading");
-    setSelectedValue(value);
+    patchModules(value);
   }
 
   /**
    * Save
    */
 
-  useEffect(() => {
-    async function patchModules() {
-      if (!selectedValue) return setState("default");
+  async function patchModules(selectedValue: string) {
+    if (!onChange) return;
+    if (!selectedValue) return setState("default");
 
-      const selectedOption = options.find(
-        ({ value }) => value === selectedValue,
-      );
-      if (!selectedOption) return;
+    const selectedOption = options.find(({ value }) => value === selectedValue);
+    if (!selectedOption) return;
 
-      const selectedType: ModuleSchemaName | "page.preset" | undefined =
-        selectedOption?._type;
-      const presetId =
-        selectedOption._type == "page.preset" ? selectedValue : null;
+    const selectedType: ModuleSchemaName | "page.preset" | undefined =
+      selectedOption?._type;
+    const presetId =
+      selectedOption._type == "page.preset" ? selectedValue : null;
 
-      if (!selectedType) return;
+    if (!selectedType) return;
 
-      let newModules: {
-        _key?: string;
-        _type: ModuleSchemaName;
-        preset?: { _ref: string; _weak: boolean };
-        language?: LanguageType;
-      }[] = [];
+    let newModules: {
+      _key?: string;
+      _type: ModuleSchemaName;
+      preset?: { _ref: string; _weak: boolean };
+      language?: LanguageType;
+    }[] = [];
 
-      if (presetId) {
-        newModules = (selectedOption?.modules || []).map((module) => ({
+    if (presetId) {
+      newModules = (selectedOption?.modules || []).map((module) => ({
+        _type: selectedType as ModuleSchemaName,
+        ...module,
+      }));
+    } else {
+      newModules = [
+        {
           _type: selectedType as ModuleSchemaName,
-          ...module,
-        }));
-      } else {
-        newModules = [
-          {
-            _type: selectedType as ModuleSchemaName,
-            ...selectedOption?.initialValue,
-          },
-        ];
-      }
-
-      // want to have sanity generate fresh keys so removing them here
-      function freshKeys(obj: { [key: string]: any }) {
-        for (let prop in obj) {
-          if (prop === "_key") obj[prop] = nanoid();
-          else if (typeof obj[prop] === "object") freshKeys(obj[prop]);
-        }
-      }
-
-      newModules = newModules.map((module) => {
-        const moduleSchema = allSchemas[module._type]?.get();
-
-        if (
-          moduleSchema.fields.find(
-            (field: { name: string }) => field.name === "language",
-          )
-        ) {
-          module.language =
-            getCurrentLanguages().length === 1
-              ? (getCurrentLanguages()[0] as LanguageType)
-              : baseLanguage;
-        }
-
-        freshKeys(module);
-        module._key = nanoid();
-
-        // add back link to preset
-        if (presetId) {
-          module.preset = { _ref: presetId, _weak: true };
-        }
-
-        return module;
-      });
-
-      try {
-        /**
-         * need to create a draft if it doesn't exist, otherwise changes would instantly be published
-         * (if the state of the document is published)
-         */
-
-        const draftDoc = await client.createIfNotExists({
-          ...document,
-          _type: document._type,
-          _id: draftId,
-        });
-
-        await client
-          .patch(draftDoc._id)
-          .setIfMissing({ [updateField]: [] })
-          .insert("after", `${updateField}[-1]`, newModules)
-          .commit({
-            /**
-             * setting this to true leads to a bug when other modules are duplicated
-             * apparently they then have duplicated keys for things in lists or portable text and those are duplicated as well.
-             * When auto generating new ones these are seen as bad values and this generates a message
-             * like `Document \"drafts.page_homepage\" has duplicate array _key \"d6148fef5908\" at hero[0].text[0]._key and hero[1].text[0]._key`
-             *
-             * We can set the following to true if this test case passes:
-             * - create a module with array items (e.g buttons)
-             * - duplicate that module using the Sanity interface
-             * - add a new module
-             * - no error appears and the module is added successfully
-             */
-            autoGenerateArrayKeys: false,
-          });
-
-        // click the last item in the list to open the editor dialog
-        if (newModules?.length === 1) {
-          setTimeout(() => {
-            const items = window.document.querySelectorAll(
-              `[id="${updateField}"] [data-testid="default-preview"]`,
-            ) as NodeList;
-            const lastItem = items[items.length - 1] as HTMLElement;
-            lastItem?.click();
-          }, 0);
-        }
-
-        try {
-          onChange?.();
-        } catch (err) {
-          console.error(err);
-        }
-      } catch (err) {
-        console.error(err);
-        toast.push({
-          status: "error",
-          title: `Something went wrong.`,
-        });
-      }
-
-      setState("default");
-      setSelectedValue(null);
+          ...selectedOption?.initialValue,
+        },
+      ];
     }
 
-    patchModules();
-  }, [debouncedselectedValue, updateField, onChange, allSchemas]);
+    // want to have sanity generate fresh keys so removing them here
+    function freshKeys(obj: { [key: string]: any }) {
+      for (let prop in obj) {
+        if (prop === "_key") obj[prop] = nanoid();
+        else if (typeof obj[prop] === "object") freshKeys(obj[prop]);
+      }
+    }
+
+    newModules = newModules.map((module) => {
+      const moduleSchema = allSchemas[module._type]?.get();
+
+      if (
+        moduleSchema.fields.find(
+          (field: { name: string }) => field.name === "language",
+        )
+      ) {
+        module.language =
+          getCurrentLanguages().length === 1
+            ? (getCurrentLanguages()[0] as LanguageType)
+            : baseLanguage;
+      }
+
+      freshKeys(module);
+      module._key = nanoid();
+
+      // add back link to preset
+      if (presetId) {
+        module.preset = { _ref: presetId, _weak: true };
+      }
+
+      return module;
+    });
+
+    try {
+      onChange(set([...(value || []), ...newModules]));
+
+      // click the last item in the list to open the editor dialog
+      if (newModules?.length === 1) {
+        setTimeout(() => {
+          const items = window.document.querySelectorAll(
+            `[id="${updateField}"] [data-testid="default-preview"]`,
+          ) as NodeList;
+          const lastItem = items[items.length - 1] as HTMLElement;
+          lastItem?.click();
+        }, 0);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.push({
+        status: "error",
+        title: `Something went wrong.`,
+      });
+    }
+
+    setState("default");
+  }
 
   /**
    * Do fuzzy search based on title, description and more

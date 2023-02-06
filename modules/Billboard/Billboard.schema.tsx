@@ -22,7 +22,7 @@ const schema = defineType({
       eyebrow: "eyebrow",
       image: "image",
     },
-    prepare({ eyebrow = "", title = "Gallery", language, image }: any) {
+    prepare({ eyebrow = "", title = "Billboard", language, image }: any) {
       return {
         title: title,
         subtitle: prefixWithLanguage(language, eyebrow),

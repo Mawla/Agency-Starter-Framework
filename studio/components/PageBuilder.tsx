@@ -18,6 +18,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
       >
         <ModuleSelect
           onChange={props.onChange}
+          value={props.value}
           options={props.options}
           schemaType={props.schemaType}
         />
