@@ -1,8 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  getOriginalImageDimensions,
-  getResponsiveImageUrl,
-} from "../../helpers/sanity/image-url";
+import { getResponsiveImageUrl } from "../../helpers/sanity/image-url";
 import { roundToNearest } from "../../helpers/utils/number";
 import { useDebounce } from "../../hooks/useDebounce";
 import { ImageType, RatioType } from "../../types";
@@ -67,28 +64,6 @@ export const ResponsiveImage = ({
   const debouncedWrapperWidth = useDebounce(wrapperWidth, 500);
   const debouncedWrapperHeight = useDebounce(wrapperHeight, 500);
 
-  const originalDimensions = getOriginalImageDimensions(src as string);
-  if (!width) width = originalDimensions?.width;
-  if (!height) height = originalDimensions?.height;
-  const aspectRatio = originalDimensions?.aspectRatio;
-
-  let placeHolderSrc: string | null = null;
-
-  // if (ratio) {
-  //   height = (+width / +ratio.split(':')[0]) * +ratio.split(':')[1];
-  // }
-
-  if (src && typeof src === "string" && src.indexOf("sanity.io") > -1) {
-    placeHolderSrc = getResponsiveImageUrl({
-      src,
-      width: 16,
-      height: 16 / (+(width || 0) / +(height || 0)),
-      hotspot,
-      crop,
-      blur: 10,
-    });
-  }
-
   useEffect(() => {
     if (state === null) setState("loading");
   }, [state]);
@@ -96,7 +71,6 @@ export const ResponsiveImage = ({
   const onResize = useCallback(() => {
     if (!src) return;
     if (!wrapperRef?.current) return;
-    if (!placeHolderSrc) return;
     if (typeof src !== "string") return;
 
     const rect = wrapperRef.current.getBoundingClientRect();
@@ -106,7 +80,7 @@ export const ResponsiveImage = ({
 
     setWrapperWidth(w);
     setWrapperHeight(h);
-  }, [src, placeHolderSrc, roundSize]);
+  }, [src, roundSize]);
 
   /**
    * Listen to window resizes
@@ -128,7 +102,6 @@ export const ResponsiveImage = ({
 
   useEffect(() => {
     if (!src) return;
-    if (!placeHolderSrc) return;
     if (typeof src !== "string") return;
     if (!wrapperRef.current) return;
 
@@ -167,7 +140,6 @@ export const ResponsiveImage = ({
     crop,
     hotspot,
     preventResize,
-    placeHolderSrc,
     roundSize,
   ]);
 
@@ -185,10 +157,8 @@ export const ResponsiveImage = ({
   if (!src) return null;
 
   return (
-    // disable margin underneath next image until classes can be applied to next image directly
-    // https://github.com/vercel/next.js/discussions/22861
     <div
-      className={cx("text-0 h-full w-full", {
+      className={cx("h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
         ["absolute inset-0"]: fill,
       })}
@@ -206,7 +176,7 @@ export const ResponsiveImage = ({
 
       {(state === "loading" || state === "loaded") && (
         <img
-          src={(responsiveSrc || placeHolderSrc || src) as string}
+          src={(responsiveSrc || src) as string}
           className={className}
           alt={alt || ""}
           width={fill ? undefined : width}
