@@ -132,23 +132,24 @@ function createModule(
   const schemaFilePath = filePath.replace(".tsx", ".schema.tsx").toLowerCase();
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
-  createSchema(lowerName, pascalName, schemaName, {
-    replacer: "MyModule",
-    schemaFilePath,
-    prototypeFile: `${__dirname}/MyModule.schema.tsx`,
-    schemaImportPrefix: isHero ? "hero" : "module",
-    fields,
-    description,
-  });
+  // createSchema(lowerName, pascalName, schemaName, {
+  //   replacer: "MyModule",
+  //   schemaFilePath,
+  //   prototypeFile: `${__dirname}/MyModule.schema.tsx`,
+  //   schemaImportPrefix: isHero ? "hero" : "module",
+  //   fields,
+  //   description,
+  // });
 
-  const importLines = [];
-  const typescriptLines = [];
-  const jsxLines = [];
-  const propsLines = [];
-  const testsLines = [];
+  const importLines: string[] = [];
+  const typescriptLines: string[] = [];
+  const jsxLines: string[] = [];
+  const propsLines: string[] = [];
+  const testsLines: string[] = [];
+  const schemaLines: string[] = [];
 
-  const queryImportLines = [];
-  const queryFieldLines = [];
+  const queryImportLines: string[] = [];
+  const queryFieldLines: string[] = [];
 
   if (fields.indexOf("title") > -1) {
     typescriptLines.push("eyebrow?: string;");
@@ -177,6 +178,22 @@ function createModule(
       `);
     queryFieldLines.push(`title`);
     queryFieldLines.push(`eyebrow`);
+    schemaLines.push(`
+      defineField({
+        name: 'eyebrow',
+        title: 'Eyebrow',
+        type: 'string',
+        group: 'content',
+      })`);
+
+    schemaLines.push(`
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'text',
+        rows: 2,
+        group: 'content',
+      })`);
   }
 
   if (fields.indexOf("intro") > -1) {
@@ -212,6 +229,13 @@ function createModule(
     queryImportLines.push(
       `import { richTextQuery } from "../../components/portabletext/portabletext.query";`,
     );
+    schemaLines.push(`
+      defineField({
+        name: 'intro',
+        title: 'Intro',
+        type: 'portabletext.simple',
+        group: 'content',
+      })`);
   }
 
   if (fields.indexOf("image") > -1) {
@@ -251,6 +275,13 @@ function createModule(
     queryImportLines.push(
       `import { imageQuery } from "../../components/images/image.query";`,
     );
+    schemaLines.push(`
+      defineField({
+        name: 'image',
+        title: 'Image',
+        type: 'image',
+        group: 'content',
+      })`);
   }
 
   if (fields.indexOf("items") > -1) {
@@ -275,26 +306,47 @@ function createModule(
       `);
 
     queryFieldLines.push(`items`);
-  }
 
-  if (fields.indexOf("buttons") > -1) {
-    typescriptLines.push("buttons?: ButtonProps[];");
-    propsLines.push("buttons");
-    importLines.push(`
+    schemaLines.push(`
+      defineField({
+        name: 'items',
+        title: 'Items',
+        group: 'content',
+        type: 'array',
+        of: [
+          defineField({
+            title: 'Item',
+            name: 'item',
+            type: 'object',
+            fields: [
+              defineField({
+                name: 'title',
+                title: 'Title',
+                type: 'string',
+              })
+            ],
+          }),
+        ],
+      })`);
+
+    if (fields.indexOf("buttons") > -1) {
+      typescriptLines.push("buttons?: ButtonProps[];");
+      propsLines.push("buttons");
+      importLines.push(`
       import { ButtonProps } from '../../components/buttons/Button';
       
       const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
         () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/module/ButtonGroup"),
       );
       `);
-    jsxLines.push(`
+      jsxLines.push(`
       {buttons && (
         <div className="mt-8 lg:mt-12">
           <ButtonGroup items={buttons} />
         </div>
       )}
       `);
-    testsLines.push(`
+      testsLines.push(`
       it('renders button', async () => {
         await act(() => {
           render(<MyModule buttons={[{ label: 'hello' }]} />);
@@ -303,10 +355,19 @@ function createModule(
       });
       `);
 
-    queryFieldLines.push(`buttons[] \${buttonQuery}`);
-    queryImportLines.push(
-      `import { buttonQuery } from "../../components/buttons/button.query";`,
-    );
+      queryFieldLines.push(`buttons[] \${buttonQuery}`);
+      queryImportLines.push(
+        `import { buttonQuery } from "../../components/buttons/button.query";`,
+      );
+
+      schemaLines.push(`
+    defineField({
+       name: 'buttons',
+       title: 'Buttons',
+       type: 'buttongroup',
+       group: 'content',
+     })`);
+    }
   }
 
   // create module file
@@ -382,6 +443,22 @@ function createModule(
 
   console.log(
     `› Created file ${cyan(path.relative(process.cwd(), queryFilePath))}`,
+  );
+
+  // create schema file
+  const schemaContent = fs
+    .readFileSync(`${__dirname}/MyModule.schema.tsx`)
+    .toString()
+    .replace("/*DESCRIPTION*/", description)
+    .replace("/*FIELDS*/", queryFieldLines.join(",\n  "))
+    .replace(/MyModuleSchema/g, schemaName)
+    .replace(/mymodule/g, lowerName)
+    .replace(/MyModule/g, pascalName);
+  fs.writeFileSync(schemaFilePath, schemaContent);
+  prettierFile(schemaFilePath);
+
+  console.log(
+    `› Created file ${cyan(path.relative(process.cwd(), schemaFilePath))}`,
   );
 }
 
