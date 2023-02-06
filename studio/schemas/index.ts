@@ -6,7 +6,7 @@ import portableTextBasic from "../../components/portabletext/portabletextbasic.s
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import video from "../../components/video/video.schema";
-import heroBasic from "../../heroes/HeroBasic/herobasic.schema";
+import heroBasic from "../../heroes/herobasic/herobasic.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import moduleBillboard from "../../modules/billboard/billboard.schema";
