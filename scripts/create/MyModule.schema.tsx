@@ -12,7 +12,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "MyModuleSchema",
-  title: "MyModuleTitle",
+  title: "MyModule",
   type: "object",
   icon: () => <DocumentIcon type="image" />,
   description: "/*DESCRIPTION*/",
