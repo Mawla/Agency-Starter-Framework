@@ -1,4 +1,6 @@
-import { languages, LanguageType } from "./languages";
+import { getPathForId } from "./helpers/sitemap/getPathForId";
+import { baseLanguage, languages, LanguageType } from "./languages";
+import { getSitemapQuery, SitemapItemType } from "./queries/sitemap";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
@@ -34,6 +36,28 @@ const CONFIG = {
     muxInput(),
     cloudinarySchemaPlugin(),
   ],
+
+  document: {
+    productionUrl: async (prev: any, context: any) => {
+      const { client, document } = context;
+
+      const sitemap: SitemapItemType[] = await client.fetch(getSitemapQuery());
+      const path = getPathForId(document._id, sitemap, baseLanguage);
+
+      if (path === "/" && document._id.indexOf("page_homepage") === -1) {
+        return prev;
+      }
+
+      if (path) {
+        return `${(import.meta as any).env.SANITY_STUDIO_PROJECT_PATH.replace(
+          /\/+$/,
+          "",
+        )}${path}`;
+      }
+
+      return prev;
+    },
+  },
 
   schema: {
     types: schemaTypes,
