@@ -152,7 +152,7 @@ const build = (answers) => {
 function createQuery(name, schemaName, documentId, answers) {
   const { singleton, parentType, parentId } = answers;
 
-  const filePath = `${__dirname}/../../queries/sitemap.ts`;
+  const filePath = `${__dirname}/../../queries/sitemap.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let str;
