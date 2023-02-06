@@ -11,7 +11,8 @@ const { sortLines } = require("./sortLines");
  */
 
 module.exports.addSchema = (schemaImportName, schemaFilePath, translatable) => {
-  const indexFilePath = `${__dirname}/../../studio/schemas/index.ts`;
+  const dir = path.relative(__dirname, ".");
+  const indexFilePath = `${dir}/../../studio/schemas/index.ts`;
   const file = fs.readFileSync(indexFilePath).toString();
   let lines = file.split("\n");
 
