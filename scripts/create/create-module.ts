@@ -2,15 +2,15 @@
  * 
  * This script generates a new module based on user input.
 
- * › create modules/[pascalName]/Module.tsx
- * › create modules/[pascalName]/Module.stories.tsx
+ * › create modules/[name]/Module.tsx
+ * › create modules/[name]/Module.stories.tsx
  *
  * › create studio/modules/module.[schemaname].tsx
  * › add import in schema
  * › add schema in list of schemas
  *
  * › add query in queries/page.ts
- * › add render action in layout/ModuleBuilder/ModuleBuilder.tsx
+ * › add render action in layout/modulebuilder/ModuleBuilder.tsx
  * 
  * › add schema to all schemas type types.sanity.ts
  * › add schema to module type types.sanity.ts
@@ -403,7 +403,7 @@ function createQuery(name, pascalName, schemaName, fields, isHero) {
  */
 
 function createBuilder(name, pascalName, schemaName, fields, isHero) {
-  const filePath = `${__dirname}/../../layout/ModuleBuilder/${
+  const filePath = `${__dirname}/../../layout/modulebuilder/${
     isHero ? "HeroBuilder" : "ModuleBuilder"
   }.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
