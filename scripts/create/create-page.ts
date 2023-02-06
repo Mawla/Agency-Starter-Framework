@@ -22,8 +22,8 @@ const path = require("path");
 const { pascalCase } = require("../helpers/pascalCase");
 const { prettierFile } = require("../helpers/prettierFile");
 const { addLine } = require("../helpers/addLine");
-const { createSchema } = require("../helpers/createSchema");
-const { createType } = require("../helpers/createType");
+const { addSchema } = require("../helpers/addSchema");
+const { addSchemaType } = require("../helpers/addSchemaType");
 const { cyan } = require("../helpers/terminal");
 const { question } = require("../helpers/question");
 const { yesno } = require("../helpers/yesno");
@@ -123,9 +123,9 @@ const build = (answers) => {
   const documentId = schemaName.replace("page.", "page_");
 
   console.log("");
-  createType(schemaName, { linkable: true, translatable: true });
+  addSchemaType(schemaName, { linkable: true, translatable: true });
 
-  createSchema(lowerName, pascalName, schemaName, {
+  addSchema(lowerName, pascalName, schemaName, {
     replacer: "MyPage",
     prototypeFile: `${__dirname}/page.mypage.tsx`,
     schemaImportPrefix: "page",
