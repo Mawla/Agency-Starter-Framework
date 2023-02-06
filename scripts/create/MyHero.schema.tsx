@@ -1,4 +1,4 @@
-import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/BackgroundOptions";
+import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
