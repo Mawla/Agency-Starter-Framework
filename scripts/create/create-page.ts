@@ -131,6 +131,9 @@ const build = (answers) => {
     schemaImportPrefix: "page",
     translatable: true,
   });
+  addSchema(`page${pascalName}`, `./documents/${schemaName}`, true);
+
+  // schemaImportName, importPath, translatable
 
   createQuery(name, schemaName, documentId, answers);
   if (addDesk)
