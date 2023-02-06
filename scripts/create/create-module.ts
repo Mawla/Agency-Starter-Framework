@@ -16,6 +16,7 @@
  * › add schema to all schemas type types.sanity.ts
  * › add schema to module type types.sanity.ts
  */
+import { addSchema } from "../helpers/addSchema";
 
 const fs = require("fs");
 const path = require("path");
@@ -131,15 +132,6 @@ function createModule(
   const queryFilePath = filePath.replace(".tsx", ".query.ts").toLowerCase();
   const schemaFilePath = filePath.replace(".tsx", ".schema.tsx").toLowerCase();
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-
-  // createSchema(lowerName, pascalName, schemaName, {
-  //   replacer: "MyModule",
-  //   schemaFilePath,
-  //   prototypeFile: `${__dirname}/MyModule.schema.tsx`,
-  //   schemaImportPrefix: isHero ? "hero" : "module",
-  //   fields,
-  //   description,
-  // });
 
   const importLines: string[] = [];
   const typescriptLines: string[] = [];
@@ -459,6 +451,12 @@ function createModule(
 
   console.log(
     `› Created file ${cyan(path.relative(process.cwd(), schemaFilePath))}`,
+  );
+
+  addSchema(
+    isHero ? `hero${pascalName}` : `module${pascalName}`,
+    schemaFilePath,
+    true,
   );
 }
 
