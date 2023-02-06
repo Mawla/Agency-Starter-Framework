@@ -1,4 +1,4 @@
-import { HeroBasicProps } from "../../heroes/HeroBasic/HeroBasic";
+import { HeroBasicProps } from "../../heroes/herobasic/HeroBasic";
 import { GenericModuleProps } from "../../types";
 import React, { lazy, Suspense, ComponentType } from "react";
 
