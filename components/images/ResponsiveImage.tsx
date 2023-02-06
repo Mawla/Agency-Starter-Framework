@@ -8,17 +8,22 @@ import { ImageType, RatioType } from "../../types";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
 import cx from "classnames";
 import Head from "next/head";
-import NextImage, { ImageProps as NextImageProps } from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export type ResponsiveImageProps = {
+  src: string | null;
+  width?: number;
+  height?: number;
+  className?: string;
+  priority?: boolean;
+  fill?: boolean;
   crop?: ImageType["crop"];
   hotspot?: ImageType["hotspot"];
   preventResize?: boolean;
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
-} & NextImageProps;
+};
 
 const IMAGE_QUALITY = 85;
 
@@ -197,19 +202,13 @@ export const ResponsiveImage = ({
       )}
 
       {(state === "loading" || state === "loaded") && (
-        <NextImage
-          src={responsiveSrc || placeHolderSrc || src}
+        <img
+          src={(responsiveSrc || placeHolderSrc || src) as string}
           className={className}
           alt={alt || ""}
-          fill={fill}
           width={fill ? undefined : width}
           height={fill ? undefined : height}
-          loader={({ src, width, quality = 100 }) => {
-            return `${src}&q=${quality}`;
-          }}
-          priority={false} // we handle preload ourselves with better size
-          quality={IMAGE_QUALITY}
-          onLoadingComplete={onImageLoad}
+          onLoad={onImageLoad}
         />
       )}
       <ScriptJsonLd data={imageJsonLd} />
