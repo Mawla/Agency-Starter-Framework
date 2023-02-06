@@ -113,7 +113,9 @@ function createModule(
     ? `${__dirname}/../../heroes`
     : `${__dirname}/../../modules`;
   const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
-  const storiesFilePath = filePath.replace(".tsx", ".stories.tsx").toLowerCase();
+  const storiesFilePath = filePath
+    .replace(".tsx", ".stories.tsx")
+    .toLowerCase();
   const optionsFilePath = filePath.replace(".tsx", ".options.ts").toLowerCase();
   const testFilePath = filePath.replace(".tsx", ".test.tsx").toLowerCase();
   const queryFilePath = filePath.replace(".tsx", ".query.ts").toLowerCase();
@@ -274,6 +276,7 @@ function createModule(
       const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
         () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/module/ButtonGroup"),
       );
+      `);
     jsxLines.push(`
       {buttons && (
         <div className="mt-8 lg:mt-12">
@@ -324,7 +327,7 @@ function createModule(
 
   // create options file
   const optionsContent = fs
-    .readFileSync(`${__dirname}/MyModuleOptions.ts`)
+    .readFileSync(`${__dirname}/MyModule.options.ts`)
     .toString()
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(optionsFilePath, optionsContent);
