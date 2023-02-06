@@ -1,7 +1,7 @@
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { IconLoader } from "../images/IconLoader";
-import { SliderColorType } from "./SliderOptions";
+import { SliderColorType } from "./slider.options";
 import cx from "classnames";
 import { CSSProperties, useContext, useState } from "react";
 import { Keyboard, Navigation } from "swiper";

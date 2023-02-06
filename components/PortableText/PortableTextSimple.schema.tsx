@@ -1,4 +1,4 @@
-import richTextBasicSchema from "./PortableTextBasic.schema";
+import richTextBasicSchema from "./portabletextbasic.schema";
 import { defineType } from "sanity";
 
 export default defineType({

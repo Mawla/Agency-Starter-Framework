@@ -1,4 +1,4 @@
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";

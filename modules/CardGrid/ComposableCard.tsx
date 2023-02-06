@@ -1,7 +1,6 @@
 import { backgroundClasses, borderClasses } from "../../colors";
-import PortableText from "../../components/PortableText/PortableText";
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { ButtonGroupProps } from "../../components/buttons/buttongroup";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import {
@@ -13,6 +12,7 @@ import {
   TitleProps,
   WeightType,
 } from "../../components/module/Title";
+import PortableText from "../../components/portabletext/PortableText";
 import { IconType, ImageType } from "../../types";
 import {
   CardAlignType,
@@ -28,7 +28,7 @@ import {
   TitleColorType,
   CardSpacingType,
   ComposableCardThemeType,
-} from "./ComposableCardOptions";
+} from "./composablecard.options";
 import cx from "classnames";
 import Link from "next/link";
 import React, { ComponentType, lazy } from "react";
@@ -58,7 +58,7 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup"
     ),
 );
 

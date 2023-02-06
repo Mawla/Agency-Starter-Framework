@@ -21,7 +21,7 @@ import {
   IMAGE_ROUNDED_OPTIONS,
   TEXT_COLOR_OPTIONS,
   TITLE_COLOR_OPTIONS,
-} from "./ComposableCardOptions";
+} from "./composablecard.options";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 

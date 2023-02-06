@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from "./Button";
-import { AlignType, DIRECTION_OPTIONS } from "./ButtonGroupOptions";
+import { AlignType, DIRECTION_OPTIONS } from "./buttongroup.options";
 import cx from "classnames";
 import React from "react";
 

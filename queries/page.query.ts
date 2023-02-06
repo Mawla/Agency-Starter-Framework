@@ -2,22 +2,22 @@ import {
   FlatBreadcrumbItemType,
   FlatBreadcrumbType,
   getBreadcrumbQuery,
-} from "../components/Breadcrumb/breadcrumb.query";
-import { richTextQuery } from "../components/PortableText/PortableText.query";
-import { imageQuery } from "../components/images/Image.query";
-import { videoQuery } from "../components/video/Video.query";
+} from "../components/breadcrumb/breadcrumb.query";
+import { imageQuery } from "../components/images/image.query";
+import { richTextQuery } from "../components/portabletext/portabletext.query";
+import { videoQuery } from "../components/video/video.query";
 import { HeroBasicProps } from "../heroes/HeroBasic/HeroBasic";
-import { getHeroBasicQuery } from "../heroes/HeroBasic/HeroBasic.query";
+import { getHeroBasicQuery } from "../heroes/HeroBasic/herobasic.query";
 import { LanguageType } from "../languages";
-import { staticFormQuery } from "../layout/ModuleBuilder/StaticFormBuilder.query";
-import { getBillboardQuery } from "../modules/Billboard/Billboard.query";
-import { getBreadcrumbModuleQuery } from "../modules/Breadcrumb/Breadcrumb.query";
-import { getCardGridQuery } from "../modules/CardGrid/CardGrid.query";
-import { getGalleryQuery } from "../modules/Gallery/Gallery.query";
-import { getRichTextQuery } from "../modules/RichText/RichText.query";
-import { getSlidesQuery } from "../modules/Slides/Slides.query";
-import { getStoryQuery } from "../modules/Story/Story.query";
-import { getTextImageQuery } from "../modules/TextImage/TextImage.query";
+import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query";
+import { getBillboardQuery } from "../modules/billboard/billboard.query";
+import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
+import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
+import { getGalleryQuery } from "../modules/gallery/gallery.query";
+import { getRichTextQuery } from "../modules/richtext/richtext.query";
+import { getSlidesQuery } from "../modules/slides/slides.query";
+import { getStoryQuery } from "../modules/story/story.query";
+import { getTextImageQuery } from "../modules/textimage/textimage.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
 import { ConfigType } from "./config.query";

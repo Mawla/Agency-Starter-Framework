@@ -113,11 +113,11 @@ function createModule(
     ? `${__dirname}/../../heroes`
     : `${__dirname}/../../modules`;
   const filePath = `${fileDir}/${pascalName}/${pascalName}.tsx`;
-  const storiesFilePath = filePath.replace(".tsx", ".stories.tsx");
-  const optionsFilePath = filePath.replace(".tsx", "Options.ts");
-  const testFilePath = filePath.replace(".tsx", ".test.tsx");
-  const queryFilePath = filePath.replace(".tsx", ".query.ts");
-  const schemaFilePath = filePath.replace(".tsx", ".schema.tsx");
+  const storiesFilePath = filePath.replace(".tsx", ".stories.tsx").toLowerCase();
+  const optionsFilePath = filePath.replace(".tsx", ".options.ts").toLowerCase();
+  const testFilePath = filePath.replace(".tsx", ".test.tsx").toLowerCase();
+  const queryFilePath = filePath.replace(".tsx", ".query.ts").toLowerCase();
+  const schemaFilePath = filePath.replace(".tsx", ".schema.tsx").toLowerCase();
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   createSchema(pascalName, schemaName, {

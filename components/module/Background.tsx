@@ -1,6 +1,6 @@
 import { backgroundClasses, textClasses } from "../../colors";
 import { ColorType } from "../../types";
-import { BackgroundColorType, ModuleRoundedType } from "./BackgroundOptions";
+import { BackgroundColorType, ModuleRoundedType } from "./background.options";
 import cx from "classnames";
 import React from "react";
 

@@ -1,8 +1,8 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
-import { WidthType, WIDTH_OPTIONS } from "../../components/module/WidthOptions";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
+import {
+  WidthType,
+  WIDTH_OPTIONS,
+} from "../../components/module/width.options";
 import { demoImage6, demoImage7 } from "../../stories/content";
 import { Story } from "./Story";
 import {
@@ -10,7 +10,9 @@ import {
   StoryBackgroundColorType,
   STORY_ALIGN_OPTIONS,
   STORY_BACKGROUND_COLOR_OPTIONS,
-} from "./StoryOptions";
+} from "./story.options";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: Story,
@@ -55,7 +57,7 @@ export const Alignments = () => (
             image: { align },
           }}
         />
-      )
+      ),
     )}
   </div>
 );
@@ -78,7 +80,7 @@ export const ModuleSpacing = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <>

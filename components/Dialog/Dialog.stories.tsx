@@ -1,9 +1,8 @@
+import { Button } from "../buttons/Button";
+import VideoComponent from "../video/Video";
+import { Dialog } from "./Dialog";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-
-import VideoComponent from "../../components/video/Video";
-import { Button } from "../buttons/Button";
-import { Dialog } from "./Dialog";
 
 export default {
   component: Dialog,

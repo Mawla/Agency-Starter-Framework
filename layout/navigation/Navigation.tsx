@@ -21,12 +21,12 @@ export type NavItem = {
   }[];
 };
 
-export type NavProps = {
+export type NavigationProps = {
   items: NavItem[];
   buttons: ButtonProps[];
 };
 
-export const Nav = ({ items, buttons }: NavProps) => {
+export const Navigation = ({ items, buttons }: NavigationProps) => {
   // const router = useRouter();
   const { screenWidth, breakpoint } = useBreakpoint();
   const scrollDirection = useScrollDirection();

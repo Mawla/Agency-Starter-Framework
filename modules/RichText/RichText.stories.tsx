@@ -1,4 +1,4 @@
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { demoImage2 } from "../../stories/content";
 import { RichText } from "./RichText";
 import {
@@ -6,7 +6,7 @@ import {
   BACKGROUND_COLOR_OPTIONS,
   TextAlignType,
   TEXT_ALIGN_OPTIONS,
-} from "./RichTextOptions";
+} from "./richtext.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

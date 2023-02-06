@@ -1,4 +1,4 @@
-import { PortableTextProps } from "../../components/PortableText/PortableText";
+import { PortableTextProps } from "../../components/portabletext/PortableText";
 import {
   NewsLetterSignUpFormProps,
   NewsLetterSignUpFormValues,
@@ -27,7 +27,7 @@ export type StaticFormBuilderProps = {
 const PortableText = lazy<React.ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
     ) as any,
 );
 

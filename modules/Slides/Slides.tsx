@@ -1,11 +1,11 @@
-import { SliderProps } from "../../components/Slider/Slider";
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { ButtonGroupProps } from "../../components/buttons/buttongroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
-import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
 import { WrapperProps } from "../../components/module/Wrapper";
+import { SpaceType } from "../../components/module/spacing.options";
+import { SliderProps } from "../../components/slider/Slider";
 import { HeadingLevelType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -25,7 +25,7 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 
 const Slider = lazy<ComponentType<SliderProps>>(
   () =>
-    import(/* webpackChunkName: "Slider" */ "../../components/Slider/Slider"),
+    import(/* webpackChunkName: "Slider" */ "../../components/slider/Slider"),
 );
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
@@ -38,7 +38,7 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup"
     ),
 );
 

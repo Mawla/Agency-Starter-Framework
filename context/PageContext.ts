@@ -1,4 +1,4 @@
-import { FlatBreadcrumbType } from "../components/Breadcrumb/breadcrumb.query";
+import { FlatBreadcrumbType } from "../components/breadcrumb/breadcrumb.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { SitemapItemType } from "../queries/sitemap.query";
 import React from "react";

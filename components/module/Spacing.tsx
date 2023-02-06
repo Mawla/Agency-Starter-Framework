@@ -2,7 +2,7 @@ import {
   SpaceType,
   spaceTopClasses,
   spaceBottomClasses,
-} from "./SpacingOptions";
+} from "./spacing.options";
 import cx from "classnames";
 import React from "react";
 

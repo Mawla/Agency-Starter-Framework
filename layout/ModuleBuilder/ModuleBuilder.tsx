@@ -1,12 +1,12 @@
 import { PageContext } from "../../context/PageContext";
-import { BillboardProps } from "../../modules/Billboard/Billboard";
-import { BreadcrumbProps } from "../../modules/Breadcrumb/Breadcrumb";
-import { CardGridProps } from "../../modules/CardGrid/CardGrid";
-import { GalleryProps } from "../../modules/Gallery/Gallery";
-import { RichTextProps } from "../../modules/RichText/RichText";
-import { SlidesProps } from "../../modules/Slides/Slides";
-import { StoryProps } from "../../modules/Story/Story";
-import { TextImageProps } from "../../modules/TextImage/TextImage";
+import { BillboardProps } from "../../modules/billboard/Billboard";
+import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
+import { CardGridProps } from "../../modules/cardgrid/CardGrid";
+import { GalleryProps } from "../../modules/gallery/Gallery";
+import { RichTextProps } from "../../modules/richtext/RichText";
+import { SlidesProps } from "../../modules/slides/Slides";
+import { StoryProps } from "../../modules/story/Story";
+import { TextImageProps } from "../../modules/textimage/TextImage";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
@@ -15,50 +15,50 @@ import React, { ComponentType, useContext } from "react";
 import { Suspense, lazy } from "react";
 
 const Story = lazy<ComponentType<StoryProps>>(
-  () => import(/* webpackChunkName: "Story" */ "../../modules/Story/Story"),
+  () => import(/* webpackChunkName: "Story" */ "../../modules/story/Story"),
 );
 
 const Slides = lazy<ComponentType<SlidesProps>>(
-  () => import(/* webpackChunkName: "Slides" */ "../../modules/Slides/Slides"),
+  () => import(/* webpackChunkName: "Slides" */ "../../modules/slides/Slides"),
 );
 
 const Gallery = lazy<ComponentType<GalleryProps>>(
   () =>
-    import(/* webpackChunkName: "Gallery" */ "../../modules/Gallery/Gallery"),
+    import(/* webpackChunkName: "Gallery" */ "../../modules/gallery/Gallery"),
 );
 
 const TextImage = lazy<ComponentType<TextImageProps>>(
   () =>
     import(
-      /* webpackChunkName: "TextImage" */ "../../modules/TextImage/TextImage"
+      /* webpackChunkName: "TextImage" */ "../../modules/textimage/TextImage"
     ),
 );
 
 const Billboard = lazy<ComponentType<BillboardProps>>(
   () =>
     import(
-      /* webpackChunkName: "Billboard" */ "../../modules/Billboard/Billboard"
+      /* webpackChunkName: "Billboard" */ "../../modules/billboard/Billboard"
     ),
 );
 
 const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
   () =>
     import(
-      /* webpackChunkName: "Breadcrumb" */ "../../modules/Breadcrumb/Breadcrumb"
+      /* webpackChunkName: "Breadcrumb" */ "../../modules/breadcrumb/Breadcrumb"
     ),
 );
 
 const CardGrid = lazy<ComponentType<CardGridProps>>(
   () =>
     import(
-      /* webpackChunkName: "CardGrid" */ "../../modules/CardGrid/CardGrid"
+      /* webpackChunkName: "CardGrid" */ "../../modules/cardgrid/CardGrid"
     ),
 );
 
 const RichText = lazy<ComponentType<RichTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "RichText" */ "../../modules/RichText/RichText"
+      /* webpackChunkName: "RichText" */ "../../modules/richtext/RichText"
     ),
 );
 

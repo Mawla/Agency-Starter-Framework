@@ -1,4 +1,4 @@
-import { WidthType } from "./WidthOptions";
+import { WidthType } from "./width.options";
 import cx from "classnames";
 import React from "react";
 

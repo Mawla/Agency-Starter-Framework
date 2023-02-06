@@ -1,19 +1,18 @@
-import { Meta } from '@storybook/react';
-import cx from 'classnames';
-import React from 'react';
-
-import { ButtonProps } from './Button';
-import { ButtonGroup } from './ButtonGroup';
-import { ALIGN_OPTIONS, DIRECTION_OPTIONS } from './ButtonGroupOptions';
+import { ButtonProps } from "./Button";
+import { ButtonGroup } from "./buttongroup";
+import { ALIGN_OPTIONS, DIRECTION_OPTIONS } from "./buttongroup.options";
+import { Meta } from "@storybook/react";
+import cx from "classnames";
+import React from "react";
 
 export default {
   component: ButtonGroup,
-  title: 'Components/ButtonGroup',
+  title: "Components/ButtonGroup",
 } as Meta;
 
 const buttons: ButtonProps[] = [
-  { label: 'Button text', icon: 'demo' },
-  { label: 'Button text' },
+  { label: "Button text", icon: "demo" },
+  { label: "Button text" },
 ];
 
 export const Directions = () => (
@@ -44,7 +43,7 @@ export const Stretch = () => (
           direction={direction}
           items={buttons.map((button) => ({
             ...button,
-            stretch: direction === 'vertical',
+            stretch: direction === "vertical",
           }))}
           stretch
         />
@@ -64,10 +63,10 @@ export const Alignments = () => (
       ).map(([align, label]) => (
         <div
           key={label}
-          className={cx('py-10 h-48 w-full', {
-            ['text-left items-start']: align === 'left',
-            ['text-center items-center']: align === 'center',
-            ['text-right items-end']: align === 'right',
+          className={cx("py-10 h-48 w-full", {
+            ["text-left items-start"]: align === "left",
+            ["text-center items-center"]: align === "center",
+            ["text-right items-end"]: align === "right",
           })}
         >
           <span className="inline-block mr-4">horizontal / {align}</span>
@@ -90,10 +89,10 @@ export const Alignments = () => (
       ).map(([align, label]) => (
         <div
           key={label}
-          className={cx('py-10 h-48 w-full', {
-            ['text-left items-start']: align === 'left',
-            ['text-center items-center']: align === 'center',
-            ['text-right items-end']: align === 'right',
+          className={cx("py-10 h-48 w-full", {
+            ["text-left items-start"]: align === "left",
+            ["text-center items-center"]: align === "center",
+            ["text-right items-end"]: align === "right",
           })}
         >
           <span className="inline-block mr-4">vertical / {align}</span>

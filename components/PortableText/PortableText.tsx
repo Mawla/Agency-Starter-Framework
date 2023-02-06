@@ -1,10 +1,10 @@
 import { VideoType } from "../../types";
-import { Table } from "../Table/Table";
-import { ButtonGroup } from "../buttons/ButtonGroup";
 import { Link } from "../buttons/Link";
+import { ButtonGroup } from "../buttons/buttongroup";
 import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
-import { SCRIPTS, ScriptType } from "./PortableTextOptions";
+import { Table } from "../table/Table";
+import { SCRIPTS, ScriptType } from "./portabletext.options";
 import { PortableText as PortableTextReact } from "@portabletext/react";
 import Script from "next/script";
 import React, { ComponentType, lazy } from "react";

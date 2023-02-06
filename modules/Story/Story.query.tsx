@@ -1,5 +1,5 @@
-import { buttonQuery } from "../../components/buttons/Button.query";
-import { getImageQuery, imageQuery } from "../../components/images/Image.query";
+import { buttonQuery } from "../../components/buttons/button.query";
+import { getImageQuery, imageQuery } from "../../components/images/image.query";
 import { LanguageType } from "../../languages";
 import groq from "groq";
 

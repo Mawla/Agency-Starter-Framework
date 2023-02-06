@@ -1,7 +1,7 @@
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
 import { Background as ModuleBackground } from "./Background";
-import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./BackgroundOptions";
+import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./background.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

@@ -1,10 +1,10 @@
 import { getClient } from "../helpers/sanity/server";
 import { languages, LanguageType } from "../languages";
-import { getFooterQuery, FooterType } from "../layout/Footer/Footer.query";
+import { getFooterQuery, FooterType } from "../layout/footer/footer.query";
 import {
   getNavigationQuery,
   NavigationType,
-} from "../layout/Nav/Navigation.query";
+} from "../layout/navigation/navigation.query";
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery, PageType } from "../queries/page.query";

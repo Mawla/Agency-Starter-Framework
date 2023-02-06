@@ -1,4 +1,4 @@
-import { getVideoPreview } from "../../../components/video/Video.schema";
+import { getVideoPreview } from "../../../components/video/video.schema";
 import { DocumentIcon } from "../../utils/DocumentIcon";
 import React from "react";
 import { defineField, defineType, SlugRule } from "sanity";

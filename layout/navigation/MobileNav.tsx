@@ -2,7 +2,7 @@ import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { Logo } from "./Logo";
-import { NavProps } from "./Nav";
+import { NavigationProps } from "./Navigation";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
@@ -11,7 +11,7 @@ import React from "react";
 export type MobileNavProps = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-} & NavProps;
+} & NavigationProps;
 
 export const MobileNav = ({
   items,

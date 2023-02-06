@@ -1,10 +1,10 @@
 import React, { ComponentType, lazy } from "react";
 
 import {  WrapperProps } from '../../components/module/Wrapper';
-import { BackgroundColorType } from '../../components/module/BackgroundOptions';
+import { BackgroundColorType } from '../../components/module/background.options';
 import { ColorType, HeadingLevelType } from '../../types';
-import { SpaceType } from '../../components/module/SpacingOptions';
-import { TitleSizeType } from './MyModuleOptions';
+import { SpaceType } from '../../components/module/spacing.options';
+import { TitleSizeType } from './MyModule.options';
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () => import(/* webpackChunkName: "Width" */ "../../components/module/Width"),

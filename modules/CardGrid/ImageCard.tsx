@@ -1,6 +1,6 @@
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ImageType } from "../../types";
-import { ImageRatioType } from "./ImageCardOptions";
+import { ImageRatioType } from "./imagecard.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 

@@ -1,19 +1,19 @@
 import {
   FlatBreadcrumbType,
   NestedBreadcrumbType,
-} from "../components/Breadcrumb/breadcrumb.query";
+} from "../components/breadcrumb/breadcrumb.query";
 import { LoadingAnimation } from "../components/loaders/LoadingAnimation";
 import { Wrapper } from "../components/module/Wrapper";
 import { getClient } from "../helpers/sanity/server";
 import { getFlatBreadcrumb } from "../helpers/sitemap/getFlatBreadcrumb";
 import { baseLanguage, languages, LanguageType } from "../languages";
-import { Footer } from "../layout/Footer/Footer";
-import { getFooterQuery, FooterType } from "../layout/Footer/Footer.query";
-import { Nav } from "../layout/Nav/Nav";
+import { Footer } from "../layout/footer/Footer";
+import { getFooterQuery, FooterType } from "../layout/footer/footer.query";
+import { Navigation } from "../layout/navigation/Navigation";
 import {
   getNavigationQuery,
   NavigationType,
-} from "../layout/Nav/Navigation.query";
+} from "../layout/navigation/navigation.query";
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery, PageType } from "../queries/page.query";
@@ -47,7 +47,7 @@ const SlugPage = ({
   if (!page || router.isFallback) {
     return (
       <>
-        <Nav items={[]} buttons={[]} />
+        <Navigation items={[]} buttons={[]} />
         <Wrapper>
           <LoadingAnimation />
         </Wrapper>

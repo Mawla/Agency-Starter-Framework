@@ -1,9 +1,9 @@
 import { CustomRichTextEditor } from "../../studio/components/CustomRichTextEditor";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { DIRECTION_OPTIONS } from "../buttons/ButtonGroupOptions";
-import richTextBasicSchema from "./PortableTextBasic.schema";
-import { SCRIPT_OPTIONS } from "./PortableTextOptions";
+import { DIRECTION_OPTIONS } from "../buttons/buttongroup.options";
+import { SCRIPT_OPTIONS } from "./portabletext.options";
+import richTextBasicSchema from "./portabletextbasic.schema";
 import React from "react";
 import { defineField } from "sanity";
 

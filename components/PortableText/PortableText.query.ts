@@ -1,6 +1,6 @@
-import { buttonHrefQuery, buttonQuery } from "../buttons/Button.query";
-import { imageSourceQuery } from "../images/Image.query";
-import { videoSourceQuery } from "../video/Video.query";
+import { buttonHrefQuery, buttonQuery } from "../buttons/button.query";
+import { imageSourceQuery } from "../images/image.query";
+import { videoSourceQuery } from "../video/video.query";
 import groq from "groq";
 
 export const richTextImage = `

@@ -1,18 +1,18 @@
-import { PortableTextProps } from "../../components/PortableText/PortableText";
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { ButtonGroupProps } from "../../components/buttons/buttongroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
-import {
-  BackgroundColorType,
-  ModuleRadiusType,
-} from "../../components/module/BackgroundOptions";
-import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
 import { WidthProps } from "../../components/module/Width";
 import { WrapperProps } from "../../components/module/Wrapper";
+import {
+  BackgroundColorType,
+  ModuleRadiusType,
+} from "../../components/module/background.options";
+import { SpaceType } from "../../components/module/spacing.options";
+import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { HeadingLevelType, ImageType } from "../../types";
-import { ImageAlignType, TitleSizeType } from "./TextImageOptions";
+import { ImageAlignType, TitleSizeType } from "./textimage.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -30,14 +30,14 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup"
     ),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
     ),
 );
 

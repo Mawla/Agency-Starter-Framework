@@ -1,6 +1,6 @@
 import { Link } from "../../components/buttons/Link";
 import { PageContext } from "../../context/PageContext";
-import { Logo } from "../Nav/Logo";
+import { Logo } from "../navigation/Logo";
 import { useContext } from "react";
 
 export const FooterLogo = () => {

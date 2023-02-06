@@ -1,9 +1,9 @@
-import { LivePreviewProps } from "../components/PreviewMode/LivePreview";
+import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
-import { FooterType } from "../layout/Footer/Footer.query";
-import { NavigationType } from "../layout/Nav/Navigation.query";
+import { FooterType } from "../layout/footer/footer.query";
+import { NavigationType } from "../layout/navigation/navigation.query";
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery, PageType } from "../queries/page.query";
@@ -15,7 +15,7 @@ import React, { ComponentType, lazy, useEffect, useState } from "react";
 const LivePreview = lazy<ComponentType<LivePreviewProps>>(
   () =>
     import(
-      /* webpackChunkName: "LivePreview" */ "../components/PreviewMode/LivePreview"
+      /* webpackChunkName: "LivePreview" */ "../components/previewmode/LivePreview"
     ),
 );
 

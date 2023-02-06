@@ -1,16 +1,16 @@
-import { PageLock } from "../../components/PageLock/PageLock";
-import { PreviewButton } from "../../components/PreviewMode/PreviewButton";
 import { Seo } from "../../components/meta/Seo";
+import { PageLock } from "../../components/pagelock/PageLock";
+import { PreviewButton } from "../../components/previewmode/PreviewButton";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { LanguageType } from "../../languages";
 import { ConfigType } from "../../queries/config.query";
 import { PageType } from "../../queries/page.query";
 import { SitemapItemType } from "../../queries/sitemap.query";
-import { Footer } from "../Footer/Footer";
-import { FooterType } from "../Footer/Footer.query";
-import { Nav } from "../Nav/Nav";
-import { NavigationType } from "../Nav/Navigation.query";
+import { Footer } from "../footer/Footer";
+import { FooterType } from "../footer/footer.query";
+import { Navigation } from "../navigation/Navigation";
+import { NavigationProps } from "../navigation/Navigation";
 import { PageBody } from "./PageBody";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
@@ -18,7 +18,7 @@ import React from "react";
 
 export type PageProps = {
   isPreviewMode: boolean;
-  navigation: NavigationType;
+  navigation: NavigationProps;
   page: PageType;
   footer: FooterType;
   config: ConfigType;
@@ -70,7 +70,7 @@ export const Page = ({
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
 
         {page && navigation && !isPreviewMode && (
-          <Nav
+          <Navigation
             items={page.hideNav === true ? [] : navItems}
             buttons={page.hideNav === true ? [] : navigation.buttons}
           />

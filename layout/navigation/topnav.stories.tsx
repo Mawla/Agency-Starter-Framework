@@ -1,12 +1,15 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { MobileNav } from "./MobileNav";
-import { NavItem } from "./Nav";
+import { NavItem } from "./Navigation";
+import { TopNav } from "./TopNav";
 import { Meta } from "@storybook/react";
 import React from "react";
 
 export default {
-  component: MobileNav,
-  title: "Components/MobileNav",
+  component: TopNav,
+  title: "Components/TopNav",
+  parameters: {
+    layout: "fullscreen",
+  },
 } as Meta;
 
 const items: NavItem[] = [
@@ -15,11 +18,11 @@ const items: NavItem[] = [
     children: [
       {
         label: "Product 1",
-        href: "/",
+        href: "",
       },
       {
         label: "Product 2",
-        href: "/",
+        href: "",
       },
     ],
   },
@@ -32,12 +35,12 @@ const items: NavItem[] = [
     children: [
       {
         label: "Business cases",
-        href: "/",
+        href: "",
         current: true,
       },
       {
         label: "Industries",
-        href: "/",
+        href: "",
       },
     ],
   },
@@ -58,10 +61,14 @@ const buttons: ButtonProps[] = [
   },
   {
     label: "Sign in",
-    href: "/",
+    href: "/login",
   },
 ];
 
-export const Default = () => (
-  <MobileNav items={items} buttons={buttons} open={true} />
+export const Default = () => <TopNav items={items} buttons={buttons} />;
+
+export const Landing = () => <TopNav items={[]} buttons={[]} />;
+
+export const NavOutOfView = () => (
+  <TopNav items={[]} buttons={[]} showNav={false} />
 );

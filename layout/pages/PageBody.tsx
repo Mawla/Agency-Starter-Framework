@@ -1,8 +1,8 @@
 import { PageContext } from "../../context/PageContext";
 import { PageType } from "../../queries/page.query";
-import { DialogBuilder } from "../ModuleBuilder/DialogBuilder";
-import { HeroBuilder } from "../ModuleBuilder/HeroBuilder";
-import { ModuleBuilder } from "../ModuleBuilder/ModuleBuilder";
+import { DialogBuilder } from "../modulebuilder/DialogBuilder";
+import { HeroBuilder } from "../modulebuilder/HeroBuilder";
+import { ModuleBuilder } from "../modulebuilder/ModuleBuilder";
 import React, { useContext } from "react";
 
 export const PageBody = (props: PageType) => {

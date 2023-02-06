@@ -1,4 +1,4 @@
-import { BleedSpaceType } from "./BleedOptions";
+import { BleedSpaceType } from "./bleed.options";
 import cx from "classnames";
 import React from "react";
 

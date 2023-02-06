@@ -1,6 +1,6 @@
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { IMAGE_RATIO_OPTIONS } from "./ImageCardOptions";
+import { IMAGE_RATIO_OPTIONS } from "./imagecard.options";
 import React from "react";
 import { defineType, defineField } from "sanity";
 

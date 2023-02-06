@@ -1,16 +1,16 @@
-import { PortableTextProps } from "../../components/PortableText/PortableText";
-import { ModuleRadiusType } from "../../components/module/BackgroundOptions";
-import { SpaceType } from "../../components/module/SpacingOptions";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
-import { WidthType } from "../../components/module/WidthOptions";
 import { WrapperProps } from "../../components/module/Wrapper";
+import { ModuleRadiusType } from "../../components/module/background.options";
+import { SpaceType } from "../../components/module/spacing.options";
+import { WidthType } from "../../components/module/width.options";
+import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { ColorType, HeadingLevelType } from "../../types";
 import {
   BackgroundColorType,
   TextAlignType,
   TitleSizeType,
-} from "./RichTextOptions";
+} from "./richtext.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -30,7 +30,7 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
     ),
 );
 

@@ -1,5 +1,5 @@
-import { DialogProps } from "../../components/Dialog/Dialog";
-import { PortableTextProps } from "../../components/PortableText/PortableText";
+import { DialogProps } from "../../components/dialog/Dialog";
+import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { VideoType } from "../../types";
 import { DialogSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
@@ -12,7 +12,7 @@ import { Suspense } from "react";
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
     ) as any,
 );
 
@@ -26,7 +26,7 @@ const Video = lazy<ComponentType<VideoType>>(
 const Dialog = lazy<ComponentType<DialogProps>>(
   () =>
     import(
-      /* webpackChunkName: "Dialog" */ "../../components/Dialog/Dialog"
+      /* webpackChunkName: "Dialog" */ "../../components/dialog/Dialog"
     ) as any,
 );
 

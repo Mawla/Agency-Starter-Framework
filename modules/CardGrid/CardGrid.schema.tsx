@@ -1,6 +1,6 @@
-import { SLIDER_COLOR_OPTIONS } from "../../components/Slider/SliderOptions";
-import { MODULE_RADIUS_OPTIONS } from "../../components/module/BackgroundOptions";
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { MODULE_RADIUS_OPTIONS } from "../../components/module/background.options";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
+import { SLIDER_COLOR_OPTIONS } from "../../components/slider/slider.options";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
@@ -12,8 +12,8 @@ import {
   COLUMN_OPTIONS,
   GAP_OPTIONS,
   TITLE_SIZE_OPTIONS,
-} from "./CardGridOptions";
-import { COMPOSABLE_CARD_THEME_OPTIONS } from "./ComposableCardOptions";
+} from "./cardgrid.options";
+import { COMPOSABLE_CARD_THEME_OPTIONS } from "./composablecard.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";

@@ -2,7 +2,7 @@ import { ButtonProps } from "../../components/buttons/Button";
 import {
   buttonQuery,
   buttonWithChildrenQuery,
-} from "../../components/buttons/Button.query";
+} from "../../components/buttons/button.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
 import groq from "groq";

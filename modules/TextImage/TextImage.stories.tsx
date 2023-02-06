@@ -1,7 +1,7 @@
 import {
   SpaceTopType,
   SPACE_OPTIONS,
-} from "../../components/module/SpacingOptions";
+} from "../../components/module/spacing.options";
 import { demoImage2 } from "../../stories/content";
 import { TextImage } from "./TextImage";
 import {
@@ -11,7 +11,7 @@ import {
   BACKGROUND_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
   TitleSizeType,
-} from "./TextImageOptions";
+} from "./textimage.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

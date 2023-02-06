@@ -1,14 +1,14 @@
 import cx from 'classnames';
 import React, { ComponentType, CSSProperties, lazy } from 'react';
 
-import { SliderColorType } from '../../components/Slider/SliderOptions';
+import { SliderColorType } from '../../components/slider/slider.options';
 import { ButtonProps } from '../../components/buttons/Button';
-import {  ButtonGroupProps } from '../../components/buttons/ButtonGroup';
+import {  ButtonGroupProps } from '../../components/buttons/buttongroup';
 import {
   ModuleRadiusType,
   ModuleRoundedType,
-} from '../../components/module/BackgroundOptions';
-import { SpaceType } from '../../components/module/SpacingOptions';
+} from '../../components/module/background.options';
+import { SpaceType } from '../../components/module/spacing.options';
 import { AlignType, TextProps } from '../../components/module/Text';
 import { TitleProps } from '../../components/module/Title';
 import {  WrapperProps } from '../../components/module/Wrapper';
@@ -17,19 +17,19 @@ import {
   BreakpointType,
   useBreakpoint,
 } from '../../hooks/useBreakpoint';
-import ErrorBoundary from '../../layout/ModuleBuilder/ErrorBoundary';
+import ErrorBoundary from '../../layout/modulebuilder/ErrorBoundary';
 import {
   BackgroundColorType,
   ButtonPositionType,
   ColumnType,
   GapType,
   TitleSizeType,
-} from './CardGridOptions';
+} from './cardgrid.options';
 import { type ComposableCardProps } from './ComposableCard';
 import { ImageCardProps } from './ImageCard';
 import { ColorType, HeadingLevelType } from '../../types';
-import  { PortableTextProps } from '../../components/PortableText/PortableText';
-import { SliderProps } from '../../components/Slider/Slider';
+import  { PortableTextProps } from '../../components/portabletext/PortableText';
+import { SliderProps } from '../../components/slider/Slider';
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
@@ -55,20 +55,20 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 
 const Slider = lazy<ComponentType<SliderProps>>(
   () =>
-    import(/* webpackChunkName: "Slider" */ "../../components/Slider/Slider"),
+    import(/* webpackChunkName: "Slider" */ "../../components/slider/Slider"),
 );
 
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup"
     ),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
-      /* webpackChunkName: "PortableText" */ "../../components/PortableText/PortableText"
+      /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
     ),
 );
 

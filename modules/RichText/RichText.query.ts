@@ -1,4 +1,4 @@
-import { richTextQuery } from "../../components/PortableText/PortableText.query";
+import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import groq from "groq";
 

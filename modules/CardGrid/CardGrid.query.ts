@@ -1,12 +1,12 @@
-import { richTextQuery } from "../../components/PortableText/PortableText.query";
 import {
   buttonQuery,
   resolveIdHrefQuery,
-} from "../../components/buttons/Button.query";
-import { getImageQuery, imageQuery } from "../../components/images/Image.query";
+} from "../../components/buttons/button.query";
+import { getImageQuery, imageQuery } from "../../components/images/image.query";
+import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import { getTranslationQuery } from "../../queries/translations.query";
-import { COMPOSABLE_CARD_THEME_OPTIONS } from "./ComposableCardOptions";
+import { COMPOSABLE_CARD_THEME_OPTIONS } from "./composablecard.options";
 import groq from "groq";
 
 export const getCardGridQuery = (language: LanguageType) => groq`

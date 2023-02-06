@@ -3,7 +3,7 @@ import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { Logo } from "./Logo";
-import { NavProps } from "./Nav";
+import { NavigationProps } from "./Navigation";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
 import React, { ComponentType, lazy, useContext, useRef } from "react";
@@ -19,7 +19,7 @@ export type TopNavProps = {
   showNav?: boolean;
   onHamburgerClick?: () => void;
   navHeight?: number;
-} & NavProps;
+} & NavigationProps;
 
 export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
   ({ items, buttons, showNav = true, onHamburgerClick, navHeight }, navRef) => {

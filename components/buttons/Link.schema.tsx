@@ -1,5 +1,5 @@
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
-import buttonSchema from "./Button.schema";
+import buttonSchema from "./button.schema";
 import React from "react";
 import { defineType } from "sanity";
 

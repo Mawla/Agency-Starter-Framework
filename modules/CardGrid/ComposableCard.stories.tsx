@@ -40,7 +40,7 @@ import {
   TEXT_COLOR_OPTIONS,
   TitleColorType,
   TITLE_COLOR_OPTIONS,
-} from "./ComposableCardOptions";
+} from "./composablecard.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

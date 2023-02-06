@@ -1,5 +1,5 @@
-import { richTextQuery } from "../../components/PortableText/PortableText.query";
-import { imageQuery } from "../../components/images/Image.query";
+import { imageQuery } from "../../components/images/image.query";
+import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import groq from "groq";
 

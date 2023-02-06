@@ -1,12 +1,12 @@
 import { slugify } from "../../helpers/utils/string";
 import { ColorType } from "../../types";
 import { Background } from "./Background";
-import { BackgroundColorType, ModuleRoundedType } from "./BackgroundOptions";
 import { Bleed } from "./Bleed";
 import { Spacing, SpacingProps } from "./Spacing";
-import { SpaceType } from "./SpacingOptions";
 import { Width } from "./Width";
-import { WidthType } from "./WidthOptions";
+import { BackgroundColorType, ModuleRoundedType } from "./background.options";
+import { SpaceType } from "./spacing.options";
+import { WidthType } from "./width.options";
 import React from "react";
 
 export type WrapperProps = {

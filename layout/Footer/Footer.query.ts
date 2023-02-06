@@ -1,7 +1,7 @@
 import {
   buttonFieldsQuery,
   buttonQuery,
-} from "../../components/buttons/Button.query";
+} from "../../components/buttons/button.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
 import { IconType } from "../../types";

@@ -4,14 +4,14 @@ import { LanguageType } from "../../languages";
 import { ColorType, IconType } from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
+import { Link } from "./Link";
 import {
   AlignType,
   SizeType,
   IconPositionType,
   WeightType,
   VariantType,
-} from "./ButtonOptions";
-import { Link } from "./Link";
+} from "./buttonoptions";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 

@@ -1,11 +1,11 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { Nav, NavItem } from "./Nav";
+import { Navigation, NavItem } from "./Navigation";
 import { Meta } from "@storybook/react";
 import React from "react";
 
 export default {
-  component: Nav,
-  title: "Components/Nav",
+  component: Navigation,
+  title: "Components/Navigation",
 } as Meta;
 
 const items: NavItem[] = [
@@ -63,11 +63,11 @@ const buttons: ButtonProps[] = [
   },
 ];
 
-export const Default = () => <Nav items={items} buttons={buttons} />;
+export const Default = () => <Navigation items={items} buttons={buttons} />;
 
 export const ScrollBehavior = () => (
   <div>
-    <Nav items={items} buttons={buttons} />
+    <Navigation items={items} buttons={buttons} />
     <div style={{ height: "50vh" }} className="bg-neutral-100" />
     <div style={{ height: "50vh" }} className="bg-white" />
     <div style={{ height: "50vh" }} className="bg-neutral-500" />

@@ -1,6 +1,6 @@
 import { demoImage2 } from "../../stories/content";
 import { ImageCard } from "./ImageCard";
-import { ImageRatioType, IMAGE_RATIO_OPTIONS } from "./ImageCardOptions";
+import { ImageRatioType, IMAGE_RATIO_OPTIONS } from "./imagecard.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

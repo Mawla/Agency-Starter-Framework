@@ -1,5 +1,5 @@
-import { MODULE_RADIUS_OPTIONS } from "../../components/module/BackgroundOptions";
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { MODULE_RADIUS_OPTIONS } from "../../components/module/background.options";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
@@ -8,7 +8,7 @@ import {
   BACKGROUND_COLOR_OPTIONS,
   IMAGE_ALIGN_OPTIONS,
   TITLE_SIZE_OPTIONS,
-} from "./TextImageOptions";
+} from "./textimage.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import React from "react";
 import { defineField, defineType } from "sanity";

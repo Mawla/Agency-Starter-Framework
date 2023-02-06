@@ -1,4 +1,4 @@
-import { Breadcrumb } from "../../components/Breadcrumb/Breadcrumb";
+import { Breadcrumb } from "../../components/breadcrumb/Breadcrumb";
 import { isLanguage } from "../../languages";
 import { usePathname } from "next/navigation";
 

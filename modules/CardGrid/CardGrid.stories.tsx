@@ -1,6 +1,7 @@
-import { SPACE_OPTIONS } from "../../components/module/SpacingOptions";
+import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
 import { CardGrid, CardGridProps } from "./CardGrid";
+import { ComposableCardProps } from "./ComposableCard";
 import {
   AlignType,
   ALIGN_OPTIONS,
@@ -13,8 +14,7 @@ import {
   GAP_OPTIONS,
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
-} from "./CardGridOptions";
-import { ComposableCardProps } from "./ComposableCard";
+} from "./cardgrid.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

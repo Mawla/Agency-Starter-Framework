@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { SIZE_OPTIONS, VariantType, VARIANT_OPTIONS } from "./ButtonOptions";
+import { SIZE_OPTIONS, VariantType, VARIANT_OPTIONS } from "./buttonoptions";
 import { Meta } from "@storybook/react";
 import React from "react";
 

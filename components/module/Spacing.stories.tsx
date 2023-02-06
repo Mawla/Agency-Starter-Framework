@@ -1,8 +1,7 @@
+import { Spacing as SpacingComponent } from "./Spacing";
+import { SPACE_OPTIONS } from "./spacing.options";
 import { Meta } from "@storybook/react";
 import React from "react";
-
-import { Spacing as SpacingComponent } from "./Spacing";
-import { SPACE_OPTIONS } from "./SpacingOptions";
 
 export default {
   component: SpacingComponent,
@@ -14,7 +13,7 @@ export const Sizes = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <div key={label} className="border mb-4 px-4">
@@ -31,7 +30,7 @@ export const Top = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <div key={label} className="border mb-4 px-4">
@@ -48,7 +47,7 @@ export const Bottom = () => (
     {(
       Object.entries(SPACE_OPTIONS) as [
         key: keyof typeof SPACE_OPTIONS,
-        label: string
+        label: string,
       ][]
     ).map(([size, label]) => (
       <div key={label} className="border mb-4 px-4">

@@ -1,4 +1,4 @@
-import buttonSchema from "../../components/buttons/Button.schema";
+import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
 import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { ICONS } from "../../types";

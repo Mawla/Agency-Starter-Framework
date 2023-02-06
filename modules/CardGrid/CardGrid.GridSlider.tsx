@@ -1,20 +1,20 @@
-import { SliderProps } from "../../components/Slider/Slider";
+import { SliderProps } from "../../components/slider/Slider";
 import {
   BREAKPOINTS,
   BreakpointType,
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
-import ErrorBoundary from "../../layout/ModuleBuilder/ErrorBoundary";
+import ErrorBoundary from "../../layout/modulebuilder/ErrorBoundary";
 import { CardGridProps } from "./CardGrid";
-import { ColumnType, GapType } from "./CardGridOptions";
 import { ComposableCardProps } from "./ComposableCard";
 import { ImageCardProps } from "./ImageCard";
+import { ColumnType, GapType } from "./cardgrid.options";
 import cx from "classnames";
 import React, { ComponentType, CSSProperties, lazy } from "react";
 
 const Slider = lazy<ComponentType<SliderProps>>(
   () =>
-    import(/* webpackChunkName: "Slider" */ "../../components/Slider/Slider"),
+    import(/* webpackChunkName: "Slider" */ "../../components/slider/Slider"),
 );
 
 const ComposableCard = lazy<ComponentType<ComposableCardProps>>(

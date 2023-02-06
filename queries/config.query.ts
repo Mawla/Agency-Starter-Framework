@@ -1,4 +1,4 @@
-import { getImageQuery } from "../components/images/Image.query";
+import { getImageQuery } from "../components/images/image.query";
 import { LanguageType } from "../languages";
 import { ImageType, TranslationFieldType } from "../types";
 import groq from "groq";

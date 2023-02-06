@@ -1,10 +1,10 @@
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
-import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./BackgroundOptions";
 import { Spacing as SpacingComponent } from "./Spacing";
-import { SPACE_OPTIONS } from "./SpacingOptions";
-import { WidthType, WIDTH_OPTIONS } from "./WidthOptions";
 import { Wrapper as WrapperComponent } from "./Wrapper";
+import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./background.options";
+import { SPACE_OPTIONS } from "./spacing.options";
+import { WidthType, WIDTH_OPTIONS } from "./width.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 

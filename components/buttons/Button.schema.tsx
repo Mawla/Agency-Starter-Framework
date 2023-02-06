@@ -6,7 +6,7 @@ import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
 import { ICONS } from "../../types";
-import { ICON_POSITION_OPTIONS, VARIANT_OPTIONS } from "./ButtonOptions";
+import { ICON_POSITION_OPTIONS, VARIANT_OPTIONS } from "./buttonoptions";
 import React from "react";
 import {
   ConditionalPropertyCallback,

@@ -1,6 +1,6 @@
-import { richTextQuery } from "../../components/PortableText/PortableText.query";
-import { buttonQuery } from "../../components/buttons/Button.query";
-import { getImageQuery } from "../../components/images/Image.query";
+import { buttonQuery } from "../../components/buttons/button.query";
+import { getImageQuery } from "../../components/images/image.query";
+import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import groq from "groq";
 

@@ -1,7 +1,7 @@
 import {
   BackgroundColorType,
   BACKGROUND_COLOR_OPTIONS,
-} from "../../components/module/BackgroundOptions";
+} from "../../components/module/background.options";
 import { Footer, FooterProps } from "./Footer";
 import { Meta } from "@storybook/react";
 import React from "react";

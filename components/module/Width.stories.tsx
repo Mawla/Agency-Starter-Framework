@@ -1,5 +1,5 @@
 import { Width as WidthComponent } from "./Width";
-import { WidthType, WIDTH_OPTIONS } from "./WidthOptions";
+import { WidthType, WIDTH_OPTIONS } from "./width.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
