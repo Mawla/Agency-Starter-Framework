@@ -73,7 +73,7 @@ async function init() {
     const fields = await fieldsInput.run();
 
     const pascalName = `${pascalCase(name)}`;
-    const lowerName = name.toLowerCase();
+    const lowerName = name.toLowerCase().replace(/\s/g, "");
     const schemaName = `${isHero ? "hero" : "module"}.${name
       .toLowerCase()
       .replace(/\s/g, "")}`;
