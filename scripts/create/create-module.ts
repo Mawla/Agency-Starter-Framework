@@ -132,7 +132,7 @@ function createModule(
   const schemaFilePath = filePath.replace(".tsx", ".schema.tsx").toLowerCase();
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
-  createSchema(pascalName, schemaName, {
+  createSchema(lowerName, pascalName, schemaName, {
     replacer: "MyModule",
     schemaFilePath,
     prototypeFile: `${__dirname}/MyModule.schema.tsx`,

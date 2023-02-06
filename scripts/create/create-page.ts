@@ -118,13 +118,14 @@ const build = (answers) => {
   if (!name.trim().length) return readline.close();
 
   const pascalName = `${pascalCase(name)}`;
+  const lowerName = name.toLowerCase();
   const schemaName = `page.${name.toLowerCase().replace(/\s/g, "")}`;
   const documentId = schemaName.replace("page.", "page_");
 
   console.log("");
   createType(schemaName, { linkable: true, translatable: true });
 
-  createSchema(pascalName, schemaName, {
+  createSchema(lowerName, pascalName, schemaName, {
     replacer: "MyPage",
     prototypeFile: `${__dirname}/page.mypage.tsx`,
     schemaImportPrefix: "page",

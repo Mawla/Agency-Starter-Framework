@@ -51,7 +51,7 @@ readline.question(question(ask, description), (name) => {
 function build() {
   const { name, pascalName, schemaName } = answers;
 
-  createSchema(pascalName, schemaName, {
+  createSchema(name?.toLowerCase(), pascalName, schemaName, {
     replacer: "MyDialog",
     prototypeFile: `${__dirname}/dialog.mydialog.tsx`,
     schemaImportPrefix: "dialog",

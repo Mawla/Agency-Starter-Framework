@@ -13,7 +13,7 @@ const { sortLines } = require("../helpers/sortLines");
  * d. add selected fields
  */
 
-module.exports.createSchema = (pascalName, schemaName, options) => {
+module.exports.createSchema = (lowerName, pascalName, schemaName, options) => {
   const schemaEditFn = options.schemaEditFn || ((x) => x);
   const schemaImportName = `${options.schemaImportPrefix}${pascalName}`;
 
@@ -135,6 +135,7 @@ module.exports.createSchema = (pascalName, schemaName, options) => {
       pascalName.replace(/([A-Z])/g, " $1").trim(),
     )
     .replace(new RegExp(`${options.replacer}Schema`, "g"), schemaName)
+    .replace(new RegExp(`${options.replacer.toLowerCase()}`, "g"), lowerName)
     .replace(new RegExp(`${options.replacer}`, "g"), pascalName)
     .replace("/*FIELDS*/", `${fieldLines.join(",\n")},`)
     .replace("/*DESCRIPTION*/", options.description || "");
