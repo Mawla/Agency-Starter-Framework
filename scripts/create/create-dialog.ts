@@ -6,8 +6,8 @@
  * › add import in schema
  * › add schema in list of schemas
  *
- * › add query in queries/page.ts
- * › add render action in layout/ModuleBuilder/DialogBuilder.tsx
+ * › add query in queries/pag.query.ts
+ * › add render action in layout/modulebuilder/DialogBuilder.tsx
  * 
  * › add schema to all schemas type types.sanity.ts
  * › add schema to dialog type types.sanity.ts
@@ -68,7 +68,7 @@ function build() {
 
 function createQuery() {
   const { name, schemaName } = answers;
-  const filePath = `${__dirname}/../../queries/page.ts`;
+  const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   const newQuery = `
