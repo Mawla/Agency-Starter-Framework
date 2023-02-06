@@ -89,7 +89,7 @@ async function init() {
 
     createQuery(name, pascalName, schemaName, fields, isHero);
     createType(schemaName, { module: !isHero, hero: isHero });
-    createBuilder(name, pascalName, schemaName, fields, isHero);
+    createBuilder(lowerName, pascalName, schemaName, fields, isHero);
 
     console.log("\nNext steps: ");
 
@@ -305,7 +305,7 @@ function createModule(
 
     queryFieldLines.push(`buttons[] \${buttonQuery}`);
     queryImportLines.push(
-      `import { buttonQuery } from "../../queries/components/button";`,
+      `import { buttonQuery } from "../../components/buttons/button.query";`,
     );
   }
 
@@ -313,6 +313,7 @@ function createModule(
   const moduleContent = fs
     .readFileSync(`${__dirname}/MyModule.tsx`)
     .toString()
+    .replace(/mymodule/g, lowerName)
     .replace(/MyModule/g, pascalName)
     .replace("/*TYPE*/", `${typescriptLines.join("\n")}`)
     .replace("/*IMPORT*/", `${importLines.join("\n")}`)
@@ -412,7 +413,7 @@ function createQuery(name, pascalName, schemaName, fields, isHero) {
  * Add module to the module builder
  */
 
-function createBuilder(name, pascalName, schemaName, fields, isHero) {
+function createBuilder(lowerName, pascalName, schemaName, fields, isHero) {
   const filePath = `${__dirname}/../../layout/modulebuilder/${
     isHero ? "HeroBuilder" : "ModuleBuilder"
   }.tsx`;
@@ -422,14 +423,14 @@ function createBuilder(name, pascalName, schemaName, fields, isHero) {
   lines = [
     `import { ${pascalName}Props } from '../../${
       isHero ? "heroes" : "modules"
-    }/${pascalName}/${pascalName}'`,
+    }/${lowerName}/${pascalName}'`,
     `
       const ${pascalName} = lazy<ComponentType<${pascalName}Props>>(
         () =>
           import(
             /* webpackChunkName: "${pascalName}" */ '../../${
       isHero ? "heroes" : "modules"
-    }/${pascalName}/${pascalName}'
+    }/${lowerName}/${pascalName}'
           )
       );
       `,
