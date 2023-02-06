@@ -182,6 +182,7 @@ export const ResponsiveImage = ({
     <div
       className={cx("text-0 h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
+        ["absolute inset-0"]: fill,
       })}
       ref={wrapperRef}
     >
@@ -203,10 +204,10 @@ export const ResponsiveImage = ({
           fill={fill}
           width={fill ? undefined : width}
           height={fill ? undefined : height}
-          priority={priority}
           loader={({ src, width, quality = 100 }) => {
             return `${src}&q=${quality}`;
           }}
+          priority={false} // we handle preload ourselves with better size
           quality={IMAGE_QUALITY}
           onLoadingComplete={onImageLoad}
         />
