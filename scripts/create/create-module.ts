@@ -16,14 +16,13 @@
  * › add schema to all schemas type types.sanity.ts
  * › add schema to module type types.sanity.ts
  */
-import { addSchema } from "../helpers/addSchema";
 
 const fs = require("fs");
 const path = require("path");
 const { pascalCase } = require("../helpers/pascalCase");
 const { prettierFile } = require("../helpers/prettierFile");
 const { addLine } = require("../helpers/addLine");
-const { createSchema } = require("../helpers/createSchema");
+const { addSchema } = require("../helpers/addSchema");
 const { createType } = require("../helpers/createType");
 const { question } = require("../helpers/question");
 const { cyan } = require("../helpers/terminal");
