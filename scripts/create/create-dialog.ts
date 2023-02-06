@@ -73,11 +73,7 @@ function build() {
     `› Created file ${cyan(path.relative(process.cwd(), schemaFilePath))}`,
   );
 
-  addSchema(
-    `dialog${pascalName}`,
-    `import dialogForm from "./documents/${schemaName}";`,
-    false,
-  );
+  addSchema(`dialog${pascalName}`, `./documents/${schemaName}`, false);
 
   createQuery();
   addSchemaType(schemaName, { dialog: true });
