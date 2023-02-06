@@ -328,6 +328,7 @@ function createModule(
   const storyContent = fs
     .readFileSync(`${__dirname}/MyModule.stories.tsx`)
     .toString()
+    .replace(/mymodule/g, lowerName)
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(storiesFilePath, storyContent);
   prettierFile(storiesFilePath);
@@ -340,6 +341,7 @@ function createModule(
   const optionsContent = fs
     .readFileSync(`${__dirname}/MyModule.options.ts`)
     .toString()
+    .replace(/mymodule/g, lowerName)
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(optionsFilePath, optionsContent);
   prettierFile(optionsFilePath);
@@ -357,6 +359,7 @@ function createModule(
     .readFileSync(`${__dirname}/MyModule.test.tsx`)
     .toString()
     .replace("/*TESTS*/", testsLines.join("\n\n"))
+    .replace(/mymodule/g, lowerName)
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(testFilePath, testContent);
   prettierFile(testFilePath);
@@ -372,6 +375,7 @@ function createModule(
     .replace("/*IMPORT*/", queryImportLines.join("\n"))
     .replace("/*FIELDS*/", queryFieldLines.join(",\n  "))
     .replace(/MyModuleSchema/g, schemaName)
+    .replace(/mymodule/g, lowerName)
     .replace(/MyModule/g, pascalName);
   fs.writeFileSync(queryFilePath, queryContent);
   prettierFile(queryFilePath);
