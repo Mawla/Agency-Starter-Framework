@@ -1,6 +1,7 @@
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
+import ResponsiveImage from "../../components/images/ResponsiveImage";
 import { SimpleImage } from "../../components/images/SimpleImage";
 import { Bleed } from "../../components/module/Bleed";
 import { TextProps } from "../../components/module/Text";
@@ -62,13 +63,15 @@ export const HeroBasic = (data: HeroBasicProps) => {
               )}
             </div>
             {image && (
-              <div className="relative block mx-auto overflow-hidden rounded-lg mt-10">
-                <SimpleImage
+              <div className="relative block mx-auto overflow-hidden rounded-lg mt-10 aspect-video">
+                <ResponsiveImage
                   {...image}
                   priority
                   loading="eager"
                   width={1374}
                   height={774}
+                  fill
+                  className="absolute inset-0"
                 />
               </div>
             )}
