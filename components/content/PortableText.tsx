@@ -77,7 +77,7 @@ export const PortableText = ({ content = [] }) => {
               <div className="not-prose my-8 md:my-12 lg:my-16 prose-media">
                 <figure>
                   <Video {...value.video} />
-                  <FigCaption caption={value.caption} />
+                  <FigCaption caption={value.caption} className="mt-2" />
                 </figure>
               </div>
             );

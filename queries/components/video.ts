@@ -1,6 +1,5 @@
-import groq from 'groq';
-
-import { getImageQuery } from './image';
+import { getImageQuery } from "./image";
+import groq from "groq";
 
 export const videoQueryFields = groq`
   loop,
@@ -8,8 +7,8 @@ export const videoQueryFields = groq`
   caption,
   provider,
   frameless,
-  "videoId": coalesce(sanity.asset->url, mux.asset->playbackId, cloudinary.public_id, youtube, vimeo, static),
-  "poster": ${getImageQuery('poster')}
+  "videoId": coalesce(mux.asset->playbackId, youtube, vimeo),
+  "poster": ${getImageQuery("poster")}
 `;
 
 export const videoQuery = groq`
@@ -23,6 +22,6 @@ export const videoSourceQuery = groq`
     "caption": @.caption,
     "provider": @.provider,
     "frameless": @.frameless,
-    "videoId": coalesce(sanity.asset->url, mux.asset->playbackId, cloudinary.public_id, youtube, vimeo, static),
+    "videoId": coalesce(mux.asset->playbackId, youtube, vimeo),
   }
 `;

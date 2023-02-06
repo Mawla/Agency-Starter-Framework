@@ -105,10 +105,7 @@ export type ImageType = {
 export const VIDEO_PROVIDERS = {
   youtube: "Youtube",
   vimeo: "Vimeo",
-  cloudinary: "Cloudinary",
   mux: "Mux",
-  sanity: "Sanity",
-  static: "Static",
 };
 
 export type VideoProviderType = keyof typeof VIDEO_PROVIDERS;

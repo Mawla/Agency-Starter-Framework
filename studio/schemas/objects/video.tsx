@@ -8,38 +8,22 @@ export const getVideoPreview = (prefix = "") => ({
   select: {
     caption: `${prefix}caption`,
     provider: `${prefix}provider`,
-    staticFile: `${prefix}static`,
-    cloudinary: `${prefix}cloudinary`,
     youtube: `${prefix}youtube`,
     video: `${prefix}video`,
     muxPlaybackId: `${prefix}mux.asset.playbackId`,
     vimeo: `${prefix}vimeo`,
-    sanity: `${prefix}sanity`,
     language: "language",
   },
-  prepare({
-    caption,
-    staticFile,
-    cloudinary,
-    youtube,
-    vimeo,
-    muxPlaybackId,
-    sanity,
-    language,
-  }: any) {
+  prepare({ caption, youtube, vimeo, muxPlaybackId, language }: any) {
     const videoThumbnail = getVideoPreviewThumbnail({
-      cloudinary,
       muxPlaybackId,
       youtube,
     });
     const videoTitle = getVideoPreviewTitle({
       caption,
-      staticFile,
-      cloudinary,
       youtube,
       vimeo,
       muxPlaybackId,
-      sanity,
     });
 
     return {
@@ -52,33 +36,18 @@ export const getVideoPreview = (prefix = "") => ({
 
 export const getVideoPreviewTitle = ({
   caption,
-  staticFile,
-  cloudinary,
   youtube,
   vimeo,
   muxPlaybackId,
-  sanity,
 }: any) => {
-  return `${[
-    staticFile,
-    sanity ? "sanity video" : null,
-    youtube,
-    vimeo,
-    muxPlaybackId ? "mux video" : null,
-    cloudinary?.url,
-  ]
+  return `${[youtube, vimeo, muxPlaybackId ? "mux video" : null]
     .filter(Boolean)
     .join(", ")}${caption ? ` - ${caption}` : ""}`;
 };
 
-export const getVideoPreviewThumbnail = ({
-  cloudinary,
-  muxPlaybackId,
-  youtube,
-}: any) => {
+export const getVideoPreviewThumbnail = ({ muxPlaybackId, youtube }: any) => {
   let image = null;
 
-  if (cloudinary) image = cloudinary.url?.replace(".mp4", ".jpg");
   if (muxPlaybackId)
     image = `https://image.mux.com/${muxPlaybackId}/thumbnail.jpg?&fit_mode=smartcrop&width=160&height=160`;
 
@@ -127,13 +96,7 @@ const schema = defineType({
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "sanity") as ConditionalPropertyCallback,
     }),
-    defineField({
-      title: "Cloudinary Video",
-      type: "cloudinary.asset",
-      name: "cloudinary",
-      hidden: ({ parent, value }) =>
-        !value && parent?.provider !== "cloudinary",
-    }),
+
     defineField({
       title: "Youtube URL",
       type: "url",
@@ -161,15 +124,6 @@ const schema = defineType({
         !value && parent?.provider !== "mux") as ConditionalPropertyCallback,
     }),
     defineField({
-      title: "Static",
-      type: "string",
-      name: "static",
-      description:
-        "Path to a video on the web, or a static video uploaded in the next.js public folder, e.g /video/movie.mp4",
-      hidden: (({ parent, value }) =>
-        !value && parent?.provider !== "static") as ConditionalPropertyCallback,
-    }),
-    defineField({
       name: "loop",
       title: "Loop",
       type: "boolean",
@@ -182,6 +136,8 @@ const schema = defineType({
       type: "boolean",
       fieldset: "videoOptions",
       description: "Start playing the video automatically.",
+      hidden: (({ parent, value }) =>
+        parent?.provider === "youtube") as ConditionalPropertyCallback,
     }),
     defineField({
       name: "frameless",
@@ -190,6 +146,8 @@ const schema = defineType({
       fieldset: "videoOptions",
       description:
         "Remove controls from video. This may not work very well with Youtube or Vimeo.",
+      hidden: (({ parent, value }) =>
+        parent?.provider === "youtube") as ConditionalPropertyCallback,
     }),
     defineField({
       name: "caption",
