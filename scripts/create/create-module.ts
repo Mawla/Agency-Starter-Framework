@@ -188,7 +188,7 @@ function createModule(
       () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );`);
     importLines.push(
-      `import PortableText from "../../components/content/PortableText";`,
+      `import PortableText from "../../components/portabletext/PortableText";`,
     );
     jsxLines.push(`
       {intro && (
