@@ -9,13 +9,13 @@ export const SCHEMA_NAME: SchemaName = "MyPageSchema";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "MyPageTitle",
+  title: "MyPage",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   preview: {
     select: {
       title: `title.${baseLanguage}`,
-      media: "hero.0.visual.image",
+      media: "hero.0.image",
     },
   },
   icon: () => <DocumentIcon type="page" />,
