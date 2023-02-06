@@ -17,9 +17,16 @@ module.exports.addSchema = (schemaImportName, schemaFilePath, translatable) => {
   const file = fs.readFileSync(indexFilePath).toString();
   let lines = file.split("\n");
 
+  console.log("----------------------------");
+  console.log(indexFilePath);
+  console.log(schemaFilePath);
+  console.log(path.relative(__dirname, schemaFilePath));
+  console.log(path.relative(indexFilePath, schemaFilePath));
+  console.log("----------------------------");
+
   const relativeSchemaPath = path.relative(
-    "../../",
-    path.resolve(schemaFilePath),
+    indexFilePath,
+    path.relative(__dirname, schemaFilePath),
   );
 
   /**
