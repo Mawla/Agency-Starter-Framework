@@ -56,7 +56,16 @@ export const ResponsiveImage = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
 
-  const [responsiveSrc, setResponsiveSrc] = useState<string | null>(null);
+  const [responsiveSrc, setResponsiveSrc] = useState<string | null>(
+    getResponsiveImageUrl({
+      src: src || "",
+      width: width || 0,
+      height: height || 0,
+      hotspot,
+      crop,
+      quality: IMAGE_QUALITY,
+    }),
+  );
   const [state, setState] = useState<"loading" | "loaded" | null>(null);
 
   const [wrapperWidth, setWrapperWidth] = useState<number>(0);
