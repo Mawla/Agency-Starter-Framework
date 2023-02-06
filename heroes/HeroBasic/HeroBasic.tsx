@@ -1,8 +1,7 @@
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroup } from "../../components/buttons/ButtonGroup";
 import PortableText from "../../components/content/PortableText";
-import ResponsiveImage from "../../components/images/ResponsiveImage";
-import { SimpleImage } from "../../components/images/SimpleImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { Bleed } from "../../components/module/Bleed";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
@@ -16,6 +15,13 @@ const Title = lazy<ComponentType<TitleProps>>(
 
 const Text = lazy<ComponentType<TextProps>>(
   () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
+);
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    ),
 );
 
 export type HeroBasicProps = {
