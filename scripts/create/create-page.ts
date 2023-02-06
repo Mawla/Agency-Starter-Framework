@@ -124,6 +124,19 @@ const build = (answers) => {
 
   console.log("");
   addSchemaType(schemaName, { linkable: true, translatable: true });
+
+  // create schema file
+  const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.tsx`;
+
+  const schemaContent = fs
+    .readFileSync(`${__dirname}/page.mypage.tsx`)
+    .toString()
+    .replace(/MyPageSchema/g, schemaName)
+    .replace(/mypage/g, lowerName)
+    .replace(/MyPage/g, pascalName);
+  fs.writeFileSync(schemaFilePath, schemaContent);
+  prettierFile(schemaFilePath);
+
   addSchema(`page${pascalName}`, `./documents/${schemaName}`, true);
 
   createQuery(name, schemaName, documentId, answers);
