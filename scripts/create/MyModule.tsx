@@ -4,7 +4,7 @@ import {  WrapperProps } from '../../components/module/Wrapper';
 import { BackgroundColorType } from '../../components/module/background.options';
 import { ColorType, HeadingLevelType } from '../../types';
 import { SpaceType } from '../../components/module/spacing.options';
-import { TitleSizeType } from './MyModule.options';
+import { TitleSizeType } from './mymodule.options';
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () => import(/* webpackChunkName: "Width" */ "../../components/module/Width"),
