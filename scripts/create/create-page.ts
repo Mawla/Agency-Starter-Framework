@@ -124,16 +124,7 @@ const build = (answers) => {
 
   console.log("");
   addSchemaType(schemaName, { linkable: true, translatable: true });
-
-  addSchema(lowerName, pascalName, schemaName, {
-    replacer: "MyPage",
-    prototypeFile: `${__dirname}/page.mypage.tsx`,
-    schemaImportPrefix: "page",
-    translatable: true,
-  });
   addSchema(`page${pascalName}`, `./documents/${schemaName}`, true);
-
-  // schemaImportName, importPath, translatable
 
   createQuery(name, schemaName, documentId, answers);
   if (addDesk)
