@@ -19,8 +19,8 @@ const path = require("path");
 const { pascalCase } = require("../helpers/pascalCase");
 const { prettierFile } = require("../helpers/prettierFile");
 const { addLine } = require("../helpers/addLine");
-const { createSchema } = require("../helpers/createSchema");
-const { createType } = require("../helpers/createType");
+const { addSchema } = require("../helpers/addSchema");
+const { addSchemaType } = require("../helpers/addSchemaType");
 const { question } = require("../helpers/question");
 const { cyan } = require("../helpers/terminal");
 
@@ -32,13 +32,19 @@ const readline = require("readline").createInterface({
 const ask = `What is the name of the dialog? `;
 const description = `Human readable form. 'My Dialog' will become schema name 'dialog.mydialog'.`;
 
-const answers: { name?: string; schemaName?: string; pascalName?: string } = {};
+const answers: {
+  name?: string;
+  schemaName?: string;
+  pascalName?: string;
+  lowerName?: string;
+} = {};
 
 readline.question(question(ask, description), (name) => {
   if (!name.trim().length) return readline.close();
 
   answers.name = name;
   answers.pascalName = `${pascalCase(name)}`;
+  answers.lowerName = name.toLowerCase().replace(/\s/g, "");
   answers.schemaName = `dialog.${name.toLowerCase().replace(/\s/g, "")}`;
 
   console.log("");
@@ -49,16 +55,32 @@ readline.question(question(ask, description), (name) => {
 });
 
 function build() {
-  const { name, pascalName, schemaName } = answers;
+  const { lowerName, pascalName, schemaName } = answers;
 
-  createSchema(name?.toLowerCase(), pascalName, schemaName, {
-    replacer: "MyDialog",
-    prototypeFile: `${__dirname}/dialog.mydialog.tsx`,
-    schemaImportPrefix: "dialog",
-  });
+  const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.ts`;
+
+  // create schema file
+  const schemaContent = fs
+    .readFileSync(`${__dirname}/dialog.mydialog.tsx`)
+    .toString()
+    .replace(/MyDialogSchema/g, schemaName)
+    .replace(/mydialog/g, lowerName)
+    .replace(/MyDialog/g, pascalName);
+  fs.writeFileSync(schemaFilePath, schemaContent);
+  prettierFile(schemaFilePath);
+
+  console.log(
+    `› Created file ${cyan(path.relative(process.cwd(), schemaFilePath))}`,
+  );
+
+  addSchema(
+    `dialog${pascalName}`,
+    `import dialogForm from "./documents/${schemaName}";`,
+    false,
+  );
 
   createQuery();
-  createType(schemaName, { dialog: true });
+  addSchemaType(schemaName, { dialog: true });
   createBuilder();
 }
 
