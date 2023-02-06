@@ -12,7 +12,11 @@ const YOUTUBE_DEMO_VIDEO_ID = `https://www.youtube.com/watch?v=aqz-KE-bpKQ`;
 const VIMEO_DEMO_VIDEO_ID = `1084537`;
 
 export const AutoPlay = () => (
-  <Video provider="mux" videoId={MUX_DEMO_VIDEO_ID} autoPlay />
+  <>
+    <Video provider="mux" videoId={MUX_DEMO_VIDEO_ID} autoPlay />
+    <Video provider="youtube" videoId={YOUTUBE_DEMO_VIDEO_ID} autoPlay />
+    <Video provider="vimeo" videoId={VIMEO_DEMO_VIDEO_ID} autoPlay />
+  </>
 );
 
 export const Loop = () => (

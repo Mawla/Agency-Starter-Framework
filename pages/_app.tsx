@@ -1,5 +1,3 @@
-import "../styles/plyr-custom.css";
-import "../styles/plyr.css";
 import "../styles/styles.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";

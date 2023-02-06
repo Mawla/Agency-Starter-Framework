@@ -136,8 +136,6 @@ const schema = defineType({
       type: "boolean",
       fieldset: "videoOptions",
       description: "Start playing the video automatically.",
-      hidden: (({ parent, value }) =>
-        parent?.provider === "youtube") as ConditionalPropertyCallback,
     }),
     defineField({
       name: "frameless",
@@ -146,8 +144,6 @@ const schema = defineType({
       fieldset: "videoOptions",
       description:
         "Remove controls from video. This may not work very well with Youtube or Vimeo.",
-      hidden: (({ parent, value }) =>
-        parent?.provider === "youtube") as ConditionalPropertyCallback,
     }),
     defineField({
       name: "caption",
