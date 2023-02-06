@@ -1,15 +1,15 @@
 const fs = require("fs");
 const path = require("path");
-const { addLine } = require("../helpers/addLine");
-const { cyan } = require("../helpers/terminal");
-const { prettierFile } = require("../helpers/prettierFile");
-const { sortLines } = require("../helpers/sortLines");
+const { addLine } = require("./addLine");
+const { cyan } = require("./terminal");
+const { prettierFile } = require("./prettierFile");
+const { sortLines } = require("./sortLines");
 
 /**
  * Add page to the list of sanity schema types
  */
 
-module.exports.createType = (schemaName, options) => {
+module.exports.addSchemaType = (schemaName, options) => {
   const filePath = `${__dirname}/../../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
