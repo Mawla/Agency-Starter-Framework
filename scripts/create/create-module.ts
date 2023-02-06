@@ -4,12 +4,13 @@
 
  * › create modules/[name]/Module.tsx
  * › create modules/[name]/Module.stories.tsx
+ * › create modules/[name]/Module.schema.tsx
+ * › create modules/[name]/Module.options.tsx
  *
- * › create studio/modules/module.[schemaname].tsx
  * › add import in schema
  * › add schema in list of schemas
  *
- * › add query in queries/page.ts
+ * › add query in queries/page.query.ts
  * › add render action in layout/modulebuilder/ModuleBuilder.tsx
  * 
  * › add schema to all schemas type types.sanity.ts
@@ -384,7 +385,7 @@ function createModule(
  */
 
 function createQuery(name, pascalName, schemaName, fields, isHero) {
-  const filePath = `${__dirname}/../../queries/page.ts`;
+  const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines.push(
