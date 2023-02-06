@@ -87,9 +87,9 @@ async function init() {
       isHero,
     );
 
-    createQuery(name, pascalName, schemaName, fields, isHero);
+    addQuery(name, pascalName, schemaName, fields, isHero);
     createType(schemaName, { module: !isHero, hero: isHero });
-    createBuilder(lowerName, pascalName, schemaName, fields, isHero);
+    addBuilder(lowerName, pascalName, schemaName, fields, isHero);
 
     console.log("\nNext steps: ");
 
@@ -463,7 +463,7 @@ function createModule(
  * Add query
  */
 
-function createQuery(name, pascalName, schemaName, fields, isHero) {
+function addQuery(name, pascalName, schemaName, fields, isHero) {
   const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
@@ -491,7 +491,7 @@ function createQuery(name, pascalName, schemaName, fields, isHero) {
  * Add module to the module builder
  */
 
-function createBuilder(lowerName, pascalName, schemaName, fields, isHero) {
+function addBuilder(lowerName, pascalName, schemaName, fields, isHero) {
   const filePath = `${__dirname}/../../layout/modulebuilder/${
     isHero ? "HeroBuilder" : "ModuleBuilder"
   }.tsx`;
