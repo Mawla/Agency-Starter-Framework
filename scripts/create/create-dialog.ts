@@ -57,7 +57,7 @@ readline.question(question(ask, description), (name) => {
 function build() {
   const { lowerName, pascalName, schemaName } = answers;
 
-  const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.ts`;
+  const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.tsx`;
 
   // create schema file
   const schemaContent = fs
