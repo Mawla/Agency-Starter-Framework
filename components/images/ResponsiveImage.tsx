@@ -24,7 +24,7 @@ export type ResponsiveImageProps = {
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
-  loading: "eager" | "lazy" | "auto";
+  loading?: "eager" | "lazy";
 };
 
 const IMAGE_QUALITY = 85;
