@@ -60,11 +60,25 @@ export const getSitemapQuery = () => {
   const sitemapQuery = groq`
   [
     ${homePageQuery},
-    
+
     // content pages
     ...*[
-      _type == "page.content"
-      ] {
+      _type == "page.content" ||
+      _type == 'page.blogs' ||
+      _type == 'page.blog' ||
+      _type == 'page.events' ||
+      _type == 'page.event' ||
+      _type == 'page.casestudies' ||
+      _type == 'page.casestudy' ||
+      _type == 'page.podcasts' ||
+      _type == 'page.podcast' ||
+      _type == 'page.guides' ||
+      _type == 'page.guide' ||
+      _type == 'page.tools' ||
+      _type == 'page.tool' ||
+      _type == 'page.videos' ||
+      _type == 'page.video'
+    ] {
       ${baseFields},
 
       ${languages.map(

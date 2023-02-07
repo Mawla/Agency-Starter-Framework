@@ -29,11 +29,25 @@ import dialogForm from "./documents/dialog.form";
 import dialogRichText from "./documents/dialog.richtext";
 import dialogVideo from "./documents/dialog.video";
 import formStatic from "./documents/form.static";
+import pageBlog from "./documents/page.blog";
+import pageBlogs from "./documents/page.blogs";
+import pageCaseStudies from "./documents/page.casestudies";
+import pageCaseStudy from "./documents/page.casestudy";
 import pageContent from "./documents/page.content";
+import pageEvent from "./documents/page.event";
+import pageEvents from "./documents/page.events";
+import pageGuide from "./documents/page.guide";
+import pageGuides from "./documents/page.guides";
 import pageHome from "./documents/page.home";
 import pageNotFound from "./documents/page.notfound";
+import pagePodcast from "./documents/page.podcast";
+import pagePodcasts from "./documents/page.podcasts";
 import modulePreset from "./documents/page.preset";
 import pageSitemap from "./documents/page.sitemap";
+import pageTool from "./documents/page.tool";
+import pageTools from "./documents/page.tools";
+import pageVideo from "./documents/page.video";
+import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
 import redirect from "./documents/redirect";
@@ -86,10 +100,24 @@ export const schemaTypes = [
     configTranslations,
     footer,
     navigation,
+    pageBlog,
+    pageBlogs,
+    pageCaseStudies,
+    pageCaseStudy,
     pageContent,
+    pageEvent,
+    pageEvents,
+    pageGuide,
+    pageGuides,
     pageHome,
     pageNotFound,
+    pagePodcast,
+    pagePodcasts,
     pageSitemap,
+    pageTool,
+    pageTools,
+    pageVideo,
+    pageVideos,
     person,
   ]),
 ];

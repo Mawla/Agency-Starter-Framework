@@ -48,6 +48,20 @@ export const structure = (
                   `_type in [
                     'page.content',
                     'page.home',
+                    'page.events',
+                    'page.event',
+                    'page.casestudies',
+                    'page.casestudy',
+                    'page.podcasts',
+                    'page.podcast',
+                    'page.guides',
+                    'page.guide',
+                    'page.tools',
+                    'page.tool',
+                    'page.videos',
+                    'page.video',
+                    'page.blogs',
+                    'page.blog'
                   ] && !defined(parent)`,
                 )
                 .child(
@@ -56,10 +70,54 @@ export const structure = (
             ),
 
           S.divider(),
+
           singleton(S, { id: "page_homepage", type: "page.home" }),
           documentList(S, { type: "page.content", title: "Content pages" }),
 
           S.divider(),
+
+          documentList(S, {
+            type: "page.blog",
+            title: "Blogs",
+            filter: '_type == "page.blogs" || _type == "page.blog"',
+          }),
+
+          documentList(S, {
+            type: "page.event",
+            title: "Events",
+            filter: '_type == "page.events" || _type == "page.event"',
+          }),
+
+          documentList(S, {
+            type: "page.casestudy",
+            title: "Case studies",
+            filter: '_type == "page.casestudies" || _type == "page.casestudy"',
+          }),
+
+          documentList(S, {
+            type: "page.podcast",
+            title: "Podcasts",
+            filter: '_type == "page.podcasts" || _type == "page.podcast"',
+          }),
+
+          documentList(S, {
+            type: "page.guide",
+            title: "Guides",
+            filter: '_type == "page.guides" || _type == "page.guide"',
+          }),
+
+          documentList(S, {
+            type: "page.tool",
+            title: "Tools",
+            filter: '_type == "page.tools" || _type == "page.tool"',
+          }),
+
+          documentList(S, {
+            type: "page.video",
+            title: "Videos",
+            filter: '_type == "page.videos" || _type == "page.video"',
+          }),
+
           S.divider(),
         ]),
       ),

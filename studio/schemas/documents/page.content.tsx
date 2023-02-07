@@ -6,6 +6,7 @@ import {
   HERO_FIELD,
   MODULES_FIELD,
   pageBase,
+  PARENT_FIELD,
   PASSWORD,
   SLUG_FIELD,
   TITLE_FIELD,
@@ -102,26 +103,7 @@ export default defineType({
   fieldsets: [...pageBase.fieldsets],
   fields: [
     PASSWORD,
-    defineField({
-      name: "parent",
-      title: "Parent",
-      type: "reference",
-      to: [{ type: "page.content" }],
-      options: {
-        filter: ({ document }) => {
-          if (!document._id) return {};
-
-          return {
-            filter: `
-              _id != $id
-            `,
-            params: {
-              id: document._id,
-            },
-          };
-        },
-      },
-    }),
+    PARENT_FIELD,
     TITLE_FIELD,
     {
       ...SLUG_FIELD,
