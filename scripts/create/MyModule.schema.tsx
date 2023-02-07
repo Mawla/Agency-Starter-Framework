@@ -55,18 +55,6 @@ const schema = defineType({
       group: "language",
     }),
     defineField({
-      name: "preset",
-      title: "Preset",
-      type: "preset",
-      group: "tools",
-    }),
-    defineField({
-      name: "copyPaste",
-      title: "Copy Paste",
-      type: "copyPaste",
-      group: "tools",
-    }),
-    defineField({
       name: "theme",
       title: "Theme",
       type: "object",
@@ -143,6 +131,18 @@ const schema = defineType({
           },
         }),
       ],
+    }),
+    defineField({
+      name: "preset",
+      title: "Preset",
+      type: "preset",
+      group: "tools",
+    }),
+    defineField({
+      name: "copyPaste",
+      title: "Copy Paste",
+      type: "copyPaste",
+      group: "tools",
     }),
   ],
 });

@@ -50,24 +50,6 @@ const schema = defineType({
       group: "language",
     }),
     defineField({
-      name: "preset",
-      title: "Preset",
-      type: "preset",
-      group: "tools",
-      options: {
-        updateField: "hero",
-      },
-    }),
-    defineField({
-      name: "copyPaste",
-      title: "Copy Paste",
-      type: "copyPaste",
-      group: "tools",
-      options: {
-        updateField: "hero",
-      },
-    }),
-    defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
@@ -99,6 +81,24 @@ const schema = defineType({
       title: "Buttons",
       type: "buttongroup",
       group: "content",
+    }),
+    defineField({
+      name: "preset",
+      title: "Preset",
+      type: "preset",
+      group: "tools",
+      options: {
+        updateField: "hero",
+      },
+    }),
+    defineField({
+      name: "copyPaste",
+      title: "Copy Paste",
+      type: "copyPaste",
+      group: "tools",
+      options: {
+        updateField: "hero",
+      },
     }),
   ],
 });
