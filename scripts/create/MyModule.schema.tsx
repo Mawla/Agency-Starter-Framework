@@ -20,7 +20,7 @@ const schema = defineType({
       title: "title",
       image: "image",
     },
-    prepare({ title = "MyModuleTitle" }: any) {
+    prepare({ title = "MyModule" }: any) {
       return {
         title: title,
       };
