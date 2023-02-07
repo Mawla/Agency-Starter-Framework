@@ -1,8 +1,8 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import React from 'react';
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import React from "react";
 
 const shouldEnableMarker = () =>
-  process.env.NEXT_PUBLIC_SANITY_DATASET === 'client-staging';
+  process.env.NEXT_PUBLIC_SANITY_DATASET === "client-staging";
 
 class MyDocument extends Document {
   render() {
@@ -55,7 +55,7 @@ class MyDocument extends Document {
             media="(max-width: 1024px)"
           />
 
-          {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
+          {/* {process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && (
             <>
               <link rel="preconnect" href="https://www.google-analytics.com" />
               <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -80,7 +80,7 @@ class MyDocument extends Document {
                 __html: `!function(e,r,a){if(!e.__Marker){e.__Marker={};var t=[],n={__cs:t};["show","hide","isVisible","capture","cancelCapture","unload","reload","isExtensionInstalled","setReporter","on","off"].forEach(function(e){n[e]=function(){var r=Array.prototype.slice.call(arguments);r.unshift(e),t.push(r)}}),e.Marker=n;var s=r.createElement("script");s.async=1,s.src="https://edge.marker.io/latest/shim.js";var i=r.getElementsByTagName("script")[0];i.parentNode.insertBefore(s,i)}}(window,document);`,
               }}
             />
-          )}
+          )} */}
         </Head>
         <body>
           <Main />
