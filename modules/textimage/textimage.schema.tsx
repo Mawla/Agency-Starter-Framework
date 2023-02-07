@@ -1,7 +1,6 @@
 import { MODULE_RADIUS_OPTIONS } from "../../components/module/background.options";
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import {
   BACKGROUND_COLOR_OPTIONS,
@@ -22,14 +21,13 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-      language: "language",
       eyebrow: "eyebrow",
       image: "image",
     },
-    prepare({ eyebrow = "", title = "Text Image", language, image }: any) {
+    prepare({ eyebrow = "", title = "Text Image", image }: any) {
       return {
         title: title,
-        subtitle: prefixWithLanguage(language, eyebrow),
+        subtitle: eyebrow,
         media: image ? image : () => <LayoutHalfVertical weight="thin" />,
       };
     },

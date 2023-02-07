@@ -1,4 +1,3 @@
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { VIDEO_PROVIDERS } from "../../types";
 import getYoutubeId from "get-youtube-id";
 import React from "react";
@@ -12,9 +11,8 @@ export const getVideoPreview = (prefix = "") => ({
     video: `${prefix}video`,
     muxPlaybackId: `${prefix}mux.asset.playbackId`,
     vimeo: `${prefix}vimeo`,
-    language: "language",
   },
-  prepare({ caption, youtube, vimeo, muxPlaybackId, language }: any) {
+  prepare({ caption, youtube, vimeo, muxPlaybackId }: any) {
     const videoThumbnail = getVideoPreviewThumbnail({
       muxPlaybackId,
       youtube,
@@ -28,7 +26,6 @@ export const getVideoPreview = (prefix = "") => ({
 
     return {
       title: videoTitle,
-      subtitle: prefixWithLanguage(language),
       media: videoThumbnail ? <img src={videoThumbnail} alt="" /> : null,
     };
   },

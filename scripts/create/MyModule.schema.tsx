@@ -2,7 +2,6 @@ import { COLORS } from "../../colors";
 import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import { TITLE_SIZE_OPTIONS } from "./mymodule.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
@@ -19,13 +18,11 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-      language: "language",
       image: "image",
     },
-    prepare({ title = "MyModuleTitle", language }: any) {
+    prepare({ title = "MyModuleTitle" }: any) {
       return {
         title: title,
-        subtitle: prefixWithLanguage(language),
       };
     },
   },

@@ -1,4 +1,3 @@
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
 import { Website } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -12,12 +11,10 @@ const schema = defineType({
   preview: {
     select: {
       content: "content",
-      language: "language",
     },
-    prepare({ content = [], language }: any) {
+    prepare({ content = [] }: any) {
       return {
         title: blocksToText(content),
-        subtitle: prefixWithLanguage(language),
       };
     },
   },

@@ -1,6 +1,5 @@
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { DotsHorizontal } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -21,12 +20,10 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-      language: "language",
     },
-    prepare({ title = "Breadcrumb", language }: any) {
+    prepare({ title = "Breadcrumb" }: any) {
       return {
         title: title,
-        subtitle: prefixWithLanguage(language),
         media: () => <DotsHorizontal weight="thin" />,
       };
     },

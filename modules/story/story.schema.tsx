@@ -2,7 +2,6 @@ import buttonSchema from "../../components/buttons/button.schema";
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { WIDTH_OPTIONS } from "../../components/module/width.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { STORY_ALIGN_OPTIONS } from "./story.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { StarMedalAward } from "@vectopus/atlas-icons-react";
@@ -27,14 +26,13 @@ const schema = defineType({
     select: {
       quote: "quote",
       person: "person.name.en",
-      language: "language",
       image: "image",
       backgroundImage: "backgroundImage",
     },
-    prepare({ quote, person, language, image, backgroundImage }: any) {
+    prepare({ quote, person, image, backgroundImage }: any) {
       return {
         title: quote,
-        subtitle: prefixWithLanguage(language, person),
+        subtitle: person,
         media: image || backgroundImage,
       };
     },

@@ -2,7 +2,6 @@ import { MODULE_RADIUS_OPTIONS } from "../../components/module/background.option
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { SLIDER_COLOR_OPTIONS } from "../../components/slider/slider.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import {
   ALIGN_OPTIONS,
@@ -29,13 +28,11 @@ const schema = defineType({
     select: {
       title: "title",
       eyebrow: "eyebrow",
-      language: "language",
       image: "items.0.image",
     },
     prepare({
       eyebrow = "",
       title = "Card Grid",
-      language,
       image,
     }: {
       eyebrow?: string;
@@ -45,7 +42,7 @@ const schema = defineType({
     }) {
       return {
         title,
-        subtitle: prefixWithLanguage(language, eyebrow),
+        subtitle: eyebrow,
         media: image || <ColumnLayout weight="thin" />,
       };
     },

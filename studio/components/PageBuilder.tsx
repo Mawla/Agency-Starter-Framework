@@ -127,7 +127,8 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
             padding: 2,
           }}
         >
-          {props.schemaType?.title}
+          {props.schemaType?.title}{" "}
+          {props.value?.language ? `(${props.value?.language})` : ""}
         </span>
       </div>
       {props.renderDefault(props)}

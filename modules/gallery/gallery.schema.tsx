@@ -1,6 +1,5 @@
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { VirtualRealityImage } from "@vectopus/atlas-icons-react";
@@ -16,13 +15,12 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-      language: "language",
       eyebrow: "eyebrow",
     },
-    prepare({ eyebrow = "", title = "Gallery", language }: any) {
+    prepare({ eyebrow = "", title = "Gallery" }: any) {
       return {
         title: title,
-        subtitle: prefixWithLanguage(language, eyebrow),
+        subtitle: eyebrow,
         media: () => <VirtualRealityImage weight="thin" />,
       };
     },

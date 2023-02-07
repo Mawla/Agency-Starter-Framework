@@ -1,6 +1,5 @@
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { HangingPresentation } from "@vectopus/atlas-icons-react";
@@ -16,12 +15,10 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-      language: "language",
     },
-    prepare({ title = "Slides", language }: any) {
+    prepare({ title = "Slides" }: any) {
       return {
         title: title,
-        subtitle: prefixWithLanguage(language),
       };
     },
   },

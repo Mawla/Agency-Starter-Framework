@@ -1,5 +1,4 @@
 import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { ImageGallery } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -14,13 +13,11 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-      language: "language",
       image: "image",
     },
-    prepare({ title = "MyHero", language }: any) {
+    prepare({ title = "MyHero" }: any) {
       return {
         title: title,
-        subtitle: prefixWithLanguage(language),
       };
     },
   },

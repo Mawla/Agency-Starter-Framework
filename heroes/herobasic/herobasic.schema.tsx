@@ -1,4 +1,3 @@
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { ImageGallery } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -14,12 +13,11 @@ const schema = defineType({
       title: "title",
       eyebrow: "eyebrow",
       image: "image",
-      language: "language",
     },
-    prepare({ title = "", eyebrow = "", image, language }: any) {
+    prepare({ title = "", eyebrow = "", image }: any) {
       return {
         title: `${title}`,
-        subtitle: prefixWithLanguage(language, eyebrow),
+        subtitle: eyebrow,
         media: image,
       };
     },

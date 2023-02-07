@@ -1,4 +1,3 @@
-import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { Website } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, SlugRule } from "sanity";
@@ -11,12 +10,10 @@ const schema = defineType({
   preview: {
     select: {
       title: "form.name",
-      language: "language",
     },
-    prepare({ title = "", language }: any) {
+    prepare({ title = "" }: any) {
       return {
         title: `Form: ${title}`,
-        subtitle: prefixWithLanguage(language),
       };
     },
   },

@@ -2,7 +2,6 @@ import { MODULE_RADIUS_OPTIONS } from "../../components/module/background.option
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { WIDTH_OPTIONS } from "../../components/module/width.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import { HEADING_LEVELS } from "../../types";
 import {
@@ -26,12 +25,11 @@ const schema = defineType({
       title: "title",
       eyebrow: "eyebrow",
       content: "content",
-      language: "language",
     },
-    prepare({ eyebrow = "", title = "", content = [], language }: any) {
+    prepare({ eyebrow = "", title = "", content = [] }: any) {
       return {
         title: [eyebrow, title, blocksToText(content)].join(" "),
-        subtitle: prefixWithLanguage(language, blocksToText(content)),
+        subtitle: blocksToText(content),
         media: () => <LinesFile weight="thin" />,
       };
     },
