@@ -7,7 +7,7 @@ import { SpaceType } from '../../components/module/spacing.options';
 import { TitleSizeType } from './mymodule.options';
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
-  () => import(/* webpackChunkName: "Width" */ "../../components/module/Width"),
+  () => import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
 );
 
 
