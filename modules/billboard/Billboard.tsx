@@ -8,7 +8,7 @@ import { WrapperProps } from "../../components/module/Wrapper";
 import { SpaceType } from "../../components/module/spacing.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { HeadingLevelType, ImageType } from "../../types";
-import { AlignType } from "./BillboardOptions";
+import { AlignType } from "./billboard.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 

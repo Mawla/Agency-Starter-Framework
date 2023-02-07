@@ -1,6 +1,6 @@
 import { demoImage2, demoImage4, demoImage5 } from "../../stories/content";
 import { Billboard } from "./Billboard";
-import { AlignType, ALIGN_OPTIONS } from "./BillboardOptions";
+import { AlignType, ALIGN_OPTIONS } from "./billboard.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
