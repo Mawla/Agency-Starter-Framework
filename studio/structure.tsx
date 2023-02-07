@@ -262,7 +262,7 @@ async function nestedContentPageList(
         if (id === page?._id || `drafts.${id}` === page?._id) {
           return defaultDocumentNode(S, {
             schemaType: page?._type,
-          } as DefaultDocumentNodeContext);
+          } as DefaultDocumentNodeContext).id(id);
         }
         return nestedContentPageList(S, id, context) as any;
       });
