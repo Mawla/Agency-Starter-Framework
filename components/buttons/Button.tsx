@@ -11,7 +11,7 @@ import {
   IconPositionType,
   WeightType,
   VariantType,
-} from "./buttonoptions";
+} from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
