@@ -18,7 +18,7 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /(bg|text|border)-(neutral|action)-(100|200|300|400|500|600|700|800|900)/,
+        /(bg|text|border)-(neutral|action|brand)-(100|200|300|400|500|600|700|800|900)/,
     },
     {
       pattern: /(bg|text|border)-(white|black)/,
