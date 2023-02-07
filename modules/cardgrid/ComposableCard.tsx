@@ -1,6 +1,6 @@
 import { backgroundClasses, borderClasses } from "../../colors";
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroupProps } from "../../components/buttons/buttongroup2";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import {
@@ -58,7 +58,7 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup2"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
     ),
 );
 

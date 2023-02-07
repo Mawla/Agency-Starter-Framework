@@ -3,7 +3,7 @@ import React, { ComponentType, CSSProperties, lazy } from 'react';
 
 import { SliderColorType } from '../../components/slider/slider.options';
 import { ButtonProps } from '../../components/buttons/Button';
-import {  ButtonGroupProps } from '../../components/buttons/buttongroup2';
+import {  ButtonGroupProps } from '../../components/buttons/ButtonGroup';
 import {
   ModuleRadiusType,
   ModuleRoundedType,
@@ -61,7 +61,7 @@ const Slider = lazy<ComponentType<SliderProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup2"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
     ),
 );
 

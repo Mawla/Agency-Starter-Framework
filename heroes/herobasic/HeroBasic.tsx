@@ -1,5 +1,5 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroup, ButtonGroupProps } from "../../components/buttons/buttongroup2";
+import { ButtonGroup, ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { BleedProps } from "../../components/module/Bleed";
 import { TextProps } from "../../components/module/Text";
@@ -42,7 +42,7 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup2"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
     ),
 );
 
