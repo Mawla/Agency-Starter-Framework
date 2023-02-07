@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import {
   getOriginalImageDimensions,
   getResponsiveImageUrl,
@@ -8,26 +7,17 @@ import { ImageType, RatioType } from "../../types";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
 import cx from "classnames";
 import Head from "next/head";
+import NextImage, { ImageProps as NextImageProps } from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export type ResponsiveImageProps = {
-  src: string | null;
-  width?: number;
-  height?: number;
-  className?: string;
-  priority?: boolean;
-  fill?: boolean;
   crop?: ImageType["crop"];
   hotspot?: ImageType["hotspot"];
   preventResize?: boolean;
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
-  loading?: "eager" | "lazy";
-  imageSrcSet?: string;
-  imageSizes?: string;
-  maxWidth?: number;
-};
+} & NextImageProps;
 
 const IMAGE_QUALITY = 85;
 
@@ -56,10 +46,6 @@ export const ResponsiveImage = ({
   ratio,
   roundSize = 0,
   fill = false,
-  loading = "lazy",
-  imageSrcSet,
-  imageSizes,
-  maxWidth = 2400,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -68,10 +54,22 @@ export const ResponsiveImage = ({
 
   const [wrapperWidth, setWrapperWidth] = useState<number>(0);
 
-  const imageDimensions = getOriginalImageDimensions(src || "");
-  const originalWidth = imageDimensions?.width || 0;
-  const originalHeight = imageDimensions?.height || 0;
-  const originalAspectRatio = imageDimensions.aspectRatio;
+  const originalDimensions = getOriginalImageDimensions(src as string);
+  if (!width) width = originalDimensions?.width;
+  if (!height) height = originalDimensions?.height;
+
+  let placeHolderSrc: string | null = null;
+
+  if (src && typeof src === "string" && src.indexOf("sanity.io") > -1) {
+    placeHolderSrc = getResponsiveImageUrl({
+      src,
+      width: 16,
+      height: 16 / (+(width || 0) / +(height || 0)),
+      hotspot,
+      crop,
+      blur: 10,
+    });
+  }
 
   useEffect(() => {
     if (state === null) setState("loading");
@@ -80,12 +78,13 @@ export const ResponsiveImage = ({
   const onResize = useCallback(() => {
     if (!src) return;
     if (!wrapperRef?.current) return;
+    if (!placeHolderSrc) return;
     if (typeof src !== "string") return;
 
     const rect = wrapperRef.current.getBoundingClientRect();
     const w = roundToNearest(roundSize, rect.width);
     setWrapperWidth(w);
-  }, [src, roundSize]);
+  }, [src, placeHolderSrc, roundSize]);
 
   /**
    * Listen to window resizes
@@ -107,6 +106,7 @@ export const ResponsiveImage = ({
 
   useEffect(() => {
     if (!src) return;
+    if (!placeHolderSrc) return;
     if (typeof src !== "string") return;
     if (!wrapperRef.current) return;
 
@@ -144,6 +144,7 @@ export const ResponsiveImage = ({
     crop,
     hotspot,
     preventResize,
+    placeHolderSrc,
     roundSize,
   ]);
 
@@ -160,35 +161,11 @@ export const ResponsiveImage = ({
 
   if (!src) return null;
 
-  /**
-   * Generate srcset and sizes for responsive images
-   * e.g imagesrcset="640.png 640w, 800.png 800w, 1024.png 1024w" imagesizes="100vw"
-   */
-
-  function getImageSizes() {
-    const stepSize = roundSize || 50;
-
-    const imageSizes: string[] = new Array(Math.floor(maxWidth / stepSize))
-      .fill(0)
-      .map((_, i) => {
-        const newWidth = maxWidth - i * stepSize;
-        const newSrc = getResponsiveImageUrl({
-          src: src || "",
-          width: roundToNearest(roundSize, newWidth),
-          height: roundToNearest(roundSize, newWidth) / originalAspectRatio,
-          hotspot,
-          crop,
-          quality: IMAGE_QUALITY,
-        });
-        return `${newSrc} ${newWidth}w`;
-      });
-    console.log(imageSizes.join(",\n"));
-    return imageSizes.join(", ");
-  }
-
   return (
+    // disable margin underneath next image until classes can be applied to next image directly
+    // https://github.com/vercel/next.js/discussions/22861
     <div
-      className={cx("h-full w-full", {
+      className={cx("text-0 h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
         ["absolute inset-0"]: fill,
       })}
@@ -200,21 +177,25 @@ export const ResponsiveImage = ({
             rel="preload"
             as="image"
             href={`${responsiveSrc}&q=${IMAGE_QUALITY}`}
-            imageSrcSet={imageSrcSet || getImageSizes()}
-            imageSizes={imageSizes || "100vw"}
           />
         </Head>
       )}
 
       {(state === "loading" || state === "loaded") && (
-        <img
-          src={(responsiveSrc || src) as string}
+        <NextImage
+          src={responsiveSrc || placeHolderSrc || src}
           className={className}
           alt={alt || ""}
-          width={width}
-          height={height}
-          onLoad={onImageLoad}
-          loading={loading}
+          fill={fill}
+          width={fill ? undefined : width}
+          height={fill ? undefined : height}
+          priority={priority}
+          // loader={({ src, width, quality = 100 }) => {
+          //   console.log(src);
+          //   return `${src}&q=${quality}`;
+          // }}
+          quality={IMAGE_QUALITY}
+          onLoadingComplete={onImageLoad}
         />
       )}
       <ScriptJsonLd data={imageJsonLd} />
