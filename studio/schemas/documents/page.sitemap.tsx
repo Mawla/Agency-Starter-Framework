@@ -1,7 +1,7 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { HERO_FIELD, pageBase, TITLE_FIELD } from "./_page";
+import { ListRight } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
@@ -11,7 +11,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Sitemap page",
   type: "document",
-  icon: () => <DocumentIcon type="sitemap" />,
+  icon: () => <ListRight weight="thin" size={20} />,
   preview: {
     select: {
       title: `title.${baseLanguage}`,

@@ -1,10 +1,10 @@
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import { ALIGN_OPTIONS } from "./billboard.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
+import { ImageGallery } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -12,7 +12,7 @@ const schema = defineType({
   name: "module.billboard",
   title: "Billboard",
   type: "object",
-  icon: () => <DocumentIcon type="image" />,
+  icon: () => <ImageGallery weight="thin" />,
   initialValue: {},
   description: "Display large image with text",
   preview: {

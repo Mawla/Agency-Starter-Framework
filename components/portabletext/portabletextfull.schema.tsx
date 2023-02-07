@@ -1,9 +1,9 @@
 import { CustomRichTextEditor } from "../../studio/components/CustomRichTextEditor";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DIRECTION_OPTIONS } from "../buttons/buttongroup.options";
 import { SCRIPT_OPTIONS } from "./portabletext.options";
 import richTextBasicSchema from "./portabletextbasic.schema";
+import { Chain, CodingWebsite, Tables } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField } from "sanity";
 
@@ -51,7 +51,7 @@ export default defineField({
             subtitle:
               items?.map(({ label }: { label: string }) => label).join(", ") ||
               "",
-            media: <DocumentIcon type="link" />,
+            media: <Chain weight="thin" />,
           };
         },
       },
@@ -75,7 +75,7 @@ export default defineField({
       type: "object",
       name: "csv",
       title: "CSV",
-      icon: () => <DocumentIcon type="csv" />,
+      icon: () => <Tables weight="thin" />,
       preview: {
         select: {
           file: "file.asset.url",
@@ -101,7 +101,7 @@ export default defineField({
       type: "object",
       name: "scripts",
       title: "Scripts",
-      icon: () => <DocumentIcon type="script" />,
+      icon: () => <CodingWebsite weight="thin" />,
       preview: {
         select: {
           scriptId: "scriptId",

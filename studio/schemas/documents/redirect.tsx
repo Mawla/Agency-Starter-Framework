@@ -1,6 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { CurveLeftArrowUp } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule } from "sanity";
 
@@ -10,7 +10,7 @@ export default defineType({
   name: SCHEMA_NAME,
   type: "document",
   title: "Redirect",
-  icon: () => <DocumentIcon type="redirect" />,
+  icon: () => <CurveLeftArrowUp weight="thin" size={20} />,
   fields: [
     defineField({
       name: "warning",

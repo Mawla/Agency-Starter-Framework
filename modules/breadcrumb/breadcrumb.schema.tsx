@@ -1,8 +1,8 @@
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
+import { DotsHorizontal } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -11,7 +11,7 @@ const schema = defineType({
   title: "Breadcrumb",
   type: "object",
   description: "Navigation path",
-  icon: () => <DocumentIcon type="breadcrumb" />,
+  icon: () => <DotsHorizontal weight="thin" />,
   initialValue: {
     theme: {
       background: "white",
@@ -27,7 +27,7 @@ const schema = defineType({
       return {
         title: title,
         subtitle: prefixWithLanguage(language),
-        media: () => <DocumentIcon type="breadcrumb" />,
+        media: () => <DotsHorizontal weight="thin" />,
       };
     },
   },

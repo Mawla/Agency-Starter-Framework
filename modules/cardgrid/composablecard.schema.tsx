@@ -4,7 +4,6 @@ import {
   WEIGHT_OPTIONS as TITLE_WEIGHT_OPTIONS,
 } from "../../components/module/Title";
 import IconPicker from "../../studio/components/IconPicker";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import { ICONS } from "../../types";
@@ -22,6 +21,7 @@ import {
   TEXT_COLOR_OPTIONS,
   TITLE_COLOR_OPTIONS,
 } from "./composablecard.options";
+import { IdCard } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 
@@ -29,7 +29,7 @@ export const schema = defineType({
   title: "Composable card",
   name: "card.composable",
   type: "document",
-  icon: () => <DocumentIcon type="star" />,
+  icon: () => <IdCard weight="thin" />,
   preview: {
     select: {
       title: "title",

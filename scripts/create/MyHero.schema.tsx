@@ -1,7 +1,7 @@
 import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
+import { ImageGallery } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -9,7 +9,7 @@ const schema = defineType({
   name: "MyHeroSchema",
   title: "MyHero",
   type: "object",
-  icon: () => <DocumentIcon type="image" />,
+  icon: () => <ImageGallery weight="thin" />,
   description: "/*DESCRIPTION*/",
   preview: {
     select: {

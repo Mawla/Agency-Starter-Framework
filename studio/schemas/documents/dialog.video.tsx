@@ -1,5 +1,5 @@
 import { getVideoPreview } from "../../../components/video/video.schema";
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { Website } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, SlugRule } from "sanity";
 
@@ -7,7 +7,7 @@ const schema = defineType({
   name: "dialog.video",
   title: "Video Dialog",
   type: "object",
-  icon: () => <DocumentIcon type="video" />,
+  icon: () => <Website weight="thin" />,
   preview: getVideoPreview("video."),
   fields: [
     defineField({

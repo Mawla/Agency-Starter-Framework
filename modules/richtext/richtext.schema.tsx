@@ -1,7 +1,6 @@
 import { MODULE_RADIUS_OPTIONS } from "../../components/module/background.options";
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { WIDTH_OPTIONS } from "../../components/module/width.options";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
@@ -12,6 +11,7 @@ import {
   TITLE_SIZE_OPTIONS,
 } from "./richtext.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
+import { LinesFile } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -20,7 +20,7 @@ const schema = defineType({
   title: "Rich text",
   type: "object",
   description: "Generic content module with headings, images etc.",
-  icon: () => <DocumentIcon type="page" />,
+  icon: () => <LinesFile weight="thin" />,
   preview: {
     select: {
       title: "title",
@@ -32,7 +32,7 @@ const schema = defineType({
       return {
         title: [eyebrow, title, blocksToText(content)].join(" "),
         subtitle: prefixWithLanguage(language, blocksToText(content)),
-        media: () => <DocumentIcon type="page" />,
+        media: () => <LinesFile weight="thin" />,
       };
     },
   },

@@ -1,5 +1,5 @@
 import { baseLanguage } from "../../../languages";
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { Account } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -7,7 +7,7 @@ const schema = defineType({
   name: "person",
   title: "Person",
   type: "document",
-  icon: () => <DocumentIcon type="person" />,
+  icon: () => <Account weight="thin" size={20} />,
   preview: {
     select: {
       title: `name`,

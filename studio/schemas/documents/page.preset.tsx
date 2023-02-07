@@ -1,8 +1,8 @@
 import { HERO_SCHEMAS, MODULE_SCHEMAS } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { MODULES_FIELD } from "./_page";
+import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
@@ -10,7 +10,7 @@ const schema = defineType({
   name: "page.preset",
   title: "Preset",
   type: "document",
-  icon: () => <DocumentIcon type="module" />,
+  icon: () => <StarBookmark weight="thin" size={20} />,
   preview: {
     select: {
       title: "title",

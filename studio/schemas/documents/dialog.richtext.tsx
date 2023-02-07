@@ -1,6 +1,6 @@
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
 import { blocksToText } from "../../utils/portableText/portableTextToText";
+import { Website } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { SlugRule, defineType, defineField } from "sanity";
 
@@ -8,7 +8,7 @@ const schema = defineType({
   name: "dialog.richtext",
   title: "Rich Text Dialog",
   type: "object",
-  icon: () => <DocumentIcon type="dialog" />,
+  icon: () => <Website weight="thin" />,
   preview: {
     select: {
       content: "content",

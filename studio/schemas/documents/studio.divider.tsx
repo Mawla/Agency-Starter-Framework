@@ -1,4 +1,4 @@
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { DotArrowLeftRight } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -8,7 +8,7 @@ const schema = defineType({
   description:
     "Helper to visually group modules in the cms. Not shown on the website.",
   type: "object",
-  icon: () => <DocumentIcon type="divider" />,
+  icon: () => <DotArrowLeftRight weight="thin" />,
   preview: {
     select: {
       description: "description",

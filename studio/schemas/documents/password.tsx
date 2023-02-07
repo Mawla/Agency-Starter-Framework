@@ -1,6 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { getLinkableTypes } from "../../utils/schemas/getLinkableTypes";
+import { Passcode } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule } from "sanity";
 
@@ -10,7 +10,7 @@ export default defineType({
   name: SCHEMA_NAME,
   type: "document",
   title: "Password",
-  icon: () => <DocumentIcon type="password" />,
+  icon: () => <Passcode weight="thin" />,
   fields: [
     defineField({
       name: "password",

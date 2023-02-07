@@ -1,7 +1,7 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { pageBase } from "./_page";
+import { House } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
@@ -11,7 +11,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Homepage",
   type: "document",
-  icon: () => <DocumentIcon type="homepage" />,
+  icon: () => <House weight="thin" size={20} />,
   preview: {
     select: {
       title: `title.${baseLanguage}`,

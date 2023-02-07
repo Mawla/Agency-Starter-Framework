@@ -1,8 +1,8 @@
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { ICONS } from "../../types";
 import { SchemaName } from "../../types.sanity";
+import { AlignDown, Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
   ConditionalPropertyCallback,
@@ -40,7 +40,7 @@ const PREVIEW = {
         subtitle: external
           ? external
           : items?.map(({ label }: any) => label).join(", "),
-        media: <DocumentIcon type="link" />,
+        media: <Chain weight="thin" size={20} />,
       };
     },
   },
@@ -50,7 +50,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Footer",
   type: "document",
-  icon: () => <DocumentIcon type="footer" />,
+  icon: () => <AlignDown weight="thin" size={18} />,
   initialValue: {},
   options: { localize: true } as any,
   preview: {

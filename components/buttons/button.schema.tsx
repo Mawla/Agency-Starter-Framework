@@ -2,11 +2,11 @@ import DialogSelect, {
   DialogSelectWrapper,
 } from "../../studio/components/DialogSelect";
 import IconPicker from "../../studio/components/IconPicker";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
 import { ICONS } from "../../types";
 import { ICON_POSITION_OPTIONS, VARIANT_OPTIONS } from "./button.options";
+import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
   ConditionalPropertyCallback,
@@ -191,7 +191,7 @@ const schema = defineType({
       return {
         title: label,
         subtitle: external ? external : null,
-        media: <DocumentIcon type="link" />,
+        media: <Chain weight="thin" />,
       };
     },
   },

@@ -1,5 +1,5 @@
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { prefixWithLanguage } from "../../utils/language/prefix-with-language";
+import { Website } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, SlugRule } from "sanity";
 
@@ -7,7 +7,7 @@ const schema = defineType({
   name: "dialog.form",
   title: "Form",
   type: "object",
-  icon: () => <DocumentIcon type="dialog" />,
+  icon: () => <Website weight="thin" />,
   preview: {
     select: {
       title: "form.name",

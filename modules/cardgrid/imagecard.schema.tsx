@@ -1,6 +1,6 @@
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { IMAGE_RATIO_OPTIONS } from "./imagecard.options";
+import { Postcard } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType, defineField } from "sanity";
 
@@ -8,7 +8,7 @@ export const schema = defineType({
   title: "Image card",
   name: "card.image",
   type: "document",
-  icon: () => <DocumentIcon type="image" />,
+  icon: () => <Postcard weight="thin" />,
   preview: {
     select: {
       media: "image",

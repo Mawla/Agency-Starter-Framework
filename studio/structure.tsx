@@ -1,5 +1,4 @@
 import { languages, LanguagesListItemType } from "../languages";
-import { DocumentIcon } from "./utils/DocumentIcon";
 import { documentList } from "./utils/desk/documentList";
 import { group } from "./utils/desk/group";
 import { list } from "./utils/desk/list";
@@ -8,6 +7,15 @@ import { EmbedIframe } from "./views/EmbedIframe";
 import { PreviewIframe } from "./views/PreviewIframe";
 import { SeoPane } from "./views/SeoPane";
 import { Sitemap } from "./views/Sitemap";
+import {
+  Diagram,
+  Eye,
+  FilingCabinet,
+  Gear,
+  Layers,
+  MagnifyingGlass,
+  QuestionFile,
+} from "@vectopus/atlas-icons-react";
 import {
   DefaultDocumentNodeContext,
   StructureBuilder,
@@ -26,12 +34,12 @@ export const structure = (
     .items([
       group(S, {
         title: "Pages",
-        icon: () => <DocumentIcon type="studio" />,
+        icon: () => <Diagram weight="thin" size={20} />,
       }).child(
         list(S, { title: "Pages" }).items([
           S.listItem()
             .title("All pages")
-            .icon(() => <DocumentIcon type="structure" />)
+            .icon(() => <Layers weight="thin" size={20} />)
             .child(
               S.documentList()
                 .title("Content pages")
@@ -57,19 +65,19 @@ export const structure = (
       ),
       group(S, {
         title: "Collections",
-        icon: () => <DocumentIcon type="collections" />,
+        icon: () => <FilingCabinet weight="thin" size={20} />,
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),
         ]),
       ),
-
+      S.divider(),
       singleton(S, { id: "navigation", type: "navigation" }),
       singleton(S, { id: "footer", type: "footer" }),
       S.divider(),
       group(S, {
         title: "Config",
-        icon: () => <DocumentIcon type="config" />,
+        icon: () => <Gear weight="thin" size={20} />,
       }).child(
         list(S, { title: "Config" }).items([
           singleton(S, { id: "config_general", type: "config.general" }),
@@ -85,17 +93,18 @@ export const structure = (
           }),
         ]),
       ),
-      S.documentTypeListItem("page.preset").title("Presets"),
       documentList(S, { type: "redirect", title: "Redirects" }),
       documentList(S, { type: "form.static", title: "Forms" }),
       S.divider(),
       singleton(S, { id: "page_notfound", type: "page.notfound" }),
       singleton(S, { id: "page_sitemap", type: "page.sitemap" }),
+      S.divider(),
+      S.documentTypeListItem("page.preset").title("Presets"),
 
       S.divider(),
       S.listItem()
         .title("Guide")
-        .icon(() => <DocumentIcon type="guide" />)
+        .icon(() => <QuestionFile weight="thin" size={20} />)
         .child(
           S.component(EmbedIframe)
             .options({
@@ -144,13 +153,13 @@ export const PreviewView = (
       language: language.id,
     })
     .title("Preview " + language.title)
-    .icon(() => <DocumentIcon type="preview" />);
+    .icon(() => <Eye weight="thin" size={16} />);
 
 export const SeoView = (S: StructureBuilder) =>
   S.view
     .component(SeoPane)
     .title("SEO")
-    .icon(() => <DocumentIcon type="search" />);
+    .icon(() => <MagnifyingGlass weight="thin" size={16} />);
 
 /**
  * Group pages by parent

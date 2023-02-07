@@ -1,6 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { MagnifyingGlass } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -32,7 +32,7 @@ export const SEO_FIELD = {
       rows: 3,
       validation: (Rule: any) =>
         Rule.required().warning(
-          "It's good practice adding a description for SEO."
+          "It's good practice adding a description for SEO.",
         ),
     }),
     defineField({
@@ -42,7 +42,7 @@ export const SEO_FIELD = {
       description: "Preferred size: 1200x630",
       validation: (Rule: any) =>
         Rule.required().warning(
-          "It's good practice adding an image for SEO and social sharing."
+          "It's good practice adding an image for SEO and social sharing.",
         ),
     }),
     defineField({
@@ -59,7 +59,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "SEO",
   type: "document",
-  icon: () => <DocumentIcon type="search" />,
+  icon: () => <MagnifyingGlass weight="thin" size={20} />,
   initialValue: {},
   preview: {
     prepare() {

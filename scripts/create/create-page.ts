@@ -95,12 +95,7 @@ function finish() {
   console.log("\nNext steps: ");
 
   console.log(
-    `› Create an icon for the desk structure in ${cyan(
-      path.relative(
-        process.cwd(),
-        `${__dirname}/../../studio/utils/desk/DocumentIcon.tsx`,
-      ),
-    )} or use an existing icon ${cyan("http://localhost:3333/cms/engine")}`,
+    `› Create an icon for the desk structure from https://atlasicons.vectopus.com`,
   );
 
   if (answers.parentType) {

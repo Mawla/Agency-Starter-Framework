@@ -1,7 +1,7 @@
 import { STATIC_FORMS, STATIC_FORM_OPTIONS } from "../../../types";
 import { SchemaName } from "../../../types.sanity";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { optionsToList } from "../../utils/fields/optionsToList";
+import { PencilBox } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule } from "sanity";
 
@@ -11,7 +11,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Static form",
   type: "document",
-  icon: () => <DocumentIcon type="form" />,
+  icon: () => <PencilBox weight="thin" />,
   initialValue: {},
   fields: [
     defineField({
@@ -50,7 +50,7 @@ export default defineType({
           type: "object",
           name: "options",
           title: "Options",
-          icon: () => <DocumentIcon type="form" />,
+          icon: () => <PencilBox weight="thin" />,
           preview: {
             select: {
               title: "key",

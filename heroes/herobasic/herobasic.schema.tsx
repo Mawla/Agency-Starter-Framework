@@ -1,6 +1,6 @@
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { EllipsisVerticalIcon } from "@sanity/icons";
+import { ImageGallery } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -8,7 +8,7 @@ const schema = defineType({
   name: "hero.basic",
   title: "Hero Basic",
   type: "object",
-  icon: () => <DocumentIcon type="image" />,
+  icon: () => <ImageGallery weight="thin" />,
   preview: {
     select: {
       title: "title",

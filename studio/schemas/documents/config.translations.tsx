@@ -1,7 +1,7 @@
 import { TRANSLATION_FIELDS } from "../../../types";
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { Geography } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -11,7 +11,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Translations",
   type: "document",
-  icon: () => <DocumentIcon type="translations" />,
+  icon: () => <Geography weight="thin" size={20} />,
   preview: {
     prepare() {
       return {
@@ -40,7 +40,7 @@ export default defineType({
           description,
           validation: (Rule: any) => Rule.required(),
           options: { localize: true } as any,
-        })
+        }),
       ),
   ],
 });

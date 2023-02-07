@@ -5206,6 +5206,11 @@
     "@uiw/codemirror-extensions-basic-setup" "4.19.7"
     codemirror "^6.0.0"
 
+"@vectopus/atlas-icons-react@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@vectopus/atlas-icons-react/-/atlas-icons-react-0.0.7.tgz#b503cc003f041f40d2c49607d0dc47f3f709b684"
+  integrity sha512-xflYytrecnhhXgRc9iI0ECgZzprKy5SCfq1UyFxqUQU5yELVXsGT2Ibykg9fvrynBFKcFxVdfFetNLWRpXToMg==
+
 "@vercel/og@^0.0.21":
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/@vercel/og/-/og-0.0.21.tgz#9d2421a241a0cfbdc3841b88bf323d980339da40"

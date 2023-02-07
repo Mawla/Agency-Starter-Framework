@@ -1,8 +1,12 @@
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { ICONS } from "../../types";
 import { SchemaName } from "../../types.sanity";
+import {
+  Chain,
+  JustifyAll,
+  TriangleExclamation,
+} from "@vectopus/atlas-icons-react";
 import React from "react";
 import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
 
@@ -44,9 +48,9 @@ const PREVIEW = {
           ? external
           : children?.map(({ label }: { label: string }) => label).join(", "),
         media: label?.trim().length ? (
-          <DocumentIcon type="link" />
+          <Chain weight="thin" size={20} />
         ) : (
-          <DocumentIcon type="warning" />
+          <TriangleExclamation weight="thin" size={20} />
         ),
       };
     },
@@ -57,7 +61,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Navigation",
   type: "document",
-  icon: () => <DocumentIcon type="navigation" />,
+  icon: () => <JustifyAll weight="thin" size={18} />,
   initialValue: {},
   options: { localize: true } as any,
   preview: {

@@ -1,6 +1,5 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import {
   DIALOGS_FIELD,
   HERO_FIELD,
@@ -8,6 +7,7 @@ import {
   pageBase,
   TITLE_FIELD,
 } from "./_page";
+import { BlockProhibited } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
@@ -17,7 +17,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "404 page",
   type: "document",
-  icon: () => <DocumentIcon type="notfound" />,
+  icon: () => <BlockProhibited weight="thin" size={20} />,
   preview: {
     select: {
       title: `title.${baseLanguage}`,

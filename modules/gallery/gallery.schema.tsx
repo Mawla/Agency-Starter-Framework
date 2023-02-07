@@ -1,9 +1,9 @@
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
-import { DocumentIcon } from "../../studio/utils/DocumentIcon";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { prefixWithLanguage } from "../../studio/utils/language/prefix-with-language";
 import { HEADING_LEVELS } from "../../types";
 import { EllipsisVerticalIcon } from "@sanity/icons";
+import { VirtualRealityImage } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -12,7 +12,7 @@ const schema = defineType({
   title: "Gallery",
   type: "object",
   description: "Photo showcase slider",
-  icon: () => <DocumentIcon type="gallery" />,
+  icon: () => <VirtualRealityImage weight="thin" />,
   preview: {
     select: {
       title: "title",
@@ -23,7 +23,7 @@ const schema = defineType({
       return {
         title: title,
         subtitle: prefixWithLanguage(language, eyebrow),
-        media: () => <DocumentIcon type="gallery" />,
+        media: () => <VirtualRealityImage weight="thin" />,
       };
     },
   },

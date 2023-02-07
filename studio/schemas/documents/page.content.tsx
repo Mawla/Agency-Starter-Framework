@@ -1,6 +1,5 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { DocumentIcon } from "../../utils/DocumentIcon";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import {
   DIALOGS_FIELD,
@@ -12,6 +11,7 @@ import {
   TITLE_FIELD,
 } from "./_page";
 import { SEO_FIELD } from "./config.seo";
+import { Pages } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -21,7 +21,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Content page",
   type: "document",
-  icon: () => <DocumentIcon type="page" />,
+  icon: () => <Pages weight="thin" size={20} />,
   orderings: [
     {
       title: "Title",

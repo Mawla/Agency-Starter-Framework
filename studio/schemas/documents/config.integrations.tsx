@@ -1,6 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
-import { DocumentIcon } from "../../utils/DocumentIcon";
+import { TrimPathfinder } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -10,7 +10,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Integrations",
   type: "document",
-  icon: () => <DocumentIcon type="integrations" />,
+  icon: () => <TrimPathfinder weight="thin" size={20} />,
   initialValue: {},
   preview: {
     prepare() {
