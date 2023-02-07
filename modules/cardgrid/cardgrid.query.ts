@@ -1,12 +1,7 @@
-import {
-  buttonQuery,
-  resolveIdHrefQuery,
-} from "../../components/buttons/button.query";
+import { buttonQuery } from "../../components/buttons/button.query";
 import { getImageQuery, imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
-import { getTranslationQuery } from "../../queries/translations.query";
-import { COMPOSABLE_CARD_THEME_OPTIONS } from "./composablecard.options";
 import groq from "groq";
 
 export const getCardGridQuery = (language: LanguageType) => groq`
@@ -21,53 +16,21 @@ _type == "module.cardgrid" => {
   gap,
   columns,
   buttons[] ${buttonQuery},
-  feed,
-  "items": select(
-    // department cards
-    feed.type == 'department' => *[_type == 'page.department' && !(_id in path("drafts.**"))] {
-      "type": 'card.composable',
-      _id,
-      "_key": _id,
-      "themeName": "${COMPOSABLE_CARD_THEME_OPTIONS.department}",
-      "title": title.${language},
-      "text": description.${language},
+  items[] {
+    "type": _type,
+    theme,
+    _key,
+    _type == "card.composable" => {
+      "cover": ${getImageQuery("cover")},
       "image": ${imageQuery},
-      "buttons": [{ 
-        "label": ${getTranslationQuery("read_more", language)},
-        "variant": 'secondary',
-        "href": ${resolveIdHrefQuery}
-      }]
+      icon,
+      title,
+      subtitle,
+      text[] ${richTextQuery},
+      buttons[] ${buttonQuery},
     },
-
-    // people cards
-    feed.type == 'person' => *[_type == 'person' && !(_id in path("drafts.**"))] {
-      "type": 'card.composable',
-      _id,
-      "_key": _id,
-      "themeName": "${COMPOSABLE_CARD_THEME_OPTIONS.person}",
-      "title": name,
-      "subtitle": position.${language},
-      "text": description.${language},
+    _type == "card.image" => {
       "image": ${imageQuery},
     },
-
-    // free form cards
-    items[] {
-      "type": _type,
-      theme,
-      _key,
-      _type == "card.composable" => {
-        "cover": ${getImageQuery("cover")},
-        "image": ${imageQuery},
-        icon,
-        title,
-        subtitle,
-        text[] ${richTextQuery},
-        buttons[] ${buttonQuery},
-      },
-      _type == "card.image" => {
-        "image": ${imageQuery},
-      },
-    }
-  )
+  }
 }`;

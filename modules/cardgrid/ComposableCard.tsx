@@ -27,7 +27,6 @@ import {
   TextColorType,
   TitleColorType,
   CardSpacingType,
-  ComposableCardThemeType,
 } from "./composablecard.options";
 import cx from "classnames";
 import Link from "next/link";
@@ -71,7 +70,6 @@ export type ComposableCardProps = {
   subtitle?: string;
   text?: React.ReactElement;
   buttons?: ButtonProps[];
-  themeName?: ComposableCardThemeType;
   theme?: {
     card?: {
       align?: CardAlignType;
@@ -143,25 +141,6 @@ const cardVerticalSpacingClasses: Record<CardSpacingType, string> = {
   lg: "py-10 sm:py-12 md:py-16 lg:py-20",
 };
 
-export const COMPOSABLE_CARD_THEMES: Record<
-  ComposableCardThemeType,
-  ComposableCardProps["theme"]
-> = {
-  department: {
-    card: { border: "neutral-200" },
-    title: { size: "lg", color: "neutral-500" },
-    text: { size: "md", color: "neutral-900" },
-    image: { height: "sm", ratio: "1/1", rounded: "full" },
-  },
-
-  person: {
-    title: { size: "md", color: "brand-500" },
-    subtitle: { size: "md", color: "neutral-500", weight: "regular" },
-    image: { rounded: "xl", ratio: "3/2", height: "lg" },
-    text: { color: "neutral-900", size: "lg" },
-  },
-};
-
 export const ComposableCard = ({
   title,
   subtitle,
@@ -170,14 +149,9 @@ export const ComposableCard = ({
   cover,
   icon,
   theme,
-  themeName,
   buttons,
 }: ComposableCardProps) => {
   const cardClickable = buttons?.length === 1 && buttons?.[0]?.href;
-
-  if (themeName && COMPOSABLE_CARD_THEMES[themeName]) {
-    theme = COMPOSABLE_CARD_THEMES[themeName];
-  }
 
   // add white background when there is a shadow
   if (theme?.card?.shadow && !theme?.card?.background)

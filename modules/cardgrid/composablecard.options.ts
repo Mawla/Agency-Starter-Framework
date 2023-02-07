@@ -75,10 +75,3 @@ export type ImageRoundedType = keyof typeof IMAGE_ROUNDED_OPTIONS;
 
 export const IMAGE_RATIO_OPTIONS = pick(RATIOS, "auto", "16/9", "1/1", "3/2");
 export type ImageRatioType = keyof typeof IMAGE_RATIO_OPTIONS;
-
-export const COMPOSABLE_CARD_THEME_OPTIONS = {
-  department: "department",
-  person: "person",
-};
-export type ComposableCardThemeType =
-  keyof typeof COMPOSABLE_CARD_THEME_OPTIONS;

@@ -11,11 +11,10 @@ import {
   GAP_OPTIONS,
   TITLE_SIZE_OPTIONS,
 } from "./cardgrid.options";
-import { COMPOSABLE_CARD_THEME_OPTIONS } from "./composablecard.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { ColumnLayout } from "@vectopus/atlas-icons-react";
 import React from "react";
-import { ConditionalPropertyCallback, defineField, defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "module.cardgrid",
@@ -101,37 +100,8 @@ const schema = defineType({
       title: "Items",
       type: "array",
       description: "Manually put together a list of cards.",
-      hidden: (({ parent, value }) =>
-        !value && parent?.feed) as ConditionalPropertyCallback,
       group: ["content", "cards"],
       of: [{ type: "card.composable" }, { type: "card.image" }],
-    }),
-    defineField({
-      name: "feed",
-      title: "Feed",
-      type: "object",
-      group: ["content", "cards"],
-      description: "Automatically let a list of predefined cards flow in.",
-      hidden: (({ parent, value }) =>
-        !value && parent?.items) as ConditionalPropertyCallback,
-      fields: [
-        defineField({
-          name: "type",
-          title: "Type",
-          type: "string",
-          options: {
-            list: optionsToList(COMPOSABLE_CARD_THEME_OPTIONS),
-          },
-        }),
-        defineField({
-          name: "items",
-          title: "Items",
-          type: "array",
-          hidden: (({ parent, value }) =>
-            !value && parent?.type !== "person") as ConditionalPropertyCallback,
-          of: [{ type: "reference", to: [{ type: "person" }] }],
-        }),
-      ],
     }),
     defineField({
       name: "buttons",
