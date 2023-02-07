@@ -18,7 +18,7 @@ const schema = defineType({
       return {
         title: `${title}`,
         subtitle: eyebrow,
-        media: image,
+        media: image || <ImageGallery weight="thin" />,
       };
     },
   },
