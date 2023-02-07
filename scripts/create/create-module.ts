@@ -87,7 +87,7 @@ async function init() {
       isHero,
     );
 
-    addQuery(pascalName, isHero);
+    addQuery(lowerName, pascalName, isHero);
     addSchemaType(schemaName, { module: !isHero, hero: isHero });
     addBuilder(lowerName, pascalName, schemaName, isHero);
 
@@ -461,14 +461,14 @@ function createModule(
  * Add query to page.query.ts
  */
 
-function addQuery(pascalName, isHero) {
+function addQuery(lowerName, pascalName, isHero) {
   const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines.push(
     `import { get${pascalName}Query } from "../${
       isHero ? "heroes" : "modules"
-    }/${pascalName}/${pascalName}.query";`,
+    }/${lowerName}/${lowerName}.query";`,
   );
   lines = addLine(
     `    \${get${pascalName}Query(language)},`,
