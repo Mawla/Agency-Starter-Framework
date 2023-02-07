@@ -1,5 +1,5 @@
 import button from "../../components/buttons/button.schema";
-import buttongroup from "../../components/buttons/buttonGroup.schema";
+import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
