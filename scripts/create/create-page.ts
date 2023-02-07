@@ -1,4 +1,3 @@
-import { languages } from "../../languages";
 import { SCHEMAS } from "../../types.sanity";
 
 /**
@@ -246,7 +245,7 @@ function createDeskStructure(
 
   lines = addLine(str, lines, `type: "page.content"`, -1);
   lines = addLine(
-    `,\n                    '${schemaName}'`,
+    `                   ,'${schemaName}`,
     lines,
     `] && !defined(parent)`,
     0,
