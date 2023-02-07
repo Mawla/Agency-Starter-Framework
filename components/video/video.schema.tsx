@@ -42,11 +42,15 @@ export const getVideoPreviewTitle = ({
     .join(", ")}${caption ? ` - ${caption}` : ""}`;
 };
 
-export const getVideoPreviewThumbnail = ({ muxPlaybackId, youtube }: any) => {
+export const getVideoPreviewThumbnail = ({
+  muxPlaybackId,
+  youtube,
+  vimeo,
+}: any) => {
   let image = null;
 
   if (muxPlaybackId)
-    image = `https://image.mux.com/${muxPlaybackId}/thumbnail.jpg?&fit_mode=smartcrop&width=160&height=160`;
+    image = `https://image.mux.com/${muxPlaybackId}/thumbnail.png?width=400&height=200&fit_mode=smartcrop&time=35`;
 
   if (youtube)
     image = `https://img.youtube.com/vi/${getYoutubeId(youtube)}/0.jpg`;
@@ -59,6 +63,56 @@ export const getVideoPreviewThumbnail = ({ muxPlaybackId, youtube }: any) => {
   return image;
 };
 
+const VideoPreview = (props: any) => {
+  return (
+    <div
+      style={{
+        background: "rgba(0,0,0,.85)",
+        color: "white",
+        width: "100%",
+        aspectRatio: "16/9",
+        textAlign: "center",
+        fontSize: 12,
+      }}
+    >
+      {props?.media?.props?.src && (
+        <img src={`${props?.media?.props?.src}`} style={{ width: "100%" }} />
+      )}
+      <svg
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+      {props.title && (
+        <span
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "10px",
+            transform: "translateX(-50%)",
+          }}
+        >
+          {props.title}
+        </span>
+      )}
+    </div>
+  );
+};
+
 const schema = defineType({
   name: "video",
   title: "Video",
@@ -68,6 +122,9 @@ const schema = defineType({
     autoPlay: false,
   },
   preview: getVideoPreview(),
+  components: {
+    preview: VideoPreview,
+  },
   fieldsets: [
     {
       name: "videoOptions",
@@ -84,16 +141,6 @@ const schema = defineType({
         list: Object.keys(VIDEO_PROVIDERS),
       },
     }),
-    defineField({
-      title: "Sanity",
-      type: "file",
-      name: "sanity",
-      description:
-        "Hosting videos on Sanity itself is discouraged. The video can't be optimised by the frontend and hosting costs will increase. Choosing a dedicated video provider like Youtube, Vimeo, Mux or Cloudinary is encouraged.",
-      hidden: (({ parent, value }) =>
-        !value && parent?.provider !== "sanity") as ConditionalPropertyCallback,
-    }),
-
     defineField({
       title: "Youtube URL",
       type: "url",
