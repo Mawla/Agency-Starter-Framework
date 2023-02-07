@@ -17,10 +17,12 @@ export const isPathUnique = async (slug: string, context: any) => {
   const sitemap: SitemapType = await client.fetch(getSitemapQuery());
 
   // get this document from the sitemap
-  const sitemapItem = sitemap.find(({ _id }) => document._id === _id);
+  const sitemapItem = sitemap
+    .filter(Boolean)
+    .find(({ _id }) => document?._id === _id);
 
   // find all paths that match this documents path
-  const matches = sitemap.filter(({ paths, _id }) => {
+  const matches = sitemap.filter(Boolean).filter(({ paths, _id }) => {
     const languagePath = paths?.[language as LanguageType];
     const sitemapItemPath = sitemapItem?.paths[language as LanguageType];
 
