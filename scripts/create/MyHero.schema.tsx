@@ -8,16 +8,19 @@ const schema = defineType({
   name: "MyHeroSchema",
   title: "MyHero",
   type: "object",
-  icon: () => <ImageGallery weight="thin" />,
   description: "/*DESCRIPTION*/",
+  icon: () => <ImageGallery weight="thin" />,
   preview: {
     select: {
       title: "title",
+      eyebrow: "eyebrow",
       image: "image",
     },
-    prepare({ title = "MyHero" }: any) {
+    prepare({ title = "", eyebrow = "", image }: any) {
       return {
-        title: title,
+        title: `${title}`,
+        subtitle: eyebrow,
+        media: image || <ImageGallery weight="thin" />,
       };
     },
   },
