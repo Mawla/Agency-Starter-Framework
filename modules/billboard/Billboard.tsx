@@ -1,5 +1,5 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroupProps } from "../../components/buttons/buttongroup";
+import { ButtonGroupProps } from "../../components/buttons/buttongroup2";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
@@ -39,7 +39,7 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup2"
     ),
 );
 

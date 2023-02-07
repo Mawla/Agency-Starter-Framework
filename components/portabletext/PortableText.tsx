@@ -1,6 +1,6 @@
 import { VideoType } from "../../types";
 import { Link } from "../buttons/Link";
-import { ButtonGroup } from "../buttons/buttongroup";
+import { ButtonGroup } from "../buttons/buttongroup2";
 import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { Table } from "../table/Table";

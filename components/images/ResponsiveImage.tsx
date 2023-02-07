@@ -4,12 +4,9 @@ import {
   getResponsiveImageUrl,
 } from "../../helpers/sanity/image-url";
 import { roundToNearest } from "../../helpers/utils/number";
-import { useDebounce } from "../../hooks/useDebounce";
-import { ImageSizes } from "../../modules/cardgrid/composablecard.stories";
 import { ImageType, RatioType } from "../../types";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
 import cx from "classnames";
-import { log } from "console";
 import Head from "next/head";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
@@ -65,15 +62,11 @@ export const ResponsiveImage = ({
   maxWidth = 2400,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const placeholderRef = useRef<HTMLDivElement>(null);
 
   const [responsiveSrc, setResponsiveSrc] = useState<string | null>(null);
   const [state, setState] = useState<"loading" | "loaded" | null>(null);
 
   const [wrapperWidth, setWrapperWidth] = useState<number>(0);
-  const [wrapperHeight, setWrapperHeight] = useState<number>(0);
-  const debouncedWrapperWidth = useDebounce(wrapperWidth, 500);
-  const debouncedWrapperHeight = useDebounce(wrapperHeight, 500);
 
   const imageDimensions = getOriginalImageDimensions(src || "");
   const originalWidth = imageDimensions?.width || 0;
@@ -90,12 +83,8 @@ export const ResponsiveImage = ({
     if (typeof src !== "string") return;
 
     const rect = wrapperRef.current.getBoundingClientRect();
-
     const w = roundToNearest(roundSize, rect.width);
-    const h = roundToNearest(roundSize, rect.height);
-
     setWrapperWidth(w);
-    setWrapperHeight(h);
   }, [src, roundSize]);
 
   /**
@@ -149,7 +138,6 @@ export const ResponsiveImage = ({
     );
   }, [
     wrapperWidth,
-    debouncedWrapperHeight,
     width,
     height,
     src,

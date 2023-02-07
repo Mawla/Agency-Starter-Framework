@@ -1,5 +1,5 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroupProps } from "../../components/buttons/buttongroup";
+import { ButtonGroupProps } from "../../components/buttons/buttongroup2";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -7,7 +7,7 @@ import React, { ComponentType, lazy } from "react";
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/buttongroup2"
     ),
 );
 
