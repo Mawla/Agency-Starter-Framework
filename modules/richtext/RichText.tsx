@@ -44,7 +44,6 @@ export type RichTextProps = {
       background?: BackgroundColorType;
       align?: TextAlignType;
       width?: WidthType;
-      pullUp?: boolean;
     };
     title?: {
       size?: TitleSizeType;
@@ -76,7 +75,6 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
         width: theme?.module?.width,
         background: theme?.module?.background,
         space: theme?.module?.space,
-        pullUp: theme?.module?.pullUp,
         rounded: {
           top: theme?.decorations?.roundedTop,
           bottom: theme?.decorations?.roundedBottom,

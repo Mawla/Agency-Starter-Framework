@@ -119,11 +119,6 @@ const schema = defineType({
                   list: optionsToList(WIDTH_OPTIONS),
                 },
               },
-              {
-                name: "pullUp",
-                type: "boolean",
-                title: "Pull next module up",
-              },
             ],
           },
         }),

@@ -20,7 +20,6 @@ export type WrapperProps = {
     text?: ColorType;
     rounded?: ModuleRoundedType;
     width?: WidthType;
-    pullUp?: boolean;
   };
 } & Partial<SpacingProps>;
 
@@ -85,19 +84,9 @@ export const Wrapper = ({
               <Bleed bleed="lg">
                 <Width width="inner">{children}</Width>
               </Bleed>
-
-              {/* create space for the next module inside this one */}
-              {theme?.pullUp && (
-                <div className="pb-40 md:pb-60 xl:pb-80 2xl:pb-[500px]" />
-              )}
             </Background>
           </Width>
         </Spacing>
-
-        {/* pull up next module */}
-        {theme?.pullUp && (
-          <div className="-mb-40 md:-mb-60 xl:-mb-96 2xl:mb-[-500px]" />
-        )}
       </Bleed>
     );
   }
