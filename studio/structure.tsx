@@ -46,22 +46,22 @@ export const structure = (
                 .schemaType("page.content")
                 .filter(
                   `_type in [
-                    'page.content',
-                    'page.home',
-                    'page.events',
-                    'page.event',
-                    'page.casestudies',
-                    'page.casestudy',
-                    'page.podcasts',
-                    'page.podcast',
-                    'page.guides',
-                    'page.guide',
-                    'page.tools',
-                    'page.tool',
-                    'page.videos',
-                    'page.video',
-                    'page.blogs',
-                    'page.blog'
+                    'page.content'
+                    ,'page.home'
+                    ,'page.events'
+                    ,'page.event'
+                    ,'page.casestudies'
+                    ,'page.casestudy'
+                    ,'page.podcasts'
+                    ,'page.podcast'
+                    ,'page.guides'
+                    ,'page.guide'
+                    ,'page.tools'
+                    ,'page.tool'
+                    ,'page.videos'
+                    ,'page.video'
+                    ,'page.blogs'
+                    ,'page.blog'
                   ] && !defined(parent)`,
                 )
                 .child(
