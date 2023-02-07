@@ -68,7 +68,9 @@ function askChildren() {
 
   const ask = `If it has a parent, what is its type?`;
   const description = `Used to create a grouped desk structure.`;
-  const options = Object.keys(SCHEMAS).map((type) => type);
+  const options = Object.keys(SCHEMAS)
+    .filter((type) => type.startsWith("page."))
+    .map((type) => type);
 
   readline.question(question(ask, description, options), (answer) => {
     answers.parentType = answer;
