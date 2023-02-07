@@ -7,8 +7,8 @@ test("test non-existent existing path", () => {
 });
 
 test("test existing path", () => {
-  const path = getPathForId("xxx3", DEMO_SITEMAP, "it");
-  expect(path).toEqual("/it/page1/page2/page3");
+  const path = getPathForId("xxx3", DEMO_SITEMAP, "es");
+  expect(path).toEqual("/es/page1/page2/page3");
 });
 
 test("test existing path with wrong language", () => {

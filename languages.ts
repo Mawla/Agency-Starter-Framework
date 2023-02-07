@@ -1,4 +1,4 @@
-export type LanguageType = "en" | "it" | "es";
+export type LanguageType = "en" | "es";
 
 export type LanguagesListItemType = {
   id: LanguageType;
@@ -8,7 +8,6 @@ export type LanguagesListType = LanguagesListItemType[];
 
 export const languages: LanguagesListType = [
   { id: "en", title: "English" },
-  { id: "it", title: "Italiano" },
   { id: "es", title: "Español" },
 ];
 

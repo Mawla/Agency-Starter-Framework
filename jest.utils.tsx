@@ -19,12 +19,10 @@ const DEMO_SITEMAP: SitemapItemType[] = [
     title: "Page 1",
     paths: {
       en: "/",
-      it: "/",
       es: "/",
     },
     titles: {
       en: "/",
-      it: "/",
       es: "/",
     },
   },
@@ -36,12 +34,10 @@ const DEMO_SITEMAP: SitemapItemType[] = [
     title: "Page 2",
     paths: {
       en: "/",
-      it: "/",
       es: "/",
     },
     titles: {
       en: "/",
-      it: "/",
       es: "/",
     },
   },
@@ -53,12 +49,10 @@ const DEMO_SITEMAP: SitemapItemType[] = [
     title: "Page 3",
     paths: {
       en: "/",
-      it: "/",
       es: "/",
     },
     titles: {
       en: "/",
-      it: "/",
       es: "/",
     },
   },

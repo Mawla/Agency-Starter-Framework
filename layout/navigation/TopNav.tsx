@@ -162,7 +162,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                             "text-md",
                                             "p-3 rounded-2xs",
                                             {
-                                              ["font-bold bg-neutral-800 hover:bg-neutral-800 text-neutral-600"]:
+                                              ["font-bold bg-neutral-100 hover:bg-neutral-100 text-neutral-600"]:
                                                 current,
                                             },
                                           )}
