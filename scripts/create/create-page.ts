@@ -200,10 +200,10 @@ function createQuery(name, schemaName, documentId, answers) {
   }*/
 
   lines = addLine(
-    `|| _type == '${schemaName}'`,
+    `      || _type == '${schemaName}'`,
     lines,
     `_type == "page.content"`,
-    0,
+    1,
   );
   fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
