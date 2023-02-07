@@ -110,7 +110,7 @@ function finish() {
 askName();
 
 const build = (answers) => {
-  const { name, singleton, addDesk } = answers;
+  const { name, singleton, addDesk, parentType, parentId } = answers;
   if (!name.trim().length) return readline.close();
 
   const pascalName = `${pascalCase(name)}`;
@@ -129,7 +129,23 @@ const build = (answers) => {
     .toString()
     .replace(/MyPageSchema/g, schemaName)
     .replace(/mypage/g, lowerName)
-    .replace(/MyPage/g, pascalName);
+    .replace(/MyPage/g, pascalName)
+    .replace(
+      `/*PARENT_FIELD*/`,
+      singleton
+        ? `PARENT_FIELD,`
+        : `{
+      ...PARENT_FIELD,
+      to: [{ type: "${parentType}" }],
+      options: { disableNew: true },
+      hidden: true,
+    },`,
+    )
+    .replace(
+      ` /*PARENT_INITIAL_VALUE*/`,
+      singleton ? `` : `parent: { _type: "reference", _ref: "${parentId}" },`,
+    );
+
   fs.writeFileSync(schemaFilePath, schemaContent);
   prettierFile(schemaFilePath);
 
@@ -200,7 +216,7 @@ function createQuery(name, schemaName, documentId, answers) {
   }*/
 
   lines = addLine(
-    `      || _type == '${schemaName}'`,
+    `       || _type == '${schemaName}'`,
     lines,
     `_type == "page.content"`,
     1,
@@ -251,7 +267,7 @@ function createDeskStructure(
 
   lines = addLine(str, lines, `type: "page.content"`, -1);
   lines = addLine(
-    `                   ,'${schemaName}`,
+    `                   ,'${schemaName}'`,
     lines,
     `] && !defined(parent)`,
     0,

@@ -1,6 +1,11 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { ORDER_PUBLISHED_DESC, pageBase, PUBLISHED_AT_FIELD } from "./_page";
+import {
+  PARENT_FIELD,
+  ORDER_PUBLISHED_DESC,
+  pageBase,
+  PUBLISHED_AT_FIELD,
+} from "./_page";
 import { Pages } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
@@ -21,7 +26,12 @@ export default defineType({
   icon: () => <Pages weight="thin" size={20} />,
   initialValue: {
     ...pageBase.initialValue,
+    /*PARENT_INITIAL_VALUE*/
   },
   fieldsets: [...pageBase.fieldsets],
-  fields: [...pageBase.fields, PUBLISHED_AT_FIELD],
+  fields: [
+    /*PARENT_FIELD*/
+    ...pageBase.fields,
+    PUBLISHED_AT_FIELD,
+  ],
 });
