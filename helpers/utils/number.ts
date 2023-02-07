@@ -23,7 +23,7 @@ export const wrap = (min: number, max: number, v: number) => {
 
 export const roundToNearest = (multiple: number, v: number) => {
   if (multiple === 0) return Math.round(v);
-  return Math.round(v / multiple) * multiple;
+  return Math.ceil(v / multiple) * multiple;
 };
 
 /**

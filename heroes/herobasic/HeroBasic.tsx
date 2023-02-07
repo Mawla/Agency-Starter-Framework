@@ -93,6 +93,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                   width={1374}
                   height={774}
                   fill
+                  maxWidth={1370}
                 />
               </div>
             )}

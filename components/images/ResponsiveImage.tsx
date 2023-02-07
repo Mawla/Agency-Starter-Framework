@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { getResponsiveImageUrl } from "../../helpers/sanity/image-url";
+import {
+  getOriginalImageDimensions,
+  getResponsiveImageUrl,
+} from "../../helpers/sanity/image-url";
 import { roundToNearest } from "../../helpers/utils/number";
 import { useDebounce } from "../../hooks/useDebounce";
+import { ImageSizes } from "../../modules/cardgrid/composablecard.stories";
 import { ImageType, RatioType } from "../../types";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
 import cx from "classnames";
+import { log } from "console";
 import Head from "next/head";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
@@ -22,6 +27,9 @@ export type ResponsiveImageProps = {
   roundSize?: number;
   alt?: string;
   loading?: "eager" | "lazy";
+  imageSrcSet?: string;
+  imageSizes?: string;
+  maxWidth?: number;
 };
 
 const IMAGE_QUALITY = 85;
@@ -52,6 +60,9 @@ export const ResponsiveImage = ({
   roundSize = 0,
   fill = false,
   loading = "lazy",
+  imageSrcSet,
+  imageSizes,
+  maxWidth = 2400,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
@@ -72,6 +83,11 @@ export const ResponsiveImage = ({
   const [wrapperHeight, setWrapperHeight] = useState<number>(0);
   const debouncedWrapperWidth = useDebounce(wrapperWidth, 500);
   const debouncedWrapperHeight = useDebounce(wrapperHeight, 500);
+
+  const imageDimensions = getOriginalImageDimensions(src || "");
+  const originalWidth = imageDimensions?.width || 0;
+  const originalHeight = imageDimensions?.height || 0;
+  const originalAspectRatio = imageDimensions.aspectRatio;
 
   useEffect(() => {
     if (state === null) setState("loading");
@@ -165,6 +181,32 @@ export const ResponsiveImage = ({
 
   if (!src) return null;
 
+  /**
+   * Generate srcset and sizes for responsive images
+   * e.g imagesrcset="640.png 640w, 800.png 800w, 1024.png 1024w" imagesizes="100vw"
+   */
+
+  function getImageSizes() {
+    const stepSize = roundSize || 50;
+
+    const imageSizes: string[] = new Array(Math.floor(maxWidth / stepSize))
+      .fill(0)
+      .map((_, i) => {
+        const newWidth = maxWidth - i * stepSize;
+        const newSrc = getResponsiveImageUrl({
+          src: src || "",
+          width: roundToNearest(roundSize, newWidth),
+          height: roundToNearest(roundSize, newWidth) / originalAspectRatio,
+          hotspot,
+          crop,
+          quality: IMAGE_QUALITY,
+        });
+        return `${newSrc} ${newWidth}w`;
+      });
+    console.log(imageSizes.join(",\n"));
+    return imageSizes.join(", ");
+  }
+
   return (
     <div
       className={cx("h-full w-full", {
@@ -179,6 +221,8 @@ export const ResponsiveImage = ({
             rel="preload"
             as="image"
             href={`${responsiveSrc}&q=${IMAGE_QUALITY}`}
+            imageSrcSet={imageSrcSet || getImageSizes()}
+            imageSizes={imageSizes || "100vw"}
           />
         </Head>
       )}
@@ -188,8 +232,8 @@ export const ResponsiveImage = ({
           src={(responsiveSrc || src) as string}
           className={className}
           alt={alt || ""}
-          width={fill ? undefined : width}
-          height={fill ? undefined : height}
+          width={width}
+          height={height}
           onLoad={onImageLoad}
           loading={loading}
         />
