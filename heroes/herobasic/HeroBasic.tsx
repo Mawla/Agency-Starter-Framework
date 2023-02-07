@@ -1,5 +1,5 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroup, ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { BleedProps } from "../../components/module/Bleed";
 import { TextProps } from "../../components/module/Text";
@@ -90,6 +90,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
                 />
               )}
             </div>
+
             {image && (
               <div className="relative block mx-auto overflow-hidden rounded-lg mt-10 aspect-video">
                 <ResponsiveImage

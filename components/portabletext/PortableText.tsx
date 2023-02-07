@@ -1,6 +1,6 @@
 import { VideoType } from "../../types";
-import { ButtonGroup } from "../buttons/ButtonGroup";
-import { Link } from "../buttons/Link";
+import { ButtonGroupProps } from "../buttons/ButtonGroup";
+import { LinkProps } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { Table } from "../table/Table";
@@ -18,6 +18,14 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 
 const Video = lazy<ComponentType<VideoType>>(
   () => import(/* webpackChunkName: "VideoComponent" */ "../video/Video"),
+);
+
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+  () => import(/* webpackChunkName: "ButtonGroup" */ "../buttons/ButtonGroup"),
+);
+
+const Link = lazy<ComponentType<LinkProps>>(
+  () => import(/* webpackChunkName: "Link" */ "../buttons/Link"),
 );
 
 export type PortableTextProps = {
