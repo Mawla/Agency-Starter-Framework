@@ -23,6 +23,7 @@ const schema = defineType({
     prepare({ title = "MyModule" }: any) {
       return {
         title: title,
+        media: <ImageGallery weight="thin" />,
       };
     },
   },
