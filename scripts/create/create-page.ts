@@ -158,8 +158,9 @@ function createQuery(name, schemaName, documentId, answers) {
   const filePath = `${__dirname}/../../queries/sitemap.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  let str;
+  // let str;
 
+  /*
   // singleton query
   if (singleton) {
     str = `
@@ -196,9 +197,14 @@ function createQuery(name, schemaName, documentId, answers) {
     },
 `;
     }
-  }
+  }*/
 
-  lines = addLine(str, lines, "// content pages", -1);
+  lines = addLine(
+    `|| _type == '${schemaName}'`,
+    lines,
+    `_type == "page.content"`,
+    0,
+  );
   fs.writeFileSync(filePath, lines.join("\n"));
   console.log(
     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
