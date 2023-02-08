@@ -2,12 +2,14 @@ import { act, render, screen } from "../../jest.utils";
 import ResourceHero from "./ResourceHero";
 import "@testing-library/jest-dom";
 
+jest.mock("next/dist/client/router", () => require("next-router-mock"));
+
 describe("ResourceHero", () => {
   it("renders title", async () => {
     await act(() => {
       render(<ResourceHero title="Hello" />);
     });
-    expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
+    expect(screen.getByText("Hello", { selector: "h1" })).toBeInTheDocument();
   });
 
   it("renders intro", async () => {
