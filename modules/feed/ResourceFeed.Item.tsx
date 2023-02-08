@@ -10,7 +10,7 @@ import { joinList, truncate } from "../../helpers/utils/string";
 import { ImageType } from "../../types";
 import { useContext } from "react";
 
-export type FeedItem = {
+export type ResourceFeedItem = {
   _id: string;
   title: string;
   date: string;
@@ -21,7 +21,7 @@ export type FeedItem = {
   authors?: { name: string; image?: ImageType }[];
 };
 
-export const FeedItem = ({
+export const ResourceFeedItem = ({
   title,
   date,
   image,
@@ -29,7 +29,7 @@ export const FeedItem = ({
   intro,
   tags,
   authors,
-}: FeedItem) => {
+}: ResourceFeedItem) => {
   const { language } = useContext(PageContext);
   const { config } = useContext(SiteContext);
   const translations = config.translations;

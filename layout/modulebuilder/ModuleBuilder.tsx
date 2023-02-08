@@ -2,7 +2,7 @@ import { PageContext } from "../../context/PageContext";
 import { BillboardProps } from "../../modules/billboard/Billboard";
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
-import { FeedProps } from "../../modules/feed/Feed";
+import { ResourceFeedProps } from "../../modules/feed/ResourceFeed";
 import { GalleryProps } from "../../modules/gallery/Gallery";
 import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
@@ -15,8 +15,9 @@ import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType, useContext } from "react";
 import { Suspense, lazy } from "react";
 
-const Feed = lazy<ComponentType<FeedProps>>(
-  () => import(/* webpackChunkName: "Feed" */ "../../modules/feed/Feed"),
+const ResourceFeed = lazy<ComponentType<ResourceFeedProps>>(
+  () =>
+    import(/* webpackChunkName: "Feed" */ "../../modules/feed/ResourceFeed"),
 );
 
 const Story = lazy<ComponentType<StoryProps>>(
@@ -129,8 +130,8 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               {item._type === "module.story" && (
                 <Story {...(item as StoryProps)} />
               )}
-              {item._type === "module.feed" && (
-                <Feed {...(item as FeedProps)} />
+              {item._type === "module.resourcefeed" && (
+                <ResourceFeed {...(item as ResourceFeedProps)} />
               )}
             </LazyLoadInView>
           </ModuleErrorBoundary>

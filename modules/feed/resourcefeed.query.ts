@@ -5,7 +5,7 @@ import groq from "groq";
 
 export const getFeedQuery = (
   language: LanguageType,
-) => groq`_type == "module.feed" => {
+) => groq`_type == "module.resourcefeed" => {
   title,
   eyebrow,
   "tags": *[_type == 'page.tag'] {

@@ -1,15 +1,15 @@
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
-import { Feed } from "./Feed";
+import { ResourceFeed } from "./ResourceFeed";
 import { Meta } from "@storybook/react";
 import React from "react";
 
 export default {
-  component: Feed,
-  title: "Modules/Feed",
+  component: ResourceFeed,
+  title: "Modules/ResourceFeed",
 } as Meta;
 
-export const Default = () => <Feed title="Feed" />;
+export const Default = () => <ResourceFeed title="Feed" />;
 
 export const Colors = () => (
   <>
@@ -18,7 +18,7 @@ export const Colors = () => (
         (Object.keys(STORYBOOK_COLORS_SUBSET) as ColorType[]).map(
           (color2: ColorType) => (
             <div key={`${color1}${color2}`} className="mb-10">
-              <Feed
+              <ResourceFeed
                 title="Feed"
                 theme={{
                   module: { background: color1 },

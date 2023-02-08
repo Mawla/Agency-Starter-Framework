@@ -3,8 +3,8 @@ import { WrapperProps } from "../../components/module/Wrapper";
 import { BackgroundColorType } from "../../components/module/background.options";
 import { SpaceType } from "../../components/module/spacing.options";
 import { ColorType, HeadingLevelType } from "../../types";
-import { FeedItem } from "./Feed.Item";
-import { TitleSizeType } from "./feed.options";
+import { ResourceFeedItem } from "./ResourceFeed.Item";
+import { TitleSizeType } from "./resourcefeed.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -17,7 +17,7 @@ const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
 );
 
-export type FeedProps = {
+export type ResourceFeedProps = {
   theme?: {
     module?: {
       background?: BackgroundColorType;
@@ -34,11 +34,17 @@ export type FeedProps = {
   };
   eyebrow?: string;
   title?: string;
-  items?: FeedItem[];
+  items?: ResourceFeedItem[];
   tags?: string[];
 };
 
-export const Feed = ({ theme, eyebrow, title, items, tags }: FeedProps) => {
+export const ResourceFeed = ({
+  theme,
+  eyebrow,
+  title,
+  items,
+  tags,
+}: ResourceFeedProps) => {
   const [currentTag, setCurrentTag] = React.useState<string | null>(null);
 
   const filteredItems = items?.filter((item) => {
@@ -94,7 +100,7 @@ export const Feed = ({ theme, eyebrow, title, items, tags }: FeedProps) => {
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredItems?.map((item) => (
             <li key={item._id}>
-              <FeedItem {...item} />
+              <ResourceFeedItem {...item} />
             </li>
           ))}
         </ul>
@@ -103,4 +109,4 @@ export const Feed = ({ theme, eyebrow, title, items, tags }: FeedProps) => {
   );
 };
 
-export default React.memo(Feed);
+export default React.memo(ResourceFeed);

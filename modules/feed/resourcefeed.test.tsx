@@ -1,5 +1,5 @@
 import { act, render, screen } from "../../jest.utils";
-import Feed from "./Feed";
+import Feed from "./ResourceFeed";
 import "@testing-library/jest-dom";
 
 describe("Feed", () => {

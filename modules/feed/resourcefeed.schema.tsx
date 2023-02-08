@@ -3,14 +3,17 @@ import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.opt
 import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
-import { FEED_FILTER_OPTIONS, TITLE_SIZE_OPTIONS } from "./feed.options";
+import {
+  RESOURCE_FEED_FILTER_OPTIONS,
+  TITLE_SIZE_OPTIONS,
+} from "./resourcefeed.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { FunnelSort } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "module.feed",
+  name: "module.resourcefeed",
   title: "Feed",
   type: "object",
   icon: () => <FunnelSort weight="thin" />,
@@ -74,7 +77,7 @@ const schema = defineType({
           type: "array",
           of: [{ type: "string" }],
           options: {
-            list: optionsToList(FEED_FILTER_OPTIONS),
+            list: optionsToList(RESOURCE_FEED_FILTER_OPTIONS),
           },
         }),
       ],
