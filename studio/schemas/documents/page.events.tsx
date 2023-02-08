@@ -24,9 +24,6 @@ export default defineType({
     },
   },
   icon: () => <CalendarHome weight="thin" size={20} />,
-  initialValue: {
-    ...pageBase.initialValue,
-  },
   fieldsets: [...pageBase.fieldsets],
   fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
 });

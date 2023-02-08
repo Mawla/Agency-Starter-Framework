@@ -59,9 +59,6 @@ export default defineType({
       ],
     },
   ],
-  initialValue: {
-    ...pageBase.initialValue,
-  },
   preview: {
     select: {
       title: `title.${baseLanguage}`,

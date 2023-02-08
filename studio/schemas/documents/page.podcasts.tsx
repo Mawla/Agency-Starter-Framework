@@ -25,7 +25,6 @@ export default defineType({
   },
   icon: () => <EarMuffs weight="thin" size={20} />,
   initialValue: {
-    ...pageBase.initialValue,
     parent: { _type: "reference", _ref: "page_podcasts" },
   },
   fieldsets: [...pageBase.fieldsets],

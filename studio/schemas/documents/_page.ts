@@ -211,7 +211,6 @@ export const PARENT_FIELD = defineField({
 });
 
 export const pageBase = {
-  initialValue: {},
   fieldsets: [
     {
       title: "SEO & metadata",

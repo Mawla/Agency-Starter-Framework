@@ -17,9 +17,6 @@ export default defineType({
       title: `title.${baseLanguage}`,
     },
   },
-  initialValue: {
-    ...pageBase.initialValue,
-  },
   fieldsets: [...pageBase.fieldsets],
   fields: [TITLE_FIELD, HERO_FIELD],
 });

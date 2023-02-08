@@ -25,7 +25,6 @@ export default defineType({
   },
   icon: () => <Pages weight="thin" size={20} />,
   initialValue: {
-    ...pageBase.initialValue,
     /*PARENT_INITIAL_VALUE*/
   },
   fieldsets: [...pageBase.fieldsets],

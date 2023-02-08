@@ -25,7 +25,6 @@ export default defineType({
   },
   icon: () => <Toolbox weight="thin" size={20} />,
   initialValue: {
-    ...pageBase.initialValue,
     parent: { _type: "reference", _ref: "page_tools" },
   },
   fieldsets: [...pageBase.fieldsets],

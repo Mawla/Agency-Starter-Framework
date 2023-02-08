@@ -25,9 +25,6 @@ export default defineType({
       };
     },
   },
-  initialValue: {
-    ...pageBase.initialValue,
-  },
   fieldsets: [...pageBase.fieldsets],
   fields: [...pageBase.fields.filter(({ name }) => name !== "slug")],
 });
