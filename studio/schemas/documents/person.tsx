@@ -14,7 +14,7 @@ const schema = defineType({
       subtitle: `position.${baseLanguage}`,
       media: "image",
     },
-    prepare({ title, subtitle, media }: any) {
+    prepare({ title = "", subtitle = "", media }: any) {
       return {
         title: `${title}`,
         subtitle: `${subtitle}`,
