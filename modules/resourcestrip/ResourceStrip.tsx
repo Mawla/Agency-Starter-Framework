@@ -1,11 +1,12 @@
+import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
 import { WrapperProps } from "../../components/module/Wrapper";
 import { BackgroundColorType } from "../../components/module/background.options";
 import { SpaceType } from "../../components/module/spacing.options";
+import PortableText from "../../components/portabletext/PortableText";
 import { ColorType, HeadingLevelType } from "../../types";
-import { ResourceFeedItemProps } from "./ResourceFeed.Item";
-import { TitleSizeType } from "./resourcefeed.options";
-import cx from "classnames";
+import { ResourceFeedItemProps } from "../resourcefeed/ResourceFeed.Item";
+import { TitleSizeType } from "./resourcestrip.options";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -17,6 +18,10 @@ const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
 );
 
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
+);
+
 const ResourceFeedItem = lazy<ComponentType<ResourceFeedItemProps>>(
   () =>
     import(
@@ -24,7 +29,7 @@ const ResourceFeedItem = lazy<ComponentType<ResourceFeedItemProps>>(
     ),
 );
 
-export type ResourceFeedProps = {
+export type ResourceStripProps = {
   theme?: {
     module?: {
       background?: BackgroundColorType;
@@ -41,23 +46,18 @@ export type ResourceFeedProps = {
   };
   eyebrow?: string;
   title?: string;
+  intro?: React.ReactNode;
   items?: ResourceFeedItemProps[];
-  tags?: string[];
 };
 
-export const ResourceFeed = ({
+export const ResourceStrip = ({
   theme,
   eyebrow,
   title,
+  intro,
   items,
-  tags,
-}: ResourceFeedProps) => {
-  const [currentTag, setCurrentTag] = React.useState<string | null>(null);
-
-  const filteredItems = items?.filter((item) => {
-    if (!currentTag) return true;
-    return item.tags?.includes(currentTag);
-  });
+}: ResourceStripProps) => {
+  if (!items?.length) return null;
 
   return (
     <Wrapper
@@ -78,35 +78,17 @@ export const ResourceFeed = ({
         </div>
       )}
 
-      {tags && Boolean(tags?.length) && (
-        <div className="mb-4 md:mb-6">
-          <ul className="flex flex-wrap gap-2">
-            {tags?.filter(Boolean).map((tag) => (
-              <li key={tag}>
-                <button
-                  className={cx("text-md py-1 px-2 border", {
-                    ["bg-white hover:underline border-neutral-300"]:
-                      currentTag !== tag,
-                    ["text-white bg-neutral-600 border-neutral-600"]:
-                      currentTag === tag,
-                  })}
-                  onClick={() =>
-                    currentTag === tag
-                      ? setCurrentTag(null)
-                      : tag && setCurrentTag(tag)
-                  }
-                >
-                  {tag}
-                </button>
-              </li>
-            ))}
-          </ul>
+      {intro && (
+        <div className="mb-10 md:mb-14">
+          <Text color={theme?.text?.color}>
+            <PortableText content={intro as any} />
+          </Text>
         </div>
       )}
 
-      {Boolean(filteredItems?.length) && (
+      {Boolean(items?.length) && (
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredItems?.map((item) => (
+          {items?.map((item) => (
             <li key={item._id}>
               <ResourceFeedItem {...item} />
             </li>
@@ -117,4 +99,4 @@ export const ResourceFeed = ({
   );
 };
 
-export default React.memo(ResourceFeed);
+export default React.memo(ResourceStrip);

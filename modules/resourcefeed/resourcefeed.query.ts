@@ -13,11 +13,13 @@ export const getFeedQuery = (
   }.title,
   "items": *[_type in ^.filter.types && !(_id in path("drafts.*"))] {
     _id,
+    publishedAt,
+    _createdAt,
     "title": title.${language},
     "href": ${resolveIdHrefQuery},
     "image": hero[language == '${language}'][0] { "image": ${imageQuery} }.image,
     "intro": coalesce(
-      pt::text(heroes[0].content),
+      pt::text(hero[language == "${language}"][0].intro),
       pt::text(modules[_type == 'module.richtext'][0].content),
     ),
     "tags": tags[]->title.${language},

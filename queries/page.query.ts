@@ -16,6 +16,7 @@ import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query
 import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
 import { getGalleryQuery } from "../modules/gallery/gallery.query";
 import { getFeedQuery } from "../modules/resourcefeed/resourcefeed.query";
+import { getResourceStripQuery } from "../modules/resourcestrip/resourcestrip.query";
 import { getRichTextQuery } from "../modules/richtext/richtext.query";
 import { getSlidesQuery } from "../modules/slides/slides.query";
 import { getStoryQuery } from "../modules/story/story.query";
@@ -104,6 +105,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     ${getSlidesQuery(language)},
     ${getStoryQuery(language)},
     ${getFeedQuery(language)},
+    ${getResourceStripQuery(language)},
   },
 
   // dialogs

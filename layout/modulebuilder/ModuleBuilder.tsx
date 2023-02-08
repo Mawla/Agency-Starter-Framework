@@ -4,6 +4,7 @@ import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
 import { GalleryProps } from "../../modules/gallery/Gallery";
 import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
+import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
 import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
 import { StoryProps } from "../../modules/story/Story";
@@ -14,6 +15,13 @@ import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType, useContext } from "react";
 import { Suspense, lazy } from "react";
+
+const ResourceStrip = lazy<ComponentType<ResourceStripProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceStrip" */ "../../modules/resourcestrip/ResourceStrip"
+    ),
+);
 
 const ResourceFeed = lazy<ComponentType<ResourceFeedProps>>(
   () =>
@@ -134,6 +142,9 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.resourcefeed" && (
                 <ResourceFeed {...(item as ResourceFeedProps)} />
+              )}
+              {item._type === "module.resourcestrip" && (
+                <ResourceStrip {...(item as ResourceStripProps)} />
               )}
             </LazyLoadInView>
           </ModuleErrorBoundary>

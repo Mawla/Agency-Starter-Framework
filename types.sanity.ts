@@ -11,11 +11,12 @@ export const SCHEMAS = {
   "dialog.video": "",
   "form.static": "",
   "hero.basic": "",
+  "hero.resourcehero": "",
   "module.billboard": "",
   "module.breadcrumb": "",
   "module.cardgrid": "",
-  "module.resourcefeed": "",
   "module.gallery": "",
+  "module.resourcefeed": "",
   "module.richtext": "",
   "module.slides": "",
   "module.story": "",
@@ -41,7 +42,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "hero.resourcehero": "",
+  "module.resourcestrip": "",
   footer: "",
   navigation: "",
   password: "",
@@ -108,17 +109,30 @@ export const TRANSLATABLE_SCHEMAS = pick(
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
 
+export const TAGGABLE_SCHEMAS = pick(
+  LINKABLE_SCHEMAS,
+  "page.blog",
+  "page.event",
+  "page.casestudy",
+  "page.podcast",
+  "page.tool",
+  "page.video",
+  "page.guide",
+);
+export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
+
 export const MODULE_SCHEMAS = pick(
   SCHEMAS,
   "module.billboard",
   "module.breadcrumb",
   "module.cardgrid",
   "module.gallery",
+  "module.resourcefeed",
   "module.richtext",
   "module.slides",
   "module.story",
   "module.textimage",
-  "module.resourcefeed",
+  "module.resourcestrip",
 );
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;

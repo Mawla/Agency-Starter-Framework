@@ -9,12 +9,13 @@ import { SiteContext } from "../../context/SiteContext";
 import { joinList, truncate } from "../../helpers/utils/string";
 import { ImageType } from "../../types";
 import { useContext } from "react";
+import React from "react";
 
-export type ResourceFeedItem = {
+export type ResourceFeedItemProps = {
   _id: string;
   title: string;
   date: string;
-  image: ImageType;
+  image?: ImageType;
   href: string;
   intro?: string;
   tags?: string[];
@@ -29,7 +30,7 @@ export const ResourceFeedItem = ({
   intro,
   tags,
   authors,
-}: ResourceFeedItem) => {
+}: ResourceFeedItemProps) => {
   const { language } = useContext(PageContext);
   const { config } = useContext(SiteContext);
   const translations = config.translations;
@@ -85,7 +86,7 @@ export const ResourceFeedItem = ({
 
         {intro && (
           <Text size="md" color="neutral-600">
-            {truncate(intro, 200)}
+            {truncate(intro, 150)}
           </Text>
         )}
       </div>
@@ -101,3 +102,5 @@ export const ResourceFeedItem = ({
     </div>
   );
 };
+
+export default React.memo(ResourceFeedItem);

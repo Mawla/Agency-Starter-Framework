@@ -4,27 +4,27 @@ import { SPACE_OPTIONS } from "../../components/module/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
 import { TAGGABLE_SCHEMAS } from "../../types.sanity";
-import { TITLE_SIZE_OPTIONS } from "./resourcefeed.options";
+import { TITLE_SIZE_OPTIONS } from "./resourcestrip.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { FunnelSort } from "@vectopus/atlas-icons-react";
+import { PenFilm } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "module.resourcefeed",
-  title: "Resource Feed",
+  name: "module.resourcestrip",
+  title: "Resource Strip",
   type: "object",
-  icon: () => <FunnelSort weight="thin" />,
-  description: "Automatically load a list of resources",
+  icon: () => <PenFilm weight="thin" />,
+  description: "Filterable list of latest resources",
   preview: {
     select: {
       title: "title",
       image: "image",
     },
-    prepare({ title = "Resource Feed" }: any) {
+    prepare({ title = "Resource Strip" }: any) {
       return {
         title: title,
-        media: <FunnelSort weight="thin" />,
+        media: <PenFilm weight="thin" />,
       };
     },
   },
@@ -63,23 +63,36 @@ const schema = defineType({
       rows: 2,
       group: "content",
     }),
+
     defineField({
-      name: "filter",
-      title: "Filter",
-      type: "object",
+      name: "intro",
+      title: "Intro",
+      type: "portabletext.simple",
       group: "content",
-      fields: [
-        defineField({
-          name: "types",
-          title: "Types",
-          type: "array",
-          of: [{ type: "string" }],
-          options: {
-            list: optionsToList(TAGGABLE_SCHEMAS),
-          },
-        }),
-      ],
     }),
+    // defineField({
+    //   name: "filter",
+    //   title: "Filter",
+    //   type: "object",
+    //   group: "content",
+    //   fields: [
+    //     defineField({
+    //       name: "types",
+    //       title: "Types",
+    //       type: "array",
+    //       of: [{ type: "string" }],
+    //       options: {
+    //         list: optionsToList(TAGGABLE_SCHEMAS),
+    //       },
+    //     }),
+    //     defineField({
+    //       name: "tags",
+    //       title: "Tags",
+    //       type: "array",
+    //       of: [{ type: "reference", to: [{ type: "page.tag" }] }],
+    //     }),
+    //   ],
+    // }),
     defineField({
       name: "language",
       title: "Language",
@@ -136,6 +149,22 @@ const schema = defineType({
                   list: optionsToList(HEADING_LEVELS),
                 },
               },
+              {
+                name: "color",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "text",
+          title: "Text",
+          type: "styles",
+          options: {
+            fields: [
               {
                 name: "color",
                 type: "color",

@@ -68,7 +68,7 @@ export const ResourceHero = ({
   date,
 }: ResourceHeroProps) => {
   const { breadcrumb } = useContext(PageContext);
-  const backLink = breadcrumb[breadcrumb.length - 2]?.path;
+  const backLink = breadcrumb?.[breadcrumb.length - 2]?.path;
 
   return (
     <Wrapper
