@@ -132,9 +132,7 @@ const build = (answers) => {
     .replace(/MyPage/g, pascalName)
     .replace(
       `/*PARENT_FIELD*/`,
-      !parentType || !parentId
-        ? ""
-        : singleton
+      singleton
         ? `PARENT_FIELD,`
         : `{
       ...PARENT_FIELD,
