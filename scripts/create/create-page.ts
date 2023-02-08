@@ -143,7 +143,11 @@ const build = (answers) => {
     )
     .replace(
       ` /*PARENT_INITIAL_VALUE*/`,
-      singleton ? `` : `parent: { _type: "reference", _ref: "${parentId}" },`,
+      singleton
+        ? ``
+        : parentType && parentId
+        ? `parent: { _type: "reference", _ref: "${parentId}" },`
+        : "",
     );
 
   fs.writeFileSync(schemaFilePath, schemaContent);
