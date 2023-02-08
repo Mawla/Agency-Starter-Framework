@@ -61,6 +61,7 @@ export const structure = (
 
           singleton(S, { id: "page_homepage", type: "page.home" }),
           documentList(S, { type: "page.content", title: "Content pages" }),
+          documentList(S, { type: "page.landing", title: "Landing pages" }),
 
           S.divider(),
 

@@ -16,6 +16,7 @@ import PagePasswordComponent, {
   PagePasswordWrapper,
 } from "../../components/PagePasswordComponent";
 import { getISODateString } from "../../utils/datetime";
+import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import { title } from "process";
@@ -46,6 +47,7 @@ export const SLUG_FIELD = defineField({
     source: title,
     maxLength: 96,
     localize: true,
+    isUnique: isPathUnique,
   } as any,
   validation: (Rule: SlugRule) =>
     Rule.required().custom(async (slug, context) => {

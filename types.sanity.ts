@@ -14,11 +14,13 @@ export const SCHEMAS = {
   "module.billboard": "",
   "module.breadcrumb": "",
   "module.cardgrid": "",
+  "module.feed": "",
   "module.gallery": "",
   "module.richtext": "",
   "module.slides": "",
   "module.story": "",
   "module.textimage": "",
+  "page.blog": "",
   "page.blogs": "",
   "page.casestudies": "",
   "page.casestudy": "",
@@ -37,7 +39,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "page.blog": "",
+  "page.landing": "",
   footer: "",
   navigation: "",
   password: "",
@@ -50,6 +52,7 @@ export type SchemaName = keyof typeof SCHEMAS;
 
 export const LINKABLE_SCHEMAS = pick(
   SCHEMAS,
+  "page.blog",
   "page.blogs",
   "page.casestudies",
   "page.casestudy",
@@ -65,7 +68,7 @@ export const LINKABLE_SCHEMAS = pick(
   "page.tools",
   "page.video",
   "page.videos",
-  "page.blog",
+  "page.landing",
 );
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
@@ -77,6 +80,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "config.translations",
   "footer",
   "navigation",
+  "page.blog",
   "page.blogs",
   "page.casestudies",
   "page.casestudy",
@@ -95,7 +99,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "page.video",
   "page.videos",
   "person",
-  "page.blog",
+  "page.landing",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
@@ -110,6 +114,7 @@ export const MODULE_SCHEMAS = pick(
   "module.slides",
   "module.story",
   "module.textimage",
+  "module.feed",
 );
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;

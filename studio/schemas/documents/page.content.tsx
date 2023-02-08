@@ -1,6 +1,5 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { isPathUnique } from "../../utils/desk/isPathUnique";
 import {
   DIALOGS_FIELD,
   HERO_FIELD,
@@ -102,15 +101,7 @@ export default defineType({
     PASSWORD,
     PARENT_FIELD,
     TITLE_FIELD,
-    {
-      ...SLUG_FIELD,
-      options: {
-        source: "title",
-        maxLength: 96,
-        localize: true,
-        isUnique: isPathUnique,
-      },
-    },
+    SLUG_FIELD,
     HERO_FIELD,
     MODULES_FIELD,
     DIALOGS_FIELD,

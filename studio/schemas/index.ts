@@ -14,6 +14,7 @@ import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
 import moduleCardGrid from "../../modules/cardgrid/cardgrid.schema";
 import cardComposable from "../../modules/cardgrid/composablecard.schema";
 import cardImage from "../../modules/cardgrid/imagecard.schema";
+import moduleFeed from "../../modules/feed/feed.schema";
 import moduleGallery from "../../modules/gallery/gallery.schema";
 import moduleRichText from "../../modules/richtext/richtext.schema";
 import moduleSlides from "../../modules/slides/slides.schema";
@@ -39,6 +40,7 @@ import pageEvents from "./documents/page.events";
 import pageGuide from "./documents/page.guide";
 import pageGuides from "./documents/page.guides";
 import pageHome from "./documents/page.home";
+import pageLanding from "./documents/page.landing";
 import pageNotFound from "./documents/page.notfound";
 import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
@@ -99,6 +101,7 @@ export const schemaTypes = [
     configSeo,
     configTranslations,
     footer,
+    moduleFeed,
     navigation,
     pageBlog,
     pageBlogs,
@@ -110,6 +113,7 @@ export const schemaTypes = [
     pageGuide,
     pageGuides,
     pageHome,
+    pageLanding,
     pageNotFound,
     pagePodcast,
     pagePodcasts,
