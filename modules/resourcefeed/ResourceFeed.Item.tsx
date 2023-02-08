@@ -43,7 +43,11 @@ export const ResourceFeedItem = ({
 
       {image && (
         <div className="relative aspect-video overflow-hidden rounded-sm">
-          <ResponsiveImage {...image} fill />
+          <ResponsiveImage
+            {...image}
+            fill
+            className="group-hover:scale-110 transition-transform duration-500"
+          />
         </div>
       )}
 
