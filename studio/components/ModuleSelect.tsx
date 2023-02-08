@@ -285,9 +285,10 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           (field: { name: string }) => field.name === "language",
         )
       ) {
+        let languages = getCurrentLanguages() || [baseLanguage];
         module.language =
-          getCurrentLanguages().length === 1
-            ? (getCurrentLanguages()[0] as LanguageType)
+          languages.length === 1
+            ? (languages[0] as LanguageType)
             : baseLanguage;
       }
 
