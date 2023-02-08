@@ -1,4 +1,5 @@
 import { languages, LanguagesListItemType } from "../languages";
+import { LINKABLE_SCHEMAS } from "../types.sanity";
 import { documentList } from "./utils/desk/documentList";
 import { group } from "./utils/desk/group";
 import { list } from "./utils/desk/list";
@@ -46,22 +47,9 @@ export const structure = (
                 .schemaType("page.content")
                 .filter(
                   `_type in [
-                    'page.content'
-                    ,'page.home'
-                    ,'page.events'
-                    ,'page.event'
-                    ,'page.casestudies'
-                    ,'page.casestudy'
-                    ,'page.podcasts'
-                    ,'page.podcast'
-                    ,'page.guides'
-                    ,'page.guide'
-                    ,'page.tools'
-                    ,'page.tool'
-                    ,'page.videos'
-                    ,'page.video'
-                    ,'page.blogs'
-                    ,'page.blog'
+                    ${Object.keys(LINKABLE_SCHEMAS)
+                      .map((schema) => `'${schema}'`)
+                      .join(", ")}
                   ] && !defined(parent)`,
                 )
                 .child(

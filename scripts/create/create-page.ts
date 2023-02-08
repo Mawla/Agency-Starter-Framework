@@ -266,12 +266,12 @@ function createDeskStructure(
   }
 
   lines = addLine(str, lines, `type: "page.content"`, -1);
-  lines = addLine(
-    `                   ,'${schemaName}'`,
-    lines,
-    `] && !defined(parent)`,
-    0,
-  );
+  // lines = addLine(
+  //   `                   ,'${schemaName}'`,
+  //   lines,
+  //   `] && !defined(parent)`,
+  //   0,
+  // );
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
