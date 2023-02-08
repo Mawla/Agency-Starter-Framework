@@ -1,10 +1,10 @@
-export const getCurrentLanguages = (): string[] => {
+export const getCurrentLanguages = (): string[] | null => {
   const localStorageLanguages = localStorage.getItem(
-    '@sanity/plugin/language-filter/selected-languages',
+    "@sanity/plugin/language-filter/selected-languages",
   );
 
   if (localStorageLanguages) {
     return JSON.parse(localStorageLanguages);
   }
-  return [];
+  return null;
 };

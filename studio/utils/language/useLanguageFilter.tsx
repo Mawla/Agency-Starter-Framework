@@ -10,7 +10,9 @@ export function useLanguageFilter() {
    */
 
   useEffect(() => {
-    setSelectedLanguages(getCurrentLanguages());
+    setSelectedLanguages(
+      getCurrentLanguages() || languages.map((language) => language.id),
+    );
   }, []);
 
   useEffect(() => {
@@ -20,12 +22,12 @@ export function useLanguageFilter() {
 
     document.documentElement?.addEventListener(
       "click",
-      _onLanguagePluginChange
+      _onLanguagePluginChange,
     );
     () =>
       document.documentElement?.removeEventListener(
         "click",
-        _onLanguagePluginChange
+        _onLanguagePluginChange,
       );
   }, []);
 
@@ -38,7 +40,7 @@ export function useLanguageFilter() {
 
 export function onLanguagePluginChange(
   e: MouseEvent,
-  onChange: (value: string[]) => void
+  onChange: (value: string[]) => void,
 ) {
   const target = e.target as HTMLInputElement;
 
@@ -47,7 +49,7 @@ export function onLanguagePluginChange(
     const newSelectedLanguages: string[] = [];
     languages.map((language) => {
       const input = document.querySelector(
-        `[name=language-${language.id}]`
+        `[name=language-${language.id}]`,
       ) as HTMLInputElement;
       if (input?.checked) newSelectedLanguages.push(language.id);
     });
