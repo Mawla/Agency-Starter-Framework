@@ -15,7 +15,7 @@ export type ResourceFeedItemProps = {
   _id: string;
   title: string;
   date: string;
-  image?: ImageType;
+  image: ImageType;
   href: string;
   intro?: string;
   tags?: string[];
