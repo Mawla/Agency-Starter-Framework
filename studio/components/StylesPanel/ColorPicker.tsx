@@ -1,5 +1,4 @@
 import { optionsToList } from "../../utils/fields/optionsToList";
-import styles from "./stylespanel.module.css";
 import { Box, Flex, Stack, Text, Tooltip } from "@sanity/ui";
 import cx from "classnames";
 import React from "react";
@@ -42,16 +41,23 @@ export const ColorPicker = ({
 
   return (
     <div>
-      <PopoverDisclosure {...popover} className={styles.popoverButton}>
+      <PopoverDisclosure {...popover} className="stylespanel_popoverButton">
         <span
-          className={cx(!value && styles.previewColorEmpty, styles.preview)}
+          className={cx(
+            !value && "stylespanel_previewColorEmpty",
+            "stylespanel_preview",
+          )}
           style={{
             backgroundColor: currentColor || "",
           }}
         />
       </PopoverDisclosure>
 
-      <Popover {...popover} className={styles.popover} aria-label="popover">
+      <Popover
+        {...popover}
+        className="stylespanel_popover"
+        aria-label="popover"
+      >
         <Stack space={1} padding={2}>
           {Object.values(colorRows).map((colorList) => (
             <Flex
@@ -97,17 +103,17 @@ export const ColorPicker = ({
                       }}
                       type="button"
                       aria-label={option.value || ""}
-                      className={styles.colorItemWrapper}
+                      className="stylespanel_colorItemWrapper"
                     >
                       <span
                         className={
                           option.value === null
                             ? value === null
-                              ? styles.colorItemClearActive
-                              : styles.colorItemClear
+                              ? "stylespanel_colorItemClearActive"
+                              : "stylespanel_colorItemClear"
                             : value === option.value
-                            ? styles.colorItemActive
-                            : styles.colorItem
+                            ? "stylespanel_colorItemActive"
+                            : "stylespanel_colorItem"
                         }
                         style={{
                           backgroundColor:

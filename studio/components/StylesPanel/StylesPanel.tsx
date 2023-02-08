@@ -55,6 +55,152 @@ const StylesPanel = (props: ObjectInputProps) => {
 
   return (
     <Stack space={2}>
+      {/* moving these styles inline pending https://github.com/sanity-io/sanity/issues/3972#issuecomment-1422802293 */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+          /* Popover */
+          .stylespanel_popover {
+            z-index: 100;
+            background: white;
+            border: 1px solid #bec6d3;
+            padding: 0;
+            box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.1);
+          }
+
+          .stylespanel_popoverButton {
+            border: 0;
+            background: white;
+            display: block;
+            padding: 0;
+          }
+
+          .stylespanel_preview {
+            width: 32px;
+            height: 32px;
+            border: 0;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: box-shadow 0.15s;
+            border-radius: 1px;
+          }
+
+          .stylespanel_preview:hover {
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+          }
+
+          .stylespanel_preview > * {
+            opacity: 0.75;
+            transition: opacity 0.15s;
+          }
+
+          .stylespanel_preview:hover > * {
+            opacity: 1;
+          }
+
+          .stylespanel_previewColorEmpty {
+            background-color: transparent;
+            background-image: linear-gradient(45deg, #eee 25%, transparent 25%),
+              linear-gradient(-45deg, #eee 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #eee 75%),
+              linear-gradient(-45deg, transparent 75%, #eee 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+          }
+
+          /* Color */
+          .stylespanel_colorItemWrapper {
+            width: 32px;
+            height: 32px;
+            align-items: flex-start;
+            display: inline-block;
+            border: 0;
+            position: relative;
+            background: white;
+          }
+
+          .stylespanel_colorItem,
+          .stylespanel_colorItemActive,
+          .stylespanel_colorItemClearActive,
+          .stylespanel_colorItemClear {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075);
+            border-radius: 1px;
+          }
+
+          .stylespanel_colorItemClearActive,
+          .stylespanel_colorItemActive {
+            z-index: 1;
+            box-shadow: none;
+            border: 4px solid white;
+            top: -6px;
+            right: -6px;
+            bottom: -6px;
+            left: -6px;
+            outline: 1px solid rgba(0, 0, 0, 0.075);
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+          }
+
+          .stylespanel_colorItemClearActive,
+          .stylespanel_colorItemClear {
+            background-color: transparent;
+            background-image: linear-gradient(45deg, #ddd 25%, transparent 25%),
+              linear-gradient(-45deg, #ddd 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #ddd 75%),
+              linear-gradient(-45deg, transparent 75%, #ddd 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+          }
+
+          /* Select */
+
+          .stylespanel_selectOption {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+          }
+
+          .stylespanel_selectOption:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+          }
+
+          .stylespanel_selectOption:last-of-type {
+            border: 0;
+          }
+
+          .stylespanel_selectCheck {
+            width: 16px;
+          }
+
+          .stylespanel_selectCheck > * {
+            position: absolute;
+            top: 7px;
+            left: 10px;
+          }
+
+          /* Text field */
+
+          .stylespanel_textInput {
+            padding: 3px;
+          }
+      `,
+        }}
+      />
+
       {Boolean(schemaType?.title?.trim().length) && (
         <Text size={1} weight="semibold">
           {schemaType?.title}

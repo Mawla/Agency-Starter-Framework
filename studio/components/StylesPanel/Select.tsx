@@ -1,4 +1,3 @@
-import styles from "./stylespanel.module.css";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import { CheckmarkIcon } from "@sanity/icons";
 import { Text } from "@sanity/ui";
@@ -30,17 +29,21 @@ export const Select = ({
 
   return (
     <div>
-      <PopoverDisclosure {...popover} className={styles.popoverButton}>
-        <span className={styles.preview}>
+      <PopoverDisclosure {...popover} className="stylespanel_popoverButton">
+        <span className="stylespanel_preview">
           <Icon />
         </span>
       </PopoverDisclosure>
 
-      <Popover {...popover} className={styles.popover} aria-label="popover">
-        <div className={styles.select}>
+      <Popover
+        {...popover}
+        className="stylespanel_popover"
+        aria-label="popover"
+      >
+        <div className="stylespanel_select">
           {options.map((item) => (
             <div
-              className={styles.selectOption}
+              className="stylespanel_selectOption"
               key={item.value}
               onClick={() => {
                 onChange(item.value);
@@ -48,7 +51,7 @@ export const Select = ({
               }}
             >
               {value === item.value && (
-                <span className={styles.selectCheck}>
+                <span className="stylespanel_selectCheck">
                   <CheckmarkIcon />
                 </span>
               )}

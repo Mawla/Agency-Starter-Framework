@@ -1,4 +1,3 @@
-import styles from "./stylespanel.module.css";
 import { InputIcon } from "@radix-ui/react-icons";
 import { TextInput as SanityTextInput } from "@sanity/ui";
 import React from "react";
@@ -24,14 +23,18 @@ export const TextInput = ({
 
   return (
     <div>
-      <PopoverDisclosure {...popover} className={styles.popoverButton}>
-        <span className={styles.preview}>
+      <PopoverDisclosure {...popover} className="stylespanel_popoverButton">
+        <span className="stylespanel_preview">
           <InputIcon />
         </span>
       </PopoverDisclosure>
 
-      <Popover {...popover} className={styles.popover} aria-label="popover">
-        <div className={styles.textInput}>
+      <Popover
+        {...popover}
+        className="stylespanel_popover"
+        aria-label="popover"
+      >
+        <div className="stylespanel_textInput">
           <SanityTextInput
             fontSize={1}
             onChange={(event) => {

@@ -1,4 +1,3 @@
-import styles from "./stylespanel.module.css";
 import { CheckIcon, BorderSolidIcon } from "@radix-ui/react-icons";
 import React, { useState } from "react";
 import { Button } from "reakit/Button";
@@ -24,7 +23,7 @@ export const Toggle = ({ value, onChange = () => {} }: ToggleProps) => {
       as={Button}
       checked={Boolean(checked)}
       onChange={toggle}
-      className={styles.preview}
+      className="stylespanel_preview"
     >
       {checked === true && <CheckIcon />}
       {checked === false && <BorderSolidIcon />}
