@@ -2,8 +2,8 @@ import { PageContext } from "../../context/PageContext";
 import { BillboardProps } from "../../modules/billboard/Billboard";
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
-import { ResourceFeedProps } from "../../modules/feed/ResourceFeed";
 import { GalleryProps } from "../../modules/gallery/Gallery";
+import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
 import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
 import { StoryProps } from "../../modules/story/Story";
@@ -17,7 +17,9 @@ import { Suspense, lazy } from "react";
 
 const ResourceFeed = lazy<ComponentType<ResourceFeedProps>>(
   () =>
-    import(/* webpackChunkName: "Feed" */ "../../modules/feed/ResourceFeed"),
+    import(
+      /* webpackChunkName: "Feed" */ "../../modules/resourcefeed/ResourceFeed"
+    ),
 );
 
 const Story = lazy<ComponentType<StoryProps>>(

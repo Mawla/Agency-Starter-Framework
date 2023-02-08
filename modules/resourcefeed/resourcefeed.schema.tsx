@@ -14,7 +14,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "module.resourcefeed",
-  title: "Feed",
+  title: "Resource Feed",
   type: "object",
   icon: () => <FunnelSort weight="thin" />,
   description: "Automatically load a list of resources",
@@ -23,7 +23,7 @@ const schema = defineType({
       title: "title",
       image: "image",
     },
-    prepare({ title = "Feed" }: any) {
+    prepare({ title = "Resource Feed" }: any) {
       return {
         title: title,
         media: <FunnelSort weight="thin" />,

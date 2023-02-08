@@ -14,8 +14,8 @@ import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
-import { getFeedQuery } from "../modules/feed/resourcefeed.query";
 import { getGalleryQuery } from "../modules/gallery/gallery.query";
+import { getFeedQuery } from "../modules/resourcefeed/resourcefeed.query";
 import { getRichTextQuery } from "../modules/richtext/richtext.query";
 import { getSlidesQuery } from "../modules/slides/slides.query";
 import { getStoryQuery } from "../modules/story/story.query";
