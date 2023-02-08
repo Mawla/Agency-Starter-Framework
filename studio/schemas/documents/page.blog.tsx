@@ -37,7 +37,18 @@ export default defineType({
       options: { disableNew: true },
       hidden: true,
     },
-    ...pageBase.fields,
+    ...pageBase.fields.map((field) => {
+      if (field.name === "hero") {
+        return {
+          ...field,
+          options: {
+            ...field.options,
+            filterType: /hero.resourcehero/,
+          },
+        };
+      }
+      return field;
+    }),
     TAGS_FIELD,
     AUTHOR_FIELD,
     PUBLISHED_AT_FIELD,
