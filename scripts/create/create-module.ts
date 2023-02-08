@@ -436,7 +436,11 @@ function createModule(
 
   // create schema file
   const schemaContent = fs
-    .readFileSync(`${__dirname}/MyModule.schema.tsx`)
+    .readFileSync(
+      isHero
+        ? `${__dirname}/MyHero.schema.tsx`
+        : `${__dirname}/MyModule.schema.tsx`,
+    )
     .toString()
     .replace("/*DESCRIPTION*/", description)
     .replace("/*FIELDS*/", schemaLines.join(",\n  ") + ",")
