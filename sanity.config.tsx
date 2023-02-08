@@ -17,7 +17,6 @@ export default defineConfig({
   projectId: env.SANITY_STUDIO_API_PROJECT_ID,
   dataset: env.SANITY_STUDIO_API_DATASET,
   title: "Sanity Studio",
-  basePath: env.NEXT_PUBLIC_VERCEL_ENV ? "" : "/cms",
   plugins: [
     deskTool({
       structure,

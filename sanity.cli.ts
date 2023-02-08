@@ -13,6 +13,6 @@ var dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 export default defineCliConfig({
   api: { projectId, dataset },
   project: {
-    basePath: "/cms",
+    basePath: process.env.NEXT_PUBLIC_VERCEL_ENV ? "/cms" : "",
   },
 });
