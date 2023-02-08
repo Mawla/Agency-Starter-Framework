@@ -6,13 +6,21 @@ import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
-import { ConfigContext, defineConfig, WorkspaceOptions } from "sanity";
+import { ConfigContext, defineConfig, TemplateResponse, WorkspaceOptions } from "sanity";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
 
-const CONFIG = {
-  projectId: (import.meta as any).env.SANITY_STUDIO_API_PROJECT_ID,
+const env = (import.meta as any).env;
+
+
+export default defineConfig({
+  projectId: env.SANITY_STUDIO_API_PROJECT_ID,
+  dataset: env.dataset,
+  basePath: `/cms/`,
+  name: env.name,
+  title: env.title,
+
   plugins: [
     deskTool({
       structure,
@@ -56,12 +64,7 @@ const CONFIG = {
       return prev;
     },
     newDocumentOptions: (
-      prev: {
-        templateId: string;
-        description: string;
-        title: string;
-        icon: React.ComponentType<any>;
-      }[],
+      prev: TemplateResponse[],
       context: ConfigContext,
     ) => {
       console.log(prev, context);
@@ -80,7 +83,6 @@ const CONFIG = {
           ({ name }: { name: string }) => name === option.templateId,
         );
         if ((schema?.options as any)?.singleton) return false;
-
         return true;
       });
 
@@ -91,59 +93,4 @@ const CONFIG = {
   schema: {
     types: schemaTypes,
   },
-};
-
-const ENVIRONMENTS = [
-  {
-    name: "development",
-    title: "Development",
-    code: "dev",
-    dataset: "development",
-    color: "#111",
-  },
-  {
-    name: "staging",
-    title: "Staging",
-    code: "stg",
-    dataset: "staging",
-    color: "#FFA500",
-  },
-  {
-    name: "production",
-    title: "Production",
-    code: "prod",
-    dataset: "production",
-    color: "#FF0000",
-  },
-];
-
-export default defineConfig(
-  ENVIRONMENTS.map(
-    (env) =>
-      ({
-        ...CONFIG,
-        dataset: env.dataset,
-        basePath: `/cms/${env.name}`,
-        name: env.name,
-        title: env.title,
-        icon: () => (
-          <div
-            style={{
-              borderRadius: 3,
-              height: "100%",
-              display: "grid",
-              placeItems: "center",
-              background: env.color,
-              color: "#fff",
-              fontWeight: "bold",
-              fontFamily: "sans-serif",
-              fontSize: 10,
-              textTransform: "uppercase",
-            }}
-          >
-            {env.code}
-          </div>
-        ),
-      } as WorkspaceOptions),
-  ),
-);
+});
