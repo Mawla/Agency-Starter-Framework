@@ -7,6 +7,7 @@ import portableTextFull from "../../components/portabletext/portabletextfull.sch
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import video from "../../components/video/video.schema";
 import heroBasic from "../../heroes/herobasic/herobasic.schema";
+import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import moduleBillboard from "../../modules/billboard/billboard.schema";
@@ -102,6 +103,7 @@ export const schemaTypes = [
     configSeo,
     configTranslations,
     footer,
+    heroResourceHero,
     moduleFeed,
     navigation,
     pageBlog,

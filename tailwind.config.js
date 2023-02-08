@@ -92,7 +92,7 @@ module.exports = {
       none: "none",
       "2xs": "375px",
       xs: "500px",
-      text: "650px",
+      text: "100ch",
       quote: "700px",
       title: "100ch",
       screen: "100vw",
@@ -203,6 +203,11 @@ module.exports = {
         30: "120px",
       },
       typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            maxWidth: "none",
+          },
+        },
         current: {
           css: {
             "--tw-prose-body": "currentColor",

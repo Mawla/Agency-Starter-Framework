@@ -56,9 +56,9 @@ export const Title = ({
   size = "sm",
   weight = "bold",
   className,
-  color = "neutral-500",
+  color = "neutral-600",
   eyebrow,
-  eyebrowColor = "neutral-800",
+  eyebrowColor = "brand-600",
 }: TitleProps) => {
   const Element = as;
   const titleWords = children?.toString()?.trim().split(" ");

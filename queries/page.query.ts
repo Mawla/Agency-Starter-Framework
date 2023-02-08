@@ -8,6 +8,7 @@ import { richTextQuery } from "../components/portabletext/portabletext.query";
 import { videoQuery } from "../components/video/video.query";
 import { HeroBasicProps } from "../heroes/herobasic/HeroBasic";
 import { getHeroBasicQuery } from "../heroes/herobasic/herobasic.query";
+import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { LanguageType } from "../languages";
 import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query";
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
@@ -77,9 +78,11 @@ export const getPageQuery = (language: LanguageType) => groq`
   "hero": select(_type == 'page.preset' => modules, hero[language == "${language}" && !(_type in path('studio.*'))])[] {
     _type,
     _key,
+    theme,
 
     ${getHeroBasicQuery(language)},
 
+    ${getResourceHeroQuery(language)},
   }[0],
 
   // modules

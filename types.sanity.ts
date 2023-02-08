@@ -36,11 +36,12 @@ export const SCHEMAS = {
   "page.podcasts": "",
   "page.preset": "",
   "page.sitemap": "",
+  "page.tag": "",
   "page.tool": "",
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "page.tag": "",
+  "hero.resourcehero": "",
   footer: "",
   navigation: "",
   password: "",
@@ -122,7 +123,7 @@ export const MODULE_SCHEMAS = pick(
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
 
-export const HERO_SCHEMAS = pick(SCHEMAS, "hero.basic");
+export const HERO_SCHEMAS = pick(SCHEMAS, "hero.basic", "hero.resourcehero");
 
 export type HeroSchemaName = keyof typeof HERO_SCHEMAS;
 

@@ -86,9 +86,9 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
         })}
       >
         <div
-          className={cx("max-w-title flex flex-col gap-8", {
+          className={cx("max-w-text flex flex-col gap-8", {
             ["md:text-left"]: theme?.module?.align === "left",
-            ["md:text-center md:mx-auto"]: theme?.module?.align === "center",
+            ["md:mx-auto"]: theme?.module?.width !== "full",
           })}
         >
           {(Boolean(title?.trim().length) ||

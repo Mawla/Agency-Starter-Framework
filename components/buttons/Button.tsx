@@ -78,7 +78,7 @@ const weightClasses: Record<WeightType, string> = {
 const variantClasses: Record<VariantType, string> = {
   primary: "bg-[#eee] text-[#000]",
   secondary: "bg-[#000] text-[#fff]",
-  tertiary: "bg-[#f00] text-[pink]",
+  tertiary: "bg-[#fff] text-[#000]",
 };
 
 export const Button = (props: ButtonProps) => {
