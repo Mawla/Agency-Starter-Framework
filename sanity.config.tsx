@@ -6,7 +6,7 @@ import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
-import { defineConfig, WorkspaceOptions } from "sanity";
+import { ConfigContext, defineConfig, WorkspaceOptions } from "sanity";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
@@ -52,6 +52,37 @@ const CONFIG = {
           "",
         )}${path}`;
       }
+
+      return prev;
+    },
+    newDocumentOptions: (
+      prev: {
+        templateId: string;
+        description: string;
+        title: string;
+        icon: React.ComponentType<any>;
+      }[],
+      context: ConfigContext,
+    ) => {
+      console.log(prev, context);
+      // if (creationContext.schemaType?.startsWith("config.")) return prev;
+      prev = prev.filter((option: any) => {
+        if (option.templateId.startsWith("config.")) return false;
+        if (option.templateId.startsWith("media.")) return false;
+        if (option.templateId.startsWith("card.")) return false;
+        if (option.templateId.startsWith("password.")) return false;
+        if (option.templateId === "footer") return false;
+        if (option.templateId === "navigation") return false;
+        if (option.templateId === "page.notfound") return false;
+        if (option.templateId === "page.sitemap") return false;
+
+        const schema = context?.schema?._original?.types.find(
+          ({ name }: { name: string }) => name === option.templateId,
+        );
+        if ((schema?.options as any)?.singleton) return false;
+
+        return true;
+      });
 
       return prev;
     },

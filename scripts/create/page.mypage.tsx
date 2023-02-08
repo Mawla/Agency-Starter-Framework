@@ -17,6 +17,7 @@ export default defineType({
   title: "MyPage",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
+  /*OPTIONS*/
   preview: {
     select: {
       title: `title.${baseLanguage}`,

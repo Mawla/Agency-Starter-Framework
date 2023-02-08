@@ -17,6 +17,9 @@ export default defineType({
   title: "Tools",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
+  options: {
+    singleton: true,
+  },
   preview: {
     select: {
       title: `title.${baseLanguage}`,

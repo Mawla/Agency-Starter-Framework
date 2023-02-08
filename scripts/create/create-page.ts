@@ -130,6 +130,7 @@ const build = (answers) => {
     .replace(/MyPageSchema/g, schemaName)
     .replace(/mypage/g, lowerName)
     .replace(/MyPage/g, pascalName)
+    .replace(`/*OPTIONS*/`, singleton ? `options: { singleton: true },` : "")
     .replace(
       `/*PARENT_FIELD*/`,
       singleton
