@@ -133,7 +133,9 @@ const build = (answers) => {
     .replace(`/*OPTIONS*/`, singleton ? `options: { singleton: true },` : "")
     .replace(
       `/*PARENT_FIELD*/`,
-      singleton
+      !parentType || !parentId || !parentType?.trim().length
+        ? ""
+        : singleton
         ? `PARENT_FIELD,`
         : `{
       ...PARENT_FIELD,
@@ -144,7 +146,7 @@ const build = (answers) => {
     )
     .replace(
       ` /*PARENT_INITIAL_VALUE*/`,
-      !parentType || !parentId || singleton
+      !parentType || !parentId || !parentType?.trim().length || singleton
         ? ""
         : `parent: { _type: "reference", _ref: "${parentId}" },`,
     );
