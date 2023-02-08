@@ -61,9 +61,8 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
   let titleColor: ColorType = "neutral-500";
   let textColor: ColorType = "neutral-400";
   let eyebrowColor: ColorType = "brand-500";
-  let isDarkBackground = false;
+
   if (theme?.module?.background === "neutral-900") {
-    isDarkBackground = true;
     titleColor = "white";
     textColor = "white";
     eyebrowColor = "white";
@@ -72,7 +71,7 @@ export const RichText = ({ eyebrow, title, content, theme }: RichTextProps) => {
   return (
     <Wrapper
       theme={{
-        width: theme?.module?.width,
+        width: theme?.module?.width || "inner",
         background: theme?.module?.background,
         space: theme?.module?.space,
         rounded: {

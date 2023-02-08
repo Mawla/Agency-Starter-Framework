@@ -1,6 +1,7 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
+  AUTHOR_FIELD,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -38,6 +39,7 @@ export default defineType({
     },
     ...pageBase.fields,
     TAGS_FIELD,
+    AUTHOR_FIELD,
     PUBLISHED_AT_FIELD,
   ],
 });

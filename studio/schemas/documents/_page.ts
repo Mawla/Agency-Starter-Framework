@@ -219,6 +219,13 @@ export const TAGS_FIELD = defineField({
   of: [{ type: "reference", to: [{ type: "page.tag" }] }],
 });
 
+export const AUTHOR_FIELD = defineField({
+  name: "authors",
+  title: "Authors",
+  type: "array",
+  of: [{ type: "reference", to: [{ type: "person" }] }],
+});
+
 export const pageBase = {
   fieldsets: [
     {

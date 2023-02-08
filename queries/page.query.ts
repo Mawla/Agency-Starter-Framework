@@ -13,6 +13,7 @@ import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
+import { getFeedQuery } from "../modules/feed/feed.query";
 import { getGalleryQuery } from "../modules/gallery/gallery.query";
 import { getRichTextQuery } from "../modules/richtext/richtext.query";
 import { getSlidesQuery } from "../modules/slides/slides.query";
@@ -99,6 +100,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     ${getGalleryQuery(language)},
     ${getSlidesQuery(language)},
     ${getStoryQuery(language)},
+    ${getFeedQuery(language)},
   },
 
   // dialogs

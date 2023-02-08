@@ -158,11 +158,11 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                           locale={language}
                                           className={cx(
                                             "bg-white hover:bg-neutral-100 flex transition-colors",
-                                            "text-neutral-500",
+                                            "text-neutral-600",
                                             "text-md",
                                             "p-3 rounded-2xs",
                                             {
-                                              ["font-bold bg-neutral-100 hover:bg-neutral-100 text-neutral-600"]:
+                                              ["font-bold bg-neutral-100 hover:bg-neutral-100"]:
                                                 current,
                                             },
                                           )}

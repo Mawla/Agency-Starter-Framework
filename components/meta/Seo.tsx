@@ -66,6 +66,8 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
 
   const excludeFromSitemap = sitemapItem?.excludeFromSitemap?.[language];
 
+  console.log(seoTitle);
+
   return (
     <>
       <NextSeo
@@ -75,7 +77,7 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
         titleTemplate={`%s - ${config?.general?.name}`}
         description={seoDescription}
         canonical={seoCanonical}
-        useAppDir={true}
+        useAppDir={false}
         languageAlternates={
           sitemapItemPaths
             ? (Object.entries(sitemapItemPaths)
