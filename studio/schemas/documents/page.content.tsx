@@ -11,7 +11,7 @@ import {
   TITLE_FIELD,
 } from "./_page";
 import { SEO_FIELD } from "./config.seo";
-import { Pages } from "@vectopus/atlas-icons-react";
+import { BlogWebsite } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -21,7 +21,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Content page",
   type: "document",
-  icon: () => <Pages weight="thin" size={20} />,
+  icon: () => <BlogWebsite weight="thin" size={20} />,
   orderings: [
     {
       title: "Title",
