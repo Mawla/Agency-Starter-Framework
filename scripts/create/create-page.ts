@@ -132,7 +132,9 @@ const build = (answers) => {
     .replace(/MyPage/g, pascalName)
     .replace(
       `/*PARENT_FIELD*/`,
-      singleton
+      !parentType || !parentId
+        ? ""
+        : singleton
         ? `PARENT_FIELD,`
         : `{
       ...PARENT_FIELD,
@@ -143,11 +145,9 @@ const build = (answers) => {
     )
     .replace(
       ` /*PARENT_INITIAL_VALUE*/`,
-      singleton
-        ? ``
-        : parentType && parentId
-        ? `parent: { _type: "reference", _ref: "${parentId}" },`
-        : "",
+      !parentType || !parentId || singleton
+        ? ""
+        : `parent: { _type: "reference", _ref: "${parentId}" },`,
     );
 
   fs.writeFileSync(schemaFilePath, schemaContent);
