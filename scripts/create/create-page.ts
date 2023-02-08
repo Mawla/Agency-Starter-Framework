@@ -133,9 +133,7 @@ const build = (answers) => {
     .replace(`/*OPTIONS*/`, singleton ? `options: { singleton: true },` : "")
     .replace(
       `/*PARENT_FIELD*/`,
-      !parentType || !parentId || !parentType?.trim().length
-        ? ""
-        : singleton
+      singleton || !parentType || !parentId || !parentType?.trim().length
         ? `PARENT_FIELD,`
         : `{
       ...PARENT_FIELD,

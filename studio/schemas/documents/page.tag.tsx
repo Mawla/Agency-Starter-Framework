@@ -1,43 +1,31 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
+  PARENT_FIELD,
   ORDER_PUBLISHED_DESC,
   pageBase,
-  PARENT_FIELD,
   PUBLISHED_AT_FIELD,
-  TAGS_FIELD,
 } from "./_page";
-import { Calendar } from "@vectopus/atlas-icons-react";
+import { Tag } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
-export const SCHEMA_NAME: SchemaName = "page.event";
+export const SCHEMA_NAME: SchemaName = "page.tag";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Event",
+  title: "Tag",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
+
   preview: {
     select: {
       title: `title.${baseLanguage}`,
       media: "hero.0.image",
     },
   },
-  icon: () => <Calendar weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_events" },
-  },
+  icon: () => <Tag weight="thin" size={20} />,
+  initialValue: {},
   fieldsets: [...pageBase.fieldsets],
-  fields: [
-    {
-      ...PARENT_FIELD,
-      to: [{ type: "page.events" }],
-      options: { disableNew: true },
-      hidden: true,
-    },
-    ...pageBase.fields,
-    TAGS_FIELD,
-    PUBLISHED_AT_FIELD,
-  ],
+  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
 });

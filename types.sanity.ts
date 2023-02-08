@@ -30,6 +30,7 @@ export const SCHEMAS = {
   "page.guide": "",
   "page.guides": "",
   "page.home": "",
+  "page.landing": "",
   "page.notfound": "",
   "page.podcast": "",
   "page.podcasts": "",
@@ -39,7 +40,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "page.landing": "",
+  "page.tag": "",
   footer: "",
   navigation: "",
   password: "",
@@ -62,13 +63,14 @@ export const LINKABLE_SCHEMAS = pick(
   "page.guide",
   "page.guides",
   "page.home",
+  "page.landing",
   "page.podcast",
   "page.podcasts",
   "page.tool",
   "page.tools",
   "page.video",
   "page.videos",
-  "page.landing",
+  "page.tag",
 );
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
@@ -90,6 +92,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "page.guide",
   "page.guides",
   "page.home",
+  "page.landing",
   "page.notfound",
   "page.podcast",
   "page.podcasts",
@@ -99,7 +102,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "page.video",
   "page.videos",
   "person",
-  "page.landing",
+  "page.tag",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;

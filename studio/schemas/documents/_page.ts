@@ -212,6 +212,13 @@ export const PARENT_FIELD = defineField({
   },
 });
 
+export const TAGS_FIELD = defineField({
+  name: "tags",
+  title: "Tags",
+  type: "array",
+  of: [{ type: "reference", to: [{ type: "page.tag" }] }],
+});
+
 export const pageBase = {
   fieldsets: [
     {

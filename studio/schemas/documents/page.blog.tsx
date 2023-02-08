@@ -5,6 +5,7 @@ import {
   pageBase,
   PARENT_FIELD,
   PUBLISHED_AT_FIELD,
+  TAGS_FIELD,
 } from "./_page";
 import { InkPen } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -36,6 +37,7 @@ export default defineType({
       hidden: true,
     },
     ...pageBase.fields,
+    TAGS_FIELD,
     PUBLISHED_AT_FIELD,
   ],
 });

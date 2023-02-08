@@ -46,6 +46,7 @@ import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
 import modulePreset from "./documents/page.preset";
 import pageSitemap from "./documents/page.sitemap";
+import pageTag from "./documents/page.tag";
 import pageTool from "./documents/page.tool";
 import pageTools from "./documents/page.tools";
 import pageVideo from "./documents/page.video";
@@ -118,6 +119,7 @@ export const schemaTypes = [
     pagePodcast,
     pagePodcasts,
     pageSitemap,
+    pageTag,
     pageTool,
     pageTools,
     pageVideo,

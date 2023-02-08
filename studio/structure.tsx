@@ -108,6 +108,8 @@ export const structure = (
           }),
 
           S.divider(),
+          documentList(S, { type: "page.tag", title: "Tags" }),
+          S.divider(),
         ]),
       ),
       group(S, {
