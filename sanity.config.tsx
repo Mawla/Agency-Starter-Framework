@@ -6,21 +6,16 @@ import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
-import { ConfigContext, defineConfig, TemplateResponse, WorkspaceOptions } from "sanity";
+import { ConfigContext, defineConfig, TemplateResponse } from "sanity";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
 
 const env = (import.meta as any).env;
 
-
 export default defineConfig({
   projectId: env.SANITY_STUDIO_API_PROJECT_ID,
-  dataset: env.dataset,
-  basePath: `/cms/`,
-  name: env.name,
-  title: env.title,
-
+  dataset: env.SANITY_STUDIO_API_DATASET,
   plugins: [
     deskTool({
       structure,
@@ -63,12 +58,7 @@ export default defineConfig({
 
       return prev;
     },
-    newDocumentOptions: (
-      prev: TemplateResponse[],
-      context: ConfigContext,
-    ) => {
-      console.log(prev, context);
-      // if (creationContext.schemaType?.startsWith("config.")) return prev;
+    newDocumentOptions: (prev: TemplateResponse[], context: ConfigContext) => {
       prev = prev.filter((option: any) => {
         if (option.templateId.startsWith("config.")) return false;
         if (option.templateId.startsWith("media.")) return false;
