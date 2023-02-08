@@ -52,13 +52,6 @@ const schema = defineType({
     }),
 
     defineField({
-      name: "eyebrow",
-      title: "Eyebrow",
-      type: "string",
-      group: "content",
-    }),
-
-    defineField({
       name: "title",
       title: "Title",
       type: "text",

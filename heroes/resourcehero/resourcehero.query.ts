@@ -1,3 +1,4 @@
+import { resolveIdHrefQuery } from "../../components/buttons/button.query";
 import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
@@ -7,10 +8,12 @@ export const getResourceHeroQuery = (
   language: LanguageType,
 ) => groq`_type == "hero.resourcehero" => {
   title,
-  eyebrow,
   intro[] ${richTextQuery},
   "image": ${imageQuery},
-  "tags": ^.tags[]->title.${language},
+  "tags": ^.tags[]->{
+    "title": title.${language},
+    "href": ${resolveIdHrefQuery}
+  },
   "authors": ^.authors[]->{ 
     name, 
     "image": ${imageQuery} 

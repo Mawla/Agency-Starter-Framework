@@ -1,5 +1,5 @@
 import { Button } from "../../components/buttons/Button";
-import { DateDisplay } from "../../components/date/DateDisplay";
+import Link from "../../components/buttons/Link";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
@@ -8,6 +8,7 @@ import { BackgroundColorType } from "../../components/module/background.options"
 import { SpaceType } from "../../components/module/spacing.options";
 import PortableText from "../../components/portabletext/PortableText";
 import { PageContext } from "../../context/PageContext";
+import { formatDate } from "../../helpers/utils/date";
 import { joinList } from "../../helpers/utils/string";
 import { ColorType, HeadingLevelType } from "../../types";
 import { ImageType } from "../../types";
@@ -49,18 +50,16 @@ export type ResourceHeroProps = {
       color?: ColorType;
     };
   };
-  eyebrow?: string;
   title?: string;
   intro?: React.ReactNode;
   image?: ImageType;
-  tags?: string[];
+  tags?: { title: string; href: string }[];
   authors?: { name: string; image?: ImageType }[];
   date?: string;
 };
 
 export const ResourceHero = ({
   theme,
-  eyebrow,
   title,
   intro,
   image,
@@ -86,8 +85,8 @@ export const ResourceHero = ({
         },
       }}
     >
-      <div className="grid md:grid-cols-12 py-16 gap-16">
-        <div className="col-span-7 flex flex-col gap-6 text-neutral-600">
+      <div className="md:grid md:grid-cols-12 py-16 gap-16">
+        <div className="md:col-span-7 flex flex-col gap-6 text-neutral-600">
           {backLink && (
             <div>
               <span className="-rotate-180 inline-block">
@@ -101,7 +100,7 @@ export const ResourceHero = ({
               size={theme?.title?.size || "3xl"}
               as={theme?.title?.level || "h1"}
               color={theme?.title?.color}
-              eyebrow={eyebrow}
+              eyebrow={(date && formatDate(date)) || ""}
             >
               {title}
             </Title>
@@ -116,13 +115,18 @@ export const ResourceHero = ({
           )}
 
           {/* tags and date */}
-          <Text size="sm">
-            {tags && Boolean(tags?.length) && (
-              <span className="">{joinList(tags)}</span>
-            )}
-            {" • "}
-            {date && <DateDisplay datetime={date} />}
-          </Text>
+          {tags && Boolean(tags?.length) && (
+            <div className="flex gap-1 flex-wrap">
+              {tags.map((tag) => (
+                <Link
+                  href={tag.href}
+                  className="border border-neutral-300 py-1 px-2"
+                >
+                  {tag.title}
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* authors */}
           <div className="flex flex-col gap-4">
@@ -131,22 +135,22 @@ export const ResourceHero = ({
                 {authors.map(
                   ({ image }) =>
                     image && (
-                      <span className="w-10 aspect-square relative rounded-full overflow-hidden border border-white">
+                      <span className="w-10 -mr-4 aspect-square relative rounded-full overflow-hidden border border-white">
                         <ResponsiveImage {...image} fill />
                       </span>
                     ),
                 )}
 
-                <span className="text-md">
+                <span className="text-md ml-4">
                   {joinList(authors.map((a) => a.name))}
                 </span>
               </div>
             )}
           </div>
         </div>
-        <div className="col-span-5">
+        <div className="mt-6 md:mt-0 md:col-span-5">
           {image && (
-            <div className="w-full h-full relative overflow-hidden rounded-lg">
+            <div className="w-full h-96 md:w-full md:h-full relative overflow-hidden rounded-lg">
               <ResponsiveImage {...image} fill className="absolute inset-0" />
             </div>
           )}
