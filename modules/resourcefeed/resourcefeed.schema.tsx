@@ -78,6 +78,12 @@ const schema = defineType({
             list: optionsToList(TAGGABLE_SCHEMAS),
           },
         }),
+        defineField({
+          name: "tags",
+          title: "Tags",
+          type: "array",
+          of: [{ type: "reference", to: [{ type: "page.tag" }] }],
+        }),
       ],
     }),
     defineField({
@@ -142,6 +148,19 @@ const schema = defineType({
                 options: {
                   colors: COLORS,
                 },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "tags",
+          title: "Tags",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "display",
+                type: "boolean",
               },
             ],
           },

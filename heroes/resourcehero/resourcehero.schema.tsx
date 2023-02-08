@@ -5,7 +5,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "hero.resourcehero",
-  title: "ResourceHero",
+  title: "Resource Hero",
   type: "object",
   description: "Generic hero for blogs, events, etc…",
   icon: () => <ImageGallery weight="thin" />,

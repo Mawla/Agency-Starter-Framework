@@ -38,6 +38,9 @@ export type ResourceFeedProps = {
     text?: {
       color?: ColorType;
     };
+    tags?: {
+      display?: boolean;
+    };
   };
   eyebrow?: string;
   title?: string;
@@ -78,7 +81,7 @@ export const ResourceFeed = ({
         </div>
       )}
 
-      {tags && Boolean(tags?.length) && (
+      {tags && theme?.tags?.display !== false && Boolean(tags?.length) && (
         <div className="mb-4 md:mb-6">
           <ul className="flex flex-wrap gap-2">
             {tags?.filter(Boolean).map((tag) => (
