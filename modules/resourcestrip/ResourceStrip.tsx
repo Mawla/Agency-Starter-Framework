@@ -68,7 +68,7 @@ export const ResourceStrip = ({
       {title && (
         <div className="mb-4 md:mb-6">
           <Title
-            size={theme?.title?.size || "lg"}
+            size={theme?.title?.size || "3xl"}
             as={theme?.title?.level}
             color={theme?.title?.color}
             eyebrow={eyebrow}
@@ -80,21 +80,26 @@ export const ResourceStrip = ({
 
       {intro && (
         <div className="mb-10 md:mb-14">
-          <Text color={theme?.text?.color}>
+          <Text color={theme?.text?.color || "neutral-800"}>
             <PortableText content={intro as any} />
           </Text>
         </div>
       )}
 
-      {Boolean(items?.length) && (
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {items?.map((item) => (
-            <li key={item._id}>
-              <ResourceFeedItem {...item} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="overflow-scrolling-touch pb-4 overflow-auto lg:overflow-visible w-screen -mx-8 lg:w-auto lg:mx-0 lg:pb-0 snap-x">
+        {Boolean(items?.length) && (
+          <ul className="flex flex-nowrap gap-6 px-8 lg:px-0">
+            {items?.map((item) => (
+              <li
+                key={item._id}
+                className="min-w-[300px] lg:min-w-0 w-1/3 snap-center"
+              >
+                <ResourceFeedItem {...item} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </Wrapper>
   );
 };
