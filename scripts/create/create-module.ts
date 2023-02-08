@@ -162,7 +162,9 @@ function createModule(
         await act(() => {
           render(<MyModule title="Hello" />);
         });
-        expect(screen.getByText('Hello', { selector: 'h2' })).toBeInTheDocument();
+        expect(screen.getByText('Hello', { selector: '${
+          isHero ? "h1" : "h2"
+        }' })).toBeInTheDocument();
       });
       `);
     queryFieldLines.push(`title`);
