@@ -186,7 +186,6 @@ export type RatiosType = { [key in keyof typeof RATIOS]: string };
 
 export const STATIC_FORMS = {
   "newsletter-sign-up": "Newsletter sign up",
-  contact: "Contact",
 };
 
 export type StaticFormType = keyof typeof STATIC_FORMS;
