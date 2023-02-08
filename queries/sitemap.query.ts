@@ -1,5 +1,5 @@
 import { languages, LanguageType } from "../languages";
-import { SchemaName } from "../types.sanity";
+import { LINKABLE_SCHEMAS, SchemaName } from "../types.sanity";
 import groq from "groq";
 
 export type SitemapItemType = {
@@ -59,25 +59,14 @@ const getSingletonQuery = (id: string) => {
 export const getSitemapQuery = () => {
   const sitemapQuery = groq`
   [
+    // fixed path pages
     ${homePageQuery},
 
-    // content pages
+    // parent based pages
     ...*[
-      _type == "page.content"
-      || _type == 'page.blogs'
-      || _type == 'page.blog'
-      || _type == 'page.events'
-      || _type == 'page.event'
-      || _type == 'page.casestudies'
-      || _type == 'page.casestudy'
-      || _type == 'page.podcasts'
-      || _type == 'page.podcast'
-      || _type == 'page.guides'
-      || _type == 'page.guide'
-      || _type == 'page.tools'
-      || _type == 'page.tool'
-      || _type == 'page.videos'
-      || _type == 'page.video'
+      ${Object.keys(LINKABLE_SCHEMAS)
+        .map((schema) => `_type == "${schema}"`)
+        .join("|| ")}
     ] {
       ${baseFields},
 

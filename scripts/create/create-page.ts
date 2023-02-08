@@ -151,7 +151,7 @@ const build = (answers) => {
 
   addSchema(`page${pascalName}`, `./documents/${schemaName}`, true);
 
-  createQuery(name, schemaName, documentId, answers);
+  // createQuery(name, schemaName, documentId, answers);
   if (addDesk)
     createDeskStructure(name, pascalName, schemaName, documentId, answers);
 
@@ -168,64 +168,64 @@ const build = (answers) => {
  * Add query
  */
 
-function createQuery(name, schemaName, documentId, answers) {
-  const { singleton, parentType, parentId } = answers;
+// function createQuery(name, schemaName, documentId, answers) {
+//   const { singleton, parentType, parentId } = answers;
 
-  const filePath = `${__dirname}/../../queries/sitemap.query.ts`;
-  let lines = fs.readFileSync(filePath).toString().split("\n");
+//   const filePath = `${__dirname}/../../queries/sitemap.query.ts`;
+//   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  // let str;
+//   // let str;
 
-  /*
-  // singleton query
-  if (singleton) {
-    str = `
-    \${getSingletonQuery('${documentId}')},`;
-  } else {
-    // page with a parent query
-    if (parentId) {
-      str = `
-    // ${name}
-    ...*[_type == "${schemaName}"] {
-      \${baseFields},
-      "paths": {
-        \${languages.map(
-          (language) =>
-            \`"\${language.id}": "/" + *[_id match "*${parentId}"] { "slug": slug.\${language.id}.current}[0].slug  +"/"+ slug.\${language.id}.current\`
-          )
-        }
-      },
-    },
-`;
+//   /*
+//   // singleton query
+//   if (singleton) {
+//     str = `
+//     \${getSingletonQuery('${documentId}')},`;
+//   } else {
+//     // page with a parent query
+//     if (parentId) {
+//       str = `
+//     // ${name}
+//     ...*[_type == "${schemaName}"] {
+//       \${baseFields},
+//       "paths": {
+//         \${languages.map(
+//           (language) =>
+//             \`"\${language.id}": "/" + *[_id match "*${parentId}"] { "slug": slug.\${language.id}.current}[0].slug  +"/"+ slug.\${language.id}.current\`
+//           )
+//         }
+//       },
+//     },
+// `;
 
-      // top level page
-    } else {
-      str = `
-    // ${name}
-    ...*[_type == "${schemaName}"] {
-      \${baseFields},
-      "paths": {
-        \${languages.map(
-          (language) =>
-            \`"\${language.id}": "/" + slug.\${language.id}.current\`,
-        )}
-      },
-    },
-`;
-    }
-  }*/
+//       // top level page
+//     } else {
+//       str = `
+//     // ${name}
+//     ...*[_type == "${schemaName}"] {
+//       \${baseFields},
+//       "paths": {
+//         \${languages.map(
+//           (language) =>
+//             \`"\${language.id}": "/" + slug.\${language.id}.current\`,
+//         )}
+//       },
+//     },
+// `;
+//     }
+//   }*/
 
-  lines = addLine(
-    `       || _type == '${schemaName}'`,
-    lines,
-    `_type == "page.content"`,
-    1,
-  );
-  fs.writeFileSync(filePath, lines.join("\n"));
-  console.log(
-    `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
-  );
-}
+//   lines = addLine(
+//     `       || _type == '${schemaName}'`,
+//     lines,
+//     `_type == "page.content"`,
+//     1,
+//   );
+//   fs.writeFileSync(filePath, lines.join("\n"));
+//   console.log(
+//     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
+//   );
+// }
 
 /**
  * Add to desk
