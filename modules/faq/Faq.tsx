@@ -42,7 +42,7 @@ export type FaqProps = {
   eyebrow?: string;
   title?: string;
   intro?: React.ReactNode;
-  items?: { _key?: string; title?: string; body?: any[] }[];
+  items?: { _key?: string; title?: string; content?: any[] }[];
 };
 
 function fixLinkDefs(obj: any) {
