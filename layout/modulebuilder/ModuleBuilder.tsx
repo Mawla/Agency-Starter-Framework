@@ -2,6 +2,7 @@ import { PageContext } from "../../context/PageContext";
 import { BillboardProps } from "../../modules/billboard/Billboard";
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
+import { FaqProps } from "../../modules/faq/Faq";
 import { GalleryProps } from "../../modules/gallery/Gallery";
 import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
 import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
@@ -15,6 +16,10 @@ import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType, useContext } from "react";
 import { Suspense, lazy } from "react";
+
+const Faq = lazy<ComponentType<FaqProps>>(
+  () => import(/* webpackChunkName: "Faq" */ "../../modules/faq/Faq"),
+);
 
 const ResourceStrip = lazy<ComponentType<ResourceStripProps>>(
   () =>
@@ -146,6 +151,7 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               {item._type === "module.resourcestrip" && (
                 <ResourceStrip {...(item as ResourceStripProps)} />
               )}
+              {item._type === "module.faq" && <Faq {...(item as FaqProps)} />}
             </LazyLoadInView>
           </ModuleErrorBoundary>
         </Suspense>
