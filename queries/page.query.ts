@@ -22,6 +22,7 @@ import { getRichTextQuery } from "../modules/richtext/richtext.query";
 import { getSlidesQuery } from "../modules/slides/slides.query";
 import { getStoryQuery } from "../modules/story/story.query";
 import { getTextImageQuery } from "../modules/textimage/textimage.query";
+import { getVideoQuery } from "../modules/video/video.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
 import { ConfigType } from "./config.query";
@@ -108,6 +109,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     ${getFeedQuery(language)},
     ${getResourceStripQuery(language)},
     ${getFaqQuery(language)},
+    ${getVideoQuery(language)},
   },
 
   // dialogs

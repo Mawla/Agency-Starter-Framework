@@ -16,6 +16,7 @@ export const SCHEMAS = {
   "module.billboard": "",
   "module.breadcrumb": "",
   "module.cardgrid": "",
+  "module.faq": "",
   "module.gallery": "",
   "module.resourcefeed": "",
   "module.resourcestrip": "",
@@ -44,7 +45,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "module.faq": "",
+  "module.video": "",
   footer: "",
   navigation: "",
   password: "",
@@ -128,6 +129,7 @@ export const MODULE_SCHEMAS = pick(
   "module.billboard",
   "module.breadcrumb",
   "module.cardgrid",
+  "module.faq",
   "module.gallery",
   "module.resourcefeed",
   "module.resourcestrip",
@@ -135,7 +137,7 @@ export const MODULE_SCHEMAS = pick(
   "module.slides",
   "module.story",
   "module.textimage",
-  "module.faq",
+  "module.video",
 );
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;

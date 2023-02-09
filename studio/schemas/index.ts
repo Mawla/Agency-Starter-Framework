@@ -23,6 +23,7 @@ import moduleRichText from "../../modules/richtext/richtext.schema";
 import moduleSlides from "../../modules/slides/slides.schema";
 import moduleStory from "../../modules/story/story.schema";
 import moduleTextImage from "../../modules/textimage/textimage.schema";
+import moduleVideo from "../../modules/video/video.schema";
 import { translateFields } from "../utils/language/field-translation";
 import configCMS from "./documents/config.cms";
 import configGeneral from "./documents/config.general";
@@ -111,6 +112,7 @@ export const schemaTypes = [
     moduleFaq,
     moduleFeed,
     moduleResourceStrip,
+    moduleVideo,
     navigation,
     pageBlog,
     pageBlogs,

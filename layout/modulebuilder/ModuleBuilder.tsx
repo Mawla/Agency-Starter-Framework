@@ -10,12 +10,17 @@ import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
 import { StoryProps } from "../../modules/story/Story";
 import { TextImageProps } from "../../modules/textimage/TextImage";
+import { VideoProps } from "../../modules/video/Video";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType, useContext } from "react";
 import { Suspense, lazy } from "react";
+
+const Video = lazy<ComponentType<VideoProps>>(
+  () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video"),
+);
 
 const Faq = lazy<ComponentType<FaqProps>>(
   () => import(/* webpackChunkName: "Faq" */ "../../modules/faq/Faq"),
@@ -152,6 +157,9 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
                 <ResourceStrip {...(item as ResourceStripProps)} />
               )}
               {item._type === "module.faq" && <Faq {...(item as FaqProps)} />}
+              {item._type === "module.video" && (
+                <Video {...(item as VideoProps)} />
+              )}
             </LazyLoadInView>
           </ModuleErrorBoundary>
         </Suspense>

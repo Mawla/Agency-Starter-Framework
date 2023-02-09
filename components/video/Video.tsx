@@ -15,7 +15,11 @@ const VimeoPlayer = lazy<ComponentType<VideoType>>(
   () => import(/* webpackChunkName: "VimeoPlayer" */ "./VimeoPlayer"),
 );
 
-export const Video = (props: VideoType & { className?: string }) => {
+export type VideoProps = {
+  className?: string;
+} & VideoType;
+
+export const Video = (props: VideoProps) => {
   let { provider, className } = props;
   if (!className) className = "aspect-video relative";
 
