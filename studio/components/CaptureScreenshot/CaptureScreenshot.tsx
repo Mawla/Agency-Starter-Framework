@@ -42,7 +42,7 @@ export const CaptureScreenshot: ComponentType<any> = () => {
     setState("loading");
 
     const firstModuleLanguage = getLanguageTitle(
-      document?.modules?.[0]?.language || baseLanguage
+      document?.modules?.[0]?.language || baseLanguage,
     )?.toLowerCase();
 
     if (!window.document.querySelector(".previewView iframe")) {
@@ -50,7 +50,7 @@ export const CaptureScreenshot: ComponentType<any> = () => {
 
       // click split
       const splitButton = window.document.querySelector(
-        '[title="Split pane right"]'
+        '[title="Split pane right"]',
       ) as HTMLButtonElement;
       splitButton?.click();
 
@@ -58,7 +58,7 @@ export const CaptureScreenshot: ComponentType<any> = () => {
 
       // click preview
       const previewButton = window.document.querySelectorAll(
-        `[data-testid="document-pane"]:last-of-type [id*="tab-preview-${firstModuleLanguage}"]`
+        `[data-testid="document-pane"]:last-of-type [id*="tab-preview-${firstModuleLanguage}"]`,
       )?.[0] as HTMLButtonElement;
       previewButton?.click();
 
@@ -66,13 +66,13 @@ export const CaptureScreenshot: ComponentType<any> = () => {
     }
 
     const previewIframe = window.document.querySelector(
-      ".previewView iframe"
+      ".previewView iframe",
     ) as HTMLIFrameElement;
     if (!previewIframe?.contentWindow) return;
 
     previewIframe.contentWindow.postMessage(
       { type: "captureScreenshot", width: 1024, height: 768 },
-      (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH
+      import.meta.env.SANITY_STUDIO_PROJECT_PATH,
     );
   }, [document]);
 
@@ -84,7 +84,7 @@ export const CaptureScreenshot: ComponentType<any> = () => {
     function closePreview() {
       if (closePreviewAfterScreenshot) {
         const closeButton = window.document.querySelectorAll(
-          '[title="Close split pane"]'
+          '[title="Close split pane"]',
         )?.[1] as HTMLButtonElement;
 
         closeButton?.click();

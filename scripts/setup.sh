@@ -41,7 +41,7 @@ echo "SANITY_STUDIO_API_DATASET=development" >> .env.development
 # Generate preview secret
 echo "\033[0;36m-\033[0m Generating preview secret"
 previewSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 | python -c 'import json, sys; a = json.loads(sys.stdin.read()); print u" ".join(a);')
-echo "SANITY_STUDIO_PREVIEW_SECRET=\"$previewSecret\"" >> .env.development
+echo "SANITY_PREVIEW_SECRET=\"$previewSecret\"" >> .env.development
 
 echo "\033[0;36m-\033[0m Generating webhook secret"
 webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 | python -c 'import json, sys; a = json.loads(sys.stdin.read()); print u" ".join(a);')

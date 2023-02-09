@@ -46,9 +46,9 @@ const IconPicker: ComponentType<any> = (props) => {
           <Flex padding={1} gap={3} align="center">
             <img
               style={{ width: 30, height: 30 }}
-              src={`${
-                (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH
-              }icons/${schemaType?.options?.icons[option.icon]}`}
+              src={`${import.meta.env.SANITY_STUDIO_PROJECT_PATH}icons/${
+                schemaType?.options?.icons[option.icon]
+              }`}
             />
             <Text size={2}>{option.label}</Text>
           </Flex>
@@ -59,7 +59,7 @@ const IconPicker: ComponentType<any> = (props) => {
         currentIcon ? (
           <img
             style={{ width: 16, height: 16 }}
-            src={`${(import.meta as any).env.SANITY_STUDIO_PROJECT_PATH}icons/${
+            src={`${import.meta.env.SANITY_STUDIO_PROJECT_PATH}icons/${
               schemaType?.options?.icons[currentIcon]
             }`}
           />

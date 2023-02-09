@@ -1,4 +1,5 @@
-import React, { ComponentType } from "react";
+import React, { ComponentType, useEffect, useState } from "react";
+import { useClient } from "sanity";
 
 export const PreviewIframe: ComponentType<any> = ({
   documentId,
@@ -30,11 +31,21 @@ export const PreviewIframeComponent = ({
   _type: string;
   language: string;
 }) => {
-  const url = `${
-    (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH
-  }api/preview/preview?_id=${_id}&_type=${_type}&secret=${
-    (import.meta as any).env.SANITY_STUDIO_PREVIEW_SECRET
-  }&language=${language}`;
+  const client = useClient({ apiVersion: "vX" });
+  const [secret, setSecret] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function getSecret() {
+      const secret = await client.fetch(
+        `*[_id == "secret.config_cms"][0].previewSecret`,
+      );
+      setSecret(secret);
+    }
+    getSecret();
+  }, []);
+
+  if (!secret) return null;
+
   return (
     <div className="previewView">
       <style>{`
@@ -50,7 +61,11 @@ export const PreviewIframeComponent = ({
         }
       `}</style>
 
-      <iframe src={url} />
+      <iframe
+        src={`${
+          import.meta.env.SANITY_STUDIO_PROJECT_PATH
+        }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${language}`}
+      />
     </div>
   );
 };

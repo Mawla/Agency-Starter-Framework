@@ -11,7 +11,7 @@ import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
 
-const env = (import.meta as any).env;
+const env = import.meta.env;
 
 export default defineConfig({
   projectId: env.SANITY_STUDIO_API_PROJECT_ID,
@@ -51,7 +51,7 @@ export default defineConfig({
       }
 
       if (path) {
-        return `${(import.meta as any).env.SANITY_STUDIO_PROJECT_PATH.replace(
+        return `${import.meta.env.SANITY_STUDIO_PROJECT_PATH.replace(
           /\/+$/,
           "",
         )}${path}`;
@@ -59,6 +59,9 @@ export default defineConfig({
 
       return prev;
     },
+    // actions: (prev, context) => {
+    //   return context.schemaType === "config.cms" ? [] : prev;
+    // },
     newDocumentOptions: (prev: TemplateResponse[], context: ConfigContext) => {
       prev = prev.filter((option: any) => {
         if (option.templateId.startsWith("config.")) return false;

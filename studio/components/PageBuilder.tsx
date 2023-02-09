@@ -70,7 +70,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     // post message to iframe to scroll to module
     previewIframe.contentWindow.postMessage(
       { type: "preview-view-scroll-to-module", moduleKey: props.value._key },
-      (import.meta as any).env.SANITY_STUDIO_PROJECT_PATH,
+      import.meta.env.SANITY_STUDIO_PROJECT_PATH,
     );
   }, [props.open, props.value?._key]);
 

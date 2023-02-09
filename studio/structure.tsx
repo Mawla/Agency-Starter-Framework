@@ -140,6 +140,7 @@ export const structure = (
             id: "config_translations",
             type: "config.translations",
           }),
+          singleton(S, { id: "secret.config_cms", type: "config.cms" }),
         ]),
       ),
       documentList(S, { type: "redirect", title: "Redirects" }),

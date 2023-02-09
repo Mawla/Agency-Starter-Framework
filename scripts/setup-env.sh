@@ -1,5 +1,5 @@
 sanityProjectId=$(grep 'NEXT_PUBLIC_SANITY_PROJECT_ID' ./.env.development | cut -d \= -f2)
-previewSecret=$(grep 'SANITY_STUDIO_PREVIEW_SECRET' ./.env.development | cut -d \= -f2)
+previewSecret=$(grep 'SANITY_PREVIEW_SECRET' ./.env.development | cut -d \= -f2)
 webhookSecret=$(grep 'SANITY_WEBHOOK_SECRET' ./.env.development | cut -d \= -f2)
 sanityReadToken=$(grep 'SANITY_API_READ_TOKEN' ./.env.development | cut -d \= -f2)
 sanityWriteToken=$(grep 'SANITY_API_WRITE_TOKEN' ./.env.development | cut -d \= -f2)
@@ -27,9 +27,9 @@ echo "development | tr -d '\n'" | vercel env add SANITY_STUDIO_API_DATASET devel
 echo "staging | tr -d '\n'" | vercel env add SANITY_STUDIO_API_DATASET preview staging
 
 # sanity studio preview secret
-echo $previewSecret | tr -d '\n' | vercel env add SANITY_STUDIO_PREVIEW_SECRET development
-echo $previewSecret | tr -d '\n' | vercel env add SANITY_STUDIO_PREVIEW_SECRET preview
-echo $previewSecret | tr -d '\n' | vercel env add SANITY_STUDIO_PREVIEW_SECRET production
+echo $previewSecret | tr -d '\n' | vercel env add SANITY_PREVIEW_SECRET development
+echo $previewSecret | tr -d '\n' | vercel env add SANITY_PREVIEW_SECRET preview
+echo $previewSecret | tr -d '\n' | vercel env add SANITY_PREVIEW_SECRET production
 
 # sanity studio webhook secret
 echo $webhookSecret | tr -d '\n' | vercel env add SANITY_WEBHOOK_SECRET development

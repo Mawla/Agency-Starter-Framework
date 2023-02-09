@@ -23,6 +23,7 @@ import moduleSlides from "../../modules/slides/slides.schema";
 import moduleStory from "../../modules/story/story.schema";
 import moduleTextImage from "../../modules/textimage/textimage.schema";
 import { translateFields } from "../utils/language/field-translation";
+import configCMS from "./documents/config.cms";
 import configGeneral from "./documents/config.general";
 import configIntegrations from "./documents/config.integrations";
 import configSeo from "./documents/config.seo";
@@ -70,6 +71,7 @@ export const schemaTypes = [
     cardImage,
     configIntegrations,
     configSocial,
+    configCMS,
     copypaste,
     dialogForm,
     dialogRichText,

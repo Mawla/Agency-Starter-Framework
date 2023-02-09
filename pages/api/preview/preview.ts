@@ -16,8 +16,14 @@ function warning(msg: string) {
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { secret, _id, _type, language } = req.query;
 
-  if (secret !== process.env.SANITY_STUDIO_PREVIEW_SECRET) {
-    return res.status(401).send(warning("The preview token is invalid."));
+  if (secret !== process.env.SANITY_PREVIEW_SECRET) {
+    return res
+      .status(401)
+      .send(
+        warning(
+          "The preview token is invalid. Make sure the Vercel environment variable is set correctly and matches the preview secret in the Sanity CMS config.",
+        ),
+      );
   }
 
   if (!secret || Array.isArray(secret) || !secret.trim().length)

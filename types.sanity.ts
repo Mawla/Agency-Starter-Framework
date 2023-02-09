@@ -1,6 +1,7 @@
 import { pick } from "./helpers/utils/object";
 
 export const SCHEMAS = {
+  "config.cms": "",
   "config.general": "",
   "config.integrations": "",
   "config.seo": "",
