@@ -9,7 +9,6 @@ export const imageQueryFields = groq`
 
 export const imageSimpleQuery = groq`
   @.image.source.asset -> {
-    "preventResize": ^.image.preventResize,
     "hotspot": ^.image.source.hotspot,
     "crop": ^.image.source.crop,
     ${imageQueryFields}
@@ -20,7 +19,6 @@ export const imageSimpleQuery = groq`
 
 export const imageSourceQuery = groq`
   @.source.asset -> {
-    "preventResize": image.preventResize,
     "hotspot": image.hotspot,
     "crop": image.crop,
     "caption": image.caption,

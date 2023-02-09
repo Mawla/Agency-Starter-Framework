@@ -81,7 +81,6 @@ export type HeadingLevelsType = {
 
 export type ImageType = {
   src: string;
-  preventResize?: boolean;
   width?: number;
   height?: number;
   alt: string;

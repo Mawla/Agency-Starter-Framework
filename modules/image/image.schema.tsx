@@ -73,7 +73,7 @@ const schema = defineType({
     defineField({
       name: "image",
       title: "Image",
-      type: "image",
+      type: "image.simple",
       group: "content",
     }),
     defineField({

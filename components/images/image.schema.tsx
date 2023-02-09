@@ -73,13 +73,6 @@ const schema = defineType({
       description:
         "Optional caption to display with the image. Only shown on the website when layout allows for it.",
     }),
-    defineField({
-      name: "preventResize",
-      title: "Prevent resize",
-      type: "boolean",
-      description:
-        "If enabled, the image will maintain its aspect ratio when scaled.",
-    }),
   ],
 });
 

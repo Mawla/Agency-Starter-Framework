@@ -13,7 +13,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 export type ResponsiveImageProps = {
   crop?: ImageType["crop"];
   hotspot?: ImageType["hotspot"];
-  preventResize?: boolean;
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
@@ -41,7 +40,6 @@ export const ResponsiveImage = ({
   hotspot,
   alt = "",
   className,
-  preventResize = false,
   priority,
   ratio,
   roundSize = 0,
@@ -116,12 +114,6 @@ export const ResponsiveImage = ({
     let newHeight = roundToNearest(roundSize, rect.height);
     let quality: number | null = IMAGE_QUALITY;
 
-    if (preventResize === true) {
-      // Do we need to factor in crops as well? https://github.com/sanity-io/hydrogen-sanity-demo/blob/main/src/components/SanityImage.client.jsx#L100
-      newHeight = rect.width / (+(width || 0) / +(height || 0));
-      quality = null;
-    }
-
     // for layouts where height depends on the image, use image ratio
     if (newHeight === 0)
       newHeight = newWidth / (+(width || 0) / +(height || 0));
@@ -143,7 +135,6 @@ export const ResponsiveImage = ({
     src,
     crop,
     hotspot,
-    preventResize,
     placeHolderSrc,
     roundSize,
   ]);

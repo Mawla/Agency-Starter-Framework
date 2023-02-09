@@ -1,3 +1,4 @@
+import FigCaption from "../../components/images/FigCaption";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { SimpleImage } from "../../components/images/SimpleImage";
 import { TextProps } from "../../components/module/Text";
@@ -80,7 +81,15 @@ export const Image = ({ theme, eyebrow, title, intro, image }: ImageProps) => {
         </div>
       )}
 
-      {image && <SimpleImage {...image} />}
+      {image && (
+        <figure>
+          <SimpleImage {...image} />
+
+          {image.caption && (
+            <FigCaption caption={image.caption} className="mt-2" />
+          )}
+        </figure>
+      )}
     </Wrapper>
   );
 };
