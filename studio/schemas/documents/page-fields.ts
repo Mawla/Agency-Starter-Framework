@@ -227,6 +227,22 @@ export const AUTHOR_FIELD = defineField({
   of: [{ type: "reference", to: [{ type: "person" }] }],
 });
 
+export const HIDE_NAV_FIELD = defineField({
+  name: "hideNav",
+  title: "Hide navigation",
+  type: "boolean",
+  description: "Option to hide the navigation",
+  initialValue: false,
+});
+
+export const HIDE_FOOTER_FIELD = defineField({
+  name: "hideFooter",
+  title: "Hide footer",
+  type: "boolean",
+  description: "Option to hide the footer",
+  initialValue: false,
+});
+
 export const pageBase = {
   fieldsets: [
     {
@@ -246,6 +262,8 @@ export const pageBase = {
     MODULES_FIELD,
     DIALOGS_FIELD,
     SEO_FIELD,
+    HIDE_NAV_FIELD,
+    HIDE_FOOTER_FIELD,
   ],
 };
 

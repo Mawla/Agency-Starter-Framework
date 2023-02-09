@@ -1,6 +1,6 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { HERO_FIELD, pageBase, TITLE_FIELD } from "./_page";
+import { HERO_FIELD, pageBase, TITLE_FIELD } from "./page-fields";
 import { ListRight } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";

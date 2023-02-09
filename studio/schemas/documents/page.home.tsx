@@ -1,5 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
-import { DEFAULT_CONTENT_PAGE_PREVIEW, pageBase } from "./_page";
+import { DEFAULT_CONTENT_PAGE_PREVIEW, pageBase } from "./page-fields";
 import { House } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";

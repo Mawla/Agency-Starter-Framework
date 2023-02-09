@@ -5,7 +5,7 @@ import {
   pageBase,
   PUBLISHED_AT_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
-} from "./_page";
+} from "./page-fields";
 import { Tag } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";

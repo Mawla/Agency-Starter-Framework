@@ -6,7 +6,7 @@ import {
   PARENT_FIELD,
   PUBLISHED_AT_FIELD,
   TAGS_FIELD,
-} from "./_page";
+} from "./page-fields";
 import { Toolbox } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";

@@ -5,7 +5,7 @@ import {
   PUBLISHED_AT_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
   DEFAULT_CONTENT_PAGE_ORDERINGS,
-} from "./_page";
+} from "./page-fields";
 import { ClickBait } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";

@@ -6,7 +6,7 @@ import {
   MODULES_FIELD,
   pageBase,
   TITLE_FIELD,
-} from "./_page";
+} from "./page-fields";
 import { BlockProhibited } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";

@@ -6,7 +6,7 @@ import {
   PARENT_FIELD,
   PUBLISHED_AT_FIELD,
   TAGS_FIELD,
-} from "./_page";
+} from "./page-fields";
 import { Book } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
@@ -15,7 +15,7 @@ export const SCHEMA_NAME: SchemaName = "page.casestudy";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "CaseStudy",
+  title: "Case Study",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,

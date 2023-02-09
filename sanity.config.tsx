@@ -59,9 +59,6 @@ export default defineConfig({
 
       return prev;
     },
-    // actions: (prev, context) => {
-    //   return context.schemaType === "config.cms" ? [] : prev;
-    // },
     newDocumentOptions: (prev: TemplateResponse[], context: ConfigContext) => {
       prev = prev.filter((option: any) => {
         if (option.templateId.startsWith("config.")) return false;
@@ -70,6 +67,7 @@ export default defineConfig({
         if (option.templateId.startsWith("password.")) return false;
         if (option.templateId === "footer") return false;
         if (option.templateId === "navigation") return false;
+        if (option.templateId === "page.home") return false;
         if (option.templateId === "page.notfound") return false;
         if (option.templateId === "page.sitemap") return false;
 
