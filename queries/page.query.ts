@@ -76,7 +76,7 @@ export const getPageQuery = (language: LanguageType) => groq`
   },
 
   // hero
-  "hero": select(_type == 'page.preset' => modules, hero[language == "${language}" && !(_type in path('studio.*'))])[] {
+  "hero": hero[language == "${language}" && !(_type in path('studio.*'))][] {
     _type,
     _key,
     theme,

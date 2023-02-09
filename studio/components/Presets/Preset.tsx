@@ -81,7 +81,7 @@ const Preset: ComponentType<any> = (props) => {
     setState("loading");
     async function getPresets() {
       const compatiblePresets: OptionType[] = await client.fetch(
-        `*[_type == 'page.preset' && defined(modules) && !(_id in path("drafts.*")) && modules[0]._type == '${parent?._type}'] { 
+        `*[_type == 'page.preset' && defined(${containerName}) && !(_id in path("drafts.*")) && ${containerName}[0]._type == '${parent?._type}'] { 
           _id, 
           _type, 
           _updatedAt,
@@ -89,10 +89,10 @@ const Preset: ComponentType<any> = (props) => {
           description, 
           "value": _id, 
           "label": title,
-          "preset": modules[0],
+          "preset": ${containerName}[0],
           "usedBy": count(*[references(^._id)]),
           "image": image.asset->url
-        } | order(usedBy desc)`
+        } | order(usedBy desc)`,
       );
       const options = compatiblePresets.map((item) => ({
         ...item,
@@ -116,7 +116,7 @@ const Preset: ComponentType<any> = (props) => {
   useEffect(() => {
     async function getOriginalPresetTitle() {
       const originalPreset = await client.fetch(
-        `*[_type == 'page.preset' && _id == "${value?._ref}"] { title }.title`
+        `*[_type == 'page.preset' && _id == "${value?._ref}"] { title }.title`,
       );
       setOriginalPresetTitle(originalPreset);
     }
@@ -148,7 +148,7 @@ const Preset: ComponentType<any> = (props) => {
         fuzzyMatch(query, option.label) || fuzzyMatch(query, option.description)
       );
     },
-    []
+    [],
   );
 
   /**
@@ -233,7 +233,7 @@ const Preset: ComponentType<any> = (props) => {
     await client.create({
       _id: exportPresetId,
       _type: "page.preset",
-      modules: [obj],
+      [containerName]: [obj],
     });
 
     exportPresetLink?.current?.click();

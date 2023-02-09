@@ -45,6 +45,7 @@ type OptionType = {
   image?: string;
   initialValue?: {};
   modules?: any[];
+  hero?: any[];
 };
 
 export type ModuleSelectProps = {
@@ -123,10 +124,11 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
         name?: string;
         description?: string;
         modules?: any[];
+        hero?: any[];
         usedBy?: number;
         image?: string;
       }[] = await client.fetch(`
-        *[_type == 'page.preset' && defined(modules) && !(_id in path("drafts.*"))] {
+        *[_type == 'page.preset' && (defined(modules) || defined(hero)) && !(_id in path("drafts.*"))] {
           title,
           _id,
           _type,
@@ -134,7 +136,8 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           description,
           "usedBy": count(*[references(^._id)]),
           "image": image.asset->url,
-          modules[]
+          modules[],
+          hero[],
         } | order(usedBy desc)`);
 
       presets = presets
@@ -150,7 +153,10 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
               typeFilter ? new RegExp(typeFilter).test(_type) : true,
             ),
         }))
-        .filter(({ modules }) => Boolean(modules?.length));
+        .filter(
+          ({ modules, hero }) =>
+            Boolean(modules?.length) || Boolean(hero?.length),
+        );
 
       /**
        * Make list of options
@@ -171,6 +177,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           image,
           hidden,
           modules,
+          hero,
         }) => {
           // for the current page type (unless we're looking at presets) call the hide function on the option schema
           if (document._type !== "page.preset" && hidden?.(document._type)) {
@@ -187,6 +194,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
             initialValue,
             image,
             modules,
+            hero,
           };
 
           return obj;
@@ -256,7 +264,10 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
     }[] = [];
 
     if (presetId) {
-      newModules = (selectedOption?.modules || []).map((module) => ({
+      newModules = [
+        ...(selectedOption?.modules || []),
+        ...(selectedOption.hero || []),
+      ].map((module) => ({
         _type: selectedType as ModuleSchemaName,
         ...module,
       }));
@@ -303,9 +314,21 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
       return module;
     });
 
-    try {
-      onChange(set([...(value || []), ...newModules]));
+    const currentFieldModules = newModules.filter(({ _type }) =>
+      typeFilter ? new RegExp(typeFilter).test(_type) : true,
+    );
 
+    // these are objects for other fields, e.g type hero when importing modules
+    // not using other field for now
+    // we can just add them to the matching field using a patch event
+    // but is that what we want?
+    // for now a user must do this manually
+    const otherFieldModules = newModules.filter(({ _type }) =>
+      typeFilter ? !new RegExp(typeFilter).test(_type) : false,
+    );
+
+    try {
+      onChange(set([...(value || []), ...currentFieldModules]));
       // click the last item in the list to open the editor dialog
       if (newModules?.length === 1) {
         setTimeout(() => {
