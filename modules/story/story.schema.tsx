@@ -11,9 +11,7 @@ import { defineType, defineField } from "sanity";
 const INTERNAL_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "internal",
 );
-const EXTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "external",
-);
+const HREF_FIELD = buttonSchema.fields.find(({ name }) => name === "href");
 const DIALOGS_FIELD = buttonSchema.fields.find(({ name }) => name === "dialog");
 
 const schema = defineType({
@@ -113,7 +111,7 @@ const schema = defineType({
       type: "object",
       name: "videoLink",
       title: "Video link",
-      fields: [INTERNAL_FIELD, DIALOGS_FIELD, EXTERNAL_FIELD].map(
+      fields: [INTERNAL_FIELD, DIALOGS_FIELD, HREF_FIELD].map(
         (x) =>
           ({
             ...x,

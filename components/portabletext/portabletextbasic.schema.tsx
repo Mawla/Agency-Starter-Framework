@@ -1,13 +1,9 @@
-import { CustomRichTextEditor } from "../../studio/components/CustomRichTextEditor";
 import { defineField } from "sanity";
 
 export default defineField({
   name: "portabletext.basic",
   title: "Rich Text",
   type: "array",
-  components: {
-    input: CustomRichTextEditor,
-  },
   of: [
     {
       type: "block",

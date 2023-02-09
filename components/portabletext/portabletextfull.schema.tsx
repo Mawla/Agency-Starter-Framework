@@ -1,4 +1,3 @@
-import { CustomRichTextEditor } from "../../studio/components/CustomRichTextEditor";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DIRECTION_OPTIONS } from "../buttons/buttongroup.options";
 import { SCRIPT_OPTIONS } from "./portabletext.options";
@@ -11,9 +10,6 @@ export default defineField({
   name: "portabletext.full",
   title: "Rich Text",
   type: "array",
-  components: {
-    input: CustomRichTextEditor,
-  },
   of: [
     {
       type: "block",

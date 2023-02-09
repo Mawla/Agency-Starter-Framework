@@ -30,7 +30,7 @@ export const resolveIdHrefQuery = `
 export const buttonHrefQuery = groq`
   coalesce(
     coalesce(
-      external, 
+      href, 
       // coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0].paths[^.language] // why doesn't this work? That would make it way shorter than using this loop
       select(
         ${languages.map(

@@ -9,8 +9,8 @@ const INTERNAL_FIELD = buttonSchema.fields.find(
 const LANGUAGE_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "language",
 ) as any;
-const EXTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "external",
+const HREF_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "href",
 ) as any;
 const DIALOG_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "dialog",
@@ -42,7 +42,7 @@ export default defineType({
   fields: [
     INTERNAL_FIELD,
     LANGUAGE_FIELD,
-    EXTERNAL_FIELD,
+    HREF_FIELD,
     PARAMS_FIELD,
     DIALOG_FIELD,
     FILE_FIELD,

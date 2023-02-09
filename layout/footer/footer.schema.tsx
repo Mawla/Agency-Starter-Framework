@@ -22,8 +22,8 @@ const INTERNAL_FIELD = buttonSchema.fields.find(
 const LANGUAGE_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "language",
 ) as any;
-const EXTERNAL_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "external",
+const HREF_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "href",
 ) as any;
 
 const PREVIEW = {
@@ -31,14 +31,14 @@ const PREVIEW = {
     select: {
       title: "title",
       label: "label",
-      external: "external",
+      href: "href",
       items: "items",
     },
-    prepare({ title, label, items = [], external }: any) {
+    prepare({ title, label, items = [], href }: any) {
       return {
         title: title || label || "[Empty]",
-        subtitle: external
-          ? external
+        subtitle: href
+          ? href
           : items?.map(({ label }: any) => label).join(", "),
         media: <Chain weight="thin" size={20} />,
       };
@@ -90,7 +90,7 @@ export default defineType({
                 collapsed: true,
               },
               ...PREVIEW,
-              fields: [INTERNAL_FIELD, LANGUAGE_FIELD, EXTERNAL_FIELD],
+              fields: [INTERNAL_FIELD, LANGUAGE_FIELD, HREF_FIELD],
             }),
             defineField({
               name: "items",
@@ -112,14 +112,14 @@ export default defineType({
                     LABEL_FIELD,
                     INTERNAL_FIELD,
                     LANGUAGE_FIELD,
-                    EXTERNAL_FIELD,
+                    HREF_FIELD,
                   ],
                 }),
               ],
               hidden: (({ parent, value }) =>
                 !value &&
                 (parent?.internal ||
-                  parent?.external)) as ConditionalPropertyCallback,
+                  parent?.href)) as ConditionalPropertyCallback,
             }),
           ],
         }),
@@ -144,7 +144,7 @@ export default defineType({
             LABEL_FIELD,
             INTERNAL_FIELD,
             LANGUAGE_FIELD,
-            EXTERNAL_FIELD,
+            HREF_FIELD,
             defineField({
               name: "icon",
               title: "Icon",
@@ -184,7 +184,7 @@ export default defineType({
             },
           ],
           ...PREVIEW,
-          fields: [LABEL_FIELD, INTERNAL_FIELD, LANGUAGE_FIELD, EXTERNAL_FIELD],
+          fields: [LABEL_FIELD, INTERNAL_FIELD, LANGUAGE_FIELD, HREF_FIELD],
         }),
       ],
     }),

@@ -47,7 +47,7 @@ export type FaqProps = {
 
 function fixLinkDefs(obj: any) {
   for (let prop in obj) {
-    if (prop === "href") obj[prop] = obj[prop].external || obj[prop].internal;
+    if (prop === "href") obj[prop] = obj[prop].href || obj[prop].internal;
     else if (typeof obj[prop] === "object") fixLinkDefs(obj[prop]);
   }
   return obj;

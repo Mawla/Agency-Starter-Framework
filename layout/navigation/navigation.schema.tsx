@@ -19,17 +19,17 @@ const LABEL_FIELD = {
 const INTERNAL_FIELD = {
   ...buttonSchema.fields.filter(({ name }) => name === "internal")[0],
   hidden: (({ parent, value }) =>
-    !value && parent?.external) as ConditionalPropertyCallback,
+    !value && parent?.href) as ConditionalPropertyCallback,
 };
 
 const LANGUAGE_FIELD = {
   ...buttonSchema.fields.filter(({ name }) => name === "language")[0],
   hidden: (({ parent, value }) =>
-    !value && parent?.external) as ConditionalPropertyCallback,
+    !value && parent?.href) as ConditionalPropertyCallback,
 };
 
-const EXTERNAL_FIELD = {
-  ...buttonSchema.fields.filter(({ name }) => name === "external")[0],
+const HREF_FIELD = {
+  ...buttonSchema.fields.filter(({ name }) => name === "href")[0],
   hidden: (({ parent, value }) =>
     !value && parent?.internal) as ConditionalPropertyCallback,
 };
@@ -38,14 +38,14 @@ const PREVIEW = {
   preview: {
     select: {
       label: "label",
-      external: "external",
+      href: "href",
       children: "children",
     },
-    prepare({ label, children = [], external }: any) {
+    prepare({ label, children = [], href }: any) {
       return {
         title: label || "[Empty]",
-        subtitle: external
-          ? external
+        subtitle: href
+          ? href
           : children?.map(({ label }: { label: string }) => label).join(", "),
         media: label?.trim().length ? (
           <Chain weight="thin" size={20} />
@@ -90,13 +90,12 @@ export default defineType({
             LABEL_FIELD,
             INTERNAL_FIELD,
             LANGUAGE_FIELD,
-            EXTERNAL_FIELD,
+            HREF_FIELD,
             {
               name: "children",
               title: "Submenu",
               type: "array",
-              description:
-                "List of submenu buttons. Be sure not to add an internal or external link when adding a submenu.",
+              description: "List of submenu buttons.",
               of: [
                 {
                   type: "object",
@@ -113,17 +112,15 @@ export default defineType({
                     {
                       ...INTERNAL_FIELD,
                       hidden: (({ parent, value }) =>
-                        !value &&
-                        parent?.external) as ConditionalPropertyCallback,
+                        !value && parent?.href) as ConditionalPropertyCallback,
                     },
                     {
                       ...LANGUAGE_FIELD,
                       hidden: (({ parent, value }) =>
-                        !value &&
-                        parent?.external) as ConditionalPropertyCallback,
+                        !value && parent?.href) as ConditionalPropertyCallback,
                     },
                     {
-                      ...EXTERNAL_FIELD,
+                      ...HREF_FIELD,
                       hidden: (({ parent, value }) =>
                         !value &&
                         parent?.internal) as ConditionalPropertyCallback,
@@ -150,17 +147,17 @@ export default defineType({
             {
               ...INTERNAL_FIELD,
               hidden: (({ parent, value }) =>
-                !value && parent?.external) as ConditionalPropertyCallback,
+                !value && parent?.href) as ConditionalPropertyCallback,
               group: null as any,
             },
             {
               ...LANGUAGE_FIELD,
               hidden: (({ parent, value }) =>
-                !value && parent?.external) as ConditionalPropertyCallback,
+                !value && parent?.href) as ConditionalPropertyCallback,
               group: null as any,
             },
             {
-              ...EXTERNAL_FIELD,
+              ...HREF_FIELD,
               hidden: (({ parent, value }) =>
                 !value && parent?.internal) as ConditionalPropertyCallback,
               group: null as any,
