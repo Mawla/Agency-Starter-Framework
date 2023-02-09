@@ -32,7 +32,7 @@ const moduleExports = {
   async rewrites() {
     return {
       afterFiles: [
-        { source: "/sitemap.xml", destination: "/api/sitemap" },
+        { source: "/sitemap.xml", destination: "/api/sitemap-xml" },
         { source: "/cms", destination: "/cms/index.html" },
         { source: "/cms/:path*", destination: "/cms/index.html" },
       ],

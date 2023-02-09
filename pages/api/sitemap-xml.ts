@@ -26,9 +26,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
         .map(({ id }) => {
           if (excludeFromSitemap?.[id] === true) return;
 
+          const url = getURLForPath(domain, paths?.[id], id);
+          if (!url) return;
+
           return `
     <url>
-    <loc>${getURLForPath(domain, paths?.[id], id)}</loc>
+    <loc>${url}</loc>
     <lastmod>${new Date(_updatedAt).toISOString()}</lastmod>
     </url>
     `;
