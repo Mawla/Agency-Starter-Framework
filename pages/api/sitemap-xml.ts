@@ -19,6 +19,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
     getSitemapQuery(),
   );
 
+  const uniqueItemsDict: Record<string, string> = {};
+
   const items: string[] = [...pages]
     .filter(Boolean)
     .map(({ paths, _updatedAt, excludeFromSitemap }) =>
@@ -27,7 +29,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
           if (excludeFromSitemap?.[id] === true) return;
 
           const url = getURLForPath(domain, paths?.[id], id);
-          if (!url) return;
+          if (uniqueItemsDict[url]) return;
+          if (!uniqueItemsDict[url]) uniqueItemsDict[url] = url;
 
           return `
     <url>

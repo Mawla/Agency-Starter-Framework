@@ -6,9 +6,7 @@ export const getURLForPath = (
   language: LanguageType = baseLanguage,
 ) => {
   const languagePath = language === baseLanguage ? "" : `/${language}`;
-  const pathWithoutTrailingSlash = path?.replace(/\/+$/, "");
-
-  if (!pathWithoutTrailingSlash) return null;
+  const pathWithoutTrailingSlash = path?.replace(/\/+$/, "") || "";
 
   if (!domain) return `${languagePath}${pathWithoutTrailingSlash}`;
 
