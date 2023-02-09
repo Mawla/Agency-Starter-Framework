@@ -24,6 +24,7 @@ export const SCHEMAS = {
   "module.slides": "",
   "module.story": "",
   "module.textimage": "",
+  "module.video": "",
   "page.blog": "",
   "page.blogs": "",
   "page.casestudies": "",
@@ -45,7 +46,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "module.video": "",
+  "module.image": "",
   footer: "",
   navigation: "",
   password: "",
@@ -138,6 +139,7 @@ export const MODULE_SCHEMAS = pick(
   "module.story",
   "module.textimage",
   "module.video",
+  "module.image",
 );
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;

@@ -1,23 +1,16 @@
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
+import { demoImage2 } from "../../stories/content";
 import { ColorType } from "../../types";
-import { Video } from "./Video";
+import { Image } from "./Image";
 import { Meta } from "@storybook/react";
 import React from "react";
 
 export default {
-  component: Video,
-  title: "Modules/Video",
+  component: Image,
+  title: "Modules/Image",
 } as Meta;
 
-export const Default = () => (
-  <Video
-    video={{
-      caption: "youtube",
-      provider: "youtube",
-      videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
-    }}
-  />
-);
+export const Default = () => <Image title="Image" image={demoImage2} />;
 
 export const Colors = () => (
   <>
@@ -26,8 +19,8 @@ export const Colors = () => (
         (Object.keys(STORYBOOK_COLORS_SUBSET) as ColorType[]).map(
           (color2: ColorType) => (
             <div key={`${color1}${color2}`} className="mb-10">
-              <Video
-                title="Video"
+              <Image
+                title="Image"
                 theme={{
                   module: { background: color1 },
                   text: { color: color2 },

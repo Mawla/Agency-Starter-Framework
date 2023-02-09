@@ -4,6 +4,7 @@ import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
 import { FaqProps } from "../../modules/faq/Faq";
 import { GalleryProps } from "../../modules/gallery/Gallery";
+import { ImageProps } from "../../modules/image/Image";
 import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
 import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
 import { RichTextProps } from "../../modules/richtext/RichText";
@@ -17,6 +18,10 @@ import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType, useContext } from "react";
 import { Suspense, lazy } from "react";
+
+const Image = lazy<ComponentType<ImageProps>>(
+  () => import(/* webpackChunkName: "Image" */ "../../modules/image/Image"),
+);
 
 const Video = lazy<ComponentType<VideoProps>>(
   () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video"),
@@ -159,6 +164,9 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               {item._type === "module.faq" && <Faq {...(item as FaqProps)} />}
               {item._type === "module.video" && (
                 <Video {...(item as VideoProps)} />
+              )}
+              {item._type === "module.image" && (
+                <Image {...(item as ImageProps)} />
               )}
             </LazyLoadInView>
           </ModuleErrorBoundary>

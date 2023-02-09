@@ -17,6 +17,7 @@ import cardComposable from "../../modules/cardgrid/composablecard.schema";
 import cardImage from "../../modules/cardgrid/imagecard.schema";
 import moduleFaq from "../../modules/faq/faq.schema";
 import moduleGallery from "../../modules/gallery/gallery.schema";
+import moduleImage from "../../modules/image/image.schema";
 import moduleFeed from "../../modules/resourcefeed/resourcefeed.schema";
 import moduleResourceStrip from "../../modules/resourcestrip/resourcestrip.schema";
 import moduleRichText from "../../modules/richtext/richtext.schema";
@@ -111,6 +112,7 @@ export const schemaTypes = [
     heroResourceHero,
     moduleFaq,
     moduleFeed,
+    moduleImage,
     moduleResourceStrip,
     moduleVideo,
     navigation,
