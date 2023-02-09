@@ -47,7 +47,7 @@ export const FooterMenu = ({
 
         <IconLoader
           icon="chevron"
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden text-action-500 transition-transform duration-75 group-open:rotate-180"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden transition-transform duration-75 group-open:rotate-180"
         />
       </summary>
 
