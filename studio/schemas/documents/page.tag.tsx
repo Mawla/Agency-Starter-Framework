@@ -1,10 +1,10 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
   PARENT_FIELD,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PUBLISHED_AT_FIELD,
+  DEFAULT_CONTENT_PAGE_PREVIEW,
 } from "./_page";
 import { Tag } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -17,13 +17,7 @@ export default defineType({
   title: "Tag",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
-
-  preview: {
-    select: {
-      title: `title.${baseLanguage}`,
-      media: "hero.0.image",
-    },
-  },
+  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Tag weight="thin" size={20} />,
   initialValue: {},
   fieldsets: [...pageBase.fieldsets],

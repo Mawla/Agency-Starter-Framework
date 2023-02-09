@@ -1,4 +1,4 @@
-import { languages } from "../../../languages";
+import { baseLanguage, languages } from "../../../languages";
 import {
   DialogSchemaName,
   DIALOG_SCHEMAS,
@@ -24,6 +24,7 @@ import {
   ArrayRule,
   DateRule,
   defineField,
+  PreviewConfig,
   SlugRule,
   SortOrdering,
   StringRule,
@@ -247,3 +248,70 @@ export const pageBase = {
     SEO_FIELD,
   ],
 };
+
+export const SLUG_PREVIEW_SELECT_FIELDS = {
+  slug: `slug.${baseLanguage}.current`,
+  level1Slug: `parent.slug.${baseLanguage}.current`,
+  level2Slug: `parent.parent.slug.${baseLanguage}.current`,
+  level3Slug: `parent.parent.parent.slug.${baseLanguage}.current`,
+  level4Slug: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
+  level5Slug: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
+};
+
+export const getPreviewSlugPagePath = (paths: string[]) => {
+  return `/${["", ...Object.values(paths).filter(Boolean).reverse()]
+    .filter(Boolean)
+    .join("/")}`;
+};
+
+export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
+  select: {
+    title: `title.${baseLanguage}`,
+    media: "hero.0.image",
+    ...SLUG_PREVIEW_SELECT_FIELDS,
+  },
+  prepare({ title, media, ...paths }: any) {
+    return {
+      title: `${title}`,
+      subtitle: getPreviewSlugPagePath(paths),
+      media,
+    };
+  },
+};
+
+export const DEFAULT_CONTENT_PAGE_ORDERINGS: SortOrdering[] = [
+  {
+    title: "Title",
+    name: "Title",
+    by: [{ field: `title.${baseLanguage}`, direction: "asc" }],
+  },
+  {
+    title: "Slug",
+    name: "Slug",
+    by: [{ field: `slug.${baseLanguage}.current`, direction: "asc" }],
+  },
+  {
+    title: "Path",
+    name: "Path",
+    by: [
+      {
+        field: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
+        direction: "desc",
+      },
+      {
+        field: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
+        direction: "desc",
+      },
+      {
+        field: `parent.parent.parent.slug.${baseLanguage}.current`,
+        direction: "desc",
+      },
+      {
+        field: `parent.parent.slug.${baseLanguage}.current`,
+        direction: "desc",
+      },
+      { field: `parent.slug.${baseLanguage}.current`, direction: "desc" },
+      { field: `slug.${baseLanguage}.current`, direction: "desc" },
+    ],
+  },
+];

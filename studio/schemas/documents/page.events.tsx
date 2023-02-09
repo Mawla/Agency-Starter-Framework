@@ -1,6 +1,6 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
+  DEFAULT_CONTENT_PAGE_PREVIEW,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -20,12 +20,7 @@ export default defineType({
   options: {
     singleton: true,
   },
-  preview: {
-    select: {
-      title: `title.${baseLanguage}`,
-      media: "hero.0.image",
-    },
-  },
+  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <CalendarHome weight="thin" size={20} />,
   fieldsets: [...pageBase.fieldsets],
   fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],

@@ -15,6 +15,7 @@ import {
   Gear,
   Layers,
   MagnifyingGlass,
+  PapertrayLines,
   QuestionFile,
 } from "@vectopus/atlas-icons-react";
 import {
@@ -35,12 +36,12 @@ export const structure = (
     .items([
       group(S, {
         title: "Pages",
-        icon: () => <Diagram weight="thin" size={20} />,
+        icon: () => <Layers weight="thin" size={24} />,
       }).child(
         list(S, { title: "Pages" }).items([
           S.listItem()
             .title("All pages")
-            .icon(() => <Layers weight="thin" size={20} />)
+            .icon(() => <Diagram weight="thin" size={20} />)
             .child(
               S.documentList()
                 .title("Content pages")
@@ -114,7 +115,7 @@ export const structure = (
       ),
       group(S, {
         title: "Collections",
-        icon: () => <FilingCabinet weight="thin" size={20} />,
+        icon: () => <PapertrayLines weight="thin" size={20} />,
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),

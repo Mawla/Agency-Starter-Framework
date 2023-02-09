@@ -1,6 +1,7 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
+  DEFAULT_CONTENT_PAGE_ORDERINGS,
+  DEFAULT_CONTENT_PAGE_PREVIEW,
   DIALOGS_FIELD,
   HERO_FIELD,
   MODULES_FIELD,
@@ -22,80 +23,8 @@ export default defineType({
   title: "Content page",
   type: "document",
   icon: () => <BlogWebsite weight="thin" size={20} />,
-  orderings: [
-    {
-      title: "Title",
-      name: "Title",
-      by: [{ field: `title.${baseLanguage}`, direction: "asc" }],
-    },
-    {
-      title: "Slug",
-      name: "Slug",
-      by: [{ field: `slug.${baseLanguage}.current`, direction: "asc" }],
-    },
-    {
-      title: "Path",
-      name: "Path",
-      by: [
-        {
-          field: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
-          direction: "desc",
-        },
-        {
-          field: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
-          direction: "desc",
-        },
-        {
-          field: `parent.parent.parent.slug.${baseLanguage}.current`,
-          direction: "desc",
-        },
-        {
-          field: `parent.parent.slug.${baseLanguage}.current`,
-          direction: "desc",
-        },
-        { field: `parent.slug.${baseLanguage}.current`, direction: "desc" },
-        { field: `slug.${baseLanguage}.current`, direction: "desc" },
-      ],
-    },
-  ],
-  preview: {
-    select: {
-      title: `title.${baseLanguage}`,
-      media: "hero.0.visual.image1",
-      slug: `slug.${baseLanguage}.current`,
-      level1Slug: `parent.slug.${baseLanguage}.current`,
-      level2Slug: `parent.parent.slug.${baseLanguage}.current`,
-      level3Slug: `parent.parent.parent.slug.${baseLanguage}.current`,
-      level4Slug: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
-      level5Slug: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
-    },
-    prepare({
-      title,
-      media,
-      slug,
-      level1Slug,
-      level2Slug,
-      level3Slug,
-      level4Slug,
-      level5Slug,
-    }: any) {
-      return {
-        title: `${title}`,
-        subtitle: [
-          " ",
-          level5Slug,
-          level4Slug,
-          level3Slug,
-          level2Slug,
-          level1Slug,
-          slug,
-        ]
-          .filter(Boolean)
-          .join("/"),
-        media,
-      };
-    },
-  },
+  orderings: DEFAULT_CONTENT_PAGE_ORDERINGS,
+  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   fieldsets: [...pageBase.fieldsets],
   fields: [
     PASSWORD,

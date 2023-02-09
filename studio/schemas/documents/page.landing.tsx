@@ -1,10 +1,10 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
   PARENT_FIELD,
-  ORDER_PUBLISHED_DESC,
   pageBase,
   PUBLISHED_AT_FIELD,
+  DEFAULT_CONTENT_PAGE_PREVIEW,
+  DEFAULT_CONTENT_PAGE_ORDERINGS,
 } from "./_page";
 import { ClickBait } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -16,15 +16,10 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Landing",
   type: "document",
-  orderings: [ORDER_PUBLISHED_DESC],
-  preview: {
-    select: {
-      title: `title.${baseLanguage}`,
-      media: "hero.0.image",
-    },
-  },
+  orderings: DEFAULT_CONTENT_PAGE_ORDERINGS,
+  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <ClickBait weight="thin" size={20} />,
   initialValue: {},
   fieldsets: [...pageBase.fieldsets],
-  fields: [...pageBase.fields, PUBLISHED_AT_FIELD],
+  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
 });

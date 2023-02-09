@@ -1,6 +1,6 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
+  DEFAULT_CONTENT_PAGE_PREVIEW,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -18,12 +18,7 @@ export default defineType({
   title: "Tool",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
-  preview: {
-    select: {
-      title: `title.${baseLanguage}`,
-      media: "hero.0.image",
-    },
-  },
+  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Toolbox weight="thin" size={20} />,
   initialValue: {
     parent: { _type: "reference", _ref: "page_tools" },
