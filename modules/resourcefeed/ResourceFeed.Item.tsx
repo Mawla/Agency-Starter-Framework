@@ -56,7 +56,10 @@ export const ResourceFeedItem = ({
           {authors.map(
             ({ image }) =>
               image && (
-                <span className="w-5 aspect-square relative rounded-full overflow-hidden border border-white">
+                <span
+                  className="w-5 aspect-square relative rounded-full overflow-hidden border border-white"
+                  key={image.src}
+                >
                   <ResponsiveImage {...image} fill />
                 </span>
               ),
