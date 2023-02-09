@@ -186,7 +186,7 @@ export const ComposableCard = ({
             ["text-center"]: theme?.card?.align === "center",
             ["text-right"]: theme?.card?.align === "right",
             ["border-2"]: theme?.card?.border,
-            ["rounded-2xl md:rounded-3xl"]:
+            ["rounded-md md:rounded-lg"]:
               theme?.card?.background ||
               theme?.card?.border ||
               theme?.card?.shadow,
