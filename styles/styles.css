@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+Font definitions
+*/
+
+/* Tailwind: font-extralight */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-ExtraLight.ttf");
+  font-weight: 200;
+}
+
+/* Tailwind: font-light */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-Light.ttf");
+  font-weight: 300;
+}
+
+/* Tailwind: font-normal */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-Regular.ttf");
+  font-weight: 400;
+}
+
+/* Tailwind: font-medium */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-Medium.ttf");
+  font-weight: 500;
+}
+
+/* Tailwind: font-semibold */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-SemiBold.ttf");
+  font-weight: 600;
+}
+
+/* Tailwind: font-bold */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-Bold.ttf");
+  font-weight: 700;
+}
+
+/* Tailwind: font-extrabold */
+@font-face {
+  font-family: "Manrope";
+  src: local("/fonts/Manrope-ExtraBold.ttf");
+  font-weight: 800;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding: 10vh;
