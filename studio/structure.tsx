@@ -1,6 +1,7 @@
 import { languages } from "../languages";
 import { LINKABLE_SCHEMAS } from "../types.sanity";
 import { documentList } from "./utils/desk/documentList";
+import { getIconForSchema } from "./utils/desk/get-icon-for-schema";
 import { group } from "./utils/desk/group";
 import { list } from "./utils/desk/list";
 import { singleton } from "./utils/desk/singleton";
@@ -51,11 +52,9 @@ export const structure = (
                       .title("Content pages")
                       .schemaType("page.content")
                       .filter(
-                        `_type in [
-                    ${Object.keys(LINKABLE_SCHEMAS)
-                      .map((schema) => `'${schema}'`)
-                      .join(", ")}
-                  ] && !defined(parent)`,
+                        `_type in [${Object.keys(LINKABLE_SCHEMAS)
+                          .map((schema) => `'${schema}'`)
+                          .join(", ")}] && !defined(parent)`,
                       )
                       .child(
                         (id: string) =>
@@ -66,73 +65,165 @@ export const structure = (
                 S.divider(),
 
                 singleton(S, {
-                  id: `page_homepage__i18n_${language.id}`,
+                  id: `page_homepage`,
                   type: "page.home",
+                  language: language.id,
                 }),
                 documentList(S, {
                   type: "page.content",
                   title: "Content pages",
+                  language: language.id,
                 }),
                 documentList(S, {
                   type: "page.landing",
                   title: "Landing pages",
+                  language: language.id,
                 }),
 
                 S.divider(),
 
-                documentList(S, {
-                  type: "page.blog",
-                  title: "Blogs",
-                  filter: '_type == "page.blogs" || _type == "page.blog"',
-                }),
+                S.listItem()
+                  .title("Blogs")
+                  .icon(getIconForSchema(S, "page.blogs"))
+                  .child(
+                    list(S, { title: "Blogs" }).items([
+                      singleton(S, {
+                        id: `page_blogs`,
+                        type: "page.blogs",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.blog",
+                        title: "Blog articles",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
-                documentList(S, {
-                  type: "page.event",
-                  title: "Events",
-                  filter: '_type == "page.events" || _type == "page.event"',
-                }),
+                S.listItem()
+                  .title("Events")
+                  .icon(getIconForSchema(S, "page.events"))
+                  .child(
+                    list(S, { title: "Events" }).items([
+                      singleton(S, {
+                        id: `page_events`,
+                        type: "page.events",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.event",
+                        title: "Events",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
-                documentList(S, {
-                  type: "page.casestudy",
-                  title: "Case studies",
-                  filter:
-                    '_type == "page.casestudies" || _type == "page.casestudy"',
-                }),
+                S.listItem()
+                  .title("Case studies")
+                  .icon(getIconForSchema(S, "page.casestudies"))
+                  .child(
+                    list(S, { title: "Case studies" }).items([
+                      singleton(S, {
+                        id: `page_casestudies`,
+                        type: "page.casestudies",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.casestudy",
+                        title: "Case studies",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
-                documentList(S, {
-                  type: "page.podcast",
-                  title: "Podcasts",
-                  filter: '_type == "page.podcasts" || _type == "page.podcast"',
-                }),
+                S.listItem()
+                  .title("Podcasts")
+                  .icon(getIconForSchema(S, "page.podcasts"))
+                  .child(
+                    list(S, { title: "Podcasts" }).items([
+                      singleton(S, {
+                        id: `page_podcasts`,
+                        type: "page.podcasts",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.podcast",
+                        title: "Podcasts",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
-                documentList(S, {
-                  type: "page.guide",
-                  title: "Guides",
-                  filter: '_type == "page.guides" || _type == "page.guide"',
-                }),
+                S.listItem()
+                  .title("Guides")
+                  .icon(getIconForSchema(S, "page.guides"))
+                  .child(
+                    list(S, { title: "Guides" }).items([
+                      singleton(S, {
+                        id: `page_guides`,
+                        type: "page.guides",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.guide",
+                        title: "Guides",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
-                documentList(S, {
-                  type: "page.tool",
-                  title: "Tools",
-                  filter: '_type == "page.tools" || _type == "page.tool"',
-                }),
+                S.listItem()
+                  .title("Tools")
+                  .icon(getIconForSchema(S, "page.tools"))
+                  .child(
+                    list(S, { title: "Tools" }).items([
+                      singleton(S, {
+                        id: `page_tools`,
+                        type: "page.tools",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.tool",
+                        title: "Tools",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
-                documentList(S, {
-                  type: "page.video",
-                  title: "Videos",
-                  filter: '_type == "page.videos" || _type == "page.video"',
-                }),
+                S.listItem()
+                  .title("Videos")
+                  .icon(getIconForSchema(S, "page.videos"))
+                  .child(
+                    list(S, { title: "Videos" }).items([
+                      singleton(S, {
+                        id: `page_videos`,
+                        type: "page.videos",
+                        language: language.id,
+                      }),
+                      documentList(S, {
+                        type: "page.video",
+                        title: "Videos",
+                        language: language.id,
+                      }),
+                    ]),
+                  ),
 
                 S.divider(),
-                documentList(S, { type: "page.tag", title: "Tags" }),
+                documentList(S, {
+                  type: "page.tag",
+                  title: "Tags",
+                  language: language.id,
+                }),
                 S.divider(),
                 singleton(S, {
-                  id: `page_notfound__i18n_${language.id}`,
+                  id: `page_notfound`,
                   type: "page.notfound",
+                  language: language.id,
                 }),
                 singleton(S, {
-                  id: `page_sitemap__i18n_${language.id}`,
+                  id: `page_sitemap`,
                   type: "page.sitemap",
+                  language: language.id,
                 }),
               ]),
             ),
