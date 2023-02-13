@@ -3,10 +3,10 @@ import { baseLanguage, languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
-import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
+import { LINKABLE_SCHEMAS, TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
-import { ConfigContext, defineConfig, Schema, TemplateResponse } from "sanity";
+import { ConfigContext, defineConfig, TemplateResponse } from "sanity";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
@@ -101,5 +101,19 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+
+    templates: Object.keys(LINKABLE_SCHEMAS).map((schemaType) => {
+      const schema = schemaTypes.find(({ name }) => name === schemaType);
+
+      return {
+        id: `${schemaType}-with-language`,
+        title: schema.title,
+        parameters: [{ name: "language", type: "string" }],
+        schemaType: schemaType,
+        value: (params: { language: LanguageType }) => ({
+          language: params?.language,
+        }),
+      };
+    }),
   },
 });
