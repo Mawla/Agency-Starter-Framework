@@ -1,4 +1,4 @@
-import { languages, LanguagesListItemType, LanguageType } from "../languages";
+import { languages } from "../languages";
 import { LINKABLE_SCHEMAS } from "../types.sanity";
 import { documentList } from "./utils/desk/documentList";
 import { group } from "./utils/desk/group";
@@ -40,7 +40,7 @@ export const structure = (
             title: language.title,
             icon: () => <Layers weight="thin" size={24} />,
           })
-            .id(`pages-${language.id}`)
+            .id(`${language.id}`)
             .child(
               list(S, { title: language.title }).items([
                 S.listItem()
