@@ -35,22 +35,12 @@ const schema = defineType({
       default: true,
     },
     {
-      name: "language",
-      title: "Language",
-    },
-    {
       name: "tools",
       title: " ",
       icon: EllipsisVerticalIcon,
     },
   ],
   fields: [
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-      group: "language",
-    }),
     defineField({
       name: "theme",
       title: "Theme",

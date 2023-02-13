@@ -39,10 +39,6 @@ const schema = defineType({
       title: "Theme",
     },
     {
-      name: "language",
-      title: "Language",
-    },
-    {
       name: "tools",
       title: " ",
       icon: EllipsisVerticalIcon,
@@ -85,12 +81,6 @@ const schema = defineType({
           of: [{ type: "reference", to: [{ type: "page.tag" }] }],
         }),
       ],
-    }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-      group: "language",
     }),
     defineField({
       name: "theme",
