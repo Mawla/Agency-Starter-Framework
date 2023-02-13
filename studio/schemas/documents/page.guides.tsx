@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.guides";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Guides",
+  title: "Guides overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {

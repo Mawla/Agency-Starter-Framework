@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.events";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Events",
+  title: "Events overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {

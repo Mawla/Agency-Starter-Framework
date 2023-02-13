@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.videos";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Videos",
+  title: "Videos overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {

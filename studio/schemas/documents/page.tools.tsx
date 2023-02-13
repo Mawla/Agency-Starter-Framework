@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.tools";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Tools",
+  title: "Tools overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {

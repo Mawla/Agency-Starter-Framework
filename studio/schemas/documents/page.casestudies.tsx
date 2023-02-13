@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.casestudies";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "CaseStudies",
+  title: "Case studies overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {
