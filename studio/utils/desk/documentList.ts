@@ -1,3 +1,4 @@
+import { LanguageType } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import { getDocumentIcon } from "../document/getDocumentIcon";
 import { getDocumentTitle } from "../document/getDocumentTitle";
@@ -9,11 +10,12 @@ type DocumentListProps = {
   filter?: string;
   icon?: JSX.Element;
   createMenuTypes?: SchemaName[];
+  language?: LanguageType;
 };
 
 export function documentList(
   S: StructureBuilder,
-  { type, title, filter, icon, createMenuTypes }: DocumentListProps
+  { type, title, filter, icon, createMenuTypes, language }: DocumentListProps,
 ) {
   return S.listItem()
     .title(title || getDocumentTitle(S, type))
@@ -24,8 +26,8 @@ export function documentList(
         .filter(filter || `_type == "${type}"`)
         .menuItems([...(S.documentTypeList(type).getMenuItems() as [])])
         .initialValueTemplates([
-          ...((createMenuTypes || [type]).map((x) =>
-            S.initialValueTemplateItem(x)
+          ...((createMenuTypes || [type]).map((type) =>
+            S.initialValueTemplateItem(`${type}-with-language`, { language }),
           ) as any),
         ]);
 
@@ -50,7 +52,7 @@ export function documentList(
       // but only works with lists with a single schematype
 
       return list.canHandleIntent(
-        S.documentTypeList(type).getCanHandleIntent() as any
+        S.documentTypeList(type).getCanHandleIntent() as any,
       );
     });
 }

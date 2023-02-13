@@ -1,3 +1,4 @@
+import { LanguageType } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import { defaultDocumentNode } from "../../structure";
 import { getDocumentIcon } from "../document/getDocumentIcon";
@@ -9,17 +10,20 @@ type SingletonProps = {
   type: SchemaName;
   icon?: JSX.Element;
   title?: string;
+  language?: LanguageType;
 };
 
 export function singleton(
   S: StructureBuilder,
-  { id, type, title, icon }: SingletonProps
+  { id, type, title, icon, language }: SingletonProps,
 ) {
   return S.listItem()
     .title(title || getDocumentTitle(S, type))
     .icon(icon || (getDocumentIcon(S, type) as any))
-    .id(id)
+    .id(language ? `${id}__i18n_${language}` : id)
     .child(
-      defaultDocumentNode(S, { schemaType: type } as DefaultDocumentNodeContext)
+      defaultDocumentNode(S, {
+        schemaType: type,
+      } as DefaultDocumentNodeContext),
     );
 }
