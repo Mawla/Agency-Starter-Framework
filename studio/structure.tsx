@@ -1,4 +1,4 @@
-import { languages, LanguagesListItemType } from "../languages";
+import { languages, LanguagesListItemType, LanguageType } from "../languages";
 import { LINKABLE_SCHEMAS } from "../types.sanity";
 import { documentList } from "./utils/desk/documentList";
 import { group } from "./utils/desk/group";
@@ -11,7 +11,6 @@ import { Sitemap } from "./views/Sitemap";
 import {
   Diagram,
   Eye,
-  FilingCabinet,
   Gear,
   Layers,
   MagnifyingGlass,
@@ -25,6 +24,7 @@ import {
   DocumentListBuilder,
   StructureResolverContext,
   Child,
+  ListItemBuilder,
 } from "sanity/desk";
 
 export const structure = (
@@ -34,85 +34,110 @@ export const structure = (
   S.list()
     .title("Website")
     .items([
-      group(S, {
-        title: "Pages",
-        icon: () => <Layers weight="thin" size={24} />,
-      }).child(
-        list(S, { title: "Pages" }).items([
-          S.listItem()
-            .title("All pages")
-            .icon(() => <Diagram weight="thin" size={20} />)
+      ...languages.map(
+        (language): ListItemBuilder =>
+          group(S, {
+            title: language.title,
+            icon: () => <Layers weight="thin" size={24} />,
+          })
+            .id(`pages-${language.id}`)
             .child(
-              S.documentList()
-                .title("Content pages")
-                .schemaType("page.content")
-                .filter(
-                  `_type in [
+              list(S, { title: language.title }).items([
+                S.listItem()
+                  .title("All pages")
+                  .icon(() => <Diagram weight="thin" size={20} />)
+                  .child(
+                    S.documentList()
+                      .title("Content pages")
+                      .schemaType("page.content")
+                      .filter(
+                        `_type in [
                     ${Object.keys(LINKABLE_SCHEMAS)
                       .map((schema) => `'${schema}'`)
                       .join(", ")}
                   ] && !defined(parent)`,
-                )
-                .child(
-                  (id: string) => nestedContentPageList(S, id, context) as any,
-                ),
+                      )
+                      .child(
+                        (id: string) =>
+                          nestedContentPageList(S, id, context) as any,
+                      ),
+                  ),
+
+                S.divider(),
+
+                singleton(S, {
+                  id: `page_homepage__i18n_${language.id}`,
+                  type: "page.home",
+                }),
+                documentList(S, {
+                  type: "page.content",
+                  title: "Content pages",
+                }),
+                documentList(S, {
+                  type: "page.landing",
+                  title: "Landing pages",
+                }),
+
+                S.divider(),
+
+                documentList(S, {
+                  type: "page.blog",
+                  title: "Blogs",
+                  filter: '_type == "page.blogs" || _type == "page.blog"',
+                }),
+
+                documentList(S, {
+                  type: "page.event",
+                  title: "Events",
+                  filter: '_type == "page.events" || _type == "page.event"',
+                }),
+
+                documentList(S, {
+                  type: "page.casestudy",
+                  title: "Case studies",
+                  filter:
+                    '_type == "page.casestudies" || _type == "page.casestudy"',
+                }),
+
+                documentList(S, {
+                  type: "page.podcast",
+                  title: "Podcasts",
+                  filter: '_type == "page.podcasts" || _type == "page.podcast"',
+                }),
+
+                documentList(S, {
+                  type: "page.guide",
+                  title: "Guides",
+                  filter: '_type == "page.guides" || _type == "page.guide"',
+                }),
+
+                documentList(S, {
+                  type: "page.tool",
+                  title: "Tools",
+                  filter: '_type == "page.tools" || _type == "page.tool"',
+                }),
+
+                documentList(S, {
+                  type: "page.video",
+                  title: "Videos",
+                  filter: '_type == "page.videos" || _type == "page.video"',
+                }),
+
+                S.divider(),
+                documentList(S, { type: "page.tag", title: "Tags" }),
+                S.divider(),
+                singleton(S, {
+                  id: `page_notfound__i18n_${language.id}`,
+                  type: "page.notfound",
+                }),
+                singleton(S, {
+                  id: `page_sitemap__i18n_${language.id}`,
+                  type: "page.sitemap",
+                }),
+              ]),
             ),
-
-          S.divider(),
-
-          singleton(S, { id: "page_homepage", type: "page.home" }),
-          documentList(S, { type: "page.content", title: "Content pages" }),
-          documentList(S, { type: "page.landing", title: "Landing pages" }),
-
-          S.divider(),
-
-          documentList(S, {
-            type: "page.blog",
-            title: "Blogs",
-            filter: '_type == "page.blogs" || _type == "page.blog"',
-          }),
-
-          documentList(S, {
-            type: "page.event",
-            title: "Events",
-            filter: '_type == "page.events" || _type == "page.event"',
-          }),
-
-          documentList(S, {
-            type: "page.casestudy",
-            title: "Case studies",
-            filter: '_type == "page.casestudies" || _type == "page.casestudy"',
-          }),
-
-          documentList(S, {
-            type: "page.podcast",
-            title: "Podcasts",
-            filter: '_type == "page.podcasts" || _type == "page.podcast"',
-          }),
-
-          documentList(S, {
-            type: "page.guide",
-            title: "Guides",
-            filter: '_type == "page.guides" || _type == "page.guide"',
-          }),
-
-          documentList(S, {
-            type: "page.tool",
-            title: "Tools",
-            filter: '_type == "page.tools" || _type == "page.tool"',
-          }),
-
-          documentList(S, {
-            type: "page.video",
-            title: "Videos",
-            filter: '_type == "page.videos" || _type == "page.video"',
-          }),
-
-          S.divider(),
-          documentList(S, { type: "page.tag", title: "Tags" }),
-          S.divider(),
-        ]),
       ),
+
       group(S, {
         title: "Collections",
         icon: () => <PapertrayLines weight="thin" size={20} />,
@@ -147,9 +172,6 @@ export const structure = (
       documentList(S, { type: "redirect", title: "Redirects" }),
       documentList(S, { type: "form.static", title: "Forms" }),
       S.divider(),
-      singleton(S, { id: "page_notfound", type: "page.notfound" }),
-      singleton(S, { id: "page_sitemap", type: "page.sitemap" }),
-      S.divider(),
       S.documentTypeListItem("page.preset").title("Presets"),
 
       S.divider(),
@@ -175,9 +197,7 @@ export const defaultDocumentNode = (
   // add preview iframe for pages
   const views: any[] = [S.view.form()];
   if (schemaType.startsWith("page.")) {
-    languages.forEach((language) => {
-      views.push(PreviewView(S, language));
-    });
+    views.push(PreviewView(S));
 
     if (
       schemaType.startsWith("page.") &&
@@ -194,16 +214,10 @@ export const defaultDocumentNode = (
   return S.document().schemaType(schemaType).views(views);
 };
 
-export const PreviewView = (
-  S: StructureBuilder,
-  language: LanguagesListItemType,
-) =>
+export const PreviewView = (S: StructureBuilder) =>
   S.view
     .component(PreviewIframe)
-    .options({
-      language: language.id,
-    })
-    .title("Preview " + language.title)
+    .title("Preview")
     .icon(() => <Eye weight="thin" size={16} />);
 
 export const SeoView = (S: StructureBuilder) =>
