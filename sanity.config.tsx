@@ -67,7 +67,10 @@ export default defineConfig({
       if (schema.options?.singleton) {
         return [
           ...prev.filter(
-            ({ action }) => action == "publish" || action == "unpublish",
+            ({ action }) =>
+              action == "publish" ||
+              action == "unpublish" ||
+              action == "delete",
           ),
         ];
       }
