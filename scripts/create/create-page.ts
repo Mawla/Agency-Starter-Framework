@@ -119,7 +119,7 @@ const build = (answers) => {
   const documentId = schemaName.replace("page.", "page_");
 
   console.log("");
-  addSchemaType(schemaName, { linkable: true, translatable: true });
+  addSchemaType(schemaName, { linkable: true, translatable: false });
 
   // create schema file
   const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.tsx`;
@@ -152,7 +152,7 @@ const build = (answers) => {
   fs.writeFileSync(schemaFilePath, schemaContent);
   prettierFile(schemaFilePath);
 
-  addSchema(`page${pascalName}`, `./documents/${schemaName}`, true);
+  addSchema(`page${pascalName}`, `./documents/${schemaName}`);
 
   // createQuery(name, schemaName, documentId, answers);
   if (addDesk)
