@@ -6,7 +6,7 @@ import { structure, defaultDocumentNode } from "./studio/structure";
 import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
-import { ConfigContext, defineConfig, TemplateResponse } from "sanity";
+import { ConfigContext, defineConfig, Schema, TemplateResponse } from "sanity";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
@@ -57,6 +57,20 @@ export default defineConfig({
         )}${path}`;
       }
 
+      return prev;
+    },
+    actions: (prev, context) => {
+      const schema = Object.entries(context.schema._registry)
+        .find(([key, value]) => key === context.schemaType)?.[1]
+        .get();
+
+      if (schema.options?.singleton) {
+        return [
+          ...prev.filter(
+            ({ action }) => action == "publish" || action == "unpublish",
+          ),
+        ];
+      }
       return prev;
     },
     newDocumentOptions: (prev: TemplateResponse[], context: ConfigContext) => {
