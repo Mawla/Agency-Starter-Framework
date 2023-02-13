@@ -1,4 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   AUTHOR_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
@@ -21,8 +22,11 @@ export default defineType({
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <InkPen weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_blogs" },
+  initialValue: () => {
+    const { language } = getStructurePath();
+    return {
+      parent: { _type: "reference", _ref: `page_blogs__i18n_${language}` },
+    };
   },
   fieldsets: [...pageBase.fieldsets],
   fields: [

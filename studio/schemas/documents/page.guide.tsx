@@ -1,4 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
   ORDER_PUBLISHED_DESC,
@@ -20,8 +21,11 @@ export default defineType({
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Textbook weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_guides" },
+  initialValue: () => {
+    const { language } = getStructurePath();
+    return {
+      parent: { _type: "reference", _ref: `page_guides__i18n_${language}` },
+    };
   },
   fieldsets: [...pageBase.fieldsets],
   fields: [
