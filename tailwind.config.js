@@ -110,7 +110,7 @@ module.exports = {
       ...defaultTheme.screens,
     },
     fontFamily: {
-      sans: ["Manrope", "Circular", "Arial", "sans-serif"],
+      sans: ["Manrope", "Arial", "sans-serif"],
       mono: ["monospace"],
     },
     fontSize: {
@@ -282,8 +282,8 @@ module.exports = {
                 classNode.parent.insertBefore(
                   classNode,
                   selectorParser().astSync(
-                    `.${prefixClass("group")}:${pseudoClass} `,
-                  ),
+                    `.${prefixClass("group")}:${pseudoClass} `
+                  )
                 );
               });
             }).processSync(selector);
