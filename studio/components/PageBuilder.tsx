@@ -1,5 +1,5 @@
 import { languages } from "../../languages";
-import { useLanguageFilter } from "../utils/language/useLanguageFilter";
+import { useLanguageFilter } from "../utils/language/use-language-filter";
 import ModuleSelect from "./ModuleSelect";
 import { ComponentType, useEffect } from "react";
 
