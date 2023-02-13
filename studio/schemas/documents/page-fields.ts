@@ -16,6 +16,7 @@ import PagePasswordComponent, {
   PagePasswordWrapper,
 } from "../../components/PagePasswordComponent";
 import { getISODateString } from "../../utils/datetime";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
@@ -213,6 +214,16 @@ export const PARENT_FIELD = defineField({
   },
 });
 
+export const LANGUAGE_FIELD = defineField({
+  name: "language",
+  title: "Language",
+  type: "language",
+  initialValue: () => {
+    const { language } = getStructurePath();
+    return language || baseLanguage;
+  },
+});
+
 export const TAGS_FIELD = defineField({
   name: "tags",
   title: "Tags",
@@ -264,6 +275,7 @@ export const pageBase = {
     SEO_FIELD,
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
+    LANGUAGE_FIELD,
   ],
 };
 
