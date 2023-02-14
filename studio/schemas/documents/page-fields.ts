@@ -270,6 +270,8 @@ export const I18N_BASE_FIELD = defineField({
 });
 
 export const getI18nBaseFieldForSingleton = (schemaType: string) => {
+  const { language } = getStructurePath();
+  if (language === baseLanguage) return I18N_BASE_FIELD;
   const schemaName = schemaType.toLowerCase().replace(/\s/g, "");
   const documentId = schemaName.replace("page.", "page_");
 
