@@ -21,10 +21,18 @@ export default defineType({
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Toolbox weight="thin" size={20} />,
-  initialValue: () => {
+  initialValue: async (props: any, context: any) => {
+    const client = context.getClient({ apiVersion: "vX" });
     const { language } = getStructurePath();
+
+    const parentDocumentId = await client.fetch(
+      `*[_id match "page_tools__i18n_${language}"][0]._id`,
+    );
+
+    if (!parentDocumentId) return {};
+
     return {
-      parent: { _type: "reference", _ref: `page_tools__i18n_${language}` },
+      parent: { _type: "reference", _ref: parentDocumentId },
     };
   },
   groups: [...pageBase.groups],
@@ -32,8 +40,16 @@ export default defineType({
     {
       ...PARENT_FIELD,
       to: [{ type: "page.tools" }],
-      options: { disableNew: true },
-      hidden: true,
+      options: {
+        disableNew: true,
+        filter: () => {
+          const { language } = getStructurePath();
+          return {
+            filter: `language == $language`,
+            params: { language },
+          };
+        },
+      },
     },
     ...pageBase.fields,
     TAGS_FIELD,
