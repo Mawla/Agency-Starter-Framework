@@ -5,6 +5,7 @@ import {
   pageBase,
   PUBLISHED_AT_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getI18nBaseFieldForSingleton,
 } from "./page-fields";
 import { Pages } from "@vectopus/atlas-icons-react";
 import React from "react";
