@@ -2,6 +2,7 @@ import { getPathForId } from "../../helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "../../languages";
 import { getConfigQuery } from "../../queries/config.query";
 import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap.query";
+import { getStructurePath } from "../utils/desk/get-structure-path";
 import { Card, Stack, Text, TabList, Tab, TabPanel } from "@sanity/ui";
 import React, { ComponentType, useEffect, useState } from "react";
 import { useClient } from "sanity";
@@ -14,8 +15,10 @@ export const SeoPane: ComponentType<any> = ({
 }) => {
   const client = useClient({ apiVersion: "vX" });
   const [config, setConfig] = useState<any>(null);
-  const [currentLanguage, setCurrentLanguage] =
-    useState<LanguageType>(baseLanguage);
+  const { language } = getStructurePath();
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(
+    language as LanguageType,
+  );
   const [sitemap, setSitemap] = useState<SitemapItemType[]>([]);
 
   useEffect(() => {
@@ -70,9 +73,8 @@ export const SeoPane: ComponentType<any> = ({
                 />
                 <Text size={3} style={{ color: "#1a0dab" }}>
                   {document?.displayed?.seo?.title ||
-                    document?.displayed?.title ||
-                    config?.seo?.title}{" "}
-                  - {config?.general?.name}
+                    document?.displayed?.title}{" "}
+                  - {config?.seo?.title || config?.general?.name}
                 </Text>
                 <Text
                   size={2}
