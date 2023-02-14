@@ -1,5 +1,3 @@
-import { languages } from "../../languages";
-import { useLanguageFilter } from "../utils/language/use-language-filter";
 import ModuleSelect from "./ModuleSelect";
 import { ComponentType, useEffect } from "react";
 
@@ -33,26 +31,6 @@ export const PageBuilder: ComponentType<any> = (props) => {
  */
 
 export const PageBuilderItem: React.ComponentType<any> = (props) => {
-  const selectedLanguages = useLanguageFilter();
-  let makeHidden = true;
-
-  // If no language is selected, show all items with no language set
-  if (selectedLanguages.length === 0) {
-    if (!props.value?.language || !props.value?.language?.trim().length) {
-      makeHidden = false;
-    }
-  }
-
-  // If all languages are selected, show all items
-  if (selectedLanguages.length === languages.length) {
-    makeHidden = false;
-  }
-
-  // If the item has a language and it is selected, show the item
-  if (selectedLanguages.includes(props.value?.language)) {
-    makeHidden = false;
-  }
-
   /**
    * When the form is opened: scroll preview iframe to element
    */
@@ -104,7 +82,6 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     <div
       style={{
         borderBottom: "1px solid rgba(0,0,0,.1)",
-        display: makeHidden ? "none" : "block",
         position: "relative",
       }}
       data-type="module"
@@ -128,7 +105,6 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
           }}
         >
           {props.schemaType?.title}{" "}
-          {props.value?.language ? `(${props.value?.language})` : ""}
         </span>
       </div>
       {props.renderDefault(props)}

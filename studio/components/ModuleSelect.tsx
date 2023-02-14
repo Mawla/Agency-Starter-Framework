@@ -1,6 +1,4 @@
-import { LanguageType, baseLanguage } from "../../languages";
 import { ModuleSchemaName } from "../../types.sanity";
-import { getCurrentLanguages } from "../utils/language/get-current-languages";
 import { SearchIcon } from "@sanity/icons";
 import {
   Badge,
@@ -260,7 +258,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
       _key?: string;
       _type: ModuleSchemaName;
       preset?: { _ref: string; _weak: boolean };
-      language?: LanguageType;
     }[] = [];
 
     if (presetId) {
@@ -290,18 +287,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
 
     newModules = newModules.map((module) => {
       const moduleSchema = allSchemas[module._type]?.get();
-
-      if (
-        moduleSchema.fields.find(
-          (field: { name: string }) => field.name === "language",
-        )
-      ) {
-        let languages = getCurrentLanguages() || [baseLanguage];
-        module.language =
-          languages.length === 1
-            ? (languages[0] as LanguageType)
-            : baseLanguage;
-      }
 
       freshKeys(module);
       module._key = nanoid();
