@@ -1,7 +1,7 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
-import { languages, LanguageType } from "../../languages";
+import { getLanguageTitle, languages, LanguageType } from "../../languages";
 import { IconType } from "../../types";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
@@ -39,7 +39,8 @@ export const LanguageSwitch = ({
       title,
       href: path,
       languageId: language,
-    }));
+    }))
+    .sort((a, b) => (a.title || "").localeCompare(b.title || ""));
 
   if (!links.length || links.length === 1) return null;
 
@@ -76,7 +77,6 @@ export const LanguageSwitch = ({
         <span className="w-5 aspect-square">
           <IconLoader
             icon={FLAGS[language]}
-            path="flags/"
             removeColors={false}
             className="w-4 h-4"
           />
@@ -119,11 +119,10 @@ export const LanguageSwitch = ({
                 >
                   <IconLoader
                     icon={FLAGS[languageId]}
-                    path="flags/"
                     removeColors={false}
                     className="w-5 aspect-square"
                   />
-                  {title}
+                  {getLanguageTitle(languageId)}
                 </Link>
               )}
             </RadixNavigationMenu.Item>
