@@ -42,13 +42,7 @@ export default defineType({
       to: [{ type: "page.guides" }],
       options: {
         disableNew: true,
-        filter: () => {
-          const { language } = getStructurePath();
-          return {
-            filter: `language == $language`,
-            params: { language },
-          };
-        },
+        ...PARENT_FIELD.options,
       },
     },
     ...pageBase.fields,

@@ -43,13 +43,7 @@ export default defineType({
       to: [{ type: "page.blogs" }],
       options: {
         disableNew: true,
-        filter: () => {
-          const { language } = getStructurePath();
-          return {
-            filter: `language == $language`,
-            params: { language },
-          };
-        },
+        ...PARENT_FIELD.options,
       },
       group: ["meta"],
     },
