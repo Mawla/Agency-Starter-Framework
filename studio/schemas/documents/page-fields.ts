@@ -243,8 +243,12 @@ export const I18N_BASE_FIELD = defineField({
   name: "i18n_base",
   title: "Base language",
   description:
-    "The document in the base language. This is used for providing language alternatives.",
+    "The same document in the primary language. This is to provide language alternatives on the website. Leave this blank if there is no such related page.",
   type: "reference",
+  validation: (Rule: any) =>
+    Rule.required().warning(
+      "It's good practice adding base language document.",
+    ),
   to: Object.keys(LINKABLE_SCHEMAS).map((schema) => ({ type: schema })),
   weak: true,
   options: {
