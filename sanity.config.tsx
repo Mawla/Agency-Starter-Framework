@@ -1,5 +1,5 @@
 import { getPathForId } from "./helpers/sitemap/getPathForId";
-import { languages, LanguageType } from "./languages";
+import { baseLanguage, languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
@@ -50,7 +50,8 @@ export default defineConfig({
 
       const sitemap: SitemapItemType[] = await client.fetch(getSitemapQuery());
 
-      const languagePrefix = document.language ? `/${document.language}` : "/";
+      const languagePrefix =
+        document.language === baseLanguage ? "" : `/${document.language}`;
       const path = `${languagePrefix}${getPathForId(document._id, sitemap)}`;
 
       if (path === "/" && document._id.indexOf("page_homepage") === -1) {
