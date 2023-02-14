@@ -67,18 +67,6 @@ const schema = defineType({
           parent?.file)) as ConditionalPropertyCallback,
     }),
     defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-      group: "link",
-      description: "Switch to a different language version of the page.",
-      hidden: (({ parent, value }) =>
-        !value &&
-        (parent?.href ||
-          parent?.dialog ||
-          parent?.file)) as ConditionalPropertyCallback,
-    }),
-    defineField({
       name: "params",
       title: "Extra url parameters",
       type: "string",

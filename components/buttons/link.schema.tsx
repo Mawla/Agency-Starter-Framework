@@ -6,9 +6,6 @@ import { defineType } from "sanity";
 const INTERNAL_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "internal",
 ) as any;
-const LANGUAGE_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "language",
-) as any;
 const HREF_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "href",
 ) as any;
@@ -41,7 +38,6 @@ export default defineType({
   icon: () => <Chain weight="thin" />,
   fields: [
     INTERNAL_FIELD,
-    LANGUAGE_FIELD,
     HREF_FIELD,
     PARAMS_FIELD,
     DIALOG_FIELD,

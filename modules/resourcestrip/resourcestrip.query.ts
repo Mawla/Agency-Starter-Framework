@@ -15,13 +15,14 @@ export const getResourceStripQuery = (
     && _type == ^.^._type 
     && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0 
     && !(_id in path("drafts.*"))
+    && language == "${language}"
   ] {
     _id,
     publishedAt,
     _createdAt,
-    "title": title.${language},
+    title,
     "href": ${resolveIdHrefQuery},
-    "image": hero[language == '${language}'][0] { "image": ${imageQuery} }.image,
+    "image": hero[0] { "image": ${imageQuery} }.image,
     "date": coalesce(publishedAt, _createdAt),
   }[0...3] | order(publishedAt desc, _createdAt desc)
 

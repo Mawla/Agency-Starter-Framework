@@ -112,7 +112,7 @@ export const LanguageSwitch = ({
                     "text-md",
                     "p-3",
                     {
-                      ["font-bold bg-neutral-800 rounded-sm"]:
+                      ["font-bold bg-neutral-100 rounded-sm"]:
                         language === languageId,
                     },
                   )}

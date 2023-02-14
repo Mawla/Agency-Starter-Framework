@@ -8,9 +8,7 @@ export const getFeedQuery = (
 ) => groq`_type == "module.resourcefeed" => {
   title,
   eyebrow,
-  "tags": *[_type == 'page.tag'] {
-    "title": title.${language},
-  }.title,
+  "tags": *[_type == 'page.tag' && language == "${language}"].title,
   "items": *[
     (
       _type in ^.filter.types 
@@ -23,18 +21,19 @@ export const getFeedQuery = (
       || count(tags[@._ref in ^.^.filter.tags[]._ref]) > 0 
     )
     && !(_id in path("drafts.*"))
+    && language == "${language}"
   ] {
     _id,
     publishedAt,
     _createdAt,
-    "title": title.${language},
+    title,
     "href": ${resolveIdHrefQuery},
-    "image": hero[language == '${language}'][0] { "image": ${imageQuery} }.image,
+    "image": hero[0] { "image": ${imageQuery} }.image,
     "intro": coalesce(
-      pt::text(hero[language == "${language}"][0].intro),
+      pt::text(hero[0].intro),
       pt::text(modules[_type == 'module.richtext'][0].content),
     ),
-    "tags": tags[]->title.${language},
+    "tags": tags[]->title,
     "authors": authors[]-> { 
       name, 
       "image": ${imageQuery} 
