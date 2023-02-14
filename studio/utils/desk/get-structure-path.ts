@@ -1,4 +1,4 @@
-import { baseLanguage } from "../../../languages";
+import { baseLanguage, isLanguage } from "../../../languages";
 
 export const getStructurePath = () => {
   const path = location.pathname;
@@ -8,6 +8,6 @@ export const getStructurePath = () => {
   const language = pathParts[0];
 
   return {
-    language: language || baseLanguage,
+    language: isLanguage(language) ? language : baseLanguage,
   };
 };
