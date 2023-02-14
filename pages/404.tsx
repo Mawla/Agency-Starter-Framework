@@ -70,18 +70,7 @@ export const getStaticProps: GetStaticProps = async ({
     title: "",
     path: "",
     _updatedAt: "",
-    paths: languages.reduce(
-      (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>,
-    ),
-    titles: languages.reduce(
-      (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>,
-    ),
-    excludeFromSitemap: languages.reduce(
-      (acc, curr) => ({ [curr.id]: true, ...acc }),
-      {} as Record<LanguageType, boolean>,
-    ),
+    excludeFromSitemap: true,
   };
   const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
     language,
