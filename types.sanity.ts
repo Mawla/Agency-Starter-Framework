@@ -72,6 +72,7 @@ export const LINKABLE_SCHEMAS = pick(
   "page.landing",
   "page.podcast",
   "page.podcasts",
+  "page.sitemap",
   "page.tool",
   "page.tools",
   "page.video",

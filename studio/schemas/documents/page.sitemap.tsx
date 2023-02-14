@@ -1,5 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
-import { HERO_FIELD, pageBase, TITLE_FIELD } from "./page-fields";
+import { HERO_FIELD, pageBase, SLUG_FIELD, TITLE_FIELD } from "./page-fields";
 import { ListRight } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
@@ -10,6 +10,9 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Sitemap page",
   type: "document",
+  options: {
+    singleton: true,
+  },
   icon: () => <ListRight weight="thin" size={20} />,
   preview: {
     select: {
@@ -17,5 +20,14 @@ export default defineType({
     },
   },
   groups: [...pageBase.groups],
-  fields: [TITLE_FIELD, HERO_FIELD],
+  fields: [
+    TITLE_FIELD,
+    {
+      ...SLUG_FIELD,
+      type: "string",
+      initialValue: "sitemap",
+      readOnly: true,
+    },
+    HERO_FIELD,
+  ],
 });
