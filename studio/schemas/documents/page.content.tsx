@@ -3,6 +3,7 @@ import {
   DEFAULT_CONTENT_PAGE_ORDERINGS,
   DEFAULT_CONTENT_PAGE_PREVIEW,
   pageBase,
+  PARENT_FIELD,
 } from "./page-fields";
 import { BlogWebsite } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -18,5 +19,5 @@ export default defineType({
   orderings: DEFAULT_CONTENT_PAGE_ORDERINGS,
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   groups: [...pageBase.groups],
-  fields: [...pageBase.fields],
+  fields: [PARENT_FIELD, ...pageBase.fields],
 });
