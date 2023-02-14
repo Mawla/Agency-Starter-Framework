@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   // fetch page
   const sitemapItem: SitemapItemType = {
-    _id: "page_notfound",
+    _id: `page_notfound__i18n_${language}`,
     _type: "page.notfound",
     title: "",
     path: "",
