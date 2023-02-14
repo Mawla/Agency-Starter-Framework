@@ -25,10 +25,8 @@ export default async function handler(req: NextRequest) {
   let id = searchParams.get("id");
   if (!id) id = "page_homepage";
 
-  const language = searchParams.get("language") || "en";
-
   const page = await sanityClient.fetch(`*[_id == "${id}"][0] {
-    "hero": hero[language == "${language}"][0] {
+    "hero": hero[0] {
       eyebrow,
       title,
       text,
