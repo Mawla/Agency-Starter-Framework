@@ -21,6 +21,6 @@ export default defineType({
   initialValue: {
     parent: { _type: "reference", _ref: "page_podcasts" },
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [PARENT_FIELD, ...pageBase.fields],
 });

@@ -28,12 +28,13 @@ export default defineType({
       parent: { _type: "reference", _ref: `page_blogs__i18n_${language}` },
     };
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,
       to: [{ type: "page.blogs" }],
       options: { disableNew: true },
+      group: ["meta"],
       hidden: true,
     },
     ...pageBase.fields.map((field) => {
@@ -41,7 +42,7 @@ export default defineType({
         return {
           ...field,
           options: {
-            ...field.options,
+            ...(field as any).options,
             filterType: /hero.resourcehero/,
           },
         };

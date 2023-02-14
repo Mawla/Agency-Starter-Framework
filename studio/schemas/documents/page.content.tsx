@@ -17,6 +17,6 @@ export default defineType({
   icon: () => <BlogWebsite weight="thin" size={20} />,
   orderings: DEFAULT_CONTENT_PAGE_ORDERINGS,
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [...pageBase.fields],
 });

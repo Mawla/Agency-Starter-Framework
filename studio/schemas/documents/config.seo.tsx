@@ -11,10 +11,6 @@ export const SEO_FIELD = {
   title: "Seo",
   type: "object",
   localize: true,
-  options: {
-    collapsible: true,
-    collapsed: true,
-  },
   fields: [
     defineField({
       name: "title",

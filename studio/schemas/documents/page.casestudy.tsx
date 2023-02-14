@@ -30,7 +30,7 @@ export default defineType({
       },
     };
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,

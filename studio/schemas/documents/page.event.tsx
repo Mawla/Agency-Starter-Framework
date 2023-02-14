@@ -27,7 +27,7 @@ export default defineType({
       parent: { _type: "reference", _ref: `page_events__i18n_${language}` },
     };
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,

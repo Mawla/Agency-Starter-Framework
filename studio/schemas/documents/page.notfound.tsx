@@ -23,6 +23,6 @@ export default defineType({
       title: `title.${baseLanguage}`,
     },
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [TITLE_FIELD, HERO_FIELD, MODULES_FIELD, DIALOGS_FIELD],
 });

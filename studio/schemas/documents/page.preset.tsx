@@ -1,7 +1,7 @@
 import { HERO_SCHEMAS, MODULE_SCHEMAS } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
-import { HERO_FIELD, MODULES_FIELD } from "./page-fields";
+import { HERO_FIELD, MODULES_FIELD, pageBase } from "./page-fields";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -25,6 +25,7 @@ const schema = defineType({
       };
     },
   },
+  groups: [...pageBase.groups],
   fields: [
     defineField({
       name: "title",

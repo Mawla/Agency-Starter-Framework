@@ -21,6 +21,6 @@ export default defineType({
   },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <CalendarHome weight="thin" size={20} />,
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [PARENT_FIELD, ...pageBase.fields],
 });

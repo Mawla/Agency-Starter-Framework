@@ -23,7 +23,7 @@ export default defineType({
   initialValue: {
     /*PARENT_INITIAL_VALUE*/
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [
     /*PARENT_FIELD*/
     ...pageBase.fields,

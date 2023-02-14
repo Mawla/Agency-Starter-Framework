@@ -37,6 +37,7 @@ export const TITLE_FIELD = defineField({
   type: "string",
   validation: (Rule: StringRule) => Rule.required(),
   options: { localize: true } as any,
+  group: ["content"],
 });
 
 export const SLUG_FIELD = defineField({
@@ -61,6 +62,7 @@ export const SLUG_FIELD = defineField({
         return "Invalid slug: Only numbers, lowercase letters, and dashes are permitted.";
       }
     }),
+  group: ["content"],
 });
 
 export const PUBLISHED_AT_FIELD = defineField({
@@ -94,6 +96,7 @@ export const HERO_FIELD = defineField({
     updateField: "hero",
     placeholder: "Add a hero…",
   } as any,
+  group: ["content"],
 });
 
 export const MODULES_FIELD = defineField({
@@ -121,6 +124,7 @@ export const MODULES_FIELD = defineField({
     updateField: "modules",
     placeholder: "Add a module…",
   } as any,
+  group: ["content"],
 });
 
 export const DIALOGS_FIELD = defineField({
@@ -146,6 +150,7 @@ export const DIALOGS_FIELD = defineField({
     updateField: "dialogs",
     placeholder: "Add a dialog…",
   } as any,
+  group: ["content"],
 });
 
 export const ORDER_PUBLISHED_DESC: SortOrdering = {
@@ -191,6 +196,7 @@ export const PASSWORD = defineField({
       title,
     })),
   ],
+  group: ["meta"],
 });
 
 export const PARENT_FIELD = defineField({
@@ -212,6 +218,7 @@ export const PARENT_FIELD = defineField({
       };
     },
   },
+  group: ["content"],
 });
 
 export const LANGUAGE_FIELD = defineField({
@@ -220,9 +227,9 @@ export const LANGUAGE_FIELD = defineField({
   type: "language",
   initialValue: () => {
     const { language } = getStructurePath();
-    console.log(language);
     return language || baseLanguage;
   },
+  group: ["language"],
 });
 
 export const TAGS_FIELD = defineField({
@@ -230,6 +237,7 @@ export const TAGS_FIELD = defineField({
   title: "Tags",
   type: "array",
   of: [{ type: "reference", to: [{ type: "page.tag" }] }],
+  group: ["content"],
 });
 
 export const AUTHOR_FIELD = defineField({
@@ -237,6 +245,7 @@ export const AUTHOR_FIELD = defineField({
   title: "Authors",
   type: "array",
   of: [{ type: "reference", to: [{ type: "person" }] }],
+  group: ["content"],
 });
 
 export const HIDE_NAV_FIELD = defineField({
@@ -245,6 +254,7 @@ export const HIDE_NAV_FIELD = defineField({
   type: "boolean",
   description: "Option to hide the navigation",
   initialValue: false,
+  group: ["meta"],
 });
 
 export const HIDE_FOOTER_FIELD = defineField({
@@ -253,17 +263,23 @@ export const HIDE_FOOTER_FIELD = defineField({
   type: "boolean",
   description: "Option to hide the footer",
   initialValue: false,
+  group: ["meta"],
 });
 
 export const pageBase = {
-  fieldsets: [
+  groups: [
+    {
+      title: "Content",
+      name: "content",
+      default: true,
+    },
     {
       title: "SEO & metadata",
-      name: "metadata",
-      options: {
-        collapsible: true,
-        collapse: true,
-      },
+      name: "meta",
+    },
+    {
+      title: "Language",
+      name: "language",
     },
   ],
   fields: [
@@ -273,7 +289,7 @@ export const pageBase = {
     HERO_FIELD,
     MODULES_FIELD,
     DIALOGS_FIELD,
-    SEO_FIELD,
+    { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
     LANGUAGE_FIELD,
