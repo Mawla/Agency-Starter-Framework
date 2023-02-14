@@ -57,7 +57,7 @@ export default async function handler(
 
   try {
     let messages = [];
-    const languagePrefix = language ? `/${language}/` : "/";
+    const languagePrefix = language ? `/${language}` : "/";
     const path = `${languagePrefix}${getPathForId(_id, sitemap)}`;
     await res.revalidate(path);
     const message = `Revalidated "${_type}" with path ${path}`;

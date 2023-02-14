@@ -185,18 +185,11 @@ export const EMPTY_RICHTEXT_MODULE = {
 export const PASSWORD = defineField({
   name: "locked",
   title: "Locked",
-  type: "object",
+  type: "boolean",
   components: {
     input: PagePasswordComponent,
     field: PagePasswordWrapper,
   },
-  fields: [
-    ...languages.map(({ id, title }) => ({
-      name: id,
-      type: "boolean",
-      title,
-    })),
-  ],
   group: ["meta"],
 });
 

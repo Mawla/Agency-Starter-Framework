@@ -49,7 +49,9 @@ export default defineConfig({
       const { client, document } = context;
 
       const sitemap: SitemapItemType[] = await client.fetch(getSitemapQuery());
-      const path = getPathForId(document._id, sitemap);
+
+      const languagePrefix = document.language ? `/${document.language}` : "/";
+      const path = `${languagePrefix}${getPathForId(document._id, sitemap)}`;
 
       if (path === "/" && document._id.indexOf("page_homepage") === -1) {
         return prev;
