@@ -223,6 +223,17 @@ export const structure = (
                 }),
                 S.divider(),
                 singleton(S, {
+                  id: "navigation",
+                  type: "navigation",
+                  language: language.id,
+                }),
+                singleton(S, {
+                  id: "footer",
+                  type: "footer",
+                  language: language.id,
+                }),
+                S.divider(),
+                singleton(S, {
                   id: `page_notfound`,
                   type: "page.notfound",
                   language: language.id,
@@ -244,9 +255,6 @@ export const structure = (
           documentList(S, { type: "person", title: "People" }),
         ]),
       ),
-      S.divider(),
-      singleton(S, { id: "navigation", type: "navigation" }),
-      singleton(S, { id: "footer", type: "footer" }),
       S.divider(),
       group(S, {
         title: "Config",

@@ -32,16 +32,16 @@ export const getFooterQuery = (language: LanguageType) => groq`
   "sitemap": ${getSitemapQuery()}
 } {
   sitemap,
-  "footer": *[_id == 'footer'][0] {
-    "copyright": copyright.${language},
-    "legal": legal.${language},
-    "links": links.${language}[] { 
+  "footer": *[_id == "footer__i18n_${language}"][0] {
+    "copyright": copyright,
+    "legal": legal,
+    "links": links[] { 
       title, 
       "href": link ${buttonQuery}.href,
       items[] ${buttonQuery} 
     },
-    "legalLinks": legalLinks.${language}[] ${buttonQuery},
-    "socials": socials.${language}[] {
+    "legalLinks": legalLinks[] ${buttonQuery},
+    "socials": socials[] {
       icon,
       ${buttonFieldsQuery},
     },

@@ -22,12 +22,6 @@ const INTERNAL_FIELD = {
     !value && parent?.href) as ConditionalPropertyCallback,
 };
 
-const LANGUAGE_FIELD = {
-  ...buttonSchema.fields.filter(({ name }) => name === "language")[0],
-  hidden: (({ parent, value }) =>
-    !value && parent?.href) as ConditionalPropertyCallback,
-};
-
 const HREF_FIELD = {
   ...buttonSchema.fields.filter(({ name }) => name === "href")[0],
   hidden: (({ parent, value }) =>
@@ -63,7 +57,7 @@ export default defineType({
   type: "document",
   icon: () => <JustifyAll weight="thin" size={18} />,
   initialValue: {},
-  options: { localize: true } as any,
+  options: { singleton: true },
   preview: {
     prepare() {
       return {
@@ -89,7 +83,6 @@ export default defineType({
           fields: [
             LABEL_FIELD,
             INTERNAL_FIELD,
-            LANGUAGE_FIELD,
             HREF_FIELD,
             {
               name: "children",
@@ -111,11 +104,6 @@ export default defineType({
                     LABEL_FIELD,
                     {
                       ...INTERNAL_FIELD,
-                      hidden: (({ parent, value }) =>
-                        !value && parent?.href) as ConditionalPropertyCallback,
-                    },
-                    {
-                      ...LANGUAGE_FIELD,
                       hidden: (({ parent, value }) =>
                         !value && parent?.href) as ConditionalPropertyCallback,
                     },
@@ -146,12 +134,6 @@ export default defineType({
             { ...LABEL_FIELD, group: null as any },
             {
               ...INTERNAL_FIELD,
-              hidden: (({ parent, value }) =>
-                !value && parent?.href) as ConditionalPropertyCallback,
-              group: null as any,
-            },
-            {
-              ...LANGUAGE_FIELD,
               hidden: (({ parent, value }) =>
                 !value && parent?.href) as ConditionalPropertyCallback,
               group: null as any,

@@ -19,9 +19,6 @@ const LABEL_FIELD = buttonSchema.fields.find(
 const INTERNAL_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "internal",
 ) as any;
-const LANGUAGE_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "language",
-) as any;
 const HREF_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "href",
 ) as any;
@@ -50,9 +47,8 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Footer",
   type: "document",
+  options: { singleton: true },
   icon: () => <AlignDown weight="thin" size={18} />,
-  initialValue: {},
-  options: { localize: true } as any,
   preview: {
     prepare() {
       return {
@@ -90,7 +86,7 @@ export default defineType({
                 collapsed: true,
               },
               ...PREVIEW,
-              fields: [INTERNAL_FIELD, LANGUAGE_FIELD, HREF_FIELD],
+              fields: [INTERNAL_FIELD, HREF_FIELD],
             }),
             defineField({
               name: "items",
@@ -108,12 +104,7 @@ export default defineType({
                     },
                   ],
                   ...PREVIEW,
-                  fields: [
-                    LABEL_FIELD,
-                    INTERNAL_FIELD,
-                    LANGUAGE_FIELD,
-                    HREF_FIELD,
-                  ],
+                  fields: [LABEL_FIELD, INTERNAL_FIELD, HREF_FIELD],
                 }),
               ],
               hidden: (({ parent, value }) =>
@@ -143,7 +134,6 @@ export default defineType({
           fields: [
             LABEL_FIELD,
             INTERNAL_FIELD,
-            LANGUAGE_FIELD,
             HREF_FIELD,
             defineField({
               name: "icon",
@@ -184,7 +174,7 @@ export default defineType({
             },
           ],
           ...PREVIEW,
-          fields: [LABEL_FIELD, INTERNAL_FIELD, LANGUAGE_FIELD, HREF_FIELD],
+          fields: [LABEL_FIELD, INTERNAL_FIELD, HREF_FIELD],
         }),
       ],
     }),
