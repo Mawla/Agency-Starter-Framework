@@ -1,4 +1,4 @@
-import { languages } from "../languages";
+import { languages, LanguageType } from "../languages";
 import { LINKABLE_SCHEMAS } from "../types.sanity";
 import { documentList } from "./utils/desk/documentList";
 import { getIconForSchema } from "./utils/desk/get-icon-for-schema";
@@ -54,11 +54,18 @@ export const structure = (
                       .filter(
                         `_type in [${Object.keys(LINKABLE_SCHEMAS)
                           .map((schema) => `'${schema}'`)
-                          .join(", ")}] && !defined(parent)`,
+                          .join(", ")}] && !defined(parent) && language == '${
+                          language.id
+                        }'`,
                       )
                       .child(
                         (id: string) =>
-                          nestedContentPageList(S, id, context) as any,
+                          nestedContentPageList(
+                            S,
+                            id,
+                            context,
+                            language.id,
+                          ) as any,
                       ),
                   ),
 
@@ -325,12 +332,13 @@ async function nestedContentPageList(
   S: StructureBuilder,
   id: string,
   context: StructureResolverContext,
+  language: LanguageType,
 ): Promise<StructureBuilder | DocumentListBuilder | DocumentBuilder | Child> {
   const client = context.getClient({
     apiVersion: "vX",
   });
   const page = await client.fetch(
-    `*[_id == $id || _id == "drafts.${id}"][0] { "title": title.en, _id, _type }`,
+    `*[_id == $id || _id == "drafts.${id}"][0] { "title": title, _id, _type }`,
     { id },
   );
 
@@ -348,11 +356,13 @@ async function nestedContentPageList(
       .schemaType(page?._type)
       .filter(
         `
-       $id == _id || "drafts.${id}" == _id ||
-       $id == parent._ref || "drafts.${id}" == parent._ref ||
-       $id == parent.parent._ref || "drafts.${id}" == parent.parent._ref ||
-       $id == parent.parent.parent._ref || "drafts.${id}" == parent.parent.parent._ref ||
-       $id == parent.parent.parent.parent._ref || "drafts.${id}" == parent.parent.parent.parent._ref
+        (
+          $id == _id || "drafts.${id}" == _id ||
+          $id == parent._ref || "drafts.${id}" == parent._ref ||
+          $id == parent.parent._ref || "drafts.${id}" == parent.parent._ref ||
+          $id == parent.parent.parent._ref || "drafts.${id}" == parent.parent.parent._ref ||
+          $id == parent.parent.parent.parent._ref || "drafts.${id}" == parent.parent.parent.parent._ref
+        ) && language == "${language}"
        `,
       )
       .params({ id })
@@ -362,7 +372,7 @@ async function nestedContentPageList(
             schemaType: page?._type,
           } as DefaultDocumentNodeContext).id(id);
         }
-        return nestedContentPageList(S, id, context) as any;
+        return nestedContentPageList(S, id, context, language) as any;
       });
   }
 
