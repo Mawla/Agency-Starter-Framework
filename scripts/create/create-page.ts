@@ -146,7 +146,7 @@ const build = (answers) => {
       !parentType || !parentId || !parentType?.trim().length || singleton
         ? ""
         : `
-        initialValue: async (props, context) => {
+        initialValue: async (props:any, context:any) => {
           const client = context.getClient({ apiVersion: "vX" });
           const { language } = getStructurePath();
       
