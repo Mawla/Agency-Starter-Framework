@@ -1,5 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import {
+  getPreviewSlugPagePath,
   HERO_FIELD,
   LANGUAGE_FIELD,
   pageBase,
@@ -23,6 +24,14 @@ export default defineType({
   preview: {
     select: {
       title: `title`,
+      slug: "slug.current",
+      language: "language",
+    },
+    prepare({ title, slug, language }) {
+      return {
+        title: title,
+        subtitle: getPreviewSlugPagePath(language, [slug]),
+      };
     },
   },
   groups: [...pageBase.groups],
