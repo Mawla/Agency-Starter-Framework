@@ -269,6 +269,19 @@ export const I18N_BASE_FIELD = defineField({
   group: ["meta", "language"],
 });
 
+export const getI18nBaseFieldForSingleton = (schemaType: string) => {
+  const schemaName = schemaType.toLowerCase().replace(/\s/g, "");
+  const documentId = schemaName.replace("page.", "page_");
+
+  return {
+    ...I18N_BASE_FIELD,
+    initialValue: {
+      _ref: `${documentId}__i18n_${baseLanguage}`,
+      _weak: true,
+    },
+  };
+};
+
 export const TAGS_FIELD = defineField({
   name: "tags",
   title: "Tags",

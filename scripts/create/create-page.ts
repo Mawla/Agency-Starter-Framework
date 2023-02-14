@@ -124,7 +124,7 @@ const build = (answers) => {
   // create schema file
   const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.tsx`;
 
-  const schemaContent = fs
+  let schemaContent = fs
     .readFileSync(`${__dirname}/page.mypage.tsx`)
     .toString()
     .replace(/MyPageSchema/g, schemaName)
@@ -148,6 +148,18 @@ const build = (answers) => {
         ? ""
         : `parent: { _type: "reference", _ref: "${parentId}" },`,
     );
+
+  if (singleton) {
+    schemaContent = schemaContent.replace(
+      "...pageBase.fields,",
+      `...pageBase.fields.map((field) => {
+      if (field.name === "i18n_base") {
+        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
+      }
+      return { ...field };
+    }),`,
+    );
+  }
 
   fs.writeFileSync(schemaFilePath, schemaContent);
   prettierFile(schemaFilePath);

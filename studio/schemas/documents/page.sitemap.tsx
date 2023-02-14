@@ -1,7 +1,10 @@
+import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
+  getI18nBaseFieldForSingleton,
   getPreviewSlugPagePath,
   HERO_FIELD,
+  I18N_BASE_FIELD,
   LANGUAGE_FIELD,
   pageBase,
   SLUG_FIELD,
@@ -39,12 +42,13 @@ export default defineType({
     TITLE_FIELD,
     {
       ...SLUG_FIELD,
+      initialValue: { current: "sitemap" },
       description:
         "This must match the slug of the Next.js pages/sitemap.tsx file.",
-      initialValue: () => ({ current: "sitemap" }),
       readOnly: true,
     },
     LANGUAGE_FIELD,
+    getI18nBaseFieldForSingleton(SCHEMA_NAME),
     HERO_FIELD,
   ],
 });

@@ -1,6 +1,7 @@
 import { SchemaName } from "../../../types.sanity";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getI18nBaseFieldForSingleton,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -16,11 +17,19 @@ export default defineType({
   title: "Podcasts overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
+  options: {
+    singleton: true,
+  },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <EarMuffs weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_podcasts" },
-  },
   groups: [...pageBase.groups],
-  fields: [PARENT_FIELD, ...pageBase.fields],
+  fields: [
+    PARENT_FIELD,
+    ...pageBase.fields.map((field) => {
+      if (field.name === "i18n_base") {
+        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
+      }
+      return { ...field };
+    }),
+  ],
 });
