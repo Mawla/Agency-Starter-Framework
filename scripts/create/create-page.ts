@@ -143,7 +143,7 @@ const build = (answers) => {
     },`,
     )
     .replace(
-      ` /*/*INITIAL_VALUE*/*/`,
+      `/*INITIAL_VALUE*/`,
       !parentType || !parentId || !parentType?.trim().length || singleton
         ? ""
         : `
