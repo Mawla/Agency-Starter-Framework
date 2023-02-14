@@ -23,7 +23,7 @@ export function documentList(
     .child(() => {
       const list = S.documentList()
         .title(title || getDocumentTitle(S, type))
-        .filter(filter || `_type == "${type}"`)
+        .filter(filter || `_type == "${type}" && language == "${language}"`)
         .menuItems([...(S.documentTypeList(type).getMenuItems() as [])])
         .initialValueTemplates([
           ...((createMenuTypes || [type]).map((type) =>
