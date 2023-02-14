@@ -1,4 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   PARENT_FIELD,
   ORDER_PUBLISHED_DESC,
@@ -21,9 +22,7 @@ export default defineType({
   /*OPTIONS*/
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Pages weight="thin" size={20} />,
-  initialValue: {
-    /*PARENT_INITIAL_VALUE*/
-  },
+  /*INITIAL_VALUE*/
   groups: [...pageBase.groups],
   fields: [
     /*PARENT_FIELD*/
