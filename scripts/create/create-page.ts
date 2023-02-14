@@ -152,7 +152,7 @@ const build = (answers) => {
           const { language } = getStructurePath();
       
           const parentDocumentId = await client.fetch(
-            \`*[_id match "\${parentId}__i18n_\${language}"][0]._id\`,
+            \`*[_id match "${parentId}__i18n_\${language}"][0]._id\`,
           );
       
           if (!parentDocumentId) return {};
