@@ -54,82 +54,81 @@ export const getPageQuery = (language: LanguageType) => groq`
 } {
   sitemap,
   "page": *[_id == $_id][0]{
-  _id,
-  _type,
-  _updatedAt,
-  _rev,
-  "title": title.${language},
-  hideNav,
-  hideFooter,
-  "locked": locked.${language},
-  "homepage": ^.sitemap[_id match "*page_homepage"][0] {
-    "path": paths.${language}, 
-    "title": titles.${language},
-  },
-  "breadcrumb": ${getBreadcrumbQuery(language)},
-  "sitemapItem": ^.sitemap[_id == $_id][0],
-  publishedAt,
-  description,
-  "image": ${imageQuery},
-
-  // page seo
-  "seo": seo.${language} {
-    ...,
-    "image": ${imageQuery}
-  },
-
-  // hero
-  "hero": hero[language == "${language}" && !(_type in path('studio.*'))][] {
+    _id,
     _type,
-    _key,
-    theme,
+    _updatedAt,
+    _rev,
+    title,
+    hideNav,
+    hideFooter,
+    "locked": locked,
+    "homepage": ^.sitemap[_id match "*page_homepage*" && language == '${language}'][0] {
+      path, 
+      title
+    },
+    "breadcrumb": ${getBreadcrumbQuery(language)},
+    "sitemapItem": ^.sitemap[_id == $_id][0],
+    publishedAt,
+    description,
+    "image": ${imageQuery},
 
-    ${getHeroBasicQuery(language)},
-
-    ${getResourceHeroQuery(language)},
-  }[0],
-
-  // modules
-  "modules": modules[language == "${language}" && !(_type in path('studio.*'))] {
-    _key,
-    _type,
-    decorations[] {
+    // page seo
+    "seo": {
       ...,
-      "image": ${imageQuery},
-    },
-    theme,
-
-    ${getRichTextQuery(language)},
-    ${getBreadcrumbModuleQuery(language)},
-    ${getCardGridQuery(language)},
-    ${getBillboardQuery(language)},
-    ${getTextImageQuery(language)},
-    ${getGalleryQuery(language)},
-    ${getSlidesQuery(language)},
-    ${getStoryQuery(language)},
-    ${getFeedQuery(language)},
-    ${getResourceStripQuery(language)},
-    ${getFaqQuery(language)},
-    ${getVideoQuery(language)},
-    ${getImageQuery(language)},
-  },
-
-  // dialogs
-  "dialogs": dialogs[language == "${language}"] {
-    _key,
-    _type,
-    "slug": slug.current,
-    _type == "dialog.richtext" => {
-      content[] ${richTextQuery}
+      "image": ${imageQuery}
     },
 
-    _type == "dialog.video" => {
-      ${videoQuery}
+    // hero
+    "hero": hero[!(_type in path('studio.*'))][] {
+      _type,
+      _key,
+      theme,
+
+      ${getHeroBasicQuery(language)},
+      ${getResourceHeroQuery(language)},
+    }[0],
+
+    // modules
+    "modules": modules[!(_type in path('studio.*'))] {
+      _key,
+      _type,
+      decorations[] {
+        ...,
+        "image": ${imageQuery},
+      },
+      theme,
+
+      ${getRichTextQuery(language)},
+      ${getBreadcrumbModuleQuery(language)},
+      ${getCardGridQuery(language)},
+      ${getBillboardQuery(language)},
+      ${getTextImageQuery(language)},
+      ${getGalleryQuery(language)},
+      ${getSlidesQuery(language)},
+      ${getStoryQuery(language)},
+      ${getFeedQuery(language)},
+      ${getResourceStripQuery(language)},
+      ${getFaqQuery(language)},
+      ${getVideoQuery(language)},
+      ${getImageQuery(language)},
     },
 
-    _type == "dialog.form" => {
-      "form": ${staticFormQuery}    
+    // dialogs
+    dialogs {
+      _key,
+      _type,
+      "slug": slug.current,
+      _type == "dialog.richtext" => {
+        content[] ${richTextQuery}
+      },
+
+      _type == "dialog.video" => {
+        ${videoQuery}
+      },
+
+      _type == "dialog.form" => {
+        "form": ${staticFormQuery}    
+      },
     },
-  },
   }
 }.page`;
