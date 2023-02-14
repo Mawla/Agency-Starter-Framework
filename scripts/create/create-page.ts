@@ -166,7 +166,6 @@ const build = (answers) => {
 
   addSchema(`page${pascalName}`, `./documents/${schemaName}`);
 
-  // createQuery(name, schemaName, documentId, answers);
   if (addDesk)
     createDeskStructure(name, pascalName, schemaName, documentId, answers);
 
@@ -178,69 +177,6 @@ const build = (answers) => {
 
   readline.close();
 };
-
-/**
- * Add query
- */
-
-// function createQuery(name, schemaName, documentId, answers) {
-//   const { singleton, parentType, parentId } = answers;
-
-//   const filePath = `${__dirname}/../../queries/sitemap.query.ts`;
-//   let lines = fs.readFileSync(filePath).toString().split("\n");
-
-//   // let str;
-
-//   /*
-//   // singleton query
-//   if (singleton) {
-//     str = `
-//     \${getSingletonQuery('${documentId}')},`;
-//   } else {
-//     // page with a parent query
-//     if (parentId) {
-//       str = `
-//     // ${name}
-//     ...*[_type == "${schemaName}"] {
-//       \${baseFields},
-//       "paths": {
-//         \${languages.map(
-//           (language) =>
-//             \`"\${language.id}": "/" + *[_id match "*${parentId}"] { "slug": slug.\${language.id}.current}[0].slug  +"/"+ slug.\${language.id}.current\`
-//           )
-//         }
-//       },
-//     },
-// `;
-
-//       // top level page
-//     } else {
-//       str = `
-//     // ${name}
-//     ...*[_type == "${schemaName}"] {
-//       \${baseFields},
-//       "paths": {
-//         \${languages.map(
-//           (language) =>
-//             \`"\${language.id}": "/" + slug.\${language.id}.current\`,
-//         )}
-//       },
-//     },
-// `;
-//     }
-//   }*/
-
-//   lines = addLine(
-//     `       || _type == '${schemaName}'`,
-//     lines,
-//     `_type == "page.content"`,
-//     1,
-//   );
-//   fs.writeFileSync(filePath, lines.join("\n"));
-//   console.log(
-//     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
-//   );
-// }
 
 /**
  * Add to desk
@@ -262,7 +198,11 @@ function createDeskStructure(
 
   if (singleton) {
     str = `
-      singleton(S, { id: '${documentId}', type: '${schemaName}' }),
+      singleton(S, { 
+        id: '${documentId}', 
+        type: '${schemaName}',
+        language: language.id, 
+      }),
     `;
   } else {
     if (parentId) {
@@ -270,23 +210,21 @@ function createDeskStructure(
         documentList(S, {
           type: '${schemaName}',
           title: '${pascalName}',
-          filter: '_type == "${parentType}" || _type == "${schemaName}"',
+          language: language.id,
         }),
       `;
     } else {
       str = `
-        documentList(S, { type: '${schemaName}', title: '${name}' }),
+        documentList(S, { 
+          type: '${schemaName}', 
+          title: '${name}',
+          language: language.id
+        }),
       `;
     }
   }
 
   lines = addLine(str, lines, `type: "page.content"`, -1);
-  // lines = addLine(
-  //   `                   ,'${schemaName}'`,
-  //   lines,
-  //   `] && !defined(parent)`,
-  //   0,
-  // );
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
