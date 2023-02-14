@@ -28,6 +28,7 @@ import {
   SlugRule,
   SortOrdering,
   StringRule,
+  useSchema,
 } from "sanity";
 
 export const TITLE_FIELD = defineField({
@@ -230,6 +231,17 @@ export const LANGUAGE_FIELD = defineField({
   initialValue: () => {
     const { language } = getStructurePath();
     return language || baseLanguage;
+  },
+  readOnly: ({ document }: any) => {
+    if (!document) return false;
+
+    const schemas = useSchema();
+    const schema = schemas._original?.types.find(
+      ({ name }: { name: string }) => name === document._type,
+    );
+    if ((schema?.options as any)?.singleton) return true;
+
+    return false;
   },
   group: ["language"],
 });
