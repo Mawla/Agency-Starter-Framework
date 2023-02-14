@@ -1,12 +1,17 @@
 import "../styles/styles.css";
+import { Manrope } from "@next/font/google";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import Script from "next/script";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "tailwindcss/tailwind.css";
 
 const queryClient = new QueryClient();
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -23,7 +28,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           data-blockingmode="auto"
         />
       )} */}
-      <Component {...pageProps} />
+
+      <main className={`${manrope.variable} font-sans`}>
+        <Component {...pageProps} />
+      </main>
     </QueryClientProvider>
   );
 }
