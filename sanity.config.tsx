@@ -1,8 +1,9 @@
 import { getPathForId } from "./helpers/sitemap/getPathForId";
-import { baseLanguage, languages, LanguageType } from "./languages";
+import { languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
+import { getStructurePath } from "./studio/utils/desk/get-structure-path";
 import { LINKABLE_SCHEMAS, TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
@@ -49,7 +50,7 @@ export default defineConfig({
       const { client, document } = context;
 
       const sitemap: SitemapItemType[] = await client.fetch(getSitemapQuery());
-      const path = getPathForId(document._id, sitemap, baseLanguage);
+      const path = getPathForId(document._id, sitemap);
 
       if (path === "/" && document._id.indexOf("page_homepage") === -1) {
         return prev;
