@@ -20,7 +20,6 @@ import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
-import { title } from "process";
 import {
   ArrayRule,
   DateRule,
@@ -36,7 +35,6 @@ export const TITLE_FIELD = defineField({
   title: "Title",
   type: "string",
   validation: (Rule: StringRule) => Rule.required(),
-  options: { localize: true } as any,
   group: ["content"],
 });
 
@@ -47,9 +45,10 @@ export const SLUG_FIELD = defineField({
   description:
     "The unique identifying part of a web address at the end of the URL. Only lowercase and no special characters except -.",
   options: {
-    source: title,
+    source: (doc: any) => {
+      return doc.title;
+    },
     maxLength: 96,
-    localize: true,
     isUnique: isPathUnique,
   } as any,
   validation: (Rule: SlugRule) =>
@@ -297,23 +296,29 @@ export const pageBase = {
 };
 
 export const SLUG_PREVIEW_SELECT_FIELDS = {
-  slug: `slug.${baseLanguage}.current`,
-  level1Slug: `parent.slug.${baseLanguage}.current`,
-  level2Slug: `parent.parent.slug.${baseLanguage}.current`,
-  level3Slug: `parent.parent.parent.slug.${baseLanguage}.current`,
-  level4Slug: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
-  level5Slug: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
+  slug: `slug.current`,
+  level1Slug: `parent.slug.current`,
+  level2Slug: `parent.parent.slug.current`,
+  level3Slug: `parent.parent.parent.slug.current`,
+  level4Slug: `parent.parent.parent.parent.slug.current`,
+  level5Slug: `parent.parent.parent.parent.parent.slug.current`,
 };
 
 export const getPreviewSlugPagePath = (paths: string[]) => {
-  return `/${["", ...Object.values(paths).filter(Boolean).reverse()]
+  const { language } = getStructurePath();
+  const languagePath = language === baseLanguage ? "" : `/${language}`;
+
+  return `${languagePath}/${[
+    "",
+    ...Object.values(paths).filter(Boolean).reverse(),
+  ]
     .filter(Boolean)
     .join("/")}`;
 };
 
 export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   select: {
-    title: `title.${baseLanguage}`,
+    title: `title`,
     media: "hero.0.image",
     ...SLUG_PREVIEW_SELECT_FIELDS,
   },
@@ -330,35 +335,35 @@ export const DEFAULT_CONTENT_PAGE_ORDERINGS: SortOrdering[] = [
   {
     title: "Title",
     name: "Title",
-    by: [{ field: `title.${baseLanguage}`, direction: "asc" }],
+    by: [{ field: `title`, direction: "asc" }],
   },
   {
     title: "Slug",
     name: "Slug",
-    by: [{ field: `slug.${baseLanguage}.current`, direction: "asc" }],
+    by: [{ field: `slug.current`, direction: "asc" }],
   },
   {
     title: "Path",
     name: "Path",
     by: [
       {
-        field: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.parent.parent.parent.slug.current`,
         direction: "desc",
       },
       {
-        field: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.parent.parent.slug.current`,
         direction: "desc",
       },
       {
-        field: `parent.parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.parent.slug.current`,
         direction: "desc",
       },
       {
-        field: `parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.slug.current`,
         direction: "desc",
       },
-      { field: `parent.slug.${baseLanguage}.current`, direction: "desc" },
-      { field: `slug.${baseLanguage}.current`, direction: "desc" },
+      { field: `parent.slug.current`, direction: "desc" },
+      { field: `slug.current`, direction: "desc" },
     ],
   },
 ];
