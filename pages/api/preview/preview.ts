@@ -14,7 +14,7 @@ function warning(msg: string) {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const { secret, _id, _type, language } = req.query;
+  const { secret, _id, _type } = req.query;
 
   if (secret !== process.env.SANITY_PREVIEW_SECRET) {
     return res
@@ -29,16 +29,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (!secret || Array.isArray(secret) || !secret.trim().length)
     return res.status(400).send(warning("secret is missing."));
 
-  if (!_id || !language || Array.isArray(_id) || Array.isArray(_type)) {
+  if (!_id || Array.isArray(_id) || Array.isArray(_type)) {
     return res.status(400).send(warning("invalid arguments."));
   }
 
-  if (Array.isArray(language)) {
-    return res.status(401).send(warning("Can not preview multiple languages."));
-  }
-
   const draftId = _id.startsWith("drafts.") ? _id : `drafts.${_id}`;
-  const Location = `/preview?id=${draftId}&type=${_type}&language=${language}`;
+  const Location = `/preview?id=${draftId}&type=${_type}`;
   res.setPreviewData({});
   res.writeHead(307, { Location });
   res.end();
