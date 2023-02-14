@@ -29,7 +29,5 @@ export const isPathUnique = async (slug: string, context: any) => {
     );
   });
 
-  console.log(matches);
-
   return matches.length === 0;
 };
