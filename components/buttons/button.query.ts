@@ -1,4 +1,3 @@
-import { languages } from "../../languages";
 import groq from "groq";
 
 // To find the top level sitemap we need to travel up an unknown number of scopes
@@ -15,31 +14,14 @@ const findTopLevelSitemap = new Array(numLevels)
   .map((x, i) => `${new Array(i + 2).fill("").join("^.")}sitemap`);
 
 export const resolveIdHrefQuery = `
-  coalesce(
-    select(
-      ${languages.map(
-        ({ id }) => `
-        language == '${id}' => coalesce(${findTopLevelSitemap})[_id == ^._id][0].paths.${id}
-        `,
-      )}
-    ),
-    coalesce(${findTopLevelSitemap})[_id == ^._id][0].paths.[$language]
-  )
+  coalesce(${findTopLevelSitemap})[_id == ^._id][0].path
 `;
 
 export const buttonHrefQuery = groq`
   coalesce(
     coalesce(
       href, 
-      // coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0].paths[^.language] // why doesn't this work? That would make it way shorter than using this loop
-      select(
-        ${languages.map(
-          ({ id }) => `
-          language == '${id}' => coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0].paths.${id}
-          `,
-        )}
-      ),
-      coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0].paths.[$language],
+      coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0].path,
       '#'+ dialog, 
       file.asset->url
     ) + coalesce(params, ''), 
