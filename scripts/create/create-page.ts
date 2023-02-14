@@ -140,13 +140,7 @@ const build = (answers) => {
       to: [{ type: "${parentType}" }],
       options: {
         disableNew: true,
-        filter: () => {
-          const { language } = getStructurePath();
-          return {
-            filter: \`language == $language\`,
-            params: { language },
-          };
-        },
+        ...PARENT_FIELD.options,
       },
     },`,
     )
