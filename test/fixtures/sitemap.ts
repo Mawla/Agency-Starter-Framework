@@ -7,10 +7,6 @@ export const DEMO_SITEMAP: SitemapType = [
     title: "content page",
     path: "/page1",
     _updatedAt: "xxx",
-    excludeFromSitemap: {
-      en: true,
-      es: true,
-    },
   },
   {
     _id: "xxx2",
@@ -18,10 +14,6 @@ export const DEMO_SITEMAP: SitemapType = [
     title: "content page 2",
     path: "/page1/page2",
     _updatedAt: "xxx",
-    excludeFromSitemap: {
-      en: true,
-      es: true,
-    },
   },
   {
     _id: "xxx3",
@@ -29,9 +21,5 @@ export const DEMO_SITEMAP: SitemapType = [
     title: "content page 3",
     path: "/page1/page2/page3",
     _updatedAt: "xxx",
-    excludeFromSitemap: {
-      en: true,
-      es: true,
-    },
   },
 ];
