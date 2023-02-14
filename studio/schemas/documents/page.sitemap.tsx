@@ -1,5 +1,10 @@
 import { SchemaName } from "../../../types.sanity";
-import { HERO_FIELD, pageBase, TITLE_FIELD } from "./page-fields";
+import {
+  HERO_FIELD,
+  LANGUAGE_FIELD,
+  pageBase,
+  TITLE_FIELD,
+} from "./page-fields";
 import { ListRight } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
@@ -30,6 +35,7 @@ export default defineType({
       readOnly: true,
       group: ["content"],
     },
+    LANGUAGE_FIELD,
     HERO_FIELD,
   ],
 });
