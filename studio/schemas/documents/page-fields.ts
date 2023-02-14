@@ -259,7 +259,7 @@ export const LANGUAGE_FIELD = defineField({
 
 export const I18N_BASE_FIELD = defineField({
   name: "i18n_base",
-  title: "Base language",
+  title: "Base language document",
   description:
     "The same document in the primary language. This is to provide language alternatives on the website. Leave this blank if there is no such related page.",
   type: "reference",
