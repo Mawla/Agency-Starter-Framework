@@ -52,7 +52,6 @@ export const SCHEMAS = {
   password: "",
   person: "",
   redirect: "",
-  sitemap: "",
 };
 
 export type SchemaName = keyof typeof SCHEMAS;

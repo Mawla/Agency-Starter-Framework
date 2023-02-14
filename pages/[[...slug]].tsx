@@ -200,6 +200,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = sitemap
     .filter(Boolean)
+    .filter((item) => !item._id.startsWith("page_sitemap"))
     .map((item) => ({
       params: {
         slug: item?.path?.split("/").splice(1),
