@@ -139,7 +139,6 @@ const build = (answers) => {
       ...PARENT_FIELD,
       to: [{ type: "${parentType}" }],
       options: { disableNew: true },
-      hidden: true,
     },`,
     )
     .replace(
