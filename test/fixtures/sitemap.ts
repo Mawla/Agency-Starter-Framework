@@ -19,7 +19,7 @@ export const DEMO_SITEMAP: SitemapType = [
     _id: "xxx3",
     _type: "page.content",
     title: "content page 3",
-    path: "/page1/page2/page3",
+    path: "/es/page1/page2/page3",
     _updatedAt: "xxx",
   },
 ];
