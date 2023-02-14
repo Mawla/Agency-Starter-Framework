@@ -2,6 +2,7 @@ import { SchemaName } from "../../../types.sanity";
 import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getParentDocumentInitialValue,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -22,18 +23,7 @@ export default defineType({
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <EarMuffs weight="thin" size={20} />,
   initialValue: async (props: any, context: any) => {
-    const client = context.getClient({ apiVersion: "vX" });
-    const { language } = getStructurePath();
-
-    const parentDocumentId = await client.fetch(
-      `*[_id match "page_podcasts__i18n_${language}"][0]._id`,
-    );
-
-    if (!parentDocumentId) return {};
-
-    return {
-      parent: { _type: "reference", _ref: parentDocumentId },
-    };
+    return await getParentDocumentInitialValue(context, "page_podcasts");
   },
   groups: [...pageBase.groups],
   fields: [

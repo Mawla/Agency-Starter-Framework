@@ -3,6 +3,7 @@ import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   AUTHOR_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getParentDocumentInitialValue,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -23,18 +24,7 @@ export default defineType({
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <InkPen weight="thin" size={20} />,
   initialValue: async (props: any, context: any) => {
-    const client = context.getClient({ apiVersion: "vX" });
-    const { language } = getStructurePath();
-
-    const parentDocumentId = await client.fetch(
-      `*[_id match "page_blogs__i18n_${language}"][0]._id`,
-    );
-
-    if (!parentDocumentId) return {};
-
-    return {
-      parent: { _type: "reference", _ref: parentDocumentId },
-    };
+    return await getParentDocumentInitialValue(context, "page_blogs");
   },
   groups: [...pageBase.groups],
   fields: [
@@ -45,7 +35,6 @@ export default defineType({
         disableNew: true,
         ...PARENT_FIELD.options,
       },
-      group: ["meta"],
     },
     ...pageBase.fields.map((field) => {
       if (field.name === "hero") {

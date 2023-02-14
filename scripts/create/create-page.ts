@@ -149,19 +149,8 @@ const build = (answers) => {
       !parentType || !parentId || !parentType?.trim().length || singleton
         ? ""
         : `
-        initialValue: async (props:any, context:any) => {
-          const client = context.getClient({ apiVersion: "vX" });
-          const { language } = getStructurePath();
-      
-          const parentDocumentId = await client.fetch(
-            \`*[_id match "${parentId}__i18n_\${language}"][0]._id\`,
-          );
-      
-          if (!parentDocumentId) return {};
-      
-          return {
-            parent: { _type: "reference", _ref: parentDocumentId },
-          };
+        initialValue: async (props: any, context: any) => {
+          return await getParentDocumentInitialValue(context, "${parentId}");
         },
         `,
     );

@@ -218,6 +218,24 @@ export const PARENT_FIELD = defineField({
   group: ["content"],
 });
 
+export async function getParentDocumentInitialValue(
+  context: any,
+  parentId: string,
+) {
+  const client = context.getClient({ apiVersion: "vX" });
+  const { language } = getStructurePath();
+
+  const parentDocumentId = await client.fetch(
+    `*[_id match "${parentId}__i18n_${language}"][0]._id`,
+  );
+
+  if (!parentDocumentId) return {};
+
+  return {
+    parent: { _type: "reference", _ref: parentDocumentId },
+  };
+}
+
 export const LANGUAGE_FIELD = defineField({
   name: "language",
   title: "Language",
