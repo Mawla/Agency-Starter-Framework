@@ -59,7 +59,7 @@ export const SeoPane: ComponentType<any> = ({
             <Card>
               <Stack space={4}>
                 <img
-                  src={`${process.env.SANITY_STUDIO_PROJECT_PATH}api/opengraph-image?id=${document?.displayed?._id}&language=${language.id}&date=${document?.displayed?._updatedAt}`}
+                  src={`${process.env.SANITY_STUDIO_PROJECT_PATH}api/opengraph-image?id=${document?.displayed?._id}&date=${document?.displayed?._updatedAt}`}
                   style={{
                     width: "100%",
                     aspectRatio: "1200/630",
@@ -69,8 +69,8 @@ export const SeoPane: ComponentType<any> = ({
                   }}
                 />
                 <Text size={3} style={{ color: "#1a0dab" }}>
-                  {document?.displayed?.seo?.[language.id]?.title ||
-                    document?.displayed?.title?.[language.id] ||
+                  {document?.displayed?.seo?.title ||
+                    document?.displayed?.title ||
                     config?.seo?.title}{" "}
                   - {config?.general?.name}
                 </Text>
@@ -80,8 +80,8 @@ export const SeoPane: ComponentType<any> = ({
                     color: "#4d5156",
                   }}
                 >
-                  {document?.displayed?.description?.[language.id] ||
-                    document?.displayed?.seo?.[language.id]?.description ||
+                  {document?.displayed?.description ||
+                    document?.displayed?.seo?.description ||
                     config?.seo?.description}
                 </Text>
                 <Text
@@ -93,7 +93,7 @@ export const SeoPane: ComponentType<any> = ({
                   https://
                   {config?.general?.domain}
                   {language.id === baseLanguage ? "" : `/${language.id}`}
-                  {getPathForId(document?.displayed?._id, sitemap, language.id)}
+                  {getPathForId(document?.displayed?._id, sitemap)}
                 </Text>
               </Stack>
             </Card>
