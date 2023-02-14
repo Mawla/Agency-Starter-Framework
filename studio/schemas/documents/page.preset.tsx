@@ -32,12 +32,14 @@ const schema = defineType({
       title: "Title",
       type: "string",
       validation: (Rule: StringRule) => Rule.required(),
+      group: ["content"],
     }),
     defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
+      group: ["content"],
       options: {
         source: (doc, options) => (options.parent as any).title,
       },
@@ -47,6 +49,7 @@ const schema = defineType({
       title: "Description",
       type: "text",
       rows: 2,
+      group: ["content"],
     }),
     defineField({
       ...HERO_FIELD,
@@ -75,6 +78,7 @@ const schema = defineType({
       title: "Image",
       type: "image",
       description: "1024x768 screenshot used for previews in the CMS.",
+      group: ["content"],
     }),
     defineField({
       name: "screenshot",
@@ -83,12 +87,14 @@ const schema = defineType({
       components: {
         field: CaptureScreenshot,
       },
+      group: ["content"],
     }),
     defineField({
       name: "usage",
       title: "Used on",
       type: "string",
       components: { field: PresetUsage },
+      group: ["content"],
     }),
   ],
 });
