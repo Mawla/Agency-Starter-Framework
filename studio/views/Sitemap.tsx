@@ -37,7 +37,7 @@ export const Sitemap: ComponentType<any> = ({ options }) => {
     async function fetchTree() {
       const result = await client.fetch(getSitemapQuery());
       setResult(result);
-      setTree(result.filter((item: any) => Boolean(item.paths)));
+      setTree(result.filter((item: any) => Boolean(item.path)));
       setState("ready");
     }
     fetchTree();
@@ -100,6 +100,7 @@ export const Sitemap: ComponentType<any> = ({ options }) => {
 
                       return a.path.localeCompare(b.path);
                     })
+                    .filter(({ language }) => language === currentLanguage)
                     .map(({ title, path, _id, _type }) => {
                       const depth = path ? path.split("/").length - 2 : 0;
 

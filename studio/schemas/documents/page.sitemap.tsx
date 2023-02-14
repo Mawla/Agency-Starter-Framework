@@ -3,6 +3,7 @@ import {
   HERO_FIELD,
   LANGUAGE_FIELD,
   pageBase,
+  SLUG_FIELD,
   TITLE_FIELD,
 } from "./page-fields";
 import { ListRight } from "@vectopus/atlas-icons-react";
@@ -28,12 +29,11 @@ export default defineType({
   fields: [
     TITLE_FIELD,
     {
-      name: "slug",
-      title: "Slug",
-      type: "string",
-      initialValue: "sitemap",
+      ...SLUG_FIELD,
+      description:
+        "This must match the slug of the Next.js pages/sitemap.tsx file.",
+      initialValue: () => ({ current: "sitemap" }),
       readOnly: true,
-      group: ["content"],
     },
     LANGUAGE_FIELD,
     HERO_FIELD,
