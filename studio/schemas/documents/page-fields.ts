@@ -202,17 +202,20 @@ export const PARENT_FIELD = defineField({
   name: "parent",
   title: "Parent",
   type: "reference",
-  to: [{ type: "page.content" }],
+  to: [{ type: "page.content" }, { type: "page.landing" }],
   options: {
     filter: ({ document }) => {
+      const { language } = getStructurePath();
       if (!document._id) return {};
 
       return {
         filter: `
           _id != $id
+          && language == $language
         `,
         params: {
           id: document._id,
+          language,
         },
       };
     },
