@@ -220,6 +220,7 @@ export const LANGUAGE_FIELD = defineField({
   type: "language",
   initialValue: () => {
     const { language } = getStructurePath();
+    console.log(language);
     return language || baseLanguage;
   },
 });

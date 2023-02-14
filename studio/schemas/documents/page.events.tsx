@@ -4,7 +4,6 @@ import {
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
-  PUBLISHED_AT_FIELD,
 } from "./page-fields";
 import { CalendarHome } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -23,5 +22,5 @@ export default defineType({
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <CalendarHome weight="thin" size={20} />,
   fieldsets: [...pageBase.fieldsets],
-  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
+  fields: [PARENT_FIELD, ...pageBase.fields],
 });
