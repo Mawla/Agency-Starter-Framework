@@ -1,4 +1,3 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
   DIALOGS_FIELD,
@@ -20,7 +19,7 @@ export default defineType({
   icon: () => <BlockProhibited weight="thin" size={20} />,
   preview: {
     select: {
-      title: `title.${baseLanguage}`,
+      title: `title`,
     },
   },
   groups: [...pageBase.groups],

@@ -1,49 +1,57 @@
-import {ArrowTopRightIcon} from '@sanity/icons'
-import {Text, Flex, Stack} from '@sanity/ui'
-import React, {useEffect, useState} from 'react'
-import {useClient, useFormValue} from 'sanity'
-import {IntentLink} from 'sanity/router'
+import { ArrowTopRightIcon } from "@sanity/icons";
+import { Text, Flex, Stack } from "@sanity/ui";
+import React, { useEffect, useState } from "react";
+import { useClient, useFormValue } from "sanity";
+import { IntentLink } from "sanity/router";
 
 const PresetUsage = () => {
-  const document = useFormValue([]) as {_id: string}
-  const client = useClient({apiVersion: 'vX'})
+  const document = useFormValue([]) as { _id: string };
+  const client = useClient({ apiVersion: "vX" });
 
-  const [usage, setUsage] = useState<{_type: string; title: string; _id: string}[]>([])
+  const [usage, setUsage] = useState<
+    { _type: string; title: string; _id: string }[]
+  >([]);
 
   useEffect(() => {
-    if (!document._id) return
+    if (!document._id) return;
 
     async function getUsage() {
       const usage = await client.fetch(
         `*[_type match 'page.*' && defined(modules) && ($id in hero[].preset._ref || $id in modules[].preset._ref)] {
           _id, 
           _type, 
-          "title": title.en
+          "title": title
         }`,
         {
-          id: document._id.replace('drafts.', ''),
+          id: document._id.replace("drafts.", ""),
+        },
+      );
+
+      const idDict = usage?.reduce(
+        (acc: Record<string, { _id: string }>, page: { _id: string }) => {
+          acc[page._id] = page;
+          return acc;
+        },
+        {},
+      );
+
+      const pages = usage?.filter((page: { _id: string }) => {
+        if (
+          page._id.startsWith("drafts.") &&
+          idDict[page._id.replace("drafts.", "")]
+        ) {
+          return false;
         }
-      )
+        return page;
+      });
 
-      const idDict = usage?.reduce((acc: Record<string, {_id: string}>, page: {_id: string}) => {
-        acc[page._id] = page
-        return acc
-      }, {})
-
-      const pages = usage?.filter((page: {_id: string}) => {
-        if (page._id.startsWith('drafts.') && idDict[page._id.replace('drafts.', '')]) {
-          return false
-        }
-        return page
-      })
-
-      setUsage(pages)
+      setUsage(pages);
     }
 
-    getUsage()
-  }, [document?._id])
+    getUsage();
+  }, [document?._id]);
 
-  if (!usage.length) return null
+  if (!usage.length) return null;
 
   return (
     <Stack space={4}>
@@ -54,12 +62,12 @@ const PresetUsage = () => {
         {usage.map((page) => (
           <IntentLink
             intent="edit"
-            params={{id: page._id, type: page._type}}
+            params={{ id: page._id, type: page._type }}
             target="_blank"
             style={{
-              color: '#111',
+              color: "#111",
               border: 0,
-              background: 'transparent',
+              background: "transparent",
             }}
           >
             <Flex gap={2}>
@@ -70,7 +78,7 @@ const PresetUsage = () => {
         ))}
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
-export default PresetUsage
+export default PresetUsage;

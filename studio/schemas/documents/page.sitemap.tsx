@@ -1,4 +1,3 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import { HERO_FIELD, pageBase, TITLE_FIELD } from "./page-fields";
 import { ListRight } from "@vectopus/atlas-icons-react";
@@ -14,7 +13,7 @@ export default defineType({
   icon: () => <ListRight weight="thin" size={20} />,
   preview: {
     select: {
-      title: `title.${baseLanguage}`,
+      title: `title`,
     },
   },
   groups: [...pageBase.groups],
