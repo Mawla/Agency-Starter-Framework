@@ -95,17 +95,13 @@ export const Sitemap: ComponentType<any> = ({ options }) => {
                 <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
                   {tree
                     ?.sort((a, b) => {
-                      if (!a.paths[currentLanguage]) return 1;
-                      if (!b.paths[currentLanguage]) return 1;
+                      if (!a.path) return 1;
+                      if (!b.path) return 1;
 
-                      return a.paths[currentLanguage].localeCompare(
-                        b.paths[currentLanguage],
-                      );
+                      return a.path.localeCompare(b.path);
                     })
-                    .map(({ title, titles, paths, _id, _type }) => {
-                      const depth = paths[currentLanguage]
-                        ? paths[currentLanguage].split("/").length - 2
-                        : 0;
+                    .map(({ title, path, _id, _type }) => {
+                      const depth = path ? path.split("/").length - 2 : 0;
 
                       return (
                         <li key={_id}>
@@ -136,11 +132,11 @@ export const Sitemap: ComponentType<any> = ({ options }) => {
                                   params={{ id: _id, type: _type }}
                                   style={{ color: "#111" }}
                                 >
-                                  {titles ? titles[currentLanguage] : title}
+                                  {title}
                                 </IntentLink>
                               </div>
                             </Text>
-                            {paths[currentLanguage] ? (
+                            {path ? (
                               <Stack space={2}>
                                 <Text
                                   size={1}
@@ -149,7 +145,7 @@ export const Sitemap: ComponentType<any> = ({ options }) => {
                                   }}
                                 >
                                   /{currentLanguage}
-                                  {paths[currentLanguage]}
+                                  {path}
                                 </Text>
                                 <CheckUnique
                                   _id={_id}
