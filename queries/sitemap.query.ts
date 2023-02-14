@@ -2,6 +2,13 @@ import { LanguageType } from "../languages";
 import { LINKABLE_SCHEMAS, SchemaName } from "../types.sanity";
 import groq from "groq";
 
+export type LanguageAlternateType = {
+  title: string;
+  path: string;
+  language: LanguageType;
+  excludeFromSitemap?: boolean;
+};
+
 export type SitemapItemType = {
   _id: string;
   _type: SchemaName;
@@ -11,6 +18,7 @@ export type SitemapItemType = {
   _updatedAt: string;
   excludeFromSitemap?: boolean;
   parent?: string;
+  i18n_base?: string;
 };
 
 export type SitemapType = SitemapItemType[];
@@ -24,6 +32,7 @@ const baseFields = groq`
   locked,
   parent,
   language,
+  "i18n_base": i18n_base,
   "modules": modules[] { language },
   "hero": hero[] { language }
 `;
@@ -72,6 +81,7 @@ export const getSitemapQuery = () => {
     language,
     _updatedAt,
     path,
+    "i18n_base": i18n_base._ref,
     "parent": parent._ref,
     "excludeFromSitemap": seo.excludeFromSitemap || locked || ((!defined(hero) || count(hero) == 0) && (!defined(modules) || count(modules) == 0))
   }`;

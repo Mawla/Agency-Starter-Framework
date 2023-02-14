@@ -28,16 +28,17 @@ export const LanguageSwitch = ({
   align = "right",
   position = "below",
 }: LanguageSwitchProps) => {
-  const { sitemapItem, language } = useContext(PageContext);
+  const { sitemapItem, language, languageAlternates } = useContext(PageContext);
 
   if (languages?.length === 1) return null;
 
-  const links = languages
-    .filter(({ id }) => sitemapItem?.excludeFromSitemap?.[id] !== true)
-    .map(({ id, title }) => ({
+  const links = [sitemapItem, ...languageAlternates]
+    .filter(Boolean)
+    .filter(({ excludeFromSitemap }) => excludeFromSitemap !== true)
+    .map(({ path, title, language }) => ({
       title,
-      href: sitemapItem?.paths?.[id],
-      languageId: id,
+      href: path,
+      languageId: language,
     }));
 
   if (!links.length || links.length === 1) return null;
@@ -48,9 +49,11 @@ export const LanguageSwitch = ({
         <ul>
           {links.map(({ title, href, languageId }) => (
             <li key={languageId}>
-              <Link href={href} locale={languageId}>
-                {title}
-              </Link>
+              {href && title && (
+                <Link href={href} locale={languageId}>
+                  {title}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -99,28 +102,30 @@ export const LanguageSwitch = ({
         >
           {links.map(({ title, href, languageId }) => (
             <RadixNavigationMenu.Item key={languageId}>
-              <Link
-                href={href}
-                locale={languageId}
-                className={cx(
-                  "hover:underline flex underline-offset-4 gap-3",
-                  "text-neutral-500",
-                  "text-md",
-                  "p-3",
-                  {
-                    ["font-bold bg-neutral-800 rounded-sm"]:
-                      language === languageId,
-                  },
-                )}
-              >
-                <IconLoader
-                  icon={FLAGS[languageId]}
-                  path="flags/"
-                  removeColors={false}
-                  className="w-5 aspect-square"
-                />
-                {title}
-              </Link>
+              {title && languageId && href && (
+                <Link
+                  href={href}
+                  locale={languageId}
+                  className={cx(
+                    "hover:underline flex underline-offset-4 gap-3",
+                    "text-neutral-500",
+                    "text-md",
+                    "p-3",
+                    {
+                      ["font-bold bg-neutral-800 rounded-sm"]:
+                        language === languageId,
+                    },
+                  )}
+                >
+                  <IconLoader
+                    icon={FLAGS[languageId]}
+                    path="flags/"
+                    removeColors={false}
+                    className="w-5 aspect-square"
+                  />
+                  {title}
+                </Link>
+              )}
             </RadixNavigationMenu.Item>
           ))}
         </RadixNavigationMenu.List>

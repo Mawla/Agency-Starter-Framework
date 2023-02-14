@@ -150,8 +150,6 @@ export const getStaticProps: GetStaticProps = async ({
       return a.path.localeCompare(b.path);
     });
 
-  console.log(sitemap);
-
   // return object
   const props: StaticProps = {
     config,

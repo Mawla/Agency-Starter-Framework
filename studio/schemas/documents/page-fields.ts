@@ -1,9 +1,10 @@
-import { baseLanguage, languages } from "../../../languages";
+import { baseLanguage, languages, LanguageType } from "../../../languages";
 import {
   DialogSchemaName,
   DIALOG_SCHEMAS,
   HeroSchemaName,
   HERO_SCHEMAS,
+  LINKABLE_SCHEMAS,
   ModuleSchemaName,
   MODULE_SCHEMAS,
 } from "../../../types.sanity";
@@ -234,7 +235,6 @@ export const LANGUAGE_FIELD = defineField({
   },
   readOnly: ({ document }: any) => {
     if (!document) return false;
-
     const schemas = useSchema();
     const schema = schemas._original?.types.find(
       ({ name }: { name: string }) => name === document._type,
@@ -244,6 +244,29 @@ export const LANGUAGE_FIELD = defineField({
     return false;
   },
   group: ["language"],
+});
+
+export const I18N_BASE_FIELD = defineField({
+  name: "i18n_base",
+  title: "Base language",
+  description:
+    "The document in the base language. This is used for providing language alternatives.",
+  type: "reference",
+  to: Object.keys(LINKABLE_SCHEMAS).map((schema) => ({ type: schema })),
+  weak: true,
+  options: {
+    filter: ({ document }: any) => {
+      if (!document._id) return {};
+      return {
+        filter: `language == "${baseLanguage}"`,
+      };
+    },
+  },
+  hidden: ({ document }: any) => {
+    if (document.language === baseLanguage) return true;
+    return false;
+  },
+  group: ["meta", "language"],
 });
 
 export const TAGS_FIELD = defineField({
@@ -307,6 +330,7 @@ export const pageBase = {
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
     LANGUAGE_FIELD,
+    I18N_BASE_FIELD,
   ],
 };
 
@@ -319,8 +343,10 @@ export const SLUG_PREVIEW_SELECT_FIELDS = {
   level5Slug: `parent.parent.parent.parent.parent.slug.current`,
 };
 
-export const getPreviewSlugPagePath = (paths: string[]) => {
-  const { language } = getStructurePath();
+export const getPreviewSlugPagePath = (
+  language: LanguageType,
+  paths: string[],
+) => {
   const languagePath = language === baseLanguage ? "" : `/${language}`;
 
   return `${languagePath}/${[
@@ -335,12 +361,13 @@ export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   select: {
     title: `title`,
     media: "hero.0.image",
+    language: "language",
     ...SLUG_PREVIEW_SELECT_FIELDS,
   },
-  prepare({ title, media, ...paths }: any) {
+  prepare({ title, media, language, ...paths }: any) {
     return {
       title: `${title}`,
-      subtitle: getPreviewSlugPagePath(paths),
+      subtitle: getPreviewSlugPagePath(language, paths),
       media,
     };
   },
