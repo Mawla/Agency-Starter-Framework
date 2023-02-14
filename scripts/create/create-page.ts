@@ -143,10 +143,17 @@ const build = (answers) => {
     },`,
     )
     .replace(
-      ` /*PARENT_INITIAL_VALUE*/`,
+      ` /*/*INITIAL_VALUE*/*/`,
       !parentType || !parentId || !parentType?.trim().length || singleton
         ? ""
-        : `parent: { _type: "reference", _ref: "${parentId}" },`,
+        : `
+        initialValue: () => {
+          const { language } = getStructurePath();
+          return {
+            parent: { _type: "reference", _ref: \`${parentId}__i18n_\${language}\` },
+          };
+        },
+        `,
     );
 
   if (singleton) {
