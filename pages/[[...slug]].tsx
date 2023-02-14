@@ -6,7 +6,7 @@ import { LoadingAnimation } from "../components/loaders/LoadingAnimation";
 import { Wrapper } from "../components/module/Wrapper";
 import { getClient } from "../helpers/sanity/server";
 import { getFlatBreadcrumb } from "../helpers/sitemap/getFlatBreadcrumb";
-import { baseLanguage, languages, LanguageType } from "../languages";
+import { baseLanguage, LanguageType } from "../languages";
 import { Footer } from "../layout/footer/Footer";
 import { getFooterQuery, FooterType } from "../layout/footer/footer.query";
 import { Navigation } from "../layout/navigation/Navigation";
@@ -113,10 +113,15 @@ export const getStaticProps: GetStaticProps = async ({
   const sitemapItem = preview
     ? sitemap.find(
         (item) =>
-          item.paths[language] === path && item._id.startsWith(`drafts.`),
-      ) || sitemap.find((item) => item.paths[language] === path)
+          item.path === path &&
+          item._id.startsWith(`drafts.`) &&
+          item?.language == language,
+      ) ||
+      sitemap.find((item) => item.path === path && item?.language == language)
     : // get published page in production mode
-      sitemap?.find((item) => item?.paths?.[language] === path);
+      sitemap?.find(
+        (item) => item?.path === path && item?.language == language,
+      );
 
   if (!sitemapItem) return { notFound: true };
 
@@ -178,7 +183,7 @@ export const getStaticProps: GetStaticProps = async ({
   if (!page?.hero && !page?.modules?.length && !page.locked) {
     if (!IS_PRODUCION)
       console.log(
-        `No hero or modules, rendering 404. The page exists, it just has no content.`,
+        `No hero or modules, rendering 404. The page exists but has no content.\n${sitemapItem.path}`,
       );
     return { notFound: true };
   }
@@ -195,18 +200,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = sitemap
     .filter(Boolean)
-    .reduce(
-      (acc, curr) => [
-        ...languages.map(({ id }) => ({
-          params: {
-            slug: curr?.paths?.[id]?.split("/").splice(1),
-          },
-          locale: id,
-        })),
-        ...acc,
-      ],
-      [] as { params: { slug: string[] }; locale: LanguageType }[],
-    )
+    .map((item) => ({
+      params: {
+        slug: item?.path?.split("/").splice(1),
+      },
+      locale: item.language,
+    }))
     .filter((path) => path.params.slug?.length);
 
   return {
