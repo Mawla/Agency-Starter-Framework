@@ -1,4 +1,4 @@
-import { languages, LanguageType } from "../languages";
+import { LanguageType } from "../languages";
 import { LINKABLE_SCHEMAS, SchemaName } from "../types.sanity";
 import groq from "groq";
 
@@ -6,17 +6,10 @@ export type SitemapItemType = {
   _id: string;
   _type: SchemaName;
   title?: string;
-  titles: {
-    [key in LanguageType]: string;
-  };
   path?: string;
-  paths: {
-    [key in LanguageType]: string;
-  };
+  language?: LanguageType;
   _updatedAt: string;
-  excludeFromSitemap?: {
-    [key in LanguageType]: boolean;
-  };
+  excludeFromSitemap?: boolean;
   parent?: string;
 };
 
@@ -30,104 +23,58 @@ const baseFields = groq`
   _updatedAt, 
   locked,
   parent,
+  language,
   "modules": modules[] { language },
   "hero": hero[] { language }
 `;
 
-const slugFields = groq`
- ${baseFields}, 
- "path": "/"+ slug.current,
- "paths": {
-    ${languages.map(
-      (language) => `"${language.id}": "/"+ slug.${language.id}.current`,
-    )}
-  },
-`;
-
 const homePageQuery = groq`
-*[_id match "*page_homepage"] { 
+*[_id match "*page_homepage*"] { 
   ${baseFields},
-  "paths": {
-    ${languages.map((language) => `"${language.id}": "/"`)}
-  },
-}[0]`;
-
-const getSingletonQuery = (id: string) => {
-  return `*[_id match "*${id}"] { ${slugFields} }[0]`;
-};
+  "path": "/"
+}`;
 
 export const getSitemapQuery = () => {
   const sitemapQuery = groq`
   [
     // fixed path pages
-    ${homePageQuery},
+    ...${homePageQuery},
 
     // parent based pages
     ...*[
-      ${Object.keys(LINKABLE_SCHEMAS)
-        .map((schema) => `_type == "${schema}"`)
-        .join("|| ")}
+    ${Object.keys(LINKABLE_SCHEMAS)
+      .map((schema) => `_type == "${schema}"`)
+      .join("|| ")}
     ] {
       ${baseFields},
-
-      ${languages.map(
-        (language) => `
-        ${`"level0${language.id}"`}: slug.${language.id}.current,
-        ${`"level1${language.id}"`}: parent -> slug.${language.id}.current,
-        ${`"level2${language.id}"`}: parent -> parent -> slug.${
-          language.id
-        }.current,
-        ${`"level3${language.id}"`}: parent -> parent -> parent -> slug.${
-          language.id
-        }.current,
-        ${`"level4${language.id}"`}: parent -> parent -> parent -> parent -> slug.${
-          language.id
-        }.current
-      `,
-      )}
+      "level0": slug.current,
+      "level1": parent -> slug.current,
+      "level2": parent -> parent -> slug.current,
+      "level3": parent -> parent -> parent -> slug.current,
+      "level4": parent -> parent -> parent -> parent -> slug.current,
+      "level5": parent -> parent -> parent -> parent -> parent -> slug.current,
     }
     {
     ${baseFields},
-    titles,
-    "paths": {
-      ${languages.map(
-        (language) => `
-        "${language.id}": select(
-          defined(level4${language.id}) => "/"+ level4${language.id} +"/"+ level3${language.id} +"/"+ level2${language.id} +"/"+ level1${language.id} +"/"+ level0${language.id},
-          defined(level3${language.id}) => "/"+ level3${language.id} +"/"+ level2${language.id} +"/"+ level1${language.id} +"/"+ level0${language.id},
-          defined(level2${language.id}) => "/"+ level2${language.id} +"/"+ level1${language.id} + "/"+ level0${language.id},
-          defined(level1${language.id}) => "/"+ level1${language.id} +"/"+ level0${language.id},
-          defined(level0${language.id}) => "/"+ level0${language.id}
-        )
-        `,
-      )}
-    }
+    "path": select(
+      defined(level5) => "/"+ level5 +"/"+ level4 +"/"+ level3 +"/"+ level2 +"/"+ level1 +"/"+ level0,
+      defined(level4) => "/"+ level4 +"/"+ level3 +"/"+ level2 +"/"+ level1 +"/"+ level0,
+      defined(level3) => "/"+ level3 +"/"+ level2 +"/"+ level1 +"/"+ level0,
+      defined(level2) => "/"+ level2 +"/"+ level1 + "/"+ level0,
+      defined(level1) => "/"+ level1 +"/"+ level0,
+      defined(level0) => "/"+ level0
+    )
   }
   ]{
     _id, 
     _type, 
-    "titles": title, 
+    title,
+    language,
     _updatedAt,
-    paths,
+    path,
     "parent": parent._ref,
-    "excludeFromSitemap": {
-      ${languages.map(
-        (language) => `
-        "${language.id}": 
-          seo.${language.id}.excludeFromSitemap || 
-          locked.${language.id} ||
-          (
-            (
-              !defined(hero) || 
-              !("${language.id}" in hero[].language)
-             ) && (
-              !defined(modules) || 
-              !("${language.id}" in modules[].language)
-            )
-          )
-        `,
-      )}
-  }}`;
+    "excludeFromSitemap": seo.excludeFromSitemap || locked || ((!defined(hero) || count(hero) == 0) && (!defined(modules) || count(modules) == 0))
+  }`;
 
   return sitemapQuery;
 };
