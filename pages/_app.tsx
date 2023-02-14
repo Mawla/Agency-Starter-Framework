@@ -29,9 +29,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       )} */}
 
-      <main className={`${manrope.variable} font-sans`}>
+      <div className={`${manrope.variable} font-sans`}>
         <Component {...pageProps} />
-      </main>
+      </div>
     </QueryClientProvider>
   );
 }
