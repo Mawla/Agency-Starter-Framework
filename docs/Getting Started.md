@@ -45,13 +45,13 @@ Make
 Add a webhook to `xxx.vercel.app/api/revalidate` on publish.
 
 | field      | value                                 |
-| ---------- | ------------------------------------- | --- | ----------------------- | --- | ----------------------------- | --- | ------------------- |
+| ---------- | ------------------------------------- | --- | ----------------------- | --- | ---------------------------------- | --- | ------------------------ |
 | name       | Next.js Revalidate                    |
 | dataset    | production                            |
 | url        | https://xxx.vercel.app/api/revalidate |
 | trigger    | create + update + delete              |
 | method     | post                                  |
-| filter     | `\_type == 'redirect'                 |     | \_type match 'config\*' |     | \_type == '\_type:navigation' |     | \_type == 'footer'` |
+| filter     | `\_type == 'redirect'                 |     | \_type match 'config\*' |     | \_type match '\_type:navigation\*' |     | \_type match 'footer\*'` |
 | projection | `{ _id, _type }`                      |
 | secret     | .env SANITY_WEBHOOK_SECRET            |
 
