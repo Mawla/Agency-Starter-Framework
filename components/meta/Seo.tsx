@@ -70,7 +70,7 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
         title={seoTitle}
         noindex={excludeFromSitemap === true}
         nofollow={excludeFromSitemap === true}
-        titleTemplate={`%s - ${config?.general?.name}`}
+        titleTemplate={`%s - ${config.seo.title || config?.general?.name}`}
         description={seoDescription}
         canonical={seoCanonical}
         useAppDir={false}

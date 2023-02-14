@@ -6,48 +6,53 @@ import { defineField, defineType } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "config.seo";
 
+const SEO_TITLE_FIELD = defineField({
+  name: "title",
+  title: "Title",
+  type: "string",
+  description: "Around 55-60 characters long.",
+  validation: (Rule: any) =>
+    Rule.required().warning("It's good practice adding a title for SEO."),
+});
+
+const SEO_DESCRIPTION_FIELD = defineField({
+  name: "description",
+  title: "Description",
+  description: "Around 150-160 characters long.",
+  type: "text",
+  rows: 3,
+  validation: (Rule: any) =>
+    Rule.required().warning("It's good practice adding a description for SEO."),
+});
+
+const SEO_IMAGE_FIELD = defineField({
+  name: "image",
+  title: "Image",
+  type: "image",
+  description: "Preferred size: 1200x630",
+  validation: (Rule: any) =>
+    Rule.required().warning(
+      "It's good practice adding an image for SEO and social sharing.",
+    ),
+});
+
+const SEO_EXCLUDE_FROM_SITEMAP_FIELD = defineField({
+  name: "excludeFromSitemap",
+  title: "Exclude from sitemap",
+  type: "boolean",
+  description: "Option to exclude from sitemap",
+  initialValue: false,
+});
+
 export const SEO_FIELD = {
   name: "seo",
   title: "Seo",
   type: "object",
-  localize: true,
   fields: [
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-      description: "Around 55-60 characters long.",
-      validation: (Rule: any) =>
-        Rule.required().warning("It's good practice adding a title for SEO."),
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      description: "Around 150-160 characters long.",
-      type: "text",
-      rows: 3,
-      validation: (Rule: any) =>
-        Rule.required().warning(
-          "It's good practice adding a description for SEO.",
-        ),
-    }),
-    defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-      description: "Preferred size: 1200x630",
-      validation: (Rule: any) =>
-        Rule.required().warning(
-          "It's good practice adding an image for SEO and social sharing.",
-        ),
-    }),
-    defineField({
-      name: "excludeFromSitemap",
-      title: "Exclude from sitemap",
-      type: "boolean",
-      description: "Option to exclude from sitemap",
-      initialValue: false,
-    }),
+    SEO_TITLE_FIELD,
+    SEO_DESCRIPTION_FIELD,
+    SEO_IMAGE_FIELD,
+    SEO_EXCLUDE_FROM_SITEMAP_FIELD,
   ],
 };
 
@@ -69,11 +74,12 @@ export default defineType({
       name: "warning",
       title: "Warning",
       type: "string",
-      options: { localize: false } as any,
       components: { field: Warning },
       description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
-    ...SEO_FIELD.fields.filter((x) => x.name !== "excludeFromSitemap"),
+    { ...SEO_TITLE_FIELD, options: { localize: true } as any },
+    { ...SEO_DESCRIPTION_FIELD, options: { localize: true } as any },
+    { ...SEO_IMAGE_FIELD, options: { localize: true } as any },
   ],
 });
