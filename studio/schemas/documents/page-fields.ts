@@ -229,6 +229,7 @@ export async function getParentDocumentInitialValue(
     `*[_id match "${parentId}__i18n_${language}"][0]._id`,
   );
 
+  // prevent a reference to a non existing page, that crashes the studio
   if (!parentDocumentId) return {};
 
   return {
@@ -250,6 +251,7 @@ export const LANGUAGE_FIELD = defineField({
     const schema = schemas._original?.types.find(
       ({ name }: { name: string }) => name === document._type,
     );
+    // can't change language of singleton documents as the id has the language in it
     if ((schema?.options as any)?.singleton) return true;
 
     return false;
