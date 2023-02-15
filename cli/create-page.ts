@@ -89,6 +89,7 @@ function injectTypes(answers: AnswersType, names: NamesType) {
   const filePath = `${__dirname}/../../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
+  // add to schemas list
   lines = addLine({
     addition: `  '${schemaName}': '',`,
     lines,
@@ -99,6 +100,22 @@ function injectTypes(answers: AnswersType, names: NamesType) {
     lines,
     fromNeedle: "export const SCHEMAS",
     toNeedle: "};",
+  });
+
+  // add to linkable schemas list
+  lines = addLine({
+    addition: `  '${schemaName}'`,
+    lines,
+    needle: "export const LINKABLE_SCHEMAS",
+    endNeedle: ");",
+    adjustLine: 2,
+  });
+
+  lines = sortLines({
+    lines,
+    fromNeedle: "export const LINKABLE_SCHEMAS",
+    toNeedle: ");",
+    adjustFromLine: 1,
   });
 
   fs.writeFileSync(filePath, lines.join("\n"));
