@@ -86,7 +86,7 @@ async function init() {
 function injectTypes(answers: AnswersType, names: NamesType) {
   const { schemaName } = names;
 
-  const filePath = `${__dirname}/../../types.sanity.ts`;
+  const filePath = `${__dirname}/../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   // add to schemas list
