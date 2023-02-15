@@ -81,6 +81,9 @@ export const LINKABLE_SCHEMAS = pick(
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
 
+// pages we want to link to in the CMS, but are Next.js static routes
+export const STATIC_LINKABLE_SCHEMAS: SchemaName[] = ["page.sitemap"];
+
 export const TRANSLATABLE_SCHEMAS = pick(
   SCHEMAS,
   "config.general",

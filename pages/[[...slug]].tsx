@@ -22,6 +22,7 @@ import {
   SitemapItemType,
   SitemapType,
 } from "../queries/sitemap.query";
+import { STATIC_LINKABLE_SCHEMAS } from "../types.sanity";
 import type {
   GetStaticPaths,
   GetStaticProps,
@@ -200,7 +201,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = sitemap
     .filter(Boolean)
-    .filter((item) => !item._id.startsWith("page_sitemap"))
+    .filter((item) => !STATIC_LINKABLE_SCHEMAS.includes(item._type))
     .map((item) => ({
       params: {
         slug: item?.path?.split("/").splice(1),
