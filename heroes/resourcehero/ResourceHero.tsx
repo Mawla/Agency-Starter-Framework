@@ -117,7 +117,7 @@ export const ResourceHero = ({
           {/* tags and date */}
           {tags && Boolean(tags?.length) && (
             <div className="flex gap-1 flex-wrap">
-              {tags.map((tag) => (
+              {tags.filter(Boolean).map((tag) => (
                 <Link
                   href={tag.href}
                   className="border border-neutral-300 py-1 px-2"
