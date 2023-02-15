@@ -1,4 +1,7 @@
-import { pascalCase } from "./utils/pascalCase";
+import { addLine } from "./utils/add-line";
+import { pascalCase } from "./utils/pascal-case";
+import { prettierFile } from "./utils/prettier-file";
+import { sortLines } from "./utils/sort-lines";
 import { text, intro, outro, confirm } from "@clack/prompts";
 
 const fs = require("fs");
@@ -61,11 +64,11 @@ async function init() {
   let documentId = schemaName.replace("page.", "page_");
 
   const answers = {
-    name,
-    isSingleton,
-    hasChildren,
-    childName,
-    addToDesk,
+    name: String(name),
+    isSingleton: Boolean(isSingleton),
+    hasChildren: Boolean(hasChildren),
+    childName: String(childName),
+    addToDesk: Boolean(addToDesk),
   };
 
   const names: NamesType = {
@@ -81,10 +84,25 @@ async function init() {
 }
 
 function injectTypes(answers: AnswersType, names: NamesType) {
-  const { pascalName, lowerName, schemaName, documentId } = names;
+  const { schemaName } = names;
 
   const filePath = `${__dirname}/../../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
+
+  lines = addLine({
+    addition: `  '${schemaName}': '',`,
+    lines,
+    needle: "export const SCHEMAS",
+  });
+
+  lines = sortLines({
+    lines,
+    fromNeedle: "export const SCHEMAS",
+    toNeedle: "};",
+  });
+
+  fs.writeFileSync(filePath, lines.join("\n"));
+  prettierFile(filePath);
 }
 
 init();
