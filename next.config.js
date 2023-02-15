@@ -23,7 +23,7 @@ const moduleExports = {
   reactStrictMode: true,
   outputFileTracing: false, // https://github.com/getsentry/sentry-javascript/issues/4103
   sentry: {
-    // autoInstrumentServerFunctions: false, // https://github.com/getsentry/sentry-javascript/issues/5964#issuecomment-1313367269
+    autoInstrumentServerFunctions: false, // https://github.com/getsentry/sentry-javascript/issues/5964#issuecomment-1313367269
     excludeServerRoutes: ["/api/opengraph-image"],
   },
   i18n: {
