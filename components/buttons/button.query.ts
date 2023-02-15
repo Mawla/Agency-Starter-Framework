@@ -16,7 +16,7 @@ const findTopLevelSitemap = new Array(numLevels)
 
 export const resolveIdHrefQuery = `
   coalesce(${findTopLevelSitemap})[_id == ^._id][0] { 
-    "path": select(language == "${baseLanguage}" => '', language) + path
+    "path": select(language == "${baseLanguage}" => '', '/'+ language) + path
   }.path
 `;
 
@@ -25,7 +25,7 @@ export const buttonHrefQuery = groq`
     coalesce(
       href, 
       coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0] { 
-        "path": select(language == "${baseLanguage}" => '', language) + path
+        "path": select(language == "${baseLanguage}" => '', '/'+ language) + path
       }.path,
       '#'+ dialog, 
       file.asset->url
