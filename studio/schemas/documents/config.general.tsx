@@ -35,7 +35,7 @@ export default defineType({
       type: "string",
       options: { localize: true } as any,
       description:
-        "Name of the website. Used in the page title and brand schema as brand name.",
+        "Name of the website. Used in the brand schema as brand name and as fallback page title.",
       validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
