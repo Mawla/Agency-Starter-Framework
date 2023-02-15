@@ -21,6 +21,7 @@
     "test-watch": "jest --watch"
   },
   "dependencies": {
+    "@clack/prompts": "^0.2.2",
     "@dnd-kit/core": "^6.0.7",
     "@dnd-kit/sortable": "^7.0.2",
     "@mux/mux-player-react": "^1.7.1",
