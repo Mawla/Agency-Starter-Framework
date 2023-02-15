@@ -1,6 +1,6 @@
 import { config } from "../../../helpers/sanity/config";
+import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import sanityClient from "@sanity/client";
-import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export const client = sanityClient({
@@ -46,4 +46,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   return res.json({ _rev: result._rev });
 };
 
-export default withSentry(handler);
+export default withSentryOptional(handler);

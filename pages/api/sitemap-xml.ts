@@ -1,9 +1,9 @@
 import { getClient } from "../../helpers/sanity/server";
+import { withSentryOptional } from "../../helpers/sentry/with-sentry-optional";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
 import { languages } from "../../languages";
 import { ConfigType } from "../../queries/config.query";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
-import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
@@ -50,4 +50,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
   res.status(200).send(sitemap);
 };
 
-export default withSentry(handler);
+export default withSentryOptional(handler);

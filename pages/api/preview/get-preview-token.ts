@@ -1,4 +1,4 @@
-import { withSentry } from "@sentry/nextjs";
+import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -20,7 +20,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 
 const handler = async (
   req: ExtendedNextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) => {
   if (req.method !== "POST") return res.status(405).end();
 
@@ -40,4 +40,4 @@ const handler = async (
     .json({ previewToken: `${user.id}${process.env.SANITY_API_READ_TOKEN}` });
 };
 
-export default withSentry(handler as any);
+export default withSentryOptional(handler as any);

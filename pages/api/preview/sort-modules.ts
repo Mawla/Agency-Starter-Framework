@@ -1,5 +1,5 @@
+import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import { sanityClient } from "../sanity-client";
-import { withSentry } from "@sentry/nextjs";
 import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -79,4 +79,4 @@ const handler = async (
   });
 };
 
-export default withSentry(handler as any);
+export default withSentryOptional(handler);
