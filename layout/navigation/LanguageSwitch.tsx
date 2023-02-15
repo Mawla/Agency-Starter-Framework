@@ -28,11 +28,11 @@ export const LanguageSwitch = ({
   align = "right",
   position = "below",
 }: LanguageSwitchProps) => {
-  const { sitemapItem, language, languageAlternates } = useContext(PageContext);
+  const { language, languageAlternates } = useContext(PageContext);
 
   if (languages?.length === 1) return null;
 
-  const links = [sitemapItem, ...languageAlternates]
+  const links = languageAlternates
     .filter(Boolean)
     .filter(({ excludeFromSitemap }) => excludeFromSitemap !== true)
     .map(({ path, title, language }) => ({
@@ -42,7 +42,7 @@ export const LanguageSwitch = ({
     }))
     .sort((a, b) => (a.title || "").localeCompare(b.title || ""));
 
-  if (!links.length || links.length === 1) return null;
+  if (!links.length) return null;
 
   return (
     <RadixNavigationMenu.Item className="relative">
