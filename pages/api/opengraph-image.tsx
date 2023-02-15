@@ -1,4 +1,5 @@
 import { config as sanityConfig } from "../../helpers/sanity/config";
+import { withSentryOptional } from "../../helpers/sentry/with-sentry-optional";
 import imageUrlBuilder from "@sanity/image-url";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
@@ -19,7 +20,7 @@ const sanityClient = new PicoSanity({
   useCdn: process.env.NODE_ENV === "production",
 });
 
-export default async function handler(req: NextRequest) {
+const handler = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
   let id = searchParams.get("id");
@@ -123,4 +124,6 @@ export default async function handler(req: NextRequest) {
       </div>
     ),
   );
-}
+};
+
+export default withSentryOptional(handler);
