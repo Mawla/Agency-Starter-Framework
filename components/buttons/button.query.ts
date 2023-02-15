@@ -1,3 +1,4 @@
+import { baseLanguage } from "../../languages";
 import groq from "groq";
 
 // To find the top level sitemap we need to travel up an unknown number of scopes
@@ -14,14 +15,18 @@ const findTopLevelSitemap = new Array(numLevels)
   .map((x, i) => `${new Array(i + 2).fill("").join("^.")}sitemap`);
 
 export const resolveIdHrefQuery = `
-  coalesce(${findTopLevelSitemap})[_id == ^._id][0].path
+  coalesce(${findTopLevelSitemap})[_id == ^._id][0] { 
+    "path": select(language == "${baseLanguage}" => '', language) + path
+  }.path
 `;
 
 export const buttonHrefQuery = groq`
   coalesce(
     coalesce(
       href, 
-      coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0].path,
+      coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0] { 
+        "path": select(language == "${baseLanguage}" => '', language) + path
+      }.path,
       '#'+ dialog, 
       file.asset->url
     ) + coalesce(params, ''), 
