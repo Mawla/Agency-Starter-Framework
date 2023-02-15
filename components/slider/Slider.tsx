@@ -51,26 +51,13 @@ export const Slider = ({
       <Swiper
         spaceBetween={gap}
         slidesPerView={columns}
-        // slidesPerGroup={columns} // this sort of breaks dragging behaviour, removing it for now
         grabCursor={!slides?.some((slide) => slide?.props?.href)}
-        // centeredSlides={true}
-        modules={[
-          Keyboard,
-          // Pagination,
-          Navigation,
-        ]}
+        modules={[Keyboard, Navigation]}
         simulateTouch={true}
-        // preventClicks={false}
-        // preventClicksPropagation={false}
         navigation={{ prevEl, nextEl }}
-        // autoHeight={true}
         keyboard={{
           enabled: true,
         }}
-        // pagination={{
-        //   clickable: true,
-        //   type: 'bullets',
-        // }}
       >
         {slides?.filter(Boolean).map((slide, n) => (
           <SwiperSlide
