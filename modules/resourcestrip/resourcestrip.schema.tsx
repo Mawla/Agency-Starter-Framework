@@ -66,29 +66,6 @@ const schema = defineType({
       type: "portabletext.simple",
       group: "content",
     }),
-    // defineField({
-    //   name: "filter",
-    //   title: "Filter",
-    //   type: "object",
-    //   group: "content",
-    //   fields: [
-    //     defineField({
-    //       name: "types",
-    //       title: "Types",
-    //       type: "array",
-    //       of: [{ type: "string" }],
-    //       options: {
-    //         list: optionsToList(TAGGABLE_SCHEMAS),
-    //       },
-    //     }),
-    //     defineField({
-    //       name: "tags",
-    //       title: "Tags",
-    //       type: "array",
-    //       of: [{ type: "reference", to: [{ type: "page.tag" }] }],
-    //     }),
-    //   ],
-    // }),
     defineField({
       name: "theme",
       title: "Theme",
