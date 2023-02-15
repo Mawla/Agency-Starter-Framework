@@ -81,7 +81,7 @@ export const HERO_FIELD = defineField({
   components: {
     input: PageBuilder,
   },
-  validation: (Rule: ArrayRule<any>) => Rule.max(languages.length).warning(),
+  validation: (Rule: ArrayRule<any>) => Rule.max(1).warning(),
   description: "The hero section of the page.",
   of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
     (type: HeroSchemaName) => ({
