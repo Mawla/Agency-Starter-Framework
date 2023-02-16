@@ -62,7 +62,6 @@ import person from "./documents/person";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
 import copypaste from "./objects/copypaste";
-import language from "./objects/language";
 import preset from "./objects/preset";
 import styles from "./objects/styles";
 
@@ -84,7 +83,6 @@ export const schemaTypes = [
     heroBasic,
     heroResourceHero,
     imageSimple,
-    language,
     link,
     moduleBillboard,
     moduleBreadcrumb,

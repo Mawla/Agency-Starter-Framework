@@ -240,7 +240,11 @@ export async function getParentDocumentInitialValue(
 export const LANGUAGE_FIELD = defineField({
   name: "language",
   title: "Language",
-  type: "language",
+  type: "string",
+  validation: (Rule: StringRule) => Rule.required(),
+  options: {
+    list: languages.map(({ title, id }) => ({ title, value: id })),
+  },
   initialValue: () => {
     const { language } = getStructurePath();
     return language || baseLanguage;
