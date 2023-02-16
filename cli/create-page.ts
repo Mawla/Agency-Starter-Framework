@@ -1,5 +1,7 @@
+import { getStructureDocumentList } from "./templates/page/structure-document-list";
+import { getStructureSingleton } from "./templates/page/structure-singleton";
 import { addLine } from "./utils/add-line";
-import { pascalCase } from "./utils/pascal-case";
+import { formatName } from "./utils/format-name";
 import { prettierFile } from "./utils/prettier-file";
 import { sortLines } from "./utils/sort-lines";
 import { text, intro, outro, confirm } from "@clack/prompts";
@@ -9,13 +11,6 @@ const IS_TEST = args.includes("--test");
 
 const fs = require("fs");
 const path = require("path");
-
-type NamesType = {
-  pascalName: string;
-  lowerName: string;
-  schemaName: string;
-  documentId: string;
-};
 
 type AnswersType = {
   name: string;
@@ -39,52 +34,22 @@ async function init() {
     message: "Is it a single use item, like the homepage or blog overview?",
   });
 
-  let hasChildren;
-  if (isSingleton) {
-    hasChildren = await confirm({
-      message: "Does it have children?",
-    });
-  }
-
-  let childName;
-  if (hasChildren) {
-    childName = await text({
-      message: `What is the name of the page? (e.g. "Blog")`,
-      validate(value) {
-        if (!value || value.trim().length === 0) return `Value is required!`;
-      },
-    });
-  }
-
   let addToDesk = await confirm({
     message: "Do you want to add it to the studio desk structure?",
   });
 
   name = String(name);
-  let pascalName = `${pascalCase(name)}`;
-  let lowerName = name.toLowerCase();
-  let schemaName = `page.${name.toLowerCase().replace(/\s/g, "")}`;
-  let documentId = schemaName.replace("page.", "page_");
 
   const answers = {
     name: String(name),
     isSingleton: Boolean(isSingleton),
-    hasChildren: Boolean(hasChildren),
-    childName: String(childName),
     addToDesk: Boolean(addToDesk),
   };
 
-  const names: NamesType = {
-    pascalName,
-    lowerName,
-    schemaName,
-    documentId,
-  };
-
-  injectTypes(answers, names);
-  injectSchema(answers, names);
-  injectDeskStructure(answers, names);
-  createSchema(answers, names);
+  injectTypes(answers);
+  injectSchema(answers);
+  injectDeskStructure(answers);
+  createSchema(answers);
 
   outro(`You're all set!`);
 }
@@ -93,8 +58,10 @@ async function init() {
  * Add types to types.sanity.ts
  */
 
-export function injectTypes(answers: AnswersType, names: NamesType) {
-  const { schemaName } = names;
+export function injectTypes(answers: AnswersType) {
+  let { pascalName, lowerName, schemaName, documentId } = formatName(
+    answers.name,
+  );
 
   const filePath = `${__dirname}/../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
@@ -133,17 +100,18 @@ export function injectTypes(answers: AnswersType, names: NamesType) {
   if (!IS_TEST) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
-  } else {
-    return lines;
   }
+  return lines;
 }
 
 /**
  * Add the schema to the schema index file
  */
 
-export function injectSchema(answers: AnswersType, names: NamesType) {
-  const { pascalName, schemaName } = names;
+export function injectSchema(answers: AnswersType) {
+  let { pascalName, lowerName, schemaName, documentId } = formatName(
+    answers.name,
+  );
 
   const filePath = path.resolve(`${__dirname}../../studio/schemas/index.ts`);
   const file = fs.readFileSync(filePath).toString();
@@ -164,48 +132,70 @@ export function injectSchema(answers: AnswersType, names: NamesType) {
     needle: fromNeedle,
   });
   lines = sortLines({ lines, fromNeedle, toNeedle });
+  lines = lines.join("\n");
 
   if (!IS_TEST) {
-    fs.writeFileSync(filePath, lines.join("\n"));
+    fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
+  return lines;
 }
 
 /**
  * Add the page to the sanity desk structure
  */
 
-export function injectDeskStructure(answers: AnswersType, names: NamesType) {
-  const { schemaName, documentId } = names;
-  const { isSingleton } = answers;
+export function injectDeskStructure(answers: AnswersType) {
+  let { pascalName, lowerName, schemaName, documentId } = formatName(
+    answers.name,
+  );
 
   const filePath = `${__dirname}/../studio/structure.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let addition;
-
   if (answers.isSingleton) {
-    addition = `
-    singleton(S, {
-      id: '${documentId}',
-      type: '${schemaName}',
-      language: language.id,
-    }),
-  `;
+    addition = getStructureSingleton({
+      schemaName,
+      documentId,
+    });
   }
+
+  if (!answers.isSingleton) {
+    addition = getStructureDocumentList({
+      schemaName,
+      pascalName,
+    });
+  }
+
+  if (addition) {
+    lines = addLine({
+      addition,
+      lines,
+      needle: `id: "navigation",`,
+      adjustLine: -2,
+    });
+  }
+
+  lines = lines.join("\n");
 
   if (!IS_TEST) {
-    fs.writeFileSync(filePath, lines.join("\n"));
+    fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
+
+  console.log(lines);
+  return lines;
 }
 
 /**
  * Create the schema file
  */
 
-export function createSchema(answers: AnswersType, names: NamesType) {
-  const { schemaName } = names;
+export function createSchema(answers: AnswersType) {
+  let { pascalName, lowerName, schemaName, documentId } = formatName(
+    answers.name,
+  );
   const schemaFilePath = `${__dirname}/../studio/schemas/documents/${schemaName}.tsx`;
 
   const schemaContent = schemaName;
