@@ -280,7 +280,7 @@ function createModule(
     typescriptLines.push("items?: { _key?:string;title?:string }[];");
     propsLines.push("items");
     jsxLines.push(`
-      {Boolean(items?.filter(Boolean).length) && (
+      {items && Boolean(items?.filter(Boolean).length) && (
         <ul className="pt-7 divide-y divide-grey-50">
           {items?.map(({ title, _key }) => (
             <li key={_key} className="">{title}</li>
@@ -326,13 +326,14 @@ function createModule(
       propsLines.push("buttons");
       importLines.push(`
       import { ButtonProps } from '../../components/buttons/Button';
+      import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
       
       const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
         () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"),
       );
       `);
       jsxLines.push(`
-      {Boolean(buttons?.filter(Boolean).length) && (
+      {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div className="mt-8 lg:mt-12">
           <ButtonGroup items={buttons} />
         </div>
