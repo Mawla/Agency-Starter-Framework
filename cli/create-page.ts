@@ -4,6 +4,9 @@ import { prettierFile } from "./utils/prettier-file";
 import { sortLines } from "./utils/sort-lines";
 import { text, intro, outro, confirm } from "@clack/prompts";
 
+const args = process.argv.slice(2);
+const IS_TEST = args.includes("--test");
+
 const fs = require("fs");
 const path = require("path");
 
@@ -90,7 +93,7 @@ async function init() {
  * Add types to types.sanity.ts
  */
 
-function injectTypes(answers: AnswersType, names: NamesType) {
+export function injectTypes(answers: AnswersType, names: NamesType) {
   const { schemaName } = names;
 
   const filePath = `${__dirname}/../types.sanity.ts`;
@@ -125,15 +128,21 @@ function injectTypes(answers: AnswersType, names: NamesType) {
     adjustFromLine: 1,
   });
 
-  fs.writeFileSync(filePath, lines.join("\n"));
-  prettierFile(filePath);
+  lines = lines.join("\n");
+
+  if (!IS_TEST) {
+    fs.writeFileSync(filePath, lines);
+    prettierFile(filePath);
+  } else {
+    return lines;
+  }
 }
 
 /**
  * Add the schema to the schema index file
  */
 
-function injectSchema(answers: AnswersType, names: NamesType) {
+export function injectSchema(answers: AnswersType, names: NamesType) {
   const { pascalName, schemaName } = names;
 
   const filePath = path.resolve(`${__dirname}../../studio/schemas/index.ts`);
@@ -156,15 +165,17 @@ function injectSchema(answers: AnswersType, names: NamesType) {
   });
   lines = sortLines({ lines, fromNeedle, toNeedle });
 
-  fs.writeFileSync(filePath, lines.join("\n"));
-  prettierFile(filePath);
+  if (!IS_TEST) {
+    fs.writeFileSync(filePath, lines.join("\n"));
+    prettierFile(filePath);
+  }
 }
 
 /**
  * Add the page to the sanity desk structure
  */
 
-function injectDeskStructure(answers: AnswersType, names: NamesType) {
+export function injectDeskStructure(answers: AnswersType, names: NamesType) {
   const { schemaName, documentId } = names;
   const { isSingleton } = answers;
 
@@ -183,21 +194,26 @@ function injectDeskStructure(answers: AnswersType, names: NamesType) {
   `;
   }
 
-  fs.writeFileSync(filePath, lines.join("\n"));
-  prettierFile(filePath);
+  if (!IS_TEST) {
+    fs.writeFileSync(filePath, lines.join("\n"));
+    prettierFile(filePath);
+  }
 }
 
 /**
  * Create the schema file
  */
 
-function createSchema(answers: AnswersType, names: NamesType) {
+export function createSchema(answers: AnswersType, names: NamesType) {
   const { schemaName } = names;
   const schemaFilePath = `${__dirname}/../studio/schemas/documents/${schemaName}.tsx`;
 
   const schemaContent = schemaName;
-  fs.writeFileSync(schemaFilePath, schemaContent);
-  prettierFile(schemaFilePath);
+
+  if (!IS_TEST) {
+    fs.writeFileSync(schemaFilePath, schemaContent);
+    prettierFile(schemaFilePath);
+  }
 }
 
 init();
