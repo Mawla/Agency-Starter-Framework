@@ -136,7 +136,7 @@ export function injectSchema(answers: AnswersType) {
   const importPath = `./documents/${schemaName}`;
 
   // add import: place doesn't matter, prettier will take care of it
-  lines = [`import ${schemaImportName} from '${importPath}';`, ...lines];
+  lines = [`import ${schemaImportName} from "${importPath}";`, ...lines];
   const fromNeedle = `...[`;
   const toNeedle = `],`;
 
@@ -168,28 +168,30 @@ export function injectDeskStructure(answers: AnswersType) {
   const filePath = `${__dirname}/../studio/structure.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  let addition;
-  if (answers.isSingleton) {
-    addition = getStructureSingleton({
-      schemaName,
-      documentId,
-    });
-  }
+  if (answers.addToDesk) {
+    let addition;
+    if (answers.isSingleton) {
+      addition = getStructureSingleton({
+        schemaName,
+        documentId,
+      });
+    }
 
-  if (!answers.isSingleton) {
-    addition = getStructureDocumentList({
-      schemaName,
-      pascalName,
-    });
-  }
+    if (!answers.isSingleton) {
+      addition = getStructureDocumentList({
+        schemaName,
+        pascalName,
+      });
+    }
 
-  if (addition) {
-    lines = addLine({
-      addition,
-      lines,
-      needle: `id: "navigation",`,
-      adjustLine: -2,
-    });
+    if (addition) {
+      lines = addLine({
+        addition,
+        lines,
+        needle: `id: "navigation",`,
+        adjustLine: -2,
+      });
+    }
   }
 
   lines = lines.join("\n");
@@ -199,7 +201,6 @@ export function injectDeskStructure(answers: AnswersType) {
     prettierFile(filePath);
   }
 
-  console.log(lines);
   return lines;
 }
 
