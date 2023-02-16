@@ -1,3 +1,11 @@
+/**
+ * Script to generate new Sanity page
+ * and insert it in types and sanity schemas index
+ *
+ * sanity exec ./cli/create-page.ts -- --write
+ * NODE_ENV=test npx jest ./cli/create-page.test.ts
+ *
+ */
 import { getStructureDocumentList } from "./templates/page/structure-document-list";
 import { getStructureSingleton } from "./templates/page/structure-singleton";
 import { addLine } from "./utils/add-line";
@@ -7,7 +15,11 @@ import { sortLines } from "./utils/sort-lines";
 import { text, intro, outro, confirm, isCancel } from "@clack/prompts";
 
 const args = process.argv.slice(2);
-const IS_TEST = args.includes("--test");
+const WRITE = args.includes("--write");
+
+if (WRITE) {
+  init();
+}
 
 const fs = require("fs");
 const path = require("path");
@@ -49,10 +61,10 @@ async function init() {
 
   if (isCancel(answers)) return;
 
-  injectTypes(answers, IS_TEST);
-  injectSchema(answers, IS_TEST);
-  injectDeskStructure(answers, IS_TEST);
-  createSchema(answers, IS_TEST);
+  injectTypes(answers);
+  injectSchema(answers);
+  injectDeskStructure(answers);
+  createSchema(answers);
 
   outro(`You're all set!`);
 }
@@ -61,7 +73,7 @@ async function init() {
  * Add types to types.sanity.ts
  */
 
-export function injectTypes(answers: AnswersType, isTest = false) {
+export function injectTypes(answers: AnswersType) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -84,7 +96,7 @@ export function injectTypes(answers: AnswersType, isTest = false) {
 
   // add to linkable schemas list
   lines = addLine({
-    addition: `  "${schemaName}"`,
+    addition: `  "${schemaName}",`,
     lines,
     needle: "export const LINKABLE_SCHEMAS",
     endNeedle: ");",
@@ -100,7 +112,7 @@ export function injectTypes(answers: AnswersType, isTest = false) {
 
   lines = lines.join("\n");
 
-  if (!isTest) {
+  if (WRITE) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
@@ -111,7 +123,7 @@ export function injectTypes(answers: AnswersType, isTest = false) {
  * Add the schema to the schema index file
  */
 
-export function injectSchema(answers: AnswersType, isTest = false) {
+export function injectSchema(answers: AnswersType) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -137,7 +149,7 @@ export function injectSchema(answers: AnswersType, isTest = false) {
   lines = sortLines({ lines, fromNeedle, toNeedle });
   lines = lines.join("\n");
 
-  if (!isTest) {
+  if (WRITE) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
@@ -148,7 +160,7 @@ export function injectSchema(answers: AnswersType, isTest = false) {
  * Add the page to the sanity desk structure
  */
 
-export function injectDeskStructure(answers: AnswersType, isTest = false) {
+export function injectDeskStructure(answers: AnswersType) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -182,7 +194,7 @@ export function injectDeskStructure(answers: AnswersType, isTest = false) {
 
   lines = lines.join("\n");
 
-  if (!isTest) {
+  if (WRITE) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
@@ -195,7 +207,7 @@ export function injectDeskStructure(answers: AnswersType, isTest = false) {
  * Create the schema file
  */
 
-export function createSchema(answers: AnswersType, isTest = false) {
+export function createSchema(answers: AnswersType) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -203,10 +215,8 @@ export function createSchema(answers: AnswersType, isTest = false) {
 
   const schemaContent = schemaName;
 
-  if (!isTest) {
+  if (WRITE) {
     fs.writeFileSync(schemaFilePath, schemaContent);
     prettierFile(schemaFilePath);
   }
 }
-
-init();
