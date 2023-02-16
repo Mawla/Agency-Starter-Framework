@@ -79,9 +79,16 @@ async function init() {
   };
 
   injectTypes(answers, names);
+  injectSchema(answers, names);
+  injectDeskStructure(answers, names);
+  createSchema(answers, names);
 
   outro(`You're all set!`);
 }
+
+/**
+ * Add types to types.sanity.ts
+ */
 
 function injectTypes(answers: AnswersType, names: NamesType) {
   const { schemaName } = names;
@@ -120,6 +127,76 @@ function injectTypes(answers: AnswersType, names: NamesType) {
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
+}
+
+/**
+ * Add the schema to the schema index file
+ */
+
+function injectSchema(answers: AnswersType, names: NamesType) {
+  const { pascalName, schemaName } = names;
+
+  const filePath = path.resolve(`${__dirname}../../studio/schemas/index.ts`);
+  const file = fs.readFileSync(filePath).toString();
+  let lines = file.split("\n");
+
+  const schemaImportName = `page${pascalName}`;
+  const importPath = `./documents/${schemaName}`;
+
+  // add import: place doesn't matter, prettier will take care of it
+  lines = [`import ${schemaImportName} from '${importPath}';`, ...lines];
+  const fromNeedle = `...[`;
+  const toNeedle = `],`;
+
+  // add to schemas list
+  lines = addLine({
+    addition: `    ${schemaImportName},`,
+    lines,
+    needle: fromNeedle,
+  });
+  lines = sortLines({ lines, fromNeedle, toNeedle });
+
+  fs.writeFileSync(filePath, lines.join("\n"));
+  prettierFile(filePath);
+}
+
+/**
+ * Add the page to the sanity desk structure
+ */
+
+function injectDeskStructure(answers: AnswersType, names: NamesType) {
+  const { schemaName,documentId } = names;
+  const { isSingleton} = answers;
+
+  const filePath = `${__dirname}/../studio/structure.tsx`;
+  let lines = fs.readFileSync(filePath).toString().split("\n");
+
+  let addition;
+
+  if (answers.isSingleton) {
+    addition = `
+    singleton(S, { 
+      id: '${documentId}', 
+      type: '${schemaName}',
+      language: language.id, 
+    }),
+  `;
+
+  fs.writeFileSync(filePath, lines.join("\n"));
+  prettierFile(filePath);
+}
+
+/**
+ * Create the schema file
+ */
+
+function createSchema(answers: AnswersType, names: NamesType) {
+  const { schemaName } = names;
+  const schemaFilePath = `${__dirname}/../studio/schemas/documents/${schemaName}.tsx`;
+
+  const schemaContent = schemaName;
+  fs.writeFileSync(schemaFilePath, schemaContent);
+  prettierFile(schemaFilePath);
 }
 
 init();
