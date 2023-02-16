@@ -188,14 +188,20 @@ function createModule(
   }
 
   if (fields.indexOf("intro") > -1) {
-    typescriptLines.push("intro?: PortableTextBlock[];");
+    typescriptLines.push("intro?: PortableTextProps['content'];");
     propsLines.push("intro");
     importLines.push(`
-    import { PortableTextBlock } from "sanity";
+    import { PortableTextProps } from "../../components/portabletext/PortableText";
     import { TextProps } from "../../components/module/Text";
+    
+    const PortableText = lazy<ComponentType<PortableTextProps>>(
+      () => import(/* webpackChunkName: "PortableText" */ '../../components/portabletext/PortableText') 
+    );
+
     const Text = lazy<ComponentType<TextProps>>(
       () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );`);
+
     importLines.push(
       `import PortableText from "../../components/portabletext/PortableText";`,
     );
