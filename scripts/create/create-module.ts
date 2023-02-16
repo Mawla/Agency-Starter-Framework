@@ -190,21 +190,21 @@ function createModule(
   if (fields.indexOf("intro") > -1) {
     typescriptLines.push("intro?: PortableTextProps['content'];");
     propsLines.push("intro");
-    importLines.push(`
-    import { PortableTextProps } from "../../components/portabletext/PortableText";
-    import { TextProps } from "../../components/module/Text";
-    
-    const PortableText = lazy<ComponentType<PortableTextProps>>(
-      () => import(/* webpackChunkName: "PortableText" */ '../../components/portabletext/PortableText') 
+    importLines.push(
+      `import { TextProps } from "../../components/module/Text";`,
     );
 
-    const Text = lazy<ComponentType<TextProps>>(
+    importLines.push(`const Text = lazy<ComponentType<TextProps>>(
       () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );`);
 
     importLines.push(
-      `import PortableText from "../../components/portabletext/PortableText";`,
+      `import { PortableTextProps } from "../../components/portabletext/PortableText";`,
     );
+    importLines.push(`const PortableText = lazy<ComponentType<PortableTextProps>>(
+        () => import(/* webpackChunkName: "PortableText" */ '../../components/portabletext/PortableText') 
+      );`);
+
     jsxLines.push(`
       {intro && (
         <div className="mb-10 md:mb-14">
