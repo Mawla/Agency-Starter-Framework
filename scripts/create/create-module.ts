@@ -151,7 +151,7 @@ function createModule(
       () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
     );`);
     jsxLines.push(`
-      {title && (
+      {(title || eyebrow) && (
         <div className="mb-4 md:mb-6">
           <Title size={theme?.title?.size || 'lg'} as={theme?.title?.level} color={theme?.title?.color} eyebrow={eyebrow}>{title}</Title>
         </div>
@@ -188,9 +188,10 @@ function createModule(
   }
 
   if (fields.indexOf("intro") > -1) {
-    typescriptLines.push("intro?: React.ReactNode;");
+    typescriptLines.push("intro?: PortableTextBlock[];");
     propsLines.push("intro");
     importLines.push(`
+    import { PortableTextBlock } from "sanity";
     import { TextProps } from "../../components/module/Text";
     const Text = lazy<ComponentType<TextProps>>(
       () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
@@ -279,7 +280,7 @@ function createModule(
     typescriptLines.push("items?: { _key?:string;title?:string }[];");
     propsLines.push("items");
     jsxLines.push(`
-      {Boolean(items?.length) && (
+      {Boolean(items?.filter(Boolean).length) && (
         <ul className="pt-7 divide-y divide-grey-50">
           {items?.map(({ title, _key }) => (
             <li key={_key} className="">{title}</li>
@@ -331,7 +332,7 @@ function createModule(
       );
       `);
       jsxLines.push(`
-      {buttons && (
+      {Boolean(buttons?.filter(Boolean).length) && (
         <div className="mt-8 lg:mt-12">
           <ButtonGroup items={buttons} />
         </div>
