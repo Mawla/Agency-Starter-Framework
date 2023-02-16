@@ -165,8 +165,8 @@ function injectSchema(answers: AnswersType, names: NamesType) {
  */
 
 function injectDeskStructure(answers: AnswersType, names: NamesType) {
-  const { schemaName,documentId } = names;
-  const { isSingleton} = answers;
+  const { schemaName, documentId } = names;
+  const { isSingleton } = answers;
 
   const filePath = `${__dirname}/../studio/structure.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
@@ -175,12 +175,13 @@ function injectDeskStructure(answers: AnswersType, names: NamesType) {
 
   if (answers.isSingleton) {
     addition = `
-    singleton(S, { 
-      id: '${documentId}', 
+    singleton(S, {
+      id: '${documentId}',
       type: '${schemaName}',
-      language: language.id, 
+      language: language.id,
     }),
   `;
+  }
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);
