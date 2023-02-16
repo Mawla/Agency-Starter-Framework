@@ -4,7 +4,7 @@ import { addLine } from "./utils/add-line";
 import { formatName } from "./utils/format-name";
 import { prettierFile } from "./utils/prettier-file";
 import { sortLines } from "./utils/sort-lines";
-import { text, intro, outro, confirm } from "@clack/prompts";
+import { text, intro, outro, confirm, isCancel } from "@clack/prompts";
 
 const args = process.argv.slice(2);
 const IS_TEST = args.includes("--test");
@@ -15,8 +15,6 @@ const path = require("path");
 type AnswersType = {
   name: string;
   isSingleton: boolean;
-  hasChildren?: boolean;
-  childName?: string;
   addToDesk: boolean;
 };
 
@@ -29,14 +27,17 @@ async function init() {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
   });
+  if (isCancel(name)) process.exit(0);
 
   let isSingleton = await confirm({
     message: "Is it a single use item, like the homepage or blog overview?",
   });
+  if (isCancel(isSingleton)) process.exit(0);
 
   let addToDesk = await confirm({
     message: "Do you want to add it to the studio desk structure?",
   });
+  if (isCancel(addToDesk)) process.exit(0);
 
   name = String(name);
 
@@ -46,10 +47,12 @@ async function init() {
     addToDesk: Boolean(addToDesk),
   };
 
-  injectTypes(answers);
-  injectSchema(answers);
-  injectDeskStructure(answers);
-  createSchema(answers);
+  if (isCancel(answers)) return;
+
+  injectTypes(answers, IS_TEST);
+  injectSchema(answers, IS_TEST);
+  injectDeskStructure(answers, IS_TEST);
+  createSchema(answers, IS_TEST);
 
   outro(`You're all set!`);
 }
@@ -58,7 +61,7 @@ async function init() {
  * Add types to types.sanity.ts
  */
 
-export function injectTypes(answers: AnswersType) {
+export function injectTypes(answers: AnswersType, isTest = false) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -68,7 +71,7 @@ export function injectTypes(answers: AnswersType) {
 
   // add to schemas list
   lines = addLine({
-    addition: `  '${schemaName}': '',`,
+    addition: `  "${schemaName}": "",`,
     lines,
     needle: "export const SCHEMAS",
   });
@@ -81,7 +84,7 @@ export function injectTypes(answers: AnswersType) {
 
   // add to linkable schemas list
   lines = addLine({
-    addition: `  '${schemaName}'`,
+    addition: `  "${schemaName}"`,
     lines,
     needle: "export const LINKABLE_SCHEMAS",
     endNeedle: ");",
@@ -97,7 +100,7 @@ export function injectTypes(answers: AnswersType) {
 
   lines = lines.join("\n");
 
-  if (!IS_TEST) {
+  if (!isTest) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
@@ -108,7 +111,7 @@ export function injectTypes(answers: AnswersType) {
  * Add the schema to the schema index file
  */
 
-export function injectSchema(answers: AnswersType) {
+export function injectSchema(answers: AnswersType, isTest = false) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -134,7 +137,7 @@ export function injectSchema(answers: AnswersType) {
   lines = sortLines({ lines, fromNeedle, toNeedle });
   lines = lines.join("\n");
 
-  if (!IS_TEST) {
+  if (!isTest) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
@@ -145,7 +148,7 @@ export function injectSchema(answers: AnswersType) {
  * Add the page to the sanity desk structure
  */
 
-export function injectDeskStructure(answers: AnswersType) {
+export function injectDeskStructure(answers: AnswersType, isTest = false) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -179,7 +182,7 @@ export function injectDeskStructure(answers: AnswersType) {
 
   lines = lines.join("\n");
 
-  if (!IS_TEST) {
+  if (!isTest) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
@@ -192,7 +195,7 @@ export function injectDeskStructure(answers: AnswersType) {
  * Create the schema file
  */
 
-export function createSchema(answers: AnswersType) {
+export function createSchema(answers: AnswersType, isTest = false) {
   let { pascalName, lowerName, schemaName, documentId } = formatName(
     answers.name,
   );
@@ -200,7 +203,7 @@ export function createSchema(answers: AnswersType) {
 
   const schemaContent = schemaName;
 
-  if (!IS_TEST) {
+  if (!isTest) {
     fs.writeFileSync(schemaFilePath, schemaContent);
     prettierFile(schemaFilePath);
   }
