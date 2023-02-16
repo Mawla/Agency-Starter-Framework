@@ -328,7 +328,7 @@ function createModule(
       import { ButtonProps } from '../../components/buttons/Button';
       
       const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
-        () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/module/ButtonGroup"),
+        () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"),
       );
       `);
       jsxLines.push(`
