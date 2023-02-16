@@ -8,6 +8,7 @@ import { StaticFormBuilder } from "./StaticFormBuilder";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
 import { Suspense } from "react";
+import { PortableTextBlock } from "sanity";
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
@@ -36,7 +37,7 @@ export type DialogBuilderProps = {
     _type?: DialogSchemaName;
     _key?: string;
     slug?: string;
-    content?: { _type: string }[];
+    content?: PortableTextBlock[];
     video?: VideoType;
     form?: {};
   }[];

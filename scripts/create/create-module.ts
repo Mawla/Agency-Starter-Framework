@@ -151,7 +151,7 @@ function createModule(
       () => import(/* webpackChunkName: "Title" */ '../../components/module/Title') 
     );`);
     jsxLines.push(`
-      {title && (
+      {(title || eyebrow) && (
         <div className="mb-4 md:mb-6">
           <Title size={theme?.title?.size || 'lg'} as={theme?.title?.level} color={theme?.title?.color} eyebrow={eyebrow}>{title}</Title>
         </div>
@@ -188,16 +188,23 @@ function createModule(
   }
 
   if (fields.indexOf("intro") > -1) {
-    typescriptLines.push("intro?: React.ReactNode;");
+    typescriptLines.push("intro?: PortableTextProps['content'];");
     propsLines.push("intro");
-    importLines.push(`
-    import { TextProps } from "../../components/module/Text";
-    const Text = lazy<ComponentType<TextProps>>(
+    importLines.push(
+      `import { TextProps } from "../../components/module/Text";`,
+    );
+
+    importLines.push(`const Text = lazy<ComponentType<TextProps>>(
       () => import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );`);
+
     importLines.push(
-      `import PortableText from "../../components/portabletext/PortableText";`,
+      `import { PortableTextProps } from "../../components/portabletext/PortableText";`,
     );
+    importLines.push(`const PortableText = lazy<ComponentType<PortableTextProps>>(
+        () => import(/* webpackChunkName: "PortableText" */ '../../components/portabletext/PortableText') 
+      );`);
+
     jsxLines.push(`
       {intro && (
         <div className="mb-10 md:mb-14">
@@ -279,7 +286,7 @@ function createModule(
     typescriptLines.push("items?: { _key?:string;title?:string }[];");
     propsLines.push("items");
     jsxLines.push(`
-      {Boolean(items?.length) && (
+      {items && Boolean(items?.filter(Boolean).length) && (
         <ul className="pt-7 divide-y divide-grey-50">
           {items?.map(({ title, _key }) => (
             <li key={_key} className="">{title}</li>
@@ -325,13 +332,14 @@ function createModule(
       propsLines.push("buttons");
       importLines.push(`
       import { ButtonProps } from '../../components/buttons/Button';
+      import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
       
       const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
-        () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/module/ButtonGroup"),
+        () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"),
       );
       `);
       jsxLines.push(`
-      {buttons && (
+      {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div className="mt-8 lg:mt-12">
           <ButtonGroup items={buttons} />
         </div>
