@@ -50,3 +50,6 @@ tmp/
 
 # Vim
 Session.vim
+
+production-*
+development-*

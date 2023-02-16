@@ -19,26 +19,26 @@ export type FlatBreadcrumbType = FlatBreadcrumbItemType[];
 
 export const getBreadcrumbQuery = (language: LanguageType) => groq`
 ^.sitemap[_id == $_id][0] { 
-    "path": paths.${language}, 
-    "title": titles.${language},
+    path, 
+    title,
     "parent": ^.^.sitemap[_id == ^.parent][0] {
-      "path": paths.${language}, 
-      "title": titles.${language},
+      path, 
+      title,
       "parent": ^.^.^.sitemap[_id == ^.parent][0] {
-        "path": paths.${language}, 
-        "title": titles.${language},
+        path, 
+        title,
         "parent": ^.^.^.^.sitemap[_id == ^.parent][0] {
-          "path": paths.${language}, 
-          "title": titles.${language},
+          path, 
+          title,
           "parent": ^.^.^.^.^.sitemap[_id == ^.parent][0] {
-            "path": paths.${language}, 
-            "title": titles.${language},
+            path, 
+            title,
             "parent": ^.^.^.^.^.^.sitemap[_id == ^.parent][0] {
-              "path": paths.${language}, 
-              "title": titles.${language},
+              path, 
+              title,
               "parent": ^.^.^.^.^.^.^.sitemap[_id == ^.parent][0] {
-                "path": paths.${language}, 
-                "title": titles.${language},
+                path, 
+                title,
               }
             }
           }

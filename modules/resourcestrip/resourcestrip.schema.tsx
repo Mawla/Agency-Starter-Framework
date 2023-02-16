@@ -39,10 +39,6 @@ const schema = defineType({
       title: "Theme",
     },
     {
-      name: "language",
-      title: "Language",
-    },
-    {
       name: "tools",
       title: " ",
       icon: EllipsisVerticalIcon,
@@ -69,35 +65,6 @@ const schema = defineType({
       title: "Intro",
       type: "portabletext.simple",
       group: "content",
-    }),
-    // defineField({
-    //   name: "filter",
-    //   title: "Filter",
-    //   type: "object",
-    //   group: "content",
-    //   fields: [
-    //     defineField({
-    //       name: "types",
-    //       title: "Types",
-    //       type: "array",
-    //       of: [{ type: "string" }],
-    //       options: {
-    //         list: optionsToList(TAGGABLE_SCHEMAS),
-    //       },
-    //     }),
-    //     defineField({
-    //       name: "tags",
-    //       title: "Tags",
-    //       type: "array",
-    //       of: [{ type: "reference", to: [{ type: "page.tag" }] }],
-    //     }),
-    //   ],
-    // }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-      group: "language",
     }),
     defineField({
       name: "theme",

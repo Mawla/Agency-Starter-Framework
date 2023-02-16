@@ -65,23 +65,12 @@ export const getStaticProps: GetStaticProps = async ({
 
   // fetch page
   const sitemapItem: SitemapItemType = {
-    _id: "page_notfound",
+    _id: `page_notfound__i18n_${language}`,
     _type: "page.notfound",
     title: "",
     path: "",
     _updatedAt: "",
-    paths: languages.reduce(
-      (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>,
-    ),
-    titles: languages.reduce(
-      (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>,
-    ),
-    excludeFromSitemap: languages.reduce(
-      (acc, curr) => ({ [curr.id]: true, ...acc }),
-      {} as Record<LanguageType, boolean>,
-    ),
+    excludeFromSitemap: true,
   };
   const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
     language,

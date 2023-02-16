@@ -1,6 +1,6 @@
 import { IconLoaderProps } from "../components/images/IconLoader";
 import { getClient } from "../helpers/sanity/server";
-import { languages, LanguageType } from "../languages";
+import { LanguageType } from "../languages";
 import { getFooterQuery, FooterType } from "../layout/footer/footer.query";
 import {
   getNavigationQuery,
@@ -33,7 +33,6 @@ export default function Sitemap({
   page,
   sitemapItem,
   sitemap,
-  language,
 }: StaticProps) {
   return (
     <Page
@@ -45,32 +44,31 @@ export default function Sitemap({
       sitemapItem={sitemapItem}
     >
       <ul className="max-w-inner mx-auto py-20">
-        {sitemap.map(({ titles, paths, _id }: SitemapItemType) => {
-          const depth = paths[language]
-            ? paths[language].split("/").length - 2
-            : 0;
+        {sitemap
+          .filter(({ title, path }) => title && path)
+          .map(({ title, path, _id }: SitemapItemType) => {
+            const depth = path ? path.split("/").length - 2 : 0;
 
-          return (
-            <li
-              key={_id}
-              className="mb-1"
-              style={{
-                paddingLeft: 10 * depth,
-              }}
-            >
-              <IconLoader
-                icon="chevron"
-                className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
-              />
-              <Link
-                href={paths?.[language as LanguageType]}
-                className="underline hover:no-underline"
+            return (
+              <li
+                key={_id}
+                className="mb-1"
+                style={{
+                  paddingLeft: 10 * depth,
+                }}
               >
-                {titles?.[language as LanguageType]}
-              </Link>
-            </li>
-          );
-        })}
+                <IconLoader
+                  icon="chevron"
+                  className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
+                />
+                {path && title && (
+                  <Link href={path} className="underline hover:no-underline">
+                    {title}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
       </ul>
     </Page>
   );
@@ -111,23 +109,12 @@ export const getStaticProps: GetStaticProps = async ({
 
   // fetch page
   const sitemapItem: SitemapItemType = {
-    _id: "page_sitemap",
+    _id: `page_sitemap__i18n_${language}`,
     _type: "page.sitemap",
-    title: "",
-    path: "",
+    title: "Sitemap",
+    path: "/sitemap",
     _updatedAt: "",
-    paths: languages.reduce(
-      (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>,
-    ),
-    titles: languages.reduce(
-      (acc, curr) => ({ [curr.id]: `/${curr.id}`, ...acc }),
-      {} as Record<LanguageType, string>,
-    ),
-    excludeFromSitemap: languages.reduce(
-      (acc, curr) => ({ [curr.id]: true, ...acc }),
-      {} as Record<LanguageType, boolean>,
-    ),
+    excludeFromSitemap: false,
   };
   const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
     language,
@@ -147,17 +134,20 @@ export const getStaticProps: GetStaticProps = async ({
     getSitemapQuery(),
   );
   sitemap = sitemap
-    ?.filter((item: any) => Boolean(item.paths))
-    ?.filter(({ titles, paths, excludeFromSitemap }: SitemapItemType) => {
-      if (!titles?.[language as LanguageType]) return false;
-      if (!paths?.[language as LanguageType]) return false;
-      if (excludeFromSitemap?.[language as LanguageType]) return false;
-      return true;
-    })
+    ?.filter((item: any) => Boolean(item.path))
+    ?.filter(
+      ({ title, path, excludeFromSitemap, language }: SitemapItemType) => {
+        if (!title) return false;
+        if (!path) return false;
+        if (language !== locale) return false;
+        if (excludeFromSitemap) return false;
+        return true;
+      },
+    )
     ?.sort((a: SitemapItemType, b: SitemapItemType) => {
-      if (!a.paths?.[language]) return 1;
-      if (!b.paths?.[language]) return 1;
-      return a.paths[language].localeCompare(b.paths[language]);
+      if (!a.path) return 1;
+      if (!b.path) return 1;
+      return a.path.localeCompare(b.path);
     });
 
   // return object

@@ -1,5 +1,3 @@
-// import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent';
-import { languages, LanguageType } from "../../languages";
 import { LockIcon, UnlockIcon, CheckmarkIcon, EditIcon } from "@sanity/icons";
 import {
   Stack,
@@ -13,7 +11,6 @@ import {
   Button,
   TextInput,
   Label,
-  Switch,
 } from "@sanity/ui";
 import React, { ComponentType, useCallback, useEffect, useState } from "react";
 import { useClient, useFormValue, set, unset } from "sanity";
@@ -37,14 +34,8 @@ export const PagePasswordComponent: ComponentType<any> = (props) => {
    */
 
   const onCreate = useCallback(
-    async ({
-      password,
-      language,
-    }: {
-      password: string;
-      language: Record<LanguageType, boolean>;
-    }) => {
-      onChange(set(language));
+    async ({ password }: { password: string }) => {
+      onChange(set(true));
 
       // create new password document
       await client.create({
@@ -59,23 +50,15 @@ export const PagePasswordComponent: ComponentType<any> = (props) => {
         query: '*[_type == "password" && !defined(page._ref)]',
       });
     },
-    [pageId]
+    [pageId],
   );
 
   const onEdit = useCallback(
-    async ({
-      _id,
-      password,
-      language,
-    }: {
-      _id: string;
-      password: string;
-      language: Record<LanguageType, boolean>;
-    }) => {
-      onChange(set(language));
+    async ({ _id, password }: { _id: string; password: string }) => {
+      onChange(set(true));
       await client.patch(_id).set({ password }).commit();
     },
-    [pageId]
+    [pageId],
   );
 
   const onDelete = useCallback(async ({ _id }: { _id: string }) => {
@@ -111,12 +94,9 @@ export const PagePasswordComponent: ComponentType<any> = (props) => {
             tone="caution"
             mode="ghost"
             onClick={() => setDialogOpen(true)}
-            style={{
-              marginLeft: "auto",
-              marginBottom: -32,
-            }}
             icon={LockIcon}
-          ></Button>
+            text="Add password"
+          />
         </Flex>
       )}
 
@@ -141,24 +121,10 @@ type PasswordDialogProps = {
   pageId: string;
   close: () => void;
   mode: "edit" | "create";
-  onCreate: ({
-    password,
-    language,
-  }: {
-    password: string;
-    language: Record<LanguageType, boolean>;
-  }) => void;
-  onEdit: ({
-    _id,
-    password,
-    language,
-  }: {
-    _id: string;
-    password: string;
-    language: Record<LanguageType, boolean>;
-  }) => void;
+  onCreate: ({ password }: { password: string }) => void;
+  onEdit: ({ _id, password }: { _id: string; password: string }) => void;
   onDelete: ({ _id }: { _id: string }) => void;
-  value?: Record<LanguageType, boolean>;
+  value?: {};
 };
 
 const PasswordDialog = ({
@@ -172,7 +138,7 @@ const PasswordDialog = ({
 }: PasswordDialogProps) => {
   const client = useClient({ apiVersion: "vX" });
   const [state, setState] = useState<"loading" | "ready">(
-    mode === "edit" ? "loading" : "ready"
+    mode === "edit" ? "loading" : "ready",
   );
   const [passwordDoc, setPasswordDoc] =
     useState<{
@@ -181,8 +147,6 @@ const PasswordDialog = ({
     } | null>(null);
 
   const [password, setPassword] = useState<string | null>(null);
-  const [language, setLanguage] =
-    useState<Record<LanguageType, boolean> | undefined>(value);
 
   useEffect(() => {
     if (mode !== "edit") return;
@@ -198,14 +162,14 @@ const PasswordDialog = ({
   }, [mode, pageId]);
 
   const handleEdit = () => {
-    if (!passwordDoc || !password || !language) return close();
-    onEdit({ _id: passwordDoc._id, password, language });
+    if (!passwordDoc || !password) return close();
+    onEdit({ _id: passwordDoc._id, password });
     close();
   };
 
   const handleCreate = () => {
-    if (!password || !language) return close();
-    onCreate({ password, language });
+    if (!password) return close();
+    onCreate({ password });
     close();
   };
 
@@ -236,30 +200,6 @@ const PasswordDialog = ({
                   padding={3}
                   value={password || passwordDoc?.password}
                 />
-              </Stack>
-            </Card>
-            <Card>
-              <Stack space={2}>
-                <Label size={1}>Language</Label>
-
-                {languages.map(({ id, title }) => (
-                  <Stack space={2}>
-                    <Flex gap={2} align="center">
-                      <Switch
-                        value={id}
-                        checked={language?.[id] === true}
-                        onChange={(e) =>
-                          setLanguage({
-                            ...language,
-                            [e.currentTarget.value]:
-                              e.currentTarget.checked || false,
-                          } as Record<LanguageType, boolean>)
-                        }
-                      />
-                      <Label size={1}>{title}</Label>
-                    </Flex>
-                  </Stack>
-                ))}
               </Stack>
             </Card>
           </Stack>

@@ -1,7 +1,7 @@
 import { HERO_SCHEMAS, MODULE_SCHEMAS } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
-import { HERO_FIELD, MODULES_FIELD } from "./page-fields";
+import { HERO_FIELD, MODULES_FIELD, pageBase } from "./page-fields";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -25,18 +25,21 @@ const schema = defineType({
       };
     },
   },
+  groups: [...pageBase.groups],
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       validation: (Rule: StringRule) => Rule.required(),
+      group: ["content"],
     }),
     defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
+      group: ["content"],
       options: {
         source: (doc, options) => (options.parent as any).title,
       },
@@ -46,6 +49,7 @@ const schema = defineType({
       title: "Description",
       type: "text",
       rows: 2,
+      group: ["content"],
     }),
     defineField({
       ...HERO_FIELD,
@@ -74,6 +78,7 @@ const schema = defineType({
       title: "Image",
       type: "image",
       description: "1024x768 screenshot used for previews in the CMS.",
+      group: ["content"],
     }),
     defineField({
       name: "screenshot",
@@ -82,12 +87,14 @@ const schema = defineType({
       components: {
         field: CaptureScreenshot,
       },
+      group: ["content"],
     }),
     defineField({
       name: "usage",
       title: "Used on",
       type: "string",
       components: { field: PresetUsage },
+      group: ["content"],
     }),
   ],
 });

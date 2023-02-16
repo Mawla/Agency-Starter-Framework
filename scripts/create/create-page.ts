@@ -119,12 +119,12 @@ const build = (answers) => {
   const documentId = schemaName.replace("page.", "page_");
 
   console.log("");
-  addSchemaType(schemaName, { linkable: true, translatable: true });
+  addSchemaType(schemaName, { linkable: true, translatable: false });
 
   // create schema file
   const schemaFilePath = `${__dirname}/../../studio/schemas/documents/${schemaName}.tsx`;
 
-  const schemaContent = fs
+  let schemaContent = fs
     .readFileSync(`${__dirname}/page.mypage.tsx`)
     .toString()
     .replace(/MyPageSchema/g, schemaName)
@@ -138,23 +138,40 @@ const build = (answers) => {
         : `{
       ...PARENT_FIELD,
       to: [{ type: "${parentType}" }],
-      options: { disableNew: true },
-      hidden: true,
+      options: {
+        disableNew: true,
+        ...PARENT_FIELD.options,
+      },
     },`,
     )
     .replace(
-      ` /*PARENT_INITIAL_VALUE*/`,
+      `/*INITIAL_VALUE*/`,
       !parentType || !parentId || !parentType?.trim().length || singleton
         ? ""
-        : `parent: { _type: "reference", _ref: "${parentId}" },`,
+        : `
+        initialValue: async (props: any, context: any) => {
+          return await getParentDocumentInitialValue(context, "${parentId}");
+        },
+        `,
     );
+
+  if (singleton) {
+    schemaContent = schemaContent.replace(
+      "...pageBase.fields,",
+      `...pageBase.fields.map((field) => {
+      if (field.name === "i18n_base") {
+        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
+      }
+      return { ...field };
+    }),`,
+    );
+  }
 
   fs.writeFileSync(schemaFilePath, schemaContent);
   prettierFile(schemaFilePath);
 
-  addSchema(`page${pascalName}`, `./documents/${schemaName}`, true);
+  addSchema(`page${pascalName}`, `./documents/${schemaName}`);
 
-  // createQuery(name, schemaName, documentId, answers);
   if (addDesk)
     createDeskStructure(name, pascalName, schemaName, documentId, answers);
 
@@ -166,69 +183,6 @@ const build = (answers) => {
 
   readline.close();
 };
-
-/**
- * Add query
- */
-
-// function createQuery(name, schemaName, documentId, answers) {
-//   const { singleton, parentType, parentId } = answers;
-
-//   const filePath = `${__dirname}/../../queries/sitemap.query.ts`;
-//   let lines = fs.readFileSync(filePath).toString().split("\n");
-
-//   // let str;
-
-//   /*
-//   // singleton query
-//   if (singleton) {
-//     str = `
-//     \${getSingletonQuery('${documentId}')},`;
-//   } else {
-//     // page with a parent query
-//     if (parentId) {
-//       str = `
-//     // ${name}
-//     ...*[_type == "${schemaName}"] {
-//       \${baseFields},
-//       "paths": {
-//         \${languages.map(
-//           (language) =>
-//             \`"\${language.id}": "/" + *[_id match "*${parentId}"] { "slug": slug.\${language.id}.current}[0].slug  +"/"+ slug.\${language.id}.current\`
-//           )
-//         }
-//       },
-//     },
-// `;
-
-//       // top level page
-//     } else {
-//       str = `
-//     // ${name}
-//     ...*[_type == "${schemaName}"] {
-//       \${baseFields},
-//       "paths": {
-//         \${languages.map(
-//           (language) =>
-//             \`"\${language.id}": "/" + slug.\${language.id}.current\`,
-//         )}
-//       },
-//     },
-// `;
-//     }
-//   }*/
-
-//   lines = addLine(
-//     `       || _type == '${schemaName}'`,
-//     lines,
-//     `_type == "page.content"`,
-//     1,
-//   );
-//   fs.writeFileSync(filePath, lines.join("\n"));
-//   console.log(
-//     `› Added query in ${cyan(path.relative(process.cwd(), filePath))}`,
-//   );
-// }
 
 /**
  * Add to desk
@@ -250,7 +204,11 @@ function createDeskStructure(
 
   if (singleton) {
     str = `
-      singleton(S, { id: '${documentId}', type: '${schemaName}' }),
+      singleton(S, { 
+        id: '${documentId}', 
+        type: '${schemaName}',
+        language: language.id, 
+      }),
     `;
   } else {
     if (parentId) {
@@ -258,23 +216,21 @@ function createDeskStructure(
         documentList(S, {
           type: '${schemaName}',
           title: '${pascalName}',
-          filter: '_type == "${parentType}" || _type == "${schemaName}"',
+          language: language.id,
         }),
       `;
     } else {
       str = `
-        documentList(S, { type: '${schemaName}', title: '${name}' }),
+        documentList(S, { 
+          type: '${schemaName}', 
+          title: '${name}',
+          language: language.id
+        }),
       `;
     }
   }
 
   lines = addLine(str, lines, `type: "page.content"`, -1);
-  // lines = addLine(
-  //   `                   ,'${schemaName}'`,
-  //   lines,
-  //   `] && !defined(parent)`,
-  //   0,
-  // );
 
   fs.writeFileSync(filePath, lines.join("\n"));
   prettierFile(filePath);

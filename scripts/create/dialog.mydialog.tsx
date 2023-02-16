@@ -9,11 +9,6 @@ const schema = defineType({
   icon: () => <Website weight="thin" />,
   fields: [
     defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-    }),
-    defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",

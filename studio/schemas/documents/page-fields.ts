@@ -1,9 +1,10 @@
-import { baseLanguage, languages } from "../../../languages";
+import { baseLanguage, languages, LanguageType } from "../../../languages";
 import {
   DialogSchemaName,
   DIALOG_SCHEMAS,
   HeroSchemaName,
   HERO_SCHEMAS,
+  LINKABLE_SCHEMAS,
   ModuleSchemaName,
   MODULE_SCHEMAS,
 } from "../../../types.sanity";
@@ -16,10 +17,10 @@ import PagePasswordComponent, {
   PagePasswordWrapper,
 } from "../../components/PagePasswordComponent";
 import { getISODateString } from "../../utils/datetime";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
-import { title } from "process";
 import {
   ArrayRule,
   DateRule,
@@ -28,6 +29,7 @@ import {
   SlugRule,
   SortOrdering,
   StringRule,
+  useSchema,
 } from "sanity";
 
 export const TITLE_FIELD = defineField({
@@ -35,7 +37,7 @@ export const TITLE_FIELD = defineField({
   title: "Title",
   type: "string",
   validation: (Rule: StringRule) => Rule.required(),
-  options: { localize: true } as any,
+  group: ["content"],
 });
 
 export const SLUG_FIELD = defineField({
@@ -45,9 +47,10 @@ export const SLUG_FIELD = defineField({
   description:
     "The unique identifying part of a web address at the end of the URL. Only lowercase and no special characters except -.",
   options: {
-    source: title,
+    source: (doc: any) => {
+      return doc.title;
+    },
     maxLength: 96,
-    localize: true,
     isUnique: isPathUnique,
   } as any,
   validation: (Rule: SlugRule) =>
@@ -60,6 +63,7 @@ export const SLUG_FIELD = defineField({
         return "Invalid slug: Only numbers, lowercase letters, and dashes are permitted.";
       }
     }),
+  group: ["content"],
 });
 
 export const PUBLISHED_AT_FIELD = defineField({
@@ -77,7 +81,7 @@ export const HERO_FIELD = defineField({
   components: {
     input: PageBuilder,
   },
-  validation: (Rule: ArrayRule<any>) => Rule.max(languages.length).warning(),
+  validation: (Rule: ArrayRule<any>) => Rule.max(1).warning(),
   description: "The hero section of the page.",
   of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
     (type: HeroSchemaName) => ({
@@ -93,6 +97,7 @@ export const HERO_FIELD = defineField({
     updateField: "hero",
     placeholder: "Add a hero…",
   } as any,
+  group: ["content"],
 });
 
 export const MODULES_FIELD = defineField({
@@ -120,6 +125,7 @@ export const MODULES_FIELD = defineField({
     updateField: "modules",
     placeholder: "Add a module…",
   } as any,
+  group: ["content"],
 });
 
 export const DIALOGS_FIELD = defineField({
@@ -145,6 +151,7 @@ export const DIALOGS_FIELD = defineField({
     updateField: "dialogs",
     placeholder: "Add a dialog…",
   } as any,
+  group: ["content"],
 });
 
 export const ORDER_PUBLISHED_DESC: SortOrdering = {
@@ -178,46 +185,132 @@ export const EMPTY_RICHTEXT_MODULE = {
 export const PASSWORD = defineField({
   name: "locked",
   title: "Locked",
-  type: "object",
+  type: "boolean",
   components: {
     input: PagePasswordComponent,
     field: PagePasswordWrapper,
   },
-  fields: [
-    ...languages.map(({ id, title }) => ({
-      name: id,
-      type: "boolean",
-      title,
-    })),
-  ],
+  group: ["meta"],
 });
 
 export const PARENT_FIELD = defineField({
   name: "parent",
   title: "Parent",
   type: "reference",
-  to: [{ type: "page.content" }],
+  to: [{ type: "page.content" }, { type: "page.landing" }],
   options: {
     filter: ({ document }) => {
+      const { language } = getStructurePath();
       if (!document._id) return {};
 
       return {
         filter: `
           _id != $id
+          && language == $language
         `,
         params: {
           id: document._id,
+          language,
         },
       };
     },
   },
+  group: ["content"],
 });
+
+export async function getParentDocumentInitialValue(
+  context: any,
+  parentId: string,
+) {
+  const client = context.getClient({ apiVersion: "vX" });
+  const { language } = getStructurePath();
+
+  const parentDocumentId = await client.fetch(
+    `*[_id match "${parentId}__i18n_${language}"][0]._id`,
+  );
+
+  // prevent a reference to a non existing page, that crashes the studio
+  if (!parentDocumentId) return {};
+
+  return {
+    parent: { _type: "reference", _ref: parentDocumentId },
+  };
+}
+
+export const LANGUAGE_FIELD = defineField({
+  name: "language",
+  title: "Language",
+  type: "string",
+  validation: (Rule: StringRule) => Rule.required(),
+  options: {
+    list: languages.map(({ title, id }) => ({ title, value: id })),
+  },
+  initialValue: () => {
+    const { language } = getStructurePath();
+    return language || baseLanguage;
+  },
+  readOnly: ({ document }: any) => {
+    if (!document) return false;
+    const schemas = useSchema();
+    const schema = schemas._original?.types.find(
+      ({ name }: { name: string }) => name === document._type,
+    );
+    // can't change language of singleton documents as the id has the language in it
+    if ((schema?.options as any)?.singleton) return true;
+
+    return false;
+  },
+  group: ["language"],
+});
+
+export const I18N_BASE_FIELD = defineField({
+  name: "i18n_base",
+  title: "Base language document",
+  description:
+    "The same document in the primary language. This is to provide language alternatives on the website. Leave this blank if there is no such related page.",
+  type: "reference",
+  validation: (Rule: any) =>
+    Rule.required().warning(
+      "It's good practice adding base language document.",
+    ),
+  to: Object.keys(LINKABLE_SCHEMAS).map((schema) => ({ type: schema })),
+  weak: true,
+  options: {
+    filter: ({ document }: any) => {
+      if (!document._id) return {};
+      return {
+        filter: `language == "${baseLanguage}"`,
+      };
+    },
+  },
+  hidden: ({ document }: any) => {
+    if (document.language === baseLanguage) return true;
+    return false;
+  },
+  group: ["meta", "language"],
+});
+
+export const getI18nBaseFieldForSingleton = (schemaType: string) => {
+  const { language } = getStructurePath();
+  if (language === baseLanguage) return I18N_BASE_FIELD;
+  const schemaName = schemaType.toLowerCase().replace(/\s/g, "");
+  const documentId = schemaName.replace("page.", "page_");
+
+  return {
+    ...I18N_BASE_FIELD,
+    initialValue: {
+      _ref: `${documentId}__i18n_${baseLanguage}`,
+      _weak: true,
+    },
+  };
+};
 
 export const TAGS_FIELD = defineField({
   name: "tags",
   title: "Tags",
   type: "array",
   of: [{ type: "reference", to: [{ type: "page.tag" }] }],
+  group: ["content"],
 });
 
 export const AUTHOR_FIELD = defineField({
@@ -225,6 +318,7 @@ export const AUTHOR_FIELD = defineField({
   title: "Authors",
   type: "array",
   of: [{ type: "reference", to: [{ type: "person" }] }],
+  group: ["content"],
 });
 
 export const HIDE_NAV_FIELD = defineField({
@@ -233,6 +327,7 @@ export const HIDE_NAV_FIELD = defineField({
   type: "boolean",
   description: "Option to hide the navigation",
   initialValue: false,
+  group: ["meta"],
 });
 
 export const HIDE_FOOTER_FIELD = defineField({
@@ -241,17 +336,23 @@ export const HIDE_FOOTER_FIELD = defineField({
   type: "boolean",
   description: "Option to hide the footer",
   initialValue: false,
+  group: ["meta"],
 });
 
 export const pageBase = {
-  fieldsets: [
+  groups: [
+    {
+      title: "Content",
+      name: "content",
+      default: true,
+    },
     {
       title: "SEO & metadata",
-      name: "metadata",
-      options: {
-        collapsible: true,
-        collapse: true,
-      },
+      name: "meta",
+    },
+    {
+      title: "Language",
+      name: "language",
     },
   ],
   fields: [
@@ -261,37 +362,48 @@ export const pageBase = {
     HERO_FIELD,
     MODULES_FIELD,
     DIALOGS_FIELD,
-    SEO_FIELD,
+    { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
+    LANGUAGE_FIELD,
+    I18N_BASE_FIELD,
   ],
 };
 
 export const SLUG_PREVIEW_SELECT_FIELDS = {
-  slug: `slug.${baseLanguage}.current`,
-  level1Slug: `parent.slug.${baseLanguage}.current`,
-  level2Slug: `parent.parent.slug.${baseLanguage}.current`,
-  level3Slug: `parent.parent.parent.slug.${baseLanguage}.current`,
-  level4Slug: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
-  level5Slug: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
+  slug: `slug.current`,
+  level1Slug: `parent.slug.current`,
+  level2Slug: `parent.parent.slug.current`,
+  level3Slug: `parent.parent.parent.slug.current`,
+  level4Slug: `parent.parent.parent.parent.slug.current`,
+  level5Slug: `parent.parent.parent.parent.parent.slug.current`,
 };
 
-export const getPreviewSlugPagePath = (paths: string[]) => {
-  return `/${["", ...Object.values(paths).filter(Boolean).reverse()]
+export const getPreviewSlugPagePath = (
+  language: LanguageType,
+  paths: string[],
+) => {
+  const languagePath = language === baseLanguage ? "" : `/${language}`;
+
+  return `${languagePath}/${[
+    "",
+    ...Object.values(paths).filter(Boolean).reverse(),
+  ]
     .filter(Boolean)
     .join("/")}`;
 };
 
 export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   select: {
-    title: `title.${baseLanguage}`,
+    title: `title`,
     media: "hero.0.image",
+    language: "language",
     ...SLUG_PREVIEW_SELECT_FIELDS,
   },
-  prepare({ title, media, ...paths }: any) {
+  prepare({ title, media, language, ...paths }: any) {
     return {
       title: `${title}`,
-      subtitle: getPreviewSlugPagePath(paths),
+      subtitle: getPreviewSlugPagePath(language, paths),
       media,
     };
   },
@@ -301,35 +413,35 @@ export const DEFAULT_CONTENT_PAGE_ORDERINGS: SortOrdering[] = [
   {
     title: "Title",
     name: "Title",
-    by: [{ field: `title.${baseLanguage}`, direction: "asc" }],
+    by: [{ field: `title`, direction: "asc" }],
   },
   {
     title: "Slug",
     name: "Slug",
-    by: [{ field: `slug.${baseLanguage}.current`, direction: "asc" }],
+    by: [{ field: `slug.current`, direction: "asc" }],
   },
   {
     title: "Path",
     name: "Path",
     by: [
       {
-        field: `parent.parent.parent.parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.parent.parent.parent.slug.current`,
         direction: "desc",
       },
       {
-        field: `parent.parent.parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.parent.parent.slug.current`,
         direction: "desc",
       },
       {
-        field: `parent.parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.parent.slug.current`,
         direction: "desc",
       },
       {
-        field: `parent.parent.slug.${baseLanguage}.current`,
+        field: `parent.parent.slug.current`,
         direction: "desc",
       },
-      { field: `parent.slug.${baseLanguage}.current`, direction: "desc" },
-      { field: `slug.${baseLanguage}.current`, direction: "desc" },
+      { field: `parent.slug.current`, direction: "desc" },
+      { field: `slug.current`, direction: "desc" },
     ],
   },
 ];

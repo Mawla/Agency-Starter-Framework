@@ -1,10 +1,10 @@
 import { SchemaName } from "../../../types.sanity";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getI18nBaseFieldForSingleton,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
-  PUBLISHED_AT_FIELD,
 } from "./page-fields";
 import { Book } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.casestudies";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "CaseStudies",
+  title: "Case studies overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {
@@ -22,6 +22,14 @@ export default defineType({
   },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Book weight="thin" size={20} />,
-  fieldsets: [...pageBase.fieldsets],
-  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
+  groups: [...pageBase.groups],
+  fields: [
+    PARENT_FIELD,
+    ...pageBase.fields.map((field) => {
+      if (field.name === "i18n_base") {
+        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
+      }
+      return { ...field };
+    }),
+  ],
 });

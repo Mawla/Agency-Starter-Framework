@@ -22,9 +22,9 @@ export const getNavigationQuery = (language: LanguageType) => groq`
   "sitemap": ${getSitemapQuery()}
 } {
   sitemap,
-  "navigation": *[_id == 'navigation'][0] {
-    "items": items.${language}[] ${buttonWithChildrenQuery},
-    "buttons": buttons.${language}[] ${buttonQuery},
+  "navigation": *[_id == "navigation__i18n_${language}"][0] {
+    "items": items[] ${buttonWithChildrenQuery},
+    "buttons": buttons[] ${buttonQuery},
   }
 }.navigation
 `;

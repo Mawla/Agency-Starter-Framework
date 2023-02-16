@@ -3,10 +3,15 @@ import { baseLanguage, languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
-import { TRANSLATABLE_SCHEMAS } from "./types.sanity";
+import { LINKABLE_SCHEMAS, TRANSLATABLE_SCHEMAS } from "./types.sanity";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
-import { ConfigContext, defineConfig, TemplateResponse } from "sanity";
+import {
+  ConfigContext,
+  defineConfig,
+  Template,
+  TemplateResponse,
+} from "sanity";
 import { media } from "sanity-plugin-media";
 import { muxInput } from "sanity-plugin-mux-input";
 import { deskTool } from "sanity/desk";
@@ -44,7 +49,10 @@ export default defineConfig({
       const { client, document } = context;
 
       const sitemap: SitemapItemType[] = await client.fetch(getSitemapQuery());
-      const path = getPathForId(document._id, sitemap, baseLanguage);
+
+      const languagePrefix =
+        document.language === baseLanguage ? "" : `/${document.language}`;
+      const path = `${languagePrefix}${getPathForId(document._id, sitemap)}`;
 
       if (path === "/" && document._id.indexOf("page_homepage") === -1) {
         return prev;
@@ -57,6 +65,23 @@ export default defineConfig({
         )}${path}`;
       }
 
+      return prev;
+    },
+    actions: (prev, context) => {
+      const schema = Object.entries(context.schema._registry)
+        .find(([key, value]) => key === context.schemaType)?.[1]
+        .get();
+
+      if (schema.options?.singleton) {
+        return [
+          ...prev.filter(
+            ({ action }) =>
+              action == "publish" ||
+              action == "unpublish" ||
+              action == "delete",
+          ),
+        ];
+      }
       return prev;
     },
     newDocumentOptions: (prev: TemplateResponse[], context: ConfigContext) => {
@@ -84,5 +109,22 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+
+    templates: Object.keys(LINKABLE_SCHEMAS)
+      .map((schemaType) => {
+        const schema = schemaTypes.find(({ name }) => name === schemaType);
+        if (schema.options?.singleton) return null;
+
+        return {
+          id: `${schemaType}-with-language`,
+          title: schema.title,
+          parameters: [{ name: "language", type: "string" }],
+          schemaType: schemaType,
+          value: (params: { language: LanguageType }) => ({
+            language: params?.language,
+          }),
+        };
+      })
+      .filter(Boolean) as Template<any, any>[],
   },
 });

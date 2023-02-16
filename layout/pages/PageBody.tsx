@@ -13,7 +13,7 @@ export const PageBody = (props: PageType) => {
       {props.hero ? (
         <HeroBuilder hero={props.hero} />
       ) : (
-        <h1 className="sr-only">{sitemapItem?.titles?.[language]}</h1>
+        <h1 className="sr-only">{sitemapItem?.title}</h1>
       )}
 
       {Boolean(props?.modules?.length) && (

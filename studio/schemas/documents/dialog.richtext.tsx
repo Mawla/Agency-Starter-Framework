@@ -20,11 +20,6 @@ const schema = defineType({
   },
   fields: [
     defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-    }),
-    defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",

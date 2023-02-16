@@ -32,7 +32,6 @@ export const IconLoader = ({
 }: IconLoaderProps) => {
   const Element = as;
   const [isMounted, setIsMounted] = useState(false);
-
   const {
     isLoading,
     error,
@@ -59,7 +58,7 @@ export const IconLoader = ({
         return cleanHTML;
       });
     },
-    { enabled: icon && Boolean(icon) && Boolean(ICONS[icon]) },
+    { enabled: !icon ? false : Boolean(icon) && Boolean(ICONS[icon]) },
   );
 
   useEffect(() => {

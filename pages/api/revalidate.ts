@@ -1,6 +1,5 @@
 import { config as sanityConfig } from "../../helpers/sanity/config";
 import { getPathForId } from "../../helpers/sitemap/getPathForId";
-import { languages } from "../../languages";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import sanityClient from "@sanity/client";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
@@ -38,7 +37,9 @@ export default async function handler(
 
   console.log(rawBody);
 
-  const { _id, _type } = JSON.parse(JSON.parse(JSON.stringify(rawBody)));
+  const { _id, _type, language } = JSON.parse(
+    JSON.parse(JSON.stringify(rawBody)),
+  );
   console.log(_id, _type);
 
   if (req.method !== "POST") {
@@ -56,14 +57,12 @@ export default async function handler(
 
   try {
     let messages = [];
-
-    for (const { id } of languages) {
-      const path = `/${id}${getPathForId(_id, sitemap, id)}`;
-      await res.revalidate(path);
-      const message = `Revalidated "${_type}" with path ${path}`;
-      messages.push(message);
-      console.log(message);
-    }
+    const languagePrefix = language ? `/${language}` : "/";
+    const path = `${languagePrefix}${getPathForId(_id, sitemap)}`;
+    await res.revalidate(path);
+    const message = `Revalidated "${_type}" with path ${path}`;
+    messages.push(message);
+    console.log(message);
 
     return res.status(200).json({ message: messages.join("\n") });
   } catch (err) {

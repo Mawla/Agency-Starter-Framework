@@ -32,10 +32,7 @@ const schema = defineType({
       name: "visual",
       title: "Visual",
     },
-    {
-      name: "language",
-      title: "Language",
-    },
+
     {
       name: "tools",
       title: " ",
@@ -43,12 +40,6 @@ const schema = defineType({
     },
   ],
   fields: [
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-      group: "language",
-    }),
     defineField({
       name: "eyebrow",
       title: "Eyebrow",

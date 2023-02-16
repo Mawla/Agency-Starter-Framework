@@ -11,11 +11,6 @@ const schema = defineType({
   preview: getVideoPreview("video."),
   fields: [
     defineField({
-      name: "language",
-      title: "Language",
-      type: "language",
-    }),
-    defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",

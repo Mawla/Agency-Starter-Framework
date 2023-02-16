@@ -1,10 +1,10 @@
 import { SchemaName } from "../../../types.sanity";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getI18nBaseFieldForSingleton,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
-  PUBLISHED_AT_FIELD,
 } from "./page-fields";
 import { EarMuffs } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -14,14 +14,22 @@ export const SCHEMA_NAME: SchemaName = "page.podcasts";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Podcasts",
+  title: "Podcasts overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
+  options: {
+    singleton: true,
+  },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <EarMuffs weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_podcasts" },
-  },
-  fieldsets: [...pageBase.fieldsets],
-  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
+  groups: [...pageBase.groups],
+  fields: [
+    PARENT_FIELD,
+    ...pageBase.fields.map((field) => {
+      if (field.name === "i18n_base") {
+        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
+      }
+      return { ...field };
+    }),
+  ],
 });

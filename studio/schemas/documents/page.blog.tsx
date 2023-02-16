@@ -1,7 +1,9 @@
 import { SchemaName } from "../../../types.sanity";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   AUTHOR_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getParentDocumentInitialValue,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -21,23 +23,25 @@ export default defineType({
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <InkPen weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_blogs" },
+  initialValue: async (props: any, context: any) => {
+    return await getParentDocumentInitialValue(context, "page_blogs");
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,
       to: [{ type: "page.blogs" }],
-      options: { disableNew: true },
-      hidden: true,
+      options: {
+        disableNew: true,
+        ...PARENT_FIELD.options,
+      },
     },
     ...pageBase.fields.map((field) => {
       if (field.name === "hero") {
         return {
           ...field,
           options: {
-            ...field.options,
+            ...(field as any).options,
             filterType: /hero.resourcehero/,
           },
         };

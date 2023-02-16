@@ -1,6 +1,8 @@
 import { SchemaName } from "../../../types.sanity";
+import { getStructurePath } from "../../utils/desk/get-structure-path";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getParentDocumentInitialValue,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -20,16 +22,18 @@ export default defineType({
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <EarMuffs weight="thin" size={20} />,
-  initialValue: {
-    parent: { _type: "reference", _ref: "page_podcasts" },
+  initialValue: async (props: any, context: any) => {
+    return await getParentDocumentInitialValue(context, "page_podcasts");
   },
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,
       to: [{ type: "page.podcasts" }],
-      options: { disableNew: true },
-      hidden: true,
+      options: {
+        disableNew: true,
+        ...PARENT_FIELD.options,
+      },
     },
     ...pageBase.fields,
     TAGS_FIELD,

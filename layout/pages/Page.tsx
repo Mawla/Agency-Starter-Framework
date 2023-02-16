@@ -6,7 +6,10 @@ import { SiteContext } from "../../context/SiteContext";
 import { LanguageType } from "../../languages";
 import { ConfigType } from "../../queries/config.query";
 import { PageType } from "../../queries/page.query";
-import { SitemapItemType } from "../../queries/sitemap.query";
+import {
+  LanguageAlternateType,
+  SitemapItemType,
+} from "../../queries/sitemap.query";
 import { Footer } from "../footer/Footer";
 import { FooterType } from "../footer/footer.query";
 import { Navigation } from "../navigation/Navigation";
@@ -62,13 +65,14 @@ export const Page = ({
       <PageContext.Provider
         value={{
           isPreviewMode,
-          sitemapItem: sitemapItem || ({} as SitemapItemType),
+          sitemapItem: (sitemapItem || {}) as SitemapItemType,
           language: router.locale as LanguageType,
           breadcrumb: page?.breadcrumb,
+          languageAlternates:
+            page?.languageAlternates as LanguageAlternateType[],
         }}
       >
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
-
         {page && navigation && !isPreviewMode && (
           <Navigation
             items={page.hideNav === true ? [] : navItems}
@@ -77,17 +81,13 @@ export const Page = ({
         )}
 
         <PageBody {...page} />
-
         {children}
-
         {isPreviewMode && pagePath !== "/preview" && (
           <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
             <PreviewButton pagePath={pagePath} />
           </div>
         )}
-
         {locked && !isPreviewMode && <PageLock />}
-
         {page && footer && !isPreviewMode && (
           <Footer
             links={page.hideFooter === true ? [] : footer.links}

@@ -20,6 +20,6 @@ export default defineType({
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Tag weight="thin" size={20} />,
   initialValue: {},
-  fieldsets: [...pageBase.fieldsets],
+  groups: [...pageBase.groups],
   fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
 });

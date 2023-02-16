@@ -1,33 +1,32 @@
-import {set, useFormValue} from 'sanity'
-import {SearchIcon} from '@sanity/icons'
-import {Autocomplete, Stack, Card, Text} from '@sanity/ui'
-import React, {Children, ComponentType, useCallback, useState} from 'react'
-
-import {blocksToText} from '../utils/portableText/portableTextToText'
+import { blocksToText } from "../utils/portableText/portableTextToText";
+import { SearchIcon } from "@sanity/icons";
+import { Autocomplete, Stack, Card, Text } from "@sanity/ui";
+import React, { ComponentType, useCallback, useState } from "react";
+import { set, useFormValue } from "sanity";
 
 const DialogSelect: ComponentType<any> = (props) => {
-  const {value, onFocus, onBlur, onChange} = props
+  const { value, onFocus, onBlur, onChange } = props;
 
   const document = useFormValue([]) as {
     dialogs?: {
-      slug: {current: string}
-      content: {_type: string; children: {_type: string; text: string}[]}[]
-    }[]
-  }
+      slug: { current: string };
+      content: { _type: string; children: { _type: string; text: string }[] }[];
+    }[];
+  };
 
-  const [options] = useState<{value: string; description: string}[]>(
-    (document.dialogs || []).map(({slug, content = []}) => ({
+  const [options] = useState<{ value: string; description: string }[]>(
+    (document.dialogs || []).map(({ slug, content = [] }) => ({
       value: slug?.current,
       description: `${blocksToText(content)?.slice(0, 75)}…`,
-    }))
-  )
+    })),
+  );
 
   const onSelect = useCallback(
     (newValue: string) => {
-      onChange(set(newValue))
+      onChange(set(newValue));
     },
-    [onChange, value]
-  )
+    [onChange, value],
+  );
 
   return (
     <Autocomplete
@@ -59,21 +58,21 @@ const DialogSelect: ComponentType<any> = (props) => {
       onBlur={onBlur}
       onChange={onSelect}
     />
-  )
-}
+  );
+};
 
-export default DialogSelect
+export default DialogSelect;
 
 export const DialogSelectWrapper: ComponentType<any> = (props) => {
-  const {children} = props
+  const { children } = props;
 
   const document = useFormValue([]) as {
     dialogs?: {
-      slug: {current: string}
-    }[]
-  }
+      slug: { current: string };
+    }[];
+  };
 
-  if (!document?.dialogs?.length) return null
+  if (!document?.dialogs?.length) return null;
 
-  return <div>{children}</div>
-}
+  return <div>{children}</div>;
+};

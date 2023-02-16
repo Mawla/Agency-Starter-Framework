@@ -1,6 +1,15 @@
 import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
-import { HERO_FIELD, pageBase, TITLE_FIELD } from "./page-fields";
+import {
+  getI18nBaseFieldForSingleton,
+  getPreviewSlugPagePath,
+  HERO_FIELD,
+  I18N_BASE_FIELD,
+  LANGUAGE_FIELD,
+  pageBase,
+  SLUG_FIELD,
+  TITLE_FIELD,
+} from "./page-fields";
 import { ListRight } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
@@ -11,12 +20,35 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Sitemap page",
   type: "document",
+  options: {
+    singleton: true,
+  },
   icon: () => <ListRight weight="thin" size={20} />,
   preview: {
     select: {
-      title: `title.${baseLanguage}`,
+      title: `title`,
+      slug: "slug.current",
+      language: "language",
+    },
+    prepare({ title, slug, language }) {
+      return {
+        title: title,
+        subtitle: getPreviewSlugPagePath(language, [slug]),
+      };
     },
   },
-  fieldsets: [...pageBase.fieldsets],
-  fields: [TITLE_FIELD, HERO_FIELD],
+  groups: [...pageBase.groups],
+  fields: [
+    TITLE_FIELD,
+    {
+      ...SLUG_FIELD,
+      initialValue: { current: "sitemap" },
+      description:
+        "This must match the slug of the Next.js pages/sitemap.tsx file.",
+      readOnly: true,
+    },
+    { ...LANGUAGE_FIELD, readOnly: true },
+    getI18nBaseFieldForSingleton(SCHEMA_NAME),
+    HERO_FIELD,
+  ],
 });

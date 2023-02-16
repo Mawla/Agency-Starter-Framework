@@ -1,7 +1,6 @@
 import { getClient } from "../../helpers/sanity/server";
 import { withSentryOptional } from "../../helpers/sentry/with-sentry-optional";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
-import { languages } from "../../languages";
 import { ConfigType } from "../../queries/config.query";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -23,24 +22,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
 
   const items: string[] = [...pages]
     .filter(Boolean)
-    .map(({ paths, _updatedAt, excludeFromSitemap }) =>
-      languages
-        .map(({ id }) => {
-          if (excludeFromSitemap?.[id] === true) return;
+    .map(({ path, _updatedAt, excludeFromSitemap, language }) => {
+      if (excludeFromSitemap === true) return;
+      if (!path) return;
 
-          const url = getURLForPath(domain, paths?.[id], id);
-          if (uniqueItemsDict[url]) return;
-          if (!uniqueItemsDict[url]) uniqueItemsDict[url] = url;
+      const url = getURLForPath(domain, path, language);
+      if (uniqueItemsDict[url]) return;
+      if (!uniqueItemsDict[url]) uniqueItemsDict[url] = url;
 
-          return `
-    <url>
-    <loc>${url}</loc>
-    <lastmod>${new Date(_updatedAt).toISOString()}</lastmod>
-    </url>
-    `;
-        })
-        .join("\n"),
-    );
+      return `<url>
+  <loc>${url}</loc>
+  <lastmod>${new Date(_updatedAt).toISOString()}</lastmod>
+</url>`;
+    })
+    .filter(Boolean) as string[];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

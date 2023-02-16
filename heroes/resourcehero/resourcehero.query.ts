@@ -11,7 +11,7 @@ export const getResourceHeroQuery = (
   intro[] ${richTextQuery},
   "image": ${imageQuery},
   "tags": ^.tags[]->{
-    "title": title.${language},
+    title,
     "href": ${resolveIdHrefQuery}
   },
   "authors": ^.authors[]->{ 

@@ -10,7 +10,7 @@ const { sortLines } = require("./sortLines");
  * e.g `import moduleGallery from "../../modules/gallery/gallery.schema";`
  */
 
-module.exports.addSchema = (schemaImportName, importPath, translatable) => {
+module.exports.addSchema = (schemaImportName, importPath) => {
   const indexFilePath = path.resolve(
     `${__dirname}../../../studio/schemas/index.ts`,
   );
@@ -21,8 +21,8 @@ module.exports.addSchema = (schemaImportName, importPath, translatable) => {
    * Add to all schema imports
    */
   lines = [`import ${schemaImportName} from '${importPath}';`, ...lines];
-  const fromNeedle = translatable ? `translateFields([` : `...[`;
-  const toNeedle = translatable ? `]),` : `],`;
+  const fromNeedle = `...[`;
+  const toNeedle = `],`;
 
   lines = addLine(`    ${schemaImportName},`, lines, fromNeedle);
   lines = sortLines(lines, fromNeedle, toNeedle);

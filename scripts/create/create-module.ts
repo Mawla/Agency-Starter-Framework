@@ -459,7 +459,6 @@ function createModule(
   addSchema(
     isHero ? `hero${pascalName}` : `module${pascalName}`,
     `../../${isHero ? "heroes" : "modules"}/${lowerName}/${lowerName}.schema`,
-    true,
   );
 }
 

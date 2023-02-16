@@ -52,7 +52,6 @@ export const SCHEMAS = {
   password: "",
   person: "",
   redirect: "",
-  sitemap: "",
 };
 
 export type SchemaName = keyof typeof SCHEMAS;
@@ -72,6 +71,7 @@ export const LINKABLE_SCHEMAS = pick(
   "page.landing",
   "page.podcast",
   "page.podcasts",
+  "page.sitemap",
   "page.tool",
   "page.tools",
   "page.video",
@@ -81,6 +81,9 @@ export const LINKABLE_SCHEMAS = pick(
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
 
+// pages we want to link to in the CMS, but are Next.js static routes
+export const STATIC_LINKABLE_SCHEMAS: SchemaName[] = ["page.sitemap"];
+
 export const TRANSLATABLE_SCHEMAS = pick(
   SCHEMAS,
   "config.general",
@@ -88,27 +91,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "config.translations",
   "footer",
   "navigation",
-  "page.blog",
-  "page.blogs",
-  "page.casestudies",
-  "page.casestudy",
-  "page.content",
-  "page.event",
-  "page.events",
-  "page.guide",
-  "page.guides",
-  "page.home",
-  "page.landing",
-  "page.notfound",
-  "page.podcast",
-  "page.podcasts",
-  "page.sitemap",
-  "page.tool",
-  "page.tools",
-  "page.video",
-  "page.videos",
   "person",
-  "page.tag",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;

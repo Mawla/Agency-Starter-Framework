@@ -35,8 +35,6 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
   if (!config?.seo || !page || !sitemapItem) return null;
 
   const language = router.locale as LanguageType;
-  const sitemapItemPaths = sitemapItem?.paths;
-  const sitemapItemExcludedPaths = sitemapItem?.excludeFromSitemap;
 
   const baseUrl = `https://${config?.general?.domain}`;
   const seoTitle = `${isPreviewMode ? "Preview mode 👀 - " : ""}${
@@ -46,7 +44,7 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
     page.description || page.seo?.description || config?.seo?.description;
   const seoCanonical = getURLForPath(config?.general?.domain, pagePath);
 
-  const dynamicOGImageURL = `${baseUrl}/api/opengraph-image?id=${page._id}&language=${language}`;
+  const dynamicOGImageURL = `${baseUrl}/api/opengraph-image?id=${page._id}`;
   const seoImage = {
     url: dynamicOGImageURL,
     width: 1200,
@@ -64,7 +62,7 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
     sameAs: config?.social?.socials,
   };
 
-  const excludeFromSitemap = sitemapItem?.excludeFromSitemap?.[language];
+  const excludeFromSitemap = sitemapItem?.excludeFromSitemap;
 
   return (
     <>
@@ -72,26 +70,21 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
         title={seoTitle}
         noindex={excludeFromSitemap === true}
         nofollow={excludeFromSitemap === true}
-        titleTemplate={`%s - ${config?.general?.name}`}
+        titleTemplate={`%s - ${config.seo.title || config?.general?.name}`}
         description={seoDescription}
         canonical={seoCanonical}
         useAppDir={false}
         languageAlternates={
-          sitemapItemPaths
-            ? (Object.entries(sitemapItemPaths)
-                .map(([language, pagePath]) => {
-                  if (sitemapItemExcludedPaths?.[language as LanguageType])
-                    return null;
+          !page?.languageAlternates
+            ? []
+            : page?.languageAlternates
+                .filter(({ excludeFromSitemap }) => excludeFromSitemap !== true)
+                .map(({ path, language }) => {
                   return {
                     hrefLang: language,
-                    href: getURLForPath(config?.general?.domain, pagePath),
+                    href: getURLForPath(config?.general?.domain, path),
                   };
                 })
-                .filter(Boolean) as {
-                hrefLang: LanguageType;
-                href: string;
-              }[])
-            : []
         }
         openGraph={{
           type: "website",

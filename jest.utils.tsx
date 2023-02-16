@@ -17,14 +17,6 @@ const DEMO_SITEMAP: SitemapItemType[] = [
     _updatedAt: "2022-01-04T14:26:24Z",
     path: "/page1",
     title: "Page 1",
-    paths: {
-      en: "/",
-      es: "/",
-    },
-    titles: {
-      en: "/",
-      es: "/",
-    },
   },
   {
     _id: "xx",
@@ -32,14 +24,6 @@ const DEMO_SITEMAP: SitemapItemType[] = [
     _updatedAt: "2022-01-04T15:03:13Z",
     path: "/page1/page2",
     title: "Page 2",
-    paths: {
-      en: "/",
-      es: "/",
-    },
-    titles: {
-      en: "/",
-      es: "/",
-    },
   },
   {
     _id: "xxx",
@@ -47,14 +31,6 @@ const DEMO_SITEMAP: SitemapItemType[] = [
     _updatedAt: "2022-01-04T15:03:13Z",
     path: "/page1/page2/page3",
     title: "Page 3",
-    paths: {
-      en: "/",
-      es: "/",
-    },
-    titles: {
-      en: "/",
-      es: "/",
-    },
   },
 ];
 
@@ -71,6 +47,7 @@ const Wrapper = ({ children }: { children: React.ReactElement }) => {
           language: "en",
           sitemapItem: DEMO_SITEMAP[0],
           breadcrumb: DEMO_FLAT_BREADCRUMB,
+          languageAlternates: [],
         }}
       >
         <QueryClientProvider client={queryClient}>

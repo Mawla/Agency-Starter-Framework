@@ -2,7 +2,6 @@ import { SchemaName } from "../../../types.sanity";
 import {
   PARENT_FIELD,
   pageBase,
-  PUBLISHED_AT_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
   DEFAULT_CONTENT_PAGE_ORDERINGS,
 } from "./page-fields";
@@ -20,6 +19,6 @@ export default defineType({
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <ClickBait weight="thin" size={20} />,
   initialValue: {},
-  fieldsets: [...pageBase.fieldsets],
-  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
+  groups: [...pageBase.groups],
+  fields: [PARENT_FIELD, ...pageBase.fields],
 });

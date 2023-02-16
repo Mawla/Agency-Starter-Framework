@@ -10,7 +10,7 @@ export const getStoryQuery = (
     quote,
     text,
     person-> {
-      "name": name.${language},
+      name,
       "position": position.${language},
     },
     "image": ${imageQuery},
