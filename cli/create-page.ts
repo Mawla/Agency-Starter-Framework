@@ -5,6 +5,7 @@
  * sanity exec ./cli/create-page.ts -- --write
  *
  */
+import { LINKABLE_SCHEMAS } from "../types.sanity";
 import { createSchema } from "./create-page/create-schema";
 import { injectDeskStructure } from "./create-page/inject-desk-structure";
 import { injectSchema } from "./create-page/inject-schema";
@@ -21,6 +22,7 @@ export type AnswersType = {
   addToDesk: boolean;
   pageType: "article" | "singleton" | "collection" | "content";
   articleName?: string;
+  parentType?: string;
 };
 
 async function init() {
@@ -66,6 +68,18 @@ async function init() {
     if (isCancel(articleName)) process.exit(0);
   }
 
+  let parentType;
+  if (pageType === "article") {
+    parentType = await select({
+      message: "Does it have a singleton parent page?",
+      options: Object.keys(LINKABLE_SCHEMAS).map((schema) => ({
+        value: schema,
+        title: schema,
+      })),
+    });
+    if (isCancel(parentType)) process.exit(0);
+  }
+
   let addToDesk = await confirm({
     message: "Do you want to add it to the studio desk structure?",
   });
@@ -78,6 +92,7 @@ async function init() {
     pageType: String(pageType) as AnswersType["pageType"],
     addToDesk: Boolean(addToDesk),
     articleName: String(articleName),
+    parentType: String(parentType),
   };
 
   if (isCancel(answers)) return;

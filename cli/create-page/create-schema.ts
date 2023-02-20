@@ -11,7 +11,7 @@ import { getSingletonPageSchema } from "./templates/singleton-page";
 const fs = require("fs");
 
 export function createSchema(
-  answers: Pick<AnswersType, "pageName" | "pageType">,
+  answers: Pick<AnswersType, "pageName" | "pageType" | "parentType">,
   WRITE = false,
 ) {
   let { pageName } = answers;
@@ -30,12 +30,17 @@ export function createSchema(
   }
 
   if (answers.pageType === "article") {
+    let { parentType } = answers;
+    let parentId = parentType
+      ? parentType.replace("page.", "page_")
+      : undefined;
+
     lines.push(
       getArticlePageSchema({
         schemaName,
         pageName,
-        parentId: "page_blogs",
-        parentSchemaName: "page.blogs",
+        parentId,
+        parentSchemaName: parentType,
       }),
     );
   }
