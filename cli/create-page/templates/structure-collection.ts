@@ -14,7 +14,7 @@ export const getStructureCollection = ({
   articleSchemaName,
 }: Props) => {
   return `S.listItem()
-    .title("${pageName} overview")
+    .title("${pageName}")
     .icon(getIconForSchema(S, "${schemaName}"))
     .child(
       list(S, { title: "${schemaName}" }).items([
