@@ -1,6 +1,6 @@
 import { injectSchema } from "./inject-schema";
 
-test("test inject schema in sanity studio/schemas/index.ts", () => {
+test("inject schema in sanity studio/schemas/index.ts", () => {
   const result = injectSchema({
     moduleName: "Test",
   });

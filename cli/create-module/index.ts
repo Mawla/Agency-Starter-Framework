@@ -6,14 +6,7 @@
  *
  */
 import { injectSchema } from "./inject-schema";
-import {
-  text,
-  intro,
-  outro,
-  isCancel,
-  select,
-  multiselect,
-} from "@clack/prompts";
+import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
 
 const args = process.argv.slice(2);
 const WRITE = args.includes("--write");
@@ -62,7 +55,16 @@ async function init() {
     moduleDescription: String(moduleDescription),
     fields: Boolean(fields),
   };
+
   injectSchema(answers, WRITE);
+  // create modules/[name]/Module.tsx
+  // create modules/[name]/module.stories.tsx
+  // create modules/[name]/module.test.tsx
+  // create modules/[name]/module.query.tsx
+  // create modules/[name]/module.options.tsx
+
+  // inject query in page.query.ts
+  // inject module in Module Builder
 
   outro(`You're all set!`);
 }
