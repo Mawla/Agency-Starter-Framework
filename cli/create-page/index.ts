@@ -5,12 +5,12 @@
  * sanity exec ./cli/create-page.ts -- --write
  *
  */
-import { LINKABLE_SCHEMAS } from "../types.sanity";
-import { createSchema } from "./create-page/create-schema";
-import { injectDeskStructure } from "./create-page/inject-desk-structure";
-import { injectSchema } from "./create-page/inject-schema";
-import { injectTypes } from "./create-page/inject-types";
-import { formatName } from "./utils/format-name";
+import { LINKABLE_SCHEMAS } from "../../types.sanity";
+import { createSchema } from "./create-schema";
+import { formatName } from "./format-name";
+import { injectDeskStructure } from "./inject-desk-structure";
+import { injectSchema } from "./inject-schema";
+import { injectTypes } from "./inject-types";
 import { text, intro, outro, confirm, isCancel, select } from "@clack/prompts";
 
 const args = process.argv.slice(2);
@@ -27,7 +27,7 @@ export type AnswersType = {
 };
 
 async function init() {
-  intro(`Let's create a single use page`);
+  intro(`Let's create a page`);
 
   let pageType = await select({
     message: "What type of page is it?",
@@ -95,8 +95,6 @@ async function init() {
     articleName: String(articleName),
     parentType: String(parentType),
   };
-
-  if (isCancel(answers)) return;
 
   if (pageType === "collection") {
     injectTypes({ ...answers }, WRITE);

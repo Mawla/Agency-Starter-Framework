@@ -1,8 +1,8 @@
-import { AnswersType } from "../create-page";
-import { formatName } from "../utils/format-name";
+import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { sortLines } from "../utils/sort-lines";
+import { formatName } from "./format-name";
 
 const fs = require("fs");
 

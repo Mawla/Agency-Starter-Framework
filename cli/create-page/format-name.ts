@@ -1,4 +1,4 @@
-import { pascalCase } from "./pascal-case";
+import { pascalCase } from "../utils/pascal-case";
 
 export function formatName(name: string) {
   let pascalName = `${pascalCase(name)}`;

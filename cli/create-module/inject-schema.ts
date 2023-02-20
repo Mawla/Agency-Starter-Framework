@@ -11,17 +11,17 @@ const fs = require("fs");
 const path = require("path");
 
 export function injectSchema(
-  answers: Pick<AnswersType, "pageName">,
+  answers: Pick<AnswersType, "moduleName">,
   WRITE = false,
 ) {
-  let { pascalName, schemaName } = formatName(answers.pageName);
+  let { pascalName, lowerName } = formatName(answers.moduleName);
 
   const filePath = path.resolve(`${__dirname}../../../studio/schemas/index.ts`);
   const file = fs.readFileSync(filePath).toString();
   let lines = file.split("\n");
 
-  const schemaImportName = `page${pascalName}`;
-  const importPath = `./documents/${schemaName}`;
+  const schemaImportName = `module${pascalName}`;
+  const importPath = `../../modules/${lowerName}/${lowerName}.schema`;
 
   // add import: place doesn't matter, prettier will take care of it
   lines = [`import ${schemaImportName} from "${importPath}";`, ...lines];

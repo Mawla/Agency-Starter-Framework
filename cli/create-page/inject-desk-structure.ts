@@ -1,10 +1,10 @@
 /**
  * Add the page to the sanity desk structure
  */
-import { AnswersType } from "../create-page";
-import { formatName } from "../utils/format-name";
+import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
+import { formatName } from "./format-name";
 import { getStructureCollection } from "./templates/structure-collection";
 import { getStructureDocumentList } from "./templates/structure-document-list";
 import { getStructureSingleton } from "./templates/structure-singleton";

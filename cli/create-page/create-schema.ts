@@ -1,6 +1,6 @@
-import { AnswersType } from "../create-page";
-import { formatName } from "../utils/format-name";
+import { AnswersType } from ".";
 import { prettierFile } from "../utils/prettier-file";
+import { formatName } from "./format-name";
 import { getArticlePageSchema } from "./templates/article-page";
 import { getContentPageSchema } from "./templates/content-page";
 import { getSingletonPageSchema } from "./templates/singleton-page";

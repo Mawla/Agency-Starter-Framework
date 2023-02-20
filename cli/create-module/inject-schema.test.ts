@@ -2,12 +2,12 @@ import { injectSchema } from "./inject-schema";
 
 test("test inject schema in sanity studio/schemas/index.ts", () => {
   const result = injectSchema({
-    pageName: "Tests",
+    moduleName: "Test",
   });
 
   expect(
-    result.includes(`import pageTests from "./documents/page.tests";`),
+    result.includes(`import moduleTest from "../../modules/test/test.schema";`),
   ).toBeTruthy();
 
-  expect(result.includes(`pageTests,`)).toBeTruthy();
+  expect(result.includes(`moduleTest,`)).toBeTruthy();
 });
