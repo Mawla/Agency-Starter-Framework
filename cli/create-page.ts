@@ -91,9 +91,9 @@ async function init() {
   }
 
   if (articleName) {
-    injectTypes({ ...answers, pageName: articleName }, WRITE);
-    injectSchema({ ...answers, pageName: articleName }, WRITE);
-    createSchema({ ...answers, pageName: articleName }, WRITE);
+    injectTypes({ ...structuredClone(answers), pageName: articleName }, WRITE);
+    injectSchema({ ...structuredClone(answers), pageName: articleName }, WRITE);
+    createSchema({ ...structuredClone(answers), pageName: articleName }, WRITE);
   }
 
   outro(`You're all set!`);
