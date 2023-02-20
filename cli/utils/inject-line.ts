@@ -1,7 +1,7 @@
 /**
  * Add a line to an array of lines after a flag
  *
- * addLine({
+ * injectLine({
  *   addition: 'foo',
  *   lines: ['1', '2', '3', '4', '5'],
  *   needle: '3'
@@ -10,34 +10,34 @@
  * [ '1', '2', '3', 'foo', '4', '5' ]
  */
 
-type AddLineProps = {
+type InjectLineProps = {
   addition: string;
   lines: string[];
   needle: string;
   adjustLine?: number;
-  endNeedle?: string;
+  delimiter?: string;
 };
 
-export const addLine = ({
+export const injectLine = ({
   addition,
   lines,
   needle,
   adjustLine = 1,
-  endNeedle,
-}: AddLineProps) => {
+  delimiter,
+}: InjectLineProps) => {
   const newLines = [...lines];
   const needleIndex = newLines.findIndex((line) => line.indexOf(needle) > -1);
 
   const relevantLines = newLines.slice(needleIndex);
-  const endNeedleIndex = !endNeedle
+  const delimiterIndex = !delimiter
     ? -1
-    : relevantLines.findIndex((line) => line.indexOf(endNeedle) > -1);
+    : relevantLines.findIndex((line) => line.indexOf(delimiter) > -1);
 
-  // if needle and endNeedle are on the same line we insert it on the same line
-  if (endNeedle && endNeedleIndex === 0) {
-    newLines[needleIndex + endNeedleIndex] = newLines[
-      needleIndex + endNeedleIndex
-    ].replace(endNeedle, `,${addition} ${endNeedle}`);
+  // if needle and delimiter are on the same line we insert it on the same line
+  if (delimiter && delimiterIndex === 0) {
+    newLines[needleIndex + delimiterIndex] = newLines[
+      needleIndex + delimiterIndex
+    ].replace(delimiter, `,${addition} ${delimiter}`);
   } else {
     newLines.splice(needleIndex + adjustLine, 0, addition);
   }

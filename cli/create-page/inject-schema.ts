@@ -2,8 +2,8 @@
  * Add the schema to the schema index file
  */
 import { AnswersType } from "../create-page";
-import { addLine } from "../utils/add-line";
 import { formatName } from "../utils/format-name";
+import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { sortLines } from "../utils/sort-lines";
 
@@ -29,7 +29,7 @@ export function injectSchema(
   const toNeedle = `],`;
 
   // add to schemas list
-  lines = addLine({
+  lines = injectLine({
     addition: `    ${schemaImportName},`,
     lines,
     needle: fromNeedle,

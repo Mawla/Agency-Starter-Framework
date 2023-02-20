@@ -3,16 +3,16 @@
  * starting the line after fromNeedle and ending the line before toNeedle
  *
  * const lines = ['x','xx','xxx','start here','x','y','z','a','d','end here;','xxxx','xxxxx']
- * sortLines(lines, 'start here', 'end here')
+ * sortLines({ lines, fromNeedle: 'start here', toNeedle: 'end here' })
  * [ 'x', 'xx', 'xxx', 'start here', 'a', 'd', 'x', 'y', 'z', 'end here;', 'xxxx', 'xxxxx' ]
  */
 
 type SortLinesProps = {
-  lines: string[],
-  fromNeedle: string,
-  toNeedle: string,
-  adjustFromLine?: number,
-  adjustToLine?: number,
+  lines: string[];
+  fromNeedle: string;
+  toNeedle: string;
+  adjustFromLine?: number;
+  adjustToLine?: number;
 };
 
 export const sortLines = ({

@@ -2,8 +2,8 @@
  * Add the page to the sanity desk structure
  */
 import { AnswersType } from "../create-page";
-import { addLine } from "../utils/add-line";
 import { formatName } from "../utils/format-name";
+import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { getStructureCollection } from "./templates/structure-collection";
 import { getStructureDocumentList } from "./templates/structure-document-list";
@@ -50,7 +50,7 @@ export function injectDeskStructure(
   }
 
   if (addition) {
-    lines = addLine({
+    lines = injectLine({
       addition,
       lines,
       needle: `id: "navigation",`,
