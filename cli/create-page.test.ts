@@ -1,6 +1,11 @@
-import { injectDeskStructure, injectSchema, injectTypes } from "./create-page";
-import { getStructureDocumentList } from "./templates/page/structure-document-list";
-import { getStructureSingleton } from "./templates/page/structure-singleton";
+/**
+ * NODE_ENV=test npx jest ./cli/create-page.test.ts
+ */
+import { injectDeskStructure } from "./create-page/inject-desk-structure";
+import { injectSchema } from "./create-page/inject-schema";
+import { injectTypes } from "./create-page/inject-types";
+import { getStructureDocumentList } from "./create-page/templates/page/structure-document-list";
+import { getStructureSingleton } from "./create-page/templates/page/structure-singleton";
 
 /**
  * Singleton

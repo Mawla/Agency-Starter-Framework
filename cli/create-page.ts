@@ -6,12 +6,10 @@
  * NODE_ENV=test npx jest ./cli/create-page.test.ts
  *
  */
-import { getStructureDocumentList } from "./templates/page/structure-document-list";
-import { getStructureSingleton } from "./templates/page/structure-singleton";
-import { addLine } from "./utils/add-line";
-import { formatName } from "./utils/format-name";
-import { prettierFile } from "./utils/prettier-file";
-import { sortLines } from "./utils/sort-lines";
+import { createSchema } from "./create-page/create-schema";
+import { injectDeskStructure } from "./create-page/inject-desk-structure";
+import { injectSchema } from "./create-page/inject-schema";
+import { injectTypes } from "./create-page/inject-types";
 import { text, intro, outro, confirm, isCancel } from "@clack/prompts";
 
 const args = process.argv.slice(2);
@@ -21,10 +19,7 @@ if (WRITE) {
   init();
 }
 
-const fs = require("fs");
-const path = require("path");
-
-type AnswersType = {
+export type AnswersType = {
   name: string;
   isSingleton: boolean;
   addToDesk: boolean;
@@ -61,163 +56,10 @@ async function init() {
 
   if (isCancel(answers)) return;
 
-  injectTypes(answers);
-  injectSchema(answers);
-  injectDeskStructure(answers);
-  createSchema(answers);
+  injectTypes(answers, WRITE);
+  injectSchema(answers, WRITE);
+  injectDeskStructure(answers, WRITE);
+  createSchema(answers, WRITE);
 
   outro(`You're all set!`);
-}
-
-/**
- * Add types to types.sanity.ts
- */
-
-export function injectTypes(answers: AnswersType) {
-  let { pascalName, lowerName, schemaName, documentId } = formatName(
-    answers.name,
-  );
-
-  const filePath = `${__dirname}/../types.sanity.ts`;
-  let lines = fs.readFileSync(filePath).toString().split("\n");
-
-  // add to schemas list
-  lines = addLine({
-    addition: `  "${schemaName}": "",`,
-    lines,
-    needle: "export const SCHEMAS",
-  });
-
-  lines = sortLines({
-    lines,
-    fromNeedle: "export const SCHEMAS",
-    toNeedle: "};",
-  });
-
-  // add to linkable schemas list
-  lines = addLine({
-    addition: `  "${schemaName}",`,
-    lines,
-    needle: "export const LINKABLE_SCHEMAS",
-    endNeedle: ");",
-    adjustLine: 2,
-  });
-
-  lines = sortLines({
-    lines,
-    fromNeedle: "export const LINKABLE_SCHEMAS",
-    toNeedle: ");",
-    adjustFromLine: 1,
-  });
-
-  lines = lines.join("\n");
-
-  if (WRITE) {
-    fs.writeFileSync(filePath, lines);
-    prettierFile(filePath);
-  }
-  return lines;
-}
-
-/**
- * Add the schema to the schema index file
- */
-
-export function injectSchema(answers: AnswersType) {
-  let { pascalName, lowerName, schemaName, documentId } = formatName(
-    answers.name,
-  );
-
-  const filePath = path.resolve(`${__dirname}../../studio/schemas/index.ts`);
-  const file = fs.readFileSync(filePath).toString();
-  let lines = file.split("\n");
-
-  const schemaImportName = `page${pascalName}`;
-  const importPath = `./documents/${schemaName}`;
-
-  // add import: place doesn't matter, prettier will take care of it
-  lines = [`import ${schemaImportName} from "${importPath}";`, ...lines];
-  const fromNeedle = `...[`;
-  const toNeedle = `],`;
-
-  // add to schemas list
-  lines = addLine({
-    addition: `    ${schemaImportName},`,
-    lines,
-    needle: fromNeedle,
-  });
-  lines = sortLines({ lines, fromNeedle, toNeedle });
-  lines = lines.join("\n");
-
-  if (WRITE) {
-    fs.writeFileSync(filePath, lines);
-    prettierFile(filePath);
-  }
-  return lines;
-}
-
-/**
- * Add the page to the sanity desk structure
- */
-
-export function injectDeskStructure(answers: AnswersType) {
-  let { pascalName, lowerName, schemaName, documentId } = formatName(
-    answers.name,
-  );
-
-  const filePath = `${__dirname}/../studio/structure.tsx`;
-  let lines = fs.readFileSync(filePath).toString().split("\n");
-
-  if (answers.addToDesk) {
-    let addition;
-    if (answers.isSingleton) {
-      addition = getStructureSingleton({
-        schemaName,
-        documentId,
-      });
-    }
-
-    if (!answers.isSingleton) {
-      addition = getStructureDocumentList({
-        schemaName,
-        pascalName,
-      });
-    }
-
-    if (addition) {
-      lines = addLine({
-        addition,
-        lines,
-        needle: `id: "navigation",`,
-        adjustLine: -2,
-      });
-    }
-  }
-
-  lines = lines.join("\n");
-
-  if (WRITE) {
-    fs.writeFileSync(filePath, lines);
-    prettierFile(filePath);
-  }
-
-  return lines;
-}
-
-/**
- * Create the schema file
- */
-
-export function createSchema(answers: AnswersType) {
-  let { pascalName, lowerName, schemaName, documentId } = formatName(
-    answers.name,
-  );
-  const schemaFilePath = `${__dirname}/../studio/schemas/documents/${schemaName}.tsx`;
-
-  const schemaContent = schemaName;
-
-  if (WRITE) {
-    fs.writeFileSync(schemaFilePath, schemaContent);
-    prettierFile(schemaFilePath);
-  }
 }
