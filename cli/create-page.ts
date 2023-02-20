@@ -82,19 +82,27 @@ async function init() {
 
   if (isCancel(answers)) return;
 
-  injectTypes(answers, WRITE);
-  injectSchema(answers, WRITE);
-  createSchema(answers, WRITE);
+  if (pageType === "collection") {
+    injectTypes({ ...answers }, WRITE);
+    injectSchema({ ...answers }, WRITE);
+    createSchema({ ...answers, pageType: "singleton" }, WRITE);
+
+    if (articleName) {
+      injectTypes({ ...answers, pageName: articleName }, WRITE);
+      injectSchema({ ...answers, pageName: articleName }, WRITE);
+      createSchema(
+        { ...answers, pageName: articleName, pageType: "article" },
+        WRITE,
+      );
+    }
+  } else {
+    injectTypes(answers, WRITE);
+    injectSchema(answers, WRITE);
+    createSchema(answers, WRITE);
+  }
 
   if (answers.addToDesk) {
     injectDeskStructure(answers, WRITE);
   }
-
-  if (articleName) {
-    injectTypes({ ...structuredClone(answers), pageName: articleName }, WRITE);
-    injectSchema({ ...structuredClone(answers), pageName: articleName }, WRITE);
-    createSchema({ ...structuredClone(answers), pageName: articleName }, WRITE);
-  }
-
   outro(`You're all set!`);
 }
