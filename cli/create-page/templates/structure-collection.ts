@@ -1,22 +1,31 @@
 type Props = {
-  schemaName: string;
   documentId: string;
+  schemaName: string;
+  pageName: string;
+  articleName: string;
+  articleSchemaName: string;
 };
 
-export const getStructureDocumentList = ({ documentId, schemaName }: Props) => {
+export const getStructureCollection = ({
+  documentId,
+  pageName,
+  schemaName,
+  articleName,
+  articleSchemaName,
+}: Props) => {
   return `S.listItem()
-    .title($name)
+    .title(${pageName})
     .icon(getIconForSchema(S, "${schemaName}"))
     .child(
       list(S, { title: "${schemaName}" }).items([
         singleton(S, {
           id: \`${documentId}\`,
-          type: "$schemaName",
+          type: "${schemaName}",
           language: language.id,
         }),
         documentList(S, {
-          type: "$childSchemaName",
-          title: "$childName",
+          type: "${articleSchemaName}",
+          title: "${articleName}",
           language: language.id,
         }),
       ]),

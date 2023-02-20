@@ -10,8 +10,11 @@ const fs = require("fs");
  * Add types to types.sanity.ts
  */
 
-export function injectTypes(answers: AnswersType, WRITE = false) {
-  let { schemaName } = formatName(answers.name);
+export function injectTypes(
+  answers: Pick<AnswersType, "pageName">,
+  WRITE = false,
+) {
+  let { schemaName } = formatName(answers.pageName);
 
   const filePath = `${__dirname}/../../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");

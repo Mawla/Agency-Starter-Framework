@@ -10,8 +10,11 @@ import { sortLines } from "../utils/sort-lines";
 const fs = require("fs");
 const path = require("path");
 
-export function injectSchema(answers: AnswersType, WRITE = false) {
-  let { pascalName, schemaName } = formatName(answers.name);
+export function injectSchema(
+  answers: Pick<AnswersType, "pageName">,
+  WRITE = false,
+) {
+  let { pascalName, schemaName } = formatName(answers.pageName);
 
   const filePath = path.resolve(`${__dirname}../../../studio/schemas/index.ts`);
   const file = fs.readFileSync(filePath).toString();
