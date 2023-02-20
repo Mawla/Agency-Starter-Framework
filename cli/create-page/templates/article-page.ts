@@ -1,9 +1,25 @@
 type Props = {
   schemaName: string;
   pageName: string;
-  parentId: string;
-  parentSchemaName: string;
+  parentId?: string;
+  parentSchemaName?: string;
 };
+
+const getParentInitialValue = (
+  parentId: string,
+) => `initialValue: async (props: any, context: any) => {
+    return await getParentDocumentInitialValue(context, "${parentId}");
+  }
+`;
+
+const getParentFieldOptions = (
+  parentSchemaName: string,
+) => `to: [{ type: "${parentSchemaName}" }],
+  options: {
+    disableNew: true,
+    ...PARENT_FIELD.options,
+  }
+`;
 
 export const getArticlePageSchema = ({
   schemaName,
@@ -14,7 +30,6 @@ export const getArticlePageSchema = ({
   return `
   import { SchemaName } from "../../../types.sanity";
   import {
-    AUTHOR_FIELD,
     DEFAULT_CONTENT_PAGE_PREVIEW,
     getParentDocumentInitialValue,
     ORDER_PUBLISHED_DESC,
@@ -36,18 +51,12 @@ export const getArticlePageSchema = ({
     orderings: [ORDER_PUBLISHED_DESC],
     preview: DEFAULT_CONTENT_PAGE_PREVIEW,
     icon: () => <Pages weight="thin" size={20} />,
-    initialValue: async (props: any, context: any) => {
-      return await getParentDocumentInitialValue(context, "${parentId}");
-    },
+    ${parentId && getParentInitialValue(parentId)},
     groups: [...pageBase.groups],
     fields: [
       {
         ...PARENT_FIELD,
-        to: [{ type: "${parentSchemaName}" }],
-        options: {
-          disableNew: true,
-          ...PARENT_FIELD.options,
-        },
+        ${parentSchemaName && getParentFieldOptions(parentSchemaName)}
       },
       ...pageBase.fields,
       TAGS_FIELD,
