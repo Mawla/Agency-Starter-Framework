@@ -91,7 +91,11 @@ async function init() {
       injectTypes({ ...answers, pageName: articleName }, WRITE);
       injectSchema({ ...answers, pageName: articleName }, WRITE);
       createSchema(
-        { ...answers, pageName: articleName, pageType: "article" },
+        {
+          ...answers,
+          pageName: `${articleName} overview`,
+          pageType: "article",
+        },
         WRITE,
       );
     }
