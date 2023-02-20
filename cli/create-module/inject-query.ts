@@ -21,7 +21,7 @@ export function injectQuery(
     `import { get${pascalName}Query } from "../${"modules"}/${lowerName}/${lowerName}.query";`,
   );
   lines = injectLine({
-    addition: `    \${get${pascalName}Query(language)},`,
+    addition: `      \${get${pascalName}Query(language)},`,
     lines,
     needle: '"modules":',
     adjustLine: -3,
