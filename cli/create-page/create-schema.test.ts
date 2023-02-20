@@ -23,6 +23,7 @@ test("create article page schema", () => {
   const result = createSchema({
     pageName: "Test",
     pageType: "article",
+    parentType: "page.blogs",
   });
 
   expect(
