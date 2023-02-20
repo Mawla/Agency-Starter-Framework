@@ -59,14 +59,12 @@ async function init() {
 
   injectSchema(answers, WRITE);
   injectQuery(answers, WRITE);
+  // inject module in Module Builder
   // create modules/[name]/Module.tsx
   // create modules/[name]/module.stories.tsx
   // create modules/[name]/module.test.tsx
   // create modules/[name]/module.query.tsx
   // create modules/[name]/module.options.tsx
-
-  // inject query in page.query.ts
-  // inject module in Module Builder
 
   outro(`You're all set!`);
 }
