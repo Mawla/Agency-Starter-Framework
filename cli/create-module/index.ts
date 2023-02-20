@@ -5,6 +5,7 @@
  * sanity exec ./cli/create-module.ts -- --write
  *
  */
+import { injectSchema } from "./inject-schema";
 import {
   text,
   intro,
@@ -61,6 +62,7 @@ async function init() {
     moduleDescription: String(moduleDescription),
     fields: Boolean(fields),
   };
+  injectSchema(answers, WRITE);
 
   outro(`You're all set!`);
 }
