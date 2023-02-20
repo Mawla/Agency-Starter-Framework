@@ -3,7 +3,6 @@
  * and insert it in types and sanity schemas index
  *
  * sanity exec ./cli/create-page.ts -- --write
- * NODE_ENV=test npx jest ./cli/create-page.test.ts
  *
  */
 import { createSchema } from "./create-page/create-schema";
