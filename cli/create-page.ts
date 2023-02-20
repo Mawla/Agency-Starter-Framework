@@ -10,6 +10,7 @@ import { createSchema } from "./create-page/create-schema";
 import { injectDeskStructure } from "./create-page/inject-desk-structure";
 import { injectSchema } from "./create-page/inject-schema";
 import { injectTypes } from "./create-page/inject-types";
+import { formatName } from "./utils/format-name";
 import { text, intro, outro, confirm, isCancel, select } from "@clack/prompts";
 
 const args = process.argv.slice(2);
@@ -110,7 +111,7 @@ async function init() {
           ...answers,
           pageName: articleName,
           pageType: "article",
-          parentType: answers.pageName,
+          parentType: formatName(answers.pageName).schemaName,
         },
         WRITE,
       );
