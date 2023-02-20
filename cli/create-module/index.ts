@@ -5,6 +5,7 @@
  * sanity exec ./cli/create-module.ts -- --write
  *
  */
+import { injectQuery } from "./inject-query";
 import { injectSchema } from "./inject-schema";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
 
@@ -57,6 +58,7 @@ async function init() {
   };
 
   injectSchema(answers, WRITE);
+  injectQuery(answers, WRITE);
   // create modules/[name]/Module.tsx
   // create modules/[name]/module.stories.tsx
   // create modules/[name]/module.test.tsx
