@@ -15,7 +15,8 @@
     "create-dialog": "sanity exec ./scripts/create/create-dialog.ts",
     "create-hero": "sanity exec ./scripts/create/create-hero.ts",
     "create-module": "sanity exec ./scripts/create/create-module.ts",
-    "create-page": "sanity exec ./scripts/create/create-page.ts",
+    "create-page": "sanity exec ./cli/create-page.ts",
+    "test-cli": "NODE_ENV=test npx jest ./cli/ ",
     "create-static-form": "sanity exec ./scripts/create/create-static-form.ts",
     "test": "NODE_ENV=test jest",
     "test-watch": "jest --watch"
