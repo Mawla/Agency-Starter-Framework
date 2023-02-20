@@ -13,7 +13,6 @@ export const getArticlePageSchema = ({
 }: Props) => {
   return `
   import { SchemaName } from "../../../types.sanity";
-  import { getStructurePath } from "../../utils/desk/get-structure-path";
   import {
     AUTHOR_FIELD,
     DEFAULT_CONTENT_PAGE_PREVIEW,
