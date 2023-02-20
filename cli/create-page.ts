@@ -30,20 +30,25 @@ async function init() {
     message: "What type of page is it?",
     options: [
       { value: "content", title: "Basic content page" },
-      { value: "singleton", title: "Singleton (e.g blogs overview)" },
       {
         value: "collection",
         title: "Singleton + articles (e.g blogs overview and blog articles)",
       },
+      { value: "singleton", title: "Singleton (e.g blogs overview)" },
       { value: "article", title: "Article (e.g blog articles" },
     ],
   });
   if (isCancel(pageType)) process.exit(0);
 
+  let PAGE_NAME_QUESTIONS: Record<AnswersType["pageType"], string> = {
+    content: `What is the name of the page?`,
+    collection: `What is the name of the parent page? (plural, e.g. "Blogs" or "Videos")`,
+    singleton: `What is the name of the page? (e.g. "Blogs" or "Videos")`,
+    article: `What is the name of the article page? (singular, e.g. "Blog" or "Video")`,
+  };
+
   let pageName = await text({
-    message: `What is the name of the ${
-      pageType === "collection" ? "parent" : ""
-    } page? (e.g. "Blogs")`,
+    message: PAGE_NAME_QUESTIONS[pageType],
     validate(value) {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
@@ -53,7 +58,7 @@ async function init() {
   let articleName;
   if (pageType === "collection") {
     articleName = await text({
-      message: `What is the name of the article page?`,
+      message: PAGE_NAME_QUESTIONS["article"],
       validate(value) {
         if (!value || value.trim().length === 0) return `Value is required!`;
       },
