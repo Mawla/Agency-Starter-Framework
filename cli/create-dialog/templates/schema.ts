@@ -13,6 +13,7 @@ export const getSchemaSnippet = ({
   import { Website } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType, SlugRule } from "sanity";
+  import { SLUG_FIELD } from "../page-fields";
 
   const schema = defineType({
     name: "${schemaName}",
@@ -22,10 +23,11 @@ export const getSchemaSnippet = ({
     icon: () => <Website weight="thin" />,
     fields: [
       defineField({
-        name: "slug",
-        title: "Identifier",
-        type: "slug",
-        validation: (Rule: SlugRule) => Rule.required(),
+        ...SLUG_FIELD,
+        group: "",
+        options: {
+          maxLength: 96,
+        } as any,
         description:
           "Unique identifier used to link to this dialog from a button. Only lowercase and no special characters except -",
       }),
