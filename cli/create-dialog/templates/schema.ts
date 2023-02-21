@@ -21,6 +21,19 @@ export const getSchemaSnippet = ({
     description: "${dialogDescription}",
     type: "object",
     icon: () => <Website weight="thin" />,
+    preview: {
+      select: {
+        title: 'title',
+        subtitle: 'slug.current'
+      },
+      prepare({ title ='', subtitle='' }: any) {
+        return {
+          title,
+          subtitle,
+          media: <Website weight="thin" />,
+        };
+      },
+    },
     fields: [
       defineField({
         ...SLUG_FIELD,
