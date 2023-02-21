@@ -27,7 +27,8 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
         );
       });
       expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
-    });`,
+    });
+  });`,
   )}
 
   ${render(
@@ -43,7 +44,8 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
         );
       });
       expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
-    });`,
+    });
+  });`,
   )}
 
   ${render(
@@ -64,7 +66,8 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
         );
       });
       expect(screen.getAllByAltText("hello"));
-    });`,
+    });
+  });`,
   )}
 
   ${render(
@@ -80,7 +83,8 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
         );
       });
       expect(screen.getByText("Hello", { selector: "li" })).toBeInTheDocument();
-    });`,
+    });
+  });`,
   )}
 
   ${render(
@@ -96,7 +100,8 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
         );
       });
       expect(screen.getByText("hello")).toBeInTheDocument();
-    });`,
+    });
+  });`,
   )}
   `;
 };
