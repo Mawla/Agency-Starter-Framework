@@ -19,6 +19,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     export const BACKGROUND_COLOR_OPTIONS = pick(COLORS, "white", "black");
     export type BackgroundColorType = keyof typeof BACKGROUND_COLOR_OPTIONS;
 
+    
     ${render(
       fields,
       "title",
@@ -31,6 +32,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     `,
     )};
     
+
     ${render(
       fields,
       "intro",
@@ -40,6 +42,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     `,
     )};
     
+
     ${render(
       fields,
       "eyebrow",
