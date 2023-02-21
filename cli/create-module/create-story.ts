@@ -18,7 +18,7 @@ export function createStory(
   const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.stories.tsx`;
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
-  const lines = getStorySnippet({ pascalName, fields });
+  const lines = getStorySnippet({ pascalName, lowerName, fields });
 
   if (WRITE) {
     fs.writeFileSync(filePath, lines);
