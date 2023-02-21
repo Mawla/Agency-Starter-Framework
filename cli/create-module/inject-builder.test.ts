@@ -1,7 +1,7 @@
-import { injectModuleBuilder } from "./inject-module-builder";
+import { injectBuilder } from "./inject-builder";
 
 test("inject module in page builder", () => {
-  const result = injectModuleBuilder({
+  const result = injectBuilder({
     moduleName: "Test",
   });
 

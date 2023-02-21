@@ -6,34 +6,42 @@ import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
 import {
-  getModuleBuilderComponent,
+  getHeroBuilderImport,
+  getBuilderComponent,
   getModuleBuilderImport,
-} from "./templates/module-builder";
+} from "./templates/builder";
 
 const fs = require("fs");
 
-export function injectModuleBuilder(
+export function injectBuilder(
   answers: Pick<AnswersType, "moduleName">,
   WRITE = false,
+  MODULE_TYPE = "module",
 ) {
   let { pascalName, lowerName, schemaName } = formatName(answers.moduleName);
 
-  const filePath = `${__dirname}/../../layout/modulebuilder/ModuleBuilder.tsx`;
+  let filePath = `${__dirname}/../../layout/modulebuilder/ModuleBuilder.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  lines = [
-    getModuleBuilderImport({ pascalName, lowerName, schemaName }),
-    ...lines,
-  ];
+  let imports = getModuleBuilderImport({ pascalName, lowerName, schemaName });
+  let needle = "</LazyLoadInView>";
+
+  if (MODULE_TYPE === "hero") {
+    filePath = `${__dirname}/../../layout/herobuilder/HeroBuilder.tsx`;
+    imports = getHeroBuilderImport({ pascalName, lowerName, schemaName });
+    needle = "</section>";
+  }
+
+  lines = [imports, ...lines];
 
   lines = injectLine({
-    addition: getModuleBuilderComponent({
+    addition: getBuilderComponent({
       pascalName,
       lowerName,
       schemaName,
     }),
     lines,
-    needle: "</LazyLoadInView>",
+    needle,
     offset: 0,
   });
 

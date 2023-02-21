@@ -14,11 +14,18 @@ export const getModuleBuilderImport = ({ pascalName, lowerName }: Props) => {
       ),
   );`;
 };
+export const getHeroBuilderImport = ({ pascalName, lowerName }: Props) => {
+  return `
+  import { ${pascalName}Props } from "../../heroes/${lowerName}/${pascalName}";
+  const ${pascalName} = lazy<ComponentType<${pascalName}Props>>(
+    () =>
+      import(
+        /* webpackChunkName: "${pascalName}" */ "../../heroes/${lowerName}/${pascalName}"
+      ),
+  );`;
+};
 
-export const getModuleBuilderComponent = ({
-  pascalName,
-  schemaName,
-}: Props) => {
+export const getBuilderComponent = ({ pascalName, schemaName }: Props) => {
   return `
     {item._type === "${schemaName}" && (
       <${pascalName} {...(item as ${pascalName}Props)} />

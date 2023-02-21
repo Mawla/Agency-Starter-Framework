@@ -12,11 +12,15 @@ const path = require("path");
 export function createSchema(
   answers: Pick<AnswersType, "moduleName" | "fields" | "moduleDescription">,
   WRITE = false,
+  MODULE_TYPE = "module",
 ) {
   let { moduleName, fields, moduleDescription } = answers;
-  let { lowerName, pascalName, schemaName } = formatName(moduleName);
-  const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.schema.tsx`;
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  let { lowerName, schemaName } = formatName(moduleName, MODULE_TYPE);
+  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.schema.tsx`;
+
+  if (MODULE_TYPE === "hero") {
+    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.schema.tsx`;
+  }
 
   const lines = getSchemaSnippet({
     moduleName,
@@ -27,6 +31,7 @@ export function createSchema(
   });
 
   if (WRITE) {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

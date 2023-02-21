@@ -13,6 +13,7 @@ const fs = require("fs");
 export function injectTypes(
   answers: Pick<AnswersType, "moduleName">,
   WRITE = false,
+  MODULE_TYPE = "module",
 ) {
   let { schemaName } = formatName(answers.moduleName);
 
@@ -32,18 +33,23 @@ export function injectTypes(
     toNeedle: "};",
   });
 
+  let needle = "export const MODULE_SCHEMAS";
+  if (MODULE_TYPE === "hero") {
+    needle = "export const HERO_SCHEMAS";
+  }
+
   // add to linkable schemas list
   lines = injectLine({
     addition: `  "${schemaName}",`,
     lines,
-    needle: "export const MODULE_SCHEMAS",
+    needle,
     delimiter: ");",
     offset: 2,
   });
 
   lines = sortLines({
     lines,
-    fromNeedle: "export const MODULE_SCHEMAS",
+    fromNeedle: needle,
     toNeedle: ");",
     adjustFromLine: 1,
   });

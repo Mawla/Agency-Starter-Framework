@@ -13,6 +13,7 @@ const path = require("path");
 export function injectSchema(
   answers: Pick<AnswersType, "moduleName">,
   WRITE = false,
+  MODULE_TYPE = "module",
 ) {
   let { pascalName, lowerName } = formatName(answers.moduleName);
 
@@ -20,8 +21,13 @@ export function injectSchema(
   const file = fs.readFileSync(filePath).toString();
   let lines = file.split("\n");
 
-  const schemaImportName = `module${pascalName}`;
-  const importPath = `../../modules/${lowerName}/${lowerName}.schema`;
+  let schemaImportName = `module${pascalName}`;
+  let importPath = `../../modules/${lowerName}/${lowerName}.schema`;
+
+  if (MODULE_TYPE === "hero") {
+    schemaImportName = `hero${pascalName}`;
+    importPath = `../../heroes/${lowerName}/${lowerName}.schema`;
+  }
 
   // add import: place doesn't matter, prettier will take care of it
   lines = [`import ${schemaImportName} from "${importPath}";`, ...lines];

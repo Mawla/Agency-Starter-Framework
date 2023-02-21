@@ -12,15 +12,22 @@ const path = require("path");
 export function createQuery(
   answers: Pick<AnswersType, "moduleName" | "fields">,
   WRITE = false,
+  MODULE_TYPE = "module",
 ) {
   let { moduleName, fields } = answers;
-  let { lowerName, pascalName, schemaName } = formatName(moduleName);
-  const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.query.tsx`;
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  let { lowerName, pascalName, schemaName } = formatName(
+    moduleName,
+    MODULE_TYPE,
+  );
+  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.query.tsx`;
+  if (MODULE_TYPE === "hero") {
+    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.query.tsx`;
+  }
 
   const lines = getQuerySnippet({ pascalName, schemaName, fields });
 
   if (WRITE) {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

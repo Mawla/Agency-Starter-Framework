@@ -11,7 +11,7 @@ import { createReactComponent } from "./create-react-component";
 import { createSchema } from "./create-schema";
 import { createStory } from "./create-story";
 import { createTests } from "./create-tests";
-import { injectModuleBuilder } from "./inject-module-builder";
+import { injectBuilder } from "./inject-builder";
 import { injectPageQuery } from "./inject-page-query";
 import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
@@ -19,6 +19,7 @@ import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
 
 const args = process.argv.slice(2);
 const WRITE = args.includes("--write");
+const MODULE_TYPE = args.includes("--hero") ? "hero" : "module";
 
 init();
 
@@ -75,18 +76,18 @@ async function init() {
   }
 
   // inject snippets in existing files
-  injectSchema(answers, WRITE);
-  injectTypes(answers, WRITE);
-  injectPageQuery(answers, WRITE);
-  injectModuleBuilder(answers, WRITE);
+  injectSchema(answers, WRITE, MODULE_TYPE);
+  injectTypes(answers, WRITE, MODULE_TYPE);
+  injectPageQuery(answers, WRITE, MODULE_TYPE);
+  injectBuilder(answers, WRITE, MODULE_TYPE);
 
   // create files
-  createReactComponent(answers, WRITE);
-  createSchema(answers, WRITE);
-  createQuery(answers, WRITE);
-  createOptions(answers, WRITE);
-  createStory(answers, WRITE);
-  createTests(answers, WRITE);
+  createReactComponent(answers, WRITE, MODULE_TYPE);
+  createSchema(answers, WRITE, MODULE_TYPE);
+  createQuery(answers, WRITE, MODULE_TYPE);
+  createOptions(answers, WRITE, MODULE_TYPE);
+  createStory(answers, WRITE, MODULE_TYPE);
+  createTests(answers, WRITE, MODULE_TYPE);
 
   outro(`You're all set!`);
 }
