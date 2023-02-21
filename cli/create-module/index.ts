@@ -49,7 +49,7 @@ async function init() {
 
   let fields = await multiselect({
     message: "Which fields do you want get started with?",
-    initialValue: ["title", "intro", "image"],
+    initialValue: ["title", "eyebrow", "intro", "image"],
     options: [
       { value: "title", label: "Title" },
       { value: "eyebrow", label: "Eyebrow (above title)" },
@@ -68,6 +68,13 @@ async function init() {
       (field: { value: string; label: string }) => field.value,
     ),
   };
+
+  // can't have an eyebrow without a title
+  if (answers.fields.includes("eyebrow") && !answers.fields.includes("title")) {
+    answers.fields.push("title");
+  }
+
+  return;
 
   // inject snippets in existing files
   injectSchema(answers, WRITE);
