@@ -5,6 +5,7 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { getBuilderSnippet } from "./templates/builder";
 
 const fs = require("fs");
 
@@ -18,9 +19,7 @@ export function injectBuilder(
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines = injectLine({
-    addition: `{item._type === "${schemaName}" && (
-      <div>${answers.dialogName}</div>
-    )}`,
+    addition: getBuilderSnippet({ schemaName, dialogName: answers.dialogName }),
     lines,
     needle: "</Dialog>",
     offset: 0,

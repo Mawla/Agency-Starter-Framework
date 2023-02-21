@@ -5,6 +5,7 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { getPageQuerySnippet } from "./templates/page-query";
 
 const fs = require("fs");
 
@@ -20,7 +21,7 @@ export function injectPageQuery(
   let needle = "dialogs {";
 
   lines = injectLine({
-    addition: `_type == "${schemaName}" => { ... }`,
+    addition: getPageQuerySnippet({ schemaName }),
     lines,
     needle,
     offset: 1,

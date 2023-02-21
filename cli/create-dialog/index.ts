@@ -34,7 +34,7 @@ async function init() {
   if (isCancel(dialogName)) process.exit(0);
 
   let dialogDescription = await text({
-    message: `Human readable form. 'My Dialog' will become schema name 'dialog.mydialog'.`,
+    message: `What is the description of the dialog?`,
     validate(value) {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
