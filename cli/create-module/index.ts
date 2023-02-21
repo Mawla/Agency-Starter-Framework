@@ -12,7 +12,7 @@ import { createSchema } from "./create-schema";
 import { createStory } from "./create-story";
 import { createTests } from "./create-tests";
 import { injectModuleBuilder } from "./inject-module-builder";
-import { injectQuery } from "./inject-query";
+import { injectPageQuery } from "./inject-page-query";
 import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
@@ -48,14 +48,14 @@ async function init() {
   if (isCancel(moduleName)) process.exit(0);
 
   let fields = await multiselect({
-    message: "Which basic fields do you want to set up?",
+    message: "Which fields do you want get started with?",
     initialValue: ["title", "intro", "image"],
     options: [
       { value: "title", label: "Title" },
       { value: "intro", label: "Intro" },
       { value: "image", label: "Image" },
       { value: "buttons", label: "Buttons" },
-      { value: "items", label: "List of items" },
+      { value: "items", label: "Generic list of items" },
     ],
   });
   if (isCancel(fields)) process.exit(0);
@@ -68,17 +68,19 @@ async function init() {
     ),
   };
 
+  // inject snippets in existing files
   injectSchema(answers, WRITE);
   injectTypes(answers, WRITE);
-  injectQuery(answers, WRITE);
+  injectPageQuery(answers, WRITE);
+  injectModuleBuilder(answers, WRITE);
+
+  // create files
+  createReactComponent(answers, WRITE);
+  createSchema(answers, WRITE);
+  createQuery(answers, WRITE);
   createOptions(answers, WRITE);
   createStory(answers, WRITE);
-  createReactComponent(answers, WRITE);
-  injectModuleBuilder(answers, WRITE);
-  createReactComponent(answers, WRITE);
   createTests(answers, WRITE);
-  createQuery(answers, WRITE);
-  createSchema(answers, WRITE);
 
   outro(`You're all set!`);
 }

@@ -1,7 +1,7 @@
-import { injectQuery } from "./inject-query";
+import { injectPageQuery } from "./inject-page-query";
 
 test("inject query page.query.ts", () => {
-  const result = injectQuery({
+  const result = injectPageQuery({
     moduleName: "Test",
   });
 

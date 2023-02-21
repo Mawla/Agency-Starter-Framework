@@ -12,7 +12,7 @@ import {
 
 const fs = require("fs");
 
-export function injectQuery(
+export function injectPageQuery(
   answers: Pick<AnswersType, "moduleName">,
   WRITE = false,
 ) {
