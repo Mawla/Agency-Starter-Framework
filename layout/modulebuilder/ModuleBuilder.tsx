@@ -1,4 +1,3 @@
-import { PageContext } from "../../context/PageContext";
 import { BillboardProps } from "../../modules/billboard/Billboard";
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
@@ -16,7 +15,7 @@ import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
-import React, { ComponentType, useContext } from "react";
+import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
 
 const Image = lazy<ComponentType<ImageProps>>(
@@ -104,17 +103,8 @@ const INITIAL_SECTIONS_TO_LOAD: number = 2;
 const INVIEW_LOAD_ONLY_SECTIONS: ModuleSchemaName[] = [];
 
 export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
-  const { sitemapItem } = useContext(PageContext);
-
-  const hasH1 = items.some(({ _type }) => _type.startsWith("hero."));
-
   return (
     <main>
-      {/* insert h1 at the top if there are no hero and no breadcrumbs */}
-      {!hasH1 && sitemapItem?.title && (
-        <h1 className="sr-only">{sitemapItem.title}</h1>
-      )}
-
       {items?.map((item, i) => (
         <Suspense fallback={``} key={item._key}>
           <ModuleErrorBoundary>
