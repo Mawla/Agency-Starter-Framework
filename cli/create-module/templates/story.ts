@@ -59,9 +59,9 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
       <>
         {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
           (color) => (
-            <div key={color} className="mb-10">
-              <Beeps
-                title="Beeps"
+            <div key={color}>
+              <${pascalName}
+                title="${pascalName}"
                 theme={{
                   module: { background: color },
                 }}
@@ -79,10 +79,10 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
       export const EyebrowColors = () => (
         <>
           {(Object.keys(EYEBROW_COLOR_OPTIONS) as EyebrowColorType[]).map((color) => (
-            <div key={color} className="mb-10">
-              <Beeps
-                title="Beeps"
-                eyebrow="Beeps"
+            <div key={color}>
+              <${pascalName}
+                title="${pascalName}"
+                eyebrow="${pascalName}"
                 theme={{
                   eyebrow: { color },
                 }}
@@ -101,9 +101,9 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
     export const TitleColors = () => (
       <>
         {(Object.keys(TITLE_COLOR_OPTIONS) as TitleColorType[]).map((color) => (
-          <div key={color} className="mb-10">
-            <Beeps
-              title="Beeps"
+          <div key={color}>
+            <${pascalName}
+              title="${pascalName}"
               theme={{
                 title: { color },
               }}
@@ -116,9 +116,9 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
     export const TitleSizes = () => (
       <>
         {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
-          <div key={size} className="mb-10">
-            <Beeps
-              title="Beeps"
+          <div key={size}>
+            <${pascalName}
+              title="${pascalName}"
               theme={{
                 title: { size },
               }}
@@ -136,9 +136,9 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
     export const IntroColors = () => (
       <>
         {(Object.keys(INTRO_COLOR_OPTIONS) as IntroColorType[]).map((color) => (
-          <div key={color} className="mb-10">
-            <Beeps
-              title="Beeps"
+          <div key={color}>
+            <${pascalName}
+            intro={<p>${pascalName}</p>}
               theme={{
                 intro: { color },
               }}
