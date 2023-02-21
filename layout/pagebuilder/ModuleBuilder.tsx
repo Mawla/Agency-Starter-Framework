@@ -1,4 +1,3 @@
-import { BeepsProps } from "../../modules/beeps/Beeps";
 import { BillboardProps } from "../../modules/billboard/Billboard";
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { CardGridProps } from "../../modules/cardgrid/CardGrid";
@@ -18,10 +17,6 @@ import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
-
-const Beeps = lazy<ComponentType<BeepsProps>>(
-  () => import(/* webpackChunkName: "Beeps" */ "../../modules/beeps/Beeps"),
-);
 
 const Image = lazy<ComponentType<ImageProps>>(
   () => import(/* webpackChunkName: "Image" */ "../../modules/image/Image"),
@@ -162,10 +157,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.image" && (
                 <Image {...(item as ImageProps)} />
-              )}
-
-              {item._type === "module.beeps" && (
-                <Beeps {...(item as BeepsProps)} />
               )}
             </LazyLoadInView>
           </ModuleErrorBoundary>
