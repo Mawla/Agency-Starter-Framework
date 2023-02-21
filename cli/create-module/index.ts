@@ -8,6 +8,7 @@
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
 import { createReactComponent } from "./create-react-component";
+import { createSchema } from "./create-schema";
 import { createStory } from "./create-story";
 import { createTests } from "./create-tests";
 import { injectModuleBuilder } from "./inject-module-builder";
@@ -22,7 +23,7 @@ init();
 
 export type AnswersType = {
   moduleName: string;
-  moduleDescription: boolean;
+  moduleDescription: string;
   fields?: string[];
 };
 
@@ -72,7 +73,7 @@ async function init() {
   createReactComponent(answers, WRITE);
   createTests(answers, WRITE);
   createQuery(answers, WRITE);
-  // create modules/[name]/module.schema.tsx
+  createSchema(answers, WRITE);
 
   outro(`You're all set!`);
 }

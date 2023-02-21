@@ -22,6 +22,7 @@ test("create query with title", () => {
     fields: ["title"],
   });
 
+  expect(result.includes(`eyebrow,`)).toBeTruthy();
   expect(result.includes(`title,`)).toBeTruthy();
 });
 
