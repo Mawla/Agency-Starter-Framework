@@ -30,6 +30,7 @@ export function injectBuilder(
   let needle = "</LazyLoadInView>";
 
   if (MODULE_TYPE === "hero") {
+    lines = fs.readFileSync(filePath).toString().split("\n");
     filePath = `${__dirname}/../../layout/pagebuilder/HeroBuilder.tsx`;
     imports = getHeroBuilderImport({ pascalName, lowerName, schemaName });
     needle = "</section>";
