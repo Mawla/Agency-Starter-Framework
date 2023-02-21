@@ -16,10 +16,7 @@ export function createStory(
   let { lowerName, pascalName } = formatName(moduleName);
   const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.stories.tsx`;
 
-  let lines: string | string[] = [];
-  lines.push(getStorySnippet({ pascalName, fields }));
-
-  lines = lines.join("\n");
+  const lines = getStorySnippet({ pascalName, fields });
 
   if (WRITE) {
     fs.writeFileSync(filePath, lines);
