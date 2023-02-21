@@ -7,6 +7,7 @@ import { getOptionsSnippet } from "./templates/options";
  * Create the schema file
  */
 const fs = require("fs");
+const path = require("path");
 
 export function createOptions(
   answers: Pick<AnswersType, "moduleName">,
@@ -15,6 +16,7 @@ export function createOptions(
   let { moduleName } = answers;
   let { lowerName } = formatName(moduleName);
   const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.options.ts`;
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   const lines = getOptionsSnippet();
 
