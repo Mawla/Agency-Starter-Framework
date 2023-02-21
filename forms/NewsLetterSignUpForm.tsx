@@ -1,5 +1,5 @@
 import { Button } from "../components/buttons/Button";
-import { StaticFormState } from "../layout/modulebuilder/StaticFormBuilder";
+import { StaticFormState } from "../layout/pagebuilder/StaticFormBuilder";
 import { Formik, Field, ErrorMessage } from "formik";
 import React from "react";
 import * as Yup from "yup";

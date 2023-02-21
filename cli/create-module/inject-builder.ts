@@ -20,14 +20,14 @@ export function injectBuilder(
 ) {
   let { pascalName, lowerName, schemaName } = formatName(answers.moduleName);
 
-  let filePath = `${__dirname}/../../layout/modulebuilder/ModuleBuilder.tsx`;
+  let filePath = `${__dirname}/../../layout/pagebuilder/ModuleBuilder.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let imports = getModuleBuilderImport({ pascalName, lowerName, schemaName });
   let needle = "</LazyLoadInView>";
 
   if (MODULE_TYPE === "hero") {
-    filePath = `${__dirname}/../../layout/herobuilder/HeroBuilder.tsx`;
+    filePath = `${__dirname}/../../layout/pagebuilder/HeroBuilder.tsx`;
     imports = getHeroBuilderImport({ pascalName, lowerName, schemaName });
     needle = "</section>";
   }
