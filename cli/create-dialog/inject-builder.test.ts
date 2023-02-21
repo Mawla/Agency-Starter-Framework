@@ -8,7 +8,7 @@ test("inject module in page builder", () => {
   expect(
     result.replace(/\s/g, "").includes(
       `{item._type === "dialog.test" && (
-        <div>Test</div>
+        <div>{item.title}</div>
       )}`.replace(/\s/g, ""),
     ),
   ).toBeTruthy();
