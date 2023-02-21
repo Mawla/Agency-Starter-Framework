@@ -5,5 +5,5 @@ test("inject query page.query.ts", () => {
     dialogName: "Test",
   });
 
-  expect(result.includes(`_type == "dialog.test" => { ... }`)).toBeTruthy();
+  expect(result.includes(`_type == "dialog.test" => { title }`)).toBeTruthy();
 });
