@@ -19,14 +19,14 @@ export function createQuery(
     moduleName,
     MODULE_TYPE,
   );
-  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.query.tsx`;
-  if (MODULE_TYPE === "hero") {
-    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.query.tsx`;
-  }
 
   const lines = getQuerySnippet({ pascalName, schemaName, fields });
 
   if (WRITE) {
+    let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.query.tsx`;
+    if (MODULE_TYPE === "hero") {
+      filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.query.tsx`;
+    }
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);

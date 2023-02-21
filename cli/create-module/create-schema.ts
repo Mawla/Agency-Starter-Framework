@@ -16,11 +16,6 @@ export function createSchema(
 ) {
   let { moduleName, fields, moduleDescription } = answers;
   let { lowerName, schemaName } = formatName(moduleName, MODULE_TYPE);
-  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.schema.tsx`;
-
-  if (MODULE_TYPE === "hero") {
-    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.schema.tsx`;
-  }
 
   const lines = getSchemaSnippet({
     moduleName,
@@ -31,6 +26,11 @@ export function createSchema(
   });
 
   if (WRITE) {
+    let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.schema.tsx`;
+    if (MODULE_TYPE === "hero") {
+      filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.schema.tsx`;
+    }
+
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);

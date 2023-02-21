@@ -16,15 +16,19 @@ export function createStory(
 ) {
   let { moduleName, fields } = answers;
   let { lowerName, pascalName } = formatName(moduleName, MODULE_TYPE);
-  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.stories.tsx`;
+
+  let lines = getStorySnippet({ pascalName, lowerName, fields });
 
   if (MODULE_TYPE === "hero") {
-    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.stories.tsx`;
+    lines = lines.replace('title: "Modules/', 'title: "Heroes/');
   }
 
-  const lines = getStorySnippet({ pascalName, lowerName, fields });
-
   if (WRITE) {
+    let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.stories.tsx`;
+    if (MODULE_TYPE === "hero") {
+      filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.stories.tsx`;
+    }
+
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);

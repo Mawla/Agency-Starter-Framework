@@ -16,15 +16,15 @@ export function createOptions(
 ) {
   let { moduleName, fields } = answers;
   let { lowerName } = formatName(moduleName, MODULE_TYPE);
-  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.options.ts`;
-
-  if (MODULE_TYPE === "hero") {
-    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.options.ts`;
-  }
 
   const lines = getOptionsSnippet({ fields });
 
   if (WRITE) {
+    let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.options.ts`;
+    if (MODULE_TYPE === "hero") {
+      filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.options.ts`;
+    }
+
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);

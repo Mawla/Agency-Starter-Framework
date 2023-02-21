@@ -16,15 +16,15 @@ export function createTests(
 ) {
   let { moduleName, fields } = answers;
   let { lowerName, pascalName } = formatName(moduleName, MODULE_TYPE);
-  let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.test.tsx`;
-
-  if (MODULE_TYPE === "hero") {
-    filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.test.tsx`;
-  }
 
   const lines = getTestSnippet({ pascalName, fields });
 
   if (WRITE) {
+    let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.test.tsx`;
+    if (MODULE_TYPE === "hero") {
+      filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.test.tsx`;
+    }
+
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);

@@ -25,7 +25,6 @@ export function createReactComponent(
 
   if (WRITE) {
     let filePath = `${__dirname}/../../modules/${lowerName}/${pascalName}.tsx`;
-
     if (MODULE_TYPE === "hero") {
       filePath = `${__dirname}/../../heroes/${lowerName}/${pascalName}.tsx`;
     }
