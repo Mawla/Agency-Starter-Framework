@@ -200,7 +200,7 @@ export const PARENT_FIELD = defineField({
   to: [{ type: "page.content" }, { type: "page.landing" }],
   options: {
     filter: ({ document }) => {
-      const { language } = getStructurePath();
+      const { language = baseLanguage } = getStructurePath();
       if (!document._id) return {};
 
       return {
@@ -223,7 +223,7 @@ export async function getParentDocumentInitialValue(
   parentId: string,
 ) {
   const client = context.getClient({ apiVersion: "vX" });
-  const { language } = getStructurePath();
+  const { language = baseLanguage } = getStructurePath();
 
   const parentDocumentId = await client.fetch(
     `*[_id match "${parentId}__i18n_${language}"][0]._id`,
@@ -240,7 +240,11 @@ export async function getParentDocumentInitialValue(
 export const LANGUAGE_FIELD = defineField({
   name: "language",
   title: "Language",
-  type: "language",
+  type: "string",
+  validation: (Rule: StringRule) => Rule.required(),
+  options: {
+    list: languages.map(({ title, id }) => ({ title, value: id })),
+  },
   initialValue: () => {
     const { language } = getStructurePath();
     return language || baseLanguage;
@@ -287,7 +291,7 @@ export const I18N_BASE_FIELD = defineField({
 });
 
 export const getI18nBaseFieldForSingleton = (schemaType: string) => {
-  const { language } = getStructurePath();
+  const { language = baseLanguage } = getStructurePath();
   if (language === baseLanguage) return I18N_BASE_FIELD;
   const schemaName = schemaType.toLowerCase().replace(/\s/g, "");
   const documentId = schemaName.replace("page.", "page_");

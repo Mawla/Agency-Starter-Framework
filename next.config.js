@@ -5,7 +5,9 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-const { withSentryConfig } = require("@sentry/nextjs");
+const {
+  withSentryConfigOptional,
+} = require("./helpers/sentry/with-sentry-optional");
 
 const PicoSanity = require("picosanity");
 
@@ -21,7 +23,7 @@ const moduleExports = {
   reactStrictMode: true,
   outputFileTracing: false, // https://github.com/getsentry/sentry-javascript/issues/4103
   sentry: {
-    // autoInstrumentServerFunctions: false, // https://github.com/getsentry/sentry-javascript/issues/5964#issuecomment-1313367269
+    autoInstrumentServerFunctions: false, // https://github.com/getsentry/sentry-javascript/issues/5964#issuecomment-1313367269
     excludeServerRoutes: ["/api/opengraph-image"],
   },
   i18n: {
@@ -114,4 +116,7 @@ const sentryWebpackPluginOptions = {
 
 // Make sure adding Sentry options is the last code to run before exporting, to
 // ensure that your source maps include changes from all other Webpack plugins
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
+module.exports = withSentryConfigOptional(
+  moduleExports,
+  sentryWebpackPluginOptions,
+);

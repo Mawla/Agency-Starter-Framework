@@ -4,7 +4,9 @@ import { TitleProps } from "../../components/module/Title";
 import { WrapperProps } from "../../components/module/Wrapper";
 import { BackgroundColorType } from "../../components/module/background.options";
 import { SpaceType } from "../../components/module/spacing.options";
-import PortableText from "../../components/portabletext/PortableText";
+import PortableText, {
+  PortableTextProps,
+} from "../../components/portabletext/PortableText";
 import { ColorType, HeadingLevelType } from "../../types";
 import { TitleSizeType } from "./faq.options";
 import { toHTML } from "@portabletext/to-html";
@@ -42,7 +44,11 @@ export type FaqProps = {
   eyebrow?: string;
   title?: string;
   intro?: React.ReactNode;
-  items?: { _key?: string; title?: string; content?: any[] }[];
+  items?: {
+    _key?: string;
+    title?: string;
+    content?: PortableTextProps["content"];
+  }[];
 };
 
 function fixLinkDefs(obj: any) {

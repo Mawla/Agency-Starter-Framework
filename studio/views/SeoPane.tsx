@@ -15,7 +15,7 @@ export const SeoPane: ComponentType<any> = ({
 }) => {
   const client = useClient({ apiVersion: "vX" });
   const [config, setConfig] = useState<any>(null);
-  const { language } = getStructurePath();
+  const { language = baseLanguage } = getStructurePath();
   const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(
     language as LanguageType,
   );

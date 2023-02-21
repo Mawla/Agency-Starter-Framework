@@ -110,7 +110,7 @@ module.exports = {
       ...defaultTheme.screens,
     },
     fontFamily: {
-      sans: ["Circular", "Arial", "sans-serif"],
+      sans: ["var(--font-manrope)", "Arial", "sans-serif"],
       mono: ["monospace"],
     },
     fontSize: {

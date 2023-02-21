@@ -8,6 +8,7 @@ import { SCRIPTS, ScriptType } from "./portabletext.options";
 import { PortableText as PortableTextReact } from "@portabletext/react";
 import Script from "next/script";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
@@ -29,11 +30,12 @@ const Link = lazy<ComponentType<LinkProps>>(
 );
 
 export type PortableTextProps = {
-  content: any;
+  content: string | PortableTextBlock[] | React.ReactElement;
 };
 
-export const PortableText = ({ content = [] }) => {
+export const PortableText = ({ content = [] }: PortableTextProps) => {
   if (React.isValidElement(content)) return content;
+  if (typeof content === "string") return <p>{content}</p>;
   if (!content) return null;
   return (
     <PortableTextReact
