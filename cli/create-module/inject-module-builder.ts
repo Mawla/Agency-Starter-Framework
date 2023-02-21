@@ -34,7 +34,6 @@ export function injectModuleBuilder(
     }),
     lines,
     needle: "</LazyLoadInView>",
-    offset: -1,
   });
 
   lines = lines.join("\n");
