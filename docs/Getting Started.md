@@ -17,8 +17,8 @@ npm install -g vercel
 vercel link
 yarn
 npx sanity login
-sh ./scripts/setup.sh
-sh ./scripts/setup-env.sh
+sh ./cli/setup.sh
+sh ./cli/setup-env.sh
 ```
 
 ### Sanity: Add on demand Revalidation webhook

@@ -17,7 +17,6 @@
     "create-module": "sanity exec ./cli/create-module -- --write",
     "create-hero": "sanity exec ./cli/create-module -- --write --hero",
     "test-cli": "NODE_ENV=test npx jest ./cli/ ",
-    "create-static-form": "sanity exec ./scripts/create/create-static-form.ts",
     "test": "NODE_ENV=test jest",
     "test-watch": "jest --watch"
   },
