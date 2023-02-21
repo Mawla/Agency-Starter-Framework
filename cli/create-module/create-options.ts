@@ -16,10 +16,7 @@ export function createOptions(
   let { lowerName } = formatName(moduleName);
   const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.options.ts`;
 
-  let lines: string | string[] = [];
-  lines.push(getOptionsSnippet());
-
-  lines = lines.join("\n");
+  const lines = getOptionsSnippet();
 
   if (WRITE) {
     fs.writeFileSync(filePath, lines);
