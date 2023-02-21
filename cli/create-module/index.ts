@@ -51,11 +51,11 @@ async function init() {
     message: "Which basic fields do you want to set up?",
     initialValue: ["title", "intro", "image"],
     options: [
-      { value: "title", title: "Title" },
-      { value: "intro", title: "Intro" },
-      { value: "image", title: "Image" },
-      { value: "buttons", title: "Buttons" },
-      { value: "items", title: "List of items" },
+      { value: "title", label: "Title" },
+      { value: "intro", label: "Intro" },
+      { value: "image", label: "Image" },
+      { value: "buttons", label: "Buttons" },
+      { value: "items", label: "List of items" },
     ],
   });
   if (isCancel(fields)) process.exit(0);
