@@ -6,6 +6,7 @@
  *
  */
 import { createOptions } from "./create-options";
+import { createQuery } from "./create-query";
 import { createReactComponent } from "./create-react-component";
 import { createStory } from "./create-story";
 import { createTests } from "./create-tests";
@@ -70,8 +71,8 @@ async function init() {
   injectModuleBuilder(answers, WRITE);
   createReactComponent(answers, WRITE);
   createTests(answers, WRITE);
-  // create modules/[name]/module.test.tsx
-  // create modules/[name]/module.query.tsx
+  createQuery(answers, WRITE);
+  // create modules/[name]/module.schema.tsx
 
   outro(`You're all set!`);
 }
