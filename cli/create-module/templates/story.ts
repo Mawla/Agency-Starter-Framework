@@ -18,6 +18,13 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
       BACKGROUND_COLOR_OPTIONS,
       ${render(
         fields,
+        "eyebrow",
+        `
+      EyebrowColorType,
+      EYEBROW_COLOR_OPTIONS,`,
+      )}
+      ${render(
+        fields,
         "intro",
         `
       IntroColorType,
@@ -64,6 +71,28 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
         )}
       </>
     );
+
+    ${render(
+      fields,
+      "eyebrow",
+      `
+      export const EyebrowColors = () => (
+        <>
+          {(Object.keys(EYEBROW_COLOR_OPTIONS) as EyebrowColorType[]).map((color) => (
+            <div key={color} className="mb-10">
+              <Beeps
+                title="Beeps"
+                eyebrow="Beeps"
+                theme={{
+                  eyebrow: { color },
+                }}
+              />
+            </div>
+          ))}
+        </>
+      );
+      `,
+    )}
 
     ${render(
       fields,
