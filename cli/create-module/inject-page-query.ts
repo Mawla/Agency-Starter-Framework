@@ -25,7 +25,7 @@ export function injectPageQuery(
   lines = injectLine({
     addition: getModulePageQuery({ pascalName, lowerName }),
     lines,
-    needle: '"modules":',
+    needle: "dialogs {",
     offset: -3,
   });
 
