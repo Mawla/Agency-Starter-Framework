@@ -12,7 +12,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o public/storybook --disable-telemetry",
     "chromatic": "npx chromatic --project-token=a375665afc0f",
-    "create-dialog": "sanity exec ./scripts/create/create-dialog.ts",
+    "create-dialog": "sanity exec ./cli/create-dialog -- --write",
     "create-page": "sanity exec ./cli/create-page -- --write",
     "create-module": "sanity exec ./cli/create-module -- --write",
     "create-hero": "sanity exec ./cli/create-module -- --write --hero",

@@ -4,7 +4,6 @@ import { VideoType } from "../../types";
 import { DialogSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
-import { StaticFormBuilder } from "./StaticFormBuilder";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
 import { Suspense } from "react";
