@@ -18,7 +18,7 @@ export function injectPageQuery(
   WRITE = false,
   MODULE_TYPE = "module",
 ) {
-  let { pascalName, lowerName } = formatName(answers.moduleName);
+  let { pascalName, lowerName } = formatName(answers.moduleName, MODULE_TYPE);
 
   const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");

@@ -15,7 +15,7 @@ export function injectTypes(
   WRITE = false,
   MODULE_TYPE = "module",
 ) {
-  let { schemaName } = formatName(answers.moduleName);
+  let { schemaName } = formatName(answers.moduleName, MODULE_TYPE);
 
   const filePath = `${__dirname}/../../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");

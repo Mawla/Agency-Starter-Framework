@@ -18,7 +18,10 @@ export function injectBuilder(
   WRITE = false,
   MODULE_TYPE = "module",
 ) {
-  let { pascalName, lowerName, schemaName } = formatName(answers.moduleName);
+  let { pascalName, lowerName, schemaName } = formatName(
+    answers.moduleName,
+    MODULE_TYPE,
+  );
 
   let filePath = `${__dirname}/../../layout/pagebuilder/ModuleBuilder.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");

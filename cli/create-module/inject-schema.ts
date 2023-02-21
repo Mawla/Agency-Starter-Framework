@@ -15,7 +15,7 @@ export function injectSchema(
   WRITE = false,
   MODULE_TYPE = "module",
 ) {
-  let { pascalName, lowerName } = formatName(answers.moduleName);
+  let { pascalName, lowerName } = formatName(answers.moduleName, MODULE_TYPE);
 
   const filePath = path.resolve(`${__dirname}../../../studio/schemas/index.ts`);
   const file = fs.readFileSync(filePath).toString();
