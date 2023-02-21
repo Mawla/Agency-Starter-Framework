@@ -48,7 +48,7 @@ export const getReactComponentSnippet = ({
         import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );
 
-    import PortableText from "../../components/portabletext/PortableText";
+    import PortableTextProps from "../../components/portabletext/PortableText";
     const PortableText = lazy<ComponentType<PortableTextProps>>(
       () =>
         import(/* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText")
