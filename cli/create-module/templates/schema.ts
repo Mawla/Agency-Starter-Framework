@@ -24,6 +24,11 @@ export const getSchemaSnippet = ({
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType } from "sanity";
+  ${render(
+    fields,
+    "title",
+    `import { BACKGROUND_COLOR_OPTIONS, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS } from "./${lowerName}.options";`,
+  )}
 
   const schema = defineType({
     name: "${schemaName}",
@@ -178,6 +183,13 @@ export const getSchemaSnippet = ({
                     list: optionsToList(SPACE_OPTIONS),
                   },
                 },
+                {
+                  name: "background",
+                  type: "color",
+                  options: {
+                    colors: BACKGROUND_COLOR_OPTIONS,
+                  },
+                },
               ],
             },
           }),
@@ -208,7 +220,7 @@ export const getSchemaSnippet = ({
                   name: "color",
                   type: "color",
                   options: {
-                    colors: COLORS,
+                    colors: optionsToList(TITLE_COLOR_OPTIONS),
                   },
                 },
               ],
