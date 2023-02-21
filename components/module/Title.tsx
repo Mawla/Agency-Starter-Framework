@@ -82,9 +82,6 @@ export const Title = ({
             "block mb-[.5em]",
             sizeClasses.md,
             textClasses[eyebrowColor],
-            {
-              ["opacity-75"]: eyebrowColor === "white",
-            },
           )}
         >
           {eyebrow}&nbsp;
