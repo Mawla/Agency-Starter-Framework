@@ -92,7 +92,7 @@ export const getReactComponentSnippet = ({
           size?: TitleSizeType;
           level?: HeadingLevelType
         },
-        text?: {
+        intro?: {
           color?: ColorType;
         },
       };
@@ -135,7 +135,7 @@ export const getReactComponentSnippet = ({
             `
           {intro && (
             <div className="mb-10 md:mb-14">
-              <Text color={theme?.text?.color}>
+              <Text color={theme?.intro?.color}>
                 <PortableText content={intro as any} />
               </Text>
             </div>

@@ -27,7 +27,7 @@ export const getSchemaSnippet = ({
   ${render(
     fields,
     "title",
-    `import { BACKGROUND_COLOR_OPTIONS, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS } from "./${lowerName}.options";`,
+    `import { BACKGROUND_COLOR_OPTIONS, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, INTRO_COLOR_OPTIONS } from "./${lowerName}.options";`,
   )}
 
   const schema = defineType({
@@ -47,7 +47,7 @@ export const getSchemaSnippet = ({
         return {
           title: title,
           subtitle: eyebrow,
-          media: image,
+          media: image || <Question weight="thin" />,
         };
       },
     },
@@ -220,7 +220,27 @@ export const getSchemaSnippet = ({
                   name: "color",
                   type: "color",
                   options: {
-                    colors: optionsToList(TITLE_COLOR_OPTIONS),
+                    colors: TITLE_COLOR_OPTIONS,
+                  },
+                },
+              ],
+            },
+          }),`,
+          )}
+          ${render(
+            fields,
+            "intro",
+            `defineField({
+            name: "intro",
+            title: "Intro",
+            type: "styles",
+            options: {
+              fields: [
+                {
+                  name: "color",
+                  type: "color",
+                  options: {
+                    colors: INTRO_COLOR_OPTIONS,
                   },
                 },
               ],

@@ -10,7 +10,7 @@ export const getOptionsSnippet = () => {
     export const TITLE_SIZE_OPTIONS = pick(SIZE_OPTIONS, "lg", "xl");
     export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
     
-    export const TITLE_COLOR_OPTIONS = pick(COLORS, "black", "white");
+    export const TITLE_COLOR_OPTIONS = pick(COLORS, "black");
     export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
     `;
 };
