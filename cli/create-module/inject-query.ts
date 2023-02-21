@@ -5,7 +5,10 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { getModuleQuery, getModuleQueryImport } from "./templates/module-query";
+import {
+  getModulePageQuery,
+  getModulePageQueryImport,
+} from "./templates/module-page-query";
 
 const fs = require("fs");
 
@@ -18,9 +21,9 @@ export function injectQuery(
   const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  lines.push(getModuleQueryImport({ pascalName, lowerName }));
+  lines.push(getModulePageQueryImport({ pascalName, lowerName }));
   lines = injectLine({
-    addition: getModuleQuery({ pascalName, lowerName }),
+    addition: getModulePageQuery({ pascalName, lowerName }),
     lines,
     needle: '"modules":',
     adjustLine: -3,

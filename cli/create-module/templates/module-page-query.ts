@@ -3,10 +3,10 @@ type Props = {
   lowerName: string;
 };
 
-export const getModuleQueryImport = ({ pascalName, lowerName }: Props) => {
+export const getModulePageQueryImport = ({ pascalName, lowerName }: Props) => {
   return `import { get${pascalName}Query } from "../${"modules"}/${lowerName}/${lowerName}.query";`;
 };
 
-export const getModuleQuery = ({ pascalName, lowerName }: Props) => {
+export const getModulePageQuery = ({ pascalName, lowerName }: Props) => {
   return `      \${get${pascalName}Query(language)},`;
 };
