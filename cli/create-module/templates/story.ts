@@ -36,7 +36,7 @@ export const getStorySnippet = ({ pascalName, fields }: Props) => {
               (color2: ColorType) => (
                 <div key={\`\${color1}\${color2}\`} className="mb-10">
                   <${pascalName}
-                    title="${pascalName}"
+                    ${render(fields, "title", `title="${pascalName}"`)}
                     theme={{
                       module: { background: color1 },
                       text: { color: color2 },
