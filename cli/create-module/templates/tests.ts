@@ -59,7 +59,7 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
           image={{
             width: 1600,
             height: 2400,
-            src: "xxx",
+            src: "https://i.pravatar.cc/100",
             alt: "hello",
           }}
           />,
