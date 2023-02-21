@@ -136,7 +136,7 @@ export const DIALOGS_FIELD = defineField({
     input: PageBuilder,
   },
   description:
-    "Dialogs are the modal windows, used to present extra information. A dialog must be created before it can be linked to from a button inside module.",
+    "Dialogs are modal windows, used for presenting extra information. A dialog must be created before it can be linked to from a button inside module.",
   of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
     (type: DialogSchemaName) => ({
       type,
