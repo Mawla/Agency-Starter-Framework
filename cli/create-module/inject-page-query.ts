@@ -36,7 +36,7 @@ export function injectPageQuery(
     addition: getModulePageQuery({ pascalName, lowerName }),
     lines,
     needle,
-    offset: 0,
+    offset: 1,
   });
 
   lines = lines.join("\n");
