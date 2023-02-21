@@ -63,7 +63,9 @@ async function init() {
   const answers = {
     moduleName: String(moduleName),
     moduleDescription: String(moduleDescription),
-    fields,
+    fields: (fields as any).map(
+      (field: { value: string; label: string }) => field.value,
+    ),
   };
 
   injectSchema(answers, WRITE);
