@@ -1,10 +1,10 @@
 import { pascalCase } from "../utils/pascal-case";
 
 export function formatName(name: string) {
-  name = name.trim().replace(/\s\s+/g, "");
-  let pascalName = pascalCase(name);
-  let lowerName = name.toLowerCase();
-  let schemaName = `module.${name.toLowerCase()}`;
+  name = name.trim();
+  let pascalName = pascalCase(name).replace(/\s/g, "");
+  let lowerName = name.toLowerCase().replace(/\s/g, "");
+  let schemaName = `module.${name.toLowerCase()}`.replace(/\s/g, "");
 
   return {
     pascalName,

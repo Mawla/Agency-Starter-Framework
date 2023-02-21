@@ -6,6 +6,7 @@
  *
  */
 import { createOptions } from "./create-options";
+import { createReactComponent } from "./create-react-component";
 import { createStory } from "./create-story";
 import { injectModuleBuilder } from "./inject-module-builder";
 import { injectQuery } from "./inject-query";
@@ -64,12 +65,11 @@ async function init() {
   injectQuery(answers, WRITE);
   createOptions(answers, WRITE);
   createStory(answers, WRITE);
+  createReactComponent(answers, WRITE);
   injectModuleBuilder(answers, WRITE);
-  // create modules/[name]/Module.tsx
-  // create modules/[name]/module.stories.tsx
+  createReactComponent(answers, WRITE);
   // create modules/[name]/module.test.tsx
   // create modules/[name]/module.query.tsx
-  // create modules/[name]/module.options.tsx
 
   outro(`You're all set!`);
 }

@@ -10,6 +10,6 @@ test("create names", () => {
   ]);
 
   expect(result.pascalName).toEqual("TestModule");
-  expect(result.lowerName).toEqual("test module");
+  expect(result.lowerName).toEqual("testmodule");
   expect(result.schemaName).toEqual("module.testmodule");
 });

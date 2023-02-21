@@ -8,7 +8,7 @@ export const getOptionsSnippet = () => {
     export const BACKGROUND_COLOR_OPTIONS = pick(COLORS, "white", "black");
     export type BackgroundColorType = keyof typeof BACKGROUND_COLOR_OPTIONS;
 
-    export const TITLE_SIZE_OPTIONS = pick(SIZE_OPTIONS, "2xl", "3xl");
+    export const TITLE_SIZE_OPTIONS = pick(SIZE_OPTIONS, "lg", "xl");
     export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
     `;
 };

@@ -1,4 +1,5 @@
 import { AnswersType } from "..";
+import { render } from "../../utils/render-field";
 
 type Props = {
   pascalName: string;
@@ -20,11 +21,11 @@ export const getStorySnippet = ({ pascalName, fields }: Props) => {
     } as Meta;
     
     export const Default = () => <${pascalName} 
-    ${fields?.includes("title") ? `title="${pascalName}"` : ""}
-    ${fields?.includes("intro") ? `intro={<p>${pascalName}</p>}` : ""}
-    ${fields?.includes("image") ? `image={demoImage}` : ""}
-    ${fields?.includes("buttons") ? `buttons={[{ label: ${pascalName} }]}` : ""}
-    ${fields?.includes("items") ? `items={[{ title: ${pascalName} }]}` : ""}
+    ${render(fields, "title", `title="${pascalName}"`)}
+    ${render(fields, "intro", `intro={<p>${pascalName}</p>}`)}
+    ${render(fields, "image", `image={demoImage}`)}
+    ${render(fields, "buttons", `buttons={[{ label: ${pascalName} }]}`)}
+    ${render(fields, "items", `items={[{ title: ${pascalName} }]}`)}
     />;
     
     export const Colors = () => (
