@@ -17,9 +17,9 @@ export const getReactComponentSnippet = ({
 
     import {  WrapperProps } from '../../components/module/Wrapper';
     import { BackgroundColorType } from '../../components/module/background.options';
-    import { ColorType, HeadingLevelType } from '../../types';
+    import { HeadingLevelType } from '../../types';
     import { SpaceType } from '../../components/module/spacing.options';
-    import { TitleSizeType } from './${lowerName}.options';
+    import { TitleSizeType, TitleColorType, IntroColorType } from './${lowerName}.options';
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -88,12 +88,12 @@ export const getReactComponentSnippet = ({
           space?: SpaceType;
         }
         title?: {
-          color?: ColorType;
+          color?: TitleColorType;
           size?: TitleSizeType;
           level?: HeadingLevelType
         },
         intro?: {
-          color?: ColorType;
+          color?: IntroColorType;
         },
       };
       ${render(fields, "title", "eyebrow?: string;")}

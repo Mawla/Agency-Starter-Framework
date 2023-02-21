@@ -12,5 +12,8 @@ export const getOptionsSnippet = () => {
     
     export const TITLE_COLOR_OPTIONS = pick(COLORS, "black");
     export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
+    
+    export const INTRO_COLOR_OPTIONS = pick(COLORS, "black");
+    export type IntroColorType = keyof typeof INTRO_COLOR_OPTIONS;
     `;
 };
