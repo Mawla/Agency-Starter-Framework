@@ -24,7 +24,7 @@ export type WeightType = keyof typeof WEIGHT_OPTIONS;
 
 export type TitleProps = {
   children: React.ReactElement | React.ReactNode;
-  as?: HeadingLevelType | "h1";
+  as?: HeadingLevelType;
   size?: SizeType;
   weight?: WeightType;
   className?: string;
