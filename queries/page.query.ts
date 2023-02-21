@@ -93,44 +93,37 @@ export const getPageQuery = (language: LanguageType) => groq`
 
     // hero
     "hero": hero[!(_type in path('studio.*'))][] {
+      ${getHeroBasicQuery(language)},
+      ${getResourceHeroQuery(language)},
       _type,
       _key,
       theme,
 
-      ${getHeroBasicQuery(language)},
-      ${getResourceHeroQuery(language)},
     }[0],
 
     // modules
     "modules": modules[!(_type in path('studio.*'))] {
-      _key,
-      _type,
-      decorations[] {
-        ...,
-        "image": ${imageQuery},
-      },
-      theme,
-
-      ${getRichTextQuery(language)},
+      ${getBillboardQuery(language)},
       ${getBreadcrumbModuleQuery(language)},
       ${getCardGridQuery(language)},
-      ${getBillboardQuery(language)},
-      ${getTextImageQuery(language)},
+      ${getFaqQuery(language)},
+      ${getFeedQuery(language)},
       ${getGalleryQuery(language)},
+      ${getImageQuery(language)},
+      ${getResourceStripQuery(language)},
+      ${getRichTextQuery(language)},
       ${getSlidesQuery(language)},
       ${getStoryQuery(language)},
-      ${getFeedQuery(language)},
-      ${getResourceStripQuery(language)},
-      ${getFaqQuery(language)},
+      ${getTextImageQuery(language)},
       ${getVideoQuery(language)},
-      ${getImageQuery(language)},
+      _key,
+      _type,
+      decorations,
+      theme,
     },
 
     // dialogs
     dialogs {
-      _key,
-      _type,
-      "slug": slug.current,
       _type == "dialog.richtext" => {
         content[] ${richTextQuery}
       },
@@ -142,6 +135,10 @@ export const getPageQuery = (language: LanguageType) => groq`
       _type == "dialog.form" => {
         "form": ${staticFormQuery}    
       },
+
+      _key,
+      _type,
+      "slug": slug.current,
     },
   }
 }.page`;
