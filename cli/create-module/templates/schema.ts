@@ -40,7 +40,7 @@ export const getSchemaSnippet = ({
       select: {
         ${render(fields, "title", `title: "title",`)}
         ${render(fields, "eyebrow", `eyebrow: "eyebrow",`)}
-        ${render(fields, "image", `image: "image",`)};
+        ${render(fields, "image", `image: "image",`)}
       },
       prepare({ 
         ${render(fields, "eyebrow", `eyebrow = "", `)}
