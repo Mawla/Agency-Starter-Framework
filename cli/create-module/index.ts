@@ -45,7 +45,7 @@ async function init() {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
   });
-  if (isCancel(moduleName)) process.exit(0);
+  if (isCancel(moduleDescription)) process.exit(0);
 
   let fields = await multiselect({
     message: "Which fields do you want get started with?",
