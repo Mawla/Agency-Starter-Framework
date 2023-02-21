@@ -74,8 +74,6 @@ async function init() {
     answers.fields.push("title");
   }
 
-  return;
-
   // inject snippets in existing files
   injectSchema(answers, WRITE);
   injectTypes(answers, WRITE);
