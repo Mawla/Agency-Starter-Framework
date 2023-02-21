@@ -17,7 +17,7 @@ import {
   BreakpointType,
   useBreakpoint,
 } from '../../hooks/useBreakpoint';
-import ErrorBoundary from '../../layout/modulebuilder/ErrorBoundary';
+import ErrorBoundary from '../../layout/pagebuilder/ErrorBoundary';
 import {
   BackgroundColorType,
   ButtonPositionType,
