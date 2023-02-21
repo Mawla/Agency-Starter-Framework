@@ -14,6 +14,17 @@ test("create react component with no fields", () => {
   ).toBeTruthy();
 });
 
+test("create react component with eyebrow field", () => {
+  const result = createReactComponent({
+    moduleName: "Test",
+    fields: ["eyebrow"],
+  });
+
+  expect(
+    result.replace(/\s/g, "").includes(`{(title || eyebrow`.replace(/\s/g, "")),
+  ).toBeTruthy();
+});
+
 test("create react component with title field", () => {
   const result = createReactComponent({
     moduleName: "Test",
@@ -21,9 +32,7 @@ test("create react component with title field", () => {
   });
 
   expect(
-    result
-      .replace(/\s/g, "")
-      .includes(`{(title || eyebrow)`.replace(/\s/g, "")),
+    result.replace(/\s/g, "").includes(`{title`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 
