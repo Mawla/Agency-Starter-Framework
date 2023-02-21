@@ -14,6 +14,7 @@ import { createTests } from "./create-tests";
 import { injectModuleBuilder } from "./inject-module-builder";
 import { injectQuery } from "./inject-query";
 import { injectSchema } from "./inject-schema";
+import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
 
 const args = process.argv.slice(2);
@@ -66,6 +67,7 @@ async function init() {
   };
 
   injectSchema(answers, WRITE);
+  injectTypes(answers, WRITE);
   injectQuery(answers, WRITE);
   createOptions(answers, WRITE);
   createStory(answers, WRITE);
