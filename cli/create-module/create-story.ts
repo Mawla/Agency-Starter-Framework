@@ -7,6 +7,7 @@ import { getStorySnippet } from "./templates/story";
  * Create the schema file
  */
 const fs = require("fs");
+const path = require("path");
 
 export function createStory(
   answers: Pick<AnswersType, "moduleName" | "fields">,
@@ -15,6 +16,7 @@ export function createStory(
   let { moduleName, fields } = answers;
   let { lowerName, pascalName } = formatName(moduleName);
   const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.stories.tsx`;
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   const lines = getStorySnippet({ pascalName, fields });
 
