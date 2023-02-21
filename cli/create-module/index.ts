@@ -52,6 +52,7 @@ async function init() {
     initialValue: ["title", "intro", "image"],
     options: [
       { value: "title", label: "Title" },
+      { value: "eyebrow", label: "Eyebrow (above title)" },
       { value: "intro", label: "Intro" },
       { value: "image", label: "Image" },
       { value: "buttons", label: "Buttons" },

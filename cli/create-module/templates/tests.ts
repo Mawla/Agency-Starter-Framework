@@ -16,6 +16,23 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
 
   ${render(
     fields,
+    "eyebrow",
+    `describe("${pascalName}", () => {
+    it("renders eyebrow", async () => {
+      await act(() => {
+        render(
+          <${pascalName}
+            eyebrow="Hello"
+          />,
+        );
+      });
+      expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
+    });
+  });`,
+  )}
+
+  ${render(
+    fields,
     "title",
     `describe("${pascalName}", () => {
     it("renders title", async () => {

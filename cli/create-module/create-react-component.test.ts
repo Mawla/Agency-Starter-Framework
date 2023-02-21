@@ -21,7 +21,9 @@ test("create react component with title field", () => {
   });
 
   expect(
-    result.replace(/\s/g, "").includes(`{title &&`.replace(/\s/g, "")),
+    result
+      .replace(/\s/g, "")
+      .includes(`{(title || eyebrow)`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 

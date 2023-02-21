@@ -19,7 +19,7 @@ export const getReactComponentSnippet = ({
     import { BackgroundColorType } from '../../components/module/background.options';
     import { HeadingLevelType } from '../../types';
     import { SpaceType } from '../../components/module/spacing.options';
-    import { TitleSizeType, TitleColorType, IntroColorType } from './${lowerName}.options';
+    import { TitleSizeType, TitleColorType, IntroColorType, EyebrowColorType } from './${lowerName}.options';
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -87,16 +87,34 @@ export const getReactComponentSnippet = ({
           background?: BackgroundColorType;
           space?: SpaceType;
         }
+        ${render(
+          fields,
+          "eyebrow",
+          `
+        eyebrow?: {
+          color?: EyebrowColorType;
+        },`,
+        )}
+        ${render(
+          fields,
+          "title",
+          `
         title?: {
           color?: TitleColorType;
           size?: TitleSizeType;
           level?: HeadingLevelType
-        },
+        },`,
+        )}
+        ${render(
+          fields,
+          "intro",
+          `
         intro?: {
           color?: IntroColorType;
-        },
+        },`,
+        )}
       };
-      ${render(fields, "title", "eyebrow?: string;")}
+      ${render(fields, "eyebrow", "eyebrow?: string;")}
       ${render(fields, "title", "title?: string;")}
       ${render(fields, "intro", "intro?: React.ReactNode;")}
       ${render(fields, "image", "image?: ImageType;")}
@@ -106,7 +124,8 @@ export const getReactComponentSnippet = ({
 
     export const ${pascalName} = ({ 
       theme,
-      ${render(fields, "title", `eyebrow, title,`)}
+      ${render(fields, "eyebrow", `eyebrow,`)}
+      ${render(fields, "title", `title,`)}
       ${render(fields, "intro", `intro,`)}
       ${render(fields, "image", `image,`)}
       ${render(fields, "buttons", `buttons,`)}
@@ -122,9 +141,15 @@ export const getReactComponentSnippet = ({
             fields,
             "title",
             `
-          {title && (
+          {(title || eyebrow) && (
             <div className="mb-4 md:mb-6">
-              <Title size={theme?.title?.size || 'lg'} as={theme?.title?.level} color={theme?.title?.color} eyebrow={eyebrow}>{title}</Title>
+              <Title 
+                size={theme?.title?.size || 'lg'} 
+                as={theme?.title?.level} 
+                color={theme?.title?.color} 
+                eyebrow={eyebrow} 
+                eyebrowColor={theme?.eyebrow?.color}
+              >{title}</Title>
             </div>
           )}`,
           )}
@@ -158,7 +183,7 @@ export const getReactComponentSnippet = ({
             "items",
             `
           {items && Boolean(items?.filter(Boolean).length) && (
-            <ul className="pt-7 divide-y divide-grey-50">
+            <ul className="pt-8">
               {items?.map(({ title, _key }) => (
                 <li key={_key} className="">{title}</li>
               ))}
@@ -175,9 +200,7 @@ export const getReactComponentSnippet = ({
               <ButtonGroup items={buttons} />
             </div>
           )}`,
-          )}
-
-          
+          )}          
         </Wrapper>
       );
     };

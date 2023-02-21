@@ -10,15 +10,15 @@ const fs = require("fs");
 const path = require("path");
 
 export function createOptions(
-  answers: Pick<AnswersType, "moduleName">,
+  answers: Pick<AnswersType, "moduleName" | "fields">,
   WRITE = false,
 ) {
-  let { moduleName } = answers;
+  let { moduleName, fields } = answers;
   let { lowerName } = formatName(moduleName);
   const filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.options.ts`;
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
-  const lines = getOptionsSnippet();
+  const lines = getOptionsSnippet({ fields });
 
   if (WRITE) {
     fs.writeFileSync(filePath, lines);

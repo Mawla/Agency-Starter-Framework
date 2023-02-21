@@ -16,13 +16,21 @@ test("create query with no fields", () => {
   ).toBeTruthy();
 });
 
+test("create query with eyebrow", () => {
+  const result = createQuery({
+    moduleName: "Test",
+    fields: ["eyebrow"],
+  });
+
+  expect(result.includes(`eyebrow,`)).toBeTruthy();
+});
+
 test("create query with title", () => {
   const result = createQuery({
     moduleName: "Test",
     fields: ["title"],
   });
 
-  expect(result.includes(`eyebrow,`)).toBeTruthy();
   expect(result.includes(`title,`)).toBeTruthy();
 });
 

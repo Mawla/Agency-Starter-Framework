@@ -21,7 +21,7 @@ export const getStorySnippet = ({ pascalName, fields }: Props) => {
     } as Meta;
     
     export const Default = () => <${pascalName} 
-    ${render(fields, "title", `eyebrow="${pascalName}"`)}
+    ${render(fields, "eyebrow", `eyebrow="${pascalName}"`)}
     ${render(fields, "title", `title="${pascalName}"`)}
     ${render(fields, "intro", `intro={<p>${pascalName}</p>}`)}
     ${render(fields, "image", `image={demoImage}`)}

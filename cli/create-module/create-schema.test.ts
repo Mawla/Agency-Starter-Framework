@@ -1,17 +1,26 @@
 import { createSchema } from "./create-schema";
 
-test("create query with title", () => {
+test("create schema with eyebrow", () => {
+  const result = createSchema({
+    moduleName: "Test",
+    fields: ["eyebrow"],
+    moduleDescription: "",
+  });
+
+  expect(result.includes(`name: "eyebrow",`)).toBeTruthy();
+});
+
+test("create schema with title", () => {
   const result = createSchema({
     moduleName: "Test",
     fields: ["title"],
     moduleDescription: "",
   });
 
-  expect(result.includes(`name: "eyebrow",`)).toBeTruthy();
   expect(result.includes(`name: "title",`)).toBeTruthy();
 });
 
-test("create query with intro", () => {
+test("create schema with intro", () => {
   const result = createSchema({
     moduleName: "Test",
     fields: ["intro"],
@@ -21,7 +30,7 @@ test("create query with intro", () => {
   expect(result.includes(`name: "intro",`)).toBeTruthy();
 });
 
-test("create query with image", () => {
+test("create schema with image", () => {
   const result = createSchema({
     moduleName: "Test",
     fields: ["image"],
@@ -31,7 +40,7 @@ test("create query with image", () => {
   expect(result.includes(`name: "image",`)).toBeTruthy();
 });
 
-test("create query with items", () => {
+test("create schema with items", () => {
   const result = createSchema({
     moduleName: "Test",
     fields: ["items"],
@@ -41,7 +50,7 @@ test("create query with items", () => {
   expect(result.includes(`name: "items",`)).toBeTruthy();
 });
 
-test("create query with buttons", () => {
+test("create schema with buttons", () => {
   const result = createSchema({
     moduleName: "Test",
     fields: ["buttons"],

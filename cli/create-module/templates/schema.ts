@@ -35,19 +35,26 @@ export const getSchemaSnippet = ({
     title: "${moduleName}",
     type: "object",
     icon: () => <Question weight="thin" />,
-    initialValue: {},
     description: "${moduleDescription}",
     preview: {
       select: {
-        title: "title",
-        eyebrow: "eyebrow",
-        image: "image",
+        ${render(fields, "title", `title: "title",`)}
+        ${render(fields, "eyebrow", `eyebrow: "eyebrow",`)}
+        ${render(fields, "image", `image: "image",`)};
       },
-      prepare({ eyebrow = "", title = "${moduleName}", image }: any) {
+      prepare({ 
+        ${render(fields, "eyebrow", `eyebrow = "", `)}
+        ${render(fields, "title", `title = "${moduleName}", `)}
+        ${render(fields, "image", `image`)}
+      }: any) {
         return {
-          title: title,
-          subtitle: eyebrow,
-          media: image || <Question weight="thin" />,
+          ${render(fields, "title", `title: title,`)}
+          ${render(fields, "eyebrow", `subtitle: eyebrow,`)}
+          ${render(
+            fields,
+            "eyebrow",
+            `media: image || <Question weight="thin" />,`,
+          )}
         };
       },
     },
@@ -82,7 +89,7 @@ export const getSchemaSnippet = ({
       }),
       ${render(
         fields,
-        "title",
+        "eyebrow",
         `defineField({
         name: "eyebrow",
         title: "Eyebrow",

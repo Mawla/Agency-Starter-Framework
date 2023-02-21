@@ -12,6 +12,24 @@ test("create story with no fields", () => {
   ).toBeTruthy();
 });
 
+test("create story with eyebrow", () => {
+  const result = createStory({
+    moduleName: "Test",
+    fields: ["eyebrow"],
+  });
+
+  expect(
+    result
+      .replace(/\s/g, "")
+      .includes(
+        `export const Default = () => <Test eyebrow="Test" />;`.replace(
+          /\s/g,
+          "",
+        ),
+      ),
+  ).toBeTruthy();
+});
+
 test("create story with title", () => {
   const result = createStory({
     moduleName: "Test",

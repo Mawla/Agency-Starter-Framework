@@ -31,7 +31,7 @@ export const getQuerySnippet = ({ schemaName, pascalName, fields }: Props) => {
     _type == "${schemaName}" => {
       _key,
       _type,
-      ${render(fields, "title", "eyebrow,")}
+      ${render(fields, "eyebrow", "eyebrow,")}
       ${render(fields, "title", "title,")}
       ${render(fields, "intro", "intro[] ${richTextQuery},")}
       ${render(fields, "image", '"image": ${imageQuery},')}
