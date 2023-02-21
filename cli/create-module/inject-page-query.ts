@@ -24,14 +24,14 @@ export function injectPageQuery(
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let needle = '"modules": ';
-  let addition = getModulePageQuery({ pascalName, lowerName });
+  let imports = getModulePageQueryImport({ pascalName, lowerName });
 
   if (MODULE_TYPE === "hero") {
     needle = '"hero":';
-    addition = getHeroPageQueryImport({ pascalName, lowerName });
+    imports = getHeroPageQueryImport({ pascalName, lowerName });
   }
 
-  lines.push(getModulePageQueryImport({ pascalName, lowerName }));
+  lines.push(imports);
   lines = injectLine({
     addition: getModulePageQuery({ pascalName, lowerName }),
     lines,
