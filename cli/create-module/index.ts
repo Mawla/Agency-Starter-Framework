@@ -6,6 +6,7 @@
  *
  */
 import { createOptions } from "./create-options";
+import { createStory } from "./create-story";
 import { injectQuery } from "./inject-query";
 import { injectSchema } from "./inject-schema";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
@@ -18,7 +19,7 @@ init();
 export type AnswersType = {
   moduleName: string;
   moduleDescription: boolean;
-  fields: ["title", "intro", "image", "buttons", "items"];
+  fields?: string[];
 };
 
 async function init() {
@@ -55,12 +56,13 @@ async function init() {
   const answers = {
     moduleName: String(moduleName),
     moduleDescription: String(moduleDescription),
-    fields: Boolean(fields),
+    fields,
   };
 
   injectSchema(answers, WRITE);
   injectQuery(answers, WRITE);
   createOptions(answers, WRITE);
+  createStory(answers, WRITE);
   // inject module in Module Builder
   // create modules/[name]/Module.tsx
   // create modules/[name]/module.stories.tsx
