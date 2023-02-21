@@ -49,9 +49,9 @@ const schema = defineType({
       group: "link",
       hidden: (({ parent, value }) =>
         !value &&
-        (parent?.internal ||
-          parent?.dialog ||
-          parent?.file)) as ConditionalPropertyCallback,
+        Boolean(
+          parent?.internal || parent?.dialog || parent?.file,
+        )) as ConditionalPropertyCallback,
     }),
     defineField({
       name: "internal",
@@ -62,9 +62,9 @@ const schema = defineType({
       to: getLinkableTypes(),
       hidden: (({ parent, value }) =>
         !value &&
-        (parent?.href ||
-          parent?.dialog ||
-          parent?.file)) as ConditionalPropertyCallback,
+        Boolean(
+          parent?.href || parent?.dialog || parent?.file,
+        )) as ConditionalPropertyCallback,
     }),
     defineField({
       name: "params",
@@ -74,7 +74,7 @@ const schema = defineType({
       description:
         "Use this for a #hash or ?querystring. This field is not automatically updated when the destination changes.",
       hidden: ({ parent, value }) =>
-        !value && (parent?.href || parent?.dialog || parent?.file),
+        !value && Boolean(parent?.href || parent?.dialog || parent?.file),
       validation: (Rule: StringRule) =>
         Rule.custom((value: any) => {
           if (typeof value === "undefined") return true; // Allow undefined values
@@ -95,9 +95,9 @@ const schema = defineType({
       },
       hidden: (({ parent, value }) =>
         !value &&
-        (parent?.internal ||
-          parent?.href ||
-          parent?.file)) as ConditionalPropertyCallback,
+        Boolean(
+          parent?.internal || parent?.href || parent?.file,
+        )) as ConditionalPropertyCallback,
     }),
     defineField({
       name: "file",
@@ -106,9 +106,9 @@ const schema = defineType({
       group: "link",
       hidden: (({ parent, value }) =>
         !value &&
-        (parent?.href ||
-          parent?.dialog ||
-          parent?.internal)) as ConditionalPropertyCallback,
+        Boolean(
+          parent?.href || parent?.dialog || parent?.internal,
+        )) as ConditionalPropertyCallback,
     }),
     defineField({
       name: "download",
@@ -119,7 +119,7 @@ const schema = defineType({
       description: "Make the button download the file",
       hidden: (({ parent, value }) =>
         !value &&
-        !(parent?.file || parent?.href)) as ConditionalPropertyCallback,
+        !Boolean(parent?.file || parent?.href)) as ConditionalPropertyCallback,
     }),
     defineField({
       name: "newWindow",
