@@ -8,6 +8,7 @@
 import { createOptions } from "./create-options";
 import { createReactComponent } from "./create-react-component";
 import { createStory } from "./create-story";
+import { createTests } from "./create-tests";
 import { injectModuleBuilder } from "./inject-module-builder";
 import { injectQuery } from "./inject-query";
 import { injectSchema } from "./inject-schema";
@@ -68,6 +69,7 @@ async function init() {
   createReactComponent(answers, WRITE);
   injectModuleBuilder(answers, WRITE);
   createReactComponent(answers, WRITE);
+  createTests(answers, WRITE);
   // create modules/[name]/module.test.tsx
   // create modules/[name]/module.query.tsx
 
