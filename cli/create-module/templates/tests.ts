@@ -57,9 +57,9 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
         render(
           <${pascalName}
           image={{
-            width: 1600,
-            height: 2400,
-            src: "https://i.pravatar.cc/100",
+            width: 100,
+            height: 100,
+            src: "https://picsum.photos/100/100",
             alt: "hello",
           }}
           />,
