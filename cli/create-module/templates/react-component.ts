@@ -19,7 +19,12 @@ export const getReactComponentSnippet = ({
     import { BackgroundColorType } from '../../components/module/background.options';
     import { HeadingLevelType } from '../../types';
     import { SpaceType } from '../../components/module/spacing.options';
-    import { TitleSizeType, TitleColorType, IntroColorType, EyebrowColorType } from './${lowerName}.options';
+    import { 
+      ${render(fields, "title", "TitleSizeType,")} 
+      ${render(fields, "title", "TitleColorType,")} 
+      ${render(fields, "intro", "IntroColorType,")} 
+      ${render(fields, "eyebrow", "EyebrowColorType,")} 
+    } from './${lowerName}.options';
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -139,7 +144,7 @@ export const getReactComponentSnippet = ({
         >
           ${render(
             fields,
-            "title",
+            "eyebrow",
             `
           {(title || eyebrow) && (
             <div className="mb-4 md:mb-6">
@@ -153,6 +158,21 @@ export const getReactComponentSnippet = ({
             </div>
           )}`,
           )}
+
+          ${
+            !fields?.includes("eyebrow") && fields?.includes("title")
+              ? `
+          {title && (
+            <div className="mb-4 md:mb-6">
+              <Title 
+                size={theme?.title?.size || 'lg'} 
+                as={theme?.title?.level} 
+                color={theme?.title?.color}
+              >{title}</Title>
+            </div>
+          )}`
+              : ""
+          }
 
           ${render(
             fields,
