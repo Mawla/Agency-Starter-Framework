@@ -5,25 +5,35 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { getModuleQuery, getModuleQueryImport } from "./templates/module-query";
+import {
+  getModuleBuilderComponent,
+  getModuleBuilderImport,
+} from "./templates/module-builder";
 
 const fs = require("fs");
 
-export function injectQuery(
+export function injectModuleBuilder(
   answers: Pick<AnswersType, "moduleName">,
   WRITE = false,
 ) {
-  let { pascalName, lowerName } = formatName(answers.moduleName);
+  let { pascalName, lowerName, schemaName } = formatName(answers.moduleName);
 
-  const filePath = `${__dirname}/../../queries/page.query.ts`;
+  const filePath = `${__dirname}/../../layout/modulebuilder/ModuleBuilder.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  lines.push(getModuleQueryImport({ pascalName, lowerName }));
+  lines = [
+    getModuleBuilderImport({ pascalName, lowerName, schemaName }),
+    ...lines,
+  ];
+
   lines = injectLine({
-    addition: getModuleQuery({ pascalName, lowerName }),
+    addition: getModuleBuilderComponent({
+      pascalName,
+      lowerName,
+      schemaName,
+    }),
     lines,
-    needle: '"modules":',
-    adjustLine: -3,
+    needle: "</LazyLoadInView>",
   });
 
   lines = lines.join("\n");
