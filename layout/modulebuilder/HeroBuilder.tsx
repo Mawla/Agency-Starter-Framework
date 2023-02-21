@@ -18,18 +18,18 @@ const HeroBasic = lazy<ComponentType<HeroBasicProps>>(
 );
 
 export type HeroBuilderProps = {
-  hero: GenericModuleProps;
+  item: GenericModuleProps;
 };
 
-export const HeroBuilder = ({ hero }: HeroBuilderProps) => {
+export const HeroBuilder = ({ item }: HeroBuilderProps) => {
   return (
     <Suspense fallback={``}>
-      <section data-module={hero?._type} data-id={hero._key} key={hero._key}>
-        {hero._type == "hero.basic" && (
-          <HeroBasic {...(hero as HeroBasicProps)} />
+      <section data-module={item?._type} data-id={item._key} key={item._key}>
+        {item._type == "hero.basic" && (
+          <HeroBasic {...(item as HeroBasicProps)} />
         )}
-        {hero._type === "hero.resourcehero" && (
-          <ResourceHero {...(hero as ResourceHeroProps)} />
+        {item._type === "hero.resourcehero" && (
+          <ResourceHero {...(item as ResourceHeroProps)} />
         )}
       </section>
     </Suspense>
