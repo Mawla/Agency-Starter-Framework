@@ -15,7 +15,7 @@ export function injectBuilder(
 ) {
   let { schemaName } = formatName(answers.dialogName);
 
-  let filePath = `${__dirname}/../../layout/pagebuilder/ModuleBuilder.tsx`;
+  let filePath = `${__dirname}/../../layout/pagebuilder/DialogBuilder.tsx`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   lines = injectLine({
