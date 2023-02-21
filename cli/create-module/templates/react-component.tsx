@@ -48,7 +48,7 @@ export const getReactComponentSnippet = ({
         import(/* webpackChunkName: "Text" */ '../../components/module/Text') 
     );
 
-    import PortableTextProps from "../../components/portabletext/PortableText";
+    import { PortableTextProps } from "../../components/portabletext/PortableText";
     const PortableText = lazy<ComponentType<PortableTextProps>>(
       () =>
         import(/* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText")
@@ -60,9 +60,10 @@ export const getReactComponentSnippet = ({
       fields,
       "buttons",
       `
-    import { ButtonProps } from '../../components/buttons/Button';
+    import { ButtonProps } from "../../components/buttons/Button";
+    import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
     const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
-      () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/module/ButtonGroup"),
+      () => import(/* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"),
     );`,
     )}
     
@@ -110,8 +111,7 @@ export const getReactComponentSnippet = ({
       ${render(fields, "image", `image,`)}
       ${render(fields, "buttons", `buttons,`)}
       ${render(fields, "items", `items,`)}
-      
-      : ${pascalName}Props) => {
+    }: ${pascalName}Props) => {
       return (
         <Wrapper
           theme={{
@@ -170,7 +170,7 @@ export const getReactComponentSnippet = ({
             fields,
             "buttons",
             `
-          {buttons && Boolean(buttons?.filter(Boolean).length) (
+          {buttons && Boolean(buttons?.filter(Boolean).length) && (
             <div className="mt-8 lg:mt-12">
               <ButtonGroup items={buttons} />
             </div>
