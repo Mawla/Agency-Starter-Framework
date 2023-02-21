@@ -13,7 +13,7 @@ export const getSchemaSnippet = ({
   import { Website } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType, SlugRule } from "sanity";
-  import { SLUG_FIELD } from "../page-fields";
+  import { SLUG_FIELD } from "./page-fields";
 
   const schema = defineType({
     name: "${schemaName}",
