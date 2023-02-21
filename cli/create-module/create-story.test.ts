@@ -94,7 +94,7 @@ test("create story with buttons", () => {
     result
       .replace(/\s/g, "")
       .includes(
-        `export const Default = () => <Test buttons={[{ label: Test }]} />;`.replace(
+        `export const Default = () => <Test buttons={[{ label: 'Test' }]} />;`.replace(
           /\s/g,
           "",
         ),
@@ -112,7 +112,7 @@ test("create story with items", () => {
     result
       .replace(/\s/g, "")
       .includes(
-        `export const Default = () => <Test items={[{ title: Test }]} />;`.replace(
+        `export const Default = () => <Test items={[{ title: 'Test' }]} />;`.replace(
           /\s/g,
           "",
         ),
