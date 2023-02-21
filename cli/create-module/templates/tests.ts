@@ -26,7 +26,7 @@ export const getTestSnippet = ({ pascalName, fields }: Props) => {
           />,
         );
       });
-      expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
+      expect(screen.getByText("Hello", { selector: "span" })).toBeInTheDocument();
     });
   });`,
   )}
