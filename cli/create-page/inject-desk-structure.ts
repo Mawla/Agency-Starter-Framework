@@ -54,7 +54,7 @@ export function injectDeskStructure(
       addition,
       lines,
       needle: `id: "navigation",`,
-      adjustLine: -2,
+      offset: -2,
     });
   }
 

@@ -15,7 +15,7 @@ test("inject line adjust needle up", () => {
     addition: "foo",
     lines: ["1", "2", "3", "4", "5"],
     needle: "3",
-    adjustLine: -2,
+    offset: -2,
   });
 
   expect(result).toEqual(["foo", "1", "2", "3", "4", "5"]);
@@ -26,7 +26,7 @@ test("inject line adjust needle down", () => {
     addition: "foo",
     lines: ["1", "2", "3", "4", "5"],
     needle: "3",
-    adjustLine: +3,
+    offset: +3,
   });
 
   expect(result).toEqual(["1", "2", "3", "4", "5", "foo"]);
@@ -44,7 +44,7 @@ test("insert in array", () => {
     addition: `  "foo",`,
     needle: "export const LINKABLE_SCHEMAS",
     delimiter: ");",
-    adjustLine: 2,
+    offset: 2,
   });
 
   expect(result).toEqual([
@@ -65,7 +65,7 @@ test("insert in array single line", () => {
     addition: ` "foo",`,
     needle: "export const LINKABLE_SCHEMAS",
     delimiter: ");",
-    adjustLine: 2,
+    offset: 2,
   });
 
   expect(result).toEqual([

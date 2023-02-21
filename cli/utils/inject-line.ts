@@ -14,7 +14,7 @@ type InjectLineProps = {
   addition: string;
   lines: string[];
   needle: string;
-  adjustLine?: number;
+  offset?: number;
   delimiter?: string;
 };
 
@@ -22,7 +22,7 @@ export const injectLine = ({
   addition,
   lines,
   needle,
-  adjustLine = 1,
+  offset = 1,
   delimiter,
 }: InjectLineProps) => {
   const newLines = [...lines];
@@ -39,7 +39,7 @@ export const injectLine = ({
       needleIndex + delimiterIndex
     ].replace(delimiter, `,${addition} ${delimiter}`);
   } else {
-    newLines.splice(needleIndex + adjustLine, 0, addition);
+    newLines.splice(needleIndex + offset, 0, addition);
   }
 
   return newLines;

@@ -38,7 +38,7 @@ export function injectTypes(
     lines,
     needle: "export const MODULE_SCHEMAS",
     delimiter: ");",
-    adjustLine: 2,
+    offset: 2,
   });
 
   lines = sortLines({

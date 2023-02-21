@@ -4,7 +4,7 @@
  * addLine('foo', ['1', '2', '3', '4', '5'], '3') // [ '1', '2', '3', 'foo', '4', '5' ]
  */
 
-module.exports.addLine = (line, lines, needle, adjustLine = 1, endNeedle) => {
+module.exports.addLine = (line, lines, needle, offset = 1, endNeedle) => {
   const newLines = [...lines];
   const needleIndex = newLines.findIndex((line) => line.indexOf(needle) > -1);
 
@@ -19,7 +19,7 @@ module.exports.addLine = (line, lines, needle, adjustLine = 1, endNeedle) => {
       needleIndex + endNeedleIndex
     ].replace(endNeedle, `,${line} ${endNeedle}`);
   } else {
-    newLines.splice(needleIndex + adjustLine, 0, line);
+    newLines.splice(needleIndex + offset, 0, line);
   }
 
   return newLines;

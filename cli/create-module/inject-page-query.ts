@@ -26,7 +26,7 @@ export function injectPageQuery(
     addition: getModulePageQuery({ pascalName, lowerName }),
     lines,
     needle: '"modules":',
-    adjustLine: -3,
+    offset: -3,
   });
 
   lines = lines.join("\n");
