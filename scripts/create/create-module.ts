@@ -58,11 +58,11 @@ async function init() {
       limit: 7,
       initial: ["title", "intro", "image"],
       choices: [
-        { name: "title", value: "Title" },
-        { name: "intro", value: "Intro" },
-        { name: "image", value: "Image" },
-        { name: "buttons", value: "Buttons" },
-        { name: "items", value: "Items" },
+        { label: "title", value: "Title" },
+        { label: "intro", value: "Intro" },
+        { label: "image", value: "Image" },
+        { label: "buttons", value: "Buttons" },
+        { label: "items", value: "Items" },
       ],
     });
 
