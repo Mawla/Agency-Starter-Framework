@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const getPageQuerySnippet = ({ schemaName }: Props) => {
-  return `      _type == "${schemaName}" => { ... }`;
+  return `      _type == "${schemaName}" => { title }`;
 };
