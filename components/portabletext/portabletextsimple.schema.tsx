@@ -1,3 +1,4 @@
+import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import richTextBasicSchema from "./portabletextbasic.schema";
 import { defineType } from "sanity";
 
@@ -16,5 +17,6 @@ export default defineType({
         annotations: [...(richTextBasicSchema.of[0] as any).marks.annotations],
       },
     },
+    SCRIPT_REFERENCE_FIELD,
   ],
 });

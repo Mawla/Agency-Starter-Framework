@@ -8,6 +8,9 @@ export const isPathUnique = async (slug: string, context: any) => {
   const { document } = context;
   const id = document._id.replace(/^drafts\./, "");
 
+  // we need a timeout here because sometimes the previous slug is returned by the query
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   // fetch all sitemap items
   const sitemap: SitemapType = await client.fetch(getSitemapQuery());
 

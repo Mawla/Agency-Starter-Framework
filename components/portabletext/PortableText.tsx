@@ -3,10 +3,9 @@ import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
+import { ScriptProps } from "../script/Script";
 import { Table } from "../table/Table";
-import { SCRIPTS, ScriptType } from "./portabletext.options";
 import { PortableText as PortableTextReact } from "@portabletext/react";
-import Script from "next/script";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 
@@ -27,6 +26,10 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
 
 const Link = lazy<ComponentType<LinkProps>>(
   () => import(/* webpackChunkName: "Link" */ "../buttons/Link"),
+);
+
+const Script = lazy<ComponentType<ScriptProps>>(
+  () => import(/* webpackChunkName: "Script" */ "../script/Script"),
 );
 
 export type PortableTextProps = {
@@ -99,10 +102,8 @@ export const PortableText = ({ content = [] }: PortableTextProps) => {
           csv({ value }) {
             return <Table {...value} />;
           },
-          scripts({ value }) {
-            if (!value.scriptId || !SCRIPTS[value.scriptId as ScriptType])
-              return null;
-            return <Script {...SCRIPTS[value?.scriptId as ScriptType]} />;
+          script({ value }) {
+            return <Script {...value} />;
           },
         },
       }}

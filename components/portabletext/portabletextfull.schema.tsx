@@ -1,8 +1,8 @@
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DIRECTION_OPTIONS } from "../buttons/buttongroup.options";
-import { SCRIPT_OPTIONS } from "./portabletext.options";
+import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import richTextBasicSchema from "./portabletextbasic.schema";
-import { Chain, CodingWebsite, Tables } from "@vectopus/atlas-icons-react";
+import { Chain, Tables } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField } from "sanity";
 
@@ -93,32 +93,6 @@ export default defineField({
         },
       ],
     },
-    {
-      type: "object",
-      name: "scripts",
-      title: "Scripts",
-      icon: () => <CodingWebsite weight="thin" />,
-      preview: {
-        select: {
-          scriptId: "scriptId",
-        },
-        prepare({ scriptId }: any) {
-          return {
-            title: (SCRIPT_OPTIONS as any)[scriptId],
-          };
-        },
-      },
-      fields: [
-        {
-          name: "scriptId",
-          title: "Script id",
-          type: "string",
-          validation: (Rule) => Rule.required(),
-          options: {
-            list: optionsToList(SCRIPT_OPTIONS),
-          },
-        },
-      ],
-    },
+    SCRIPT_REFERENCE_FIELD,
   ],
 });

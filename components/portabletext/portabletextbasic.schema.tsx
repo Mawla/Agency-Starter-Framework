@@ -1,3 +1,4 @@
+import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import { defineField } from "sanity";
 
 export default defineField({
@@ -34,5 +35,6 @@ export default defineField({
         ],
       },
     },
+    SCRIPT_REFERENCE_FIELD,
   ],
 });

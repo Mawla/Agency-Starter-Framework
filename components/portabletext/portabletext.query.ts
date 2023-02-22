@@ -26,6 +26,11 @@ _type == "csv" => {
   "fileName": file.asset->originalFilename,
 }`;
 
+export const richtextScript = `
+_type == "script" => {
+  ...@-> { script, title }
+}`;
+
 export const richTextMarkDefs = `
 markDefs[]{
   ...,
@@ -41,7 +46,8 @@ export const richTextQueryFields = groq`
   ${richTextVideo},
   ${richTextButtons},
   ${richTextCSV},
-  ${richTextMarkDefs}
+  ${richTextMarkDefs},
+  ${richtextScript}
  `;
 
 export const richTextQuery = groq`

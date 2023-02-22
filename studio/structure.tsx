@@ -276,7 +276,7 @@ export const structure = (
         ]),
       ),
       documentList(S, { type: "redirect", title: "Redirects" }),
-      documentList(S, { type: "form.static", title: "Forms" }),
+      documentList(S, { type: "script", title: "Scripts" }),
       S.divider(),
       S.documentTypeListItem("page.preset").title("Presets"),
 
