@@ -21,7 +21,7 @@ export default defineType({
     select: {
       title: "title",
     },
-    prepare({ title }: { title: string }) {
+    prepare({ title }) {
       return {
         title,
         media: <CodingWebsite weight="thin" />,
@@ -186,7 +186,7 @@ export const SCRIPT_REFERENCE_FIELD = {
     select: {
       title: "script.title",
     },
-    prepare({ title = "" }: { title: string }) {
+    prepare({ title = "" }) {
       return {
         title,
         media: <CodingWebsite weight="thin" />,
@@ -203,7 +203,7 @@ export const SCRIPT_REFERENCE_FIELD = {
         select: {
           title: "title",
         },
-        prepare({ title = "" }: { title: string }) {
+        prepare({ title = "" }) {
           return {
             title,
             media: <CodingWebsite weight="thin" />,
