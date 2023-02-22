@@ -10,7 +10,6 @@ import { HeroBasicProps } from "../heroes/herobasic/HeroBasic";
 import { getHeroBasicQuery } from "../heroes/herobasic/herobasic.query";
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
-import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query";
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
@@ -140,7 +139,7 @@ export const getPageQuery = (language: LanguageType) => groq`
       },
 
       _type == "dialog.form" => {
-        "form": ${staticFormQuery}    
+        script ->
       },
     },
   }

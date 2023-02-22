@@ -27,10 +27,10 @@ const schema = defineType({
         "Unique identifier used to link to this dialog from a button. Only lowercase and no special characters except -",
     }),
     defineField({
-      name: "form",
-      title: "Form",
+      name: "script",
+      title: "Script",
       type: "reference",
-      to: [{ type: "form.static" }],
+      to: [{ type: "script" }],
     }),
   ],
 });

@@ -46,15 +46,12 @@ graph TD
     RENDER{renderers} -->RENDER_HEROES
     RENDER -->RENDER_MODULES
     RENDER -->RENDER_DIALOGS
-    RENDER -->RENDER_FORMS
 
     RENDER_HEROES[HeroBuilder.tsx]-->HERO_OPTIONS
     RENDER_HEROES[HeroBuilder.tsx]-->HERO_STORIES
     RENDER_MODULES[ModuleBuilder.tsx]-->MODULE_OPTIONS
     RENDER_MODULES[ModuleBuilder.tsx]-->MODULE_STORIES
     RENDER_DIALOGS[DialogBuilder.tsx]-->PAGE
-    RENDER_FORMS[StaticFormBuilder.tsx]-->FORM
-    RENDER_FORMS[StaticFormBuilder.tsx]-->FORM_STORIES
 
     HERO[Hero.tsx]-->PAGE
     HERO_OPTIONS[HeroOptions.tsx]-->HERO
@@ -63,9 +60,6 @@ graph TD
     MODULE[Module.tsx]-->PAGE
     MODULE_OPTIONS[ModuleOptions.tsx]-->MODULE
     MODULE_STORIES[Module.stories.tsx]
-
-    FORM[Form.tsx]-->PAGE
-    FORM_STORIES[Form.stories.tsx]
 
     PAGE{"<br>BROWSER<br>…"}
 ```
