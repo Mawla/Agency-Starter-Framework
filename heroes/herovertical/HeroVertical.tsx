@@ -70,7 +70,7 @@ export type HeroVerticalProps = {
   };
   eyebrow?: string;
   title?: string;
-  intro?: PortableTextProps["content"];
+  text?: PortableTextProps["content"];
   image?: ImageType;
 };
 
@@ -78,7 +78,7 @@ export const HeroVertical = ({
   theme,
   eyebrow,
   title,
-  intro,
+  text,
   image,
 }: HeroVerticalProps) => {
   return (

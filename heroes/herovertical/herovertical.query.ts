@@ -8,6 +8,6 @@ export const getHeroVerticalQuery = (
 ) => groq`_type == "hero.herovertical" => {
   title,
   eyebrow,
-  intro[] ${richTextQuery},
+  text[] ${richTextQuery},
   "image": ${imageQuery}
 }`;
