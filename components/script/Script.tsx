@@ -19,9 +19,9 @@ export type ScriptsProps = {
 };
 
 export const Scripts = ({ items }: ScriptsProps) => {
-  if (!items?.filter(Boolean).length) return null;
-
   const { isPreviewMode } = useContext(PageContext);
+
+  if (!items?.filter(Boolean).length) return null;
 
   return (
     <React.Fragment>
