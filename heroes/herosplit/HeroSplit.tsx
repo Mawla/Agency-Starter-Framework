@@ -46,7 +46,7 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
-export type HeroBasicProps = {
+export type HeroSplitProps = {
   eyebrow?: string;
   title?: string;
   buttons?: ButtonProps[];
@@ -54,10 +54,10 @@ export type HeroBasicProps = {
   image?: ImageType;
 };
 
-export const HeroBasic = (data: HeroBasicProps) => {
+export const HeroSplit = (data: HeroSplitProps) => {
   if (!data) return null;
 
-  const { eyebrow, title, buttons, text, image }: HeroBasicProps = data;
+  const { eyebrow, title, buttons, text, image }: HeroSplitProps = data;
 
   return (
     <header className="relative z-0 overflow-hidden text-neutral-500">
@@ -102,4 +102,4 @@ export const HeroBasic = (data: HeroBasicProps) => {
   );
 };
 
-export default React.memo(HeroBasic);
+export default React.memo(HeroSplit);

@@ -4,7 +4,7 @@ import { richTextQuery } from "../../components/portabletext/portabletext.query"
 import { LanguageType } from "../../languages";
 import groq from "groq";
 
-export const getHeroBasicQuery = (
+export const getHeroSplit = (
   language: LanguageType,
 ) => groq`_type == "hero.basic" => {
   title,
