@@ -28,7 +28,10 @@ _type == "csv" => {
 
 export const richtextScript = `
 _type == "script" => {
-  ...@-> { script, title }
+  ...script-> {
+    title,
+    scripts[]
+  }
 }`;
 
 export const richTextMarkDefs = `

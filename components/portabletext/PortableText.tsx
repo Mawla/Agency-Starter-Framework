@@ -3,7 +3,7 @@ import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
-import { ScriptProps } from "../script/Script";
+import { ScriptsProps } from "../script/Script";
 import { Table } from "../table/Table";
 import { PortableText as PortableTextReact } from "@portabletext/react";
 import React, { ComponentType, lazy } from "react";
@@ -28,7 +28,7 @@ const Link = lazy<ComponentType<LinkProps>>(
   () => import(/* webpackChunkName: "Link" */ "../buttons/Link"),
 );
 
-const Script = lazy<ComponentType<ScriptProps>>(
+const Scripts = lazy<ComponentType<ScriptsProps>>(
   () => import(/* webpackChunkName: "Script" */ "../script/Script"),
 );
 
@@ -103,7 +103,7 @@ export const PortableText = ({ content = [] }: PortableTextProps) => {
             return <Table {...value} />;
           },
           script({ value }) {
-            return <Script {...value} />;
+            return <Scripts {...value} />;
           },
         },
       }}

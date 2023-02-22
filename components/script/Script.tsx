@@ -1,22 +1,54 @@
 import NextScript from "next/script";
+import React from "react";
 
-export type ScriptProps = {
+export type ScriptsProps = {
   title?: string;
-  script?: string;
+  scripts?: {
+    title?: string;
+    code?: "string";
+    html?: "string";
+    src?: "string";
+    onload?: "string";
+    onready?: "string";
+    onerror?: "string";
+    attributes: { name?: string; value?: string }[];
+  }[];
 };
 
-export const Script = ({ title, script }: ScriptProps) => {
-  if (!script) return null;
+export const Scripts = ({ scripts }: ScriptsProps) => {
+  if (!scripts?.filter(Boolean).length) return null;
 
-  if (!script.includes("<script")) {
+  return scripts.filter(Boolean).map((script) => {
+    const nextScriptProps = {
+      ...script.attributes?.reduce((acc, { name, value }) => {
+        if (name && value) {
+          acc[name] = value;
+        }
+        return acc;
+      }, {} as Record<string, string>),
+      onReady: () => new Function(script.onready || "")(),
+      onLoad: () => new Function(script.onload || "")(),
+      onError: () => new Function(script.onerror || "")(),
+    };
+
     return (
-      <NextScript id={title} strategy="lazyOnload">
-        {script}
-      </NextScript>
-    );
-  }
+      <div key={script.title}>
+        {script.html && (
+          <div dangerouslySetInnerHTML={{ __html: script.html }} />
+        )}
 
-  return <div dangerouslySetInnerHTML={{ __html: script }} />;
+        {script.code && (
+          <NextScript key={script.title} {...nextScriptProps}>
+            {script.code}
+          </NextScript>
+        )}
+
+        {script.src && (
+          <NextScript src={script.src} key={script.src} {...nextScriptProps} />
+        )}
+      </div>
+    );
+  });
 };
 
-export default Script;
+export default Scripts;
