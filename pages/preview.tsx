@@ -1,5 +1,4 @@
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
-import { ScriptsPreviewProps } from "../components/previewmode/ScriptsPreview";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
@@ -17,12 +16,6 @@ const LivePreview = lazy<ComponentType<LivePreviewProps>>(
   () =>
     import(
       /* webpackChunkName: "LivePreview" */ "../components/previewmode/LivePreview"
-    ),
-);
-const ScriptsPreview = lazy<ComponentType<ScriptsPreviewProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "ScriptsPreview" */ "../components/previewmode/ScriptsPreview"
     ),
 );
 
@@ -54,6 +47,7 @@ export default function PreviewPage({
 
   return (
     <div>
+      <pre>{JSON.stringify(page, null, 2)}</pre>
       {isPreviewMode && (
         <LivePreview
           setPageData={setPage}
@@ -68,8 +62,6 @@ export default function PreviewPage({
           pagePath={pagePath}
         />
       )}
-
-      {page?._type === "script" && <ScriptsPreview page={page} />}
 
       {page && (
         <Page

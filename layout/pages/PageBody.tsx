@@ -12,7 +12,7 @@ const Scripts = lazy<ComponentType<ScriptsProps>>(
 );
 
 export const PageBody = (props: PageType) => {
-  const { sitemapItem, language } = useContext(PageContext);
+  const { sitemapItem } = useContext(PageContext);
 
   return (
     <>

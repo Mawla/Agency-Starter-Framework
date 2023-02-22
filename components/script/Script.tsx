@@ -28,9 +28,27 @@ export const Scripts = ({ scripts }: ScriptsProps) => {
             }
             return acc;
           }, {} as Record<string, string>),
-          onReady: () => new Function(script.onready || "")(),
-          onLoad: () => new Function(script.onload || "")(),
-          onError: () => new Function(script.onerror || "")(),
+          onReady: () => {
+            try {
+              new Function(script.onready || "")();
+            } catch (error) {
+              console.error(error);
+            }
+          },
+          onLoad: () => {
+            try {
+              new Function(script.onload || "")();
+            } catch (error) {
+              console.error(error);
+            }
+          },
+          onError: () => {
+            try {
+              new Function(script.onerror || "")();
+            } catch (error) {
+              console.error(error);
+            }
+          },
         };
 
         return (
