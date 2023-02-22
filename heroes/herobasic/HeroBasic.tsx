@@ -65,7 +65,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
         <Bleed bleed="md">
           <Width
             width="inner"
-            className="space-x-24 flex flex-row border justify-between"
+            className="space-x-24 flex flex-row justify-between"
           >
             <div className="w-[40%] relative flex flex-col gap-4 mx-auto">
               {(title || eyebrow) && (
@@ -86,7 +86,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
             </div>
 
             {image && (
-              <div className="border w-[60%]">
+              <div className="w-[60%]">
                 <ResponsiveImage
                   {...image}
                   priority
