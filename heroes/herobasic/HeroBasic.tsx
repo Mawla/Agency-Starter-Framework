@@ -83,15 +83,12 @@ export const HeroBasic = (data: HeroBasicProps) => {
             </div>
 
             {image && (
-              <div className="w-1/2 border overflow-hidden mt-10">
+              <div className="border w-1/2">
                 <ResponsiveImage
                   {...image}
                   priority
                   loading="eager"
                   roundSize={50}
-                  width={1374}
-                  height={774}
-                  fill
                 />
               </div>
             )}
