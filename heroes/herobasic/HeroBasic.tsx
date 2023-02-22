@@ -63,8 +63,11 @@ export const HeroBasic = (data: HeroBasicProps) => {
     <header className="relative z-0 overflow-hidden text-neutral-500">
       <div className="relative flex flex-row items-center z-30 pt-10 md:pt-15 lg:pt-20">
         <Bleed bleed="md">
-          <Width width="inner" className="flex flex-row border justify-between">
-            <div className="w-1/2 relative flex flex-col gap-4 mx-auto">
+          <Width
+            width="inner"
+            className="space-x-24 flex flex-row border justify-between"
+          >
+            <div className="w-[40%] relative flex flex-col gap-4 mx-auto">
               {(title || eyebrow) && (
                 <Title as="h1" size="6xl" color="neutral-800" eyebrow={eyebrow}>
                   {title}
@@ -83,7 +86,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
             </div>
 
             {image && (
-              <div className="border w-1/2">
+              <div className="border w-[60%]">
                 <ResponsiveImage
                   {...image}
                   priority
