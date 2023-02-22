@@ -37,7 +37,7 @@ export default defineType({
       validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
-      name: "scripts",
+      name: "items",
       title: "Scripts",
       type: "array",
       of: [

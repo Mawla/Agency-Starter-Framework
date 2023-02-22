@@ -30,7 +30,7 @@ export const richtextScript = `
 _type == "script" => {
   ...script-> {
     title,
-    scripts[]
+    items[]
   }
 }`;
 

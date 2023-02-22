@@ -30,11 +30,7 @@ export const PageBody = (props: PageType) => {
       )}
 
       {props?.scripts?.filter(Boolean).map((script) => (
-        <Scripts
-          key={script.title}
-          title={script.title}
-          scripts={script.scripts}
-        />
+        <Scripts key={script.title} title={script.title} items={script.items} />
       ))}
     </>
   );

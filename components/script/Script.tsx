@@ -3,7 +3,7 @@ import React from "react";
 
 export type ScriptsProps = {
   title?: string;
-  scripts?: {
+  items?: {
     title?: string;
     code?: "string";
     html?: "string";
@@ -15,12 +15,12 @@ export type ScriptsProps = {
   }[];
 };
 
-export const Scripts = ({ scripts }: ScriptsProps) => {
-  if (!scripts?.filter(Boolean).length) return null;
+export const Scripts = ({ items }: ScriptsProps) => {
+  if (!items?.filter(Boolean).length) return null;
 
   return (
     <React.Fragment>
-      {scripts.filter(Boolean).map((script) => {
+      {items.filter(Boolean).map((script) => {
         const nextScriptProps = {
           ...script.attributes?.reduce((acc, { name, value }) => {
             if (name && value) {

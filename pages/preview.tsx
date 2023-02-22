@@ -47,7 +47,6 @@ export default function PreviewPage({
 
   return (
     <div>
-      <pre>{JSON.stringify(page, null, 2)}</pre>
       {isPreviewMode && (
         <LivePreview
           setPageData={setPage}

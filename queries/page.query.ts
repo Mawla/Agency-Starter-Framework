@@ -88,10 +88,16 @@ export const getPageQuery = (language: LanguageType) => groq`
     publishedAt,
     description,
     "image": ${imageQuery},
-    "scripts": (scripts[].script, scripts[]) -> {
-      title,
-      scripts[]
-    },
+    "scripts": select(
+      _type == "script" => [{
+        title,
+        items[],
+      }],
+      scripts[].script -> {
+        title,
+        items[]
+      }
+    ),
 
     // page seo
     "seo": {
