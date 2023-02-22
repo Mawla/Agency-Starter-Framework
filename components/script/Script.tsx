@@ -1,5 +1,7 @@
+import { PageContext } from "../../context/PageContext";
+import cx from "classnames";
 import NextScript from "next/script";
-import React from "react";
+import React, { useContext } from "react";
 
 export type ScriptsProps = {
   title?: string;
@@ -18,6 +20,8 @@ export type ScriptsProps = {
 
 export const Scripts = ({ items }: ScriptsProps) => {
   if (!items?.filter(Boolean).length) return null;
+
+  const { isPreviewMode } = useContext(PageContext);
 
   return (
     <React.Fragment>
@@ -53,7 +57,17 @@ export const Scripts = ({ items }: ScriptsProps) => {
         };
 
         return (
-          <div key={script._key}>
+          <div
+            key={script._key}
+            className={cx({
+              ["relative"]: isPreviewMode,
+            })}
+          >
+            {isPreviewMode && (
+              <span className="absolute right-0 top-0 text-[10px] p-1 bg-[#ddd]">
+                {script.title} script
+              </span>
+            )}
             {script.html && (
               <div dangerouslySetInnerHTML={{ __html: script.html }} />
             )}
