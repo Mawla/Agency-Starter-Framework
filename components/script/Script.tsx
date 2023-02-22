@@ -18,37 +18,45 @@ export type ScriptsProps = {
 export const Scripts = ({ scripts }: ScriptsProps) => {
   if (!scripts?.filter(Boolean).length) return null;
 
-  return scripts.filter(Boolean).map((script) => {
-    const nextScriptProps = {
-      ...script.attributes?.reduce((acc, { name, value }) => {
-        if (name && value) {
-          acc[name] = value;
-        }
-        return acc;
-      }, {} as Record<string, string>),
-      onReady: () => new Function(script.onready || "")(),
-      onLoad: () => new Function(script.onload || "")(),
-      onError: () => new Function(script.onerror || "")(),
-    };
+  return (
+    <React.Fragment>
+      {scripts.filter(Boolean).map((script) => {
+        const nextScriptProps = {
+          ...script.attributes?.reduce((acc, { name, value }) => {
+            if (name && value) {
+              acc[name] = value;
+            }
+            return acc;
+          }, {} as Record<string, string>),
+          onReady: () => new Function(script.onready || "")(),
+          onLoad: () => new Function(script.onload || "")(),
+          onError: () => new Function(script.onerror || "")(),
+        };
 
-    return (
-      <div key={script.title}>
-        {script.html && (
-          <div dangerouslySetInnerHTML={{ __html: script.html }} />
-        )}
+        return (
+          <div key={script.title}>
+            {script.html && (
+              <div dangerouslySetInnerHTML={{ __html: script.html }} />
+            )}
 
-        {script.code && (
-          <NextScript key={script.title} {...nextScriptProps}>
-            {script.code}
-          </NextScript>
-        )}
+            {script.code && (
+              <NextScript key={script.title} {...nextScriptProps}>
+                {script.code}
+              </NextScript>
+            )}
 
-        {script.src && (
-          <NextScript src={script.src} key={script.src} {...nextScriptProps} />
-        )}
-      </div>
-    );
-  });
+            {script.src && (
+              <NextScript
+                src={script.src}
+                key={script.src}
+                {...nextScriptProps}
+              />
+            )}
+          </div>
+        );
+      })}
+    </React.Fragment>
+  );
 };
 
-export default Scripts;
+export default React.memo(Scripts);

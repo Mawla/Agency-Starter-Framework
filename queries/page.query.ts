@@ -83,6 +83,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     publishedAt,
     description,
     "image": ${imageQuery},
+    scripts,
 
     // page seo
     "seo": {

@@ -302,7 +302,7 @@ export const defaultDocumentNode = (
 
   // add preview iframe for pages
   const views: any[] = [S.view.form()];
-  if (schemaType.startsWith("page.")) {
+  if (schemaType.startsWith("page.") || schemaType === "script") {
     views.push(PreviewView(S));
 
     if (
