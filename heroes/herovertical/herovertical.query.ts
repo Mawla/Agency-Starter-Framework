@@ -4,9 +4,9 @@ import { richTextQuery } from "../../components/portabletext/portabletext.query"
 import { LanguageType } from "../../languages";
 import groq from "groq";
 
-export const getHeroBasicQuery = (
+export const getHeroVerticalQuery = (
   language: LanguageType,
-) => groq`_type == "hero.basic" => {
+) => groq`_type == "hero.herovertical" => {
   title,
   eyebrow,
   "image": ${getImageQuery("image")},

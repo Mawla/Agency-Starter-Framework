@@ -6,8 +6,9 @@ import {
 import { imageQuery } from "../components/images/image.query";
 import { richTextQuery } from "../components/portabletext/portabletext.query";
 import { videoQuery } from "../components/video/video.query";
-import { HeroBasicProps } from "../heroes/herobasic/HeroBasic";
-import { getHeroBasicQuery } from "../heroes/herobasic/herobasic.query";
+import { HeroSplitProps } from "../heroes/herosplit/HeroSplit";
+import { getHeroSplitQuery } from "../heroes/herosplit/herosplit.query";
+import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query";
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query";
@@ -34,7 +35,7 @@ export type PageType = {
   _type: SchemaName;
   _id: string;
   _updatedAt: string;
-  hero?: HeroBasicProps | null;
+  hero?: HeroSplitProps | null;
   image?: ImageType;
   description?: string;
   title: string;
@@ -97,8 +98,9 @@ export const getPageQuery = (language: LanguageType) => groq`
       _key,
       theme,
 
-      ${getHeroBasicQuery(language)},
+      ${getHeroSplitQuery(language)},
       ${getResourceHeroQuery(language)},
+    ${getHeroVerticalQuery(language)},
     }[0],
 
     // modules

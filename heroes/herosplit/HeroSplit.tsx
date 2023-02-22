@@ -46,7 +46,7 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
-export type HeroBasicProps = {
+export type HeroSplitProps = {
   eyebrow?: string;
   title?: string;
   buttons?: ButtonProps[];
@@ -54,17 +54,20 @@ export type HeroBasicProps = {
   image?: ImageType;
 };
 
-export const HeroBasic = (data: HeroBasicProps) => {
+export const HeroSplit = (data: HeroSplitProps) => {
   if (!data) return null;
 
-  const { eyebrow, title, buttons, text, image }: HeroBasicProps = data;
+  const { eyebrow, title, buttons, text, image }: HeroSplitProps = data;
 
   return (
     <header className="relative z-0 overflow-hidden text-neutral-500">
-      <div className="relative flex flex-row items-center z-30 pt-10 md:pt-15 lg:pt-20">
+      <div className="relative flex flex-row z-30 pt-10 md:pt-15 lg:pt-20">
         <Bleed bleed="md">
-          <Width width="inner">
-            <div className="relative flex flex-col tablet:max-w-[75%] lg:max-w-[790px] gap-4 text-center mx-auto">
+          <Width
+            width="inner"
+            className="lg:space-x-24 flex flex-col items-start lg:flex-row justify-between"
+          >
+            <div className="lg:w-[40%] relative flex flex-col gap-4 mx-auto">
               {(title || eyebrow) && (
                 <Title as="h1" size="6xl" color="neutral-800" eyebrow={eyebrow}>
                   {title}
@@ -72,35 +75,23 @@ export const HeroBasic = (data: HeroBasicProps) => {
               )}
 
               {text && (
-                <Text
-                  size="2xl"
-                  className="mt-2"
-                  color="neutral-900"
-                  align="center"
-                >
+                <Text size="lg" className="mt-2" color="neutral-900">
                   <PortableText content={text as any} />
                 </Text>
               )}
 
               {buttons && (
-                <ButtonGroup
-                  className="mt-4 md:mt-6 lg:mt-8 mx-auto"
-                  items={buttons}
-                  align="center"
-                />
+                <ButtonGroup className="mt-4 md:mt-6 lg:mt-8" items={buttons} />
               )}
             </div>
 
             {image && (
-              <div className="relative block mx-auto overflow-hidden rounded-lg mt-10 aspect-video">
+              <div className="mt-12 lg:mt-0 lg:w-[60%]">
                 <ResponsiveImage
                   {...image}
                   priority
                   loading="eager"
                   roundSize={50}
-                  width={1374}
-                  height={774}
-                  fill
                 />
               </div>
             )}
@@ -111,4 +102,4 @@ export const HeroBasic = (data: HeroBasicProps) => {
   );
 };
 
-export default React.memo(HeroBasic);
+export default React.memo(HeroSplit);
