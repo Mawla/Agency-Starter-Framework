@@ -8,6 +8,7 @@ import { richTextQuery } from "../components/portabletext/portabletext.query";
 import { videoQuery } from "../components/video/video.query";
 import { HeroSplitProps } from "../heroes/herosplit/HeroSplit";
 import { getHeroSplitQuery } from "../heroes/herosplit/herosplit.query";
+import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query";
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query";
@@ -99,6 +100,7 @@ export const getPageQuery = (language: LanguageType) => groq`
 
       ${getHeroSplitQuery(language)},
       ${getResourceHeroQuery(language)},
+    ${getHeroVerticalQuery(language)},
     }[0],
 
     // modules

@@ -18,6 +18,7 @@ export const SCHEMAS = {
   "module.cardgrid": "",
   "module.faq": "",
   "module.gallery": "",
+  "module.image": "",
   "module.resourcefeed": "",
   "module.resourcestrip": "",
   "module.richtext": "",
@@ -46,7 +47,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "module.image": "",
+  "hero.herovertical": "",
   footer: "",
   navigation: "",
   password: "",
@@ -127,7 +128,12 @@ export const MODULE_SCHEMAS = pick(
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
 
-export const HERO_SCHEMAS = pick(SCHEMAS, "hero.basic", "hero.resourcehero");
+export const HERO_SCHEMAS = pick(
+  SCHEMAS,
+  "hero.basic",
+  "hero.resourcehero",
+  "hero.herovertical",
+);
 
 export type HeroSchemaName = keyof typeof HERO_SCHEMAS;
 

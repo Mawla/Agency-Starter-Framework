@@ -7,6 +7,7 @@ import portableTextFull from "../../components/portabletext/portabletextfull.sch
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import video from "../../components/video/video.schema";
 import heroSplit from "../../heroes/herosplit/herosplit.schema";
+import heroHeroVertical from "../../heroes/herovertical/herovertical.schema";
 import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
@@ -80,8 +81,9 @@ export const schemaTypes = [
     dialogVideo,
     footer,
     formStatic,
-    heroSplit,
+    heroHeroVertical,
     heroResourceHero,
+    heroSplit,
     imageSimple,
     link,
     moduleBillboard,
