@@ -65,7 +65,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
         <Bleed bleed="md">
           <Width
             width="inner"
-            className="lg:space-x-24 flex flex-col items-center lg:flex-row justify-between"
+            className="lg:space-x-24 flex flex-col items-start lg:flex-row justify-between"
           >
             <div className="lg:w-[40%] relative flex flex-col gap-4 mx-auto">
               {(title || eyebrow) && (
