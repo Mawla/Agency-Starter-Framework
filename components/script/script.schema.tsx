@@ -1,4 +1,3 @@
-import { ScriptPreview } from "../../studio/components/ScriptPreview";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { SchemaName } from "../../types.sanity";
 import { NEXT_LOADING_STRATEGIES } from "./script.options";
