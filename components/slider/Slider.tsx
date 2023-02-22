@@ -48,6 +48,7 @@ export const Slider = ({
 
   return (
     <div className={cx("relative", className)}>
+      {/* Adding the slidesPerGroup propetty breaks dragging behavior, removing it for now. */}
       <Swiper
         spaceBetween={gap}
         slidesPerView={columns}
