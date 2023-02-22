@@ -4,6 +4,7 @@ import React from "react";
 export type ScriptsProps = {
   title?: string;
   items?: {
+    _key?: string;
     title?: string;
     code?: "string";
     html?: "string";
@@ -52,7 +53,7 @@ export const Scripts = ({ items }: ScriptsProps) => {
         };
 
         return (
-          <div key={script.title}>
+          <div key={script._key}>
             {script.html && (
               <div dangerouslySetInnerHTML={{ __html: script.html }} />
             )}
