@@ -23,7 +23,7 @@ export default defineType({
     },
     prepare({ title }: { title: string }) {
       return {
-        title: `${title}`,
+        title,
         media: <CodingWebsite weight="thin" />,
       };
     },
@@ -186,9 +186,9 @@ export const SCRIPT_REFERENCE_FIELD = {
     select: {
       title: "script.title",
     },
-    prepare({ title }: { title: string }) {
+    prepare({ title = "" }: { title: string }) {
       return {
-        title: `${title}`,
+        title,
         media: <CodingWebsite weight="thin" />,
       };
     },
@@ -203,9 +203,9 @@ export const SCRIPT_REFERENCE_FIELD = {
         select: {
           title: "title",
         },
-        prepare({ title }: { title: string }) {
+        prepare({ title = "" }: { title: string }) {
           return {
-            title: `${title}`,
+            title,
             media: <CodingWebsite weight="thin" />,
           };
         },
