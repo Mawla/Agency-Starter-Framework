@@ -4,7 +4,7 @@ import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "hero.vertical",
+  name: "hero.herovertical",
   title: "Hero Vertical",
   type: "object",
   icon: () => <ImageGallery weight="thin" />,
