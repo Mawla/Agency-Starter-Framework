@@ -1,15 +1,12 @@
-import { BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { ImageGallery } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "hero.herovertical",
-  title: "HeroVertical",
+  name: "hero.basic",
+  title: "Hero Basic",
   type: "object",
-  description:
-    "Hero Vertical is a prominent section that typically appears at the top of a page or landing page.",
   icon: () => <ImageGallery weight="thin" />,
   preview: {
     select: {
@@ -32,9 +29,10 @@ const schema = defineType({
       default: true,
     },
     {
-      name: "theme",
-      title: "Theme",
+      name: "visual",
+      title: "Visual",
     },
+
     {
       name: "tools",
       title: " ",
@@ -48,7 +46,6 @@ const schema = defineType({
       type: "string",
       group: "content",
     }),
-
     defineField({
       name: "title",
       title: "Title",
@@ -56,43 +53,25 @@ const schema = defineType({
       rows: 2,
       group: "content",
     }),
-
     defineField({
       name: "text",
       title: "Text",
       type: "portabletext.simple",
       group: "content",
     }),
-
     defineField({
       name: "image",
       title: "Image",
       type: "image",
-      group: "content",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
-      name: "theme",
-      title: "Theme",
-      type: "object",
-      group: "theme",
-      fields: [
-        defineField({
-          name: "module",
-          title: "Module",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "background",
-                type: "color",
-                options: {
-                  colors: BACKGROUND_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-      ],
+      name: "buttons",
+      title: "Buttons",
+      type: "buttongroup",
+      group: "content",
     }),
     defineField({
       name: "preset",

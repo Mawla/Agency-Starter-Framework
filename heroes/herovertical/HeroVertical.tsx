@@ -1,21 +1,13 @@
+import { ButtonProps } from "../../components/buttons/Button";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { BleedProps } from "../../components/module/Bleed";
 import { TextProps } from "../../components/module/Text";
 import { TitleProps } from "../../components/module/Title";
 import { WidthProps } from "../../components/module/Width";
-import { WrapperProps } from "../../components/module/Wrapper";
-import { BackgroundColorType } from "../../components/module/background.options";
-import { SpaceType } from "../../components/module/spacing.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
-import { ColorType, HeadingLevelType } from "../../types";
 import { ImageType } from "../../types";
-import { TitleSizeType } from "./herovertical.options";
 import React, { ComponentType, lazy } from "react";
-
-const Wrapper = lazy<ComponentType<WrapperProps>>(
-  () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/module/Wrapper"),
-);
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/module/Title"),
@@ -25,6 +17,21 @@ const Text = lazy<ComponentType<TextProps>>(
   () => import(/* webpackChunkName: "Text" */ "../../components/module/Text"),
 );
 
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const Width = lazy<ComponentType<WidthProps>>(
+  () => import(/* webpackChunkName: "Width" */ "../../components/module/Width"),
+);
+
+const Bleed = lazy<ComponentType<BleedProps>>(
+  () => import(/* webpackChunkName: "Bleed" */ "../../components/module/Bleed"),
+);
+
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
@@ -32,55 +39,26 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
     ),
 );
 
-const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
-      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
-    ),
-);
-
-const Bleed = lazy<ComponentType<BleedProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "BleedProps" */ "../../components/module/Bleed"
-    ),
-);
-
-const Width = lazy<ComponentType<WidthProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "WidthProps" */ "../../components/module/Width"
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
     ),
 );
 
 export type HeroVerticalProps = {
-  theme?: {
-    module?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-    };
-    title?: {
-      color?: ColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-    };
-    text?: {
-      color?: ColorType;
-    };
-  };
   eyebrow?: string;
   title?: string;
-  text?: PortableTextProps["content"];
+  buttons?: ButtonProps[];
+  text?: React.ReactElement;
   image?: ImageType;
 };
 
-export const HeroVertical = ({
-  theme,
-  eyebrow,
-  title,
-  text,
-  image,
-}: HeroVerticalProps) => {
+export const HeroVertical = (data: HeroVerticalProps) => {
+  if (!data) return null;
+
+  const { eyebrow, title, buttons, text, image }: HeroVerticalProps = data;
+
   return (
     <header className="relative z-0 overflow-hidden text-neutral-500">
       <div className="relative flex flex-row items-center z-30 pt-10 md:pt-15 lg:pt-20">
