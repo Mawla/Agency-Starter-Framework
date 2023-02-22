@@ -117,7 +117,7 @@ export const TextImage = ({
               {(title || eyebrow) && (
                 <Title
                   size={theme?.title?.size || "3xl"}
-                  color="neutral-500"
+                  color="neutral-900"
                   eyebrow={eyebrow}
                   as={theme?.title?.level}
                 >
