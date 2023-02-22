@@ -11,7 +11,7 @@ export const SCHEMAS = {
   "dialog.richtext": "",
   "dialog.video": "",
   "form.static": "",
-  "hero.basic": "",
+  "hero.herosplit": "",
   "hero.resourcehero": "",
   "module.billboard": "",
   "module.breadcrumb": "",
@@ -130,7 +130,7 @@ export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
 
 export const HERO_SCHEMAS = pick(
   SCHEMAS,
-  "hero.basic",
+  "hero.herosplit",
   "hero.resourcehero",
   "hero.herovertical",
 );

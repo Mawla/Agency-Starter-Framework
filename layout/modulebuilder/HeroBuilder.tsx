@@ -33,7 +33,7 @@ export const HeroBuilder = ({ hero }: HeroBuilderProps) => {
   return (
     <Suspense fallback={``}>
       <section data-module={hero?._type} data-id={hero._key} key={hero._key}>
-        {hero._type == "hero.basic" && (
+        {hero._type == "hero.herosplit" && (
           <HeroSplit {...(hero as HeroSplitProps)} />
         )}
         {hero._type === "hero.resourcehero" && (

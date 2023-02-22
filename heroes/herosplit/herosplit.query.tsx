@@ -6,7 +6,7 @@ import groq from "groq";
 
 export const getHeroSplitQuery = (
   language: LanguageType,
-) => groq`_type == "hero.basic" => {
+) => groq`_type == "hero.herosplit" => {
   title,
   eyebrow,
   "image": ${getImageQuery("image")},

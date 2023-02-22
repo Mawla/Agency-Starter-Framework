@@ -6,7 +6,7 @@ import groq from "groq";
 
 export const getHeroVerticalQuery = (
   language: LanguageType,
-) => groq`_type == "hero.basic" => {
+) => groq`_type == "hero.vertical" => {
   title,
   eyebrow,
   "image": ${getImageQuery("image")},
