@@ -72,7 +72,7 @@ export const HeroBasic = (data: HeroBasicProps) => {
               )}
 
               {text && (
-                <Text size="2xl" className="mt-2" color="neutral-900">
+                <Text size="lg" className="mt-2" color="neutral-900">
                   <PortableText content={text as any} />
                 </Text>
               )}
