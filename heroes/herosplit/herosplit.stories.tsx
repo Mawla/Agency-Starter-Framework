@@ -1,16 +1,16 @@
 import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
-import { HeroBasic } from "./HeroBasic";
+import { HeroSplit } from "./HeroSplit";
 import { Meta } from "@storybook/react";
 import React from "react";
 
 export default {
-  component: HeroBasic,
-  title: "Hero/HeroBasic",
+  component: HeroSplit,
+  title: "Hero/HeroSplit",
 } as Meta;
 
 export const Default = () => (
-  <HeroBasic
+  <HeroSplit
     title="Hello"
     text={
       <p>
@@ -36,7 +36,7 @@ export const Colors = () => (
         (Object.keys(STORYBOOK_COLORS_SUBSET) as ColorType[]).map(
           (color2: ColorType) => (
             <div key={color1 + color2} className="mb-10">
-              <HeroBasic
+              <HeroSplit
                 title="Hello."
                 buttons={[
                   {
@@ -51,4 +51,4 @@ export const Colors = () => (
   </>
 );
 
-export const NoContent = () => <HeroBasic />;
+export const NoContent = () => <HeroSplit />;

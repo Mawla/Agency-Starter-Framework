@@ -1,7 +1,15 @@
-import { HeroBasicProps } from "../../heroes/herobasic/HeroBasic";
+import { HeroSplitProps } from "../../heroes/herosplit/HeroSplit";
+import { HeroVerticalProps } from "../../heroes/herovertical/HeroVertical";
 import { ResourceHeroProps } from "../../heroes/resourcehero/ResourceHero";
 import { GenericModuleProps } from "../../types";
 import React, { lazy, Suspense, ComponentType } from "react";
+
+const HeroVertical = lazy<ComponentType<HeroVerticalProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "HeroVertical" */ "../../heroes/herovertical/HeroVertical"
+    ),
+);
 
 const ResourceHero = lazy<ComponentType<ResourceHeroProps>>(
   () =>
@@ -10,10 +18,10 @@ const ResourceHero = lazy<ComponentType<ResourceHeroProps>>(
     ),
 );
 
-const HeroBasic = lazy<ComponentType<HeroBasicProps>>(
+const HeroSplit = lazy<ComponentType<HeroSplitProps>>(
   () =>
     import(
-      /* webpackChunkName: "HeroBasic" */ "../../heroes/herobasic/HeroBasic"
+      /* webpackChunkName: "HeroSplit" */ "../../heroes/herosplit/HeroSplit"
     ),
 );
 
@@ -25,11 +33,14 @@ export const HeroBuilder = ({ item }: HeroBuilderProps) => {
   return (
     <Suspense fallback={``}>
       <section data-module={item?._type} data-id={item._key} key={item._key}>
-        {item._type == "hero.basic" && (
-          <HeroBasic {...(item as HeroBasicProps)} />
+        {item._type == "hero.herosplit" && (
+          <HeroSplit {...(item as HeroSplitProps)} />
         )}
         {item._type === "hero.resourcehero" && (
           <ResourceHero {...(item as ResourceHeroProps)} />
+        )}
+        {item._type === "hero.herovertical" && (
+          <HeroVertical {...(item as HeroVerticalProps)} />
         )}
       </section>
     </Suspense>
