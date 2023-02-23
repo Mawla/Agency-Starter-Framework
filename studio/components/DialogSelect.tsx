@@ -29,35 +29,44 @@ const DialogSelect: ComponentType<any> = (props) => {
   );
 
   return (
-    <Autocomplete
-      radius={0}
-      fontSize={2}
-      filterOption={(query, option) =>
-        option.value?.toLowerCase().indexOf(query.toLowerCase()) > -1
-      }
-      renderOption={(option) => (
-        <Card as="button">
-          <Stack padding={3} space={3}>
-            <Text size={2}>{option.value}</Text>
-            {option.description && (
-              <Text size={1} muted>
-                {option.description}
-              </Text>
-            )}
-          </Stack>
-        </Card>
-      )}
-      value={value}
-      icon={SearchIcon}
-      id="autocomplete"
-      openButton
-      options={options}
-      placeholder="Search dialogs"
-      onSelect={onSelect}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onChange={onSelect}
-    />
+    <Stack space={3}>
+      <Text size={1} weight="semibold">
+        Dialogs
+      </Text>
+      <Text size={1} muted>
+        Dialogs are modal windows, used for presenting extra information. A
+        dialog must be created on the page before it can be linked to from here.
+      </Text>
+      <Autocomplete
+        radius={0}
+        fontSize={2}
+        filterOption={(query, option) =>
+          option.value?.toLowerCase().indexOf(query.toLowerCase()) > -1
+        }
+        renderOption={(option) => (
+          <Card as="button">
+            <Stack padding={3} space={3}>
+              <Text size={2}>{option.value}</Text>
+              {option.description && (
+                <Text size={1} muted>
+                  {option.description}
+                </Text>
+              )}
+            </Stack>
+          </Card>
+        )}
+        value={value}
+        icon={SearchIcon}
+        id="autocomplete"
+        openButton
+        options={options}
+        placeholder="Search dialogs"
+        onSelect={onSelect}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={onSelect}
+      />
+    </Stack>
   );
 };
 

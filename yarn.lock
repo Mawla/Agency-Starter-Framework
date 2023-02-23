@@ -1384,6 +1384,23 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@clack/core@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@clack/core/-/core-0.1.8.tgz#8814ed4e3160578df548c8a6b10134a82bd9d861"
+  integrity sha512-9ZT1Un5kWD408y47fxQ4zvPFOUjAfPcDCz0ruil0oZg+ewKfDCeOXYb9d3aXA4szibVPlTpr03LWPFrXBj88wA==
+  dependencies:
+    picocolors "^1.0.0"
+    sisteransi "^1.0.5"
+
+"@clack/prompts@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@clack/prompts/-/prompts-0.4.4.tgz#16cfc87306454aa62e4b9826a1e9e2408ad093f3"
+  integrity sha512-PZkvFkRCqpLMPks+kQhfEDcAp2XFpqk9P0iA8vrNUGK1+uy1xyjYer2c97aTPMJOvvHQElrpYoNFPNm3vOZBXA==
+  dependencies:
+    "@clack/core" "^0.1.8"
+    picocolors "^1.0.0"
+    sisteransi "^1.0.5"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

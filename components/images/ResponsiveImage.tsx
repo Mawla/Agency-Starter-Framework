@@ -181,10 +181,6 @@ export const ResponsiveImage = ({
           width={fill ? undefined : width}
           height={fill ? undefined : height}
           priority={priority}
-          // loader={({ src, width, quality = 100 }) => {
-          //   console.log(src);
-          //   return `${src}&q=${quality}`;
-          // }}
           quality={IMAGE_QUALITY}
           onLoadingComplete={onImageLoad}
         />

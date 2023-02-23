@@ -4,7 +4,7 @@ import {
   BreakpointType,
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
-import ErrorBoundary from "../../layout/modulebuilder/ErrorBoundary";
+import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
 import { CardGridProps } from "./CardGrid";
 import { ComposableCardProps } from "./ComposableCard";
 import { ImageCardProps } from "./ImageCard";

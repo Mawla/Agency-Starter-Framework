@@ -10,8 +10,9 @@ import {
 import { richTextQuery } from "../components/portabletext/portabletext.query";
 import { ScriptsType } from "../components/script/Script";
 import { videoQuery } from "../components/video/video.query";
-import { HeroBasicProps } from "../heroes/herobasic/HeroBasic";
-import { getHeroBasicQuery } from "../heroes/herobasic/herobasic.query";
+import { HeroSplitProps } from "../heroes/herosplit/HeroSplit";
+import { getHeroSplitQuery } from "../heroes/herosplit/herosplit.query";
+import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query";
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
@@ -37,7 +38,7 @@ export type PageType = {
   _type: SchemaName;
   _id: string;
   _updatedAt: string;
-  hero?: HeroBasicProps | null;
+  hero?: HeroSplitProps | null;
   image?: ImageType;
   description?: string;
   title: string;
@@ -107,44 +108,38 @@ export const getPageQuery = (language: LanguageType) => groq`
 
     // hero
     "hero": hero[!(_type in path('studio.*'))][] {
+      ${getHeroSplitQuery(language)},
+      ${getResourceHeroQuery(language)},
+      ${getHeroVerticalQuery(language)},
       _type,
       _key,
       theme,
 
-      ${getHeroBasicQuery(language)},
-      ${getResourceHeroQuery(language)},
     }[0],
 
     // modules
     "modules": modules[!(_type in path('studio.*'))] {
-      _key,
-      _type,
-      decorations[] {
-        ...,
-        "image": ${imageQuery},
-      },
-      theme,
-
-      ${getRichTextQuery(language)},
+      ${getBillboardQuery(language)},
       ${getBreadcrumbModuleQuery(language)},
       ${getCardGridQuery(language)},
-      ${getBillboardQuery(language)},
-      ${getTextImageQuery(language)},
+      ${getFaqQuery(language)},
+      ${getFeedQuery(language)},
       ${getGalleryQuery(language)},
+      ${getImageQuery(language)},
+      ${getResourceStripQuery(language)},
+      ${getRichTextQuery(language)},
       ${getSlidesQuery(language)},
       ${getStoryQuery(language)},
-      ${getFeedQuery(language)},
-      ${getResourceStripQuery(language)},
-      ${getFaqQuery(language)},
+      ${getTextImageQuery(language)},
       ${getVideoQuery(language)},
-      ${getImageQuery(language)},
+      _key,
+      _type,
+      decorations,
+      theme,
     },
 
     // dialogs
     dialogs {
-      _key,
-      _type,
-      "slug": slug.current,
       _type == "dialog.richtext" => {
         content[] ${richTextQuery}
       },
@@ -156,6 +151,10 @@ export const getPageQuery = (language: LanguageType) => groq`
       _type == "dialog.form" => {
         script ->
       },
+
+      _key,
+      _type,
+      "slug": slug.current,
     },
   }
 }.page`;
