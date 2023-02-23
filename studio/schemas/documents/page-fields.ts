@@ -1,3 +1,4 @@
+import { SCRIPT_REFERENCE_FIELD } from "../../../components/script/script.schema";
 import { baseLanguage, languages, LanguageType } from "../../../languages";
 import {
   DialogSchemaName,
@@ -339,6 +340,15 @@ export const HIDE_FOOTER_FIELD = defineField({
   group: ["meta"],
 });
 
+export const SCRIPTS_FIELD = defineField({
+  name: "scripts",
+  title: "Scripts",
+  type: "array",
+  description: "Scripts to load on the page",
+  group: ["meta"],
+  of: [SCRIPT_REFERENCE_FIELD],
+});
+
 export const pageBase = {
   groups: [
     {
@@ -367,6 +377,7 @@ export const pageBase = {
     HIDE_FOOTER_FIELD,
     LANGUAGE_FIELD,
     I18N_BASE_FIELD,
+    SCRIPTS_FIELD,
   ],
 };
 

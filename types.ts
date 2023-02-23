@@ -184,22 +184,6 @@ export const RATIOS = {
 export type RatioType = keyof typeof RATIOS;
 export type RatiosType = { [key in keyof typeof RATIOS]: string };
 
-export const STATIC_FORMS = {
-  "newsletter-sign-up": "Newsletter sign up",
-};
-
-export type StaticFormType = keyof typeof STATIC_FORMS;
-export type StaticFormsType = { [key in keyof typeof STATIC_FORMS]: string };
-
-export const STATIC_FORM_OPTIONS = {};
-
-export type StaticFormOptionType = keyof typeof STATIC_FORM_OPTIONS;
-export type StaticFormOptionsType = {
-  [key in keyof typeof STATIC_FORM_OPTIONS]?: string;
-};
-
-export type SuccessOrErrorMessage = { success: string } | { error: string };
-
 export type PersonType = {
   name?: string;
   position?: string;

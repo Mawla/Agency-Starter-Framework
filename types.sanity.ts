@@ -10,7 +10,6 @@ export const SCHEMAS = {
   "dialog.form": "",
   "dialog.richtext": "",
   "dialog.video": "",
-  "form.static": "",
   "hero.herosplit": "",
   "hero.resourcehero": "",
   "module.billboard": "",
@@ -53,6 +52,7 @@ export const SCHEMAS = {
   password: "",
   person: "",
   redirect: "",
+  script: "",
 };
 
 export type SchemaName = keyof typeof SCHEMAS;
@@ -140,7 +140,3 @@ export type HeroSchemaName = keyof typeof HERO_SCHEMAS;
 export const DIALOG_SCHEMAS = pick(SCHEMAS, "dialog.richtext", "dialog.video");
 
 export type DialogSchemaName = keyof typeof DIALOG_SCHEMAS;
-
-export const FORM_SCHEMAS = pick(SCHEMAS, "form.static");
-
-export type FormSchemaName = keyof typeof FORM_SCHEMAS;

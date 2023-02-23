@@ -1,3 +1,4 @@
+import { SCRIPT_REFERENCE_FIELD } from "../../../components/script/script.schema";
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
 import { TrimPathfinder } from "@vectopus/atlas-icons-react";
@@ -34,6 +35,14 @@ export default defineType({
       title: "Google Tag Manager ID",
       type: "string",
       description: "Formatted as `GTM-XXXXXX`.",
+    }),
+    defineField({
+      name: "scripts",
+      title: "Scripts",
+      type: "array",
+      description:
+        "Scripts to load on every page. Beware this will slow down the website.",
+      of: [SCRIPT_REFERENCE_FIELD],
     }),
   ],
 });

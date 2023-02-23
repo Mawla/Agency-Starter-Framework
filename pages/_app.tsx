@@ -20,15 +20,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {/* {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
-        <Script
-          id="Cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid="5664cec0-2a5d-458a-957b-9f6c25ad5f33"
-          data-blockingmode="auto"
-        />
-      )} */}
-
       <div className={`${manrope.variable} font-sans`}>
         <Component {...pageProps} />
       </div>

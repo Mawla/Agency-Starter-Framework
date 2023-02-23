@@ -3,15 +3,18 @@ import {
   FlatBreadcrumbType,
   getBreadcrumbQuery,
 } from "../components/breadcrumb/breadcrumb.query";
-import { imageQuery } from "../components/images/image.query";
+import {
+  imageQuery,
+  getImageQuery as getImageComponentQuery,
+} from "../components/images/image.query";
 import { richTextQuery } from "../components/portabletext/portabletext.query";
+import { ScriptsType } from "../components/script/Script";
 import { videoQuery } from "../components/video/video.query";
 import { HeroSplitProps } from "../heroes/herosplit/HeroSplit";
 import { getHeroSplitQuery } from "../heroes/herosplit/herosplit.query";
 import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query";
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
-import { staticFormQuery } from "../layout/pagebuilder/StaticFormBuilder.query";
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
@@ -27,7 +30,7 @@ import { getTextImageQuery } from "../modules/textimage/textimage.query";
 import { getVideoQuery } from "../modules/video/video.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
-import { ConfigType } from "./config.query";
+import { SeoType } from "./config.query";
 import { getSitemapQuery, LanguageAlternateType } from "./sitemap.query";
 import groq from "groq";
 
@@ -41,13 +44,14 @@ export type PageType = {
   title: string;
   hideNav?: boolean;
   hideFooter?: boolean;
-  seo: ConfigType["seo"];
+  seo: SeoType;
   modules: {}[];
   dialogs: {}[];
   locked?: boolean;
   homepage: FlatBreadcrumbItemType;
   breadcrumb: FlatBreadcrumbType;
   languageAlternates?: LanguageAlternateType[];
+  scripts: ScriptsType[];
 };
 
 export const getPageQuery = (language: LanguageType) => groq`
@@ -85,11 +89,21 @@ export const getPageQuery = (language: LanguageType) => groq`
     publishedAt,
     description,
     "image": ${imageQuery},
+    "scripts": select(
+      _type == "script" => [{
+        title,
+        items[],
+      }],
+      scripts[].script -> {
+        title,
+        items[]
+      }
+    ),
 
     // page seo
     "seo": {
-      ...,
-      "image": ${imageQuery}
+      ...seo,
+      "image": ${getImageComponentQuery("seo.image")}
     },
 
     // hero
@@ -135,7 +149,7 @@ export const getPageQuery = (language: LanguageType) => groq`
       },
 
       _type == "dialog.form" => {
-        "form": ${staticFormQuery}    
+        script ->
       },
 
       _key,

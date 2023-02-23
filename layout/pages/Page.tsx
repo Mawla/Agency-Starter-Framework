@@ -1,6 +1,7 @@
 import { Seo } from "../../components/meta/Seo";
 import { PageLock } from "../../components/pagelock/PageLock";
 import { PreviewButton } from "../../components/previewmode/PreviewButton";
+import { Scripts } from "../../components/script/Script";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { LanguageType } from "../../languages";
@@ -97,6 +98,17 @@ export const Page = ({
             legalLinks={footer.legalLinks}
           />
         )}
+
+        {!isPreviewMode &&
+          config.integrations?.scripts
+            ?.filter(Boolean)
+            .map((script) => (
+              <Scripts
+                key={script.title}
+                title={script.title}
+                items={script.items}
+              />
+            ))}
       </PageContext.Provider>
     </SiteContext.Provider>
   );

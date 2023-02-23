@@ -7,7 +7,6 @@ module.exports = {
     "../modules/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../layout/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../heroes/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../forms/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   typescript: {
     check: false,

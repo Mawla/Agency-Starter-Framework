@@ -112,8 +112,4 @@ Run `yarn dev`, `yarn cms` and `yarn storybook` in three terminal tabs and start
 - start creating custom page types `yarn create-page`
 - start creating modules `yarn create-module`
 - start creating heroes `yarn create-hero`
-
-Later
-
 - start creating dialogs `yarn create-dialog`
-- start creating forms `yarn create-form`

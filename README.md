@@ -19,6 +19,8 @@ Get started
 - `yarn dev` runs next.js
 - `yarn cms` runs sanity
 - `yarn storybook` runs storybook
+- `yarn test` runs tests
+
 - `yarn create-page` runs the cli to add a page
 - `yarn create-hero` runs the cli to create a hero
 - `yarn create-module` runs the cli to create a module
@@ -46,26 +48,13 @@ graph TD
     RENDER{renderers} -->RENDER_HEROES
     RENDER -->RENDER_MODULES
     RENDER -->RENDER_DIALOGS
-    RENDER -->RENDER_FORMS
 
-    RENDER_HEROES[HeroBuilder.tsx]-->HERO_OPTIONS
-    RENDER_HEROES[HeroBuilder.tsx]-->HERO_STORIES
-    RENDER_MODULES[ModuleBuilder.tsx]-->MODULE_OPTIONS
-    RENDER_MODULES[ModuleBuilder.tsx]-->MODULE_STORIES
+    RENDER_HEROES[HeroBuilder.tsx]-->HERO
+    RENDER_MODULES[ModuleBuilder.tsx]-->MODULE
     RENDER_DIALOGS[DialogBuilder.tsx]-->PAGE
-    RENDER_FORMS[StaticFormBuilder.tsx]-->FORM
-    RENDER_FORMS[StaticFormBuilder.tsx]-->FORM_STORIES
 
-    HERO[Hero.tsx]-->PAGE
-    HERO_OPTIONS[HeroOptions.tsx]-->HERO
-    HERO_STORIES[Hero.stories.tsx]
-
-    MODULE[Module.tsx]-->PAGE
-    MODULE_OPTIONS[ModuleOptions.tsx]-->MODULE
-    MODULE_STORIES[Module.stories.tsx]
-
-    FORM[Form.tsx]-->PAGE
-    FORM_STORIES[Form.stories.tsx]
+    HERO[Hero.tsx<br>hero.schema.tsx<br>hero.query.tsx<br>hero.test.tsx<br>hero.stories.tsx<br>hero.options.ts]-->PAGE
+    MODULE[Module.tsx<br>module.schema.tsx<br>module.query.tsx<br>module.test.tsx<br>module.stories.tsx<br>module.options.ts]-->PAGE
 
     PAGE{"<br>BROWSER<br>…"}
 ```

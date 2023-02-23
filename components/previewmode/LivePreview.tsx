@@ -100,7 +100,9 @@ export const LivePreview = ({
     // revision mismatch
     if (mutationRevision.current && newPage._rev !== mutationRevision.current) {
       console.log(`Revisions don't match`);
-      console.log(`- Expecing ${mutationRevision.current} got ${newPage._rev}`);
+      console.log(
+        `- Expecting ${mutationRevision.current} got ${newPage._rev}`,
+      );
       console.log(`- Reloading`);
 
       const nextTry = 250 + 250 * reloadAttempts.current;

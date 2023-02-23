@@ -5,6 +5,7 @@ import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
+import script from "../../components/script/script.schema";
 import video from "../../components/video/video.schema";
 import heroSplit from "../../heroes/herosplit/herosplit.schema";
 import heroHeroVertical from "../../heroes/herovertical/herovertical.schema";
@@ -36,7 +37,6 @@ import configTranslations from "./documents/config.translations";
 import dialogForm from "./documents/dialog.form";
 import dialogRichText from "./documents/dialog.richtext";
 import dialogVideo from "./documents/dialog.video";
-import formStatic from "./documents/form.static";
 import pageBlog from "./documents/page.blog";
 import pageBlogs from "./documents/page.blogs";
 import pageCaseStudies from "./documents/page.casestudies";
@@ -80,7 +80,6 @@ export const schemaTypes = [
     dialogRichText,
     dialogVideo,
     footer,
-    formStatic,
     heroHeroVertical,
     heroResourceHero,
     heroSplit,
@@ -127,6 +126,7 @@ export const schemaTypes = [
     portableTextSimple,
     preset,
     redirect,
+    script,
     studioDivider,
     styles,
     video,
