@@ -59,7 +59,7 @@ export const Scripts = ({ items }: ScriptsProps) => {
         return (
           <div
             key={script._key}
-            className={cx({
+            className={cx("script", {
               ["relative"]: isPreviewMode,
             })}
           >
