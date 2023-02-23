@@ -70,6 +70,7 @@ export const Scripts = ({ items }: ScriptsType) => {
                 {script.title} script
               </span>
             )}
+
             {script.html && (
               <div dangerouslySetInnerHTML={{ __html: script.html }} />
             )}
