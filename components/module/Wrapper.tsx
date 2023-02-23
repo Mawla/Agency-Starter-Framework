@@ -11,7 +11,7 @@ import React from "react";
 
 export type WrapperProps = {
   id?: string;
-  children: React.ReactElement | React.ReactNode;
+  children?: React.ReactElement | React.ReactNode;
   className?: string;
   innerClassName?: string;
   theme?: {

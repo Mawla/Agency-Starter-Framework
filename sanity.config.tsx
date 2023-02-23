@@ -46,9 +46,11 @@ export default defineConfig({
 
   document: {
     productionUrl: async (prev: any, context: any) => {
-      const { client, document } = context;
+      const { getClient, document } = context;
 
-      const sitemap: SitemapItemType[] = await client.fetch(getSitemapQuery());
+      const sitemap: SitemapItemType[] = await getClient({
+        apiVersion: "vX",
+      }).fetch(getSitemapQuery());
 
       const languagePrefix =
         document.language === baseLanguage ? "" : `/${document.language}`;

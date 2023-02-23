@@ -11,7 +11,7 @@ import { getHeroSplitQuery } from "../heroes/herosplit/herosplit.query";
 import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query";
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
-import { staticFormQuery } from "../layout/modulebuilder/StaticFormBuilder.query";
+import { staticFormQuery } from "../layout/pagebuilder/StaticFormBuilder.query";
 import { getBillboardQuery } from "../modules/billboard/billboard.query";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
@@ -94,45 +94,38 @@ export const getPageQuery = (language: LanguageType) => groq`
 
     // hero
     "hero": hero[!(_type in path('studio.*'))][] {
+      ${getHeroSplitQuery(language)},
+      ${getResourceHeroQuery(language)},
+      ${getHeroVerticalQuery(language)},
       _type,
       _key,
       theme,
 
-      ${getHeroSplitQuery(language)},
-      ${getResourceHeroQuery(language)},
-    ${getHeroVerticalQuery(language)},
     }[0],
 
     // modules
     "modules": modules[!(_type in path('studio.*'))] {
-      _key,
-      _type,
-      decorations[] {
-        ...,
-        "image": ${imageQuery},
-      },
-      theme,
-
-      ${getRichTextQuery(language)},
+      ${getBillboardQuery(language)},
       ${getBreadcrumbModuleQuery(language)},
       ${getCardGridQuery(language)},
-      ${getBillboardQuery(language)},
-      ${getTextImageQuery(language)},
+      ${getFaqQuery(language)},
+      ${getFeedQuery(language)},
       ${getGalleryQuery(language)},
+      ${getImageQuery(language)},
+      ${getResourceStripQuery(language)},
+      ${getRichTextQuery(language)},
       ${getSlidesQuery(language)},
       ${getStoryQuery(language)},
-      ${getFeedQuery(language)},
-      ${getResourceStripQuery(language)},
-      ${getFaqQuery(language)},
+      ${getTextImageQuery(language)},
       ${getVideoQuery(language)},
-      ${getImageQuery(language)},
+      _key,
+      _type,
+      decorations,
+      theme,
     },
 
     // dialogs
     dialogs {
-      _key,
-      _type,
-      "slug": slug.current,
       _type == "dialog.richtext" => {
         content[] ${richTextQuery}
       },
@@ -144,6 +137,10 @@ export const getPageQuery = (language: LanguageType) => groq`
       _type == "dialog.form" => {
         "form": ${staticFormQuery}    
       },
+
+      _key,
+      _type,
+      "slug": slug.current,
     },
   }
 }.page`;
