@@ -26,7 +26,7 @@ export const getSchemaSnippet = ({
         title: 'title',
         subtitle: 'slug.current'
       },
-      prepare({ title ='', subtitle='' }: any) {
+      prepare({ title = '', subtitle = '' }: any) {
         return {
           title,
           subtitle,
