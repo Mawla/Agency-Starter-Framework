@@ -19,6 +19,8 @@ Get started
 - `yarn dev` runs next.js
 - `yarn cms` runs sanity
 - `yarn storybook` runs storybook
+- `yarn test` runs tests
+
 - `yarn create-page` runs the cli to add a page
 - `yarn create-hero` runs the cli to create a hero
 - `yarn create-module` runs the cli to create a module
