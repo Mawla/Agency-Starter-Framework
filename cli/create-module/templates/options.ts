@@ -32,7 +32,6 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     `,
     )};
     
-
     ${render(
       fields,
       "intro",
@@ -42,7 +41,6 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     `,
     )};
     
-
     ${render(
       fields,
       "eyebrow",
