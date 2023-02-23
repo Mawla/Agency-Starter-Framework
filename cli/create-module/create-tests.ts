@@ -1,6 +1,7 @@
 import { AnswersType } from ".";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { moduleType, write } from "./get-args";
 import { getTestSnippet } from "./templates/tests";
 
 /**
@@ -11,17 +12,15 @@ const path = require("path");
 
 export function createTests(
   answers: Pick<AnswersType, "moduleName" | "fields">,
-  WRITE = false,
-  MODULE_TYPE = "module",
 ) {
   let { moduleName, fields } = answers;
-  let { lowerName, pascalName } = formatName(moduleName, MODULE_TYPE);
+  let { lowerName, pascalName } = formatName(moduleName);
 
   const lines = getTestSnippet({ pascalName, fields });
 
-  if (WRITE) {
+  if (write) {
     let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.test.tsx`;
-    if (MODULE_TYPE === "hero") {
+    if (moduleType === "hero") {
       filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.test.tsx`;
     }
 

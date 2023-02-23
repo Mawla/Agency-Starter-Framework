@@ -17,10 +17,6 @@ import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
 
-const args = process.argv.slice(2);
-const WRITE = args.includes("--write");
-const MODULE_TYPE = args.includes("--hero") ? "hero" : "module";
-
 init();
 
 export type AnswersType = {
@@ -76,18 +72,18 @@ async function init() {
   }
 
   // inject snippets in existing files
-  injectSchema(answers, WRITE, MODULE_TYPE);
-  injectTypes(answers, WRITE, MODULE_TYPE);
-  injectPageQuery(answers, WRITE, MODULE_TYPE);
-  injectBuilder(answers, WRITE, MODULE_TYPE);
+  injectSchema(answers);
+  injectTypes(answers);
+  injectPageQuery(answers);
+  injectBuilder(answers);
 
   // create files
-  createReactComponent(answers, WRITE, MODULE_TYPE);
-  createSchema(answers, WRITE, MODULE_TYPE);
-  createQuery(answers, WRITE, MODULE_TYPE);
-  createOptions(answers, WRITE, MODULE_TYPE);
-  createStory(answers, WRITE, MODULE_TYPE);
-  createTests(answers, WRITE, MODULE_TYPE);
+  createReactComponent(answers);
+  createSchema(answers);
+  createQuery(answers);
+  createOptions(answers);
+  createStory(answers);
+  createTests(answers);
 
   outro(`You're all set!`);
 }

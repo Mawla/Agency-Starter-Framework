@@ -12,9 +12,6 @@ import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel } from "@clack/prompts";
 
-const args = process.argv.slice(2);
-const WRITE = args.includes("--write");
-
 init();
 
 export type AnswersType = {
@@ -46,11 +43,11 @@ async function init() {
     dialogDescription: String(dialogDescription),
   };
 
-  injectTypes(answers, WRITE);
-  injectSchema(answers, WRITE);
-  injectPageQuery(answers, WRITE);
-  injectBuilder(answers, WRITE);
-  createSchema(answers, WRITE);
+  injectTypes(answers);
+  injectSchema(answers);
+  injectPageQuery(answers);
+  injectBuilder(answers);
+  createSchema(answers);
 
   outro(`You're all set!`);
 }

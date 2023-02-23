@@ -5,6 +5,7 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { write } from "./get-args";
 import { getStructureCollection } from "./templates/structure-collection";
 import { getStructureDocumentList } from "./templates/structure-document-list";
 import { getStructureSingleton } from "./templates/structure-singleton";
@@ -13,7 +14,6 @@ const fs = require("fs");
 
 export function injectDeskStructure(
   answers: Pick<AnswersType, "pageName" | "pageType" | "articleName">,
-  WRITE = false,
 ) {
   const { pageName } = answers;
   let { pascalName, schemaName, documentId } = formatName(answers.pageName);
@@ -60,7 +60,7 @@ export function injectDeskStructure(
 
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

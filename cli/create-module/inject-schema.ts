@@ -6,16 +6,13 @@ import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { sortLines } from "../utils/sort-lines";
 import { formatName } from "./format-name";
+import { moduleType, write } from "./get-args";
 
 const fs = require("fs");
 const path = require("path");
 
-export function injectSchema(
-  answers: Pick<AnswersType, "moduleName">,
-  WRITE = false,
-  MODULE_TYPE = "module",
-) {
-  let { pascalName, lowerName } = formatName(answers.moduleName, MODULE_TYPE);
+export function injectSchema(answers: Pick<AnswersType, "moduleName">) {
+  let { pascalName, lowerName } = formatName(answers.moduleName);
 
   const filePath = path.resolve(`${__dirname}../../../studio/schemas/index.ts`);
   const file = fs.readFileSync(filePath).toString();
@@ -24,7 +21,7 @@ export function injectSchema(
   let schemaImportName = `module${pascalName}`;
   let importPath = `../../modules/${lowerName}/${lowerName}.schema`;
 
-  if (MODULE_TYPE === "hero") {
+  if (moduleType === "hero") {
     schemaImportName = `hero${pascalName}`;
     importPath = `../../heroes/${lowerName}/${lowerName}.schema`;
   }
@@ -43,7 +40,7 @@ export function injectSchema(
   lines = sortLines({ lines, fromNeedle, toNeedle });
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

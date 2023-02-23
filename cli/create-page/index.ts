@@ -13,9 +13,6 @@ import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, confirm, isCancel, select } from "@clack/prompts";
 
-const args = process.argv.slice(2);
-const WRITE = args.includes("--write");
-
 init();
 
 export type AnswersType = {
@@ -97,31 +94,28 @@ async function init() {
   };
 
   if (pageType === "collection") {
-    injectTypes({ ...answers }, WRITE);
-    injectSchema({ ...answers }, WRITE);
-    createSchema({ ...answers, pageType: "singleton" }, WRITE);
+    injectTypes({ ...answers });
+    injectSchema({ ...answers });
+    createSchema({ ...answers, pageType: "singleton" });
 
     if (articleName) {
-      injectTypes({ ...answers, pageName: articleName }, WRITE);
-      injectSchema({ ...answers, pageName: articleName }, WRITE);
-      createSchema(
-        {
-          ...answers,
-          pageName: articleName,
-          pageType: "article",
-          parentType: formatName(answers.pageName).schemaName,
-        },
-        WRITE,
-      );
+      injectTypes({ ...answers, pageName: articleName });
+      injectSchema({ ...answers, pageName: articleName });
+      createSchema({
+        ...answers,
+        pageName: articleName,
+        pageType: "article",
+        parentType: formatName(answers.pageName).schemaName,
+      });
     }
   } else {
-    injectTypes(answers, WRITE);
-    injectSchema(answers, WRITE);
-    createSchema(answers, WRITE);
+    injectTypes(answers);
+    injectSchema(answers);
+    createSchema(answers);
   }
 
   if (answers.addToDesk) {
-    injectDeskStructure(answers, WRITE);
+    injectDeskStructure(answers);
   }
   outro(`You're all set!`);
 }

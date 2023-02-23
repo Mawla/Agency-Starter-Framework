@@ -5,14 +5,12 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { write } from "./get-args";
 import { getBuilderSnippet } from "./templates/builder";
 
 const fs = require("fs");
 
-export function injectBuilder(
-  answers: Pick<AnswersType, "dialogName">,
-  WRITE = false,
-) {
+export function injectBuilder(answers: Pick<AnswersType, "dialogName">) {
   let { schemaName } = formatName(answers.dialogName);
 
   let filePath = `${__dirname}/../../layout/pagebuilder/DialogBuilder.tsx`;
@@ -27,7 +25,7 @@ export function injectBuilder(
 
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

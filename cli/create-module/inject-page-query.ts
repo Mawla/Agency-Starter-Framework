@@ -5,6 +5,7 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { moduleType, write } from "./get-args";
 import {
   getHeroPageQueryImport,
   getModulePageQuery,
@@ -13,12 +14,8 @@ import {
 
 const fs = require("fs");
 
-export function injectPageQuery(
-  answers: Pick<AnswersType, "moduleName">,
-  WRITE = false,
-  MODULE_TYPE = "module",
-) {
-  let { pascalName, lowerName } = formatName(answers.moduleName, MODULE_TYPE);
+export function injectPageQuery(answers: Pick<AnswersType, "moduleName">) {
+  let { pascalName, lowerName } = formatName(answers.moduleName);
 
   const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
@@ -26,7 +23,7 @@ export function injectPageQuery(
   let needle = '"modules": ';
   let imports = getModulePageQueryImport({ pascalName, lowerName });
 
-  if (MODULE_TYPE === "hero") {
+  if (moduleType === "hero") {
     needle = '"hero":';
     imports = getHeroPageQueryImport({ pascalName, lowerName });
   }
@@ -41,7 +38,7 @@ export function injectPageQuery(
 
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

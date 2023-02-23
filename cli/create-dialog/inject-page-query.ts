@@ -5,14 +5,12 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { write } from "./get-args";
 import { getPageQuerySnippet } from "./templates/page-query";
 
 const fs = require("fs");
 
-export function injectPageQuery(
-  answers: Pick<AnswersType, "dialogName">,
-  WRITE = false,
-) {
+export function injectPageQuery(answers: Pick<AnswersType, "dialogName">) {
   let { schemaName } = formatName(answers.dialogName);
 
   const filePath = `${__dirname}/../../queries/page.query.ts`;
@@ -29,7 +27,7 @@ export function injectPageQuery(
 
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

@@ -1,6 +1,7 @@
 import { AnswersType } from ".";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { moduleType, write } from "./get-args";
 import { getOptionsSnippet } from "./templates/options";
 
 /**
@@ -11,17 +12,15 @@ const path = require("path");
 
 export function createOptions(
   answers: Pick<AnswersType, "moduleName" | "fields">,
-  WRITE = false,
-  MODULE_TYPE = "module",
 ) {
   let { moduleName, fields } = answers;
-  let { lowerName } = formatName(moduleName, MODULE_TYPE);
+  let { lowerName } = formatName(moduleName);
 
   const lines = getOptionsSnippet({ fields });
 
-  if (WRITE) {
+  if (write) {
     let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.options.ts`;
-    if (MODULE_TYPE === "hero") {
+    if (moduleType === "hero") {
       filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.options.ts`;
     }
 

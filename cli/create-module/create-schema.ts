@@ -1,6 +1,7 @@
 import { AnswersType } from ".";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { moduleType, write } from "./get-args";
 import { getSchemaSnippet } from "./templates/schema";
 
 /**
@@ -11,11 +12,9 @@ const path = require("path");
 
 export function createSchema(
   answers: Pick<AnswersType, "moduleName" | "fields" | "moduleDescription">,
-  WRITE = false,
-  MODULE_TYPE = "module",
 ) {
   let { moduleName, fields, moduleDescription } = answers;
-  let { lowerName, schemaName } = formatName(moduleName, MODULE_TYPE);
+  let { lowerName, schemaName } = formatName(moduleName);
 
   const lines = getSchemaSnippet({
     moduleName,
@@ -25,9 +24,9 @@ export function createSchema(
     moduleDescription,
   });
 
-  if (WRITE) {
+  if (write) {
     let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.schema.tsx`;
-    if (MODULE_TYPE === "hero") {
+    if (moduleType === "hero") {
       filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.schema.tsx`;
     }
 

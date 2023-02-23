@@ -3,6 +3,7 @@ import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { sortLines } from "../utils/sort-lines";
 import { formatName } from "./format-name";
+import { moduleType, write } from "./get-args";
 
 const fs = require("fs");
 
@@ -10,12 +11,8 @@ const fs = require("fs");
  * Add types to types.sanity.ts
  */
 
-export function injectTypes(
-  answers: Pick<AnswersType, "moduleName">,
-  WRITE = false,
-  MODULE_TYPE = "module",
-) {
-  let { schemaName } = formatName(answers.moduleName, MODULE_TYPE);
+export function injectTypes(answers: Pick<AnswersType, "moduleName">) {
+  let { schemaName } = formatName(answers.moduleName);
 
   const filePath = `${__dirname}/../../types.sanity.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
@@ -34,7 +31,7 @@ export function injectTypes(
   });
 
   let needle = "export const MODULE_SCHEMAS";
-  if (MODULE_TYPE === "hero") {
+  if (moduleType === "hero") {
     needle = "export const HERO_SCHEMAS";
   }
 
@@ -56,7 +53,7 @@ export function injectTypes(
 
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }

@@ -1,6 +1,7 @@
 import { AnswersType } from ".";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
+import { write } from "./get-args";
 import { getArticlePageSchema } from "./templates/article-page";
 import { getContentPageSchema } from "./templates/content-page";
 import { getSingletonPageSchema } from "./templates/singleton-page";
@@ -12,7 +13,6 @@ const fs = require("fs");
 
 export function createSchema(
   answers: Pick<AnswersType, "pageName" | "pageType" | "parentType">,
-  WRITE = false,
 ) {
   let { pageName } = answers;
   let { schemaName } = formatName(pageName);
@@ -56,7 +56,7 @@ export function createSchema(
 
   lines = lines.join("\n");
 
-  if (WRITE) {
+  if (write) {
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
   }
