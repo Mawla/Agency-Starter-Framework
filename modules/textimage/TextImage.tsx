@@ -117,7 +117,7 @@ export const TextImage = ({
               {(title || eyebrow) && (
                 <Title
                   size={theme?.title?.size || "3xl"}
-                  color="neutral-500"
+                  color="neutral-900"
                   eyebrow={eyebrow}
                   as={theme?.title?.level}
                 >
@@ -126,7 +126,7 @@ export const TextImage = ({
               )}
 
               {intro && (
-                <Text color="neutral-900" size="lg">
+                <Text color="neutral-800" size="md">
                   <PortableText content={intro as any} />
                 </Text>
               )}
@@ -143,14 +143,11 @@ export const TextImage = ({
                     : "order-1 md:order-1",
                 )}
               >
-                <div className="min-w-[160px] md:max-w-none aspect-[540/380] md:aspect-[380/540] relative">
-                  <ResponsiveImage
-                    {...image}
-                    roundSize={25}
-                    fill
-                    className="rounded-lg md:rounded-3xl lg:rounded-4xl overflow-hidden z-20"
-                  />
-                </div>
+                <ResponsiveImage
+                  {...image}
+                  roundSize={25}
+                  className="rounded-md overflow-hidden z-20"
+                />
               </div>
             )}
           </div>
