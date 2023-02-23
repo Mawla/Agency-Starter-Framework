@@ -3,22 +3,24 @@ import cx from "classnames";
 import NextScript from "next/script";
 import React, { useContext } from "react";
 
-export type ScriptsProps = {
+export type ScriptType = {
+  _key?: string;
   title?: string;
-  items?: {
-    _key?: string;
-    title?: string;
-    code?: "string";
-    html?: "string";
-    src?: "string";
-    onload?: "string";
-    onready?: "string";
-    onerror?: "string";
-    attributes: { name?: string; value?: string }[];
-  }[];
+  code?: "string";
+  html?: "string";
+  src?: "string";
+  onload?: "string";
+  onready?: "string";
+  onerror?: "string";
+  attributes: { name?: string; value?: string }[];
 };
 
-export const Scripts = ({ items }: ScriptsProps) => {
+export type ScriptsType = {
+  title?: string;
+  items?: ScriptType[];
+};
+
+export const Scripts = ({ items }: ScriptsType) => {
   const { isPreviewMode } = useContext(PageContext);
 
   if (!items?.filter(Boolean).length) return null;

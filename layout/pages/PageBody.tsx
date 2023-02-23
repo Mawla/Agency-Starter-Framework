@@ -1,4 +1,4 @@
-import { ScriptsProps } from "../../components/script/Script";
+import { ScriptsType } from "../../components/script/Script";
 import { PageContext } from "../../context/PageContext";
 import { PageType } from "../../queries/page.query";
 import { DialogBuilder } from "../modulebuilder/DialogBuilder";
@@ -6,7 +6,7 @@ import { HeroBuilder } from "../modulebuilder/HeroBuilder";
 import { ModuleBuilder } from "../modulebuilder/ModuleBuilder";
 import React, { ComponentType, lazy, useContext } from "react";
 
-const Scripts = lazy<ComponentType<ScriptsProps>>(
+const Scripts = lazy<ComponentType<ScriptsType>>(
   () =>
     import(/* webpackChunkName: "Script" */ "../../components/script/Script"),
 );

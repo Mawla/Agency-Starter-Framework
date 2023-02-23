@@ -3,7 +3,7 @@ import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
-import { ScriptsProps } from "../script/Script";
+import { ScriptsType } from "../script/Script";
 import { Table } from "../table/Table";
 import { PortableText as PortableTextReact } from "@portabletext/react";
 import React, { ComponentType, lazy } from "react";
@@ -28,7 +28,7 @@ const Link = lazy<ComponentType<LinkProps>>(
   () => import(/* webpackChunkName: "Link" */ "../buttons/Link"),
 );
 
-const Scripts = lazy<ComponentType<ScriptsProps>>(
+const Scripts = lazy<ComponentType<ScriptsType>>(
   () => import(/* webpackChunkName: "Script" */ "../script/Script"),
 );
 

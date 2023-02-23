@@ -8,7 +8,7 @@ import {
   getImageQuery as getImageComponentQuery,
 } from "../components/images/image.query";
 import { richTextQuery } from "../components/portabletext/portabletext.query";
-import { ScriptsProps } from "../components/script/Script";
+import { ScriptsType } from "../components/script/Script";
 import { videoQuery } from "../components/video/video.query";
 import { HeroBasicProps } from "../heroes/herobasic/HeroBasic";
 import { getHeroBasicQuery } from "../heroes/herobasic/herobasic.query";
@@ -50,7 +50,7 @@ export type PageType = {
   homepage: FlatBreadcrumbItemType;
   breadcrumb: FlatBreadcrumbType;
   languageAlternates?: LanguageAlternateType[];
-  scripts: ScriptsProps[];
+  scripts: ScriptsType[];
 };
 
 export const getPageQuery = (language: LanguageType) => groq`
