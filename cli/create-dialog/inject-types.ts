@@ -32,7 +32,7 @@ export function injectTypes(
     toNeedle: "};",
   });
 
-  let needle = "export const DIALOG_SCHEMAS";
+  const needle = "export const DIALOG_SCHEMAS";
 
   // add to linkable schemas list
   lines = injectLine({
