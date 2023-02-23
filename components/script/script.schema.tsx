@@ -93,7 +93,7 @@ export default defineType({
               name: "html",
               title: "HTML code",
               description:
-                "Any html code to be added to the page, like a <div />. Any <script /> tags will not be executed.",
+                "Any HTML code to be added to the page, like a <div />. Any <script /> tags will not be executed.",
               type: "text",
               rows: 10,
               group: "script",
