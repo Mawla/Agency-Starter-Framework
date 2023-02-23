@@ -33,7 +33,7 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
-      description: "Name of the script used to identify it in the cms.",
+      description: "Name of the script used to identify it in the CMS.",
       validation: (Rule: StringRule) => Rule.required(),
     }),
     defineField({
