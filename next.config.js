@@ -46,8 +46,19 @@ const moduleExports = {
     );
     return redirects;
   },
+
+  /**
+   * `dangerouslyAllowSVG` is a property in Next.js that allows loading of SVG images with external resources.
+   * However, it should be used with caution due to potential security vulnerabilities.
+   * Make sure to understand the risks and take appropriate security measures before using it.
+   *
+   * Read more: https://nextjs.org/docs/api-reference/next/image#dangerously-allow-svg
+   */
   images: {
     domains: ["cdn.sanity.io", "images.unsplash.com"],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async headers() {
     const headers = [
