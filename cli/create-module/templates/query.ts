@@ -8,7 +8,8 @@ type Props = {
 };
 
 export const getQuerySnippet = ({ schemaName, pascalName, fields }: Props) => {
-  return `
+  return (
+    `
     ${render(
       fields,
       "image",
@@ -38,5 +39,8 @@ export const getQuerySnippet = ({ schemaName, pascalName, fields }: Props) => {
       ${render(fields, "buttons", "buttons[] ${buttonQuery},")}
       ${render(fields, "items", "items[] { _key, title },")}
     }\`;
-  `;
+  `
+      // remove empty lines
+      .replace(/^\s*$(?:\r\n?|\n)/gm, "")
+  );
 };
