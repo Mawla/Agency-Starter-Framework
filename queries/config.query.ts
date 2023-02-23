@@ -1,4 +1,5 @@
 import { getImageQuery } from "../components/images/image.query";
+import { ScriptsType } from "../components/script/Script";
 import { LanguageType } from "../languages";
 import { ImageType, TranslationFieldType } from "../types";
 import groq from "groq";
@@ -27,6 +28,7 @@ export type ConfigType = {
   };
   integrations?: {
     gtmid?: string;
+    scripts?: ScriptsType[];
   };
   translations?: Record<TranslationFieldType, Record<LanguageType, string>>;
 };
@@ -43,7 +45,13 @@ export const getConfigQuery = (language: LanguageType) => groq`
     "image": ${getImageQuery(`image.${language}`)}
   },
   "social": *[_id == 'config_social'][0],
-  "integrations": *[_id == 'config_integrations'][0],
-  "translations": *[_id == 'config_translations'][0]
+  "integrations": *[_id == 'config_integrations'][0] {
+    gtmid,
+    "scripts": scripts[].script -> {
+      title,
+      items[]
+    }
+  },
+  "translations": *[_id == 'config_translations'][0] 
 }
 `;
