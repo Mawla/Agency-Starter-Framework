@@ -16,7 +16,7 @@ export function injectPageQuery(answers: Pick<AnswersType, "dialogName">) {
   const filePath = `${__dirname}/../../queries/page.query.ts`;
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
-  let needle = "dialogs {";
+  const needle = "dialogs {";
 
   lines = injectLine({
     addition: getPageQuerySnippet({ schemaName }),
