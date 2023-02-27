@@ -5,6 +5,7 @@ import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { LanguageType } from "../../languages";
 import { MobileNav } from "./MobileNav";
 import { TopNav } from "./TopNav";
+import router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 
 export type NavItem = {
@@ -52,14 +53,14 @@ export const Navigation = ({ items, buttons }: NavigationProps) => {
     setMobileNavIsOpen(true);
   };
 
-  // useEffect(() => {
-  //   function onRouteChange() {
-  //     setMobileNavIsOpen(false);
-  //   }
+  useEffect(() => {
+    function onRouteChange() {
+      setMobileNavIsOpen(false);
+    }
 
-  //   router.events.on("routeChangeStart", onRouteChange);
-  //   () => router.events.off("routeChangeStart", onRouteChange);
-  // }, []);
+    router.events.on("routeChangeStart", onRouteChange);
+    () => router.events.off("routeChangeStart", onRouteChange);
+  }, []);
 
   return (
     <div>
