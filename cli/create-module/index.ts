@@ -5,6 +5,7 @@
  * sanity exec ./cli/create-module.ts -- --write
  *
  */
+import { MODULE_SCHEMAS } from "../../types.sanity";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
 import { createReactComponent } from "./create-react-component";
@@ -16,7 +17,6 @@ import { injectPageQuery } from "./inject-page-query";
 import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
-import { useSchema } from "sanity";
 
 init();
 
@@ -29,16 +29,8 @@ export type AnswersType = {
 async function init() {
   intro(`Let's create a module`);
 
-  const typeFilter: RegExp = /.*/;
-  const allSchemas = useSchema()._registry;
-
-  const moduleTypes = Object.keys(allSchemas)
-    .filter((type) => (typeFilter ? new RegExp(typeFilter).test(type) : true))
-    .filter((type) => !type.startsWith("studio."))
-    .map((type) => allSchemas[type].get(type))
-    .sort((a, b) => a.title?.localeCompare(b.title));
-
-  let moduleName = `Block ${length + 1}`;
+  const moduleTypes = Object.keys(MODULE_SCHEMAS);
+  let moduleName = `Block ${moduleTypes.length + 1}`;
 
   let moduleDescription = await text({
     message: "What is the description of the module?",
