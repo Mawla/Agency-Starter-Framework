@@ -30,7 +30,7 @@ async function init() {
 
   let moduleName = await text({
     message: "What is the name of the module?",
-    validate(value) {
+    validate(value: string) {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
   });
@@ -38,7 +38,7 @@ async function init() {
 
   let moduleDescription = await text({
     message: "What is the description of the module?",
-    validate(value) {
+    validate(value: string) {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
   });
@@ -62,7 +62,7 @@ async function init() {
     moduleName: String(moduleName),
     moduleDescription: String(moduleDescription),
     fields: (fields as any).map(
-      (field: { value: string; label: string }) => field.value,
+      (field: { value: string; label: string }) => field.value
     ),
   };
 
