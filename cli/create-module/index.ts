@@ -16,6 +16,7 @@ import { injectPageQuery } from "./inject-page-query";
 import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
+import { useSchema } from "sanity";
 
 init();
 
@@ -28,13 +29,16 @@ export type AnswersType = {
 async function init() {
   intro(`Let's create a module`);
 
-  let moduleName = await text({
-    message: "What is the name of the module?",
-    validate(value: string) {
-      if (!value || value.trim().length === 0) return `Value is required!`;
-    },
-  });
-  if (isCancel(moduleName)) process.exit(0);
+  const typeFilter: RegExp = /.*/;
+  const allSchemas = useSchema()._registry;
+
+  const moduleTypes = Object.keys(allSchemas)
+    .filter((type) => (typeFilter ? new RegExp(typeFilter).test(type) : true))
+    .filter((type) => !type.startsWith("studio."))
+    .map((type) => allSchemas[type].get(type))
+    .sort((a, b) => a.title?.localeCompare(b.title));
+
+  let moduleName = `Block ${length + 1}`;
 
   let moduleDescription = await text({
     message: "What is the description of the module?",
