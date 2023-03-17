@@ -12,7 +12,6 @@ import heroHeroVertical from "../../heroes/herovertical/herovertical.schema";
 import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
-import moduleBillboard from "../../modules/billboard/billboard.schema";
 import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
 import moduleCardGrid from "../../modules/cardgrid/cardgrid.schema";
 import cardComposable from "../../modules/cardgrid/composablecard.schema";
@@ -85,7 +84,6 @@ export const schemaTypes = [
     heroSplit,
     imageSimple,
     link,
-    moduleBillboard,
     moduleBreadcrumb,
     moduleCardGrid,
     moduleFaq,
