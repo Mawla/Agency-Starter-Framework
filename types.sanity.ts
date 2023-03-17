@@ -13,8 +13,6 @@ export const SCHEMAS = {
   "hero.herosplit": "",
   "hero.resourcehero": "",
   "module.breadcrumb": "",
-  "module.story": "",
-  "module.video": "",
   "page.blog": "",
   "page.blogs": "",
   "page.casestudies": "",
@@ -99,12 +97,7 @@ export const TAGGABLE_SCHEMAS = pick(
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const MODULE_SCHEMAS = pick(
-  SCHEMAS,
-  "module.breadcrumb",
-  "module.story",
-  "module.video"
-);
+export const MODULE_SCHEMAS = pick(SCHEMAS, "module.breadcrumb");
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
 

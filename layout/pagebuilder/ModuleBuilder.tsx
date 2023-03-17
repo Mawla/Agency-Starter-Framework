@@ -1,15 +1,10 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { VideoProps } from "../../modules/video/Video";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
-
-const Video = lazy<ComponentType<VideoProps>>(
-  () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video")
-);
 
 const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
   () =>
@@ -49,9 +44,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
             >
               {item._type === "module.breadcrumb" && (
                 <Breadcrumb {...(item as BreadcrumbProps)} />
-              )}
-              {item._type === "module.video" && (
-                <Video {...(item as VideoProps)} />
               )}
             </LazyLoadInView>
           </ModuleErrorBoundary>
