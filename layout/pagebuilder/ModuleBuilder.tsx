@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { GalleryProps } from "../../modules/gallery/Gallery";
 import { ImageProps } from "../../modules/image/Image";
 import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
 import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
@@ -43,11 +42,6 @@ const Story = lazy<ComponentType<StoryProps>>(
 
 const Slides = lazy<ComponentType<SlidesProps>>(
   () => import(/* webpackChunkName: "Slides" */ "../../modules/slides/Slides")
-);
-
-const Gallery = lazy<ComponentType<GalleryProps>>(
-  () =>
-    import(/* webpackChunkName: "Gallery" */ "../../modules/gallery/Gallery")
 );
 
 const TextImage = lazy<ComponentType<TextImageProps>>(
@@ -106,9 +100,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.textimage" && (
                 <TextImage {...(item as TextImageProps)} />
-              )}
-              {item._type === "module.gallery" && (
-                <Gallery {...(item as GalleryProps)} />
               )}
               {item._type === "module.slides" && (
                 <Slides {...(item as SlidesProps)} />
