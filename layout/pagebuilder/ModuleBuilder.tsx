@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
 import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
 import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
@@ -21,13 +20,6 @@ const ResourceStrip = lazy<ComponentType<ResourceStripProps>>(
   () =>
     import(
       /* webpackChunkName: "ResourceStrip" */ "../../modules/resourcestrip/ResourceStrip"
-    )
-);
-
-const ResourceFeed = lazy<ComponentType<ResourceFeedProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "Feed" */ "../../modules/resourcefeed/ResourceFeed"
     )
 );
 
@@ -101,9 +93,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.story" && (
                 <Story {...(item as StoryProps)} />
-              )}
-              {item._type === "module.resourcefeed" && (
-                <ResourceFeed {...(item as ResourceFeedProps)} />
               )}
               {item._type === "module.resourcestrip" && (
                 <ResourceStrip {...(item as ResourceStripProps)} />

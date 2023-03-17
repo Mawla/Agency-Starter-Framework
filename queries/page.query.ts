@@ -16,7 +16,6 @@ import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query"
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
-import { getFeedQuery } from "../modules/resourcefeed/resourcefeed.query";
 import { getResourceStripQuery } from "../modules/resourcestrip/resourcestrip.query";
 import { getRichTextQuery } from "../modules/richtext/richtext.query";
 import { getSlidesQuery } from "../modules/slides/slides.query";
