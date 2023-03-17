@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { FaqProps } from "../../modules/faq/Faq";
 import { GalleryProps } from "../../modules/gallery/Gallery";
 import { ImageProps } from "../../modules/image/Image";
 import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
@@ -22,10 +21,6 @@ const Image = lazy<ComponentType<ImageProps>>(
 
 const Video = lazy<ComponentType<VideoProps>>(
   () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video")
-);
-
-const Faq = lazy<ComponentType<FaqProps>>(
-  () => import(/* webpackChunkName: "Faq" */ "../../modules/faq/Faq")
 );
 
 const ResourceStrip = lazy<ComponentType<ResourceStripProps>>(
@@ -127,7 +122,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               {item._type === "module.resourcestrip" && (
                 <ResourceStrip {...(item as ResourceStripProps)} />
               )}
-              {item._type === "module.faq" && <Faq {...(item as FaqProps)} />}
               {item._type === "module.video" && (
                 <Video {...(item as VideoProps)} />
               )}
