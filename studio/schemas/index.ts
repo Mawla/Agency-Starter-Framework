@@ -13,7 +13,6 @@ import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
-import moduleImage from "../../modules/image/image.schema";
 import moduleFeed from "../../modules/resourcefeed/resourcefeed.schema";
 import moduleResourceStrip from "../../modules/resourcestrip/resourcestrip.schema";
 import moduleRichText from "../../modules/richtext/richtext.schema";
@@ -79,7 +78,6 @@ export const schemaTypes = [
     link,
     moduleBreadcrumb,
     moduleFeed,
-    moduleImage,
     modulePreset,
     moduleResourceStrip,
     moduleRichText,

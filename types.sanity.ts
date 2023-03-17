@@ -13,7 +13,6 @@ export const SCHEMAS = {
   "hero.herosplit": "",
   "hero.resourcehero": "",
   "module.breadcrumb": "",
-  "module.image": "",
   "module.resourcefeed": "",
   "module.resourcestrip": "",
   "module.richtext": "",
@@ -114,8 +113,7 @@ export const MODULE_SCHEMAS = pick(
   "module.slides",
   "module.story",
   "module.textimage",
-  "module.video",
-  "module.image"
+  "module.video"
 );
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
