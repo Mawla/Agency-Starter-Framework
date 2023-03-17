@@ -13,7 +13,6 @@ export const SCHEMAS = {
   "hero.herosplit": "",
   "hero.resourcehero": "",
   "module.breadcrumb": "",
-  "module.cardgrid": "",
   "module.faq": "",
   "module.gallery": "",
   "module.image": "",
@@ -111,7 +110,6 @@ export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 export const MODULE_SCHEMAS = pick(
   SCHEMAS,
   "module.breadcrumb",
-  "module.cardgrid",
   "module.faq",
   "module.gallery",
   "module.resourcefeed",

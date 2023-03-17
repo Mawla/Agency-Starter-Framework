@@ -16,7 +16,6 @@ import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query"
 import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
-import { getCardGridQuery } from "../modules/cardgrid/cardgrid.query";
 import { getFaqQuery } from "../modules/faq/faq.query";
 import { getGalleryQuery } from "../modules/gallery/gallery.query";
 import { getImageQuery } from "../modules/image/image.query";
@@ -119,7 +118,6 @@ export const getPageQuery = (language: LanguageType) => groq`
     // modules
     "modules": modules[!(_type in path('studio.*'))] {
       ${getBreadcrumbModuleQuery(language)},
-      ${getCardGridQuery(language)},
       ${getFaqQuery(language)},
       ${getFeedQuery(language)},
       ${getGalleryQuery(language)},

@@ -13,9 +13,6 @@ import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
-import moduleCardGrid from "../../modules/cardgrid/cardgrid.schema";
-import cardComposable from "../../modules/cardgrid/composablecard.schema";
-import cardImage from "../../modules/cardgrid/imagecard.schema";
 import moduleFaq from "../../modules/faq/faq.schema";
 import moduleGallery from "../../modules/gallery/gallery.schema";
 import moduleImage from "../../modules/image/image.schema";
@@ -69,8 +66,6 @@ export const schemaTypes = [
   ...[
     button,
     buttongroup,
-    cardComposable,
-    cardImage,
     configCMS,
     configIntegrations,
     configSocial,
@@ -85,7 +80,6 @@ export const schemaTypes = [
     imageSimple,
     link,
     moduleBreadcrumb,
-    moduleCardGrid,
     moduleFaq,
     moduleFeed,
     moduleGallery,

@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { CardGridProps } from "../../modules/cardgrid/CardGrid";
 import { FaqProps } from "../../modules/faq/Faq";
 import { GalleryProps } from "../../modules/gallery/Gallery";
 import { ImageProps } from "../../modules/image/Image";
@@ -70,11 +69,6 @@ const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
     )
 );
 
-const CardGrid = lazy<ComponentType<CardGridProps>>(
-  () =>
-    import(/* webpackChunkName: "CardGrid" */ "../../modules/cardgrid/CardGrid")
-);
-
 const RichText = lazy<ComponentType<RichTextProps>>(
   () =>
     import(/* webpackChunkName: "RichText" */ "../../modules/richtext/RichText")
@@ -114,9 +108,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.breadcrumb" && (
                 <Breadcrumb {...(item as BreadcrumbProps)} />
-              )}
-              {item._type === "module.cardgrid" && (
-                <CardGrid {...(item as CardGridProps)} />
               )}
               {item._type === "module.textimage" && (
                 <TextImage {...(item as TextImageProps)} />
