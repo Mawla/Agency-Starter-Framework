@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { SlidesProps } from "../../modules/slides/Slides";
 import { StoryProps } from "../../modules/story/Story";
 import { TextImageProps } from "../../modules/textimage/TextImage";
 import { VideoProps } from "../../modules/video/Video";
@@ -16,10 +15,6 @@ const Video = lazy<ComponentType<VideoProps>>(
 
 const Story = lazy<ComponentType<StoryProps>>(
   () => import(/* webpackChunkName: "Story" */ "../../modules/story/Story")
-);
-
-const Slides = lazy<ComponentType<SlidesProps>>(
-  () => import(/* webpackChunkName: "Slides" */ "../../modules/slides/Slides")
 );
 
 const TextImage = lazy<ComponentType<TextImageProps>>(
@@ -70,9 +65,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.textimage" && (
                 <TextImage {...(item as TextImageProps)} />
-              )}
-              {item._type === "module.slides" && (
-                <Slides {...(item as SlidesProps)} />
               )}
               {item._type === "module.story" && (
                 <Story {...(item as StoryProps)} />
