@@ -113,7 +113,6 @@ export const getPageQuery = (language: LanguageType) => groq`
     // modules
     "modules": modules[!(_type in path('studio.*'))] {
       ${getBreadcrumbModuleQuery(language)},
-      ${getFeedQuery(language)},
       ${getRichTextQuery(language)},
       ${getSlidesQuery(language)},
       ${getStoryQuery(language)},
