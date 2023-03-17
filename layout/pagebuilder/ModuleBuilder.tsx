@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
 import { StoryProps } from "../../modules/story/Story";
 import { TextImageProps } from "../../modules/textimage/TextImage";
@@ -37,11 +36,6 @@ const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
     )
 );
 
-const RichText = lazy<ComponentType<RichTextProps>>(
-  () =>
-    import(/* webpackChunkName: "RichText" */ "../../modules/richtext/RichText")
-);
-
 export type ModuleBuilderProps = {
   items: GenericModuleProps[];
 };
@@ -71,9 +65,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               module={item._type}
               id={item._key}
             >
-              {item._type === "module.richtext" && (
-                <RichText {...(item as RichTextProps)} />
-              )}
               {item._type === "module.breadcrumb" && (
                 <Breadcrumb {...(item as BreadcrumbProps)} />
               )}
