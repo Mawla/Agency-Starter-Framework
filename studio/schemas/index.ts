@@ -13,7 +13,6 @@ import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
-import moduleResourceStrip from "../../modules/resourcestrip/resourcestrip.schema";
 import moduleRichText from "../../modules/richtext/richtext.schema";
 import moduleSlides from "../../modules/slides/slides.schema";
 import moduleStory from "../../modules/story/story.schema";
@@ -77,7 +76,6 @@ export const schemaTypes = [
     link,
     moduleBreadcrumb,
     modulePreset,
-    moduleResourceStrip,
     moduleRichText,
     moduleSlides,
     moduleStory,

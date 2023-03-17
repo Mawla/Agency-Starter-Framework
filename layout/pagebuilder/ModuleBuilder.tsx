@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
 import { RichTextProps } from "../../modules/richtext/RichText";
 import { SlidesProps } from "../../modules/slides/Slides";
 import { StoryProps } from "../../modules/story/Story";
@@ -14,13 +13,6 @@ import { Suspense, lazy } from "react";
 
 const Video = lazy<ComponentType<VideoProps>>(
   () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video")
-);
-
-const ResourceStrip = lazy<ComponentType<ResourceStripProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceStrip" */ "../../modules/resourcestrip/ResourceStrip"
-    )
 );
 
 const Story = lazy<ComponentType<StoryProps>>(
@@ -93,9 +85,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               )}
               {item._type === "module.story" && (
                 <Story {...(item as StoryProps)} />
-              )}
-              {item._type === "module.resourcestrip" && (
-                <ResourceStrip {...(item as ResourceStripProps)} />
               )}
               {item._type === "module.video" && (
                 <Video {...(item as VideoProps)} />
