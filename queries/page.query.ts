@@ -17,7 +17,6 @@ import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query"
 import { baseLanguage, LanguageType } from "../languages";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { getStoryQuery } from "../modules/story/story.query";
-import { getTextImageQuery } from "../modules/textimage/textimage.query";
 import { getVideoQuery } from "../modules/video/video.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
@@ -112,7 +111,6 @@ export const getPageQuery = (language: LanguageType) => groq`
     "modules": modules[!(_type in path('studio.*'))] {
       ${getBreadcrumbModuleQuery(language)},
       ${getStoryQuery(language)},
-      ${getTextImageQuery(language)},
       ${getVideoQuery(language)},
       _key,
       _type,

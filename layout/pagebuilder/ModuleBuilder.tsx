@@ -1,5 +1,4 @@
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { TextImageProps } from "../../modules/textimage/TextImage";
 import { VideoProps } from "../../modules/video/Video";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
@@ -10,13 +9,6 @@ import { Suspense, lazy } from "react";
 
 const Video = lazy<ComponentType<VideoProps>>(
   () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video")
-);
-
-const TextImage = lazy<ComponentType<TextImageProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "TextImage" */ "../../modules/textimage/TextImage"
-    )
 );
 
 const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
@@ -57,9 +49,6 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
             >
               {item._type === "module.breadcrumb" && (
                 <Breadcrumb {...(item as BreadcrumbProps)} />
-              )}
-              {item._type === "module.textimage" && (
-                <TextImage {...(item as TextImageProps)} />
               )}
               {item._type === "module.video" && (
                 <Video {...(item as VideoProps)} />

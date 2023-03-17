@@ -14,7 +14,6 @@ export const SCHEMAS = {
   "hero.resourcehero": "",
   "module.breadcrumb": "",
   "module.story": "",
-  "module.textimage": "",
   "module.video": "",
   "page.blog": "",
   "page.blogs": "",
@@ -104,7 +103,6 @@ export const MODULE_SCHEMAS = pick(
   SCHEMAS,
   "module.breadcrumb",
   "module.story",
-  "module.textimage",
   "module.video"
 );
 
