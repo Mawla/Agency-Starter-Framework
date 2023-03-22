@@ -5,6 +5,7 @@
  * sanity exec ./cli/create-module.ts -- --write
  *
  */
+import { MODULE_SCHEMAS } from "../../types.sanity";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
 import { createReactComponent } from "./create-react-component";
@@ -28,17 +29,12 @@ export type AnswersType = {
 async function init() {
   intro(`Let's create a module`);
 
-  let moduleName = await text({
-    message: "What is the name of the module?",
-    validate(value) {
-      if (!value || value.trim().length === 0) return `Value is required!`;
-    },
-  });
-  if (isCancel(moduleName)) process.exit(0);
+  const moduleTypes = Object.keys(MODULE_SCHEMAS);
+  let moduleName = `Block ${moduleTypes.length + 1}`;
 
   let moduleDescription = await text({
     message: "What is the description of the module?",
-    validate(value) {
+    validate(value: string) {
       if (!value || value.trim().length === 0) return `Value is required!`;
     },
   });
@@ -62,7 +58,7 @@ async function init() {
     moduleName: String(moduleName),
     moduleDescription: String(moduleDescription),
     fields: (fields as any).map(
-      (field: { value: string; label: string }) => field.value,
+      (field: { value: string; label: string }) => field.value
     ),
   };
 
