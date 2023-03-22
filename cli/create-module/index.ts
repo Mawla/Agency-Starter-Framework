@@ -30,7 +30,7 @@ async function init() {
   intro(`Let's create a module`);
 
   const moduleTypes = Object.keys(MODULE_SCHEMAS);
-  let moduleName = `Block ${moduleTypes.length + 1}`;
+  let moduleName = `Block ${moduleTypes.length}`;
 
   let moduleDescription = await text({
     message: "What is the description of the module?",
