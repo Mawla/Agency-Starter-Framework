@@ -12,21 +12,7 @@ import heroHeroVertical from "../../heroes/herovertical/herovertical.schema";
 import heroResourceHero from "../../heroes/resourcehero/resourcehero.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
-import moduleBillboard from "../../modules/billboard/billboard.schema";
 import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
-import moduleCardGrid from "../../modules/cardgrid/cardgrid.schema";
-import cardComposable from "../../modules/cardgrid/composablecard.schema";
-import cardImage from "../../modules/cardgrid/imagecard.schema";
-import moduleFaq from "../../modules/faq/faq.schema";
-import moduleGallery from "../../modules/gallery/gallery.schema";
-import moduleImage from "../../modules/image/image.schema";
-import moduleFeed from "../../modules/resourcefeed/resourcefeed.schema";
-import moduleResourceStrip from "../../modules/resourcestrip/resourcestrip.schema";
-import moduleRichText from "../../modules/richtext/richtext.schema";
-import moduleSlides from "../../modules/slides/slides.schema";
-import moduleStory from "../../modules/story/story.schema";
-import moduleTextImage from "../../modules/textimage/textimage.schema";
-import moduleVideo from "../../modules/video/video.schema";
 import { translateFields } from "../utils/language/field-translation";
 import configCMS from "./documents/config.cms";
 import configGeneral from "./documents/config.general";
@@ -70,8 +56,6 @@ export const schemaTypes = [
   ...[
     button,
     buttongroup,
-    cardComposable,
-    cardImage,
     configCMS,
     configIntegrations,
     configSocial,
@@ -85,20 +69,8 @@ export const schemaTypes = [
     heroSplit,
     imageSimple,
     link,
-    moduleBillboard,
     moduleBreadcrumb,
-    moduleCardGrid,
-    moduleFaq,
-    moduleFeed,
-    moduleGallery,
-    moduleImage,
     modulePreset,
-    moduleResourceStrip,
-    moduleRichText,
-    moduleSlides,
-    moduleStory,
-    moduleTextImage,
-    moduleVideo,
     navigation,
     pageBlog,
     pageBlogs,

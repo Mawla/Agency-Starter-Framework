@@ -1,16 +1,4 @@
-import { BillboardProps } from "../../modules/billboard/Billboard";
 import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
-import { CardGridProps } from "../../modules/cardgrid/CardGrid";
-import { FaqProps } from "../../modules/faq/Faq";
-import { GalleryProps } from "../../modules/gallery/Gallery";
-import { ImageProps } from "../../modules/image/Image";
-import { ResourceFeedProps } from "../../modules/resourcefeed/ResourceFeed";
-import { ResourceStripProps } from "../../modules/resourcestrip/ResourceStrip";
-import { RichTextProps } from "../../modules/richtext/RichText";
-import { SlidesProps } from "../../modules/slides/Slides";
-import { StoryProps } from "../../modules/story/Story";
-import { TextImageProps } from "../../modules/textimage/TextImage";
-import { VideoProps } from "../../modules/video/Video";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
@@ -18,78 +6,11 @@ import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
 
-const Image = lazy<ComponentType<ImageProps>>(
-  () => import(/* webpackChunkName: "Image" */ "../../modules/image/Image"),
-);
-
-const Video = lazy<ComponentType<VideoProps>>(
-  () => import(/* webpackChunkName: "Video" */ "../../modules/video/Video"),
-);
-
-const Faq = lazy<ComponentType<FaqProps>>(
-  () => import(/* webpackChunkName: "Faq" */ "../../modules/faq/Faq"),
-);
-
-const ResourceStrip = lazy<ComponentType<ResourceStripProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "ResourceStrip" */ "../../modules/resourcestrip/ResourceStrip"
-    ),
-);
-
-const ResourceFeed = lazy<ComponentType<ResourceFeedProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "Feed" */ "../../modules/resourcefeed/ResourceFeed"
-    ),
-);
-
-const Story = lazy<ComponentType<StoryProps>>(
-  () => import(/* webpackChunkName: "Story" */ "../../modules/story/Story"),
-);
-
-const Slides = lazy<ComponentType<SlidesProps>>(
-  () => import(/* webpackChunkName: "Slides" */ "../../modules/slides/Slides"),
-);
-
-const Gallery = lazy<ComponentType<GalleryProps>>(
-  () =>
-    import(/* webpackChunkName: "Gallery" */ "../../modules/gallery/Gallery"),
-);
-
-const TextImage = lazy<ComponentType<TextImageProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "TextImage" */ "../../modules/textimage/TextImage"
-    ),
-);
-
-const Billboard = lazy<ComponentType<BillboardProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "Billboard" */ "../../modules/billboard/Billboard"
-    ),
-);
-
 const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
   () =>
     import(
       /* webpackChunkName: "Breadcrumb" */ "../../modules/breadcrumb/Breadcrumb"
-    ),
-);
-
-const CardGrid = lazy<ComponentType<CardGridProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "CardGrid" */ "../../modules/cardgrid/CardGrid"
-    ),
-);
-
-const RichText = lazy<ComponentType<RichTextProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "RichText" */ "../../modules/richtext/RichText"
-    ),
+    )
 );
 
 export type ModuleBuilderProps = {
@@ -121,42 +42,8 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               module={item._type}
               id={item._key}
             >
-              {item._type === "module.richtext" && (
-                <RichText {...(item as RichTextProps)} />
-              )}
               {item._type === "module.breadcrumb" && (
                 <Breadcrumb {...(item as BreadcrumbProps)} />
-              )}
-              {item._type === "module.cardgrid" && (
-                <CardGrid {...(item as CardGridProps)} />
-              )}
-              {item._type === "module.billboard" && (
-                <Billboard {...(item as BillboardProps)} />
-              )}
-              {item._type === "module.textimage" && (
-                <TextImage {...(item as TextImageProps)} />
-              )}
-              {item._type === "module.gallery" && (
-                <Gallery {...(item as GalleryProps)} />
-              )}
-              {item._type === "module.slides" && (
-                <Slides {...(item as SlidesProps)} />
-              )}
-              {item._type === "module.story" && (
-                <Story {...(item as StoryProps)} />
-              )}
-              {item._type === "module.resourcefeed" && (
-                <ResourceFeed {...(item as ResourceFeedProps)} />
-              )}
-              {item._type === "module.resourcestrip" && (
-                <ResourceStrip {...(item as ResourceStripProps)} />
-              )}
-              {item._type === "module.faq" && <Faq {...(item as FaqProps)} />}
-              {item._type === "module.video" && (
-                <Video {...(item as VideoProps)} />
-              )}
-              {item._type === "module.image" && (
-                <Image {...(item as ImageProps)} />
               )}
             </LazyLoadInView>
           </ModuleErrorBoundary>
