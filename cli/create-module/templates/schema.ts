@@ -52,7 +52,7 @@ export const getSchemaSnippet = ({
           ${render(fields, "eyebrow", `subtitle: eyebrow,`)}
           ${render(
             fields,
-            "eyebrow",
+            "image",
             `media: image || <Question weight="thin" />,`,
           )}
         };
