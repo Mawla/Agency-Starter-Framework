@@ -18,9 +18,11 @@ result=$(curl --silent POST 'https://api.sanity.io/v2021-06-07/projects' \
     \"organizationId\": \"off6YjRVq\"
 }")
 
-# echo $result
+echo $result
 
-projectId=$(echo $result 2>&1 | python -c 'import json, sys; print(json.loads(sys.stdin.read())["id"]);')
+projectId=$(echo $result 2>&1 | npx --yes groq-cli '(*).id' | xargs)
+
+# write projectId to sanity.cli.ts and sanity.config.ts
 
 echo "\033[0;36m-\033[0m Created sanity project with id '$projectId'"
 
@@ -40,27 +42,25 @@ echo "SANITY_STUDIO_API_DATASET=development" >> .env.development
 
 # Generate preview secret
 echo "\033[0;36m-\033[0m Generating preview secret"
-previewSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 | python -c 'import json, sys; a = json.loads(sys.stdin.read()); print u" ".join(a);')
+previewSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 |  npx --yes groq-cli "*[0]+' '+*[1]+' '+*[2]+' '+*[3]" | xargs)
 echo "SANITY_PREVIEW_SECRET=\"$previewSecret\"" >> .env.development
 
 echo "\033[0;36m-\033[0m Generating webhook secret"
-webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 | python -c 'import json, sys; a = json.loads(sys.stdin.read()); print u" ".join(a);')
+webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 |  npx --yes groq-cli "*[0]+' '+*[1]+' '+*[2]+' '+*[3]" | xargs)
 echo "SANITY_WEBHOOK_SECRET=\"$webhookSecret\"" >> .env.development
 
 # Generate rest .env
 echo "\033[0;36m-\033[0m Writing .env.development"
 echo "SANITY_STUDIO_PROJECT_PATH=http://localhost:3000/" >> .env.development
-echo "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=xxx" >> .env.development
-echo "STORYBOOK_CLOUDINARY_CLOUD_NAME=xxx" >> .env.development
 
 echo "\033[0;36m-\033[0m Generating read api key"
 writeJson=$(curl POST "https://api.sanity.io/v2021-06-07/projects/$projectId/tokens" -H "Authorization: Bearer $authToken" -H "Content-Type: application/json" --data-raw '{"label":"preview-write","roleName":"editor"}')
-writeToken=$(echo $writeJson | python -c 'import json, sys; a = json.loads(sys.stdin.read()); print a["key"];')
+writeToken=$(echo $writeJson | npx --yes groq-cli '(*).key' | xargs)
 echo "SANITY_API_WRITE_TOKEN=$writeToken" >> .env.development
 
 echo "\033[0;36m-\033[0m Generating write api key"
 readJson=$(curl POST "https://api.sanity.io/v2021-06-07/projects/$projectId/tokens" -H "Authorization: Bearer $authToken" -H "Content-Type: application/json" --data-raw '{"label":"preview-read","roleName":"viewer"}')
-readToken=$(echo $readJson | python -c 'import json, sys; a = json.loads(sys.stdin.read()); print a["key"];')
+readToken=$(echo $readJson | npx --yes groq-cli '(*).key' | xargs)
 echo "SANITY_API_READ_TOKEN=$readToken" >> .env.development
 
 # Write sanity api tokens
