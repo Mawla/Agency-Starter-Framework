@@ -7,7 +7,12 @@ const ReactVimeo = lazy(
   () => import(/* webpackChunkName: "ReactVimeo" */ "@u-wave/react-vimeo"),
 );
 
-export const YoutubePlayer = ({ videoId, loop, autoPlay }: VideoType) => {
+export const VimeoPlayer = ({
+  videoId,
+  loop,
+  autoPlay,
+  frameless,
+}: VideoType) => {
   if (!videoId) return null;
 
   return (
@@ -17,8 +22,9 @@ export const YoutubePlayer = ({ videoId, loop, autoPlay }: VideoType) => {
       loop={loop}
       muted
       responsive
+      controls={!frameless}
     />
   );
 };
 
-export default React.memo(YoutubePlayer);
+export default React.memo(VimeoPlayer);
