@@ -125,6 +125,10 @@ const schema = defineType({
   components: {
     preview: VideoPreview,
   },
+  options: {
+    collapsed: false,
+    collapsible: false,
+  },
   fieldsets: [
     {
       name: "videoOptions",
