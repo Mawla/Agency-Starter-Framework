@@ -1,6 +1,7 @@
 import { PageContext } from "../context/PageContext";
 import { SiteContext } from "../context/SiteContext";
 import "../styles/styles.css";
+import { Manrope } from "@next/font/google";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";
 import React from "react";
@@ -13,6 +14,11 @@ Object.defineProperty(NextImage, "default", {
   value: (props) => (
     <OriginalNextImage {...props} unoptimized loader={({ src }) => src} />
   ),
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
 });
 
 export const parameters = {
@@ -51,21 +57,21 @@ export const decorators = [
                 _updatedAt: "2022-01-04T14:26:24Z",
                 path: "/page1",
                 title: "Page 1",
-                paths: {
-                  en: "/",
-                  it: "/",
-                  es: "/",
-                },
-                titles: {
-                  en: "/",
-                  it: "/",
-                  es: "/",
-                },
               },
               breadcrumb: [],
+              languageAlternates: [
+                {
+                  title: "Page1",
+                  path: "/es",
+                  language: "es",
+                  excludeFromSitemap: false,
+                },
+              ],
             }}
           >
-            <Story />
+            <div className={`${manrope.variable} font-sans`}>
+              <Story />
+            </div>
           </PageContext.Provider>
         </SiteContext.Provider>
       </QueryClientProvider>
