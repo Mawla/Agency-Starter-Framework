@@ -16,6 +16,7 @@ export default defineField({
       title: "Rich text",
       styles: [
         ...(richTextBasicSchema.of[0] as any).styles,
+        { title: "H1", value: "h1" },
         { title: "H2", value: "h2" },
         { title: "H5", value: "h5" },
       ].sort((a, b) => a.title.localeCompare(b.title)),
