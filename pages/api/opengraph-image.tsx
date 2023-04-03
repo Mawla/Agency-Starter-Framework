@@ -24,7 +24,7 @@ const handler = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
   let id = searchParams.get("id");
-  if (!id) id = "page_homepage";
+  if (!id) id = "page_homepage__i18n_en";
 
   const page = await sanityClient.fetch(`*[_id == "${id}"][0] {
     "hero": hero[0] {
