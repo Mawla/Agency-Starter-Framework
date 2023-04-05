@@ -33,7 +33,7 @@ async function init() {
 
   const schemaTypes = Object.keys(SCHEMAS).length;
   const moduleTypes = Object.keys(MODULE_SCHEMAS).length;
-  let moduleName = `Block ${moduleTypes === schemaTypes ? 1 : moduleTypes}`;
+  let moduleName = `Block ${moduleTypes === schemaTypes ? 1 : moduleTypes + 1}`;
 
   let moduleTitle = await text({
     message:
