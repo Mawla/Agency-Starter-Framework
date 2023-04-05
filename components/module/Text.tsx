@@ -70,7 +70,7 @@ export const Text = ({
         className={cx(
           "break-words prose font-regular leading-relaxed",
           "prose-strong:font-bold prose-strong:text-current",
-          "prose-a:underline prose-a:underline-offset-4",
+          "prose-a:text-current prose-a:underline prose-a:underline-offset-4",
           align && alignClasses[align],
           size && sizeClasses[size],
           font && fontClasses[font],
@@ -79,12 +79,6 @@ export const Text = ({
             : background
             ? proseClasses[background]
             : "text-current",
-          {
-            ["prose-a:text-action-500"]:
-              !background ||
-              background === "white" ||
-              background === "neutral-100",
-          },
         )}
       >
         {children}
