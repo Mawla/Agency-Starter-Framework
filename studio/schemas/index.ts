@@ -9,7 +9,6 @@ import script from "../../components/script/script.schema";
 import video from "../../components/video/video.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
-import moduleBreadcrumb from "../../modules/breadcrumb/breadcrumb.schema";
 import { translateFields } from "../utils/language/field-translation";
 import configCMS from "./documents/config.cms";
 import configGeneral from "./documents/config.general";
@@ -63,7 +62,6 @@ export const schemaTypes = [
     footer,
     imageSimple,
     link,
-    moduleBreadcrumb,
     modulePreset,
     navigation,
     pageBlog,

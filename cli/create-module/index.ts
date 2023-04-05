@@ -5,7 +5,7 @@
  * sanity exec ./cli/create-module.ts -- --write
  *
  */
-import { MODULE_SCHEMAS } from "../../types.sanity";
+import { MODULE_SCHEMAS, SCHEMAS } from "../../types.sanity";
 import { createInfo } from "./create-info";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
@@ -31,8 +31,9 @@ export type AnswersType = {
 async function init() {
   intro(`Let's create a module`);
 
-  const moduleTypes = Object.keys(MODULE_SCHEMAS);
-  let moduleName = `Block ${moduleTypes.length}`;
+  const schemaTypes = Object.keys(SCHEMAS).length;
+  const moduleTypes = Object.keys(MODULE_SCHEMAS).length;
+  let moduleName = `Block ${moduleTypes === schemaTypes ? 1 : moduleTypes + 1}`;
 
   let moduleTitle = await text({
     message:

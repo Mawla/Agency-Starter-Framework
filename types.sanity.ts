@@ -10,7 +10,6 @@ export const SCHEMAS = {
   "dialog.form": "",
   "dialog.richtext": "",
   "dialog.video": "",
-  "module.breadcrumb": "",
   "page.blog": "",
   "page.blogs": "",
   "page.casestudies": "",
@@ -94,7 +93,7 @@ export const TAGGABLE_SCHEMAS = pick(
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const MODULE_SCHEMAS = pick(SCHEMAS, "module.breadcrumb");
+export const MODULE_SCHEMAS = pick(SCHEMAS);
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
 

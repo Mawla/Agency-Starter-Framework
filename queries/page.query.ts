@@ -11,7 +11,6 @@ import { richTextQuery } from "../components/portabletext/portabletext.query";
 import { ScriptsType } from "../components/script/Script";
 import { videoQuery } from "../components/video/video.query";
 import { baseLanguage, LanguageType } from "../languages";
-import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { ImageType } from "../types";
 import { SchemaName } from "../types.sanity";
 import { SeoType } from "./config.query";
@@ -91,7 +90,6 @@ export const getPageQuery = (language: LanguageType) => groq`
 
     // modules
     "modules": modules[!(_type in path('studio.*'))] {
-      ${getBreadcrumbModuleQuery(language)},
       _key,
       _type,
       decorations,
