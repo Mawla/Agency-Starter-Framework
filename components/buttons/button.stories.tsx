@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { SIZE_OPTIONS, VariantType, VARIANT_OPTIONS } from "./button.options";
+import { SIZE_OPTIONS } from "./button.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -7,20 +7,6 @@ export default {
   component: Button,
   title: "Components/Button",
 } as Meta;
-
-export const Variants = () => (
-  <>
-    {(Object.keys(VARIANT_OPTIONS) as VariantType[]).map(
-      (variant: VariantType) => (
-        <div key={variant} className="flex gap-2 mb-10">
-          <Button label={variant} variant={variant} />
-          <Button label="loading" variant={variant} loading />
-          <Button label="disabled" variant={variant} disabled />
-        </div>
-      ),
-    )}
-  </>
-);
 
 export const Sizes = () => (
   <div className="flex flex-col gap-2 flex-wrap">

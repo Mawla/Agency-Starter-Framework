@@ -10,7 +10,6 @@ import {
   SizeType,
   IconPositionType,
   WeightType,
-  VariantType,
 } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -34,21 +33,23 @@ export type ButtonProps = {
   size?: SizeType;
   stretch?: boolean;
   target?: "_blank";
-  theme?: { text?: ColorType; background?: ColorType; border?: ColorType };
+  theme?: {
+    text?: { color?: ColorType };
+    background?: { color?: ColorType };
+    border?: { color?: ColorType };
+  };
   disabled?: boolean;
   loading?: boolean;
   weight?: WeightType;
   download?: boolean;
   hideLabel?: boolean;
   language?: LanguageType;
-  variant?: VariantType;
 };
 
 const sizeClasses: Record<SizeType, string> = {
   sm: "text-base md:text-lg",
   md: "text-lg md:text-xl",
 };
-
 const spaceClasses: Record<SizeType, string> = {
   sm: "px-4 py-2 md:px-4",
   md: "px-5 py-[9px] md:px-6",
@@ -73,12 +74,6 @@ const alignClasses: Record<AlignType, string> = {
 const weightClasses: Record<WeightType, string> = {
   regular: "font-normal",
   medium: "font-medium",
-};
-
-const variantClasses: Record<VariantType, string> = {
-  primary: "bg-[#eee] text-[#000]",
-  secondary: "bg-[#000] text-[#fff]",
-  tertiary: "bg-[#fff] text-[#000]",
 };
 
 export const Button = (props: ButtonProps) => {
@@ -115,7 +110,6 @@ const ButtonInner = ({
   stretch = false,
   target,
   theme,
-  variant = "primary",
   weight = "medium",
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
@@ -188,12 +182,14 @@ const ButtonInner = ({
 
   const sharedClasses = {
     ["cursor-pointer"]: true,
-    ["border"]: theme?.border,
+    ["border"]: true,
     ["transition-colors duration-200"]: true,
     ["rounded-full"]: round,
-    [backgroundClasses[theme?.background || "white"]]: true,
-    [borderClasses[theme?.border || "white"]]: theme?.border,
-    [textClasses[theme?.text || "black"]]: true,
+    [backgroundClasses[theme?.background?.color || "white"]]: true,
+    [borderClasses[
+      theme?.border?.color || theme?.background?.color || "white"
+    ]]: true,
+    [textClasses[theme?.text?.color || "black"]]: true,
     ["inline-flex items-center justify-center"]: !stretch,
     ["bg-opacity-0 border-opacity-0"]: plain,
     ["hover:bg-opacity-0 focus:bg-opacity-0"]: plain,
@@ -201,7 +197,6 @@ const ButtonInner = ({
       true,
     ["pointer-events-none opacity-75"]: disabled,
     [weightClasses[weight]]: true,
-    [variantClasses[variant]]: true,
   };
 
   // icon only button

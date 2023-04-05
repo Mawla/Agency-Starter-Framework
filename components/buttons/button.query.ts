@@ -41,7 +41,7 @@ export const buttonFieldsQuery = groq`
   icon,
   iconPosition,
   download,
-  variant,
+  theme,
   "target": select(newWindow => '_blank') 
 `;
 
