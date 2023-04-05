@@ -36,9 +36,9 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       export const TITLE_SIZE_OPTIONS = pick(ORIGINAL_TITLE_SIZE_OPTIONS, "lg", "xl");
       export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
     
-      export const TITLE_COLOR_OPTIONS = pick(ORIGINAL_TITLE_COLOR_OPTIONS, "black");
+      export const TITLE_COLOR_OPTIONS = pick(ORIGINAL_TITLE_COLOR_OPTIONS,"white", "black");
       export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
-      
+
     `,
     )};
     
@@ -46,7 +46,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "intro",
       `
-      export const INTRO_COLOR_OPTIONS = pick(TEXT_COLOR_OPTIONS, "black");
+      export const INTRO_COLOR_OPTIONS = pick(TEXT_COLOR_OPTIONS,"white", "black");
       export type IntroColorType = keyof typeof INTRO_COLOR_OPTIONS;
 
     `,
@@ -56,7 +56,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "eyebrow",
       `
-      export const EYEBROW_COLOR_OPTIONS = pick(ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS, "black");
+      export const EYEBROW_COLOR_OPTIONS = pick(ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS, "white", "black");
       export type EyebrowColorType = keyof typeof EYEBROW_COLOR_OPTIONS;
     `,
     )};
