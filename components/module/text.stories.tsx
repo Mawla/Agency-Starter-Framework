@@ -2,6 +2,10 @@ import { ColorType } from "../../types";
 import { Background } from "./Background";
 import { Text as TextComponent } from "./Text";
 import {
+  BackgroundColorType,
+  BACKGROUND_COLOR_OPTIONS,
+} from "./background.options";
+import {
   TextFontType,
   TextSizeType,
   TEXT_ALIGN_OPTIONS,
@@ -54,8 +58,8 @@ export const Text = () => (
       </div>
     ))}
 
-    {(Object.keys(TEXT_COLOR_OPTIONS) as ColorType[]).map(
-      (color: ColorType) => (
+    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
+      (color: BackgroundColorType) => (
         <Background theme={{ background: color }} key={color}>
           <TextComponent color="white" background={color}>
             <div className="p-4">Module background {color}</div>
