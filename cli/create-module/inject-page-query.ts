@@ -5,9 +5,8 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { moduleType, write } from "./get-args";
+import { write } from "./get-args";
 import {
-  getHeroPageQueryImport,
   getModulePageQuery,
   getModulePageQueryImport,
 } from "./templates/page-query";
@@ -22,11 +21,6 @@ export function injectPageQuery(answers: Pick<AnswersType, "moduleName">) {
 
   let needle = '"modules": ';
   let imports = getModulePageQueryImport({ pascalName, lowerName });
-
-  if (moduleType === "hero") {
-    needle = '"hero":';
-    imports = getHeroPageQueryImport({ pascalName, lowerName });
-  }
 
   lines.push(imports);
   lines = injectLine({

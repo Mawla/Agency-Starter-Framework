@@ -3,7 +3,7 @@ import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { sortLines } from "../utils/sort-lines";
 import { formatName } from "./format-name";
-import { moduleType, write } from "./get-args";
+import { write } from "./get-args";
 
 const fs = require("fs");
 
@@ -31,9 +31,6 @@ export function injectTypes(answers: Pick<AnswersType, "moduleName">) {
   });
 
   let needle = "export const MODULE_SCHEMAS";
-  if (moduleType === "hero") {
-    needle = "export const HERO_SCHEMAS";
-  }
 
   // add to linkable schemas list
   lines = injectLine({

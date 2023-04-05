@@ -5,9 +5,8 @@ import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { moduleType, write } from "./get-args";
+import { write } from "./get-args";
 import {
-  getHeroBuilderImport,
   getBuilderComponent,
   getModuleBuilderImport,
 } from "./templates/builder";
@@ -22,13 +21,6 @@ export function injectBuilder(answers: Pick<AnswersType, "moduleName">) {
 
   let imports = getModuleBuilderImport({ pascalName, lowerName, schemaName });
   let needle = "</LazyLoadInView>";
-
-  if (moduleType === "hero") {
-    filePath = `${__dirname}/../../layout/pagebuilder/HeroBuilder.tsx`;
-    lines = fs.readFileSync(filePath).toString().split("\n");
-    imports = getHeroBuilderImport({ pascalName, lowerName, schemaName });
-    needle = "</section>";
-  }
 
   lines = [imports, ...lines];
 

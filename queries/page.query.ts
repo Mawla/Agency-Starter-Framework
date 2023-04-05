@@ -10,10 +10,6 @@ import {
 import { richTextQuery } from "../components/portabletext/portabletext.query";
 import { ScriptsType } from "../components/script/Script";
 import { videoQuery } from "../components/video/video.query";
-import { HeroSplitProps } from "../heroes/herosplit/HeroSplit";
-import { getHeroSplitQuery } from "../heroes/herosplit/herosplit.query";
-import { getHeroVerticalQuery } from "../heroes/herovertical/herovertical.query";
-import { getResourceHeroQuery } from "../heroes/resourcehero/resourcehero.query";
 import { baseLanguage, LanguageType } from "../languages";
 import { getBreadcrumbModuleQuery } from "../modules/breadcrumb/breadcrumb.query";
 import { ImageType } from "../types";
@@ -26,7 +22,6 @@ export type PageType = {
   _type: SchemaName;
   _id: string;
   _updatedAt: string;
-  hero?: HeroSplitProps | null;
   image?: ImageType;
   description?: string;
   title: string;
@@ -93,17 +88,6 @@ export const getPageQuery = (language: LanguageType) => groq`
       ...seo,
       "image": ${getImageComponentQuery("seo.image")}
     },
-
-    // hero
-    "hero": hero[!(_type in path('studio.*'))][] {
-      ${getHeroSplitQuery(language)},
-      ${getResourceHeroQuery(language)},
-      ${getHeroVerticalQuery(language)},
-      _type,
-      _key,
-      theme,
-
-    }[0],
 
     // modules
     "modules": modules[!(_type in path('studio.*'))] {

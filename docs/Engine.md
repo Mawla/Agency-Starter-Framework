@@ -16,7 +16,7 @@ Both the frontend app and the Sanity Studio are hosted on the same domain on ver
 
 ## CLI
 
-The CLI is what speeds up all of the development work. Using the CLI you can add new modules, page types, heroes and dialogs without doing any coding. Once the initial setup is done you can confidently start styling and adding logic.
+The CLI is what speeds up all of the development work. Using the CLI you can add new modules, page types and dialogs without doing any coding. Once the initial setup is done you can confidently start styling and adding logic.
 
 ## Sitemap
 
@@ -34,6 +34,6 @@ While Next.js is used as a framework, there is not much specific Next.js knowled
 
 ### Conventions
 
-- Schema names are prefixed with their type: 'page._', 'hero._', 'module._', 'dialog._'.
+- Schema names are prefixed with their type: 'page._', 'module._', 'dialog.\_'.
 - Article names are the single form of the type: 'page.blog', 'page.pressrelease'.
 - Overview names are the plural form of the type: `page.blogs`, 'page.pressreleases'.

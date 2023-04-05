@@ -1,7 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import {
   DIALOGS_FIELD,
-  HERO_FIELD,
   LANGUAGE_FIELD,
   MODULES_FIELD,
   pageBase,
@@ -27,7 +26,6 @@ export default defineType({
   fields: [
     TITLE_FIELD,
     { ...LANGUAGE_FIELD, readOnly: true },
-    HERO_FIELD,
     MODULES_FIELD,
     DIALOGS_FIELD,
   ],

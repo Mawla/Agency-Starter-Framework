@@ -35,18 +35,7 @@ export default defineType({
         ...PARENT_FIELD.options,
       },
     },
-    ...pageBase.fields.map((field) => {
-      if (field.name === "hero") {
-        return {
-          ...field,
-          options: {
-            ...(field as any).options,
-            filterType: /hero.resourcehero/,
-          },
-        };
-      }
-      return field;
-    }),
+    ...pageBase.fields,
     TAGS_FIELD,
     AUTHOR_FIELD,
     PUBLISHED_AT_FIELD,

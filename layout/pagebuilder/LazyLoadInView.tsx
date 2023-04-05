@@ -1,11 +1,7 @@
 import { backgroundClasses } from "../../colors";
 import { useInView } from "../../hooks/useInView";
 import { ColorType } from "../../types";
-import {
-  DialogSchemaName,
-  HeroSchemaName,
-  ModuleSchemaName,
-} from "../../types.sanity";
+import { DialogSchemaName, ModuleSchemaName } from "../../types.sanity";
 import cx from "classnames";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -13,7 +9,7 @@ type LazyLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
   enabled?: boolean;
   background?: ColorType | "transparent";
-  module?: ModuleSchemaName | DialogSchemaName | HeroSchemaName;
+  module?: ModuleSchemaName | DialogSchemaName;
   id?: string;
   networkIdle?: boolean;
 };

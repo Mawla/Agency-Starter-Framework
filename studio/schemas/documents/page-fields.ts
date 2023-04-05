@@ -3,8 +3,6 @@ import { baseLanguage, languages, LanguageType } from "../../../languages";
 import {
   DialogSchemaName,
   DIALOG_SCHEMAS,
-  HeroSchemaName,
-  HERO_SCHEMAS,
   LINKABLE_SCHEMAS,
   ModuleSchemaName,
   MODULE_SCHEMAS,
@@ -23,7 +21,6 @@ import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import {
-  ArrayRule,
   DateRule,
   defineField,
   PreviewConfig,
@@ -73,32 +70,6 @@ export const PUBLISHED_AT_FIELD = defineField({
   title: "Date",
   type: "date",
   validation: (Rule: DateRule) => Rule.required(),
-});
-
-export const HERO_FIELD = defineField({
-  name: "hero",
-  title: "Hero",
-  type: "array",
-  components: {
-    input: PageBuilder,
-  },
-  validation: (Rule: ArrayRule<any>) => Rule.max(1).warning(),
-  description: "The hero section of the page.",
-  of: (Object.keys(HERO_SCHEMAS) as HeroSchemaName[]).map(
-    (type: HeroSchemaName) => ({
-      type,
-      components: {
-        preview: PageBuilderItemPreview,
-        item: PageBuilderItem,
-      },
-    }),
-  ),
-  options: {
-    filterType: /hero\./,
-    updateField: "hero",
-    placeholder: "Add a hero…",
-  } as any,
-  group: ["content"],
 });
 
 export const MODULES_FIELD = defineField({
@@ -369,7 +340,6 @@ export const pageBase = {
     PASSWORD,
     TITLE_FIELD,
     SLUG_FIELD,
-    HERO_FIELD,
     MODULES_FIELD,
     DIALOGS_FIELD,
     { ...SEO_FIELD, group: ["meta"] },
@@ -407,7 +377,7 @@ export const getPreviewSlugPagePath = (
 export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   select: {
     title: `title`,
-    media: "hero.0.image",
+    media: "modules.0.image",
     language: "language",
     ...SLUG_PREVIEW_SELECT_FIELDS,
   },

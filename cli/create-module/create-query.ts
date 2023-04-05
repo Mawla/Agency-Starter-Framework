@@ -1,7 +1,7 @@
 import { AnswersType } from ".";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { moduleType, write } from "./get-args";
+import { write } from "./get-args";
 import { getQuerySnippet } from "./templates/query";
 
 /**
@@ -20,9 +20,6 @@ export function createQuery(
 
   if (write) {
     let filePath = `${__dirname}/../../modules/${lowerName}/${lowerName}.query.tsx`;
-    if (moduleType === "hero") {
-      filePath = `${__dirname}/../../heroes/${lowerName}/${lowerName}.query.tsx`;
-    }
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, lines);
     prettierFile(filePath);
