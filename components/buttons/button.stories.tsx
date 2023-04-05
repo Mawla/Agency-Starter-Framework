@@ -1,5 +1,14 @@
+import { ColorType } from "../../types";
 import { Button } from "./Button";
-import { SIZE_OPTIONS, VariantType, VARIANT_OPTIONS } from "./button.options";
+import {
+  BackgroundColorType,
+  BACKGROUND_COLOR_OPTIONS,
+  BorderColorType,
+  BORDER_COLOR_OPTIONS,
+  SIZE_OPTIONS,
+  TextColorType,
+  TEXT_COLOR_OPTIONS,
+} from "./button.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -7,20 +16,6 @@ export default {
   component: Button,
   title: "Components/Button",
 } as Meta;
-
-export const Variants = () => (
-  <>
-    {(Object.keys(VARIANT_OPTIONS) as VariantType[]).map(
-      (variant: VariantType) => (
-        <div key={variant} className="flex gap-2 mb-10">
-          <Button label={variant} variant={variant} />
-          <Button label="loading" variant={variant} loading />
-          <Button label="disabled" variant={variant} disabled />
-        </div>
-      ),
-    )}
-  </>
-);
 
 export const Sizes = () => (
   <div className="flex flex-col gap-2 flex-wrap">
@@ -134,4 +129,38 @@ export const Target = () => (
     />
     <Button href="https://www.google.com" icon="close" target="_blank" />
   </div>
+);
+
+export const Theme = () => (
+  <>
+    {(Object.keys(BORDER_COLOR_OPTIONS) as BorderColorType[]).map(
+      (border: BorderColorType) => (
+        <div className="mb-10 flex gap-4 flex-wrap">
+          {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
+            (background: BackgroundColorType) =>
+              (Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
+                (text: TextColorType) => (
+                  <Button
+                    key={border + background + text}
+                    theme={{
+                      background: {
+                        color: background,
+                      },
+                      text: {
+                        color: text,
+                      },
+                      border: {
+                        color: border,
+                      },
+                    }}
+                    label={`bg ${background}, text ${text}, border ${border}`}
+                    size="sm"
+                  />
+                ),
+              ),
+          )}
+        </div>
+      ),
+    )}
+  </>
 );

@@ -5,7 +5,12 @@ import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
 import { ICONS } from "../../types";
-import { ICON_POSITION_OPTIONS, VARIANT_OPTIONS } from "./button.options";
+import {
+  BACKGROUND_COLOR_OPTIONS,
+  BORDER_COLOR_OPTIONS,
+  ICON_POSITION_OPTIONS,
+  TEXT_COLOR_OPTIONS,
+} from "./button.options";
 import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
@@ -19,10 +24,6 @@ const schema = defineType({
   name: "button",
   title: "Button",
   type: "object",
-  initialValue: {
-    variant: "primary",
-    iconPosition: "after",
-  },
   groups: [
     {
       name: "link",
@@ -129,23 +130,7 @@ const schema = defineType({
       initialValue: false,
       description: "Make the button open in a new browser window",
     }),
-    defineField({
-      name: "variant",
-      title: "Variant",
-      type: "string",
-      group: "theme",
-      description: "Choose styling option.",
-      options: {
-        list: optionsToList(VARIANT_OPTIONS),
-      },
-    }),
-    defineField({
-      name: "alt",
-      title: "Alt",
-      type: "boolean",
-      group: "theme",
-      description: "Remove background color.",
-    }),
+
     defineField({
       name: "icon",
       title: "Icon",
@@ -168,6 +153,63 @@ const schema = defineType({
       initialValue: "after",
       group: "theme",
       description: "Make the button stretch as wide as it can go.",
+    }),
+
+    defineField({
+      name: "theme",
+      title: "Theme",
+      type: "object",
+      group: "theme",
+      fields: [
+        defineField({
+          name: "text",
+          title: "Text",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "color",
+                type: "color",
+                options: {
+                  colors: TEXT_COLOR_OPTIONS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "background",
+          title: "Background",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "color",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "border",
+          title: "Border",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "color",
+                type: "color",
+                options: {
+                  colors: BORDER_COLOR_OPTIONS,
+                },
+              },
+            ],
+          },
+        }),
+      ],
     }),
   ],
   preview: {

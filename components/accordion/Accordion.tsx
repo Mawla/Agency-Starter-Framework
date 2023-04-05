@@ -40,7 +40,10 @@ export const Accordion = ({ items }: AccordionProps) => {
                     icon="chevron"
                     label=""
                     as="div"
-                    theme={{ background: "black", text: "white" }}
+                    theme={{
+                      background: { color: "black" },
+                      text: { color: "white" },
+                    }}
                   />
                 </span>
               </RadixAccordion.Trigger>

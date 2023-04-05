@@ -90,7 +90,7 @@ export const ResourceHero = ({
           {backLink && (
             <div>
               <span className="-rotate-180 inline-block">
-                <Button icon="arrow" href={backLink} variant="tertiary" />
+                <Button icon="arrow" href={backLink} />
               </span>
             </div>
           )}
