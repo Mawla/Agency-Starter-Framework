@@ -15,6 +15,7 @@
     "create-dialog": "sanity exec ./cli/create-dialog -- --write",
     "create-page": "sanity exec ./cli/create-page -- --write",
     "create-block": "sanity exec ./cli/create-block -- --write",
+    "create-module": "echo \"Modules are now called blocks. Use yarn create-block instead.\"",
     "test-cli": "NODE_ENV=test npx jest ./cli/ ",
     "test": "NODE_ENV=test jest",
     "test-watch": "jest --watch"
