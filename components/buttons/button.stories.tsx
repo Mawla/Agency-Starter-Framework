@@ -134,13 +134,14 @@ export const Target = () => (
 export const Theme = () => (
   <>
     {(Object.keys(BORDER_COLOR_OPTIONS) as BorderColorType[]).map(
-      (border: BorderColorType) =>
-        (Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-          (background: BackgroundColorType) =>
-            (Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
-              (text: TextColorType) => (
-                <div key={border + background + text} className="mb-10">
+      (border: BorderColorType) => (
+        <div className="mb-10 flex gap-4 flex-wrap">
+          {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
+            (background: BackgroundColorType) =>
+              (Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
+                (text: TextColorType) => (
                   <Button
+                    key={border + background + text}
                     theme={{
                       background: {
                         color: background,
@@ -152,12 +153,14 @@ export const Theme = () => (
                         color: border,
                       },
                     }}
-                    label="Button text"
+                    label={`bg ${background}, text ${text}, border ${border}`}
+                    size="sm"
                   />
-                </div>
+                ),
               ),
-            ),
-        ),
+          )}
+        </div>
+      ),
     )}
   </>
 );
