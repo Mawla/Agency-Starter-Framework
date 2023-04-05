@@ -1,6 +1,14 @@
 import { isDarkColor } from "./helpers/utils/color";
 import { ColorType } from "./types";
 
+/**
+ * !important
+ * All colors must be defined in
+ * - tailwind.config.js colors
+ * - tailwind.config.js safelist
+ * - colors.ts
+ */
+
 export const COLORS = {
   white: "#fff",
   black: "#000000",

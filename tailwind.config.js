@@ -13,6 +13,7 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // Be sure to add all colours in the safelist
   safelist: [
     {
       pattern:
@@ -150,6 +151,13 @@ module.exports = {
       "shadow-transform": "box-shadow, transform",
       ...defaultTheme.transitionProperty,
     },
+    /**
+     * !important
+     * All colors must be defined in
+     * - tailwind.config.js colors
+     * - tailwind.config.js safelist
+     * - colors.ts
+     */
     colors: {
       transparent: "transparent",
       white: "white",
