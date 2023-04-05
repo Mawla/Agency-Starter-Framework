@@ -198,7 +198,7 @@ const Preset: ComponentType<any> = (props) => {
            * setting this to true leads to a bug when other modules are duplicated
            * apparently they then have duplicated keys for things in lists or portable text and those are duplicated as well.
            * When auto generating new ones these are seen as bad values and this generates a message
-           * like `Document \"drafts.page_homepage\" has duplicate array _key \"d6148fef5908\" at hero[0].text[0]._key and hero[1].text[0]._key`
+           * like `Document \"drafts.page_homepage\" has duplicate array _key \"d6148fef5908\" at modules[0].text[0]._key and modules[1].text[0]._key`
            *
            * We can set the following to true if this test case passes:
            * - create a module with array items (e.g buttons)

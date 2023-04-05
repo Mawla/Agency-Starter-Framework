@@ -292,15 +292,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
       typeFilter ? new RegExp(typeFilter).test(_type) : true,
     );
 
-    // these are objects for other fields, e.g type hero when importing modules
-    // not using other field for now
-    // we can just add them to the matching field using a patch event
-    // but is that what we want?
-    // for now a user must do this manually
-    const otherFieldModules = newModules.filter(({ _type }) =>
-      typeFilter ? !new RegExp(typeFilter).test(_type) : false,
-    );
-
     try {
       onChange(set([...(value || []), ...currentFieldModules]));
       // click the last item in the list to open the editor dialog

@@ -1,10 +1,7 @@
-import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import {
   getI18nBaseFieldForSingleton,
   getPreviewSlugPagePath,
-  HERO_FIELD,
-  I18N_BASE_FIELD,
   LANGUAGE_FIELD,
   pageBase,
   SLUG_FIELD,
@@ -49,6 +46,5 @@ export default defineType({
     },
     { ...LANGUAGE_FIELD, readOnly: true },
     getI18nBaseFieldForSingleton(SCHEMA_NAME),
-    HERO_FIELD,
   ],
 });
