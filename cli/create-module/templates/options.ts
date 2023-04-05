@@ -13,7 +13,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       "title",
       `import { 
         TITLE_SIZE_OPTIONS as ORIGINAL_TITLE_SIZE_OPTIONS, 
-        TITLE_COLOR_OPTIONS as ORIGINAL_TITLE_COLOR_OPTIONS 
+        TITLE_COLOR_OPTIONS as ORIGINAL_TITLE_COLOR_OPTIONS, 
         TITLE_EYEBROW_COLOR_OPTIONS as ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS 
       } from "../../components/module/title.options";`,
     )}
