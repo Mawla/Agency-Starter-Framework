@@ -61,7 +61,7 @@ export const Text = () => (
 
     {(Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
       (color: TextColorType) => (
-        <TextComponent color={color} background={color}>
+        <TextComponent color={color} background={color} key={color}>
           <div className="p-4">Text color {color}</div>
         </TextComponent>
       ),
