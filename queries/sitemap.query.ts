@@ -33,7 +33,7 @@ const baseFields = groq`
   parent,
   language,
   "i18n_base": i18n_base,
-  "modules": modules[] { language },
+  "modules": modules[] { language }
 `;
 
 const homePageQuery = groq`
