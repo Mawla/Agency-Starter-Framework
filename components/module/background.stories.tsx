@@ -1,7 +1,10 @@
-import { STORYBOOK_COLORS_SUBSET } from "../../colors";
-import { ColorType } from "../../types";
 import { Background as ModuleBackground } from "./Background";
-import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./background.options";
+import {
+  BackgroundColorType,
+  BACKGROUND_COLOR_OPTIONS,
+  ModuleRadiusType,
+  MODULE_RADIUS_OPTIONS,
+} from "./background.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -12,8 +15,8 @@ export default {
 
 export const Background = () => (
   <>
-    {(Object.keys(STORYBOOK_COLORS_SUBSET) as ColorType[]).map(
-      (color: ColorType) => (
+    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
+      (color: BackgroundColorType) => (
         <div key={color} className="mb-10">
           <ModuleBackground theme={{ background: color }}>
             <div className="p-8">Module background {color}</div>
@@ -31,7 +34,7 @@ export const Rounded = () => (
         <ModuleBackground
           key={radius}
           theme={{
-            background: "brand-500",
+            background: "black",
             rounded: { top: radius, bottom: radius },
           }}
         >
