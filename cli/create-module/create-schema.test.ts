@@ -3,6 +3,7 @@ import { createSchema } from "./create-schema";
 test("create schema with eyebrow", () => {
   const result = createSchema({
     moduleName: "Test",
+    moduleTitle: "Test",
     fields: ["eyebrow"],
     moduleDescription: "",
   });
@@ -13,6 +14,7 @@ test("create schema with eyebrow", () => {
 test("create schema with title", () => {
   const result = createSchema({
     moduleName: "Test",
+    moduleTitle: "Test",
     fields: ["title"],
     moduleDescription: "",
   });
@@ -23,6 +25,7 @@ test("create schema with title", () => {
 test("create schema with intro", () => {
   const result = createSchema({
     moduleName: "Test",
+    moduleTitle: "Test",
     fields: ["intro"],
     moduleDescription: "",
   });
@@ -33,6 +36,7 @@ test("create schema with intro", () => {
 test("create schema with image", () => {
   const result = createSchema({
     moduleName: "Test",
+    moduleTitle: "Test",
     fields: ["image"],
     moduleDescription: "",
   });
@@ -43,6 +47,7 @@ test("create schema with image", () => {
 test("create schema with items", () => {
   const result = createSchema({
     moduleName: "Test",
+    moduleTitle: "Test",
     fields: ["items"],
     moduleDescription: "",
   });
@@ -53,6 +58,7 @@ test("create schema with items", () => {
 test("create schema with buttons", () => {
   const result = createSchema({
     moduleName: "Test",
+    moduleTitle: "Test",
     fields: ["buttons"],
     moduleDescription: "",
   });
