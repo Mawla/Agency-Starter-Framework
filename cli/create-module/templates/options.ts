@@ -19,8 +19,8 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     )}
     ${render(
       fields,
-      "text",
-      `import { TEXT_COLOR_OPTIONS as ORIGINAL_TEXT_COLOR_OPTIONS } from "../../components/module/text.options";`,
+      "intro",
+      `import { TEXT_COLOR_OPTIONS } from "../../components/module/text.options";`,
     )}
     
     import { pick } from "../../helpers/utils/object";
@@ -38,6 +38,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     
       export const TITLE_COLOR_OPTIONS = pick(ORIGINAL_TITLE_COLOR_OPTIONS, "black");
       export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
+      
     `,
     )};
     
@@ -45,8 +46,9 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "intro",
       `
-      export const INTRO_COLOR_OPTIONS = pick(ORIGINAL_TEXT_COLOR_OPTIONS, "black");
+      export const INTRO_COLOR_OPTIONS = pick(TEXT_COLOR_OPTIONS, "black");
       export type IntroColorType = keyof typeof INTRO_COLOR_OPTIONS;
+
     `,
     )};
     
