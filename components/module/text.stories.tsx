@@ -1,17 +1,16 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-
-import { STORYBOOK_COLORS_SUBSET } from "../../colors";
 import { ColorType } from "../../types";
 import { Background } from "./Background";
+import { Text as TextComponent } from "./Text";
 import {
-  ALIGN_OPTIONS,
-  FontType,
-  FONT_OPTIONS,
-  SizeType,
-  SIZE_OPTIONS,
-  Text as TextComponent,
-} from "./Text";
+  TextFontType,
+  TextSizeType,
+  TEXT_ALIGN_OPTIONS,
+  TEXT_COLOR_OPTIONS,
+  TEXT_FONT_OPTIONS,
+  TEXT_SIZE_OPTIONS,
+} from "./text.options";
+import { Meta } from "@storybook/react";
+import React from "react";
 
 export default {
   component: TextComponent,
@@ -20,26 +19,30 @@ export default {
 
 export const Text = () => (
   <div className="divide-y">
-    {(Object.keys(SIZE_OPTIONS) as SizeType[]).map((size: SizeType) => (
-      <div key={size} className="p-4">
-        <TextComponent size={size}>
-          <div className="p-1">Module text size {size}</div>
-        </TextComponent>
-      </div>
-    ))}
+    {(Object.keys(TEXT_SIZE_OPTIONS) as TextSizeType[]).map(
+      (size: TextSizeType) => (
+        <div key={size} className="p-4">
+          <TextComponent size={size}>
+            <div className="p-1">Module text size {size}</div>
+          </TextComponent>
+        </div>
+      ),
+    )}
 
-    {(Object.keys(FONT_OPTIONS) as FontType[]).map((font: FontType) => (
-      <div key={font} className="p-4">
-        <TextComponent font={font}>
-          <div className="p-1">Module font {font}</div>
-        </TextComponent>
-      </div>
-    ))}
+    {(Object.keys(TEXT_FONT_OPTIONS) as TextFontType[]).map(
+      (font: TextFontType) => (
+        <div key={font} className="p-4">
+          <TextComponent font={font}>
+            <div className="p-1">Module font {font}</div>
+          </TextComponent>
+        </div>
+      ),
+    )}
 
     {(
-      Object.entries(ALIGN_OPTIONS) as [
-        key: keyof typeof ALIGN_OPTIONS,
-        label: string
+      Object.entries(TEXT_ALIGN_OPTIONS) as [
+        key: keyof typeof TEXT_ALIGN_OPTIONS,
+        label: string,
       ][]
     ).map(([align, label]) => (
       <div key={label} className="p-4">
@@ -51,14 +54,14 @@ export const Text = () => (
       </div>
     ))}
 
-    {(Object.keys(STORYBOOK_COLORS_SUBSET) as ColorType[]).map(
+    {(Object.keys(TEXT_COLOR_OPTIONS) as ColorType[]).map(
       (color: ColorType) => (
         <Background theme={{ background: color }} key={color}>
           <TextComponent color="white" background={color}>
             <div className="p-4">Module background {color}</div>
           </TextComponent>
         </Background>
-      )
+      ),
     )}
   </div>
 );

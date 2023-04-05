@@ -1,4 +1,5 @@
-import { SIZE_OPTIONS, Title, WEIGHT_OPTIONS } from "./Title";
+import { Title } from "./Title";
+import { TITLE_SIZE_OPTIONS, TITLE_WEIGHT_OPTIONS } from "./title.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -32,8 +33,8 @@ export const WithEyebrow = () => (
 export const Sizes = () => (
   <div>
     {(
-      Object.entries(SIZE_OPTIONS) as [
-        key: keyof typeof SIZE_OPTIONS,
+      Object.entries(TITLE_SIZE_OPTIONS) as [
+        key: keyof typeof TITLE_SIZE_OPTIONS,
         label: string,
       ][]
     ).map(([size, label]) => (
@@ -48,8 +49,8 @@ export const Sizes = () => (
 export const Weights = () => (
   <div>
     {(
-      Object.entries(WEIGHT_OPTIONS) as [
-        key: keyof typeof WEIGHT_OPTIONS,
+      Object.entries(TITLE_WEIGHT_OPTIONS) as [
+        key: keyof typeof TITLE_WEIGHT_OPTIONS,
         label: string,
       ][]
     ).map(([weight, label]) => (

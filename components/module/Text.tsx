@@ -1,44 +1,29 @@
 import { proseClasses, textClasses } from "../../colors";
-import { pick } from "../../helpers/utils/object";
-import { ALIGNMENTS, FONTS, SIZES, TextElement } from "../../types";
+import { TextElement } from "../../types";
 import { ColorType } from "../../types";
+import { TextAlignType, TextFontType, TextSizeType } from "./text.options";
 import cx from "classnames";
 import React from "react";
-
-export const ALIGN_OPTIONS = pick(
-  ALIGNMENTS,
-  "left",
-  "center",
-  "right",
-  "auto",
-);
-export type AlignType = keyof typeof ALIGN_OPTIONS;
-
-export const SIZE_OPTIONS = pick(SIZES, "sm", "md", "lg", "xl", "2xl");
-export type SizeType = keyof typeof SIZE_OPTIONS;
-
-export const FONT_OPTIONS = pick(FONTS, "heading", "sans", "mono");
-export type FontType = keyof typeof FONT_OPTIONS;
 
 export type TextProps = {
   children: React.ReactElement | React.ReactNode;
   as?: TextElement;
-  align?: AlignType | null;
-  size?: SizeType | null;
+  align?: TextAlignType | null;
+  size?: TextSizeType | null;
   color?: ColorType;
   background?: ColorType;
   className?: string;
-  font?: FontType | null;
+  font?: TextFontType | null;
 };
 
-const alignClasses: Record<AlignType, string> = {
+const alignClasses: Record<TextAlignType, string> = {
   auto: "",
   left: "text-left",
   center: "text-center mx-auto",
   right: "text-right ml-auto",
 };
 
-const sizeClasses: Record<SizeType, string> = {
+const sizeClasses: Record<TextSizeType, string> = {
   sm: "prose-sm md:prose-md",
   md: "prose-md md:prose-base",
   lg: "prose-lg md:prose-xl",
@@ -46,7 +31,7 @@ const sizeClasses: Record<SizeType, string> = {
   "2xl": "prose-2xl xl:prose-3xl",
 };
 
-const fontClasses: Record<FontType, string> = {
+const fontClasses: Record<TextFontType, string> = {
   sans: "font-sans",
   mono: "font-mono",
   heading: "font-sans",
