@@ -135,7 +135,7 @@ export const Theme = () => (
   <>
     {(Object.keys(BORDER_COLOR_OPTIONS) as BorderColorType[]).map(
       (border: BorderColorType) => (
-        <div className="mb-10 flex gap-4 flex-wrap">
+        <div className="mb-10 flex gap-4 flex-wrap" key={border}>
           {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
             (background: BackgroundColorType) =>
               (Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
