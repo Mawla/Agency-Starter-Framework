@@ -15,12 +15,17 @@ const VimeoPlayer = lazy<ComponentType<VideoType>>(
   () => import(/* webpackChunkName: "VimeoPlayer" */ "./VimeoPlayer"),
 );
 
+const VideoPlayer = lazy<ComponentType<VideoType>>(
+  () => import(/* webpackChunkName: "VideoPlayer" */ "./VideoPlayer"),
+);
+
 export type VideoProps = {
   className?: string;
+  cover?: boolean;
 } & VideoType;
 
 export const Video = (props: VideoProps) => {
-  let { provider, className } = props;
+  let { provider, className, cover } = props;
   if (!className) className = "aspect-video relative";
 
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -31,6 +36,16 @@ export const Video = (props: VideoProps) => {
     once: true,
   });
 
+  const coverClassName = cover
+    ? cx(
+        `[&_div]:!h-full [&_div]:!static [&_div]:!p-0`,
+        `[&_iframe]:!absolute [&_iframe]:!top-1/2 [&_iframe]:!left-1/2`,
+        `[&_iframe]:!-translate-x-1/2 [&_iframe]:!-translate-y-1/2 [&_iframe]:!h-full [&_iframe]:!w-[1000vw]`,
+        `[&_video]:object-cover [&_video]:!h-full [&_video]:!w-full`,
+        `[&_.yt-lite]:h-full`,
+      )
+    : null;
+
   if (!lazyLoaded)
     return (
       <div
@@ -40,10 +55,11 @@ export const Video = (props: VideoProps) => {
     );
 
   return (
-    <div ref={wrapperRef} className={className}>
+    <div ref={wrapperRef} className={cx(coverClassName, className)}>
       {provider === "youtube" && <YoutubePlayer {...props} />}
       {provider === "vimeo" && <VimeoPlayer {...props} />}
       {provider === "mux" && <MuxPlayer {...props} />}
+      {provider === "url" && <VideoPlayer {...props} />}
     </div>
   );
 };

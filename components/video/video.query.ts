@@ -7,7 +7,7 @@ export const videoQueryFields = groq`
   caption,
   provider,
   frameless,
-  "videoId": coalesce(mux.asset->playbackId, youtube, vimeo),
+  "videoId": coalesce(mux.asset->playbackId, youtube, vimeo, url),
   "poster": ${getImageQuery("poster")}
 `;
 
@@ -22,6 +22,6 @@ export const videoSourceQuery = groq`
     "caption": @.caption,
     "provider": @.provider,
     "frameless": @.frameless,
-    "videoId": coalesce(mux.asset->playbackId, youtube, vimeo),
+    "videoId": coalesce(mux.asset->playbackId, youtube, vimeo, url),
   }
 `;

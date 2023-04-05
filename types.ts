@@ -106,6 +106,7 @@ export const VIDEO_PROVIDERS = {
   youtube: "Youtube",
   vimeo: "Vimeo",
   mux: "Mux",
+  url: "URL",
 };
 
 export type VideoProviderType = keyof typeof VIDEO_PROVIDERS;

@@ -172,6 +172,14 @@ const schema = defineType({
         !value && parent?.provider !== "mux") as ConditionalPropertyCallback,
     }),
     defineField({
+      title: "URL",
+      type: "url",
+      name: "url",
+      description:
+        "Link to an external file (typically mp4 or webm), e.g https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4",
+      hidden: ({ parent, value }) => !value && parent?.provider !== "url",
+    }),
+    defineField({
       name: "loop",
       title: "Loop",
       type: "boolean",
