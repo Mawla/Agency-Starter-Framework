@@ -1,17 +1,9 @@
-import { BreadcrumbProps } from "../../modules/breadcrumb/Breadcrumb";
 import { GenericModuleProps } from "../../types";
 import { ModuleSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
 import ModuleErrorBoundary from "./ModuleErrorBoundary";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
-
-const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "Breadcrumb" */ "../../modules/breadcrumb/Breadcrumb"
-    )
-);
 
 export type ModuleBuilderProps = {
   items: GenericModuleProps[];
@@ -41,11 +33,7 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               background={item.theme?.background}
               module={item._type}
               id={item._key}
-            >
-              {item._type === "module.breadcrumb" && (
-                <Breadcrumb {...(item as BreadcrumbProps)} />
-              )}
-            </LazyLoadInView>
+            ></LazyLoadInView>
           </ModuleErrorBoundary>
         </Suspense>
       ))}
