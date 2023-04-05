@@ -11,7 +11,11 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     ${render(
       fields,
       "title",
-      `import { TITLE_SIZE_OPTIONS as ORIGINAL_TITLE_SIZE_OPTIONS, TITLE_COLOR_OPTIONS as ORIGINAL_TITLE_COLOR_OPTIONS } from "../../components/module/title.options";`,
+      `import { 
+        TITLE_SIZE_OPTIONS as ORIGINAL_TITLE_SIZE_OPTIONS, 
+        TITLE_COLOR_OPTIONS as ORIGINAL_TITLE_COLOR_OPTIONS 
+        TITLE_EYEBROW_COLOR_OPTIONS as ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS 
+      } from "../../components/module/title.options";`,
     )}
     ${render(
       fields,
@@ -50,7 +54,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "eyebrow",
       `
-      export const EYEBROW_COLOR_OPTIONS = pick(ORIGINAL_TITLE_SIZE_OPTIONS, "black");
+      export const EYEBROW_COLOR_OPTIONS = pick(ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS, "black");
       export type EyebrowColorType = keyof typeof EYEBROW_COLOR_OPTIONS;
     `,
     )};
