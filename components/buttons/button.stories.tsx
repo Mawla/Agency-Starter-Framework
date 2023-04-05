@@ -1,5 +1,14 @@
+import { ColorType } from "../../types";
 import { Button } from "./Button";
-import { SIZE_OPTIONS } from "./button.options";
+import {
+  BackgroundColorType,
+  BACKGROUND_COLOR_OPTIONS,
+  BorderColorType,
+  BORDER_COLOR_OPTIONS,
+  SIZE_OPTIONS,
+  TextColorType,
+  TEXT_COLOR_OPTIONS,
+} from "./button.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -120,4 +129,35 @@ export const Target = () => (
     />
     <Button href="https://www.google.com" icon="close" target="_blank" />
   </div>
+);
+
+export const Theme = () => (
+  <>
+    {(Object.keys(BORDER_COLOR_OPTIONS) as BorderColorType[]).map(
+      (border: BorderColorType) =>
+        (Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
+          (background: BackgroundColorType) =>
+            (Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
+              (text: TextColorType) => (
+                <div key={border + background + text} className="mb-10">
+                  <Button
+                    theme={{
+                      background: {
+                        color: background,
+                      },
+                      text: {
+                        color: text,
+                      },
+                      border: {
+                        color: border,
+                      },
+                    }}
+                    label="Button text"
+                  />
+                </div>
+              ),
+            ),
+        ),
+    )}
+  </>
 );

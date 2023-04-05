@@ -1,7 +1,7 @@
 import { backgroundClasses, borderClasses, textClasses } from "../../colors";
 import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
 import { LanguageType } from "../../languages";
-import { ColorType, IconType } from "../../types";
+import { IconType } from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
@@ -10,6 +10,9 @@ import {
   SizeType,
   IconPositionType,
   WeightType,
+  TextColorType,
+  BackgroundColorType,
+  BorderColorType,
 } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -34,9 +37,9 @@ export type ButtonProps = {
   stretch?: boolean;
   target?: "_blank";
   theme?: {
-    text?: { color?: ColorType };
-    background?: { color?: ColorType };
-    border?: { color?: ColorType };
+    text?: { color?: TextColorType };
+    background?: { color?: BackgroundColorType };
+    border?: { color?: BorderColorType };
   };
   disabled?: boolean;
   loading?: boolean;
