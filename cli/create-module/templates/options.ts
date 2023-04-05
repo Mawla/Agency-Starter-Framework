@@ -7,14 +7,14 @@ type Props = {
 
 export const getOptionsSnippet = ({ fields }: Props) => {
   return `
-    import { BACKGROUND_COLOR_OPTIONS as ORIGINAL_BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
+    import { BACKGROUND_COLOR_OPTIONS as ALL_BACKGROUND_COLOR_OPTIONS } from "../../components/module/background.options";
     ${render(
       fields,
       "title",
       `import { 
-        TITLE_SIZE_OPTIONS as ORIGINAL_TITLE_SIZE_OPTIONS, 
-        TITLE_COLOR_OPTIONS as ORIGINAL_TITLE_COLOR_OPTIONS, 
-        TITLE_EYEBROW_COLOR_OPTIONS as ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS 
+        TITLE_SIZE_OPTIONS as ALL_TITLE_SIZE_OPTIONS, 
+        TITLE_COLOR_OPTIONS as ALL_TITLE_COLOR_OPTIONS, 
+        TITLE_EYEBROW_COLOR_OPTIONS as ALL_TITLE_EYEBROW_COLOR_OPTIONS 
       } from "../../components/module/title.options";`,
     )}
     ${render(
@@ -25,7 +25,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     
     import { pick } from "../../helpers/utils/object";
 
-    export const BACKGROUND_COLOR_OPTIONS = pick(ORIGINAL_BACKGROUND_COLOR_OPTIONS);
+    export const BACKGROUND_COLOR_OPTIONS = pick(ALL_BACKGROUND_COLOR_OPTIONS);
     export type BackgroundColorType = keyof typeof BACKGROUND_COLOR_OPTIONS;
 
     
@@ -33,10 +33,10 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "title",
       `
-      export const TITLE_SIZE_OPTIONS = pick(ORIGINAL_TITLE_SIZE_OPTIONS);
+      export const TITLE_SIZE_OPTIONS = pick(ALL_TITLE_SIZE_OPTIONS);
       export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
     
-      export const TITLE_COLOR_OPTIONS = pick(ORIGINAL_TITLE_COLOR_OPTIONS);
+      export const TITLE_COLOR_OPTIONS = pick(ALL_TITLE_COLOR_OPTIONS);
       export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
 
     `,
@@ -56,7 +56,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "eyebrow",
       `
-      export const EYEBROW_COLOR_OPTIONS = pick(ORIGINAL_TITLE_EYEBROW_COLOR_OPTIONS);
+      export const EYEBROW_COLOR_OPTIONS = pick(ALL_TITLE_EYEBROW_COLOR_OPTIONS);
       export type EyebrowColorType = keyof typeof EYEBROW_COLOR_OPTIONS;
     `,
     )};
