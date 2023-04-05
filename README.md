@@ -49,7 +49,6 @@ graph TD
     RENDER -->RENDER_MODULES
     RENDER -->RENDER_DIALOGS
 
-    RENDER_HEROES[HeroBuilder.tsx]-->HERO
     RENDER_MODULES[ModuleBuilder.tsx]-->MODULE
     RENDER_DIALOGS[DialogBuilder.tsx]-->PAGE
 

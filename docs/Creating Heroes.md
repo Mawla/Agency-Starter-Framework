@@ -23,4 +23,3 @@ Create the component in side `/heroes/ModuleName.tsx`.
   b. Add to `HERO_SCHEMAS[]`
   c. Sort both alphabetically
 - Add a query in queries/page.ts
-- Add a renderer to layout/ModuleBuilder/HeroBuilder.tsx
