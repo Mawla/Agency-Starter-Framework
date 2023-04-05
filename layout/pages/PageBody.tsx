@@ -1,8 +1,8 @@
 import { ScriptsType } from "../../components/script/Script";
 import { PageContext } from "../../context/PageContext";
 import { PageType } from "../../queries/page.query";
+import { BlockBuilder } from "../pagebuilder/BlockBuilder";
 import { DialogBuilder } from "../pagebuilder/DialogBuilder";
-import { ModuleBuilder } from "../pagebuilder/ModuleBuilder";
 import React, { ComponentType, lazy, useContext } from "react";
 
 const Scripts = lazy<ComponentType<ScriptsType>>(
@@ -15,9 +15,7 @@ export const PageBody = (props: PageType) => {
 
   return (
     <>
-      {Boolean(props?.modules?.length) && (
-        <ModuleBuilder items={props.modules} />
-      )}
+      {Boolean(props?.blocks?.length) && <BlockBuilder items={props.blocks} />}
 
       {Boolean(props?.dialogs?.length) && (
         <DialogBuilder items={props.dialogs} />

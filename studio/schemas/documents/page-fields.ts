@@ -4,8 +4,8 @@ import {
   DialogSchemaName,
   DIALOG_SCHEMAS,
   LINKABLE_SCHEMAS,
-  ModuleSchemaName,
-  MODULE_SCHEMAS,
+  BlockSchemaName,
+  BLOCK_SCHEMAS,
 } from "../../../types.sanity";
 import {
   PageBuilder,
@@ -72,17 +72,17 @@ export const PUBLISHED_AT_FIELD = defineField({
   validation: (Rule: DateRule) => Rule.required(),
 });
 
-export const MODULES_FIELD = defineField({
-  name: "modules",
-  title: "Modules",
+export const BLOCKS_FIELD = defineField({
+  name: "blocks",
+  title: "Blocks",
   type: "array",
   components: {
     input: PageBuilder,
   },
-  description: "Modules are the building blocks of a page.",
+  description: "Blocks are the building blocks of a page.",
   of: [
-    ...(Object.keys(MODULE_SCHEMAS) as ModuleSchemaName[]).map(
-      (type: ModuleSchemaName) => ({
+    ...(Object.keys(BLOCK_SCHEMAS) as BlockSchemaName[]).map(
+      (type: BlockSchemaName) => ({
         type,
         components: {
           preview: PageBuilderItemPreview,
@@ -93,9 +93,9 @@ export const MODULES_FIELD = defineField({
     { type: "studio.divider" },
   ],
   options: {
-    filterType: /module|studio\./,
-    updateField: "modules",
-    placeholder: "Add a module…",
+    filterType: /block|studio\./,
+    updateField: "blocks",
+    placeholder: "Add a block…",
   } as any,
   group: ["content"],
 });
@@ -108,7 +108,7 @@ export const DIALOGS_FIELD = defineField({
     input: PageBuilder,
   },
   description:
-    "Dialogs are modal windows, used for presenting extra information. A dialog must be created before it can be linked to from a button inside module.",
+    "Dialogs are modal windows, used for presenting extra information. A dialog must be created before it can be linked to from a button inside block.",
   of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
     (type: DialogSchemaName) => ({
       type,
@@ -132,8 +132,8 @@ export const ORDER_PUBLISHED_DESC: SortOrdering = {
   by: [{ field: "publishedAt", direction: "desc" }],
 };
 
-export const EMPTY_RICHTEXT_MODULE = {
-  _type: "module.richtext",
+export const EMPTY_RICHTEXT_BLOCK = {
+  _type: "block.richtext",
   _key: nanoid(),
   background: "white",
   content: [
@@ -340,7 +340,7 @@ export const pageBase = {
     PASSWORD,
     TITLE_FIELD,
     SLUG_FIELD,
-    MODULES_FIELD,
+    BLOCKS_FIELD,
     DIALOGS_FIELD,
     { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
@@ -377,7 +377,7 @@ export const getPreviewSlugPagePath = (
 export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   select: {
     title: `title`,
-    media: "modules.0.image",
+    media: "blocks.0.image",
     language: "language",
     ...SLUG_PREVIEW_SELECT_FIELDS,
   },

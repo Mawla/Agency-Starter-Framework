@@ -33,7 +33,7 @@ import pageLanding from "./documents/page.landing";
 import pageNotFound from "./documents/page.notfound";
 import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
-import modulePreset from "./documents/page.preset";
+import blockPreset from "./documents/page.preset";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
 import pageTool from "./documents/page.tool";
@@ -62,7 +62,7 @@ export const schemaTypes = [
     footer,
     imageSimple,
     link,
-    modulePreset,
+    blockPreset,
     navigation,
     pageBlog,
     pageBlogs,

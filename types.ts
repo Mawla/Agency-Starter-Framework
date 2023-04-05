@@ -192,7 +192,7 @@ export type PersonType = {
   image?: ImageType;
 };
 
-export type GenericModuleProps = {
+export type GenericBlockProps = {
   _key?: string;
   [key: string]: any;
 };

@@ -27,7 +27,7 @@ export type PageType = {
   hideNav?: boolean;
   hideFooter?: boolean;
   seo: SeoType;
-  modules: {}[];
+  blocks: {}[];
   dialogs: {}[];
   locked?: boolean;
   homepage: FlatBreadcrumbItemType;
@@ -88,8 +88,8 @@ export const getPageQuery = (language: LanguageType) => groq`
       "image": ${getImageComponentQuery("seo.image")}
     },
 
-    // modules
-    "modules": modules[!(_type in path('studio.*'))] {
+    // blocks
+    "blocks": blocks[!(_type in path('studio.*'))] {
       _key,
       _type,
       decorations,

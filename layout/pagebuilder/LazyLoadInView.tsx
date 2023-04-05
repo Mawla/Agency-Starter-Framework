@@ -1,7 +1,7 @@
 import { backgroundClasses } from "../../colors";
 import { useInView } from "../../hooks/useInView";
 import { ColorType } from "../../types";
-import { DialogSchemaName, ModuleSchemaName } from "../../types.sanity";
+import { DialogSchemaName, BlockSchemaName } from "../../types.sanity";
 import cx from "classnames";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -9,7 +9,7 @@ type LazyLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
   enabled?: boolean;
   background?: ColorType | "transparent";
-  module?: ModuleSchemaName | DialogSchemaName;
+  block?: BlockSchemaName | DialogSchemaName;
   id?: string;
   networkIdle?: boolean;
 };
@@ -18,7 +18,7 @@ export const LazyLoadInView = ({
   children,
   enabled = true,
   background = "transparent",
-  module,
+  block,
   id,
   networkIdle,
 }: LazyLoadInViewProps) => {
@@ -49,20 +49,20 @@ export const LazyLoadInView = ({
   }, [forceLoad, networkIdle]);
 
   return (
-    <section ref={wrapperRef} data-module={module} data-id={id}>
+    <section ref={wrapperRef} data-block={block} data-id={id}>
       {doLoad || forceLoad ? (
         children
       ) : (
         <div
-          data-id="module-placeholder"
+          data-id="block-placeholder"
           className={cx(
-            "animate-[module-placeholder-fade_2s_linear_infinite] h-[450px] opacity-100 relative overflow-hidden",
+            "animate-[block-placeholder-fade_2s_linear_infinite] h-[450px] opacity-100 relative overflow-hidden",
             background !== "transparent" && backgroundClasses[background],
           )}
         >
           <div
             className={cx(
-              "animate-[module-placeholder-move_2s_linear_infinite]",
+              "animate-[block-placeholder-move_2s_linear_infinite]",
               "h-full top-0 right-0 bottom-0 left-1/2 z-10 w-[500%] -ml-[250%]",
               "pointer-events-none",
               "mix-blend-difference bg-gradient-to-r from-[rgba(255,255,255,0)] via-[rgba(255,255,255,.05)] to-[rgba(255,255,255,0)]",

@@ -3,9 +3,9 @@ import { getClient } from "../../helpers/sanity/server";
 import { LanguageType } from "../../languages";
 import { PageBody } from "../../layout/pages/PageBody";
 import { getPageQuery, PageType } from "../../queries/page.query";
+import { Background } from "../block/Background";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
-import { Background } from "../module/Background";
 import { useRouter } from "next/router";
 import React, {
   useEffect,

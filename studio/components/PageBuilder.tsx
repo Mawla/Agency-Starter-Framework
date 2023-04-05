@@ -1,4 +1,4 @@
-import ModuleSelect from "./ModuleSelect";
+import BlockSelect from "./BlockSelect";
 import { ComponentType, useEffect } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
@@ -14,7 +14,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
           zIndex: 10,
         }}
       >
-        <ModuleSelect
+        <BlockSelect
           onChange={props.onChange}
           value={props.value}
           options={props.options}
@@ -45,9 +45,9 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     ) as HTMLIFrameElement;
     if (!previewIframe?.contentWindow) return;
 
-    // post message to iframe to scroll to module
+    // post message to iframe to scroll to block
     previewIframe.contentWindow.postMessage(
-      { type: "preview-view-scroll-to-module", moduleKey: props.value._key },
+      { type: "preview-view-scroll-to-block", blockKey: props.value._key },
       import.meta.env.SANITY_STUDIO_PROJECT_PATH,
     );
   }, [props.open, props.value?._key]);
@@ -61,15 +61,15 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
 
     function onMessage(e: MessageEvent) {
       if (
-        e.data.type == "preview-studio-open-module-dialog" &&
-        e.data.moduleKey === props.value?._key
+        e.data.type == "preview-studio-open-block-dialog" &&
+        e.data.blockKey === props.value?._key
       ) {
-        const moduleFormOpenButton = document.querySelector(
-          `[data-key="${e.data.moduleKey}"] [data-type="module-preview"]`,
+        const blockFormOpenButton = document.querySelector(
+          `[data-key="${e.data.blockKey}"] [data-type="block-preview"]`,
         ) as HTMLButtonElement;
 
-        if (moduleFormOpenButton) {
-          moduleFormOpenButton.click();
+        if (blockFormOpenButton) {
+          blockFormOpenButton.click();
         }
       }
     }
@@ -84,7 +84,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
         borderBottom: "1px solid rgba(0,0,0,.1)",
         position: "relative",
       }}
-      data-type="module"
+      data-type="block"
       data-key={props.value?._key}
     >
       <div
@@ -117,7 +117,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
  */
 
 export const PageBuilderItemPreview: React.ComponentType<any> = (props) => (
-  <div style={{ padding: "8px 0" }} data-type="module-preview">
+  <div style={{ padding: "8px 0" }} data-type="block-preview">
     {props.renderDefault(props)}
   </div>
 );

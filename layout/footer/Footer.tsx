@@ -1,6 +1,6 @@
+import { Wrapper } from "../../components/block/Wrapper";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
-import { Wrapper } from "../../components/module/Wrapper";
 import { IconType } from "../../types";
 import { FooterBreadcrumb } from "./Footer.Breadcrumb";
 import { FooterLogo } from "./Footer.Logo";

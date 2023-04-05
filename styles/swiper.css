@@ -25,7 +25,7 @@
 /* 
  * Make swiper visible when scrolling of the grid,
  * - always on mobile
- * - on desktop only if not in a module with a background
+ * - on desktop only if not in a block with a background
  */
 
 .swiper {

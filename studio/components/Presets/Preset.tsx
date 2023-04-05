@@ -1,5 +1,5 @@
 import { LanguageType } from "../../../languages";
-import { ModuleSchemaName } from "../../../types.sanity";
+import { BlockSchemaName } from "../../../types.sanity";
 import { SearchIcon, AddIcon } from "@sanity/icons";
 import {
   Autocomplete,
@@ -24,13 +24,13 @@ import { IntentLink } from "sanity/router";
 
 type OptionType = {
   _id: string;
-  type: ModuleSchemaName;
+  type: BlockSchemaName;
   title: string;
   value: string;
   description: string;
   label: string;
   preset?: {
-    _type: ModuleSchemaName;
+    _type: BlockSchemaName;
     _id: string;
     language: LanguageType;
   };
@@ -195,16 +195,16 @@ const Preset: ComponentType<any> = (props) => {
         ])
         .commit({
           /**
-           * setting this to true leads to a bug when other modules are duplicated
+           * setting this to true leads to a bug when other blocks are duplicated
            * apparently they then have duplicated keys for things in lists or portable text and those are duplicated as well.
            * When auto generating new ones these are seen as bad values and this generates a message
-           * like `Document \"drafts.page_homepage\" has duplicate array _key \"d6148fef5908\" at modules[0].text[0]._key and modules[1].text[0]._key`
+           * like `Document \"drafts.page_homepage\" has duplicate array _key \"d6148fef5908\" at blocks[0].text[0]._key and blocks[1].text[0]._key`
            *
            * We can set the following to true if this test case passes:
-           * - create a module with array items (e.g buttons)
-           * - duplicate that module using the Sanity interface
-           * - add a new module
-           * - no error appears and the module is added successfully
+           * - create a block with array items (e.g buttons)
+           * - duplicate that block using the Sanity interface
+           * - add a new block
+           * - no error appears and the block is added successfully
            */
           autoGenerateArrayKeys: false,
         });
@@ -246,7 +246,7 @@ const Preset: ComponentType<any> = (props) => {
           {Boolean(list?.length) && (
             <Card flex={3}>
               <Autocomplete
-                id="moduleSelect"
+                id="blockSelect"
                 filterOption={search}
                 fontSize={2}
                 radius={0}

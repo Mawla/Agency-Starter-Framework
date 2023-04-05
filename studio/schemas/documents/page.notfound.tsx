@@ -2,7 +2,7 @@ import { SchemaName } from "../../../types.sanity";
 import {
   DIALOGS_FIELD,
   LANGUAGE_FIELD,
-  MODULES_FIELD,
+  BLOCKS_FIELD,
   pageBase,
   TITLE_FIELD,
 } from "./page-fields";
@@ -26,7 +26,7 @@ export default defineType({
   fields: [
     TITLE_FIELD,
     { ...LANGUAGE_FIELD, readOnly: true },
-    MODULES_FIELD,
+    BLOCKS_FIELD,
     DIALOGS_FIELD,
   ],
 });

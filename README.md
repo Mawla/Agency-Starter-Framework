@@ -22,7 +22,7 @@ Get started
 - `yarn test` runs tests
 
 - `yarn create-page` runs the cli to add a page
-- `yarn create-module` runs the cli to create a module
+- `yarn create-block` runs the cli to create a block
 - `yarn create-dialog` runs the cli to create a dialog
 
 See /docs for some more information.
@@ -36,7 +36,7 @@ graph TD
     PREVIEW_MODE((live preview? fa:fa-spinner))--->CMS
 
     DATA -->|"get sitemap<br>(all routes)"| QUERY_SITEMAP[sitemap.ts]-->CATCH_ALL_RENDER
-    DATA -->|"get page content<br>(all modules)"| QUERY_PAGE[page.ts]-->CATCH_ALL_RENDER
+    DATA -->|"get page content<br>(all blocks)"| QUERY_PAGE[page.ts]-->CATCH_ALL_RENDER
     DATA -->|get config| QUERY_CONFIG[config.ts]-->CATCH_ALL_RENDER
     DATA -->|get navigation| QUERY_NAV[navigation.ts] -->CATCH_ALL_RENDER
     DATA -->|get footer| QUERY_FOOTER[footer.ts] -->CATCH_ALL_RENDER
@@ -44,13 +44,13 @@ graph TD
     CATCH_ALL_RENDER{"[...slug.tsx]"} -->RENDER
     CATCH_ALL_RENDER-->PREVIEW_MODE
 
-    RENDER -->RENDER_MODULES
+    RENDER -->RENDER_BLOCKS
     RENDER -->RENDER_DIALOGS
 
-    RENDER_MODULES[ModuleBuilder.tsx]-->MODULE
+    RENDER_BLOCKS[BlockBuilder.tsx]-->BLOCK
     RENDER_DIALOGS[DialogBuilder.tsx]-->PAGE
 
-    MODULE[Module.tsx<br>module.schema.tsx<br>module.query.tsx<br>module.test.tsx<br>module.stories.tsx<br>module.options.ts]-->PAGE
+    BLOCK[Block.tsx<br>block.schema.tsx<br>block.query.tsx<br>block.test.tsx<br>block.stories.tsx<br>block.options.ts]-->PAGE
 
     PAGE{"<br>BROWSER<br>…"}
 ```

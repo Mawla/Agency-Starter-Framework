@@ -6,7 +6,7 @@ const schema = defineType({
   name: "studio.divider",
   title: "CMS divider",
   description:
-    "Helper to visually group modules in the cms. Not shown on the website.",
+    "Helper to visually group blocks in the cms. Not shown on the website.",
   type: "object",
   icon: () => <DotArrowLeftRight weight="thin" />,
   preview: {

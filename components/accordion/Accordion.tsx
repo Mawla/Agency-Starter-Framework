@@ -1,5 +1,5 @@
+import Text from "../block/Text";
 import { Button } from "../buttons/Button";
-import Text from "../module/Text";
 import PortableText, { PortableTextProps } from "../portabletext/PortableText";
 import * as RadixAccordion from "@radix-ui/react-accordion";
 import React from "react";

@@ -1,9 +1,9 @@
+import { Wrapper } from "../components/block/Wrapper";
 import {
   FlatBreadcrumbType,
   NestedBreadcrumbType,
 } from "../components/breadcrumb/breadcrumb.query";
 import { LoadingAnimation } from "../components/loaders/LoadingAnimation";
-import { Wrapper } from "../components/module/Wrapper";
 import { getClient } from "../helpers/sanity/server";
 import { getFlatBreadcrumb } from "../helpers/sitemap/getFlatBreadcrumb";
 import { baseLanguage, LanguageType } from "../languages";
@@ -173,17 +173,17 @@ export const getStaticProps: GetStaticProps = async ({
 
   // if page is locked let no page data leak through
   if (page.locked) {
-    props.page.modules = [];
+    props.page.blocks = [];
     props.page.dialogs = [];
     props.page.seo = { excludeFromSitemap: true };
     props.locked = true;
   }
 
   if (!page) return { notFound: true };
-  if (!page?.modules?.length && !page.locked) {
+  if (!page?.blocks?.length && !page.locked) {
     if (!IS_PRODUCION)
       console.log(
-        `No modules, rendering 404. The page exists but has no content.\n${sitemapItem.path}`,
+        `No blocks, rendering 404. The page exists but has no content.\n${sitemapItem.path}`,
       );
     return { notFound: true };
   }
