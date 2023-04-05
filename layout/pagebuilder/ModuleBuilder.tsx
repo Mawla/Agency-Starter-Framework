@@ -33,7 +33,9 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               background={item.theme?.background}
               module={item._type}
               id={item._key}
-            ></LazyLoadInView>
+            >
+              /* all blocks */
+            </LazyLoadInView>
           </ModuleErrorBoundary>
         </Suspense>
       ))}
