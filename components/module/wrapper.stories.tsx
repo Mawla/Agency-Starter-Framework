@@ -1,8 +1,11 @@
-import { STORYBOOK_COLORS_SUBSET } from "../../colors";
-import { ColorType } from "../../types";
 import { Spacing as SpacingComponent } from "./Spacing";
 import { Wrapper as WrapperComponent } from "./Wrapper";
-import { ModuleRadiusType, MODULE_RADIUS_OPTIONS } from "./background.options";
+import {
+  BackgroundColorType,
+  BACKGROUND_COLOR_OPTIONS,
+  ModuleRadiusType,
+  MODULE_RADIUS_OPTIONS,
+} from "./background.options";
 import { SPACE_OPTIONS } from "./spacing.options";
 import { WidthType, WIDTH_OPTIONS } from "./width.options";
 import { Meta } from "@storybook/react";
@@ -33,7 +36,7 @@ export const WithBackground = () => (
   <div className="border">
     <WrapperComponent
       theme={{
-        background: "neutral-900",
+        background: "black",
         space: {
           top: "none",
           bottom: "none",
@@ -47,9 +50,9 @@ export const WithBackground = () => (
 
 export const Colors = () => (
   <>
-    {(Object.keys(STORYBOOK_COLORS_SUBSET) as ColorType[])
+    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[])
       .reverse()
-      .map((color: ColorType) => (
+      .map((color: BackgroundColorType) => (
         <div key={color} className="mb-px">
           <WrapperComponent
             theme={{
@@ -76,7 +79,7 @@ export const Spacing = () => (
         <WrapperComponent
           theme={{
             space: { top: size, bottom: size },
-            background: "action-100",
+            background: "black",
           }}
         >
           Module space {label}
@@ -90,7 +93,7 @@ export const WithContent = () => (
   <div className="border">
     <WrapperComponent
       theme={{
-        background: "neutral-800",
+        background: "black",
         text: "white",
         space: {
           top: "lg",
@@ -112,7 +115,7 @@ export const Rounded = () => (
         <div key={radius}>
           <WrapperComponent
             theme={{
-              background: "neutral-800",
+              background: "black",
               text: "white",
               rounded: {
                 top: radius,
@@ -126,7 +129,7 @@ export const Rounded = () => (
           </WrapperComponent>
           <WrapperComponent
             theme={{
-              background: "neutral-800",
+              background: "black",
               text: "white",
               width: "inner",
               rounded: {
@@ -151,7 +154,7 @@ export const Widths = () => (
       <WrapperComponent
         key={width}
         theme={{
-          background: "neutral-800",
+          background: "black",
           text: "white",
           width,
         }}
