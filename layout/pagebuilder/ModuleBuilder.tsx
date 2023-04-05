@@ -34,7 +34,7 @@ export const ModuleBuilder = ({ items }: ModuleBuilderProps) => {
               module={item._type}
               id={item._key}
             >
-              /* all blocks */
+              {/* all blocks */}
             </LazyLoadInView>
           </ModuleErrorBoundary>
         </Suspense>
