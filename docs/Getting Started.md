@@ -85,7 +85,7 @@ Run Sanity local server to see the for CMS UI
 
 ### Storybook
 
-Run storybook locally to start working on modules statically.
+Run storybook locally to start working on blocks statically.
 
 ```bash
 > yarn storybook
@@ -110,5 +110,5 @@ Run `yarn dev`, `yarn cms` and `yarn storybook` in three terminal tabs and start
 - add config data in cms
 - configure colors in `colors.ts` and `tailwind.config.ts`
 - start creating custom page types `yarn create-page`
-- start creating modules `yarn create-module`
+- start creating blocks `yarn create-block`
 - start creating dialogs `yarn create-dialog`

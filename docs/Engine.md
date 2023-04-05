@@ -7,7 +7,7 @@ The Engine is built using these technologies:
 - [Next.js](https://nextjs.org/) Frontend
 - [Sanity.io](https://www.sanity.io/) CMS
 - [GROQ](https://www.sanity.io/docs/overview-groq) Query Language
-- [Storybook](https://storybook.js.org/) Static module development
+- [Storybook](https://storybook.js.org/) Static block development
 - [Typescript](https://www.typescriptlang.org/) Javascript Type Checking
 - [TailwindCSS](https://tailwindcss.com/) Interface styling
 - [Sentry](https://getsentry.com/) Error tracking
@@ -16,7 +16,7 @@ Both the frontend app and the Sanity Studio are hosted on the same domain on ver
 
 ## CLI
 
-The CLI is what speeds up all of the development work. Using the CLI you can add new modules, page types and dialogs without doing any coding. Once the initial setup is done you can confidently start styling and adding logic.
+The CLI is what speeds up all of the development work. Using the CLI you can add new blocks, page types and dialogs without doing any coding. Once the initial setup is done you can confidently start styling and adding logic.
 
 ## Sitemap
 
@@ -30,10 +30,10 @@ While Next.js is used as a framework, there is not much specific Next.js knowled
 
 - Every page can be previewed before it's published.
 - Each time preview mode is opened, a draft will be created, even if it's published.
-- The sitemap, navigation, footer and site config aren't available in preview mode (yet). That's why there will be a preview missing for modules like the breadcrumb.
+- The sitemap, navigation, footer and site config aren't available in preview mode (yet). That's why there will be a preview missing for blocks like the breadcrumb.
 
 ### Conventions
 
-- Schema names are prefixed with their type: 'page._', 'module._', 'dialog.\_'.
+- Schema names are prefixed with their type: 'page._', 'block._', 'dialog.\_'.
 - Article names are the single form of the type: 'page.blog', 'page.pressrelease'.
 - Overview names are the plural form of the type: `page.blogs`, 'page.pressreleases'.

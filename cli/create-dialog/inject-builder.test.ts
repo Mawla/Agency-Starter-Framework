@@ -1,6 +1,6 @@
 import { injectBuilder } from "./inject-builder";
 
-test("inject module in page builder", () => {
+test("inject block in page builder", () => {
   const result = injectBuilder({
     dialogName: "Test",
   });

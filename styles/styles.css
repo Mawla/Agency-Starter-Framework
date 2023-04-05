@@ -92,7 +92,7 @@ body {
   transform-style: preserve-3d;
 }
 
-@keyframes module-placeholder-fade {
+@keyframes block-placeholder-fade {
   0% {
     opacity: 0.8;
   }
@@ -103,7 +103,7 @@ body {
     opacity: 0.8;
   }
 }
-@keyframes module-placeholder-move {
+@keyframes block-placeholder-move {
   0% {
     transform: translate3d(-30%, 0, 0);
   }

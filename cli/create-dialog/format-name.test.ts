@@ -1,7 +1,7 @@
 import { formatName } from "./format-name";
 
 test("create names", () => {
-  const result = formatName("Test module");
+  const result = formatName("Test block");
 
   expect(Object.keys(result)).toEqual([
     "pascalName",
@@ -9,7 +9,7 @@ test("create names", () => {
     "schemaName",
   ]);
 
-  expect(result.pascalName).toEqual("TestModule");
-  expect(result.lowerName).toEqual("testmodule");
-  expect(result.schemaName).toEqual("dialog.testmodule");
+  expect(result.pascalName).toEqual("TestBlock");
+  expect(result.lowerName).toEqual("testblock");
+  expect(result.schemaName).toEqual("dialog.testblock");
 });

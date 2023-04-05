@@ -19,7 +19,7 @@ export const CaptureScreenshot: ComponentType<any> = () => {
     _id: string;
     slug?: { current?: string };
     image?: { asset: { _ref: string } };
-    modules?: { language: LanguageType }[];
+    blocks?: { language: LanguageType }[];
   };
   const client = useClient({ apiVersion: "vX" });
 
@@ -41,10 +41,6 @@ export const CaptureScreenshot: ComponentType<any> = () => {
   const onClick = useCallback(async () => {
     setState("loading");
 
-    const firstModuleLanguage = getLanguageTitle(
-      document?.modules?.[0]?.language || baseLanguage,
-    )?.toLowerCase();
-
     if (!window.document.querySelector(".previewView iframe")) {
       setClosePreviewAfterScreenshot(true);
 
@@ -58,7 +54,7 @@ export const CaptureScreenshot: ComponentType<any> = () => {
 
       // click preview
       const previewButton = window.document.querySelectorAll(
-        `[data-testid="document-pane"]:last-of-type [id*="tab-preview-${firstModuleLanguage}"]`,
+        `[data-testid="document-pane"]:last-of-type [id*="tab-preview"]`,
       )?.[0] as HTMLButtonElement;
       previewButton?.click();
 

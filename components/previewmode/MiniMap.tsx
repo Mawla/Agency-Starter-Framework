@@ -18,48 +18,48 @@ import { CSS } from "@dnd-kit/utilities";
 import cx from "classnames";
 import React, { useState, forwardRef, useEffect } from "react";
 
-type MiniModuleType = {
+type MiniBlockType = {
   _key: string;
   _type: string;
   title: string;
 };
 
-type ModulePreviewType = {
+type BlockPreviewType = {
   _key: string;
   preview?: string;
 };
 
 export type MiniMapProps = {
-  modules: MiniModuleType[];
+  blocks: MiniBlockType[];
   isLoading?: boolean;
   onReorder: (
-    changedModuleKey: string,
-    replacesModuleKey: string,
+    changedBlockKey: string,
+    replacesBlockKey: string,
     items: string[],
   ) => void;
 };
 
-export const MiniMap = ({ modules, isLoading, onReorder }: MiniMapProps) => {
+export const MiniMap = ({ blocks, isLoading, onReorder }: MiniMapProps) => {
   const [activeId, setActiveId] = useState(null);
   const [items, setItems] = useState<string[]>([]);
 
-  const [modulePreviews, setModulePreviews] = useState<ModulePreviewType[]>([]);
+  const [blockPreviews, setBlockPreviews] = useState<BlockPreviewType[]>([]);
 
   /**
-   * Use module keys for ids
+   * Use block keys for ids
    */
 
   useEffect(() => {
-    setItems(modules.map(({ _key }) => _key));
-  }, [modules]);
+    setItems(blocks.map(({ _key }) => _key));
+  }, [blocks]);
 
   /**
-   * Get module previews
+   * Get block previews
    */
 
   useEffect(() => {
-    async function getModulePreviews() {
-      const previews = modules.map(({ _key }) => {
+    async function getBlockPreviews() {
+      const previews = blocks.map(({ _key }) => {
         const element = document.querySelector(`[data-id="${_key}"]`);
         const preview = element?.innerHTML;
         return {
@@ -68,21 +68,20 @@ export const MiniMap = ({ modules, isLoading, onReorder }: MiniMapProps) => {
         };
       });
 
-      const modulesLoading = previews.some(
-        ({ preview }) =>
-          !preview || preview?.indexOf("module-placeholder") > -1,
+      const blocksLoading = previews.some(
+        ({ preview }) => !preview || preview?.indexOf("block-placeholder") > -1,
       );
 
-      if (modulesLoading) {
-        setTimeout(getModulePreviews, 250);
+      if (blocksLoading) {
+        setTimeout(getBlockPreviews, 250);
         return;
       }
 
-      setModulePreviews(previews);
+      setBlockPreviews(previews);
     }
 
-    getModulePreviews();
-  }, [modules]);
+    getBlockPreviews();
+  }, [blocks]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -108,7 +107,7 @@ export const MiniMap = ({ modules, isLoading, onReorder }: MiniMapProps) => {
             <SortableItem
               key={id}
               id={id}
-              {...modulePreviews.find(({ _key }) => _key === id)}
+              {...blockPreviews.find(({ _key }) => _key === id)}
               isLoading={isLoading}
             />
           ))}
@@ -117,7 +116,7 @@ export const MiniMap = ({ modules, isLoading, onReorder }: MiniMapProps) => {
           {activeId ? (
             <div className="opacity-90 cursor-grabbing">
               <Item
-                {...(modulePreviews.find(
+                {...(blockPreviews.find(
                   ({ _key }) => _key === activeId,
                 ) as any)}
               />
@@ -155,11 +154,11 @@ export const MiniMap = ({ modules, isLoading, onReorder }: MiniMapProps) => {
   }
 
   // open form in sanity
-  function focusElement(moduleKey: string) {
+  function focusElement(blockKey: string) {
     window.parent.postMessage(
       {
-        type: "preview-studio-open-module-dialog",
-        moduleKey: moduleKey,
+        type: "preview-studio-open-block-dialog",
+        blockKey: blockKey,
       },
       "*",
     );

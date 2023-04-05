@@ -13,7 +13,7 @@ export const schema = defineField({
   },
   group: "tools",
   options: {
-    updateField: "modules",
+    updateField: "blocks",
   } as any,
 });
 

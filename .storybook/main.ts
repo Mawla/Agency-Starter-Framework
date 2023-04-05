@@ -4,7 +4,7 @@ module.exports = {
   stories: [
     "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../components/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../modules/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../blocks/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../layout/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   typescript: {

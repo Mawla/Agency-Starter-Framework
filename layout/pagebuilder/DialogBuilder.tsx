@@ -3,7 +3,7 @@ import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { VideoType } from "../../types";
 import { DialogSchemaName } from "../../types.sanity";
 import { LazyLoadInView } from "./LazyLoadInView";
-import ModuleErrorBoundary from "./ModuleErrorBoundary";
+import BlockErrorBoundary from "./BlockErrorBoundary";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
 import { Suspense } from "react";
@@ -89,10 +89,10 @@ export const DialogBuilder = ({
         ?.filter(({ slug }) => slug?.trim().length)
         .map((item) => (
           <Suspense fallback={``} key={item._key}>
-            <ModuleErrorBoundary>
+            <BlockErrorBoundary>
               <LazyLoadInView
                 enabled={currentOpenSlug === item?.slug}
-                module={item._type}
+                block={item._type}
               >
                 {item._type && (
                   <Dialog
@@ -111,7 +111,7 @@ export const DialogBuilder = ({
                   </Dialog>
                 )}
               </LazyLoadInView>
-            </ModuleErrorBoundary>
+            </BlockErrorBoundary>
           </Suspense>
         ))}
     </>

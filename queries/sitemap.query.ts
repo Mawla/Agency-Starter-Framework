@@ -33,7 +33,7 @@ const baseFields = groq`
   parent,
   language,
   "i18n_base": i18n_base,
-  "modules": modules[] { language }
+  "blocks": blocks[] { language }
 `;
 
 const homePageQuery = groq`
@@ -82,7 +82,7 @@ export const getSitemapQuery = () => {
     path,
     "i18n_base": i18n_base._ref,
     "parent": parent._ref,
-    "excludeFromSitemap": seo.excludeFromSitemap || locked || (!defined(modules) || count(modules) == 0)
+    "excludeFromSitemap": seo.excludeFromSitemap || locked || (!defined(blocks) || count(blocks) == 0)
   }`;
 
   return sitemapQuery;

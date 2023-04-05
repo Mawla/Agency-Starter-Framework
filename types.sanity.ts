@@ -93,9 +93,9 @@ export const TAGGABLE_SCHEMAS = pick(
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const MODULE_SCHEMAS = pick(SCHEMAS);
+export const BLOCK_SCHEMAS = pick(SCHEMAS);
 
-export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
+export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
 
 export const DIALOG_SCHEMAS = pick(SCHEMAS, "dialog.richtext", "dialog.video");
 

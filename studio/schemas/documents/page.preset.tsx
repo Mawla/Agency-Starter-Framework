@@ -1,7 +1,7 @@
-import { MODULE_SCHEMAS } from "../../../types.sanity";
+import { BLOCK_SCHEMAS } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
-import { MODULES_FIELD, pageBase } from "./page-fields";
+import { BLOCKS_FIELD, pageBase } from "./page-fields";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -52,14 +52,14 @@ const schema = defineType({
       group: ["content"],
     }),
     defineField({
-      ...MODULES_FIELD,
-      title: "Module",
+      ...BLOCKS_FIELD,
+      title: "Block",
       description: null as any,
-      of: Object.keys(MODULE_SCHEMAS).map((type: any) => ({ type })),
+      of: Object.keys(BLOCK_SCHEMAS).map((type: any) => ({ type })),
       options: {
-        filterType: /module|studio\./,
-        updateField: "modules",
-        placeholder: "Add a module…",
+        filterType: /block|studio\./,
+        updateField: "blocks",
+        placeholder: "Add a block",
       } as any,
     } as any),
     defineField({

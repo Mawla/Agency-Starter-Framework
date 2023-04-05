@@ -29,7 +29,7 @@ Create the detail:
 
 or by hand:
 
-- Create basic schema in `/studio/schemas/documents`. Be sure to follow the naming convention `page.lowercasemodulename`
+- Create basic schema in `/studio/schemas/documents`. Be sure to follow the naming convention `page.lowercaseblockname`
   a. Set initial values where necessary
   b. Uppercase the title
   c. Use correct type (document or object)

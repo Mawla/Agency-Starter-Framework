@@ -56,7 +56,7 @@ export const LivePreview = ({
   const reloadTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reloadAttempts = useRef<number>(0);
 
-  const [miniModules, setMiniModules] = useState<MiniMapProps["modules"]>([]);
+  const [miniBlocks, setMiniBlocks] = useState<MiniMapProps["blocks"]>([]);
   const [isMiniMapVisible, setIsMiniMapVisible] = useState<boolean>(false);
 
   const timeLog = useCallback((date: string, message: string) => {
@@ -123,7 +123,7 @@ export const LivePreview = ({
 
     setPageData(newPage);
 
-    const newMiniModules = newPage?.modules?.map(
+    const newMiniBlocks = newPage?.blocks?.map(
       ({
         _key,
         _type,
@@ -139,7 +139,7 @@ export const LivePreview = ({
       }),
     );
 
-    setMiniModules(newMiniModules);
+    setMiniBlocks(newMiniBlocks);
 
     setPreviewLoading(false);
     reloadAttempts.current = 0;
@@ -250,29 +250,29 @@ export const LivePreview = ({
   }, [pageId, frontendClient, reloadPreview]);
 
   /**
-   * Allow reordering of modules
+   * Allow reordering of blocks
    */
 
-  const onReorderModules = useCallback(
+  const onReorderBlocks = useCallback(
     async (
-      changedModuleKey: string,
-      replacesModuleKey: string,
+      changedBlockKey: string,
+      replacesBlockKey: string,
       items: string[],
     ) => {
       if (!frontendClient.current) return;
 
       setPreviewLoading(true);
 
-      await fetch(`/api/preview/sort-modules`, {
+      await fetch(`/api/preview/sort-blocks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           pageId,
-          changedModuleKey,
-          replacesModuleKey,
-          newModulesOrder: items,
+          changedBlockKey,
+          replacesBlockKey,
+          newBlocksOrder: items,
         }),
       });
     },
@@ -280,15 +280,15 @@ export const LivePreview = ({
   );
 
   /**
-   * Scroll module in view when form dialog is opened
+   * Scroll block in view when form dialog is opened
    * in the Sanity studio
    */
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
-      if (e.data.type == "preview-view-scroll-to-module" && e.data.moduleKey) {
+      if (e.data.type == "preview-view-scroll-to-block" && e.data.blockKey) {
         const element = document.querySelector(
-          `[data-id="${e.data.moduleKey}"]`,
+          `[data-id="${e.data.blockKey}"]`,
         );
 
         if (element) {
@@ -380,15 +380,15 @@ export const LivePreview = ({
         </button>
       </div>
 
-      {Boolean(miniModules?.length) && isMiniMapVisible && (
+      {Boolean(miniBlocks?.length) && isMiniMapVisible && (
         <div
           className={cx(
             "fixed top-20 right-4 z-60 bg-white border-2 border-black border-opacity-10 max-h-[calc(100vh-100px)] overflow-y-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]",
           )}
         >
           <MiniMap
-            modules={miniModules}
-            onReorder={onReorderModules}
+            blocks={miniBlocks}
+            onReorder={onReorderBlocks}
             isLoading={previewLoading}
           />
         </div>

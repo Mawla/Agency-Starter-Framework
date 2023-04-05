@@ -27,7 +27,7 @@ const handler = async (req: NextRequest) => {
   if (!id) id = "page_homepage__i18n_en";
 
   const page = await sanityClient.fetch(`*[_id == "${id}"][0] {
-    "hero": modules[0] {
+    "hero": blocks[0] {
       eyebrow,
       title,
       text,
