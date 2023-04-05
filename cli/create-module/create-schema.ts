@@ -11,13 +11,17 @@ const fs = require("fs");
 const path = require("path");
 
 export function createSchema(
-  answers: Pick<AnswersType, "moduleName" | "fields" | "moduleDescription">,
+  answers: Pick<
+    AnswersType,
+    "moduleName" | "fields" | "moduleDescription" | "moduleTitle"
+  >,
 ) {
-  let { moduleName, fields, moduleDescription } = answers;
+  let { moduleName, fields, moduleTitle, moduleDescription } = answers;
   let { lowerName, schemaName } = formatName(moduleName);
 
   const lines = getSchemaSnippet({
     moduleName,
+    moduleTitle,
     lowerName,
     schemaName,
     fields,

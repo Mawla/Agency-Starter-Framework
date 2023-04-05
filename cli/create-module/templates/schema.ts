@@ -5,12 +5,14 @@ type Props = {
   schemaName: string;
   lowerName: string;
   moduleName: string;
+  moduleTitle: string;
   moduleDescription: string;
   fields: AnswersType["fields"];
 };
 
 export const getSchemaSnippet = ({
   moduleName,
+  moduleTitle,
   lowerName,
   schemaName,
   fields,
@@ -32,7 +34,7 @@ export const getSchemaSnippet = ({
 
   const schema = defineType({
     name: "${schemaName}",
-    title: "${moduleName}",
+    title: "${moduleTitle}",
     type: "object",
     icon: () => <Question weight="thin" />,
     description: "${moduleDescription}",

@@ -6,6 +6,7 @@
  *
  */
 import { MODULE_SCHEMAS } from "../../types.sanity";
+import { createInfo } from "./create-info";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
 import { createReactComponent } from "./create-react-component";
@@ -22,6 +23,7 @@ init();
 
 export type AnswersType = {
   moduleName: string;
+  moduleTitle: string;
   moduleDescription: string;
   fields?: string[];
 };
@@ -31,6 +33,15 @@ async function init() {
 
   const moduleTypes = Object.keys(MODULE_SCHEMAS);
   let moduleName = `Block ${moduleTypes.length}`;
+
+  let moduleTitle = await text({
+    message:
+      "What is a user friendly title for the module? (e.g Text and Image)",
+    validate(value: string) {
+      if (!value || value.trim().length === 0) return `Value is required!`;
+    },
+  });
+  if (isCancel(moduleTitle)) process.exit(0);
 
   let moduleDescription = await text({
     message: "What is the description of the module?",
@@ -56,9 +67,10 @@ async function init() {
 
   const answers = {
     moduleName: String(moduleName),
+    moduleTitle: String(moduleTitle),
     moduleDescription: String(moduleDescription),
     fields: (fields as any).map(
-      (field: { value: string; label: string }) => field.value
+      (field: { value: string; label: string }) => field.value,
     ),
   };
 
@@ -80,6 +92,7 @@ async function init() {
   createOptions(answers);
   createStory(answers);
   createTests(answers);
+  createInfo(answers);
 
   outro(`You're all set!`);
 }
