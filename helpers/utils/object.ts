@@ -8,8 +8,8 @@
  */
 
 export function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
-  if (!obj) return obj as Pick<T, K>;
-  if (!keys) keys = Object.keys(obj) as K[];
+  if (!obj) return obj;
+  if (!keys || !keys.length) keys = Object.keys(obj) as K[];
   const ret: any = {};
   keys.forEach((key) => {
     ret[key] = obj[key];
