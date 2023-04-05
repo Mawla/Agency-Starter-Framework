@@ -1,13 +1,12 @@
-import { ColorType } from "../../types";
 import { Button } from "./Button";
 import {
   BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-  BorderColorType,
-  BORDER_COLOR_OPTIONS,
-  SIZE_OPTIONS,
-  TextColorType,
-  TEXT_COLOR_OPTIONS,
+  ButtonBorderColorType,
+  ButtonTextColorType,
+  BUTTON_BACKGROUND_COLOR_OPTIONS,
+  BUTTON_BORDER_COLOR_OPTIONS,
+  BUTTON_SIZE_OPTIONS,
+  BUTTON_TEXT_COLOR_OPTIONS,
 } from "./button.options";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -20,8 +19,8 @@ export default {
 export const Sizes = () => (
   <div className="flex flex-col gap-2 flex-wrap">
     {(
-      Object.entries(SIZE_OPTIONS) as [
-        key: keyof typeof SIZE_OPTIONS,
+      Object.entries(BUTTON_SIZE_OPTIONS) as [
+        key: keyof typeof BUTTON_SIZE_OPTIONS,
         label: string,
       ][]
     ).map(([size, label]) => (
@@ -57,8 +56,8 @@ export const IconBefore = () => (
 export const IconOnly = () => (
   <>
     {(
-      Object.entries(SIZE_OPTIONS) as [
-        key: keyof typeof SIZE_OPTIONS,
+      Object.entries(BUTTON_SIZE_OPTIONS) as [
+        key: keyof typeof BUTTON_SIZE_OPTIONS,
         label: string,
       ][]
     ).map(([size, label]) => (
@@ -133,31 +132,34 @@ export const Target = () => (
 
 export const Theme = () => (
   <>
-    {(Object.keys(BORDER_COLOR_OPTIONS) as BorderColorType[]).map(
-      (border: BorderColorType) => (
+    {(Object.keys(BUTTON_BORDER_COLOR_OPTIONS) as ButtonBorderColorType[]).map(
+      (border: ButtonBorderColorType) => (
         <div className="mb-10 flex gap-4 flex-wrap" key={border}>
-          {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-            (background: BackgroundColorType) =>
-              (Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
-                (text: TextColorType) => (
-                  <Button
-                    key={border + background + text}
-                    theme={{
-                      background: {
-                        color: background,
-                      },
-                      text: {
-                        color: text,
-                      },
-                      border: {
-                        color: border,
-                      },
-                    }}
-                    label={`bg ${background}, text ${text}, border ${border}`}
-                    size="sm"
-                  />
-                ),
-              ),
+          {(
+            Object.keys(
+              BUTTON_BACKGROUND_COLOR_OPTIONS,
+            ) as BackgroundColorType[]
+          ).map((background: BackgroundColorType) =>
+            (
+              Object.keys(BUTTON_TEXT_COLOR_OPTIONS) as ButtonTextColorType[]
+            ).map((text: ButtonTextColorType) => (
+              <Button
+                key={border + background + text}
+                theme={{
+                  background: {
+                    color: background,
+                  },
+                  text: {
+                    color: text,
+                  },
+                  border: {
+                    color: border,
+                  },
+                }}
+                label={`bg ${background}, text ${text}, border ${border}`}
+                size="sm"
+              />
+            )),
           )}
         </div>
       ),

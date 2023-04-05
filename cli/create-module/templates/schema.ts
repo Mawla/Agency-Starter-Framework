@@ -29,7 +29,7 @@ export const getSchemaSnippet = ({
   ${render(
     fields,
     "title",
-    `import { BACKGROUND_COLOR_OPTIONS, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, INTRO_COLOR_OPTIONS } from "./${lowerName}.options";`,
+    `import { BACKGROUND_COLOR_OPTIONS, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, EYEBROW_COLOR_OPTIONS, INTRO_COLOR_OPTIONS } from "./${lowerName}.options";`,
   )}
 
   const schema = defineType({
@@ -230,6 +230,26 @@ export const getSchemaSnippet = ({
                   type: "color",
                   options: {
                     colors: TITLE_COLOR_OPTIONS,
+                  },
+                },
+              ],
+            },
+          }),`,
+          )}
+          ${render(
+            fields,
+            "eyebrow",
+            `defineField({
+            name: "eyebrow",
+            title: "Eyebrow",
+            type: "styles",
+            options: {
+              fields: [
+                {
+                  name: "color",
+                  type: "color",
+                  options: {
+                    colors: EYEBROW_COLOR_OPTIONS,
                   },
                 },
               ],

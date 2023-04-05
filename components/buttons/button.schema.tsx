@@ -6,10 +6,10 @@ import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
 import { ICONS } from "../../types";
 import {
-  BACKGROUND_COLOR_OPTIONS,
-  BORDER_COLOR_OPTIONS,
-  ICON_POSITION_OPTIONS,
-  TEXT_COLOR_OPTIONS,
+  BUTTON_BACKGROUND_COLOR_OPTIONS,
+  BUTTON_BORDER_COLOR_OPTIONS,
+  BUTTON_ICON_POSITION_OPTIONS,
+  BUTTON_TEXT_COLOR_OPTIONS,
 } from "./button.options";
 import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -148,7 +148,7 @@ const schema = defineType({
       options: {
         layout: "radio",
         direction: "horizontal",
-        list: optionsToList(ICON_POSITION_OPTIONS),
+        list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
       },
       initialValue: "after",
       group: "theme",
@@ -171,7 +171,7 @@ const schema = defineType({
                 name: "color",
                 type: "color",
                 options: {
-                  colors: TEXT_COLOR_OPTIONS,
+                  colors: BUTTON_TEXT_COLOR_OPTIONS,
                 },
               },
             ],
@@ -187,7 +187,7 @@ const schema = defineType({
                 name: "color",
                 type: "color",
                 options: {
-                  colors: BACKGROUND_COLOR_OPTIONS,
+                  colors: BUTTON_BACKGROUND_COLOR_OPTIONS,
                 },
               },
             ],
@@ -203,7 +203,7 @@ const schema = defineType({
                 name: "color",
                 type: "color",
                 options: {
-                  colors: BORDER_COLOR_OPTIONS,
+                  colors: BUTTON_BORDER_COLOR_OPTIONS,
                 },
               },
             ],

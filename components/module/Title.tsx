@@ -1,39 +1,27 @@
 import { textClasses } from "../../colors";
-import { pick } from "../../helpers/utils/object";
-import { SIZES, FONT_WEIGHTS, HeadingLevelType } from "../../types";
+import { HeadingLevelType } from "../../types";
 import { ColorType } from "../../types";
+import {
+  TitleColorType,
+  TitleEyebrowColorType,
+  TitleSizeType,
+  TitleWeightType,
+} from "./title.options";
 import cx from "classnames";
 import React from "react";
-
-export const SIZE_OPTIONS = pick(
-  SIZES,
-  "sm",
-  "md",
-  "lg",
-  "xl",
-  "2xl",
-  "3xl",
-  "4xl",
-  "5xl",
-  "6xl",
-);
-export type SizeType = keyof typeof SIZE_OPTIONS;
-
-export const WEIGHT_OPTIONS = pick(FONT_WEIGHTS, "regular", "bold");
-export type WeightType = keyof typeof WEIGHT_OPTIONS;
 
 export type TitleProps = {
   children: React.ReactElement | React.ReactNode;
   as?: HeadingLevelType;
-  size?: SizeType;
-  weight?: WeightType;
+  size?: TitleSizeType;
+  weight?: TitleWeightType;
   className?: string;
-  color?: ColorType;
+  color?: TitleColorType;
   eyebrow?: string;
-  eyebrowColor?: ColorType;
+  eyebrowColor?: TitleEyebrowColorType;
 };
 
-const sizeClasses: Record<SizeType, string> = {
+const sizeClasses: Record<TitleSizeType, string> = {
   sm: "text-sm",
   md: "text-md",
   lg: "text-lg",
@@ -45,8 +33,8 @@ const sizeClasses: Record<SizeType, string> = {
   "6xl": "text-4xl md:text-5xl lg:text-6xl",
 };
 
-const weightClasses: Record<WeightType, string> = {
-  regular: "font-regular",
+const weightClasses: Record<TitleWeightType, string> = {
+  normal: "font-normal",
   bold: "font-bold",
 };
 
@@ -56,9 +44,9 @@ export const Title = ({
   size = "sm",
   weight = "bold",
   className,
-  color = "neutral-600",
+  color = "black",
   eyebrow,
-  eyebrowColor = "brand-600",
+  eyebrowColor = "black",
 }: TitleProps) => {
   const Element = as;
   const titleWords = children?.toString()?.trim().split(" ");

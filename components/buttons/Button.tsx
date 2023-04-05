@@ -6,13 +6,13 @@ import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
 import {
-  AlignType,
-  SizeType,
-  IconPositionType,
-  WeightType,
-  TextColorType,
+  ButtonAlignType,
+  ButtonSizeType,
+  ButtonIconPositionType,
+  ButtonWeightType,
+  ButtonTextColorType,
   BackgroundColorType,
-  BorderColorType,
+  ButtonBorderColorType,
 } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -22,59 +22,59 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 );
 
 export type ButtonProps = {
-  align?: AlignType;
+  align?: ButtonAlignType;
   ariaLabel?: string;
   as?: "button" | "a" | "div" | "span" | "submit";
   compact?: boolean;
   href?: string;
   icon?: IconType;
-  iconPosition?: IconPositionType;
+  iconPosition?: ButtonIconPositionType;
   label?: string;
   onClick?: (e: React.MouseEvent) => void;
   plain?: boolean;
   round?: boolean;
-  size?: SizeType;
+  size?: ButtonSizeType;
   stretch?: boolean;
   target?: "_blank";
   theme?: {
-    text?: { color?: TextColorType };
+    text?: { color?: ButtonTextColorType };
     background?: { color?: BackgroundColorType };
-    border?: { color?: BorderColorType };
+    border?: { color?: ButtonBorderColorType };
   };
   disabled?: boolean;
   loading?: boolean;
-  weight?: WeightType;
+  weight?: ButtonWeightType;
   download?: boolean;
   hideLabel?: boolean;
   language?: LanguageType;
 };
 
-const sizeClasses: Record<SizeType, string> = {
+const sizeClasses: Record<ButtonSizeType, string> = {
   sm: "text-base md:text-lg",
   md: "text-lg md:text-xl",
 };
-const spaceClasses: Record<SizeType, string> = {
+const spaceClasses: Record<ButtonSizeType, string> = {
   sm: "px-4 py-2 md:px-4",
   md: "px-5 py-[9px] md:px-6",
 };
 
-const iconSizeClasses: Record<SizeType, string> = {
+const iconSizeClasses: Record<ButtonSizeType, string> = {
   sm: "w-5 h-5",
   md: "w-5 h-5",
 };
 
-const iconOnlySizeClasses: Record<SizeType, string> = {
+const iconOnlySizeClasses: Record<ButtonSizeType, string> = {
   sm: "w-10 h-10 md:w-10 md:h-10",
   md: "w-10 h-10 md:w-11 md:h-11",
 };
 
-const alignClasses: Record<AlignType, string> = {
+const alignClasses: Record<ButtonAlignType, string> = {
   left: "justify-start",
   center: "justify-center",
   right: "justify-end",
 };
 
-const weightClasses: Record<WeightType, string> = {
+const weightClasses: Record<ButtonWeightType, string> = {
   regular: "font-normal",
   medium: "font-medium",
 };
