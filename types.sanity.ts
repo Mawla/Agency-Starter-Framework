@@ -10,8 +10,6 @@ export const SCHEMAS = {
   "dialog.form": "",
   "dialog.richtext": "",
   "dialog.video": "",
-  "hero.herosplit": "",
-  "hero.resourcehero": "",
   "module.breadcrumb": "",
   "page.blog": "",
   "page.blogs": "",
@@ -34,7 +32,6 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
-  "hero.herovertical": "",
   footer: "",
   navigation: "",
   password: "",
@@ -65,7 +62,7 @@ export const LINKABLE_SCHEMAS = pick(
   "page.tools",
   "page.video",
   "page.videos",
-  "page.tag"
+  "page.tag",
 );
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
@@ -80,7 +77,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "config.translations",
   "footer",
   "navigation",
-  "person"
+  "person",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
@@ -93,22 +90,13 @@ export const TAGGABLE_SCHEMAS = pick(
   "page.podcast",
   "page.tool",
   "page.video",
-  "page.guide"
+  "page.guide",
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
 export const MODULE_SCHEMAS = pick(SCHEMAS, "module.breadcrumb");
 
 export type ModuleSchemaName = keyof typeof MODULE_SCHEMAS;
-
-export const HERO_SCHEMAS = pick(
-  SCHEMAS,
-  "hero.herosplit",
-  "hero.resourcehero",
-  "hero.herovertical"
-);
-
-export type HeroSchemaName = keyof typeof HERO_SCHEMAS;
 
 export const DIALOG_SCHEMAS = pick(SCHEMAS, "dialog.richtext", "dialog.video");
 

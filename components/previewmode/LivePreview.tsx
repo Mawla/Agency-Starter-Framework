@@ -57,8 +57,6 @@ export const LivePreview = ({
   const reloadAttempts = useRef<number>(0);
 
   const [miniModules, setMiniModules] = useState<MiniMapProps["modules"]>([]);
-  const [miniHero, setMiniHero] =
-    useState<MiniMapProps["modules"][0] | null>(null);
   const [isMiniMapVisible, setIsMiniMapVisible] = useState<boolean>(false);
 
   const timeLog = useCallback((date: string, message: string) => {
@@ -142,7 +140,6 @@ export const LivePreview = ({
     );
 
     setMiniModules(newMiniModules);
-    setMiniHero(newPage.hero);
 
     setPreviewLoading(false);
     reloadAttempts.current = 0;
@@ -390,7 +387,6 @@ export const LivePreview = ({
           )}
         >
           <MiniMap
-            hero={miniHero}
             modules={miniModules}
             onReorder={onReorderModules}
             isLoading={previewLoading}

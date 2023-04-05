@@ -111,5 +111,4 @@ Run `yarn dev`, `yarn cms` and `yarn storybook` in three terminal tabs and start
 - configure colors in `colors.ts` and `tailwind.config.ts`
 - start creating custom page types `yarn create-page`
 - start creating modules `yarn create-module`
-- start creating heroes `yarn create-hero`
 - start creating dialogs `yarn create-dialog`

@@ -173,7 +173,6 @@ export const getStaticProps: GetStaticProps = async ({
 
   // if page is locked let no page data leak through
   if (page.locked) {
-    props.page.hero = null;
     props.page.modules = [];
     props.page.dialogs = [];
     props.page.seo = { excludeFromSitemap: true };
@@ -181,10 +180,10 @@ export const getStaticProps: GetStaticProps = async ({
   }
 
   if (!page) return { notFound: true };
-  if (!page?.hero && !page?.modules?.length && !page.locked) {
+  if (!page?.modules?.length && !page.locked) {
     if (!IS_PRODUCION)
       console.log(
-        `No hero or modules, rendering 404. The page exists but has no content.\n${sitemapItem.path}`,
+        `No modules, rendering 404. The page exists but has no content.\n${sitemapItem.path}`,
       );
     return { notFound: true };
   }

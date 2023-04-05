@@ -22,7 +22,6 @@ Get started
 - `yarn test` runs tests
 
 - `yarn create-page` runs the cli to add a page
-- `yarn create-hero` runs the cli to create a hero
 - `yarn create-module` runs the cli to create a module
 - `yarn create-dialog` runs the cli to create a dialog
 
@@ -52,7 +51,6 @@ graph TD
     RENDER_MODULES[ModuleBuilder.tsx]-->MODULE
     RENDER_DIALOGS[DialogBuilder.tsx]-->PAGE
 
-    HERO[Hero.tsx<br>hero.schema.tsx<br>hero.query.tsx<br>hero.test.tsx<br>hero.stories.tsx<br>hero.options.ts]-->PAGE
     MODULE[Module.tsx<br>module.schema.tsx<br>module.query.tsx<br>module.test.tsx<br>module.stories.tsx<br>module.options.ts]-->PAGE
 
     PAGE{"<br>BROWSER<br>…"}

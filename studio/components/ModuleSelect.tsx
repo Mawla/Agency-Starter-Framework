@@ -43,7 +43,6 @@ type OptionType = {
   image?: string;
   initialValue?: {};
   modules?: any[];
-  hero?: any[];
 };
 
 export type ModuleSelectProps = {
@@ -122,11 +121,10 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
         name?: string;
         description?: string;
         modules?: any[];
-        hero?: any[];
         usedBy?: number;
         image?: string;
       }[] = await client.fetch(`
-        *[_type == 'page.preset' && (defined(modules) || defined(hero)) && !(_id in path("drafts.*"))] {
+        *[_type == 'page.preset' && defined(modules) && !(_id in path("drafts.*"))] {
           title,
           _id,
           _type,
@@ -135,7 +133,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           "usedBy": count(*[references(^._id)]),
           "image": image.asset->url,
           modules[],
-          hero[],
         } | order(usedBy desc)`);
 
       presets = presets
@@ -151,10 +148,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
               typeFilter ? new RegExp(typeFilter).test(_type) : true,
             ),
         }))
-        .filter(
-          ({ modules, hero }) =>
-            Boolean(modules?.length) || Boolean(hero?.length),
-        );
+        .filter(({ modules }) => Boolean(modules?.length));
 
       /**
        * Make list of options
@@ -175,7 +169,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
           image,
           hidden,
           modules,
-          hero,
         }) => {
           // for the current page type (unless we're looking at presets) call the hide function on the option schema
           if (document._type !== "page.preset" && hidden?.(document._type)) {
@@ -192,7 +185,6 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
             initialValue,
             image,
             modules,
-            hero,
           };
 
           return obj;
@@ -261,10 +253,7 @@ const ModuleSelect: ComponentType<any> = (props: ModuleSelectProps) => {
     }[] = [];
 
     if (presetId) {
-      newModules = [
-        ...(selectedOption?.modules || []),
-        ...(selectedOption.hero || []),
-      ].map((module) => ({
+      newModules = [...(selectedOption?.modules || [])].map((module) => ({
         _type: selectedType as ModuleSchemaName,
         ...module,
       }));

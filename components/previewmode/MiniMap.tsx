@@ -30,7 +30,6 @@ type ModulePreviewType = {
 };
 
 export type MiniMapProps = {
-  hero: MiniModuleType | null;
   modules: MiniModuleType[];
   isLoading?: boolean;
   onReorder: (
@@ -40,16 +39,10 @@ export type MiniMapProps = {
   ) => void;
 };
 
-export const MiniMap = ({
-  hero,
-  modules,
-  isLoading,
-  onReorder,
-}: MiniMapProps) => {
+export const MiniMap = ({ modules, isLoading, onReorder }: MiniMapProps) => {
   const [activeId, setActiveId] = useState(null);
   const [items, setItems] = useState<string[]>([]);
 
-  const [heroPreview, setHeroPreview] = useState<string | null>(null);
   const [modulePreviews, setModulePreviews] = useState<ModulePreviewType[]>([]);
 
   /**
@@ -59,23 +52,6 @@ export const MiniMap = ({
   useEffect(() => {
     setItems(modules.map(({ _key }) => _key));
   }, [modules]);
-
-  /**
-   * Get hero preview
-   */
-
-  useEffect(() => {
-    async function getHeroPreview() {
-      const element = document.querySelector(`main`)?.previousElementSibling;
-      const preview = element?.innerHTML;
-      if (!preview?.length) {
-        setTimeout(getHeroPreview, 250);
-        return;
-      }
-      setHeroPreview(preview);
-    }
-    getHeroPreview();
-  }, [hero]);
 
   /**
    * Get module previews
@@ -117,14 +93,6 @@ export const MiniMap = ({
 
   return (
     <div className="select-none">
-      {heroPreview && (
-        <div
-          className="select-auto cursor-grab border-2 border-transparent hover:border-[#1f2937] duration-150"
-          onClick={() => hero && focusElement(hero._key)}
-        >
-          <Preview html={heroPreview} />
-        </div>
-      )}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}

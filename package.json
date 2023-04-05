@@ -15,7 +15,6 @@
     "create-dialog": "sanity exec ./cli/create-dialog -- --write",
     "create-page": "sanity exec ./cli/create-page -- --write",
     "create-module": "sanity exec ./cli/create-module -- --write",
-    "create-hero": "sanity exec ./cli/create-module -- --write --hero",
     "test-cli": "NODE_ENV=test npx jest ./cli/ ",
     "test": "NODE_ENV=test jest",
     "test-watch": "jest --watch"

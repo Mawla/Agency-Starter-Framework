@@ -17,7 +17,7 @@ const PresetUsage = () => {
 
     async function getUsage() {
       const usage = await client.fetch(
-        `*[_type match 'page.*' && defined(modules) && ($id in hero[].preset._ref || $id in modules[].preset._ref)] {
+        `*[_type match 'page.*' && defined(modules) && ($id in modules[].preset._ref)] {
           _id, 
           _type, 
           "title": title

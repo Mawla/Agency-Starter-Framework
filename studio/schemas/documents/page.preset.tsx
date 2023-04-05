@@ -1,7 +1,7 @@
-import { HERO_SCHEMAS, MODULE_SCHEMAS } from "../../../types.sanity";
+import { MODULE_SCHEMAS } from "../../../types.sanity";
 import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../components/Presets/PresetUsage";
-import { HERO_FIELD, MODULES_FIELD, pageBase } from "./page-fields";
+import { MODULES_FIELD, pageBase } from "./page-fields";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -51,17 +51,6 @@ const schema = defineType({
       rows: 2,
       group: ["content"],
     }),
-    defineField({
-      ...HERO_FIELD,
-      title: "Hero",
-      description: null as any,
-      of: Object.keys(HERO_SCHEMAS).map((type: any) => ({ type })),
-      options: {
-        filterType: /hero\./,
-        updateField: "hero",
-        placeholder: "Add a hero",
-      } as any,
-    } as any),
     defineField({
       ...MODULES_FIELD,
       title: "Module",
