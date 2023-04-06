@@ -26,11 +26,16 @@ export const getSchemaSnippet = ({
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType } from "sanity";
-  ${render(
+  import { INTRO_COLOR_OPTIONS ${render(
     fields,
     "title",
-    `import { BACKGROUND_COLOR_OPTIONS, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, EYEBROW_COLOR_OPTIONS, INTRO_COLOR_OPTIONS } from "./${lowerName}.options";`,
+    `, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, EYEBROW_COLOR_OPTIONS`,
   )}
+  ${render(
+    fields,
+    "intro",
+    `,INTRO_COLOR_OPTIONS`,
+  )} } from "./${lowerName}.options";
 
   const schema = defineType({
     name: "${schemaName}",
