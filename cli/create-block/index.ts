@@ -18,7 +18,7 @@ import { injectPageQuery } from "./inject-page-query";
 import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
-import { readdirSync } from "fs";
+import { readdirSync, mkdirSync, existsSync } from "fs";
 
 init();
 
@@ -34,6 +34,11 @@ async function init() {
 
   // read the last block folder name and increment it
   const blocksFolderPath = `${__dirname}/../../blocks/`;
+
+  if (!existsSync(blocksFolderPath)) {
+    mkdirSync(blocksFolderPath);
+  }
+
   const blockFolderNumbers = readdirSync(blocksFolderPath, {
     withFileTypes: true,
   })
