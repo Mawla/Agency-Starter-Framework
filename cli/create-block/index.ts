@@ -34,18 +34,17 @@ async function init() {
 
   // read the last block folder name and increment it
   const blocksFolderPath = `${__dirname}/../../blocks/`;
-  const finalBlockFolderName = readdirSync(blocksFolderPath, {
+  const blockFolderNumbers = readdirSync(blocksFolderPath, {
     withFileTypes: true,
   })
     .filter((dirent) => dirent.isDirectory())
-    .map(({ name }) => name)
-    .reverse()
-    .find((dirName) => dirName.startsWith("block"));
+    .map(({ name }) => +name.replace("block", ""))
+    .filter((name) => !isNaN(name))
+    .sort((a, b) => a - b)
+    .reverse();
 
-  const finalBlockFolderIndex = Number(
-    finalBlockFolderName?.replace("block", ""),
-  );
-  let blockIndex = isNaN(finalBlockFolderIndex) ? 1 : finalBlockFolderIndex + 1;
+  const highestBlockIndex = Math.max(...blockFolderNumbers) || 1;
+  let blockIndex = isFinite(highestBlockIndex) ? highestBlockIndex + 1 : 1;
   let blockName = `Block ${blockIndex}`;
 
   let blockTitle = await text({
