@@ -18,6 +18,7 @@ import { injectPageQuery } from "./inject-page-query";
 import { injectSchema } from "./inject-schema";
 import { injectTypes } from "./inject-types";
 import { text, intro, outro, isCancel, multiselect } from "@clack/prompts";
+import { readdirSync } from "fs";
 
 init();
 
@@ -31,9 +32,21 @@ export type AnswersType = {
 async function init() {
   intro(`Let's create a block`);
 
-  const schemaTypes = Object.keys(SCHEMAS).length;
-  const blockTypes = Object.keys(BLOCK_SCHEMAS).length;
-  let blockName = `Block ${blockTypes === schemaTypes ? 1 : blockTypes + 1}`;
+  // read the last block folder name and increment it
+  const blocksFolderPath = `${__dirname}/../../blocks/`;
+  const finalBlockFolderName = readdirSync(blocksFolderPath, {
+    withFileTypes: true,
+  })
+    .filter((dirent) => dirent.isDirectory())
+    .map(({ name }) => name)
+    .reverse()
+    .find((dirName) => dirName.startsWith("block"));
+
+  const finalBlockFolderIndex = Number(
+    finalBlockFolderName?.replace("block", ""),
+  );
+  let blockIndex = isNaN(finalBlockFolderIndex) ? 1 : finalBlockFolderIndex + 1;
+  let blockName = `Block ${blockIndex}`;
 
   let blockTitle = await text({
     message:
