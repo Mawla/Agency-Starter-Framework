@@ -54,7 +54,7 @@ export const Text = ({
       <Element
         className={cx(
           "break-words prose font-regular leading-relaxed",
-          "prose-strong:font-bold prose-strong:text-current",
+          "prose-strong:font-bold prose-strong:text-current prose-headings:text-current",
           "prose-a:text-current prose-a:underline prose-a:underline-offset-4",
           align && alignClasses[align],
           size && sizeClasses[size],
