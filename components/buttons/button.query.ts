@@ -59,3 +59,15 @@ export const hrefFieldQuery = groq`
   "href": link ${buttonQuery}.href,
   "target": select(newWindow => '_blank') 
 `;
+
+/**
+ * Usage
+ *
+ * {
+ *   ...,
+ *   "link": ${getButtonQuery("link")}
+ * }
+ */
+export const getButtonQuery = (fieldName: string) => groq`
+  @.${fieldName} ${buttonQuery}
+`;
