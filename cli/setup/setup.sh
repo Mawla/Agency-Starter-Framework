@@ -35,7 +35,7 @@ echo "SANITY_STUDIO_API_PROJECT_ID=$projectId" >> .env.development
 # Generate dataset
 echo "\033[0;36m-\033[0m Generating new Sanity dataset 'development'"
 sanity dataset create development --visibility public
-sanity dataset create staging --visibility public
+sanity dataset create production --visibility public
 
 echo "NEXT_PUBLIC_SANITY_DATASET=development" >> .env.development
 echo "SANITY_STUDIO_API_DATASET=development" >> .env.development
@@ -75,11 +75,19 @@ sanity cors add https://$(echo $vercelProjectName).vercel.app --credentials
 sanity cors add https://*$(echo $vercelProjectName).vercel.app --credentials
 
 # Create git branch staging
+git branch development
+git push origin development
+
+# Create git branch staging
 git branch staging
 git push origin staging
 
 # Create git branch production
 git branch production
 git push origin production
+
+git branch -d main
+
+git checkout development
 
 echo "\033[0;36mDone!\033[0m"
