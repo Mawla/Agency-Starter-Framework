@@ -91,8 +91,6 @@ export const Button = (props: ButtonProps) => {
   return <ButtonInner {...props} />;
 };
 
-export const ButtonMemo = React.memo(Button);
-
 const ButtonInner = ({
   align = "center",
   ariaLabel,
@@ -272,3 +270,5 @@ const ButtonLoader = () => (
     <Spinner />
   </span>
 );
+
+export default React.memo(Button);
