@@ -1,9 +1,14 @@
-import { Button, ButtonProps } from "./Button";
+import { ButtonProps } from "./Button";
 import { AlignType, DIRECTION_OPTIONS } from "./buttongroup.options";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
 
 export type DirectionType = keyof typeof DIRECTION_OPTIONS;
+
+const Button = lazy<ComponentType<ButtonProps>>(
+  () =>
+    import(/* webpackChunkName: "Button" */ "../../components/buttons/Button"),
+);
 
 export type ButtonGroupProps = {
   items: ButtonProps[];
