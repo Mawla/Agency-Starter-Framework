@@ -94,7 +94,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               },
                             )}
                           >
-                            {href && (
+                            {href ? (
                               <Link
                                 href={href}
                                 locale={language}
@@ -102,6 +102,8 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               >
                                 {label}
                               </Link>
+                            ) : (
+                              <span className="">{label}</span>
                             )}
 
                             {Boolean(children?.length) && (
