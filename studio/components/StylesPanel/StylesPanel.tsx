@@ -61,15 +61,15 @@ const StylesPanel = (props: ObjectInputProps) => {
         /* Popover */
         .stylespanel_popover {
           z-index: 100;
-          background: white;
-          border: 1px solid #bec6d3;
+          background: var(--card-bg-color);
+          border: 1px solid var(--card-shadow-outline-color);
           padding: 0;
           box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.1);
         }
 
         .stylespanel_popoverButton {
           border: 0;
-          background: white;
+          background: var(--card-bg-color);
           display: block;
           padding: 0;
         }
@@ -78,18 +78,18 @@ const StylesPanel = (props: ObjectInputProps) => {
           width: 32px;
           height: 32px;
           border: 0;
-          box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+          box-shadow: inset 0 0 0 1px var(--card-shadow-outline-color);
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: white;
+          background: var(--card-bg-color);
           transition: box-shadow 0.15s;
           border-radius: 1px;
         }
 
         .stylespanel_preview:hover {
-          box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0 0 0 1px var(--card-shadow-outline-color), inset 0 0 0 1px var(--card-shadow-outline-color);
         }
 
         .stylespanel_preview > * {
@@ -103,10 +103,10 @@ const StylesPanel = (props: ObjectInputProps) => {
 
         .stylespanel_previewColorEmpty {
           background-color: transparent;
-          background-image: linear-gradient(45deg, #eee 25%, transparent 25%),
-            linear-gradient(-45deg, #eee 25%, transparent 25%),
-            linear-gradient(45deg, transparent 75%, #eee 75%),
-            linear-gradient(-45deg, transparent 75%, #eee 75%);
+          background-image: linear-gradient(45deg, var(--card-shadow-outline-color) 25%, transparent 25%),
+            linear-gradient(-45deg, var(--card-shadow-outline-color) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, var(--card-shadow-outline-color) 75%),
+            linear-gradient(-45deg, transparent 75%, var(--card-shadow-outline-color) 75%);
           background-size: 10px 10px;
           background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
         }
@@ -119,7 +119,7 @@ const StylesPanel = (props: ObjectInputProps) => {
           display: inline-block;
           border: 0;
           position: relative;
-          background: white;
+          background: var(--card-bg-color);
         }
 
         .stylespanel_colorItem,
@@ -163,9 +163,27 @@ const StylesPanel = (props: ObjectInputProps) => {
 
         /* Select */
 
+        .stylespanel_select--large {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+        }
+
+        .stylespanel_select--small {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        
+        .stylespanel_select--small .stylespanel_selectOption {
+          border-right: 1px solid var(--card-shadow-outline-color);
+        }
+
+        .stylespanel_select--large .stylespanel_selectOption {
+          border-bottom: 1px solid var(--card-shadow-outline-color);
+        }
+
         .stylespanel_selectOption {
-          padding: 10px;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          padding: 10px 10px 11px 10px;
           display: flex;
           align-items: center;
           gap: 4px;
@@ -173,8 +191,10 @@ const StylesPanel = (props: ObjectInputProps) => {
         }
 
         .stylespanel_selectOption:hover {
-          background-color: rgba(0, 0, 0, 0.05);
+          background-color: var(--card-code-bg-color);
+          color: var(--card-fg-color);
           cursor: pointer;
+
         }
 
         .stylespanel_selectOption:last-of-type {

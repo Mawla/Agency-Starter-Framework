@@ -40,7 +40,13 @@ export const Select = ({
         className="stylespanel_popover"
         aria-label="popover"
       >
-        <div className="stylespanel_select">
+        <div
+          className={`stylespanel_select ${
+            options?.length < 5
+              ? "stylespanel_select--small"
+              : "stylespanel_select--large"
+          }`}
+        >
           {options.map((item) => (
             <div
               className="stylespanel_selectOption"
