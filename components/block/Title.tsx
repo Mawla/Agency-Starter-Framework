@@ -48,6 +48,7 @@ export const Title = ({
   eyebrow,
   eyebrowColor = "black",
 }: TitleProps) => {
+  if (!as) as = "h2";
   const Element = as;
   const titleWords = children?.toString()?.trim().split(" ");
 
