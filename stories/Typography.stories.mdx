@@ -7,7 +7,16 @@ export const tailwindConfig = resolveConfig([theme, defaultConfig])[0];
 export const fontSizes = Object.entries(tailwindConfig.fontSize)
   .map(([key, value]) => {
     value = Array.isArray(value) ? value[0] : value;
-    return Number(value.replace(/rem|px|em/, "") * 16);
+    if (typeof value === "number") {
+      return value;
+    }
+    if (value.includes("rem")) {
+      return Number(value.replace(/rem|px|em/, "") * 16);
+    }
+    if (value.includes("em")) {
+      return Number(value.replace(/rem|px|em/, "") * 16);
+    }
+    return Number(value.replace(/rem|px|em/, ""));
   })
   .sort((a, b) => a - b)
   .filter((value) => Boolean(value))
@@ -18,21 +27,23 @@ export const fontSizes = Object.entries(tailwindConfig.fontSize)
 # Typography
 
 <div>
-  {Object.entries(tailwindConfig.fontFamily).map(([fontName, fontValue]) =>
-    Object.entries(tailwindConfig.fontWeight).map(
-      ([weightName, weightValue]) => (
-        <div key={fontName + weightName}>
-          <h2>
-            {fontValue[0]} {weightName}
-          </h2>
-          <Typeset
-            fontSizes={fontSizes}
-            fontWeight={weightValue}
-            sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            fontFamily={fontValue}
-          />
-        </div>
-      ),
-    ),
+  {Object.entries(
+    tailwindConfig.fontFamily || defaultConfig.theme.fontFamily,
+  ).map(([fontName, fontValue]) =>
+    Object.entries(
+      tailwindConfig.fontWeight || defaultConfig.theme.fontWeight,
+    ).map(([weightName, weightValue]) => (
+      <div key={fontName + weightName}>
+        <h2>
+          {fontValue[0]} {weightName}
+        </h2>
+        <Typeset
+          fontSizes={fontSizes}
+          fontWeight={weightValue}
+          sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          fontFamily={fontValue}
+        />
+      </div>
+    )),
   )}
 </div>
