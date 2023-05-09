@@ -5,7 +5,10 @@ import FigCaption from "../images/FigCaption";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { ScriptsType } from "../script/Script";
 import { Table } from "../table/Table";
-import { PortableText as PortableTextReact } from "@portabletext/react";
+import {
+  PortableTextBlockComponent,
+  PortableText as PortableTextReact,
+} from "@portabletext/react";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 
@@ -34,9 +37,10 @@ const Scripts = lazy<ComponentType<ScriptsType>>(
 
 export type PortableTextProps = {
   content: string | PortableTextBlock[] | React.ReactElement;
+  block?: Record<string, PortableTextBlockComponent>;
 };
 
-export const PortableText = ({ content = [] }: PortableTextProps) => {
+export const PortableText = ({ content = [], block }: PortableTextProps) => {
   if (React.isValidElement(content)) return content;
   if (typeof content === "string") return <p>{content}</p>;
   if (!content) return null;
@@ -57,6 +61,20 @@ export const PortableText = ({ content = [] }: PortableTextProps) => {
             );
           },
         },
+
+        /**
+         * Example of how to override the default block rendering
+         * For instance if you want to use portable text inside an <h1> tag
+         * you don't want to paragraphs inside it, so you can do the following:
+         *
+         * <PortableText content={title as any} block={{
+         *    normal: ({ children }: PortableTextComponentProps<any>) => (
+         *      <span>{children}</span>
+         *    ),
+         *  }}/>
+         */
+
+        block: { ...block },
         list: {
           bullet: ({ children }) => <ul>{children}</ul>,
           number: ({ children }) => <ol>{children}</ol>,
