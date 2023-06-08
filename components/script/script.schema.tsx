@@ -164,7 +164,7 @@ export default defineType({
             }),
             defineField({
               name: "onerror",
-              title: "On ready script",
+              title: "On error script",
               description: "Code to execute if the script fails to load.",
               type: "text",
               rows: 10,
