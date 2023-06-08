@@ -198,6 +198,17 @@ export const getStaticProps: GetStaticProps = async ({
 export const getStaticPaths: GetStaticPaths = async () => {
   const sitemap: SitemapType = await getClient(false).fetch(getSitemapQuery());
 
+  // don't build on previews
+  if (
+    !process.env.VERCEL_GIT_COMMIT_REF ||
+    !["production", "staging"].includes(process.env.VERCEL_GIT_COMMIT_REF)
+  ) {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
+
   const paths = sitemap
     .filter(Boolean)
     .filter((item) => !STATIC_LINKABLE_SCHEMAS.includes(item._type))
