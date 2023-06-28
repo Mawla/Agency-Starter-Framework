@@ -165,7 +165,7 @@ export const getReactComponentSnippet = ({
           {title && (
             <div className="mb-4 md:mb-6">
               <Title 
-                size={theme?.title?.size || 'lg'} 
+                size={theme?.title?.size || 'xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color}
               >{title}</Title>
@@ -180,7 +180,7 @@ export const getReactComponentSnippet = ({
             `
           {intro && (
             <div className="mb-10 md:mb-14">
-              <Text color={theme?.intro?.color}>
+              <Text size={"sm"} color={theme?.intro?.color}>
                 <PortableText content={intro as any} />
               </Text>
             </div>
