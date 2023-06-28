@@ -176,6 +176,14 @@ module.exports = {
       },
       primary: "#A5D926",
       secondary: "#002A33",
+      orange: {
+        50: "#FFEAD4",
+        100: "#663400",
+      },
+      blue: {
+        50: "#DAF2FD",
+        100: "#00385F",
+      }
     },
     extend: {
       zIndex: {
