@@ -9,7 +9,7 @@ import {
   IMAGE_POSITION_OPTIONS,
 } from "./block1.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { Question } from "@vectopus/atlas-icons-react";
+import { Question, VirtualRealityImage } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -17,7 +17,7 @@ const schema = defineType({
   name: "block.block1",
   title: "Image with feature list",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <VirtualRealityImage weight="thin" />,
   description: "Text, image and feature list left or right",
   preview: {
     select: {
@@ -28,8 +28,7 @@ const schema = defineType({
     prepare({ title = "Block 1", image }: any) {
       return {
         title: title,
-
-        media: image || <Question weight="thin" />,
+        media: image || <VirtualRealityImage weight="thin" />,
       };
     },
   },
