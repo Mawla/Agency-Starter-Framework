@@ -46,7 +46,7 @@ previewSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number
 echo "SANITY_PREVIEW_SECRET=\"$previewSecret\"" >> .env.development
 
 echo "\033[0;36m-\033[0m Generating webhook secret"
-webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 |  npx --yes groq-cli "*[0]+' '+*[1]+' '+*[2]+' '+*[3]" | xargs)
+webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 |  npx --yes groq-cli "*[0]+''+*[1]+''+*[2]+''+*[3]" | xargs)
 echo "SANITY_WEBHOOK_SECRET=\"$webhookSecret\"" >> .env.development
 
 # Generate rest .env
