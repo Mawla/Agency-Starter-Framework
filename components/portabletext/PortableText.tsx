@@ -2,6 +2,7 @@ import { VideoType } from "../../types";
 import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
+import { IconLoaderProps } from "../images/IconLoader";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { ScriptsType } from "../script/Script";
 import { Table } from "../table/Table";
@@ -33,6 +34,13 @@ const Link = lazy<ComponentType<LinkProps>>(
 
 const Scripts = lazy<ComponentType<ScriptsType>>(
   () => import(/* webpackChunkName: "Script" */ "../script/Script"),
+);
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
 );
 
 export type PortableTextProps = {
@@ -78,6 +86,20 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
         list: {
           bullet: ({ children }) => <ul>{children}</ul>,
           number: ({ children }) => <ol>{children}</ol>,
+          check: ({ children }) => (
+            <ul className="list-none relative">{children}</ul>
+          ),
+        },
+        listItem: {
+          check: ({ children }) => (
+            <li className="!pl-0">
+              <IconLoader
+                icon="check-circle"
+                className="absolute left-0 -translate-y-full md:-translate-y-[80%] w-5 h-5 text-primary-600"
+              />
+              <span>{children}</span>
+            </li>
+          ),
         },
         types: {
           "image.simple"({ value }) {

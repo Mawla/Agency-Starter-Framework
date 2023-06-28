@@ -1,9 +1,14 @@
+import { Block1Props } from "../../blocks/block1/Block1";
 import { GenericBlockProps } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import BlockErrorBoundary from "./BlockErrorBoundary";
 import { LazyLoadInView } from "./LazyLoadInView";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
+
+const Block1 = lazy<ComponentType<Block1Props>>(
+  () => import(/* webpackChunkName: "Block1" */ "../../blocks/block1/Block1"),
+);
 
 export type BlockBuilderProps = {
   items: GenericBlockProps[];
@@ -35,6 +40,10 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               id={item._key}
             >
               {/* all blocks */}
+
+              {item._type === "block.block1" && (
+                <Block1 {...(item as Block1Props)} />
+              )}
             </LazyLoadInView>
           </BlockErrorBoundary>
         </Suspense>
