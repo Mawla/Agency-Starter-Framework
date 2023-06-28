@@ -18,7 +18,7 @@ const schema = defineType({
   title: "Image with feature list",
   type: "object",
   icon: () => <Question weight="thin" />,
-  description: "Text, image and feature list next to each other",
+  description: "Text, image and feature list left or right",
   preview: {
     select: {
       title: "title",

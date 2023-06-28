@@ -1,12 +1,8 @@
 {
   "title": "Image with feature list",
-  "description": "Text, image and feature list next to each other",
+  "description": "Text, image and feature list left or right",
   "name": "Block 1",
   "schemaName": "block.block1",
   "date": "2023-06-28T07:47:00.559Z",
-  "fields": [
-    "title",
-    "intro",
-    "image"
-  ]
+  "fields": ["title", "intro", "image"]
 }
