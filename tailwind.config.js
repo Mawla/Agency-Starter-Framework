@@ -108,7 +108,7 @@ module.exports = {
       "2xs": "375px",
     },
     fontFamily: {
-      sans: ["var(--font-manrope, Arial, sans-serif)"],
+      sans: ["Apercu"],
       mono: ["monospace"],
     },
     fontSize: {
