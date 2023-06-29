@@ -1,3 +1,4 @@
+import blockBlock2 from "../../blocks/block2/block2.schema";
 import blockBlock1 from "../../blocks/block1/block1.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
@@ -51,6 +52,7 @@ import styles from "./objects/styles";
 
 export const schemaTypes = [
   ...[
+    blockBlock2,
     blockBlock1,
     blockPreset,
     button,

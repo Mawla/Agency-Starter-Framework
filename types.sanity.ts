@@ -1,6 +1,7 @@
 import { pick } from "./helpers/utils/object";
 
 export const SCHEMAS = {
+  "block.block2": "",
   "block.block1": "",
   "config.cms": "",
   "config.general": "",
@@ -62,7 +63,7 @@ export const LINKABLE_SCHEMAS = pick(
   "page.tools",
   "page.video",
   "page.videos",
-  "page.tag",
+  "page.tag"
 );
 
 export type LinkableSchemaName = keyof typeof LINKABLE_SCHEMAS;
@@ -77,7 +78,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "config.translations",
   "footer",
   "navigation",
-  "person",
+  "person"
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
@@ -90,11 +91,11 @@ export const TAGGABLE_SCHEMAS = pick(
   "page.podcast",
   "page.tool",
   "page.video",
-  "page.guide",
+  "page.guide"
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const BLOCK_SCHEMAS = pick(SCHEMAS, "block.block1");
+export const BLOCK_SCHEMAS = pick(SCHEMAS, "block.block1", "block.block2");
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
 
