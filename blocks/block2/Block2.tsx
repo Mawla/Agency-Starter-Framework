@@ -94,7 +94,7 @@ export const Block2 = ({
           {title && (
             <div className="mb-4 md:mb-6">
               <Title
-                size={theme?.title?.size || "xl"}
+                size={theme?.title?.size || "3xl"}
                 as={theme?.title?.level}
                 color={theme?.title?.color}
               >
