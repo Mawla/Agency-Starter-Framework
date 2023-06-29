@@ -18,14 +18,60 @@ export default {
   title: "Blocks/Block2",
 } as Meta;
 
-export const Default = () => (
-  <Block2
-    title="Block2"
-    intro={<p>Block2</p>}
-    buttons={[{ label: "Block2" }]}
-    items={[{ title: "Block2" }]}
-  />
-);
+const DEMO_CONTENT = {
+  title: "Designed for business teams like yours\n",
+  image: demoImage,
+  intro: (
+    <p>
+      Here we focus on markets where technology, innovation, and capital can
+      unlock long-term value and drive economic growth.
+    </p>
+  ),
+  items: [
+    {
+      title: "Automatic categorization",
+      intro: (
+        <p>
+          Flow Budget automatically categorizes your income and expenses, making
+          it easy to track where your money is going.
+        </p>
+      ),
+      image: demoImage,
+    },
+    {
+      title: "Budget goals",
+      intro: (
+        <p>
+          Set budget goals for each category and get real-time updates on how
+          close you are to reaching them.
+        </p>
+      ),
+      image: demoImage,
+    },
+    {
+      title: "Cloud synchronization",
+      intro: (
+        <p>
+          Synch your data across multiple devices, so you can access your budget
+          and expenses from anywhere, at any time, and on any device.
+        </p>
+      ),
+      image: demoImage,
+    },
+    {
+      title: "Budgeting methods",
+      intro: (
+        <p>
+          The app offers a variety of budgeting methods, such as 50/30/20 rule,
+          to help users find the approach that works best for them.
+        </p>
+      ),
+      image: demoImage,
+    },
+  ],
+};
+
+export const Default = () => <Block2 {...DEMO_CONTENT} />;
 
 export const BlockBackgrounds = () => (
   <>
@@ -33,13 +79,13 @@ export const BlockBackgrounds = () => (
       (color) => (
         <div key={color}>
           <Block2
-            title="Block2"
+            {...DEMO_CONTENT}
             theme={{
               block: { background: color },
             }}
           />
         </div>
-      ),
+      )
     )}
   </>
 );
@@ -49,7 +95,7 @@ export const TitleColors = () => (
     {(Object.keys(TITLE_COLOR_OPTIONS) as TitleColorType[]).map((color) => (
       <div key={color}>
         <Block2
-          title="Block2"
+          {...DEMO_CONTENT}
           theme={{
             title: { color },
           }}
@@ -64,7 +110,7 @@ export const TitleSizes = () => (
     {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
       <div key={size}>
         <Block2
-          title="Block2"
+          {...DEMO_CONTENT}
           theme={{
             title: { size },
           }}
@@ -79,7 +125,7 @@ export const IntroColors = () => (
     {(Object.keys(INTRO_COLOR_OPTIONS) as IntroColorType[]).map((color) => (
       <div key={color}>
         <Block2
-          intro={<p>Block2</p>}
+          {...DEMO_CONTENT}
           theme={{
             intro: { color },
           }}
