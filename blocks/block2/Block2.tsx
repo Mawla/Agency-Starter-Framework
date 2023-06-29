@@ -151,9 +151,10 @@ export const Block2 = ({
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
           <div className="mt-8 lg:mt-16">
-            <div className="mt-8 lg:mt-12">
-              <ButtonGroup items={buttons} />
-            </div>
+            <ButtonGroup
+              items={buttons}
+              align={theme?.block?.align || "center"}
+            />
           </div>
         )}
       </div>
@@ -170,6 +171,7 @@ type ItemProps = {
     title?: {
       size?: TitleSizeType;
       color?: TitleColorType;
+      level?: HeadingLevelType;
     };
     intro?: {
       size?: IntroSizeType;
@@ -180,19 +182,18 @@ type ItemProps = {
 const Item = ({ title, intro, image, theme }: ItemProps) => {
   return (
     <div className="flex flex-col items-start gap-4 sm:gap-5 sm:flex-row">
-      <div className="bg-gray-100 rounded-full w-16 h-16 lg:w-24 lg:h-24 flex items-center justify-center shrink-0">
-        {image && (
-          <div className="w-full relative aspect-square">
-            <ResponsiveImage {...image} fill className="absolute inset-0" />
-          </div>
-        )}
-      </div>
+      {image && (
+        <div className="bg-gray-100 rounded-full w-16 lg:w-24 flex items-center justify-center shrink-0 relative aspect-square">
+          <ResponsiveImage {...image} fill className="absolute inset-0" />
+        </div>
+      )}
       <div>
         {title && (
           <div className="mb-2">
             <Title
               size={theme?.title?.size || "lg"}
               color={theme?.title?.color}
+              as={theme?.title?.level || "h3"}
             >
               {title}
             </Title>

@@ -23,7 +23,7 @@ export default {
 } as Meta;
 
 const DEMO_CONTENT = {
-  title: "Designed for business teams like yours\n",
+  title: "Designed for business teams like yours",
   image: demoImage,
   intro: (
     <p>
