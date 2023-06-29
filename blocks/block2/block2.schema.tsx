@@ -6,6 +6,7 @@ import {
   TITLE_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
   INTRO_COLOR_OPTIONS,
+  INTRO_SIZE_OPTIONS,
 } from "./block2.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { Question } from "@vectopus/atlas-icons-react";
@@ -180,6 +181,13 @@ const schema = defineType({
           type: "styles",
           options: {
             fields: [
+              {
+                name: "size",
+                type: "select",
+                options: {
+                  list: optionsToList(INTRO_SIZE_OPTIONS),
+                },
+              },
               {
                 name: "color",
                 type: "color",

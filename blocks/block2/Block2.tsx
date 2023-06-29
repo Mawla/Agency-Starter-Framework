@@ -12,41 +12,42 @@ import {
   TitleSizeType,
   TitleColorType,
   IntroColorType,
+  IntroSizeType,
 } from "./block2.options";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper")
+    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title")
+  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text")
+  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text"),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    )
+    ),
 );
 
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
-    )
+    ),
 );
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
-    )
+    ),
 );
 
 export type Block2Props = {
@@ -63,13 +64,13 @@ export type Block2Props = {
     };
 
     intro?: {
+      size?: IntroSizeType;
       color?: IntroColorType;
     };
   };
 
   title?: string;
   intro?: React.ReactNode;
-
   buttons?: ButtonProps[];
   items?: ItemProps[];
 };
@@ -104,7 +105,11 @@ export const Block2 = ({
           )}
           {intro && (
             <div className="mb-10 md:mb-14">
-              <Text align={"center"} size={"sm"} color={theme?.intro?.color}>
+              <Text
+                align={"center"}
+                size={theme?.intro?.size || "xl"}
+                color={theme?.intro?.color}
+              >
                 <PortableText content={intro as any} />
               </Text>
             </div>
