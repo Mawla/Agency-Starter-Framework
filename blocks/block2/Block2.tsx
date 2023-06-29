@@ -145,9 +145,11 @@ const Item = ({ title, intro, image, _key }: ItemProps) => {
   return (
     <div className="flex flex-col items-start gap-4 sm:gap-5 sm:flex-row">
       <div className="bg-gray-100 dark:bg-gray-700 rounded-full w-16 h-16 lg:w-24 lg:h-24 flex items-center justify-center shrink-0">
-        <div className="w-96 relative aspect-video">
-          <ResponsiveImage {...image} fill className="absolute inset-0" />
-        </div>
+        {image && (
+          <div className="w-96 relative aspect-video">
+            <ResponsiveImage {...image} fill className="absolute inset-0" />
+          </div>
+        )}
       </div>
       <div>
         {title && (
