@@ -1,3 +1,4 @@
+import { Block3Props } from "../../blocks/block3/Block3";
 import { Block2Props } from "../../blocks/block2/Block2";
 import { Block1Props } from "../../blocks/block1/Block1";
 import { GenericBlockProps } from "../../types";
@@ -8,6 +9,9 @@ import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
 
 
+const Block3 = lazy<ComponentType<Block3Props>>(
+  () => import(/* webpackChunkName: "Block3" */ "../../blocks/block3/Block3"),
+);
 const Block2 = lazy<ComponentType<Block2Props>>(
   () => import(/* webpackChunkName: "Block2" */ "../../blocks/block2/Block2")
 );
@@ -46,6 +50,9 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
             >
               {/* all blocks */}
 
+              {item._type === "block.block3" && (
+                <Block3 {...(item as Block3Props)} />
+              )}
               {item._type === "block.block2" && (
                 <Block2 {...(item as Block2Props)} />
               )}
