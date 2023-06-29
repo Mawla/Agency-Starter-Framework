@@ -131,7 +131,7 @@ export const getReactComponentSnippet = ({
       ${render(fields, "items", "items?: { _key?:string;title?:string }[];")}
     };
 
-    const alignClasses = {
+    const alignClasses:Record<AlignType, string> = {
       left: "text-left",
       center: "text-center mx-auto",
       right: "text-right ml-auto",
