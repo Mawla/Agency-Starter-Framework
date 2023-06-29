@@ -89,48 +89,46 @@ export const Block2 = ({
         ...theme?.block,
       }}
     >
-      <section className="bg-white dark:bg-gray-900 antialiased">
-        <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
-          <div className="max-w-3xl mx-auto text-center">
-            {title && (
-              <div className="mb-4 md:mb-6">
-                <Title
-                  size={theme?.title?.size || "xl"}
-                  as={theme?.title?.level}
-                  color={theme?.title?.color}
-                >
-                  {title}
-                </Title>
-              </div>
-            )}
-            {intro && (
-              <div className="mb-10 md:mb-14">
-                <Text align={"center"} size={"sm"} color={theme?.intro?.color}>
-                  <PortableText content={intro as any} />
-                </Text>
-              </div>
-            )}
-          </div>
-
-          <div className="p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50 dark:bg-gray-800">
-            <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
-              {items &&
-                Boolean(items?.filter(Boolean).length) &&
-                items?.map((item) => {
-                  return <Item key={item._key} {...item} />;
-                })}
+      <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
+        <div className="max-w-3xl mx-auto text-center">
+          {title && (
+            <div className="mb-4 md:mb-6">
+              <Title
+                size={theme?.title?.size || "xl"}
+                as={theme?.title?.level}
+                color={theme?.title?.color}
+              >
+                {title}
+              </Title>
             </div>
-          </div>
+          )}
+          {intro && (
+            <div className="mb-10 md:mb-14">
+              <Text align={"center"} size={"sm"} color={theme?.intro?.color}>
+                <PortableText content={intro as any} />
+              </Text>
+            </div>
+          )}
+        </div>
 
-          <div className="mt-8 text-center lg:mt-16">
-            {buttons && Boolean(buttons?.filter(Boolean).length) && (
-              <div className="mt-8 lg:mt-12">
-                <ButtonGroup items={buttons} />
-              </div>
-            )}
+        <div className="bg-white p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50">
+          <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
+            {items &&
+              Boolean(items?.filter(Boolean).length) &&
+              items?.map((item) => {
+                return <Item key={item._key} {...item} />;
+              })}
           </div>
         </div>
-      </section>
+
+        <div className="mt-8 text-center lg:mt-16">
+          {buttons && Boolean(buttons?.filter(Boolean).length) && (
+            <div className="mt-8 lg:mt-12">
+              <ButtonGroup items={buttons} />
+            </div>
+          )}
+        </div>
+      </div>
     </Wrapper>
   );
 };
@@ -144,7 +142,7 @@ type ItemProps = {
 const Item = ({ title, intro, image, _key }: ItemProps) => {
   return (
     <div className="flex flex-col items-start gap-4 sm:gap-5 sm:flex-row">
-      <div className="bg-gray-100 dark:bg-gray-700 rounded-full w-16 h-16 lg:w-24 lg:h-24 flex items-center justify-center shrink-0">
+      <div className="bg-gray-100 rounded-full w-16 h-16 lg:w-24 lg:h-24 flex items-center justify-center shrink-0">
         {image && (
           <div className="w-96 relative aspect-video">
             <ResponsiveImage {...image} fill className="absolute inset-0" />
@@ -153,8 +151,8 @@ const Item = ({ title, intro, image, _key }: ItemProps) => {
       </div>
       <div>
         {title && (
-          <div className="mb-1">
-            <Title>{title}</Title>
+          <div className="mb-2">
+            <Title size={"lg"}>{title}</Title>
           </div>
         )}
         {intro && (
