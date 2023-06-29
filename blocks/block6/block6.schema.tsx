@@ -10,7 +10,7 @@ import {
   INTRO_SIZE_OPTIONS,
 } from "./block6.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { Question } from "@vectopus/atlas-icons-react";
+import { StarSquare } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -18,7 +18,7 @@ const schema = defineType({
   name: "block.block6",
   title: "Default feature list",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <StarSquare weight="thin" />,
   description:
     "Grid layout where you can show up to three items on a row featuring an icon, title and description.",
   preview: {
@@ -91,6 +91,17 @@ const schema = defineType({
           title: "Item",
           name: "item",
           type: "object",
+          groups: [
+            {
+              name: "content",
+              title: "Content",
+              default: true,
+            },
+            {
+              name: "theme",
+              title: "Theme",
+            },
+          ],
           preview: {
             select: {
               title: "title",
@@ -98,9 +109,84 @@ const schema = defineType({
           },
           fields: [
             defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              group: "content",
+            }),
+            defineField({
               name: "title",
               title: "Title",
               type: "string",
+              group: "content",
+            }),
+            defineField({
+              name: "intro",
+              title: "Intro",
+              type: "portabletext.simple",
+              group: "content",
+            }),
+            defineField({
+              name: "theme",
+              title: "Theme",
+              type: "object",
+              group: "theme",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "styles",
+                  options: {
+                    fields: [
+                      {
+                        name: "size",
+                        type: "select",
+                        options: {
+                          list: optionsToList(TITLE_SIZE_OPTIONS),
+                        },
+                      },
+                      {
+                        name: "level",
+                        type: "select",
+                        options: {
+                          list: optionsToList(HEADING_LEVELS),
+                        },
+                      },
+                      {
+                        name: "color",
+                        type: "color",
+                        options: {
+                          colors: TITLE_COLOR_OPTIONS,
+                        },
+                      },
+                    ],
+                  },
+                }),
+
+                defineField({
+                  name: "intro",
+                  title: "Intro",
+                  type: "styles",
+                  options: {
+                    fields: [
+                      {
+                        name: "size",
+                        type: "select",
+                        options: {
+                          list: optionsToList(INTRO_SIZE_OPTIONS),
+                        },
+                      },
+                      {
+                        name: "color",
+                        type: "color",
+                        options: {
+                          colors: INTRO_COLOR_OPTIONS,
+                        },
+                      },
+                    ],
+                  },
+                }),
+              ],
             }),
           ],
         }),

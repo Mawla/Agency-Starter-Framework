@@ -86,10 +86,8 @@ const alignClasses: Record<AlignType, string> = {
 
 export const Block6 = ({
   theme,
-
   title,
   intro,
-
   buttons,
   items,
 }: Block6Props) => {
@@ -100,10 +98,7 @@ export const Block6 = ({
       }}
     >
       <div
-        className={cx(
-          "max-w-3xl",
-          alignClasses[theme?.block?.align || "center"],
-        )}
+        className={cx("max-w-3xl", alignClasses[theme?.block?.align || "left"])}
       >
         {title && (
           <div className="mb-6">
@@ -122,21 +117,10 @@ export const Block6 = ({
             <Text
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
-              align={theme?.block?.align || "center"}
+              align={theme?.block?.align || "left"}
             >
               <PortableText content={intro as any} />
             </Text>
-          </div>
-        )}
-
-        {items && (
-          <div className="p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50">
-            <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
-              {Boolean(items?.filter(Boolean).length) &&
-                items?.map((item) => {
-                  return <Item key={item._key} {...item} />;
-                })}
-            </div>
           </div>
         )}
 
@@ -146,6 +130,15 @@ export const Block6 = ({
           </div>
         )}
       </div>
+
+      {items && (
+        <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0  mt-8 lg:mt-16">
+          {Boolean(items?.filter(Boolean).length) &&
+            items?.map((item) => {
+              return <Item key={item._key} {...item} />;
+            })}
+        </div>
+      )}
     </Wrapper>
   );
 };
@@ -170,9 +163,9 @@ type ItemProps = {
 
 const Item = ({ title, intro, image, theme }: ItemProps) => {
   return (
-    <div className="flex flex-col items-start gap-4 sm:gap-5 sm:flex-row">
+    <div className="text-left">
       {image && (
-        <div className="bg-gray-100 rounded-full w-16 lg:w-24 flex items-center justify-center shrink-0 relative aspect-square">
+        <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 relative overflow-hidden">
           <ResponsiveImage {...image} fill className="absolute inset-0" />
         </div>
       )}
@@ -180,7 +173,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
         {title && (
           <div className="mb-2">
             <Title
-              size={theme?.title?.size || "lg"}
+              size={theme?.title?.size || "xl"}
               color={theme?.title?.color}
               as={theme?.title?.level || "h3"}
             >
@@ -189,7 +182,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
           </div>
         )}
         {intro && (
-          <Text size={theme?.intro?.size || "sm"} color={theme?.intro?.color}>
+          <Text size={theme?.intro?.size || "md"} color={theme?.intro?.color}>
             <PortableText content={intro as any} />
           </Text>
         )}
