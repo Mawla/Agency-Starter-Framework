@@ -23,7 +23,7 @@ export default {
 } as Meta;
 
 const DEMO_CONTENT = {
-  title: "Designed for business teams like yours\n",
+  title: "Designed for business teams like yours",
   image: demoImage,
   intro: (
     <p>
@@ -73,6 +73,7 @@ const DEMO_CONTENT = {
       image: demoImage,
     },
   ],
+  buttons: [{ label: "Get started" }],
 };
 
 export const Default = () => <Block2 {...DEMO_CONTENT} />;
@@ -166,5 +167,34 @@ export const Alignments = () => (
         />
       </div>
     ))}
+  </>
+);
+
+export const ItemsTheme = () => (
+  <>
+    <Block2
+      {...DEMO_CONTENT}
+      items={DEMO_CONTENT.items.map((x) => ({
+        ...x,
+        theme: {
+          title: {
+            color: "white",
+            size: "4xl",
+          },
+          intro: {
+            color: "white",
+            size: "xl",
+          },
+        },
+      }))}
+      theme={{
+        block: {
+          background: "white",
+        },
+        items: {
+          background: "black",
+        },
+      }}
+    />
   </>
 );

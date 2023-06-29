@@ -90,6 +90,17 @@ const schema = defineType({
           title: "Item",
           name: "item",
           type: "object",
+          groups: [
+            {
+              name: "content",
+              title: "Content",
+              default: true,
+            },
+            {
+              name: "theme",
+              title: "Theme",
+            },
+          ],
           preview: {
             select: {
               title: "title",
@@ -100,16 +111,81 @@ const schema = defineType({
               name: "image",
               title: "Image",
               type: "image",
+              group: "content",
             }),
             defineField({
               name: "title",
               title: "Title",
               type: "string",
+              group: "content",
             }),
             defineField({
               name: "intro",
               title: "Intro",
               type: "portabletext.simple",
+              group: "content",
+            }),
+            defineField({
+              name: "theme",
+              title: "Theme",
+              type: "object",
+              group: "theme",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "styles",
+                  options: {
+                    fields: [
+                      {
+                        name: "size",
+                        type: "select",
+                        options: {
+                          list: optionsToList(TITLE_SIZE_OPTIONS),
+                        },
+                      },
+                      {
+                        name: "level",
+                        type: "select",
+                        options: {
+                          list: optionsToList(HEADING_LEVELS),
+                        },
+                      },
+                      {
+                        name: "color",
+                        type: "color",
+                        options: {
+                          colors: TITLE_COLOR_OPTIONS,
+                        },
+                      },
+                    ],
+                  },
+                }),
+
+                defineField({
+                  name: "intro",
+                  title: "Intro",
+                  type: "styles",
+                  options: {
+                    fields: [
+                      {
+                        name: "size",
+                        type: "select",
+                        options: {
+                          list: optionsToList(INTRO_SIZE_OPTIONS),
+                        },
+                      },
+                      {
+                        name: "color",
+                        type: "color",
+                        options: {
+                          colors: INTRO_COLOR_OPTIONS,
+                        },
+                      },
+                    ],
+                  },
+                }),
+              ],
             }),
           ],
         }),
