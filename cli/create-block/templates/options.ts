@@ -34,6 +34,9 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     export const BACKGROUND_COLOR_OPTIONS = pick(ALL_BACKGROUND_COLOR_OPTIONS);
     export type BackgroundColorType = keyof typeof BACKGROUND_COLOR_OPTIONS;
 
+    export const ALIGN_OPTIONS = pick(ALIGNMENTS, "left", "center", "right");
+    export type AlignType = keyof typeof ALIGN_OPTIONS;
+
     
     ${render(
       fields,

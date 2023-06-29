@@ -15,6 +15,7 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
+    import cx from "classnames";
     import {  WrapperProps } from '../../components/block/Wrapper';
     import { BackgroundColorType } from '../../components/block/background.options';
     import { HeadingLevelType } from '../../types';
@@ -24,6 +25,7 @@ export const getReactComponentSnippet = ({
       ${render(fields, "title", "TitleColorType,")} 
       ${render(fields, "intro", "IntroColorType, IntroSizeType,")} 
       ${render(fields, "eyebrow", "EyebrowColorType,")} 
+      AlignType
     } from './${lowerName}.options';
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -91,6 +93,7 @@ export const getReactComponentSnippet = ({
         block?: {
           background?: BackgroundColorType;
           space?: SpaceType;
+          align?: AlignType;
         }
         ${render(
           fields,
@@ -128,6 +131,12 @@ export const getReactComponentSnippet = ({
       ${render(fields, "items", "items?: { _key?:string;title?:string }[];")}
     };
 
+    const alignClasses = {
+      left: "text-left",
+      center: "text-center mx-auto",
+      right: "text-right ml-auto",
+    };    
+
     export const ${pascalName} = ({ 
       theme,
       ${render(fields, "eyebrow", `eyebrow,`)}
@@ -143,6 +152,7 @@ export const getReactComponentSnippet = ({
             ...theme?.block
           }}
         >
+        <div className={cx('max-w-3xl', alignClasses[theme?.block?.align || "center"])}>
           ${render(
             fields,
             "eyebrow",
@@ -181,7 +191,11 @@ export const getReactComponentSnippet = ({
             `
           {intro && (
             <div className="mb-6">
-              <Text size={theme?.intro?.size || 'xl'} color={theme?.intro?.color}>
+              <Text 
+                size={theme?.intro?.size || 'xl'} 
+                color={theme?.intro?.color}
+                align={theme?.block?.align || "center"}
+              >
                 <PortableText content={intro as any} />
               </Text>
             </div>
@@ -221,7 +235,8 @@ export const getReactComponentSnippet = ({
               <ButtonGroup items={buttons} />
             </div>
           )}`,
-          )}          
+          )}    
+          </div>      
         </Wrapper>
       );
     };
