@@ -14,11 +14,10 @@
 
 ```
 npm install -g vercel
-vercel link
 yarn
 npx sanity login
-sh ./cli/setup.sh
-sh ./cli/setup-env.sh
+sh ./cli/setup/setup.sh
+sh ./cli/setup/setup-env.sh
 ```
 
 ### Sanity: Add on demand Revalidation webhook
@@ -33,27 +32,30 @@ Add a webhook to `xxx.vercel.app/api/revalidate` on publish.
 | trigger    | create + update + delete              |
 | method     | post                                  |
 | filter     | `_id match "page*"`                   |
-| projection | `{ _id, _type, language }`            |
+| projection | { \_id, \_type, language }            |
 | secret     | .env SANITY_WEBHOOK_SECRET            |
 
 ### Sanity: Add redeploy hook
 
-Redirects need a redeployment before they work:
+Redirects need a redeployment before they work.
 
-Make
+Create a deploy hook in Vercel under project › settings › git › deploy hooks. Name it `Sanity redirects`, `production` branch.
 
-Add a webhook to `xxx.vercel.app/api/revalidate` on publish.
+| field      | value                                             |
+| ---------- | ------------------------------------------------- |
+| name       | Next.js redirects                                 |
+| dataset    | production                                        |
+| url        | https://api.vercel.com/v1/integrations/deploy/xxx |
+| trigger    | create + update + delete                          |
+| method     | post                                              |
+| projection | `{ _id, _type }`                                  |
+| secret     |                                                   |
 
-| field      | value                                 |
-| ---------- | ------------------------------------- | --- | ----------------------- | --- | ---------------------------------- | --- | ------------------------ |
-| name       | Next.js Revalidate                    |
-| dataset    | production                            |
-| url        | https://xxx.vercel.app/api/revalidate |
-| trigger    | create + update + delete              |
-| method     | post                                  |
-| filter     | `\_type == 'redirect'                 |     | \_type match 'config\*' |     | \_type match '\_type:navigation\*' |     | \_type match 'footer\*'` |
-| projection | `{ _id, _type }`                      |
-| secret     | .env SANITY_WEBHOOK_SECRET            |
+filter:
+
+```
+_type == 'redirect' || _type match 'config*' || _type match '_type:navigation*' || _type match 'footer*'
+```
 
 ### Vercel: Add domains
 
