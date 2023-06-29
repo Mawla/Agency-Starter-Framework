@@ -13,6 +13,7 @@ import {
   TitleColorType,
   IntroColorType,
   IntroSizeType,
+  AlignType,
 } from "./block2.options";
 import React, { ComponentType, lazy } from "react";
 
@@ -55,6 +56,7 @@ export type Block2Props = {
     block?: {
       background?: BackgroundColorType;
       space?: SpaceType;
+      align?: AlignType;
     };
 
     title?: {
@@ -75,12 +77,16 @@ export type Block2Props = {
   items?: ItemProps[];
 };
 
+const alignClasses = {
+  left: "text-left",
+  center: "text-center mx-auto",
+  right: "text-right ml-auto",
+};
+
 export const Block2 = ({
   theme,
-
   title,
   intro,
-
   buttons,
   items,
 }: Block2Props) => {
@@ -91,7 +97,11 @@ export const Block2 = ({
       }}
     >
       <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
-        <div className="max-w-3xl mx-auto text-center">
+        <div
+          className={`max-w-3xl mx-auto ${
+            alignClasses[theme?.block?.align || "center"]
+          }`}
+        >
           {title && (
             <div className="mb-4 md:mb-6">
               <Title
@@ -106,7 +116,7 @@ export const Block2 = ({
           {intro && (
             <div className="mb-10 md:mb-14">
               <Text
-                align={"center"}
+                align={theme?.block?.align || "center"}
                 size={theme?.intro?.size || "xl"}
                 color={theme?.intro?.color}
               >
@@ -128,7 +138,7 @@ export const Block2 = ({
         )}
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-8 text-center lg:mt-16">
+          <div className="mt-8 lg:mt-16">
             <div className="mt-8 lg:mt-12">
               <ButtonGroup items={buttons} />
             </div>

@@ -7,6 +7,7 @@ import {
   TITLE_SIZE_OPTIONS,
   INTRO_COLOR_OPTIONS,
   INTRO_SIZE_OPTIONS,
+  ALIGN_OPTIONS,
 } from "./block2.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { Question } from "@vectopus/atlas-icons-react";
@@ -139,6 +140,13 @@ const schema = defineType({
                 type: "color",
                 options: {
                   colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "align",
+                type: "select",
+                options: {
+                  list: optionsToList(ALIGN_OPTIONS),
                 },
               },
             ],

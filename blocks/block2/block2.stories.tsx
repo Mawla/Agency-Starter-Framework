@@ -1,6 +1,8 @@
 import { demoImage } from "../../stories/content";
 import { Block2 } from "./Block2";
 import {
+  AlignType,
+  ALIGN_OPTIONS,
   BackgroundColorType,
   BACKGROUND_COLOR_OPTIONS,
   IntroColorType,
@@ -145,6 +147,21 @@ export const IntroSizes = () => (
           {...DEMO_CONTENT}
           theme={{
             intro: { size },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const Alignments = () => (
+  <>
+    {(Object.keys(ALIGN_OPTIONS) as AlignType[]).map((align) => (
+      <div key={align}>
+        <Block2
+          {...DEMO_CONTENT}
+          theme={{
+            block: { align },
           }}
         />
       </div>

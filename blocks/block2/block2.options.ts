@@ -8,6 +8,7 @@ import {
   TITLE_COLOR_OPTIONS as ALL_TITLE_COLOR_OPTIONS,
 } from "../../components/block/title.options";
 import { pick } from "../../helpers/utils/object";
+import { ALIGNMENTS } from "../../types";
 
 export const BACKGROUND_COLOR_OPTIONS = pick(ALL_BACKGROUND_COLOR_OPTIONS);
 export type BackgroundColorType = keyof typeof BACKGROUND_COLOR_OPTIONS;
@@ -23,3 +24,6 @@ export type IntroSizeType = keyof typeof INTRO_SIZE_OPTIONS;
 
 export const INTRO_COLOR_OPTIONS = pick(TEXT_COLOR_OPTIONS);
 export type IntroColorType = keyof typeof INTRO_COLOR_OPTIONS;
+
+export const ALIGN_OPTIONS = pick(ALIGNMENTS, "left", "center", "right");
+export type AlignType = keyof typeof ALIGN_OPTIONS;
