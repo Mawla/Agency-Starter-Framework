@@ -50,7 +50,14 @@ async function init() {
 
   const highestBlockIndex = Math.max(...blockFolderNumbers) || 1;
   let blockIndex = isFinite(highestBlockIndex) ? highestBlockIndex + 1 : 1;
-  let blockName = `Block ${blockIndex}`;
+
+  let customBlockIndex = await text({
+    message: "What is the block number? (e.g 1, 2, 3 or 51)",
+    placeholder: blockIndex.toString(),
+  });
+  if (isCancel(customBlockIndex)) process.exit(0);
+
+  let blockName = `Block ${customBlockIndex || blockIndex}`;
 
   let blockTitle = await text({
     message:
