@@ -61,12 +61,6 @@ const Gradient = lazy<ComponentType<GradientProps>>(
     ),
 );
 
-const alignClasses = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right",
-};
-
 export type Block3Props = {
   theme?: {
     block?: {
@@ -96,6 +90,12 @@ export type Block3Props = {
   intro?: React.ReactNode;
   image?: ImageType;
   buttons?: ButtonProps[];
+};
+
+const alignClasses: Record<AlignType, string> = {
+  left: "text-left",
+  center: "text-center mx-auto",
+  right: "text-right ml-auto",
 };
 
 export const Block3 = ({
