@@ -18,6 +18,7 @@ import {
   AlignType,
   IntroSizeType,
 } from "./block3.options";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -50,7 +51,7 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
-      /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
     ),
 );
 
@@ -124,9 +125,10 @@ export const Block3 = ({
       )}
 
       <div
-        className={`max-w-screen-sm relative z-10 ${
-          alignClasses[theme?.block?.align || "center"]
-        }`}
+        className={cx(
+          "max-w-screen-sm relative z-10",
+          alignClasses[theme?.block?.align || "center"],
+        )}
       >
         {title && (
           <div className="mb-4">
