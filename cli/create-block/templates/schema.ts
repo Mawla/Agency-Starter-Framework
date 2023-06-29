@@ -26,15 +26,13 @@ export const getSchemaSnippet = ({
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType } from "sanity";
-  import { BACKGROUND_COLOR_OPTIONS ${render(
-    fields,
-    "title",
-    `, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, EYEBROW_COLOR_OPTIONS`,
-  )}
+  import { BACKGROUND_COLOR_OPTIONS, ALIGN_OPTIONS
+    ${render(fields, "title", `, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS`)}
+    ${render(fields, "eyebrow", `, EYEBROW_COLOR_OPTIONS`)}
   ${render(
     fields,
     "intro",
-    `,INTRO_COLOR_OPTIONS`,
+    `,INTRO_COLOR_OPTIONS, INTRO_SIZE_OPTIONS`,
   )} } from "./${lowerName}.options";
 
   const schema = defineType({
@@ -51,7 +49,7 @@ export const getSchemaSnippet = ({
       },
       prepare({ 
         ${render(fields, "eyebrow", `eyebrow = "", `)}
-        ${render(fields, "title", `title = "${blockName}", `)}
+        ${render(fields, "title", `title = "${blockTitle}", `)}
         ${render(fields, "image", `image`)}
       }: any) {
         return {
@@ -204,6 +202,13 @@ export const getSchemaSnippet = ({
                     colors: BACKGROUND_COLOR_OPTIONS,
                   },
                 },
+                {
+                  name: "align",
+                  type: "select",
+                  options: {
+                    list: optionsToList(ALIGN_OPTIONS),
+                  },
+                },
               ],
             },
           }),
@@ -270,6 +275,13 @@ export const getSchemaSnippet = ({
             type: "styles",
             options: {
               fields: [
+                {
+                  name: "size",
+                  type: "select",
+                  options: {
+                    list: optionsToList(INTRO_SIZE_OPTIONS),
+                  },
+                },
                 {
                   name: "color",
                   type: "color",

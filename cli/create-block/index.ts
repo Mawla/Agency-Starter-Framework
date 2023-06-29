@@ -5,7 +5,6 @@
  * sanity exec ./cli/create-block.ts -- --write
  *
  */
-import { BLOCK_SCHEMAS, SCHEMAS } from "../../types.sanity";
 import { createInfo } from "./create-info";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
@@ -50,7 +49,14 @@ async function init() {
 
   const highestBlockIndex = Math.max(...blockFolderNumbers) || 1;
   let blockIndex = isFinite(highestBlockIndex) ? highestBlockIndex + 1 : 1;
-  let blockName = `Block ${blockIndex}`;
+
+  let customBlockIndex = await text({
+    message: "What is the block number? (e.g 1, 2, 3 or 51)",
+    placeholder: blockIndex.toString(),
+  });
+  if (isCancel(customBlockIndex)) process.exit(0);
+
+  let blockName = `Block ${customBlockIndex || blockIndex}`;
 
   let blockTitle = await text({
     message:
@@ -112,5 +118,10 @@ async function init() {
   createTests(answers);
   createInfo(answers);
 
-  outro(`You're all set!`);
+  outro(`
+  You're all set!
+
+  › Don't forget to replace the default schema icon with a custom one from https://atlasicons.vectopus.com.
+  
+  `);
 }

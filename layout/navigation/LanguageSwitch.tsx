@@ -21,7 +21,6 @@ type LanguageSwitchProps = {
 
 const FLAGS: Record<LanguageType, IconType> = {
   en: "flag-uk",
-  es: "flag-spain",
 };
 
 export const LanguageSwitch = ({

@@ -1,7 +1,6 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
-import { LanguageSwitch } from "./LanguageSwitch";
 import { Logo } from "./Logo";
 import { NavigationProps } from "./Navigation";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
@@ -189,9 +188,6 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             {/* buttons */}
             <div className="flex-1">
               <RadixNavigationMenu.List className="flex gap-2 xl:gap-4 items-center justify-end">
-                {/* language */}
-                <LanguageSwitch align="right" />
-
                 {/* buttons */}
                 {Boolean(buttons?.length) &&
                   buttons?.map((button) => (
