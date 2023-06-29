@@ -13,6 +13,8 @@ import {
   TitleSizeType,
   TitleColorType,
   IntroColorType,
+  AlignType,
+  IntroSizeType,
 } from "./block3.options";
 import React, { ComponentType, lazy } from "react";
 
@@ -50,11 +52,18 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
+const alignClasses = {
+  left: "text-left",
+  center: "text-center mx-auto",
+  right: "text-right",
+};
+
 export type Block3Props = {
   theme?: {
     block?: {
       background?: BackgroundColorType;
       space?: SpaceType;
+      align?: AlignType;
     };
 
     title?: {
@@ -65,6 +74,7 @@ export type Block3Props = {
 
     intro?: {
       color?: IntroColorType;
+      size?: IntroSizeType;
     };
   };
 
@@ -76,7 +86,6 @@ export type Block3Props = {
 
 export const Block3 = ({
   theme,
-
   title,
   intro,
   image,
@@ -88,37 +97,46 @@ export const Block3 = ({
         ...theme?.block,
       }}
     >
-      {title && (
-        <div className="mb-4 md:mb-6">
-          <Title
-            size={theme?.title?.size || "xl"}
-            as={theme?.title?.level}
-            color={theme?.title?.color}
-          >
-            {title}
-          </Title>
-        </div>
-      )}
-
-      {intro && (
-        <div className="mb-10 md:mb-14">
-          <Text size={"sm"} color={theme?.intro?.color}>
-            <PortableText content={intro as any} />
-          </Text>
-        </div>
-      )}
-
-      {image && (
+      {/* {image && (
         <div className="w-96 relative aspect-video">
           <ResponsiveImage {...image} fill className="absolute inset-0" />
         </div>
-      )}
+      )} */}
 
-      {buttons && Boolean(buttons?.filter(Boolean).length) && (
-        <div className="mt-8 lg:mt-12">
-          <ButtonGroup items={buttons} />
-        </div>
-      )}
+      <div
+        className={`max-w-screen-sm ${
+          alignClasses[theme?.block?.align || "center"]
+        }`}
+      >
+        {title && (
+          <div className="mb-4">
+            <Title
+              size={theme?.title?.size || "4xl"}
+              as={theme?.title?.level}
+              color={theme?.title?.color}
+            >
+              {title}
+            </Title>
+          </div>
+        )}
+        {intro && (
+          <div className="mb-6">
+            <Text
+              color={theme?.intro?.color}
+              size={theme?.intro?.size || "xl"}
+              align={theme?.block?.align || "center"}
+            >
+              <PortableText content={intro as any} />
+            </Text>
+          </div>
+        )}
+
+        {buttons && Boolean(buttons?.filter(Boolean).length) && (
+          <div className="mt-8 lg:mt-12">
+            <ButtonGroup items={buttons} />
+          </div>
+        )}
+      </div>
     </Wrapper>
   );
 };

@@ -5,8 +5,9 @@ import {
   BACKGROUND_COLOR_OPTIONS,
   TITLE_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
-  EYEBROW_COLOR_OPTIONS,
   INTRO_COLOR_OPTIONS,
+  INTRO_SIZE_OPTIONS,
+  ALIGN_OPTIONS,
 } from "./block3.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { Question } from "@vectopus/atlas-icons-react";
@@ -23,13 +24,11 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-
       image: "image",
     },
     prepare({ title = "Block 3", image }: any) {
       return {
         title: title,
-
         media: image || <Question weight="thin" />,
       };
     },
@@ -119,6 +118,14 @@ const schema = defineType({
                   colors: BACKGROUND_COLOR_OPTIONS,
                 },
               },
+              {
+                name: "align",
+                title: "Align",
+                type: "select",
+                options: {
+                  list: optionsToList(ALIGN_OPTIONS),
+                },
+              },
             ],
           },
         }),
@@ -164,6 +171,13 @@ const schema = defineType({
                 type: "color",
                 options: {
                   colors: INTRO_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "size",
+                type: "select",
+                options: {
+                  list: optionsToList(INTRO_SIZE_OPTIONS),
                 },
               },
             ],
