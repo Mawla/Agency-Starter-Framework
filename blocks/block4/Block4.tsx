@@ -52,7 +52,7 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
-const alignClasses = {
+const alignClasses: Record<AlignType, string> = {
   left: "text-left",
   center: "text-center mx-auto",
   right: "text-right ml-auto",
