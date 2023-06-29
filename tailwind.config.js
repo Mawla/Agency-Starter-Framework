@@ -108,7 +108,7 @@ module.exports = {
       "2xs": "375px",
     },
     fontFamily: {
-      sans: ["Apercu"],
+      sans: ["Apercu, arial"],
       mono: ["monospace"],
     },
     fontSize: {
@@ -183,7 +183,7 @@ module.exports = {
       blue: {
         50: "#DAF2FD",
         100: "#00385F",
-      }
+      },
     },
     extend: {
       zIndex: {
@@ -287,8 +287,8 @@ module.exports = {
                 classNode.parent.insertBefore(
                   classNode,
                   selectorParser().astSync(
-                    `.${prefixClass("group")}:${pseudoClass} `,
-                  ),
+                    `.${prefixClass("group")}:${pseudoClass} `
+                  )
                 );
               });
             }).processSync(selector);
