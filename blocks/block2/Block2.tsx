@@ -105,7 +105,7 @@ export const Block2 = ({
             )}
             {intro && (
               <div className="mb-10 md:mb-14">
-                <Text size={"sm"} color={theme?.intro?.color}>
+                <Text align={"center"} size={"sm"} color={theme?.intro?.color}>
                   <PortableText content={intro as any} />
                 </Text>
               </div>
@@ -153,7 +153,7 @@ const Item = ({ title, intro, image, _key }: ItemProps) => {
       </div>
       <div>
         {title && (
-          <div className="mb-4 md:mb-6">
+          <div className="mb-1">
             <Title>{title}</Title>
           </div>
         )}
