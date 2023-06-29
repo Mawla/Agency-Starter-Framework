@@ -207,7 +207,7 @@ export const getReactComponentSnippet = ({
             "image",
             `
             {image && (
-              <div className="w-96 relative aspect-video">
+              <div className="w-96 relative aspect-video inline-block">
                 <ResponsiveImage {...image} fill className="absolute inset-0" />
               </div>
             )}`,
