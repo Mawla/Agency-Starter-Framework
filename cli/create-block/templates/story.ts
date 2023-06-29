@@ -51,12 +51,12 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
     } as Meta;
     
     const DEMO_CONTENT = {
-      ${render(fields, "eyebrow", "eyebrow,")}
-      ${render(fields, "title", "title,")}
-      ${render(fields, "intro", "<p>intro</p>,")}
-      ${render(fields, "image", "demoImage,")}
-      ${render(fields, "buttons", "[{ label: 'Button' }],")}
-      ${render(fields, "items", "[{ title: 'Item' }],")}
+      ${render(fields, "eyebrow", "eyebrow: 'eyebrow',")}
+      ${render(fields, "title", "title: 'title',")}
+      ${render(fields, "intro", "intro: <p>intro</p>,")}
+      ${render(fields, "image", "image: demoImage,")}
+      ${render(fields, "buttons", "buttons: [{ label: 'Button' }],")}
+      ${render(fields, "items", "items: [{ title: 'Item' }],")}
     };
 
     export const Default = () => <${pascalName} 
