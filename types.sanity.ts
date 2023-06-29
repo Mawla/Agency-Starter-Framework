@@ -1,6 +1,7 @@
 import { pick } from "./helpers/utils/object";
 
 export const SCHEMAS = {
+  "block.block1": "",
   "config.cms": "",
   "config.general": "",
   "config.integrations": "",
@@ -93,7 +94,7 @@ export const TAGGABLE_SCHEMAS = pick(
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const BLOCK_SCHEMAS = pick(SCHEMAS);
+export const BLOCK_SCHEMAS = pick(SCHEMAS, "block.block1");
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
 
