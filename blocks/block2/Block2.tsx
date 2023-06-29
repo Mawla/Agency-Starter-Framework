@@ -98,7 +98,7 @@ export const Block2 = ({
     >
       <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
         <div
-          className={`max-w-3xl mx-auto ${
+          className={`max-w-3xl ${
             alignClasses[theme?.block?.align || "center"]
           }`}
         >
