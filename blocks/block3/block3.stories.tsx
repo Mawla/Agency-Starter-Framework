@@ -29,6 +29,30 @@ const DEMO_CONTENT = {
 };
 
 export const Default = () => <Block3 {...DEMO_CONTENT} />;
+export const Image = () => (
+  <Block3
+    {...DEMO_CONTENT}
+    image={demoImage}
+    theme={{
+      block: {
+        space: {
+          top: "xl",
+          bottom: "xl",
+        },
+      },
+      title: {
+        color: "white",
+      },
+      intro: {
+        color: "white",
+      },
+      image: {
+        gradientFromOpacity: 0.5,
+        gradientToOpacity: 0.2,
+      },
+    }}
+  />
+);
 
 export const BlockBackgrounds = () => (
   <>

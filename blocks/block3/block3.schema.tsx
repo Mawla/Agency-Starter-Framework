@@ -1,4 +1,5 @@
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
+import { GRADIENT_OPACITY_OPTIONS } from "../../components/gradient/GradientOptions";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
 import {
@@ -10,15 +11,15 @@ import {
   ALIGN_OPTIONS,
 } from "./block3.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { Question } from "@vectopus/atlas-icons-react";
+import { ClickBait } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "block.block3",
-  title: "Heading with CTA button#",
+  title: "Heading with CTA button",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <ClickBait weight="thin" />,
   description:
     "Use this CTA section with a heading, short paragraph, and a button to encourage users to do something.",
   preview: {
@@ -29,7 +30,7 @@ const schema = defineType({
     prepare({ title = "Block 3", image }: any) {
       return {
         title: title,
-        media: image || <Question weight="thin" />,
+        media: image || <ClickBait weight="thin" />,
       };
     },
   },
@@ -178,6 +179,35 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(INTRO_SIZE_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "image",
+          title: "Image",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "gradientFromOpacity",
+                type: "select",
+                options: {
+                  list: GRADIENT_OPACITY_OPTIONS.reduce((acc, x) => {
+                    acc.push({ title: x, value: x });
+                    return acc;
+                  }, [] as { title: number; value: number }[]),
+                },
+              },
+              {
+                name: "gradientToOpacity",
+                type: "select",
+                options: {
+                  list: GRADIENT_OPACITY_OPTIONS.reduce((acc, x) => {
+                    acc.push({ title: x, value: x });
+                    return acc;
+                  }, [] as { title: number; value: number }[]),
                 },
               },
             ],

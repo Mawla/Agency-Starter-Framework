@@ -5,6 +5,8 @@ import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { GradientProps } from "../../components/gradient/Gradient";
+import { GradientOpacityType } from "../../components/gradient/GradientOptions";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { HeadingLevelType } from "../../types";
@@ -52,6 +54,13 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
+const Gradient = lazy<ComponentType<GradientProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Gradient" */ "../../components/gradient/Gradient"
+    ),
+);
+
 const alignClasses = {
   left: "text-left",
   center: "text-center mx-auto",
@@ -76,6 +85,11 @@ export type Block3Props = {
       color?: IntroColorType;
       size?: IntroSizeType;
     };
+
+    image?: {
+      gradientFromOpacity?: GradientOpacityType;
+      gradientToOpacity?: GradientOpacityType;
+    };
   };
 
   title?: string;
@@ -97,14 +111,20 @@ export const Block3 = ({
         ...theme?.block,
       }}
     >
-      {/* {image && (
-        <div className="w-96 relative aspect-video">
+      {image && (
+        <div className="absolute inset-0 z-0">
           <ResponsiveImage {...image} fill className="absolute inset-0" />
+
+          <Gradient
+            from={theme?.image?.gradientFromOpacity || 0.2}
+            to={theme?.image?.gradientToOpacity || 0.4}
+            className="z-10"
+          />
         </div>
-      )} */}
+      )}
 
       <div
-        className={`max-w-screen-sm ${
+        className={`max-w-screen-sm relative z-10 ${
           alignClasses[theme?.block?.align || "center"]
         }`}
       >
@@ -119,6 +139,7 @@ export const Block3 = ({
             </Title>
           </div>
         )}
+
         {intro && (
           <div className="mb-6">
             <Text
