@@ -39,10 +39,10 @@ const DEMO_CONTENT = {
           "Development workflow",
           "Knowledge management",
         ].map((item, index) => (
-          <li key={index} className="!pl-0">
+          <li key={index} className="!pl-0 !relative">
             <IconLoader
               icon="check-circle"
-              className="absolute left-0 -translate-y-3.5 w-5 h-5 text-primary-600"
+              className="absolute left-0 -translate-x-[calc(100%+.75em)] top-[.25em] w-[1em] h-[1em] text-current !mt-0"
             />
             <span>{item}</span>
           </li>

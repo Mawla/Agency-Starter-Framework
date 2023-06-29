@@ -92,10 +92,10 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
         },
         listItem: {
           check: ({ children }) => (
-            <li className="!pl-0">
+            <li className="!pl-0 !relative">
               <IconLoader
                 icon="check-circle"
-                className="absolute left-0 -translate-y-full md:-translate-y-[80%] w-5 h-5 text-primary-600"
+                className="absolute left-0 -translate-x-[calc(100%+.75em)] top-[.25em] w-[1em] h-[1em] text-current !mt-0"
               />
               <span>{children}</span>
             </li>
