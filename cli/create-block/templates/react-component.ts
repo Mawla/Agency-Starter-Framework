@@ -150,7 +150,7 @@ export const getReactComponentSnippet = ({
           {(title || eyebrow) && (
             <div className="mb-6">
               <Title 
-                size={theme?.title?.size || 'lg'} 
+                size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color} 
                 eyebrow={eyebrow} 
@@ -166,7 +166,7 @@ export const getReactComponentSnippet = ({
           {title && (
             <div className="mb-6">
               <Title 
-                size={theme?.title?.size || 'xl'} 
+                size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color}
               >{title}</Title>
