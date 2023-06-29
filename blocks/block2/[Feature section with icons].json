@@ -1,0 +1,13 @@
+{
+  "title": "Feature section with icons",
+  "description": "Feature section with icons",
+  "name": "Block 2",
+  "schemaName": "block.block2",
+  "date": "2023-06-28T16:04:53.511Z",
+  "fields": [
+    "title",
+    "intro",
+    "items",
+    "buttons"
+  ]
+}

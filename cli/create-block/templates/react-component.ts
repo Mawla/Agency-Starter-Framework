@@ -15,6 +15,7 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
+    import cx from "classnames";
     import {  WrapperProps } from '../../components/block/Wrapper';
     import { BackgroundColorType } from '../../components/block/background.options';
     import { HeadingLevelType } from '../../types';
@@ -22,8 +23,9 @@ export const getReactComponentSnippet = ({
     import { 
       ${render(fields, "title", "TitleSizeType,")} 
       ${render(fields, "title", "TitleColorType,")} 
-      ${render(fields, "intro", "IntroColorType,")} 
+      ${render(fields, "intro", "IntroColorType, IntroSizeType,")} 
       ${render(fields, "eyebrow", "EyebrowColorType,")} 
+      AlignType
     } from './${lowerName}.options';
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -91,6 +93,7 @@ export const getReactComponentSnippet = ({
         block?: {
           background?: BackgroundColorType;
           space?: SpaceType;
+          align?: AlignType;
         }
         ${render(
           fields,
@@ -116,6 +119,7 @@ export const getReactComponentSnippet = ({
           `
         intro?: {
           color?: IntroColorType;
+          size?: IntroSizeType;
         },`,
         )}
       };
@@ -126,6 +130,12 @@ export const getReactComponentSnippet = ({
       ${render(fields, "buttons", "buttons?: ButtonProps[];")}
       ${render(fields, "items", "items?: { _key?:string;title?:string }[];")}
     };
+
+    const alignClasses:Record<AlignType, string> = {
+      left: "text-left",
+      center: "text-center mx-auto",
+      right: "text-right ml-auto",
+    };    
 
     export const ${pascalName} = ({ 
       theme,
@@ -142,14 +152,15 @@ export const getReactComponentSnippet = ({
             ...theme?.block
           }}
         >
+        <div className={cx('max-w-3xl', alignClasses[theme?.block?.align || "center"])}>
           ${render(
             fields,
             "eyebrow",
             `
           {(title || eyebrow) && (
-            <div className="mb-4 md:mb-6">
+            <div className="mb-6">
               <Title 
-                size={theme?.title?.size || 'lg'} 
+                size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color} 
                 eyebrow={eyebrow} 
@@ -163,9 +174,9 @@ export const getReactComponentSnippet = ({
             !fields?.includes("eyebrow") && fields?.includes("title")
               ? `
           {title && (
-            <div className="mb-4 md:mb-6">
+            <div className="mb-6">
               <Title 
-                size={theme?.title?.size || 'xl'} 
+                size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color}
               >{title}</Title>
@@ -179,8 +190,12 @@ export const getReactComponentSnippet = ({
             "intro",
             `
           {intro && (
-            <div className="mb-10 md:mb-14">
-              <Text size={"sm"} color={theme?.intro?.color}>
+            <div className="mb-6">
+              <Text 
+                size={theme?.intro?.size || 'xl'} 
+                color={theme?.intro?.color}
+                align={theme?.block?.align || "center"}
+              >
                 <PortableText content={intro as any} />
               </Text>
             </div>
@@ -192,7 +207,7 @@ export const getReactComponentSnippet = ({
             "image",
             `
             {image && (
-              <div className="w-96 relative aspect-video">
+              <div className="w-full relative aspect-video inline-block">
                 <ResponsiveImage {...image} fill className="absolute inset-0" />
               </div>
             )}`,
@@ -220,7 +235,8 @@ export const getReactComponentSnippet = ({
               <ButtonGroup items={buttons} />
             </div>
           )}`,
-          )}          
+          )}    
+          </div>      
         </Wrapper>
       );
     };
