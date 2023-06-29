@@ -32,7 +32,7 @@ export const getSchemaSnippet = ({
   ${render(
     fields,
     "intro",
-    `,INTRO_COLOR_OPTIONS`,
+    `,INTRO_COLOR_OPTIONS, INTRO_SIZE_OPTIONS`,
   )} } from "./${lowerName}.options";
 
   const schema = defineType({
@@ -268,6 +268,13 @@ export const getSchemaSnippet = ({
             type: "styles",
             options: {
               fields: [
+                {
+                  name: "size",
+                  type: "select",
+                  options: {
+                    list: optionsToList(INTRO_SIZE_OPTIONS),
+                  },
+                },
                 {
                   name: "color",
                   type: "color",

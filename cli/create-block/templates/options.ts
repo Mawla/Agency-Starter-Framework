@@ -26,7 +26,7 @@ export const getOptionsSnippet = ({ fields }: Props) => {
     ${render(
       fields,
       "intro",
-      `import { TEXT_COLOR_OPTIONS } from "../../components/block/text.options";`,
+      `import { TEXT_COLOR_OPTIONS, TEXT_SIZE_OPTIONS } from "../../components/block/text.options";`,
     )}
     
     import { pick } from "../../helpers/utils/object";
@@ -52,11 +52,15 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       fields,
       "intro",
       `
+      export const INTRO_SIZE_OPTIONS = pick(TEXT_SIZE_OPTIONS);
+      export type IntroSizeType = keyof typeof INTRO_SIZE_OPTIONS;
+
       export const INTRO_COLOR_OPTIONS = pick(TEXT_COLOR_OPTIONS);
       export type IntroColorType = keyof typeof INTRO_COLOR_OPTIONS;
 
     `,
     )};
+    
     
     ${render(
       fields,

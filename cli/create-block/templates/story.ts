@@ -28,7 +28,9 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
         "intro",
         `
       IntroColorType,
-      INTRO_COLOR_OPTIONS,`,
+      INTRO_COLOR_OPTIONS, 
+      IntroSizeType,
+      INTRO_SIZE_OPTIONS,`,
       )}
       ${render(
         fields,
@@ -141,6 +143,21 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
             intro={<p>${pascalName}</p>}
               theme={{
                 intro: { color },
+              }}
+            />
+          </div>
+        ))}
+      </>
+    );
+    
+    export const IntroSizes = () => (
+      <>
+        {(Object.keys(INTRO_SIZE_OPTIONS) as IntroSizeType[]).map((size) => (
+          <div key={size}>
+            <${pascalName}
+              title="${pascalName}"
+              theme={{
+                intro: { size },
               }}
             />
           </div>
