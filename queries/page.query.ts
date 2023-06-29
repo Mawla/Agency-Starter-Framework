@@ -1,3 +1,4 @@
+import { getBlock4Query } from "../blocks/block4/block4.query";
 import {
   FlatBreadcrumbItemType,
   FlatBreadcrumbType,
@@ -90,6 +91,7 @@ export const getPageQuery = (language: LanguageType) => groq`
 
     // blocks
     "blocks": blocks[!(_type in path('studio.*'))] {
+      ${getBlock4Query(language)},
       _key,
       _type,
       decorations,

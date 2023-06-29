@@ -4,7 +4,7 @@ import NextImage, { ImageProps as NextImageProps } from "next/image";
 
 const IMAGE_QUALITY = 85;
 
-type SimpleImageProps = {
+export type SimpleImageProps = {
   crop?: ImageType["crop"];
   hotspot?: ImageType["hotspot"];
   alt?: string;
@@ -54,3 +54,5 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
     </>
   );
 };
+
+export default SimpleImage;

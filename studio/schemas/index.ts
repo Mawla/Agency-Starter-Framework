@@ -1,3 +1,4 @@
+import block4 from "../../blocks/block4/block4.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
@@ -50,6 +51,8 @@ import styles from "./objects/styles";
 
 export const schemaTypes = [
   ...[
+    block4,
+    blockPreset,
     button,
     buttongroup,
     configCMS,
@@ -62,7 +65,6 @@ export const schemaTypes = [
     footer,
     imageSimple,
     link,
-    blockPreset,
     navigation,
     pageBlog,
     pageBlogs,
