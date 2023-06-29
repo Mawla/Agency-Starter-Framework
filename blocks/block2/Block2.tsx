@@ -6,7 +6,7 @@ import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
-import { HeadingLevelType } from "../../types";
+import {HeadingLevelType, ImageType} from "../../types";
 import {
   TitleSizeType,
   TitleColorType,
@@ -41,6 +41,12 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
+type ItemProps = {
+  title?: string;
+  intro?: React.ReactNode;
+  image?: ImageType;
+}
+
 export type Block2Props = {
   theme?: {
     block?: {
@@ -63,7 +69,7 @@ export type Block2Props = {
   intro?: React.ReactNode;
 
   buttons?: ButtonProps[];
-  items?: { _key?: string; title?: string }[];
+  items?: ItemProps[];
 };
 
 export const Block2 = ({
