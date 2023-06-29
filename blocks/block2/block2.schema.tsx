@@ -10,7 +10,7 @@ import {
   ALIGN_OPTIONS,
 } from "./block2.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { Question } from "@vectopus/atlas-icons-react";
+import { TopVerticalLayout } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -18,7 +18,7 @@ const schema = defineType({
   name: "block.block2",
   title: "Feature section with icons",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <TopVerticalLayout weight="thin" />,
   description: "Feature section with icons",
   preview: {
     select: {
@@ -147,6 +147,22 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(ALIGN_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "items",
+          title: "Items",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
                 },
               },
             ],
