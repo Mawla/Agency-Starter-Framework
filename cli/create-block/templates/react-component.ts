@@ -22,7 +22,7 @@ export const getReactComponentSnippet = ({
     import { 
       ${render(fields, "title", "TitleSizeType,")} 
       ${render(fields, "title", "TitleColorType,")} 
-      ${render(fields, "intro", "IntroColorType,")} 
+      ${render(fields, "intro", "IntroColorType, IntroSizeType,")} 
       ${render(fields, "eyebrow", "EyebrowColorType,")} 
     } from './${lowerName}.options';
 
@@ -116,6 +116,7 @@ export const getReactComponentSnippet = ({
           `
         intro?: {
           color?: IntroColorType;
+          size?: IntroSizeType;
         },`,
         )}
       };
@@ -147,9 +148,9 @@ export const getReactComponentSnippet = ({
             "eyebrow",
             `
           {(title || eyebrow) && (
-            <div className="mb-4 md:mb-6">
+            <div className="mb-6">
               <Title 
-                size={theme?.title?.size || 'lg'} 
+                size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color} 
                 eyebrow={eyebrow} 
@@ -163,9 +164,9 @@ export const getReactComponentSnippet = ({
             !fields?.includes("eyebrow") && fields?.includes("title")
               ? `
           {title && (
-            <div className="mb-4 md:mb-6">
+            <div className="mb-6">
               <Title 
-                size={theme?.title?.size || 'xl'} 
+                size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color}
               >{title}</Title>
@@ -179,8 +180,8 @@ export const getReactComponentSnippet = ({
             "intro",
             `
           {intro && (
-            <div className="mb-10 md:mb-14">
-              <Text size={"sm"} color={theme?.intro?.color}>
+            <div className="mb-6">
+              <Text size={theme?.intro?.size || 'xl'} color={theme?.intro?.color}>
                 <PortableText content={intro as any} />
               </Text>
             </div>
