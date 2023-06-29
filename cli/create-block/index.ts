@@ -5,7 +5,6 @@
  * sanity exec ./cli/create-block.ts -- --write
  *
  */
-import { BLOCK_SCHEMAS, SCHEMAS } from "../../types.sanity";
 import { createInfo } from "./create-info";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
@@ -119,5 +118,10 @@ async function init() {
   createTests(answers);
   createInfo(answers);
 
-  outro(`You're all set!`);
+  outro(`
+  You're all set!
+
+  › Don't forget to replace the default schema icon with a custom one from https://atlasicons.vectopus.com.
+  
+  `);
 }

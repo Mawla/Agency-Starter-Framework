@@ -8,14 +8,16 @@ export const prettierFile = (filePath: string) => {
     (error: Error, stdout: StdioPipe, stderr: StdioPipe) => {
       if (error) {
         console.log(`error: ${error.message}`);
+        console.log(stdout);
         return;
       }
       if (stderr) {
         if (stderr.indexOf("[warn] ") > -1) return;
         console.log(stderr);
+        console.log(stdout);
         return;
       }
-      console.log(stdout);
+      // console.log(stdout);
     },
   );
 };
