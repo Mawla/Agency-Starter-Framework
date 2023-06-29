@@ -1,4 +1,7 @@
 import { getBlock3Query } from "../blocks/block3/block3.query";
+import { getBlock2Query } from "../blocks/block2/block2.query";
+import { getBlock1Query } from "../blocks/block1/block1.query";
+
 import {
   FlatBreadcrumbItemType,
   FlatBreadcrumbType,
@@ -92,6 +95,8 @@ export const getPageQuery = (language: LanguageType) => groq`
     // blocks
     "blocks": blocks[!(_type in path('studio.*'))] {
       ${getBlock3Query(language)},
+      ${getBlock2Query(language)},
+      ${getBlock1Query(language)},
       _key,
       _type,
       decorations,

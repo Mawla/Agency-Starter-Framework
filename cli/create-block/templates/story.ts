@@ -14,6 +14,8 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
     import { Meta } from "@storybook/react";
     import React from "react";
     import {
+      AlignType,
+      ALIGN_OPTIONS,
       BackgroundColorType,
       BACKGROUND_COLOR_OPTIONS,
       ${render(
@@ -28,7 +30,9 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
         "intro",
         `
       IntroColorType,
-      INTRO_COLOR_OPTIONS,`,
+      INTRO_COLOR_OPTIONS, 
+      IntroSizeType,
+      INTRO_SIZE_OPTIONS,`,
       )}
       ${render(
         fields,
@@ -46,14 +50,19 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
       title: "Blocks/${pascalName}",
     } as Meta;
     
+    const DEMO_CONTENT = {
+      ${render(fields, "eyebrow", "eyebrow: 'eyebrow',")}
+      ${render(fields, "title", "title: 'title',")}
+      ${render(fields, "intro", "intro: <p>intro</p>,")}
+      ${render(fields, "image", "image: demoImage,")}
+      ${render(fields, "buttons", "buttons: [{ label: 'Button' }],")}
+      ${render(fields, "items", "items: [{ title: 'Item' }],")}
+    };
+
     export const Default = () => <${pascalName} 
-    ${render(fields, "eyebrow", `eyebrow="${pascalName}"`)}
-    ${render(fields, "title", `title="${pascalName}"`)}
-    ${render(fields, "intro", `intro={<p>${pascalName}</p>}`)}
-    ${render(fields, "image", `image={demoImage}`)}
-    ${render(fields, "buttons", `buttons={[{ label: '${pascalName}' }]}`)}
-    ${render(fields, "items", `items={[{ title: '${pascalName}' }]}`)}
+      {...DEMO_CONTENT}
     />;
+
     
     export const BlockBackgrounds = () => (
       <>
@@ -61,7 +70,7 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
           (color) => (
             <div key={color}>
               <${pascalName}
-                title="${pascalName}"
+                {...DEMO_CONTENT}
                 theme={{
                   block: { background: color },
                 }}
@@ -69,6 +78,21 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
             </div>
           ),
         )}
+      </>
+    );
+
+    export const Alignments = () => (
+      <>
+        {(Object.keys(ALIGN_OPTIONS) as AlignType[]).map((align) => (
+          <div key={align}>
+            <${pascalName}
+              {...DEMO_CONTENT}
+              theme={{
+                block: { align },
+              }}
+            />
+          </div>
+        ))}
       </>
     );
 
@@ -81,8 +105,8 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
           {(Object.keys(EYEBROW_COLOR_OPTIONS) as EyebrowColorType[]).map((color) => (
             <div key={color}>
               <${pascalName}
-                title="${pascalName}"
-                eyebrow="${pascalName}"
+                title={DEMO_CONTENT.title}
+                eyebrow={DEMO_CONTENT.eyebrow}
                 theme={{
                   eyebrow: { color },
                 }}
@@ -103,7 +127,7 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
         {(Object.keys(TITLE_COLOR_OPTIONS) as TitleColorType[]).map((color) => (
           <div key={color}>
             <${pascalName}
-              title="${pascalName}"
+              title={DEMO_CONTENT.title}
               theme={{
                 title: { color },
               }}
@@ -118,7 +142,7 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
         {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
           <div key={size}>
             <${pascalName}
-              title="${pascalName}"
+              title={DEMO_CONTENT.title}
               theme={{
                 title: { size },
               }}
@@ -138,9 +162,24 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
         {(Object.keys(INTRO_COLOR_OPTIONS) as IntroColorType[]).map((color) => (
           <div key={color}>
             <${pascalName}
-            intro={<p>${pascalName}</p>}
+              intro={DEMO_CONTENT.intro}
               theme={{
                 intro: { color },
+              }}
+            />
+          </div>
+        ))}
+      </>
+    );
+    
+    export const IntroSizes = () => (
+      <>
+        {(Object.keys(INTRO_SIZE_OPTIONS) as IntroSizeType[]).map((size) => (
+          <div key={size}>
+            <${pascalName}
+              intro={DEMO_CONTENT.intro}
+              theme={{
+                intro: { size },
               }}
             />
           </div>
