@@ -6,8 +6,8 @@ test("inject schema in sanity studio/schemas/index.ts", () => {
   });
 
   expect(
-    result.includes(`import blockTest from "../../blocks/test/test.schema";`),
+    result.includes(`import test from "../../blocks/test/test.schema";`),
   ).toBeTruthy();
 
-  expect(result.includes(`blockTest,`)).toBeTruthy();
+  expect(result.includes(`test,`)).toBeTruthy();
 });

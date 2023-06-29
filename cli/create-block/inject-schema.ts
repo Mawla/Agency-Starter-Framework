@@ -12,13 +12,13 @@ const fs = require("fs");
 const path = require("path");
 
 export function injectSchema(answers: Pick<AnswersType, "blockName">) {
-  let { pascalName, lowerName } = formatName(answers.blockName);
+  let { lowerName } = formatName(answers.blockName);
 
   const filePath = path.resolve(`${__dirname}../../../studio/schemas/index.ts`);
   const file = fs.readFileSync(filePath).toString();
   let lines = file.split("\n");
 
-  let schemaImportName = `block${pascalName}`;
+  let schemaImportName = lowerName;
   let importPath = `../../blocks/${lowerName}/${lowerName}.schema`;
 
   // add import: place doesn't matter, prettier will take care of it
