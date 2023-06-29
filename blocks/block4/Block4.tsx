@@ -5,7 +5,7 @@ import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
-import { SimpleImageProps } from "../../components/images/SimpleImage";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { HeadingLevelType } from "../../types";
 import { ImageType } from "../../types";
@@ -45,10 +45,10 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
-const SimpleImage = lazy<ComponentType<SimpleImageProps>>(
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
-      /* webpackChunkName: "SimpleImageProps" */ "../../components/images/SimpleImage"
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
     ),
 );
 
@@ -130,7 +130,7 @@ export const Block4 = ({
 
         {image && (
           <div className="mt-6">
-            <SimpleImage {...image} />
+            <ResponsiveImage {...image} className="inline-block" />
           </div>
         )}
       </div>

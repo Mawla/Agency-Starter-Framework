@@ -1,4 +1,4 @@
-import { demoImage, demoImage2 } from "../../stories/content";
+import { demoImage2, demoImage3 } from "../../stories/content";
 import { Block4 } from "./Block4";
 import {
   AlignType,
@@ -103,6 +103,7 @@ export const Alignments = () => (
       <div key={align}>
         <Block4
           {...DEMO_CONTENT}
+          image={demoImage3}
           theme={{
             block: { align },
           }}
