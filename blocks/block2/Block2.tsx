@@ -111,23 +111,24 @@ export const Block2 = ({
           )}
         </div>
 
-        <div className="bg-white p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50">
-          <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
-            {items &&
-              Boolean(items?.filter(Boolean).length) &&
-              items?.map((item) => {
-                return <Item key={item._key} {...item} />;
-              })}
+        {items && (
+          <div className="bg-white p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50">
+            <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
+              {Boolean(items?.filter(Boolean).length) &&
+                items?.map((item) => {
+                  return <Item key={item._key} {...item} />;
+                })}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="mt-8 text-center lg:mt-16">
-          {buttons && Boolean(buttons?.filter(Boolean).length) && (
+        {buttons && Boolean(buttons?.filter(Boolean).length) && (
+          <div className="mt-8 text-center lg:mt-16">
             <div className="mt-8 lg:mt-12">
               <ButtonGroup items={buttons} />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </Wrapper>
   );
