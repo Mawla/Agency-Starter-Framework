@@ -1,6 +1,7 @@
 import { pick } from "./helpers/utils/object";
 
 export const SCHEMAS = {
+  "block.block4": "",
   "block.block3": "",
   "block.block2": "",
   "block.block1": "",
@@ -96,7 +97,7 @@ export const TAGGABLE_SCHEMAS = pick(
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const BLOCK_SCHEMAS = pick(SCHEMAS, "block.block1", "block.block2", "block.block3");
+export const BLOCK_SCHEMAS = pick(SCHEMAS, "block.block1", "block.block2", "block.block3", "block.block4");
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
 
