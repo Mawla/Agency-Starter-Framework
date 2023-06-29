@@ -109,7 +109,6 @@ const schema = defineType({
               name: "intro",
               title: "Intro",
               type: "portabletext.simple",
-              group: "content",
             }),
           ],
         }),
