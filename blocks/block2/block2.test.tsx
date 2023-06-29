@@ -27,7 +27,7 @@ describe("Block2", () => {
     await act(() => {
       render(<Block2 items={[{ title: "Hello", _key: "" }]} />);
     });
-    expect(screen.getByText("Hello", { selector: "li" })).toBeInTheDocument();
+    expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
   });
 });
 
