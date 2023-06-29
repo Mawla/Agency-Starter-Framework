@@ -5,7 +5,6 @@
  * sanity exec ./cli/create-block.ts -- --write
  *
  */
-import { BLOCK_SCHEMAS, SCHEMAS } from "../../types.sanity";
 import { createInfo } from "./create-info";
 import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
