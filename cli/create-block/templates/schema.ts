@@ -26,11 +26,9 @@ export const getSchemaSnippet = ({
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType } from "sanity";
-  import { BACKGROUND_COLOR_OPTIONS ${render(
-    fields,
-    "title",
-    `, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS, EYEBROW_COLOR_OPTIONS`,
-  )}
+  import { BACKGROUND_COLOR_OPTIONS 
+    ${render(fields, "title", `, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS`)}
+    ${render(fields, "eyebrow", `, EYEBROW_COLOR_OPTIONS`)}
   ${render(
     fields,
     "intro",
