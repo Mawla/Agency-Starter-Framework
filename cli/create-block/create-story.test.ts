@@ -8,7 +8,12 @@ test("create story with no fields", () => {
   expect(
     result
       .replace(/\s/g, "")
-      .includes(`export const Default = () => <Test />;`.replace(/\s/g, "")),
+      .includes(
+        `export const Default = () => <Test {...DEMO_CONTENT}/>;`.replace(
+          /\s/g,
+          "",
+        ),
+      ),
   ).toBeTruthy();
 });
 
@@ -21,12 +26,7 @@ test("create story with eyebrow", () => {
   expect(
     result
       .replace(/\s/g, "")
-      .includes(
-        `export const Default = () => <Test eyebrow="Test" />;`.replace(
-          /\s/g,
-          "",
-        ),
-      ),
+      .includes(`eyebrow: 'eyebrow',`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 
@@ -37,14 +37,7 @@ test("create story with title", () => {
   });
 
   expect(
-    result
-      .replace(/\s/g, "")
-      .includes(
-        `export const Default = () => <Test title="Test" />;`.replace(
-          /\s/g,
-          "",
-        ),
-      ),
+    result.replace(/\s/g, "").includes(`title: 'title',`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 
@@ -57,12 +50,7 @@ test("create story with intro", () => {
   expect(
     result
       .replace(/\s/g, "")
-      .includes(
-        `export const Default = () => <Test intro={<p>Test</p>} />;`.replace(
-          /\s/g,
-          "",
-        ),
-      ),
+      .includes(`intro: <p>intro</p>,`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 
@@ -73,14 +61,7 @@ test("create story with image", () => {
   });
 
   expect(
-    result
-      .replace(/\s/g, "")
-      .includes(
-        `export const Default = () => <Test image={demoImage} />;`.replace(
-          /\s/g,
-          "",
-        ),
-      ),
+    result.replace(/\s/g, "").includes(`image: demoImage,`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 
@@ -93,12 +74,7 @@ test("create story with buttons", () => {
   expect(
     result
       .replace(/\s/g, "")
-      .includes(
-        `export const Default = () => <Test buttons={[{ label: 'Test' }]} />;`.replace(
-          /\s/g,
-          "",
-        ),
-      ),
+      .includes(`buttons: [{ label: 'Button' }],`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 
@@ -111,11 +87,6 @@ test("create story with items", () => {
   expect(
     result
       .replace(/\s/g, "")
-      .includes(
-        `export const Default = () => <Test items={[{ title: 'Test' }]} />;`.replace(
-          /\s/g,
-          "",
-        ),
-      ),
+      .includes(`items: [{ title: 'Item' }],`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
