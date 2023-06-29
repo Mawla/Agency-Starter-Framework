@@ -5,7 +5,6 @@ import {
   BACKGROUND_COLOR_OPTIONS,
   TITLE_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
-  EYEBROW_COLOR_OPTIONS,
   INTRO_COLOR_OPTIONS,
 } from "./block2.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";

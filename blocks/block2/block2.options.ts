@@ -3,7 +3,6 @@ import { TEXT_COLOR_OPTIONS } from "../../components/block/text.options";
 import {
   TITLE_SIZE_OPTIONS as ALL_TITLE_SIZE_OPTIONS,
   TITLE_COLOR_OPTIONS as ALL_TITLE_COLOR_OPTIONS,
-  TITLE_EYEBROW_COLOR_OPTIONS as ALL_TITLE_EYEBROW_COLOR_OPTIONS,
 } from "../../components/block/title.options";
 import { pick } from "../../helpers/utils/object";
 
