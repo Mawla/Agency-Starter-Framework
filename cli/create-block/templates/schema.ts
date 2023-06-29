@@ -49,7 +49,7 @@ export const getSchemaSnippet = ({
       },
       prepare({ 
         ${render(fields, "eyebrow", `eyebrow = "", `)}
-        ${render(fields, "title", `title = "${blockName}", `)}
+        ${render(fields, "title", `title = "${blockTitle}", `)}
         ${render(fields, "image", `image`)}
       }: any) {
         return {
