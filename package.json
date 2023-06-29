@@ -11,7 +11,7 @@
     "build-cms": "sanity build public/cms -y",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o public/storybook --disable-telemetry",
-    "chromatic": "npx chromatic --project-token=a375665afc0f",
+    "chromatic": "npx chromatic --project-token=chpt_d48ba96ec20f549",
     "create-dialog": "sanity exec ./cli/create-dialog -- --write",
     "create-page": "sanity exec ./cli/create-page -- --write",
     "create-block": "sanity exec ./cli/create-block -- --write",
