@@ -102,62 +102,66 @@ export const Block2 = ({
         ...theme?.block,
       }}
     >
-      <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
+      <div
+        className={cx(
+          "max-w-3xl",
+          alignClasses[theme?.block?.align || "center"],
+        )}
+      >
+        {title && (
+          <div className="mb-4 md:mb-6">
+            <Title
+              size={theme?.title?.size || "3xl"}
+              as={theme?.title?.level}
+              color={theme?.title?.color}
+            >
+              {title}
+            </Title>
+          </div>
+        )}
+        {intro && (
+          <div className="mb-10 md:mb-14">
+            <Text
+              align={theme?.block?.align || "center"}
+              size={theme?.intro?.size || "xl"}
+              color={theme?.intro?.color}
+            >
+              <PortableText content={intro as any} />
+            </Text>
+          </div>
+        )}
+      </div>
+
+      {items && (
+        <div
+          className={cx(
+            "p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50",
+            backgroundClasses[theme?.items?.background || "white"],
+          )}
+        >
+          <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
+            {Boolean(items?.filter(Boolean).length) &&
+              items?.map((item) => {
+                return <Item key={item._key} {...item} />;
+              })}
+          </div>
+        </div>
+      )}
+
+      {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div
           className={cx(
             "max-w-3xl",
             alignClasses[theme?.block?.align || "center"],
+            "mt-8 lg:mt-16",
           )}
         >
-          {title && (
-            <div className="mb-4 md:mb-6">
-              <Title
-                size={theme?.title?.size || "3xl"}
-                as={theme?.title?.level}
-                color={theme?.title?.color}
-              >
-                {title}
-              </Title>
-            </div>
-          )}
-          {intro && (
-            <div className="mb-10 md:mb-14">
-              <Text
-                align={theme?.block?.align || "center"}
-                size={theme?.intro?.size || "xl"}
-                color={theme?.intro?.color}
-              >
-                <PortableText content={intro as any} />
-              </Text>
-            </div>
-          )}
+          <ButtonGroup
+            items={buttons}
+            align={theme?.block?.align || "center"}
+          />
         </div>
-
-        {items && (
-          <div
-            className={cx(
-              "p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50",
-              backgroundClasses[theme?.items?.background || "white"],
-            )}
-          >
-            <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
-              {Boolean(items?.filter(Boolean).length) &&
-                items?.map((item) => {
-                  return <Item key={item._key} {...item} />;
-                })}
-            </div>
-          </div>
-        )}
-
-        {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-8 lg:mt-16">
-            <ButtonGroup
-              items={buttons}
-              align={theme?.block?.align || "center"}
-            />
-          </div>
-        )}
-      </div>
+      )}
     </Wrapper>
   );
 };

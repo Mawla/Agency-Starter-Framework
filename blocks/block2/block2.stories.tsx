@@ -73,6 +73,7 @@ const DEMO_CONTENT = {
       image: demoImage,
     },
   ],
+  buttons: [{ label: "Get started" }],
 };
 
 export const Default = () => <Block2 {...DEMO_CONTENT} />;
