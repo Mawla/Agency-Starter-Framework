@@ -148,7 +148,7 @@ export const getReactComponentSnippet = ({
             "eyebrow",
             `
           {(title || eyebrow) && (
-            <div className="mb-4 md:mb-6">
+            <div className="mb-6">
               <Title 
                 size={theme?.title?.size || 'lg'} 
                 as={theme?.title?.level} 
@@ -164,7 +164,7 @@ export const getReactComponentSnippet = ({
             !fields?.includes("eyebrow") && fields?.includes("title")
               ? `
           {title && (
-            <div className="mb-4 md:mb-6">
+            <div className="mb-6">
               <Title 
                 size={theme?.title?.size || 'xl'} 
                 as={theme?.title?.level} 
@@ -180,7 +180,7 @@ export const getReactComponentSnippet = ({
             "intro",
             `
           {intro && (
-            <div className="mb-10 md:mb-14">
+            <div className="mb-6">
               <Text size={theme?.intro?.size || 'xl'} color={theme?.intro?.color}>
                 <PortableText content={intro as any} />
               </Text>
