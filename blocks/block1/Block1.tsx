@@ -13,7 +13,9 @@ import {
   IntroColorType,
   FeaturesColorType,
   ImagePositionType,
+  IntroSizeType,
 } from "./block1.options";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -61,10 +63,12 @@ export type Block1Props = {
     };
 
     intro?: {
+      size?: IntroSizeType;
       color?: IntroColorType;
     };
 
     features?: {
+      size?: IntroSizeType;
       color?: FeaturesColorType;
     };
   };
@@ -104,7 +108,10 @@ export const Block1 = ({
 
           {intro && (
             <div className="mb-8">
-              <Text size={"lg"} color={theme?.intro?.color}>
+              <Text
+                size={theme?.intro?.size || "lg"}
+                color={theme?.intro?.color}
+              >
                 <PortableText content={intro as any} />
               </Text>
             </div>
@@ -112,7 +119,10 @@ export const Block1 = ({
 
           {features && (
             <div className="pt-8 my-7 border-t border-gray-200">
-              <Text size={"lg"} color={theme?.features?.color}>
+              <Text
+                size={theme?.intro?.size || "lg"}
+                color={theme?.features?.color}
+              >
                 <PortableText content={features as any} />
               </Text>
             </div>
@@ -121,9 +131,10 @@ export const Block1 = ({
 
         {image && (
           <div
-            className={`order-0 aspect-video mb-4 w-full lg:mb-0 lg:flex relative md:h-full ${
-              theme?.image?.position === "left" ? "lg:order-0" : "lg:order-2"
-            }`}
+            className={cx(
+              "order-0 aspect-video mb-4 w-full lg:mb-0 lg:flex relative md:h-full",
+              theme?.image?.position === "left" ? "lg:order-0" : "lg:order-2",
+            )}
           >
             <ResponsiveImage
               {...image}

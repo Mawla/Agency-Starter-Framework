@@ -6,7 +6,9 @@ import {
   BackgroundColorType,
   BACKGROUND_COLOR_OPTIONS,
   IntroColorType,
+  IntroSizeType,
   INTRO_COLOR_OPTIONS,
+  INTRO_SIZE_OPTIONS,
   TitleColorType,
   TitleSizeType,
   TITLE_COLOR_OPTIONS,
@@ -75,6 +77,21 @@ export const TitleSizes = () => (
           {...DEMO_CONTENT}
           theme={{
             title: { size },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const IntroSizes = () => (
+  <>
+    {(Object.keys(INTRO_SIZE_OPTIONS) as IntroSizeType[]).map((size) => (
+      <div key={size}>
+        <Block4
+          intro={DEMO_CONTENT.intro}
+          theme={{
+            intro: { size },
           }}
         />
       </div>

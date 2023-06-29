@@ -7,6 +7,7 @@ import {
   TITLE_SIZE_OPTIONS,
   INTRO_COLOR_OPTIONS,
   IMAGE_POSITION_OPTIONS,
+  INTRO_SIZE_OPTIONS,
 } from "./block1.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { Question, VirtualRealityImage } from "@vectopus/atlas-icons-react";
@@ -22,7 +23,6 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
-
       image: "image",
     },
     prepare({ title = "Block 1", image }: any) {
@@ -175,6 +175,13 @@ const schema = defineType({
           options: {
             fields: [
               {
+                name: "size",
+                type: "select",
+                options: {
+                  list: optionsToList(INTRO_SIZE_OPTIONS),
+                },
+              },
+              {
                 name: "color",
                 type: "color",
                 options: {
@@ -195,6 +202,13 @@ const schema = defineType({
                 type: "color",
                 options: {
                   colors: INTRO_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "size",
+                type: "select",
+                options: {
+                  list: optionsToList(INTRO_SIZE_OPTIONS),
                 },
               },
             ],
