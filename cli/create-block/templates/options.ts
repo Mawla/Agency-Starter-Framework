@@ -7,6 +7,7 @@ type Props = {
 
 export const getOptionsSnippet = ({ fields }: Props) => {
   return `
+    import { ALIGNMENTS } from "../../types";
     import { BACKGROUND_COLOR_OPTIONS as ALL_BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
     ${render(
       fields,
