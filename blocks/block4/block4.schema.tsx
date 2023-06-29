@@ -121,7 +121,7 @@ const schema = defineType({
                 name: "align",
                 type: "select",
                 options: {
-                  colors: optionsToList(ALIGN_OPTIONS),
+                  list: optionsToList(ALIGN_OPTIONS),
                 },
               },
             ],
