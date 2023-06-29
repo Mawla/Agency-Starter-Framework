@@ -168,3 +168,32 @@ export const Alignments = () => (
     ))}
   </>
 );
+
+export const ItemsTheme = () => (
+  <>
+    <Block2
+      {...DEMO_CONTENT}
+      items={DEMO_CONTENT.items.map((x) => ({
+        ...x,
+        theme: {
+          title: {
+            color: "white",
+            size: "4xl",
+          },
+          intro: {
+            color: "white",
+            size: "xl",
+          },
+        },
+      }))}
+      theme={{
+        block: {
+          background: "white",
+        },
+        items: {
+          background: "black",
+        },
+      }}
+    />
+  </>
+);

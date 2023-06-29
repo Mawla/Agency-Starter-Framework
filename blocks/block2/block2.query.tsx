@@ -1,8 +1,8 @@
 import { buttonQuery } from "../../components/buttons/button.query";
+import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import groq from "groq";
-import {imageQuery} from "../../components/images/image.query";
 
 export const getBlock2Query = (language: LanguageType) => groq`
     _type == "block.block2" => {
@@ -16,5 +16,6 @@ export const getBlock2Query = (language: LanguageType) => groq`
         title,
         intro[] ${richTextQuery},
         "image": ${imageQuery},
+        theme
       },
     }`;

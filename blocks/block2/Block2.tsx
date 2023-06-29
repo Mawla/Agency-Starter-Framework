@@ -21,36 +21,36 @@ import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper")
+    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title")
+  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text")
+  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text"),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    )
+    ),
 );
 
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
-    )
+    ),
 );
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImageProps" */ "../../components/images/ResponsiveImage"
-    )
+    ),
 );
 
 export type Block2Props = {
@@ -106,7 +106,7 @@ export const Block2 = ({
         <div
           className={cx(
             "max-w-3xl",
-            alignClasses[theme?.block?.align || "center"]
+            alignClasses[theme?.block?.align || "center"],
           )}
         >
           {title && (
@@ -135,9 +135,10 @@ export const Block2 = ({
 
         {items && (
           <div
-            className={`${
-              backgroundClasses[theme?.items?.background || "white"]
-            } p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50`}
+            className={cx(
+              "p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50",
+              backgroundClasses[theme?.items?.background || "white"],
+            )}
           >
             <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
               {Boolean(items?.filter(Boolean).length) &&
@@ -165,8 +166,18 @@ type ItemProps = {
   intro?: React.ReactNode;
   image?: ImageType;
   _key?: string;
+  theme?: {
+    title?: {
+      size?: TitleSizeType;
+      color?: TitleColorType;
+    };
+    intro?: {
+      size?: IntroSizeType;
+      color?: IntroColorType;
+    };
+  };
 };
-const Item = ({ title, intro, image, _key }: ItemProps) => {
+const Item = ({ title, intro, image, theme }: ItemProps) => {
   return (
     <div className="flex flex-col items-start gap-4 sm:gap-5 sm:flex-row">
       <div className="bg-gray-100 rounded-full w-16 h-16 lg:w-24 lg:h-24 flex items-center justify-center shrink-0">
@@ -179,11 +190,16 @@ const Item = ({ title, intro, image, _key }: ItemProps) => {
       <div>
         {title && (
           <div className="mb-2">
-            <Title size={"lg"}>{title}</Title>
+            <Title
+              size={theme?.title?.size || "lg"}
+              color={theme?.title?.color}
+            >
+              {title}
+            </Title>
           </div>
         )}
         {intro && (
-          <Text size={"sm"}>
+          <Text size={theme?.intro?.size || "sm"} color={theme?.intro?.color}>
             <PortableText content={intro as any} />
           </Text>
         )}
