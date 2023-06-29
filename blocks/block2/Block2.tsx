@@ -15,6 +15,7 @@ import {
   IntroSizeType,
   AlignType,
 } from "./block2.options";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -98,9 +99,10 @@ export const Block2 = ({
     >
       <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
         <div
-          className={`max-w-3xl ${
-            alignClasses[theme?.block?.align || "center"]
-          }`}
+          className={cx(
+            "max-w-3xl",
+            alignClasses[theme?.block?.align || "center"],
+          )}
         >
           {title && (
             <div className="mb-4 md:mb-6">
