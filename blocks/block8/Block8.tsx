@@ -151,7 +151,7 @@ const Item = ({ _key, title, intro, image, buttons, align }: ItemProps) => {
       )}
 
       {title && (
-        <div className={`mb-6 ${alignClasses[align || "center"]}`}>
+        <div className={`mb-2 ${alignClasses[align || "center"]}`}>
           <Title size={"xl"}>{title}</Title>
         </div>
       )}
