@@ -92,7 +92,11 @@ export const Block8 = ({
       >
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center sm:py-16 lg:px-6">
           {title && (
-            <div className="mb-6">
+            <div
+              className={`mb-6 ${
+                alignClasses[theme?.block?.align || "center"]
+              }`}
+            >
               <Title
                 size={theme?.title?.size || "4xl"}
                 as={theme?.title?.level}
@@ -119,7 +123,7 @@ export const Block8 = ({
             {items &&
               Boolean(items?.filter(Boolean).length) &&
               items?.map((item: ItemProps) => (
-                <Item key={item._key} {...item} />
+                <Item key={item._key} align={theme?.block?.align} {...item} />
               ))}
           </div>
         </div>
@@ -134,9 +138,10 @@ type ItemProps = {
   intro?: React.ReactNode;
   image?: ImageType;
   buttons?: ButtonProps[];
+  align?: AlignType;
 };
 
-const Item = ({ _key, title, intro, image, buttons }: ItemProps) => {
+const Item = ({ _key, title, intro, image, buttons, align }: ItemProps) => {
   return (
     <div>
       {image && (
@@ -146,14 +151,14 @@ const Item = ({ _key, title, intro, image, buttons }: ItemProps) => {
       )}
 
       {title && (
-        <div className="mb-6">
+        <div className={`mb-6 ${alignClasses[align || "center"]}`}>
           <Title size={"xl"}>{title}</Title>
         </div>
       )}
 
       {intro && (
         <div className="mb-6">
-          <Text size={"sm"}>
+          <Text align={align} size={"sm"}>
             <PortableText content={intro as any} />
           </Text>
         </div>
