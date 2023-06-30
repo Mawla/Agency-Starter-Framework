@@ -145,7 +145,7 @@ const Item = ({ _key, title, intro, image, buttons, align }: ItemProps) => {
   return (
     <div>
       {image && (
-        <div className="mt-6">
+        <div className="my-6">
           <ResponsiveImage {...image} className="inline-block" />
         </div>
       )}
