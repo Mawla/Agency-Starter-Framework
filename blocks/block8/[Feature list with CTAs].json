@@ -1,0 +1,12 @@
+{
+  "title": "Feature list with CTAs",
+  "description": "Feature list with CTAs",
+  "name": "Block 8",
+  "schemaName": "block.block8",
+  "date": "2023-06-30T11:10:39.098Z",
+  "fields": [
+    "title",
+    "intro",
+    "items"
+  ]
+}

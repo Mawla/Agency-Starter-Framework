@@ -1,13 +1,18 @@
-import { Block4Props } from "../../blocks/block4/Block4";
-import { Block3Props } from "../../blocks/block3/Block3";
-import { Block2Props } from "../../blocks/block2/Block2";
 import { Block1Props } from "../../blocks/block1/Block1";
+import { Block2Props } from "../../blocks/block2/Block2";
+import { Block3Props } from "../../blocks/block3/Block3";
+import { Block4Props } from "../../blocks/block4/Block4";
+import { Block8Props } from "../../blocks/block8/Block8";
 import { GenericBlockProps } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import BlockErrorBoundary from "./BlockErrorBoundary";
 import { LazyLoadInView } from "./LazyLoadInView";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
+
+const Block8 = lazy<ComponentType<Block8Props>>(
+  () => import(/* webpackChunkName: "Block8" */ "../../blocks/block8/Block8"),
+);
 
 const Block4 = lazy<ComponentType<Block4Props>>(
   () => import(/* webpackChunkName: "Block4" */ "../../blocks/block4/Block4"),
@@ -16,7 +21,7 @@ const Block3 = lazy<ComponentType<Block3Props>>(
   () => import(/* webpackChunkName: "Block3" */ "../../blocks/block3/Block3"),
 );
 const Block2 = lazy<ComponentType<Block2Props>>(
-  () => import(/* webpackChunkName: "Block2" */ "../../blocks/block2/Block2")
+  () => import(/* webpackChunkName: "Block2" */ "../../blocks/block2/Block2"),
 );
 const Block1 = lazy<ComponentType<Block1Props>>(
   () => import(/* webpackChunkName: "Block1" */ "../../blocks/block1/Block1"),
@@ -64,6 +69,10 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               )}
               {item._type === "block.block1" && (
                 <Block1 {...(item as Block1Props)} />
+              )}
+
+              {item._type === "block.block8" && (
+                <Block8 {...(item as Block8Props)} />
               )}
             </LazyLoadInView>
           </BlockErrorBoundary>
