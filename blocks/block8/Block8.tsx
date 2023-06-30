@@ -158,7 +158,7 @@ const Item = ({ _key, title, intro, image, buttons, align }: ItemProps) => {
 
       {intro && (
         <div className="mb-6">
-          <Text align={align} size={"sm"}>
+          <Text align={align || "center"} size={"sm"}>
             <PortableText content={intro as any} />
           </Text>
         </div>
