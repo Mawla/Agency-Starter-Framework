@@ -106,7 +106,7 @@ export const Block8 = ({
           {intro && (
             <div className="mb-6">
               <Text
-                size={theme?.intro?.size || "xl"}
+                size={theme?.intro?.size || "lg"}
                 color={theme?.intro?.color}
                 align={theme?.block?.align || "center"}
               >
