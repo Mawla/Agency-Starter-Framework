@@ -95,6 +95,21 @@ const schema = defineType({
               title: "Title",
               type: "string",
             }),
+            defineField({
+              name: "intro",
+              title: "Intro",
+              type: "portabletext.simple",
+            }),
+            defineField({
+              name: "buttons",
+              title: "Buttons",
+              type: "buttongroup",
+            }),
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+            }),
           ],
         }),
       ],
