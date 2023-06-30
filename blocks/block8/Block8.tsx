@@ -147,13 +147,13 @@ const Item = ({ _key, title, intro, image, buttons }: ItemProps) => {
 
       {title && (
         <div className="mb-6">
-          <Title>{title}</Title>
+          <Title size={"xl"}>{title}</Title>
         </div>
       )}
 
       {intro && (
         <div className="mb-6">
-          <Text>
+          <Text size={"sm"}>
             <PortableText content={intro as any} />
           </Text>
         </div>
