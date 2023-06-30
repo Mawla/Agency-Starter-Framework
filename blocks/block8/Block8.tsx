@@ -128,6 +128,8 @@ type ItemProps = {
   title: string;
 };
 
-const Item = ({ _key, title }: ItemProps) => {};
+const Item = ({ _key, title }: ItemProps) => {
+  return <p></p>;
+};
 
 export default React.memo(Block8);
