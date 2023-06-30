@@ -3,8 +3,9 @@ import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
+import { ButtonProps } from "../../components/buttons/Button";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
-import { HeadingLevelType } from "../../types";
+import { HeadingLevelType, ImageType } from "../../types";
 import {
   TitleSizeType,
   TitleColorType,
@@ -126,9 +127,12 @@ export const Block8 = ({
 type ItemProps = {
   _key: string;
   title: string;
+  intro?: React.ReactNode;
+  image?: ImageType;
+  buttons?: ButtonProps[];
 };
 
-const Item = ({ _key, title }: ItemProps) => {
+const Item = ({ _key, title, intro, image, buttons }: ItemProps) => {
   return (
     <div>
       <svg
