@@ -17,22 +17,22 @@ import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
+    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper")
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
+  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title")
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text"),
+  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text")
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    ),
+    )
 );
 
 export type Block8Props = {
@@ -84,7 +84,7 @@ export const Block8 = ({
       <div
         className={cx(
           "max-w-3xl",
-          alignClasses[theme?.block?.align || "center"],
+          alignClasses[theme?.block?.align || "center"]
         )}
       >
         {title && (
@@ -113,10 +113,8 @@ export const Block8 = ({
 
         {items && Boolean(items?.filter(Boolean).length) && (
           <ul className="pt-8">
-            {items?.map(({ title, _key }) => (
-              <li key={_key} className="">
-                {title}
-              </li>
+            {items?.map((item) => (
+              <Item key={item._key} {...item} />
             ))}
           </ul>
         )}
@@ -124,5 +122,12 @@ export const Block8 = ({
     </Wrapper>
   );
 };
+
+type ItemProps = {
+  _key: string;
+  title: string;
+};
+
+const Item = ({ _key, title }: ItemProps) => {};
 
 export default React.memo(Block8);
