@@ -23,10 +23,38 @@ export default {
 } as Meta;
 
 const DEMO_CONTENT = {
-  title: "title",
-  intro: <p>intro</p>,
+  title: "The most trusted cryptocurrency platform",
+  intro: <p>Here are a few reasons why you should choose Flowbite</p>,
 
-  items: [{ title: "Item" }],
+  items: [
+    {
+      title: "Secure storage",
+      intro: (
+        <p>
+          We store the vast majority of the digital assets in secure offline
+          storage.
+        </p>
+      ),
+    },
+    {
+      title: "Insurance",
+      intro: (
+        <p>
+          Flowbite maintains crypto insurance and all USD cash balances are
+          covered.
+        </p>
+      ),
+    },
+    {
+      title: "Best practices",
+      intro: (
+        <p>
+          Flowbite marketplace supports a variety of the most popular digital
+          currencies.
+        </p>
+      ),
+    },
+  ],
 };
 
 export const Default = () => <Block8 {...DEMO_CONTENT} />;
@@ -43,7 +71,7 @@ export const BlockBackgrounds = () => (
             }}
           />
         </div>
-      ),
+      )
     )}
   </>
 );
