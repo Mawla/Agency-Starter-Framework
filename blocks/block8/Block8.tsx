@@ -119,7 +119,7 @@ export const Block8 = ({
             </div>
           )}
 
-          <div className="flex flex-row mt-8 space-x-24">
+          <div className="flex md:flex-row mt-8 md:space-x-24 flex-col">
             {items &&
               Boolean(items?.filter(Boolean).length) &&
               items?.map((item: ItemProps) => (
