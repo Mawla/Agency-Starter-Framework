@@ -10,7 +10,7 @@ import {
   INTRO_SIZE_OPTIONS,
 } from "./block8.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { Question } from "@vectopus/atlas-icons-react";
+import { LayoutThree } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -18,7 +18,7 @@ const schema = defineType({
   name: "block.block8",
   title: "Feature list with CTAs",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <LayoutThree weight="thin" />,
   description: "Feature list with CTAs",
   preview: {
     select: {
