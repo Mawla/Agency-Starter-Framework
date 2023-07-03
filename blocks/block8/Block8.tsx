@@ -4,8 +4,8 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
-import { ButtonGroup } from "../../components/buttons/ButtonGroup";
-import { ResponsiveImage } from "../../components/images/ResponsiveImage";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { HeadingLevelType, ImageType } from "../../types";
 import {
@@ -35,6 +35,20 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
+    )
+);
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    )
+);
+
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
     )
 );
 
@@ -119,13 +133,20 @@ export const Block8 = ({
             </div>
           )}
 
-          <div className="flex md:flex-row mt-8 md:space-x-24 flex-col">
-            {items &&
-              Boolean(items?.filter(Boolean).length) &&
-              items?.map((item: ItemProps) => (
-                <Item key={item._key} align={theme?.block?.align} {...item} />
-              ))}
-          </div>
+          {items && (
+            <div className="flex md:flex-row mt-8 md:space-x-24 flex-col">
+              {Boolean(items?.filter(Boolean).length) &&
+                items?.map((item: ItemProps) => {
+                  return (
+                    <Item
+                      key={item._key}
+                      align={theme?.block?.align}
+                      {...item}
+                    />
+                  );
+                })}
+            </div>
+          )}
         </div>
       </div>
     </Wrapper>
@@ -144,30 +165,26 @@ type ItemProps = {
 const Item = ({ _key, title, intro, image, buttons, align }: ItemProps) => {
   return (
     <div>
-      {image && (
-        <div className="my-6">
-          <ResponsiveImage {...image} className="inline-block" />
-        </div>
-      )}
+      {image && <ResponsiveImage {...image} className="inline-block my-6" />}
 
       {title && (
-        <div className={`mb-2 ${alignClasses[align || "center"]}`}>
-          <Title size={"xl"}>{title}</Title>
-        </div>
+        <Title
+          as="h3"
+          size="xl"
+          className={cx("mb-2", alignClasses[align || "center"])}
+        >
+          {title}
+        </Title>
       )}
 
       {intro && (
-        <div className="mb-6">
-          <Text align={align || "center"} size={"sm"}>
-            <PortableText content={intro as any} />
-          </Text>
-        </div>
+        <Text align={align || "center"} size="sm" className="mb-6">
+          <PortableText content={intro as any} />
+        </Text>
       )}
 
       {buttons && Boolean(buttons?.filter(Boolean).length) && (
-        <div className="mt-6">
-          <ButtonGroup items={buttons} />
-        </div>
+        <ButtonGroup items={buttons} className="mt-6" />
       )}
     </div>
   );
