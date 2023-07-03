@@ -107,9 +107,9 @@ export const Block8 = ({
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center sm:py-16 lg:px-6">
           {title && (
             <div
-              className={`mb-6 ${
+              className={cx("mb-6",
                 alignClasses[theme?.block?.align || "center"]
-              }`}
+              )}
             >
               <Title
                 size={theme?.title?.size || "4xl"}
