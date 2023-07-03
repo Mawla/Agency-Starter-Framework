@@ -28,6 +28,7 @@ const DEMO_CONTENT = {
 
   items: [
     {
+      _key: "",
       title: "Secure storage",
       intro: (
         <p>
@@ -35,8 +36,10 @@ const DEMO_CONTENT = {
           storage.
         </p>
       ),
+      image: demoImage,
     },
     {
+      _key: "",
       title: "Insurance",
       intro: (
         <p>
@@ -44,8 +47,10 @@ const DEMO_CONTENT = {
           covered.
         </p>
       ),
+      image: demoImage,
     },
     {
+      _key: "",
       title: "Best practices",
       intro: (
         <p>
@@ -53,6 +58,7 @@ const DEMO_CONTENT = {
           currencies.
         </p>
       ),
+      image: demoImage,
     },
   ],
 };
