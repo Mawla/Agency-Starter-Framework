@@ -53,7 +53,7 @@ export const processString = (options: OptionType[]) => {
       return output as string[];
     } else if (Array.isArray(input)) {
       return input.map((chunk: any) =>
-        processInputWithRegex(option, chunk)
+        processInputWithRegex(option, chunk),
       ) as any;
     } else return input;
   }
@@ -78,3 +78,22 @@ export function joinList(items: string[]) {
   const finalString = items.pop();
   return items.length ? items.join(", ") + " & " + finalString : finalString;
 }
+
+/**
+ * automatically increase the heading level by 1
+ *
+ * bumpHeadingLevel('span'); // span
+ * bumpHeadingLevel('div'); // div
+ * bumpHeadingLevel('h1'); // h2
+ * bumpHeadingLevel('h2'); // h3
+ * bumpHeadingLevel('h3'); // h4
+ * bumpHeadingLevel('h4'); // h5
+ * bumpHeadingLevel('h5'); // h6
+ * bumpHeadingLevel('h6'); // h6
+ */
+
+export const bumpHeadingLevel = (tagName: string): string => {
+  const headings = ["h1", "h2", "h3", "h4", "h5"];
+  if (!headings.includes(tagName)) return tagName;
+  return `h${+tagName.substring(1) + 1}`;
+};
