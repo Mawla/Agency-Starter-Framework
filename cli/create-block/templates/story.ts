@@ -10,7 +10,7 @@ type Props = {
 export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
   return `
     import { demoImage } from "../../stories/content";
-    import { ${pascalName} } from "./${pascalName}";
+    import { ${pascalName}, ${pascalName}Props } from "./${pascalName}";
     import { Meta } from "@storybook/react";
     import React from "react";
     import {
@@ -50,7 +50,7 @@ export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
       title: "Blocks/${pascalName}",
     } as Meta;
     
-    const DEMO_CONTENT = {
+    const DEMO_CONTENT:${pascalName}Props = {
       ${render(fields, "eyebrow", "eyebrow: 'eyebrow',")}
       ${render(fields, "title", "title: 'title',")}
       ${render(fields, "intro", "intro: <p>intro</p>,")}
