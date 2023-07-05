@@ -134,24 +134,16 @@ export const getStaticProps: GetStaticProps = async ({
   // fetch navigation
   let navigation: NavigationType = await getClient(preview).fetch(
     getNavigationQuery(language),
-    {
-      language,
-    },
   );
 
   // fetch navigation
   const footer: FooterType = await getClient(preview).fetch(
     getFooterQuery(language),
-    {
-      language,
-    },
   );
 
   // fetch page
   const page = await getClient(preview).fetch(getPageQuery(language), {
     ...sitemapItem,
-    language,
-    slug: finalSlug,
   });
 
   if (page.navigation) navigation = page.navigation;

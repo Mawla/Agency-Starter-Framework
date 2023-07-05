@@ -1,12 +1,12 @@
 import { config as sanityConfig } from "../../helpers/sanity/config";
 import { getPathForId } from "../../helpers/sitemap/getPathForId";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
-import sanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
-export const client = sanityClient({
+export const client = createClient({
   ...sanityConfig,
   useCdn: false,
   token: process.env.SANITY_API_WRITE_TOKEN,

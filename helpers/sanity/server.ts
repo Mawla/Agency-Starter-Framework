@@ -1,18 +1,17 @@
-import sanityClient from '@sanity/client';
-
-import { config } from './config';
+import { config } from "./config";
+import { createClient } from "@sanity/client";
 
 /**
  * Set up a client without preview authorization
  */
 
-export const notPreviewClient = sanityClient(config);
+export const notPreviewClient = createClient(config);
 
 /**
  * Set up a preview client with serverless authentication for drafts
  */
 
-export const previewClient = sanityClient({
+export const previewClient = createClient({
   ...config,
   useCdn: false,
   token: process.env.SANITY_API_READ_TOKEN,

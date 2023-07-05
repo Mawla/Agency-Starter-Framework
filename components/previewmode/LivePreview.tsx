@@ -1,8 +1,7 @@
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
 import { MiniMap, MiniMapProps } from "./MiniMap";
 import { ScreenCapture } from "./ScreenCapture";
-import { ClientConfig, SanityClient } from "@sanity/client";
-import sanityClient from "@sanity/client";
+import { ClientConfig, createClient, SanityClient } from "@sanity/client";
 import cx from "classnames";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
@@ -15,33 +14,30 @@ const createLivePreviewFrontendClient = (
   previewToken: string,
 ) => {
   if (!previewToken) return null;
-  return sanityClient({
+  return createClient({
     ...config,
     apiVersion: "2021-03-25",
     useCdn: false,
     token: previewToken,
     ignoreBrowserTokenWarning: true,
+    perspective: "previewDrafts",
   });
 };
 
 export type LivePreviewProps = {
   setPageData: (page: any) => void;
   getQuery: () => string;
-  queryParams: any;
   pageId: string;
   updatedAt?: string;
   config: ClientConfig;
-  pagePath: string;
 };
 
 export const LivePreview = ({
   setPageData,
   getQuery,
-  queryParams,
   pageId,
   updatedAt,
   config,
-  pagePath,
 }: LivePreviewProps) => {
   const previewTools = useRef<HTMLDivElement>(null);
 
@@ -70,7 +66,6 @@ export const LivePreview = ({
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
     if (!pageId) return;
-    if (!pageId.startsWith("drafts.")) return;
 
     // clear timeout
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -89,7 +84,9 @@ export const LivePreview = ({
 
     // fetch the new page
     setPreviewLoading(true);
-    const newPage = await frontendClient.current.fetch(getQuery(), queryParams);
+    const newPage = await frontendClient.current.fetch(getQuery(), {
+      _id: pageId.replace("drafts.", ""),
+    });
     if (!newPage) {
       setPreviewLoading(false);
       return;
@@ -103,7 +100,7 @@ export const LivePreview = ({
       );
       console.log(`- Reloading`);
 
-      const nextTry = 250 + 250 * reloadAttempts.current;
+      const nextTry = 100 + 250 * reloadAttempts.current;
       reloadTimeout.current = setTimeout(reloadPreview, nextTry);
 
       return;
@@ -187,7 +184,7 @@ export const LivePreview = ({
       );
 
       listener = frontendClient?.current
-        ?.listen(`*[_id == "${pageId}"] { _rev }`, {
+        ?.listen(`*[_id == "${pageId}"][0] { _rev }`, {
           includeResult: false,
         })
         .subscribe((mutation: any) => {
@@ -235,14 +232,9 @@ export const LivePreview = ({
 
       // fetch minimal document
       const doc = await frontendClient.current.fetch(
-        `*[_id == "${pageId}"] { _id }`,
+        `*[_originalId == "${pageId}"] { _rev }`,
       );
-
-      if (!doc?.length) {
-        const result = await fetch(`/api/preview/create-draft?_id=${pageId}`);
-        const obj = await result.json();
-        initialRevision.current = obj._rev;
-      }
+      initialRevision.current = doc?._rev;
 
       reloadPreview();
     }
@@ -333,7 +325,7 @@ export const LivePreview = ({
                 <path d="M36 18c0-9.94-8.06-18-18-18">
                   <animateTransform
                     attributeName="transform"
-                    dur="1s"
+                    dur=".35s"
                     from="0 18 18"
                     repeatCount="indefinite"
                     to="360 18 18"
