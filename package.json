@@ -27,7 +27,7 @@
     "@mux/mux-player-react": "^1.7.1",
     "@next/font": "13.0.7",
     "@portabletext/react": "^2.0.0",
-    "@radix-ui/react-accordion": "^1.1.0",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-icons": "^1.1.1",
     "@radix-ui/react-navigation-menu": "^1.1.1",
