@@ -57,7 +57,7 @@ const DEMO_CONTENT: Block10Props = {
     },
     {
       title: "Hear about the new restaurant called Karma?",
-      content: <p>There’s no menu: You get what you deserve.</p>,
+      content: <p>There's no menu: You get what you deserve.</p>,
     },
     {
       title: "Did you hear about the actor who fell through the floorboards?",
