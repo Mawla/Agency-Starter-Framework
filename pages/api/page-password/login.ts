@@ -1,9 +1,9 @@
 import { config } from "../../../helpers/sanity/config";
 import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
-import sanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export const client = sanityClient({
+export const client = createClient({
   ...config,
   useCdn: false,
   token: process.env.SANITY_API_WRITE_TOKEN,

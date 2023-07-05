@@ -9,13 +9,7 @@ export const PreviewIframe: ComponentType<any> = ({
   documentId: string;
   schemaType: { name: string };
   options: { language: string };
-}) => {
-  const draftId = documentId.startsWith("drafts.")
-    ? documentId
-    : `drafts.${documentId}`;
-
-  return <PreviewIframeComponentMemo _id={draftId} _type={schemaType.name} />;
-};
+}) => <PreviewIframeComponentMemo _id={documentId} _type={schemaType.name} />;
 
 export const PreviewIframeComponent = ({
   _id,

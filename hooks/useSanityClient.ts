@@ -1,6 +1,5 @@
+import { createClient } from "@sanity/client";
 import { useMemo } from "react";
-
-const sanityClient = require("@sanity/client");
 
 export function useSanityClient(isPreviewMode = false) {
   const config = {
@@ -14,6 +13,6 @@ export function useSanityClient(isPreviewMode = false) {
     config.useCdn = false;
     config.token = process.env.SANITY_API_READ_TOKEN || "";
   }
-  const client = sanityClient(config);
+  const client = createClient(config);
   return useMemo(() => client, [client]);
 }

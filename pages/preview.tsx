@@ -8,7 +8,6 @@ import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery, PageType } from "../queries/page.query";
 import type { GetStaticProps } from "next";
-import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
 
@@ -33,17 +32,18 @@ export default function PreviewPage({
   const [navigation] = useState<NavigationType | null>(null);
   const [footer] = useState<FooterType | null>(null);
 
-  const id = Array.isArray(router.query.id)
+  let id = Array.isArray(router.query.id)
     ? router.query.id[0]
     : router.query.id;
+
   const language = router.query.language as LanguageType;
-  const pagePath = usePathname() || "";
 
   useEffect(() => {
     if (!isPreviewMode) router.push("/");
   }, [isPreviewMode, router]);
 
   if (!id) return null;
+  id = id.startsWith("drafts.") ? id : `drafts.${id}`;
 
   return (
     <div>
@@ -54,11 +54,6 @@ export default function PreviewPage({
           pageId={id}
           config={sanityConfig}
           getQuery={() => getPageQuery(language)}
-          queryParams={{
-            _id: id,
-            language,
-          }}
-          pagePath={pagePath}
         />
       )}
 
