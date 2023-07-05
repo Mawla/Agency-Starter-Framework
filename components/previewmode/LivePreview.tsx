@@ -27,21 +27,17 @@ const createLivePreviewFrontendClient = (
 export type LivePreviewProps = {
   setPageData: (page: any) => void;
   getQuery: () => string;
-  queryParams: any;
   pageId: string;
   updatedAt?: string;
   config: ClientConfig;
-  pagePath: string;
 };
 
 export const LivePreview = ({
   setPageData,
   getQuery,
-  queryParams,
   pageId,
   updatedAt,
   config,
-  pagePath,
 }: LivePreviewProps) => {
   const previewTools = useRef<HTMLDivElement>(null);
 
@@ -70,7 +66,7 @@ export const LivePreview = ({
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
     if (!pageId) return;
-    if (!pageId.startsWith("drafts.")) return;
+    // if (!pageId.startsWith("drafts.")) return;
 
     // clear timeout
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -89,7 +85,9 @@ export const LivePreview = ({
 
     // fetch the new page
     setPreviewLoading(true);
-    const newPage = await frontendClient.current.fetch(getQuery(), queryParams);
+    const newPage = await frontendClient.current.fetch(getQuery(), {
+      _id: pageId.replace("drafts.", ""),
+    });
     if (!newPage) {
       setPreviewLoading(false);
       return;
@@ -187,7 +185,7 @@ export const LivePreview = ({
       );
 
       listener = frontendClient?.current
-        ?.listen(`*[_id == "${pageId}"] { _rev }`, {
+        ?.listen(`*[_id == "${pageId}"][0] { _rev }`, {
           includeResult: false,
         })
         .subscribe((mutation: any) => {
@@ -235,14 +233,9 @@ export const LivePreview = ({
 
       // fetch minimal document
       const doc = await frontendClient.current.fetch(
-        `*[_id == "${pageId}"] { _id }`,
+        `*[_originalId == "${pageId}"] { _rev }`,
       );
-
-      if (!doc?.length) {
-        const result = await fetch(`/api/preview/create-draft?_id=${pageId}`);
-        const obj = await result.json();
-        initialRevision.current = obj._rev;
-      }
+      initialRevision.current = doc?._rev;
 
       reloadPreview();
     }
