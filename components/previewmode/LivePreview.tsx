@@ -101,7 +101,7 @@ export const LivePreview = ({
       );
       console.log(`- Reloading`);
 
-      const nextTry = 250 + 250 * reloadAttempts.current;
+      const nextTry = 100 + 250 * reloadAttempts.current;
       reloadTimeout.current = setTimeout(reloadPreview, nextTry);
 
       return;
