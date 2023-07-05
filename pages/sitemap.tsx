@@ -96,15 +96,11 @@ export const getStaticProps: GetStaticProps = async ({
   // fetch config
   const config: ConfigType = await getClient(isPreviewMode).fetch(
     getConfigQuery(language),
-    {
-      language,
-    },
   );
 
   // fetch navigation
   const navigation: NavigationType = await getClient(isPreviewMode).fetch(
     getNavigationQuery(language),
-    { language },
   );
 
   // fetch page
@@ -117,16 +113,12 @@ export const getStaticProps: GetStaticProps = async ({
     excludeFromSitemap: false,
   };
   const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
-    language,
     ...sitemapItem,
   });
 
   // fetch navigation
   const footer: FooterType = await getClient(isPreviewMode).fetch(
     getFooterQuery(language),
-    {
-      language,
-    },
   );
 
   // fetch sitemap
