@@ -1,0 +1,8 @@
+{
+  "title": "test",
+  "description": "test",
+  "name": "Block 9",
+  "schemaName": "block.block9",
+  "date": "2023-07-05T06:13:45.116Z",
+  "fields": ["title", "eyebrow", "intro", "image"]
+}

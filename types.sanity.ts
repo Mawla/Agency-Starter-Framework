@@ -6,6 +6,7 @@ export const SCHEMAS = {
   "block.block3": "",
   "block.block4": "",
   "block.block6": "",
+  "block.block9": "",
   "config.cms": "",
   "config.general": "",
   "config.integrations": "",
@@ -105,6 +106,7 @@ export const BLOCK_SCHEMAS = pick(
   "block.block3",
   "block.block4",
   "block.block6",
+  "block.block9",
 );
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
