@@ -66,7 +66,6 @@ export const LivePreview = ({
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
     if (!pageId) return;
-    // if (!pageId.startsWith("drafts.")) return;
 
     // clear timeout
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
