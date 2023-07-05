@@ -23,9 +23,15 @@ export default {
 } as Meta;
 
 const DEMO_CONTENT: Block9Props = {
-  title: "title",
-  intro: <p>intro</p>,
-  buttons: [{ label: "Button" }],
+  title: "We didn't reinvent the wheel",
+  intro: (
+    <p>
+      We are strategists, designers and developers. Innovators and problem
+      solvers. Small enough to be simple and quick, but big enough to deliver
+      the scope you want at the pace you need.{" "}
+    </p>
+  ),
+  buttons: [{ label: "Buy now" }],
   video: {
     provider: "youtube",
     videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
