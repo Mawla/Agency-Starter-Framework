@@ -2,7 +2,6 @@ import { backgroundClasses, divideClasses, textClasses } from "../../colors";
 import { ColorType } from "../../types";
 import Text from "../block/Text";
 import { BackgroundColorType } from "../block/background.options";
-import { TextColorType } from "../block/text.options";
 import { TitleColorType } from "../block/title.options";
 import { IconLoaderProps } from "../images/IconLoader";
 import PortableText, { PortableTextProps } from "../portabletext/PortableText";
