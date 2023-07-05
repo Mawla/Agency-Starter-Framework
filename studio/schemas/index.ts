@@ -3,9 +3,11 @@ import block2 from "../../blocks/block2/block2.schema";
 import block3 from "../../blocks/block3/block3.schema";
 import block4 from "../../blocks/block4/block4.schema";
 import block6 from "../../blocks/block6/block6.schema";
+import block10 from "../../blocks/block10/block10.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
+import faq, { faqItem } from "../../components/faq/faq.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
@@ -56,6 +58,7 @@ import styles from "./objects/styles";
 export const schemaTypes = [
   ...[
     block1,
+    block10,
     block2,
     block3,
     block4,
@@ -70,6 +73,8 @@ export const schemaTypes = [
     dialogForm,
     dialogRichText,
     dialogVideo,
+    faq,
+    faqItem,
     footer,
     imageSimple,
     link,

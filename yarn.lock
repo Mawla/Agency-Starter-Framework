@@ -2621,14 +2621,6 @@
     "@portabletext/toolkit" "^2.0.0"
     "@portabletext/types" "^2.0.0"
 
-"@portabletext/to-html@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@portabletext/to-html/-/to-html-1.0.4.tgz#a99d0469b3cf49e0484f096101c70f94134da65e"
-  integrity sha512-SOb/20OYEI5Tqy0St8mAGPqQuQ8uzJPpG4YQxusrQKby05NdD7vnPqDo6lkniD5kutevVoMbYrix0Kt0s6t6Nw==
-  dependencies:
-    "@portabletext/toolkit" "^1.0.5"
-    "@portabletext/types" "^1.0.2"
-
 "@portabletext/toolkit@^1.0.5":
   version "1.0.6"
   resolved "https://registry.npmjs.org/@portabletext/toolkit/-/toolkit-1.0.6.tgz"
@@ -2643,7 +2635,7 @@
   dependencies:
     "@portabletext/types" "^2.0.0"
 
-"@portabletext/types@^1.0.2", "@portabletext/types@^1.0.3":
+"@portabletext/types@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@portabletext/types/-/types-1.0.3.tgz"
   integrity sha512-SDDsdury2SaTI2D5Ea6o+Y39SSZMYHRMWJHxkxYl3yzFP0n/0EknOhoXcoaV+bxGr2dTTqZi2TOEj+uWYuavSw==

@@ -65,4 +65,4 @@ export const Accordion = ({ items }: AccordionProps) => {
   );
 };
 
-export const AccordionMemo = React.memo(Accordion);
+export default React.memo(Accordion);
