@@ -51,7 +51,6 @@ export const PageLock = () => {
     async function getPage() {
       const pageData = await getClient(false).fetch(getPageQuery(language), {
         ...sitemapItem,
-        language,
       });
       setPage(pageData);
     }

@@ -1,8 +1,7 @@
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
 import { MiniMap, MiniMapProps } from "./MiniMap";
 import { ScreenCapture } from "./ScreenCapture";
-import { ClientConfig, SanityClient } from "@sanity/client";
-import sanityClient from "@sanity/client";
+import { ClientConfig, createClient, SanityClient } from "@sanity/client";
 import cx from "classnames";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
@@ -15,12 +14,13 @@ const createLivePreviewFrontendClient = (
   previewToken: string,
 ) => {
   if (!previewToken) return null;
-  return sanityClient({
+  return createClient({
     ...config,
     apiVersion: "2021-03-25",
     useCdn: false,
     token: previewToken,
     ignoreBrowserTokenWarning: true,
+    perspective: "previewDrafts",
   });
 };
 

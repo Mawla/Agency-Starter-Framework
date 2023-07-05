@@ -56,7 +56,6 @@ export default function PreviewPage({
           getQuery={() => getPageQuery(language)}
           queryParams={{
             _id: id,
-            language,
           }}
           pagePath={pagePath}
         />
