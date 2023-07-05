@@ -7,16 +7,17 @@ import { PortableTextBlock } from "sanity";
 
 export type FAQProps = {
   items: AccordionItemType[];
+  theme?: AccordionProps["theme"];
 };
 
 const Accordion = lazy<ComponentType<AccordionProps>>(
   () => import(/* webpackChunkName: "Accordion" */ "../accordion/Accordion"),
 );
 
-export const FAQ = ({ items }: FAQProps) => {
+export const FAQ = ({ items, theme }: FAQProps) => {
   return (
     <>
-      <Accordion items={items} />
+      <Accordion items={items} theme={theme} />
 
       <Head>
         <script

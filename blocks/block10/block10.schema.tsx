@@ -1,3 +1,4 @@
+import { COLORS } from "../../colors";
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
@@ -172,6 +173,44 @@ const schema = defineType({
                 type: "color",
                 options: {
                   colors: INTRO_COLOR_OPTIONS,
+                },
+              },
+            ],
+          },
+        }),
+
+        defineField({
+          name: "faq",
+          title: "FAQ",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "title",
+                type: "color",
+                options: {
+                  colors: TITLE_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "icon",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "divider",
+                type: "color",
+                options: {
+                  colors: COLORS,
                 },
               },
             ],

@@ -1,3 +1,4 @@
+import { AccordionProps } from "../../components/accordion/Accordion";
 import { TextProps } from "../../components/block/Text";
 import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
@@ -67,6 +68,7 @@ export type Block10Props = {
       color?: IntroColorType;
       size?: IntroSizeType;
     };
+    faq?: AccordionProps["theme"];
   };
 
   title?: string;
@@ -126,7 +128,7 @@ export const Block10 = ({
 
         {faq && Boolean(faq?.filter(Boolean).length) && (
           <div className="mt-12 lg:mt-16">
-            <FAQ items={faq} />
+            <FAQ items={faq} theme={theme?.faq} />
           </div>
         )}
 
