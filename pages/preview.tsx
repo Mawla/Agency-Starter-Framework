@@ -32,9 +32,10 @@ export default function PreviewPage({
   const [navigation] = useState<NavigationType | null>(null);
   const [footer] = useState<FooterType | null>(null);
 
-  const id = Array.isArray(router.query.id)
+  let id = Array.isArray(router.query.id)
     ? router.query.id[0]
     : router.query.id;
+
   const language = router.query.language as LanguageType;
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function PreviewPage({
   }, [isPreviewMode, router]);
 
   if (!id) return null;
+  id = id.startsWith("drafts.") ? id : `drafts.${id}`;
 
   return (
     <div>
