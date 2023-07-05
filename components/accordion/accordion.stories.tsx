@@ -1,4 +1,4 @@
-import { Accordion } from "./Accordion";
+import { Accordion, AccordionProps } from "./Accordion";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -25,10 +25,25 @@ const DemoContent = (
   </>
 );
 
-const items = [
+const DEMO_ITEMS: AccordionProps["items"] = [
   {
     title: "Simplify Navigation",
-    content: DemoContent,
+    content: [
+      {
+        _key: "1bc91c6df8b3",
+        _type: "block",
+        children: [
+          {
+            _key: "9dc1274a39d5",
+            _type: "span",
+            marks: [],
+            text: "We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+    ],
   },
   {
     title: "Preview Documents and Emails",
@@ -48,10 +63,11 @@ const items = [
   },
 ];
 
-export const Default = () => <Accordion items={items} />;
+export const Default = () => <Accordion items={DEMO_ITEMS} />;
+
 export const Colors = () => (
   <Accordion
-    items={items}
+    items={DEMO_ITEMS}
     theme={{
       title: "white",
       icon: "white",

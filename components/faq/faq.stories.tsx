@@ -47,3 +47,15 @@ const DEMO_ITEMS: FAQProps["items"] = [
 ];
 
 export const Default = () => <FAQ items={DEMO_ITEMS} />;
+
+export const Colors = () => (
+  <FAQ
+    items={DEMO_ITEMS}
+    theme={{
+      title: "white",
+      icon: "white",
+      background: "black",
+      divider: "white",
+    }}
+  />
+);
