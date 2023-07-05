@@ -326,7 +326,7 @@ export const LivePreview = ({
                 <path d="M36 18c0-9.94-8.06-18-18-18">
                   <animateTransform
                     attributeName="transform"
-                    dur="1s"
+                    dur=".35s"
                     from="0 18 18"
                     repeatCount="indefinite"
                     to="360 18 18"
