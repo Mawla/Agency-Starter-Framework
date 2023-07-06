@@ -1,12 +1,9 @@
 import { ImageType } from "../../types";
 import { PortableTextProps } from "../portabletext/PortableText";
-import { PortableText } from "@portabletext/react";
-import Head from "next/head";
 import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { PortableTextBlock } from "sanity";
 
 export type TestimonialType = {
+  _key?: string;
   title?: string;
   image?: ImageType;
   name?: string;
@@ -25,44 +22,16 @@ export const Testimonials = ({ items, RenderElement }: TestimonialsProps) => {
   return (
     <>
       {items?.filter(Boolean).map((item) => (
-        <RenderElement {...item} />
+        <RenderElement
+          {...item}
+          key={item._key || item.title || item.content}
+        />
       ))}
 
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              {
-                "@context": "https://schema.org",
-                "@type": "itemsPage",
-                mainEntity: items
-                  ?.filter(
-                    ({ title, content }) => Boolean(title) && Boolean(content),
-                  )
-                  .map(({ title, content }) => {
-                    return {
-                      "@type": "Question",
-                      name: title,
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: content
-                          ? renderToStaticMarkup(
-                              <PortableText
-                                value={content as PortableTextBlock[]}
-                              />,
-                            )
-                          : "",
-                      },
-                    };
-                  }),
-              },
-              null,
-              2,
-            ),
-          }}
-        />
-      </Head>
+      {/* Thought about adding json+ld snippets here,
+      but not sure adding rich snippets here is 
+      the best place, probably better to do that 
+      site wide from CMS config */}
     </>
   );
 };

@@ -22,14 +22,17 @@ describe("Testimonials", () => {
               image: demoImage,
             },
           ]}
-          RenderElement={(props) => <pre {...props} />}
+          RenderElement={(props) => (
+            <pre data-testid="pre">{JSON.stringify(props, null, 2)}</pre>
+          )}
         />,
       );
     });
-    expect(screen.getByText("Hello", { selector: "pre" })).toBeInTheDocument();
-    expect(screen.getByText("from", { selector: "pre" })).toBeInTheDocument();
-    expect(screen.getByText("John", { selector: "pre" })).toBeInTheDocument();
-    expect(screen.getByText("Doe", { selector: "pre" })).toBeInTheDocument();
-    expect(screen.getAllByAltText("hello"));
+
+    expect(screen.getByTestId("pre")).toHaveTextContent("Hello");
+    expect(screen.getByTestId("pre")).toHaveTextContent("from");
+    expect(screen.getByTestId("pre")).toHaveTextContent("John");
+    expect(screen.getByTestId("pre")).toHaveTextContent("Doe");
+    expect(screen.getByTestId("pre")).toHaveTextContent("demoimage");
   });
 });

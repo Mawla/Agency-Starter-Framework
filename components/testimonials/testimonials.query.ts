@@ -14,6 +14,7 @@ export const testimonialsQuery = `
   _type == 'testimonials.reference' => @-> ,
   _type != 'reference' => @,
 } {
+  _key,
   name,
   jobTitle,
   title,
