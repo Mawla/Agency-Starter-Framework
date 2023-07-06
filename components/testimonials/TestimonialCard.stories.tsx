@@ -9,3 +9,16 @@ export default {
 } as Meta;
 
 export const Card = () => <TestimonialCard {...demoTestimonialsList[0]} />;
+
+export const Theme = () => (
+  <TestimonialCard
+    {...demoTestimonialsList[0]}
+    theme={{
+      background: "black",
+      title: "white",
+      content: "white",
+      name: "white",
+      jobTitle: "white",
+    }}
+  />
+);

@@ -1,3 +1,4 @@
+import { imageQuery } from "../images/image.query";
 import { richTextQuery } from "../portabletext/portabletext.query";
 
 /**
@@ -13,7 +14,10 @@ export const testimonialsQuery = `
   _type == 'testimonials.reference' => @-> ,
   _type != 'reference' => @,
 } {
+  name,
+  jobTitle,
   title,
-  content[] ${richTextQuery}
+  content[] ${richTextQuery},
+  "image": ${imageQuery},
 }
 `;

@@ -28,26 +28,31 @@ const testimonialItemObject = defineField({
       name: "name",
       title: "Person name",
       type: "string",
+      description: "Name of the person giving the testimonial.",
     }),
     defineField({
       name: "jobTitle",
       title: "Person job title",
       type: "string",
+      description: "What does this person do?",
     }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
+      description: "Describing title of the testimonial.",
     }),
     defineField({
       name: "content",
       title: "Content",
       type: "portabletext.simple",
+      description: "The testimonial itself.",
     }),
     defineField({
       name: "image",
       title: "Image",
       type: "image",
+      description: "Image of the person giving the testimonial.",
     }),
   ],
 });
@@ -58,7 +63,7 @@ export const schema = defineType({
   type: "array",
   of: [
     defineArrayMember({
-      name: "testimonial.reference",
+      name: "testimonials.reference",
       title: "Reusable testimonial",
       type: "reference",
       to: [{ type: "testimonials.item" }],

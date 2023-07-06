@@ -8,8 +8,8 @@ import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TestimonialCardProps } from "../../components/testimonials/TestimonialCard";
 import {
-  Testimonial,
   TestimonialsProps,
+  TestimonialType,
 } from "../../components/testimonials/Testimonials";
 import { HeadingLevelType } from "../../types";
 import {
@@ -81,6 +81,8 @@ export type Block11Props = {
       color?: IntroColorType;
       size?: IntroSizeType;
     };
+
+    testimonials?: TestimonialCardProps["theme"];
   };
 
   title?: string;
@@ -95,6 +97,12 @@ const alignClasses: Record<AlignType, string> = {
   right: "text-right ml-auto",
 };
 
+const gridClasses: Record<number, string> = {
+  1: "grid grid-cols-1 sm:w-1/2 mx-auto",
+  2: "grid grid-cols-1 sm:grid-cols-2 md:w-3/4 mx-auto",
+  3: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+};
+
 export const Block11 = ({
   theme,
   title,
@@ -106,8 +114,8 @@ export const Block11 = ({
   const testimonialsColumns = testimonials
     ?.reduce(
       (
-        acc: [Testimonial[], Testimonial[], Testimonial[]],
-        item: Testimonial,
+        acc: [TestimonialType[], TestimonialType[], TestimonialType[]],
+        item: TestimonialType,
         index: number,
       ) => {
         const listIndex = index % 3;
@@ -117,12 +125,6 @@ export const Block11 = ({
       [[], [], []],
     )
     .filter((x) => x.length);
-
-  const gridClasses: Record<number, string> = {
-    1: "grid grid-cols-1 w-1/2 mx-auto",
-    2: "grid grid-cols-1 sm:grid-cols-2 w-3/4 mx-auto",
-    3: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
-  };
 
   return (
     <Wrapper
@@ -175,12 +177,17 @@ export const Block11 = ({
             )}
           >
             {testimonialsColumns?.map((testimonials, index) => (
-              <div key={index}>
+              <div key={index} className="space-y-6">
                 {testimonials &&
                   Boolean(testimonials?.filter(Boolean).length) && (
                     <Testimonials
                       items={testimonials}
-                      RenderElement={TestimonialCard}
+                      RenderElement={(props) => (
+                        <TestimonialCard
+                          {...props}
+                          theme={theme?.testimonials}
+                        />
+                      )}
                     />
                   )}
               </div>

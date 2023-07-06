@@ -200,14 +200,21 @@ const schema = defineType({
                 },
               },
               {
-                name: "icon",
+                name: "content",
                 type: "color",
                 options: {
                   colors: COLORS,
                 },
               },
               {
-                name: "divider",
+                name: "name",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "jobTitle",
                 type: "color",
                 options: {
                   colors: COLORS,

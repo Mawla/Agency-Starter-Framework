@@ -6,7 +6,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { PortableTextBlock } from "sanity";
 
-export type Testimonial = {
+export type TestimonialType = {
   title?: string;
   image?: ImageType;
   name?: string;
@@ -15,7 +15,7 @@ export type Testimonial = {
 };
 
 export type TestimonialsProps = {
-  items?: Testimonial[];
+  items?: TestimonialType[];
   RenderElement?: React.ComponentType<any>;
 };
 

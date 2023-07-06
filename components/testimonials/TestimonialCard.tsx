@@ -1,7 +1,11 @@
+import { backgroundClasses, textClasses } from "../../colors";
 import { TitleProps } from "../../components/block/Title";
+import { ColorType } from "../../types";
+import { TitleColorType } from "../block/title.options";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
-import { TestimonialsProps } from "./Testimonials";
+import { TestimonialType } from "./Testimonials";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Title = lazy<ComponentType<TitleProps>>(
@@ -22,7 +26,15 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
-export type TestimonialCardProps = TestimonialsProps["items"][0];
+export type TestimonialCardProps = {
+  theme?: {
+    background?: ColorType;
+    title?: TitleColorType;
+    content?: ColorType;
+    name?: ColorType;
+    jobTitle?: ColorType;
+  };
+} & TestimonialType;
 
 export const TestimonialCard = ({
   title,
@@ -30,17 +42,27 @@ export const TestimonialCard = ({
   name,
   jobTitle,
   content,
+  theme,
 }: TestimonialCardProps) => {
   return (
-    <figure className="p-6 bg-gray-50 rounded text-left">
+    <figure
+      className={cx(
+        "p-6 rounded-sm text-left",
+        theme?.background && backgroundClasses[theme?.background],
+        theme?.content && textClasses[theme?.content],
+      )}
+    >
       {(title || content) && (
-        <blockquote className="text-sm text-gray-500">
+        <blockquote className="text-sm">
           {title && (
-            <div className="mb-6">
-              <Title size={"xl"} as="span" className="text-current">
-                {title}
-              </Title>
-            </div>
+            <Title
+              size={"xl"}
+              as="span"
+              className="text-current mb-6"
+              color={theme?.title}
+            >
+              {title}
+            </Title>
           )}
           {content && (
             <div className="mb-6 text-lg">
@@ -59,8 +81,23 @@ export const TestimonialCard = ({
 
         {(name || jobTitle) && (
           <div className="space-y-0.5 font-medium">
-            {name && <span className="block">{name}</span>}
-            {jobTitle && <span className="block text-sm">{jobTitle}</span>}
+            {name && (
+              <span
+                className={cx("block", theme?.name && textClasses[theme?.name])}
+              >
+                {name}
+              </span>
+            )}
+            {jobTitle && (
+              <span
+                className={cx(
+                  "block text-sm",
+                  theme?.jobTitle && textClasses[theme?.jobTitle],
+                )}
+              >
+                {jobTitle}
+              </span>
+            )}
           </div>
         )}
       </figcaption>

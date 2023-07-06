@@ -36,6 +36,22 @@ const DEMO_CONTENT: Block11Props = {
 
 export const Default = () => <Block11 {...DEMO_CONTENT} />;
 
+export const CardTheme = () => (
+  <Block11
+    {...DEMO_CONTENT}
+    testimonials={demoTestimonialsList}
+    theme={{
+      testimonials: {
+        background: "black",
+        title: "white",
+        content: "white",
+        name: "white",
+        jobTitle: "white",
+      },
+    }}
+  />
+);
+
 export const OneCard = () => (
   <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 1)} />
 );

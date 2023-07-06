@@ -1,4 +1,4 @@
-import { TestimonialsProps } from "../components/testimonials/Testimonials";
+import { TestimonialType } from "../components/testimonials/Testimonials";
 import { ImageType } from "../types";
 
 export const demoImage: ImageType = {
@@ -29,7 +29,7 @@ export const demoImage4: ImageType = {
   height: 546,
 };
 
-export const demoTestimonialsList: TestimonialsProps["items"] = [
+export const demoTestimonialsList: TestimonialType[] = [
   {
     title: "Solid foundation for any project",
     content:
