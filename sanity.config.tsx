@@ -56,6 +56,10 @@ export default defineConfig({
         document.language === baseLanguage ? "" : `/${document.language}`;
       const path = `${languagePrefix}${getPathForId(document._id, sitemap)}`;
 
+      if (!document.language) {
+        return prev;
+      }
+
       if (path === "/" && document._id.indexOf("page_homepage") === -1) {
         return prev;
       }
