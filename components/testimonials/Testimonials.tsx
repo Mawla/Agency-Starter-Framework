@@ -6,14 +6,16 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { PortableTextBlock } from "sanity";
 
+export type Testimonial = {
+  title?: string;
+  image?: ImageType;
+  name?: string;
+  jobTitle?: string;
+  content?: PortableTextProps["content"];
+};
+
 export type TestimonialsProps = {
-  items: {
-    title?: string;
-    image?: ImageType;
-    name?: string;
-    jobTitle?: string;
-    content?: PortableTextProps["content"];
-  }[];
+  items?: Testimonial[];
   RenderElement?: React.ComponentType<any>;
 };
 
@@ -35,7 +37,7 @@ export const Testimonials = ({ items, RenderElement }: TestimonialsProps) => {
                 "@context": "https://schema.org",
                 "@type": "itemsPage",
                 mainEntity: items
-                  .filter(
+                  ?.filter(
                     ({ title, content }) => Boolean(title) && Boolean(content),
                   )
                   .map(({ title, content }) => {

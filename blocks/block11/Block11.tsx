@@ -7,7 +7,10 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TestimonialCardProps } from "../../components/testimonials/TestimonialCard";
-import { TestimonialsProps } from "../../components/testimonials/Testimonials";
+import {
+  Testimonial,
+  TestimonialsProps,
+} from "../../components/testimonials/Testimonials";
 import { HeadingLevelType } from "../../types";
 import {
   TitleSizeType,
@@ -99,6 +102,20 @@ export const Block11 = ({
   testimonials,
   buttons,
 }: Block11Props) => {
+  // make three equal parts list for columns from the testimonials array
+  const testimonialsColumns = testimonials?.reduce(
+    (
+      acc: [Testimonial[], Testimonial[], Testimonial[]],
+      item: Testimonial,
+      index: number,
+    ) => {
+      const listIndex = index % 3;
+      acc[listIndex].push(item);
+      return acc;
+    },
+    [[], [], []],
+  );
+
   return (
     <Wrapper
       theme={{
@@ -138,18 +155,23 @@ export const Block11 = ({
 
       <div
         className={cx(
-          "max-w-4xl",
+          "max-w-screen-xl",
           alignClasses[theme?.block?.align || "center"],
         )}
       >
-        {testimonials && Boolean(testimonials?.filter(Boolean).length) && (
-          <div className="grid gap-8 lg:grid-cols-3">
-            <Testimonials
-              items={testimonials}
-              RenderElement={TestimonialCard}
-            />
-          </div>
-        )}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-20">
+          {testimonialsColumns?.map((testimonials, index) => (
+            <div key={index}>
+              {testimonials &&
+                Boolean(testimonials?.filter(Boolean).length) && (
+                  <Testimonials
+                    items={testimonials}
+                    RenderElement={TestimonialCard}
+                  />
+                )}
+            </div>
+          ))}
+        </div>
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
           <div className="mt-12 lg:mt-16">
