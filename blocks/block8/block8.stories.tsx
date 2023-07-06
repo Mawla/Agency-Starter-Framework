@@ -25,7 +25,6 @@ export default {
 const DEMO_CONTENT = {
   title: "The most trusted cryptocurrency platform",
   intro: <p>Here are a few reasons why you should choose Flowbite</p>,
-
   items: [
     {
       _key: "",
@@ -65,6 +64,34 @@ const DEMO_CONTENT = {
 
 export const Default = () => <Block8 {...DEMO_CONTENT} />;
 
+export const SingleItem = () => (
+  <Block8 {...DEMO_CONTENT} items={DEMO_CONTENT.items.slice(0, 1)} />
+);
+export const TwoItems = () => (
+  <Block8 {...DEMO_CONTENT} items={DEMO_CONTENT.items.slice(0, 2)} />
+);
+export const ThreeItems = () => (
+  <Block8 {...DEMO_CONTENT} items={DEMO_CONTENT.items.slice(0, 3)} />
+);
+export const FourItems = () => (
+  <Block8
+    {...DEMO_CONTENT}
+    items={[...DEMO_CONTENT.items, ...DEMO_CONTENT.items].slice(0, 4)}
+  />
+);
+export const FiveItems = () => (
+  <Block8
+    {...DEMO_CONTENT}
+    items={[...DEMO_CONTENT.items, ...DEMO_CONTENT.items].slice(0, 5)}
+  />
+);
+export const SixItems = () => (
+  <Block8
+    {...DEMO_CONTENT}
+    items={[...DEMO_CONTENT.items, ...DEMO_CONTENT.items].slice(0, 6)}
+  />
+);
+
 export const BlockBackgrounds = () => (
   <>
     {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
@@ -77,7 +104,7 @@ export const BlockBackgrounds = () => (
             }}
           />
         </div>
-      )
+      ),
     )}
   </>
 );

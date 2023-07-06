@@ -84,14 +84,15 @@ const alignClasses: Record<AlignType, string> = {
   right: "text-right ml-auto",
 };
 
-export const Block8 = ({
-  theme,
+const gridClasses: Record<number, string> = {
+  0: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+  1: "grid grid-cols-1",
+  2: "grid grid-cols-1 sm:grid-cols-2",
+  3: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+  4: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4",
+};
 
-  title,
-  intro,
-
-  items,
-}: Block8Props) => {
+export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
   return (
     <Wrapper
       theme={{
@@ -135,7 +136,16 @@ export const Block8 = ({
           )}
 
           {items && (
-            <div className="flex md:flex-row mt-8 md:space-x-24 flex-col">
+            <div
+              className={cx(
+                "mt-8 gap-12",
+                alignClasses[theme?.block?.align || "center"],
+                gridClasses[items?.length <= 4 ? items?.length : 0],
+                {
+                  ["md:gap-24"]: items?.length <= 2,
+                },
+              )}
+            >
               {Boolean(items?.filter(Boolean).length) &&
                 items?.map((item: ItemProps) => {
                   return (
@@ -167,8 +177,8 @@ const Item = ({ title, intro, image, buttons, align }: ItemProps) => {
   return (
     <div>
       {image && (
-        <div className="my-6">
-          <ResponsiveImage {...image} className="inline-block" />
+        <div className="inline-block my-6 aspect-square max-w-[100px]">
+          <ResponsiveImage {...image} />
         </div>
       )}
 
