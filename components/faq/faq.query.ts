@@ -1,3 +1,4 @@
+import { LanguageType } from "../../languages";
 import { richTextQuery } from "../portabletext/portabletext.query";
 
 /**
@@ -8,12 +9,12 @@ import { richTextQuery } from "../portabletext/portabletext.query";
  *   faq[] ${faqQuery}
  * }
  */
-export const faqQuery = `
+export const getFaqQuery = (language: LanguageType) => `
 {
   _type == 'faq.reference' => @-> ,
   _type != 'reference' => @,
 } {
-  title,
-  content[] ${richTextQuery}
+  "title": coalesce(title.${language}, title),
+  "content": coalesce(content.${language}, content)[] ${richTextQuery},
 }
 `;

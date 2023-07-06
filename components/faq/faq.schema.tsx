@@ -1,3 +1,4 @@
+import { baseLanguage } from "../../languages";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import { FolderQuestion, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -11,12 +12,14 @@ const faqItemObject = defineField({
   preview: {
     select: {
       title: "title",
+      titleEn: `title.${baseLanguage}`,
       content: "content",
+      contentEn: `content.${baseLanguage}`,
     },
-    prepare({ title, content = [] }) {
+    prepare({ title, titleEn, contentEn, content = [] }) {
       return {
-        title,
-        subtitle: blocksToText(content),
+        title: titleEn || title,
+        subtitle: blocksToText(contentEn || content),
         media: FolderQuestion,
       };
     },
@@ -26,11 +29,13 @@ const faqItemObject = defineField({
       name: "title",
       title: "Title",
       type: "string",
+      options: { localize: true } as any,
     }),
     defineField({
       name: "content",
       title: "Content",
       type: "portabletext.simple",
+      options: { localize: true } as any,
     }),
   ],
 });

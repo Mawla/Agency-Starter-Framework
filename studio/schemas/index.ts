@@ -74,7 +74,6 @@ export const schemaTypes = [
     dialogRichText,
     dialogVideo,
     faq,
-    faqItem,
     footer,
     imageSimple,
     link,
@@ -111,5 +110,11 @@ export const schemaTypes = [
     video,
   ],
 
-  ...translateFields([configGeneral, configSeo, configTranslations, person]),
+  ...translateFields([
+    configGeneral,
+    configSeo,
+    configTranslations,
+    person,
+    faqItem,
+  ]),
 ];
