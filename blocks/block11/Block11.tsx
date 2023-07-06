@@ -103,18 +103,26 @@ export const Block11 = ({
   buttons,
 }: Block11Props) => {
   // make three equal parts list for columns from the testimonials array
-  const testimonialsColumns = testimonials?.reduce(
-    (
-      acc: [Testimonial[], Testimonial[], Testimonial[]],
-      item: Testimonial,
-      index: number,
-    ) => {
-      const listIndex = index % 3;
-      acc[listIndex].push(item);
-      return acc;
-    },
-    [[], [], []],
-  );
+  const testimonialsColumns = testimonials
+    ?.reduce(
+      (
+        acc: [Testimonial[], Testimonial[], Testimonial[]],
+        item: Testimonial,
+        index: number,
+      ) => {
+        const listIndex = index % 3;
+        acc[listIndex].push(item);
+        return acc;
+      },
+      [[], [], []],
+    )
+    .filter((x) => x.length);
+
+  const gridClasses: Record<number, string> = {
+    1: "grid grid-cols-1 w-1/2 mx-auto",
+    2: "grid grid-cols-1 sm:grid-cols-2 w-3/4 mx-auto",
+    3: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+  };
 
   return (
     <Wrapper
@@ -159,10 +167,14 @@ export const Block11 = ({
           alignClasses[theme?.block?.align || "center"],
         )}
       >
-        <div className="gap-8 grid grid-flow-col auto-cols-fr mt-20">
-          {testimonialsColumns
-            ?.filter((x) => x.length)
-            .map((testimonials, index) => (
+        {testimonialsColumns?.length && (
+          <div
+            className={cx(
+              "gap-8 grid mt-20",
+              gridClasses[testimonialsColumns?.length],
+            )}
+          >
+            {testimonialsColumns?.map((testimonials, index) => (
               <div key={index}>
                 {testimonials &&
                   Boolean(testimonials?.filter(Boolean).length) && (
@@ -173,8 +185,8 @@ export const Block11 = ({
                   )}
               </div>
             ))}
-        </div>
-
+          </div>
+        )}
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
           <div className="mt-12 lg:mt-16">
             <ButtonGroup items={buttons} />
