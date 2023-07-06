@@ -253,6 +253,10 @@ export const structure = (
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),
+          documentList(S, {
+            type: "faq.item",
+            title: "Frequently Asked Questions",
+          }),
           documentList(S, { type: "testimonials.item", title: "Testimonials" }),
         ]),
       ),

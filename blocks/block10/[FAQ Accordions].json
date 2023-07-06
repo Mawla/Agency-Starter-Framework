@@ -1,0 +1,12 @@
+{
+  "title": "FAQ Accordions",
+  "description": "Can be used to expand the answer to each question based on user interaction.",
+  "name": "Block 10",
+  "schemaName": "block.block10",
+  "date": "2023-07-05T08:57:36.968Z",
+  "fields": [
+    "title",
+    "intro",
+    "buttons"
+  ]
+}
