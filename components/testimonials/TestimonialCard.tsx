@@ -50,6 +50,9 @@ export const TestimonialCard = ({
         "p-6 rounded-sm text-left",
         theme?.background && backgroundClasses[theme?.background],
         theme?.content && textClasses[theme?.content],
+        {
+          ["bg-[rgba(0,0,0,.03)]"]: !theme?.background,
+        },
       )}
     >
       {(title || content) && (
