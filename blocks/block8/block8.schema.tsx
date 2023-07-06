@@ -91,6 +91,11 @@ const schema = defineType({
           },
           fields: [
             defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+            }),
+            defineField({
               name: "title",
               title: "Title",
               type: "string",
@@ -104,11 +109,6 @@ const schema = defineType({
               name: "buttons",
               title: "Buttons",
               type: "buttongroup",
-            }),
-            defineField({
-              name: "image",
-              title: "Image",
-              type: "image",
             }),
           ],
         }),
