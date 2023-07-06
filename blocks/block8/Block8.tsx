@@ -20,36 +20,36 @@ import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper")
+    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title")
+  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text")
+  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text"),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    )
+    ),
 );
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
-    )
+    ),
 );
 
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
-    )
+    ),
 );
 
 export type Block8Props = {
@@ -101,14 +101,15 @@ export const Block8 = ({
       <div
         className={cx(
           "max-w-3xl",
-          alignClasses[theme?.block?.align || "center"]
+          alignClasses[theme?.block?.align || "center"],
         )}
       >
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center sm:py-16 lg:px-6">
           {title && (
             <div
-              className={cx("mb-6",
-                alignClasses[theme?.block?.align || "center"]
+              className={cx(
+                "mb-6",
+                alignClasses[theme?.block?.align || "center"],
               )}
             >
               <Title
@@ -162,10 +163,14 @@ type ItemProps = {
   align?: AlignType;
 };
 
-const Item = ({ _key, title, intro, image, buttons, align }: ItemProps) => {
+const Item = ({ title, intro, image, buttons, align }: ItemProps) => {
   return (
     <div>
-      {image && <ResponsiveImage {...image} className="inline-block my-6" />}
+      {image && (
+        <div className="my-6">
+          <ResponsiveImage {...image} className="inline-block" />
+        </div>
+      )}
 
       {title && (
         <Title
