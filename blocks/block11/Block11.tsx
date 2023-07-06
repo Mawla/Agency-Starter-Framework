@@ -6,6 +6,8 @@ import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { TestimonialCardProps } from "../../components/testimonials/TestimonialCard";
+import { TestimonialsProps } from "../../components/testimonials/Testimonials";
 import { HeadingLevelType } from "../../types";
 import {
   TitleSizeType,
@@ -44,6 +46,20 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
+const Testimonials = lazy<ComponentType<TestimonialsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Testimonials" */ "../../components/testimonials/Testimonials"
+    ),
+);
+
+const TestimonialCard = lazy<ComponentType<TestimonialCardProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "TestimonialCard" */ "../../components/testimonials/TestimonialCard"
+    ),
+);
+
 export type Block11Props = {
   theme?: {
     block?: {
@@ -66,8 +82,8 @@ export type Block11Props = {
 
   title?: string;
   intro?: React.ReactNode;
-
   buttons?: ButtonProps[];
+  testimonials?: TestimonialsProps["items"];
 };
 
 const alignClasses: Record<AlignType, string> = {
@@ -78,10 +94,9 @@ const alignClasses: Record<AlignType, string> = {
 
 export const Block11 = ({
   theme,
-
   title,
   intro,
-
+  testimonials,
   buttons,
 }: Block11Props) => {
   return (
@@ -119,9 +134,25 @@ export const Block11 = ({
             </Text>
           </div>
         )}
+      </div>
+
+      <div
+        className={cx(
+          "max-w-4xl",
+          alignClasses[theme?.block?.align || "center"],
+        )}
+      >
+        {testimonials && Boolean(testimonials?.filter(Boolean).length) && (
+          <div className="grid gap-8 lg:grid-cols-3">
+            <Testimonials
+              items={testimonials}
+              RenderElement={TestimonialCard}
+            />
+          </div>
+        )}
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-8 lg:mt-12">
+          <div className="mt-12 lg:mt-16">
             <ButtonGroup items={buttons} />
           </div>
         )}

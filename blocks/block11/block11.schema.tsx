@@ -1,3 +1,4 @@
+import { COLORS } from "../../colors";
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
@@ -10,7 +11,7 @@ import {
   INTRO_SIZE_OPTIONS,
 } from "./block11.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { Question } from "@vectopus/atlas-icons-react";
+import { MessagingLines } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -18,7 +19,7 @@ const schema = defineType({
   name: "block.block11",
   title: "Grid layout testimonial cards",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <MessagingLines weight="thin" />,
   description:
     "Up to three testimonial cards for every row and show a title, description, avatar, name, and job title",
   preview: {
@@ -73,7 +74,12 @@ const schema = defineType({
       type: "portabletext.simple",
       group: "content",
     }),
-
+    defineField({
+      name: "testimonials",
+      title: "Testimonials",
+      type: "testimonials.list",
+      group: "content",
+    }),
     defineField({
       name: "buttons",
       title: "Buttons",
@@ -167,6 +173,44 @@ const schema = defineType({
                 type: "color",
                 options: {
                   colors: INTRO_COLOR_OPTIONS,
+                },
+              },
+            ],
+          },
+        }),
+
+        defineField({
+          name: "testimonials",
+          title: "Testimonials",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "title",
+                type: "color",
+                options: {
+                  colors: TITLE_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "icon",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "divider",
+                type: "color",
+                options: {
+                  colors: COLORS,
                 },
               },
             ],

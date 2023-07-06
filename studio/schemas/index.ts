@@ -14,6 +14,9 @@ import portableTextBasic from "../../components/portabletext/portabletextbasic.s
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import script from "../../components/script/script.schema";
+import testimonials, {
+  testimonialItem,
+} from "../../components/testimonials/testimonials.schema";
 import video from "../../components/video/video.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
@@ -109,6 +112,8 @@ export const schemaTypes = [
     script,
     studioDivider,
     styles,
+    testimonialItem,
+    testimonials,
     video,
   ],
 

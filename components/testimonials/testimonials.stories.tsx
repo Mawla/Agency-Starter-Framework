@@ -1,5 +1,5 @@
 import { demoTestimonialsList } from "../../stories/content";
-import { Testimonials, TestimonialsProps } from "./Testimonials";
+import { Testimonials } from "./Testimonials";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -15,7 +15,7 @@ export const Default = () => (
   />
 );
 
-export const Card = () => (
+export const CustomElement = () => (
   <Testimonials
     items={demoTestimonialsList}
     RenderElement={(props) => <div className="border p-10">{props.title}</div>}

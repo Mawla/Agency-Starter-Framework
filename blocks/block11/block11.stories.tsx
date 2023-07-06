@@ -1,4 +1,4 @@
-import { demoImage } from "../../stories/content";
+import { demoTestimonialsList } from "../../stories/content";
 import { Block11, Block11Props } from "./Block11";
 import {
   AlignType,
@@ -30,7 +30,8 @@ const DEMO_CONTENT: Block11Props = {
       built with the utility classes from Tailwind
     </p>
   ),
-  buttons: [{ label: "Button" }],
+  testimonials: demoTestimonialsList,
+  buttons: [{ label: "Read more" }],
 };
 
 export const Default = () => <Block11 {...DEMO_CONTENT} />;

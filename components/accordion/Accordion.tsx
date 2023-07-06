@@ -1,6 +1,6 @@
 import Text from "../block/Text";
 import { ButtonProps } from "../buttons/Button";
-import PortableText, { PortableTextProps } from "../portabletext/PortableText";
+import { PortableTextProps } from "../portabletext/PortableText";
 import * as RadixAccordion from "@radix-ui/react-accordion";
 import React, { ComponentType, lazy } from "react";
 
@@ -17,6 +17,13 @@ export type AccordionProps = {
 const Button = lazy<ComponentType<ButtonProps>>(
   () =>
     import(/* webpackChunkName: "Button" */ "../../components/buttons/Button"),
+);
+
+const PortableText = lazy<ComponentType<PortableTextProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "PortableText" */ "../portabletext/PortableText"
+    ),
 );
 
 export const Accordion = ({ items }: AccordionProps) => {

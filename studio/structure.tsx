@@ -253,6 +253,7 @@ export const structure = (
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),
+          documentList(S, { type: "testimonials.item", title: "Testimonials" }),
         ]),
       ),
       S.divider(),

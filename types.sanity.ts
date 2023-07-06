@@ -39,6 +39,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
+  "testimonials.item": "",
   footer: "",
   navigation: "",
   password: "",
@@ -85,6 +86,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "footer",
   "navigation",
   "person",
+  "testimonials.item",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;

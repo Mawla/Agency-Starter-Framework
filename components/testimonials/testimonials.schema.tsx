@@ -13,24 +13,25 @@ const testimonialItemObject = defineField({
       title: "title",
       subtitle: "name",
       content: "content",
+      image: "image",
     },
-    prepare({ title, content = [] }) {
+    prepare({ title, content = [], image }) {
       return {
         title,
         subtitle: blocksToText(content),
-        media: MessagingLines,
+        media: image || MessagingLines,
       };
     },
   },
   fields: [
     defineField({
       name: "name",
-      title: "Name",
+      title: "Person name",
       type: "string",
     }),
     defineField({
       name: "jobTitle",
-      title: "Job title",
+      title: "Person job title",
       type: "string",
     }),
     defineField({
@@ -46,21 +47,21 @@ const testimonialItemObject = defineField({
     defineField({
       name: "image",
       title: "Image",
-      type: "string",
+      type: "image",
     }),
   ],
 });
 
 export const schema = defineType({
-  name: "testimonial.list",
-  title: "testimonial list",
+  name: "testimonials.list",
+  title: "Testimonial list",
   type: "array",
   of: [
     defineArrayMember({
       name: "testimonial.reference",
       title: "Reusable testimonial",
       type: "reference",
-      to: [{ type: "testimonial.item" }],
+      to: [{ type: "testimonials.item" }],
     }),
     defineArrayMember(testimonialItemObject),
   ],
@@ -70,7 +71,7 @@ export default schema;
 
 export const testimonialItem = defineType({
   ...testimonialItemObject,
-  name: "testimonial.item",
+  name: "testimonials.item",
   title: "Testimonial",
   type: "document",
   icon: () => <ImportArrowDown weight="thin" size={20} />,
