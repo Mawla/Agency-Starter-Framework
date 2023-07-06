@@ -6,6 +6,7 @@ import block6 from "../../blocks/block6/block6.schema";
 import block8 from "../../blocks/block8/block8.schema";
 import block9 from "../../blocks/block9/block9.schema";
 import block10 from "../../blocks/block10/block10.schema";
+import block11 from "../../blocks/block11/block11.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
@@ -15,6 +16,9 @@ import portableTextBasic from "../../components/portabletext/portabletextbasic.s
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import script from "../../components/script/script.schema";
+import testimonials, {
+  testimonialItem,
+} from "../../components/testimonials/testimonials.schema";
 import video from "../../components/video/video.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
@@ -60,6 +64,7 @@ import styles from "./objects/styles";
 export const schemaTypes = [
   ...[
     block1,
+    block11,
     block10,
     block2,
     block3,
@@ -111,6 +116,7 @@ export const schemaTypes = [
     script,
     studioDivider,
     styles,
+    testimonials,
     video,
   ],
 
@@ -119,6 +125,7 @@ export const schemaTypes = [
     configSeo,
     configTranslations,
     person,
+    testimonialItem,
     faqItem,
   ]),
 ];

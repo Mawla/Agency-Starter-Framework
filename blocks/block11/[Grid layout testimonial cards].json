@@ -1,0 +1,12 @@
+{
+  "title": "Grid layout testimonial cards",
+  "description": "Up to three testimonial cards for every row and show a title, description, avatar, name, and job title",
+  "name": "Block 11",
+  "schemaName": "block.block11",
+  "date": "2023-07-06T07:23:10.328Z",
+  "fields": [
+    "title",
+    "intro",
+    "buttons"
+  ]
+}

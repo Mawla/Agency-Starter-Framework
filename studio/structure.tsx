@@ -257,6 +257,7 @@ export const structure = (
             type: "faq.item",
             title: "Frequently Asked Questions",
           }),
+          documentList(S, { type: "testimonials.item", title: "Testimonials" }),
         ]),
       ),
       S.divider(),
