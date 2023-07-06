@@ -7,7 +7,7 @@ import { IconLoaderProps } from "../images/IconLoader";
 import { PortableTextProps } from "../portabletext/PortableText";
 import * as RadixAccordion from "@radix-ui/react-accordion";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, { ComponentType, lazy, Suspense } from "react";
 
 export type AccordionItemType = {
   _key?: string;
@@ -43,52 +43,54 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
 
   return (
     <div className="radix-accordion">
-      <RadixAccordion.Root
-        type="multiple"
-        className={cx(
-          "divide-y",
-          theme?.background && backgroundClasses[theme?.background],
-          divideClasses[theme?.divider || "neutral-200"],
-        )}
-      >
-        {items?.map(({ _key, title = "", content }) => (
-          <RadixAccordion.Item
-            value={_key || title}
-            key={_key || title}
-            id={_key || title}
-            className="radix-scroll-margin"
-          >
-            <RadixAccordion.Header
-              className={cx(
-                "hover:underline",
-                theme?.title ? textClasses[theme?.title] : "text-current",
-              )}
+      <Suspense>
+        <RadixAccordion.Root
+          type="multiple"
+          className={cx(
+            "divide-y",
+            theme?.background && backgroundClasses[theme?.background],
+            divideClasses[theme?.divider || "neutral-200"],
+          )}
+        >
+          {items?.map(({ _key, title = "", content }) => (
+            <RadixAccordion.Item
+              value={_key || title}
+              key={_key || title}
+              id={_key || title}
+              className="radix-scroll-margin"
             >
-              <RadixAccordion.Trigger className="p-5 text-lg flex items-center w-full group">
-                <div className="pr-6 text-left font-bold">{title}</div>
-                <span className="flex-shrink-0 ml-auto">
-                  <IconLoader
-                    icon="chevron"
-                    className={cx(
-                      "block w-6 h-6 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180",
-                      theme?.icon ? textClasses[theme?.icon] : "text-current",
-                    )}
-                  />
-                </span>
-              </RadixAccordion.Trigger>
-            </RadixAccordion.Header>
-            <RadixAccordion.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-              <Text
-                className="h-full px-5 pb-5 pt-0 text-left"
-                size="md"
-                background={theme?.background}
+              <RadixAccordion.Header
+                className={cx(
+                  "hover:underline",
+                  theme?.title ? textClasses[theme?.title] : "text-current",
+                )}
               >
-                <PortableText content={content as any} />
-              </Text>
-            </RadixAccordion.Content>
-          </RadixAccordion.Item>
-        ))}
-      </RadixAccordion.Root>
+                <RadixAccordion.Trigger className="p-5 text-lg flex items-center w-full group">
+                  <div className="pr-6 text-left font-bold">{title}</div>
+                  <span className="flex-shrink-0 ml-auto">
+                    <IconLoader
+                      icon="chevron"
+                      className={cx(
+                        "block w-6 h-6 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180",
+                        theme?.icon ? textClasses[theme?.icon] : "text-current",
+                      )}
+                    />
+                  </span>
+                </RadixAccordion.Trigger>
+              </RadixAccordion.Header>
+              <RadixAccordion.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
+                <Text
+                  className="h-full px-5 pb-5 pt-0 text-left"
+                  size="md"
+                  background={theme?.background}
+                >
+                  <PortableText content={content as any} />
+                </Text>
+              </RadixAccordion.Content>
+            </RadixAccordion.Item>
+          ))}
+        </RadixAccordion.Root>
+      </Suspense>
     </div>
   );
 };
