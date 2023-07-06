@@ -101,12 +101,16 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
     >
       <div
         className={cx(
-          "max-w-3xl",
           alignClasses[theme?.block?.align || "center"],
           theme?.intro?.color && textClasses[theme?.intro?.color],
         )}
       >
-        <div className="py-8 px-4 mx-auto max-w-screen-xl text-center sm:py-16 lg:px-6">
+        <div
+          className={cx(
+            "max-w-3xl",
+            alignClasses[theme?.block?.align || "center"],
+          )}
+        >
           {title && (
             <div
               className={cx(
@@ -135,28 +139,24 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
               </Text>
             </div>
           )}
-
-          {items && (
-            <div
-              className={cx(
-                "mt-20 gap-x-12 gap-y-10 md:gap-x-24",
-                alignClasses[theme?.block?.align || "center"],
-                gridClasses[items?.length <= 4 ? items?.length : 0],
-              )}
-            >
-              {Boolean(items?.filter(Boolean).length) &&
-                items?.map((item: ItemProps) => {
-                  return (
-                    <Item
-                      key={item._key}
-                      align={theme?.block?.align}
-                      {...item}
-                    />
-                  );
-                })}
-            </div>
-          )}
         </div>
+
+        {items && (
+          <div
+            className={cx(
+              "mt-20 gap-x-12 gap-y-10 md:gap-x-24 max-w-4xl",
+              alignClasses[theme?.block?.align || "center"],
+              gridClasses[items?.length <= 4 ? items?.length : 0],
+            )}
+          >
+            {Boolean(items?.filter(Boolean).length) &&
+              items?.map((item: ItemProps) => {
+                return (
+                  <Item key={item._key} align={theme?.block?.align} {...item} />
+                );
+              })}
+          </div>
+        )}
       </div>
     </Wrapper>
   );
