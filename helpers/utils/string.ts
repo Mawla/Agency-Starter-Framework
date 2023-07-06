@@ -1,3 +1,5 @@
+import { HeadingLevelType } from "../../types";
+
 export const slugify = (str = "") => {
   return (str || "")
     .toString()
@@ -92,8 +94,10 @@ export function joinList(items: string[]) {
  * bumpHeadingLevel('h6'); // h6
  */
 
-export const bumpHeadingLevel = (tagName: string): string => {
+export const bumpHeadingLevel = (
+  tagName: string,
+): HeadingLevelType | string => {
   const headings = ["h1", "h2", "h3", "h4", "h5"];
   if (!headings.includes(tagName)) return tagName;
-  return `h${+tagName.substring(1) + 1}`;
+  return `h${+tagName.substring(1) + 1}` as HeadingLevelType;
 };
