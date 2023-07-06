@@ -112,10 +112,15 @@ export const schemaTypes = [
     script,
     studioDivider,
     styles,
-    testimonialItem,
     testimonials,
     video,
   ],
 
-  ...translateFields([configGeneral, configSeo, configTranslations, person]),
+  ...translateFields([
+    configGeneral,
+    configSeo,
+    configTranslations,
+    person,
+    testimonialItem,
+  ]),
 ];

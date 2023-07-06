@@ -1,4 +1,4 @@
-import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
+import { baseLanguage } from "../../languages";
 import { MessagingLines, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
@@ -11,14 +11,15 @@ const testimonialItemObject = defineField({
   preview: {
     select: {
       title: "title",
+      titleEn: `title.${baseLanguage}`,
+      name: "name",
       subtitle: "name",
-      content: "content",
       image: "image",
     },
-    prepare({ title, content = [], image }) {
+    prepare({ title, titleEn, name, image }) {
       return {
-        title,
-        subtitle: blocksToText(content),
+        title: titleEn || title,
+        subtitle: name,
         media: image || MessagingLines,
       };
     },
@@ -35,18 +36,21 @@ const testimonialItemObject = defineField({
       title: "Person job title",
       type: "string",
       description: "What does this person do?",
+      options: { localize: true } as any,
     }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       description: "Describing title of the testimonial.",
+      options: { localize: true } as any,
     }),
     defineField({
       name: "content",
       title: "Content",
       type: "portabletext.simple",
       description: "The testimonial itself.",
+      options: { localize: true } as any,
     }),
     defineField({
       name: "image",

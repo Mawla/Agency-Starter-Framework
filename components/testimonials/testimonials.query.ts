@@ -1,3 +1,4 @@
+import { LanguageType } from "../../languages";
 import { imageQuery } from "../images/image.query";
 import { richTextQuery } from "../portabletext/portabletext.query";
 
@@ -9,16 +10,16 @@ import { richTextQuery } from "../portabletext/portabletext.query";
  *   testimonials[] ${testimonialsQuery}
  * }
  */
-export const testimonialsQuery = `
+
+export const getTestimonialsQuery = (language: LanguageType) => `
 {
   _type == 'testimonials.reference' => @-> ,
-  _type != 'reference' => @,
+  _type != 'reference' => @ 
 } {
-  _key,
   name,
-  jobTitle,
-  title,
-  content[] ${richTextQuery},
+  "jobTitle": coalesce(jobTitle.${language}, jobTitle),
+  "title": coalesce(title.${language}, title),
+  "content": coalesce(content.${language}, content)[] ${richTextQuery},
   "image": ${imageQuery},
 }
 `;

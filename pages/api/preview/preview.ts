@@ -14,7 +14,7 @@ function warning(msg: string) {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const { secret, _id, _type } = req.query;
+  const { secret, _id, _type, language } = req.query;
 
   if (secret !== process.env.SANITY_PREVIEW_SECRET) {
     return res
@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   }
 
   const draftId = _id.startsWith("drafts.") ? _id : `drafts.${_id}`;
-  const Location = `/preview?id=${draftId}&type=${_type}`;
+  const Location = `/preview?id=${draftId}&type=${_type}&language=${language}`;
   res.setPreviewData({});
   res.writeHead(307, { Location });
   res.end();
