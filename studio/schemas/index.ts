@@ -5,9 +5,11 @@ import block4 from "../../blocks/block4/block4.schema";
 import block6 from "../../blocks/block6/block6.schema";
 import block8 from "../../blocks/block8/block8.schema";
 import block9 from "../../blocks/block9/block9.schema";
+import block10 from "../../blocks/block10/block10.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
+import faq, { faqItem } from "../../components/faq/faq.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
@@ -58,6 +60,7 @@ import styles from "./objects/styles";
 export const schemaTypes = [
   ...[
     block1,
+    block10,
     block2,
     block3,
     block4,
@@ -74,6 +77,7 @@ export const schemaTypes = [
     dialogForm,
     dialogRichText,
     dialogVideo,
+    faq,
     footer,
     imageSimple,
     link,
@@ -110,5 +114,11 @@ export const schemaTypes = [
     video,
   ],
 
-  ...translateFields([configGeneral, configSeo, configTranslations, person]),
+  ...translateFields([
+    configGeneral,
+    configSeo,
+    configTranslations,
+    person,
+    faqItem,
+  ]),
 ];

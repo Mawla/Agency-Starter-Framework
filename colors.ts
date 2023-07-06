@@ -91,6 +91,13 @@ export const borderClasses: Record<ColorType, string> = Object.entries(
   {} as Record<ColorType, string>,
 );
 
+export const divideClasses: Record<ColorType, string> = Object.entries(
+  COLORS,
+).reduce<Record<ColorType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `divide-${key}` }),
+  {} as Record<ColorType, string>,
+);
+
 const PROSE_BACKGROUND_OVERRIDES: Record<"my-dark-color", string> = {
   "my-dark-color": "prose-invert",
 };

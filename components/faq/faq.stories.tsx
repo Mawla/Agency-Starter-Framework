@@ -1,17 +1,17 @@
 import { demoFAQList } from "../../stories/content";
-import { Accordion } from "./Accordion";
+import { FAQ, FAQProps } from "./FAQ";
 import { Meta } from "@storybook/react";
 import React from "react";
 
 export default {
-  component: Accordion,
-  title: "Components/Accordion",
+  component: FAQ,
+  title: "Components/FAQ",
 } as Meta;
 
-export const Default = () => <Accordion items={demoFAQList} />;
+export const Default = () => <FAQ items={demoFAQList} />;
 
 export const Colors = () => (
-  <Accordion
+  <FAQ
     items={demoFAQList}
     theme={{
       title: "white",
