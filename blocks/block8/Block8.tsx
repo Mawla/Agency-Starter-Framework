@@ -8,6 +8,7 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { bumpHeadingLevel } from "../../helpers/utils/string";
 import { HeadingLevelType, ImageType } from "../../types";
 import {
   TitleSizeType,
@@ -152,7 +153,12 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
             {Boolean(items?.filter(Boolean).length) &&
               items?.map((item: ItemProps) => {
                 return (
-                  <Item key={item._key} align={theme?.block?.align} {...item} />
+                  <Item
+                    key={item._key}
+                    align={theme?.block?.align}
+                    {...item}
+                    blockTitleLevel={theme?.title?.level}
+                  />
                 );
               })}
           </div>
@@ -169,9 +175,17 @@ type ItemProps = {
   image?: ImageType;
   buttons?: ButtonProps[];
   align?: AlignType;
+  blockTitleLevel?: HeadingLevelType;
 };
 
-const Item = ({ title, intro, image, buttons, align }: ItemProps) => {
+const Item = ({
+  title,
+  intro,
+  image,
+  buttons,
+  align,
+  blockTitleLevel,
+}: ItemProps) => {
   return (
     <div>
       {image && (
@@ -182,7 +196,7 @@ const Item = ({ title, intro, image, buttons, align }: ItemProps) => {
 
       {title && (
         <Title
-          as="h3"
+          as={bumpHeadingLevel(blockTitleLevel || "h2") as HeadingLevelType}
           size="xl"
           className={cx("text-current mb-2", alignClasses[align || "center"])}
         >
