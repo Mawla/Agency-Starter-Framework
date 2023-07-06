@@ -183,3 +183,14 @@ export const IntroSizes = () => (
     ))}
   </>
 );
+
+export const Colors = () => (
+  <Block8
+    {...DEMO_CONTENT}
+    theme={{
+      title: { color: "white" },
+      intro: { color: "white" },
+      block: { background: "black" },
+    }}
+  />
+);

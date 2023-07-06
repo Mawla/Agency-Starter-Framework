@@ -1,3 +1,4 @@
+import { textClasses } from "../../colors";
 import { TextProps } from "../../components/block/Text";
 import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
@@ -74,7 +75,6 @@ export type Block8Props = {
 
   title?: string;
   intro?: React.ReactNode;
-
   items?: ItemProps[];
 };
 
@@ -103,6 +103,7 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
         className={cx(
           "max-w-3xl",
           alignClasses[theme?.block?.align || "center"],
+          theme?.intro?.color && textClasses[theme?.intro?.color],
         )}
       >
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center sm:py-16 lg:px-6">
@@ -186,7 +187,7 @@ const Item = ({ title, intro, image, buttons, align }: ItemProps) => {
         <Title
           as="h3"
           size="xl"
-          className={cx("mb-2", alignClasses[align || "center"])}
+          className={cx("text-current mb-2", alignClasses[align || "center"])}
         >
           {title}
         </Title>
