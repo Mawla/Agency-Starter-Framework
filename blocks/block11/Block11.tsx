@@ -159,18 +159,20 @@ export const Block11 = ({
           alignClasses[theme?.block?.align || "center"],
         )}
       >
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-20">
-          {testimonialsColumns?.map((testimonials, index) => (
-            <div key={index}>
-              {testimonials &&
-                Boolean(testimonials?.filter(Boolean).length) && (
-                  <Testimonials
-                    items={testimonials}
-                    RenderElement={TestimonialCard}
-                  />
-                )}
-            </div>
-          ))}
+        <div className="gap-8 grid grid-flow-col auto-cols-fr mt-20">
+          {testimonialsColumns
+            ?.filter((x) => x.length)
+            .map((testimonials, index) => (
+              <div key={index}>
+                {testimonials &&
+                  Boolean(testimonials?.filter(Boolean).length) && (
+                    <Testimonials
+                      items={testimonials}
+                      RenderElement={TestimonialCard}
+                    />
+                  )}
+              </div>
+            ))}
         </div>
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (

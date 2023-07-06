@@ -36,6 +36,30 @@ const DEMO_CONTENT: Block11Props = {
 
 export const Default = () => <Block11 {...DEMO_CONTENT} />;
 
+export const OneCard = () => (
+  <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 1)} />
+);
+
+export const TwoCards = () => (
+  <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 2)} />
+);
+
+export const ThreeCards = () => (
+  <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 3)} />
+);
+
+export const FourCards = () => (
+  <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 4)} />
+);
+
+export const FiveCards = () => (
+  <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 5)} />
+);
+
+export const SixCards = () => (
+  <Block11 {...DEMO_CONTENT} testimonials={demoTestimonialsList?.slice(0, 6)} />
+);
+
 export const BlockBackgrounds = () => (
   <>
     {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
