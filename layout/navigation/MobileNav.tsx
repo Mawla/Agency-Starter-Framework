@@ -31,7 +31,7 @@ export const MobileNav = ({
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="z-[60] py-3 px-3 text-neutral-500 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
+              <RadixDialog.Close className="z-[60] py-3 px-3 text-gray-500 hover:text-black bg-white hover:bg-gray-100 transition-colors absolute top-2 right-2">
                 <IconLoader
                   icon="close"
                   className="text-current w-6 h-6 block"
@@ -53,14 +53,14 @@ export const MobileNav = ({
                         <RadixNavigationMenu.Item key={label}>
                           <details
                             open={current}
-                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-neutral-100 bg-white transition-colors duration-75"
+                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-gray-100 bg-white transition-colors duration-75"
                           >
                             <summary className="list-none relative">
                               {href ? (
                                 <Link
                                   href={href}
                                   locale={language}
-                                  className="hover:underline text-xl font-bold text-neutral-500"
+                                  className="hover:underline text-xl font-bold text-gray-500"
                                 >
                                   {label}
                                 </Link>
@@ -84,7 +84,7 @@ export const MobileNav = ({
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "text-md font-bold text-neutral-900 hover:underline relative",
+                                            "text-md font-bold text-gray-900 hover:underline relative",
                                             {
                                               ["text-action-500"]: current,
                                             },

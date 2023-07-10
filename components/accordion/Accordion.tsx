@@ -23,11 +23,8 @@ export const Accordion = ({ items }: AccordionProps) => {
   if (!Boolean(items.filter(Boolean)?.length)) return null;
 
   return (
-    <div className="filter drop-shadow-lg radix-accordion border border-neutral-200">
-      <RadixAccordion.Root
-        type="multiple"
-        className="divide-y divide-neutral-200"
-      >
+    <div className="filter drop-shadow-lg radix-accordion border border-gray-200">
+      <RadixAccordion.Root type="multiple" className="divide-y divide-gray-200">
         {items?.map(({ _key, title = "", content }) => (
           <RadixAccordion.Item
             value={_key || title}

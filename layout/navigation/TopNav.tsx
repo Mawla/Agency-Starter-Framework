@@ -47,7 +47,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               "py-2 md:py-3 lg:py-4",
               "mx-auto",
               "px-5 sm:px-8 lg:px-8 xl:px-8",
-              "border-b border-b-neutral-200",
+              "border-b border-b-gray-200",
               widthClasses.outer,
             )}
             role="navigation"
@@ -81,12 +81,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           <Element
                             className={cx(
                               "flex items-center gap-2",
-                              "text-md text-neutral-700 rounded-xs",
+                              "text-md text-gray-700 rounded-xs",
                               "py-[6px] px-3",
                               "whitespace-nowrap",
-                              "hover:bg-neutral-100 group-hover:bg-neutral-100 group-focus-within:bg-neutral-100",
+                              "hover:bg-gray-100 group-hover:bg-gray-100 group-focus-within:bg-gray-100",
                               {
-                                ["bg-neutral-100 text-neutral-900"]:
+                                ["bg-gray-100 text-gray-900"]:
                                   current ||
                                   Boolean(
                                     children?.filter(({ current }) =>
@@ -112,10 +112,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               <IconLoader
                                 icon="chevron"
                                 className={cx(
-                                  "w-4 h-4 text-inherit text-neutral-600",
-                                  "hover:text-neutral-900 transition-colors duration-75",
+                                  "w-4 h-4 text-inherit text-gray-600",
+                                  "hover:text-gray-900 transition-colors duration-75",
                                   "group-hover:rotate-180 group-focus-within:rotate-180",
-                                  "group-hover:text-neutral-600 group-focus-within:text-neutral-600",
+                                  "group-hover:text-gray-600 group-focus-within:text-gray-600",
                                 )}
                               />
                             )}
@@ -150,7 +150,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                 className={cx(
                                   "translate-y-2 p-1",
                                   "shadow-md",
-                                  "bg-white border border-neutral-300 rounded-xs",
+                                  "bg-white border border-gray-300 rounded-xs",
                                 )}
                               >
                                 {children?.map(
@@ -161,12 +161,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "bg-white hover:bg-neutral-100 flex transition-colors",
-                                            "text-neutral-600",
+                                            "bg-white hover:bg-gray-100 flex transition-colors",
+                                            "text-gray-600",
                                             "text-md",
                                             "p-3 rounded-2xs",
                                             {
-                                              ["font-bold bg-neutral-100 hover:bg-neutral-100"]:
+                                              ["font-bold bg-gray-100 hover:bg-gray-100"]:
                                                 current,
                                             },
                                           )}
@@ -203,10 +203,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           href={button.href}
                           locale={button.language}
                           className={cx(
-                            "bg-neutral-100",
+                            "bg-gray-100",
                             "hover:underline underline-offset-4",
                             "flex items-center gap-2",
-                            "text-neutral-800 rounded-full text-md",
+                            "text-gray-800 rounded-full text-md",
                             "py-[10px] pl-4 pr-3",
                             "whitespace-nowrap",
                           )}
@@ -235,7 +235,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                     className="flex"
                   >
                     <span className="w-6 h-6 block relative">
-                      <IconLoader icon="menu" className="text-neutral-600" />
+                      <IconLoader icon="menu" className="text-gray-600" />
                       <span className="absolute -inset-2 bg-white opacity-0" />
                     </span>
                   </button>

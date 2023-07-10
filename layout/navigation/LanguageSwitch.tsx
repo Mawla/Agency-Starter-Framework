@@ -64,13 +64,13 @@ export const LanguageSwitch = ({
           "group",
           "bg-white",
           "flex items-center gap-2",
-          "text-md  text-neutral-500",
+          "text-md  text-gray-500",
           "rounded-full",
           "font-bold",
           "py-[8px] pl-2.5 pr-3",
           "whitespace-nowrap",
-          "border-neutral-300 border-2  duration-75",
-          "hover:bg-neutral-100 group-hover:bg-neutral-100 group-focus-within:bg-neutral-100",
+          "border-gray-300 border-2  duration-75",
+          "hover:bg-gray-100 group-hover:bg-gray-100 group-focus-within:bg-gray-100",
         )}
       >
         <span className="w-5 aspect-square">
@@ -81,7 +81,7 @@ export const LanguageSwitch = ({
           />
         </span>
         <span>{language.toUpperCase()}</span>
-        <IconLoader icon="chevron" className="w-4 h-4 text-neutral-500" />
+        <IconLoader icon="chevron" className="w-4 h-4 text-gray-500" />
       </RadixNavigationMenu.Trigger>
 
       <RadixNavigationMenu.Content
@@ -96,7 +96,7 @@ export const LanguageSwitch = ({
           className={cx(
             "translate-y-4 p-1",
             "shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)]",
-            "bg-white border-2 border-neutral-200 rounded-md",
+            "bg-white border-2 border-gray-200 rounded-md",
           )}
         >
           {links.map(({ title, href, languageId }) => (
@@ -107,11 +107,11 @@ export const LanguageSwitch = ({
                   locale={languageId}
                   className={cx(
                     "hover:underline flex underline-offset-4 gap-3",
-                    "text-neutral-500",
+                    "text-gray-500",
                     "text-md",
                     "p-3",
                     {
-                      ["font-bold bg-neutral-100 rounded-sm"]:
+                      ["font-bold bg-gray-100 rounded-sm"]:
                         language === languageId,
                     },
                   )}

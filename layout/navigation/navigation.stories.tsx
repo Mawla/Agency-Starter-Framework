@@ -68,14 +68,14 @@ export const Default = () => <Navigation items={items} buttons={buttons} />;
 export const ScrollBehavior = () => (
   <div>
     <Navigation items={items} buttons={buttons} />
-    <div style={{ height: "50vh" }} className="bg-neutral-100" />
+    <div style={{ height: "50vh" }} className="bg-gray-100" />
     <div style={{ height: "50vh" }} className="bg-white" />
-    <div style={{ height: "50vh" }} className="bg-neutral-500" />
+    <div style={{ height: "50vh" }} className="bg-gray-500" />
     <div style={{ height: "50vh" }} className="bg-white" />
-    <div style={{ height: "50vh" }} className="bg-neutral-500" />
+    <div style={{ height: "50vh" }} className="bg-gray-500" />
     <div style={{ height: "50vh" }} className="bg-white" />
-    <div style={{ height: "50vh" }} className="bg-neutral-500" />
+    <div style={{ height: "50vh" }} className="bg-gray-500" />
     <div style={{ height: "50vh" }} className="bg-white" />
-    <div style={{ height: "50vh" }} className="bg-neutral-100" />
+    <div style={{ height: "50vh" }} className="bg-gray-100" />
   </div>
 );

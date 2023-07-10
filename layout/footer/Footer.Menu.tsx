@@ -30,9 +30,9 @@ export const FooterMenu = ({
       open={!width || width > MAX_MOBILE_SIZE ? true : current}
       className="group relative"
     >
-      <span className="pointer-events-none absolute -inset-x-4 -top-3 border border-white bottom-0 hidden group-open:block md:group-open:hidden group-open:bg-neutral-100 rounded-lg -z-10" />
+      <span className="pointer-events-none absolute -inset-x-4 -top-3 border border-white bottom-0 hidden group-open:block md:group-open:hidden group-open:bg-gray-100 rounded-lg -z-10" />
       <summary
-        className="text-neutral-500 text-xl mb-4 list-none relative"
+        className="text-gray-500 text-xl mb-4 list-none relative"
         onClick={(e) => {
           if (width && width > MAX_MOBILE_SIZE) e.preventDefault();
         }}
@@ -54,10 +54,7 @@ export const FooterMenu = ({
       <ul className="flex flex-col gap-4 pb-6 md:pb-0">
         {items?.map(({ label, href, current }) => {
           return (
-            <li
-              key={href || label}
-              className="text-neutral-900 text-md relative"
-            >
+            <li key={href || label} className="text-gray-900 text-md relative">
               {href ? (
                 <Link
                   href={href}
