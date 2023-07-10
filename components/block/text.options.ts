@@ -19,3 +19,24 @@ export type TextFontType = keyof typeof TEXT_FONT_OPTIONS;
 
 export const TEXT_COLOR_OPTIONS = pick(COLORS, "white", "black");
 export type TextColorType = keyof typeof TEXT_COLOR_OPTIONS;
+
+export const textAlignClasses: Record<TextAlignType, string> = {
+  auto: "",
+  left: "text-left",
+  center: "text-center mx-auto",
+  right: "text-right ml-auto",
+};
+
+export const textSizeClasses: Record<TextSizeType, string> = {
+  sm: "prose-sm md:prose-md",
+  md: "prose-md md:prose-base",
+  lg: "prose-lg md:prose-xl",
+  xl: "prose-xl md:prose-2xl",
+  "2xl": "prose-2xl xl:prose-3xl",
+};
+
+export const textFontClasses: Record<TextFontType, string> = {
+  sans: "font-sans",
+  mono: "font-mono",
+  heading: "font-sans",
+};

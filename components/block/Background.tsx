@@ -3,8 +3,8 @@ import { ColorType } from "../../types";
 import {
   BackgroundColorType,
   BlockRoundedType,
-  roundedBottomClasses,
-  roundedTopClasses,
+  backgroundRoundedBottomClasses,
+  backgroundRoundedTopClasses,
 } from "./background.options";
 import cx from "classnames";
 import React from "react";
@@ -34,10 +34,10 @@ export const Background = ({
       className={cx(
         "relative",
         {
-          [roundedTopClasses.md]: theme.rounded?.top === "md",
-          [roundedBottomClasses.md]: theme.rounded?.bottom === "md",
-          [roundedTopClasses.lg]: theme.rounded?.top === "lg",
-          [roundedBottomClasses.lg]: theme.rounded?.bottom === "lg",
+          [backgroundRoundedTopClasses.md]: theme.rounded?.top === "md",
+          [backgroundRoundedBottomClasses.md]: theme.rounded?.bottom === "md",
+          [backgroundRoundedTopClasses.lg]: theme.rounded?.top === "lg",
+          [backgroundRoundedBottomClasses.lg]: theme.rounded?.bottom === "lg",
         },
         theme?.background && backgroundClasses[theme?.background],
         theme?.text && textClasses[theme?.text],

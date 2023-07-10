@@ -1,7 +1,14 @@
 import { proseClasses, textClasses } from "../../colors";
 import { TextElement } from "../../types";
 import { ColorType } from "../../types";
-import { TextAlignType, TextFontType, TextSizeType } from "./text.options";
+import {
+  textAlignClasses,
+  TextAlignType,
+  textFontClasses,
+  TextFontType,
+  textSizeClasses,
+  TextSizeType,
+} from "./text.options";
 import cx from "classnames";
 import React from "react";
 
@@ -14,27 +21,6 @@ export type TextProps = {
   background?: ColorType;
   className?: string;
   font?: TextFontType | null;
-};
-
-const alignClasses: Record<TextAlignType, string> = {
-  auto: "",
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
-};
-
-const sizeClasses: Record<TextSizeType, string> = {
-  sm: "prose-sm md:prose-md",
-  md: "prose-md md:prose-base",
-  lg: "prose-lg md:prose-xl",
-  xl: "prose-xl md:prose-2xl",
-  "2xl": "prose-2xl xl:prose-3xl",
-};
-
-const fontClasses: Record<TextFontType, string> = {
-  sans: "font-sans",
-  mono: "font-mono",
-  heading: "font-sans",
 };
 
 export const Text = ({
@@ -56,9 +42,9 @@ export const Text = ({
           "break-words prose font-regular leading-relaxed",
           "prose-strong:font-bold prose-strong:text-current prose-headings:text-current",
           "prose-a:text-current prose-a:underline prose-a:underline-offset-4",
-          align && alignClasses[align],
-          size && sizeClasses[size],
-          font && fontClasses[font],
+          align && textAlignClasses[align],
+          size && textSizeClasses[size],
+          font && textFontClasses[font],
           color
             ? textClasses[color]
             : background
