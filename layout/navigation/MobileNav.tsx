@@ -65,13 +65,17 @@ export const MobileNav = ({
                                   {label}
                                 </Link>
                               ) : (
-                                <span className="block">{label}</span>
+                                <span className="block font-bold text-gray-500">
+                                  {label}
+                                </span>
                               )}
 
-                              <IconLoader
-                                icon="chevron"
-                                className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
-                              />
+                              {Boolean(children?.length) && (
+                                <IconLoader
+                                  icon="chevron"
+                                  className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
+                                />
+                              )}
                             </summary>
 
                             {Boolean(children?.length) && (
@@ -84,7 +88,7 @@ export const MobileNav = ({
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "text-md font-bold text-gray-900 hover:underline relative",
+                                            "text-md text-gray-900 hover:underline relative",
                                             {
                                               ["text-action-500"]: current,
                                             },
