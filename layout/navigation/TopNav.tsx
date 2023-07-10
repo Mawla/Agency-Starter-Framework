@@ -156,24 +156,25 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                                 {children?.map(
                                   ({ label, current, href, language }) => (
                                     <RadixNavigationMenu.Item key={label}>
-                                      {href && (
-                                        <Link
-                                          href={href}
-                                          locale={language}
-                                          className={cx(
-                                            "bg-white hover:bg-gray-100 flex transition-colors",
-                                            "text-gray-600",
-                                            "text-md",
-                                            "p-3 rounded-2xs",
-                                            {
-                                              ["font-bold bg-gray-100 hover:bg-gray-100"]:
-                                                current,
-                                            },
-                                          )}
-                                        >
-                                          {label}
-                                        </Link>
-                                      )}
+                                      <span className="bg-white text-gray-600 block p-3">
+                                        {href ? (
+                                          <Link
+                                            href={href}
+                                            locale={language}
+                                            className={cx(
+                                              "hover:bg-gray-100 flex transition-colors text-current",
+                                              {
+                                                ["font-bold bg-gray-100 hover:bg-gray-100"]:
+                                                  current,
+                                              },
+                                            )}
+                                          >
+                                            {label}
+                                          </Link>
+                                        ) : (
+                                          label
+                                        )}
+                                      </span>
                                     </RadixNavigationMenu.Item>
                                   ),
                                 )}
