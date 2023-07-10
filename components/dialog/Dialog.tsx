@@ -34,19 +34,19 @@ export const Dialog = ({
         </RadixDialog.Overlay>
         <RadixDialog.Content
           className={cx(
-            "fixed z-50 w-screen top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 max-w-90vw",
+            "fixed z-50 w-screen top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 max-w-[90vw]",
             {
-              ["max-h-75vh aspect-ratio-16-9 max-w-inner"]: mode === "video",
-              ["max-w-90vw md:max-w-75vw lg:max-w-text"]: mode === "content",
+              ["max-h-[75vh] aspect-ratio-16-9 max-w-inner"]: mode === "video",
+              ["max-w-[90vw] md:max-w-[75vw] lg:max-w-3xl"]: mode === "content",
               ["inline-flex justify-center"]: mode === "form",
             },
           )}
         >
           <div
             className={cx({
-              ["text-neutral-500 overflow-y-auto overflow-scrolling-touch filter shadow-md bg-white p-10 h-auto max-h-75vh "]:
+              ["text-neutral-500 overflow-y-auto overflow-scrolling-touch filter shadow-md bg-white p-10 h-auto max-h-[75vh] "]:
                 mode === "content",
-              ["overflow-y-auto overflow-scrolling-touch h-auto max-h-75vh relative"]:
+              ["overflow-y-auto overflow-scrolling-touch h-auto max-h-[75vh] relative"]:
                 mode === "form",
             })}
           >

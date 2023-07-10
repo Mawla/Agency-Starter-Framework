@@ -22,16 +22,16 @@ export const MobileNav = ({
   return (
     <div className={cx("radix-dialog", { ["hidden"]: !open })}>
       <RadixDialog.Root onOpenChange={onOpenChange} open={open}>
-        <RadixDialog.Overlay className="relative z-[60]">
-          <div className="fixed inset-0 bg-neutral-500 w-screen h-screen" />
+        <RadixDialog.Overlay className="relative">
+          <div className="fixed inset-0 bg-black/10 w-screen h-screen z-50" />
         </RadixDialog.Overlay>
-        <RadixDialog.Content className="[z-60] fixed top-0 right-0 w-screen max-w-sm h-screen">
+        <RadixDialog.Content className="z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen">
           <div className="h-full">
             <div className="h-full">
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="[z-60] py-3 px-3 text-neutral-500 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
+              <RadixDialog.Close className="z-[60] py-3 px-3 text-neutral-500 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
                 <IconLoader
                   icon="close"
                   className="text-current w-6 h-6 block"

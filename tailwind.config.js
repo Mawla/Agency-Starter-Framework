@@ -24,126 +24,35 @@ module.exports = {
     },
   ],
   theme: {
-    minHeight: {
-      0: "0",
-      "1/2": "50vw",
-      full: "100%",
-    },
-    maxHeight: {
-      0: "0",
-      half: "50%",
-      full: "100%",
-      screen: "100vh",
-      "50vh": "50vh",
-      "75vh": "75vh",
-      "90vh": "90vh",
-    },
-    minWidth: {
-      0: "0",
-      full: "100%",
-      "3xs": "275px",
-      "2xs": "375px",
-    },
-    maxWidth: {
-      none: "none",
-      "2xs": "375px",
-      xs: "500px",
-      text: "100ch",
-      quote: "700px",
-      title: "100ch",
-      screen: "100vw",
-      inner: "1370px",
-      outer: "1760px",
-      full: "100%",
-      "1/2": "50%",
-      "1/4": "25%",
-      "40vw": "40vw",
-      "50vw": "50vw",
-      "60vw": "60vw",
-      "75vw": "75vw",
-      "90vw": "90vw",
-      "1/3": "33.33333%",
-      ...defaultTheme.screens,
-    },
     fontFamily: {
       sans: ["Apercu, arial"],
       mono: ["monospace"],
     },
-    fontSize: {
-      ...defaultTheme.fontSize,
-    },
-    fontWeight: {
-      book: 300,
-      bold: 700,
-    },
-    fontSize: {
-      0: "0",
-      base: "1rem",
-      sm: `${12 / 16}rem`,
-      md: `${14 / 16}rem`,
-      lg: `${16 / 16}rem`,
-      xl: [`${20 / 16}rem`, "1.3"],
-      "2xl": [`${24 / 16}rem`, "1.3"],
-      "3xl": [`${32 / 16}rem`, "1.3"],
-      "4xl": [`${40 / 16}rem`, "1.3"],
-      "5xl": [`${64 / 16}rem`, "1.3"],
-      "6xl": [`${80 / 16}rem`, "1.3"],
-    },
     screens: {
       "2xs": "375px",
-      xs: "420px",
-      sm: "640px",
-      md: "768px",
-      tablet: "900px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1536px",
+      ...defaultTheme.screens,
     },
     fill: (theme) => ({
-      white: "white",
-      black: "black",
       current: "currentColor",
     }),
-    /**
-     * !important
-     * All colors must be defined in
-     * - tailwind.config.js colors
-     * - tailwind.config.js safelist
-     * - colors.ts
-     */
-    colors: {
-      transparent: "transparent",
-      white: "white",
-      black: "black",
-      current: "currentColor",
-      neutral: {
-        50: "#f8fafc",
-        100: "#f1f5f9",
-        200: "#e2e8f0",
-        300: "#cbd5e1",
-        400: "#94a3b8",
-        500: "#64748b",
-        600: "#475569",
-        700: "#334155",
-        800: "#1e293b",
-        900: "#0f172a",
-      },
-      green: {
-        500: "#A5D926",
-      },
-      aqua: {
-        900: "#002A33",
-      },
-      orange: {
-        50: "#FFEAD4",
-        900: "#663400",
-      },
-      blue: {
-        50: "#DAF2FD",
-        900: "#00385F",
-      },
-    },
     extend: {
+      /**
+       * !important
+       * All colors must be defined in
+       * - tailwind.config.js colors
+       * - tailwind.config.js safelist
+       * - colors.ts
+       */
+      colors: {
+        transparent: "transparent",
+        white: "white",
+        black: "black",
+        current: "currentColor",
+      },
+      maxWidth: {
+        inner: "1370px",
+        outer: "1760px",
+      },
       spacing: {
         30: "120px",
       },

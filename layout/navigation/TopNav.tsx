@@ -1,3 +1,4 @@
+import { widthClasses } from "../../components/block/width.options";
 import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
@@ -44,9 +45,10 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             className={cx(
               "radix-topnav flex gap-6 items-center",
               "py-2 md:py-3 lg:py-4",
-              "max-w-outer mx-auto",
+              "mx-auto",
               "px-5 sm:px-8 lg:px-8 xl:px-8",
               "border-b border-b-neutral-200",
+              widthClasses.outer,
             )}
             role="navigation"
           >
