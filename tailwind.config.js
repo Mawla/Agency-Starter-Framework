@@ -190,9 +190,6 @@ module.exports = {
       },
     },
     extend: {
-      zIndex: {
-        60: 60,
-      },
       spacing: {
         25: "100px",
         30: "120px",
@@ -291,8 +288,8 @@ module.exports = {
                 classNode.parent.insertBefore(
                   classNode,
                   selectorParser().astSync(
-                    `.${prefixClass("group")}:${pseudoClass} `
-                  )
+                    `.${prefixClass("group")}:${pseudoClass} `,
+                  ),
                 );
               });
             }).processSync(selector);
