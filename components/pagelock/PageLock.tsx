@@ -60,7 +60,7 @@ export const PageLock = () => {
   if (status === "unlocked" && page) return <PageBody {...page} />;
 
   return (
-    <Background theme={{ background: "white", text: "gray-500" }}>
+    <Background theme={{ background: "white", text: "black" }}>
       <div className="h-[75vh] grid">
         <div className="place-self-center">
           <form autoComplete="off" onSubmit={onSubmit}>
