@@ -34,7 +34,8 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             "transform transition-transform duration-500",
             "bg-white/90 backdrop-blur-[25px]",
             {
-              ["-translate-y-full ease-in-out-cubic"]: !showNav,
+              ["-translate-y-full ease-[cubic-bezier(0.2,0.07,0.38,1)]"]:
+                !showNav,
             },
           )}
           ref={navRef}

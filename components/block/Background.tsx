@@ -1,6 +1,11 @@
 import { backgroundClasses, textClasses } from "../../colors";
 import { ColorType } from "../../types";
-import { BackgroundColorType, BlockRoundedType } from "./background.options";
+import {
+  BackgroundColorType,
+  BlockRoundedType,
+  roundedBottomClasses,
+  roundedTopClasses,
+} from "./background.options";
 import cx from "classnames";
 import React from "react";
 
@@ -12,16 +17,6 @@ export type BackgroundProps = {
     background?: BackgroundColorType;
     rounded?: BlockRoundedType;
   };
-};
-
-export const roundedOuterBlockClasses: Record<"top" | "bottom", string> = {
-  top: "rounded-t-3xl sm:rounded-t-4xl md:rounded-t-5xl xl:rounded-t-6xl",
-  bottom: "rounded-b-3xl sm:rounded-b-4xl md:rounded-b-5xl xl:rounded-b-6xl",
-};
-
-export const roundedInnerBlockClasses: Record<"top" | "bottom", string> = {
-  top: "rounded-t-3xl sm:rounded-t-4xl md:rounded-t-5xl",
-  bottom: "rounded-b-3xl sm:rounded-b-4xl md:rounded-b-5xl",
 };
 
 export const Background = ({
@@ -39,10 +34,10 @@ export const Background = ({
       className={cx(
         "relative",
         {
-          [roundedOuterBlockClasses.top]: theme.rounded?.top === "lg",
-          [roundedOuterBlockClasses.bottom]: theme.rounded?.bottom === "lg",
-          [roundedInnerBlockClasses.top]: theme.rounded?.top === "md",
-          [roundedInnerBlockClasses.bottom]: theme.rounded?.bottom === "md",
+          [roundedTopClasses.md]: theme.rounded?.top === "md",
+          [roundedBottomClasses.md]: theme.rounded?.bottom === "md",
+          [roundedTopClasses.lg]: theme.rounded?.top === "lg",
+          [roundedBottomClasses.lg]: theme.rounded?.bottom === "lg",
         },
         theme?.background && backgroundClasses[theme?.background],
         theme?.text && textClasses[theme?.text],

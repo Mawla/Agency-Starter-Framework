@@ -17,76 +17,13 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /(bg|text|border|divide)-(neutral|action|brand)-(100|200|300|400|500|600|700|800|900)/,
+        /(bg|text|border)-(neutral|action|brand)-(100|200|300|400|500|600|700|800|900)/,
     },
     {
-      pattern: /(bg|text|border|divide)-(white|black)/,
+      pattern: /(bg|text|border)-(white|black)/,
     },
   ],
   theme: {
-    extend: {
-      cursor: {
-        auto: "auto",
-        default: "default",
-        pointer: "pointer",
-        grab: "grab",
-        grabbing: "grabbing",
-      },
-      transitionTimingFunction: {
-        "in-cubic": "cubic-bezier(0, 0, 0.38, 1)",
-        "out-cubic": "cubic-bezier(0.2, 0.07, 1, 1)",
-        "in-out-cubic": "cubic-bezier(0.2, 0.07, 0.38, 1)",
-      },
-      width: {
-        "50vw": "50vw",
-        "85vw": "85vw",
-        "2xs": "375px",
-      },
-      aspectRatio: {
-        "1/1": "1/1",
-        "16/9": "16/9",
-        "2/1": "2/1",
-        "13/8": "13/8",
-        "4/3": "4/3",
-        "19/27": "19/27",
-        "12/19": "12/19",
-      },
-      maxWidth: {
-        none: "none",
-        "2xs": "375px",
-        xs: "500px",
-        text: "100ch",
-        quote: "700px",
-        title: "100ch",
-        screen: "100vw",
-        inner: "1370px",
-        outer: "1760px",
-        full: "100%",
-        "1/2": "50%",
-        "1/4": "25%",
-        "40vw": "40vw",
-        "50vw": "50vw",
-        "60vw": "60vw",
-        "75vw": "75vw",
-        "90vw": "90vw",
-        "1/3": "33.33333%",
-      },
-    },
-    borderRadius: {
-      none: "0px",
-      full: "9999px",
-      "2xs": "4px",
-      xs: "8px",
-      sm: "12px",
-      md: "16px",
-      lg: "20px",
-      xl: "24px",
-      "2xl": "32px",
-      "3xl": "40px",
-      "4xl": "64px",
-      "5xl": "80px",
-      "6xl": "128px",
-    },
     minHeight: {
       0: "0",
       "1/2": "50vw",
@@ -106,6 +43,27 @@ module.exports = {
       full: "100%",
       "3xs": "275px",
       "2xs": "375px",
+    },
+    maxWidth: {
+      none: "none",
+      "2xs": "375px",
+      xs: "500px",
+      text: "100ch",
+      quote: "700px",
+      title: "100ch",
+      screen: "100vw",
+      inner: "1370px",
+      outer: "1760px",
+      full: "100%",
+      "1/2": "50%",
+      "1/4": "25%",
+      "40vw": "40vw",
+      "50vw": "50vw",
+      "60vw": "60vw",
+      "75vw": "75vw",
+      "90vw": "90vw",
+      "1/3": "33.33333%",
+      ...defaultTheme.screens,
     },
     fontFamily: {
       sans: ["Apercu, arial"],
@@ -146,10 +104,6 @@ module.exports = {
       black: "black",
       current: "currentColor",
     }),
-    transitionProperty: {
-      "shadow-transform": "box-shadow, transform",
-      ...defaultTheme.transitionProperty,
-    },
     /**
      * !important
      * All colors must be defined in
@@ -191,7 +145,6 @@ module.exports = {
     },
     extend: {
       spacing: {
-        25: "100px",
         30: "120px",
       },
       typography: ({ theme }) => ({
@@ -251,20 +204,6 @@ module.exports = {
           ],
         },
       }),
-      keyframes: {
-        slideDown: {
-          from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        slideUp: {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
-        },
-      },
-      animation: {
-        slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
-        slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
-      },
     },
   },
   plugins: [

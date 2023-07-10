@@ -38,7 +38,7 @@ export const Rounded = () => (
             rounded: { top: radius, bottom: radius },
           }}
         >
-          <div className="p-40">{radius}</div>
+          <div className="p-40 text-white">{radius}</div>
         </BlockBackground>
       ),
     )}
