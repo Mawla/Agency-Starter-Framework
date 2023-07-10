@@ -1,6 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 const selectorParser = require("postcss-selector-parser");
+const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
         /(bg|text|border)-(gray)-(100|200|300|400|500|600|700|800|900|950)/,
     },
     {
-      pattern: /(bg|text|border)-(white|black)/,
+      pattern: /(bg|text|border)-(white|black|red)/,
     },
   ],
   theme: {
@@ -35,20 +36,21 @@ module.exports = {
     fill: (theme) => ({
       current: "currentColor",
     }),
+    /**
+     * !important
+     * All colors must be defined in
+     * - tailwind.config.js colors
+     * - tailwind.config.js safelist
+     * - colors.ts
+     */
+    colors: {
+      transparent: "transparent",
+      white: "white",
+      black: "black",
+      current: "currentColor",
+      gray: colors.gray,
+    },
     extend: {
-      /**
-       * !important
-       * All colors must be defined in
-       * - tailwind.config.js colors
-       * - tailwind.config.js safelist
-       * - colors.ts
-       */
-      colors: {
-        transparent: "transparent",
-        white: "white",
-        black: "black",
-        current: "currentColor",
-      },
       maxWidth: {
         inner: "1370px",
         outer: "1760px",
