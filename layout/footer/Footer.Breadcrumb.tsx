@@ -8,7 +8,7 @@ export const FooterBreadcrumb = () => {
   if (isHomepage) return null;
 
   return (
-    <div className="pb-4 mb-4 border-b border-b-neutral-200 text-base text-neutral-500">
+    <div className="pb-4 mb-4 border-b border-b-gray-200 text-base text-gray-500">
       <Breadcrumb />
     </div>
   );

@@ -1,4 +1,4 @@
-import { WidthType } from "./width.options";
+import { widthClasses, WidthType } from "./width.options";
 import cx from "classnames";
 import React from "react";
 
@@ -11,9 +11,10 @@ export type WidthProps = {
 export const Width = ({ children, width, className }: WidthProps) => {
   return (
     <div
-      className={cx("w-full mx-auto", className, {
-        ["max-w-inner"]: width === "inner",
-        ["max-w-outer"]: width === "outer",
+      className={cx("mx-auto", className, {
+        [widthClasses.full]: !width || width === "full",
+        [widthClasses.inner]: width === "inner",
+        [widthClasses.outer]: width === "outer",
       })}
     >
       {children}

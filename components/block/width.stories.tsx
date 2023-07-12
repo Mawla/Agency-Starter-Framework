@@ -9,11 +9,11 @@ export default {
 } as Meta;
 
 export const Widths = () => (
-  <div className="flex flex-col gap-10">
+  <div className="flex flex-col gap-10 text-white">
     {(Object.keys(WIDTH_OPTIONS) as WidthType[]).map((width: WidthType) => (
-      <div className="bg-neutral-100" key={width}>
+      <div className="bg-gray-100" key={width}>
         <WidthComponent width={width}>
-          <div className="bg-neutral-900 p-10">{width}</div>
+          <div className="bg-gray-900 p-10">{width}</div>
         </WidthComponent>
       </div>
     ))}

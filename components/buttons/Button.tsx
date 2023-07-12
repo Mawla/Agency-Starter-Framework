@@ -13,6 +13,12 @@ import {
   ButtonTextColorType,
   BackgroundColorType,
   ButtonBorderColorType,
+  buttonSizeClasses,
+  buttonAlignClasses,
+  buttonSpaceClasses,
+  buttonIconOnlySizeClasses,
+  buttonWeightClasses,
+  buttonIconSizeClasses,
 } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -47,36 +53,6 @@ export type ButtonProps = {
   download?: boolean;
   hideLabel?: boolean;
   language?: LanguageType;
-};
-
-const sizeClasses: Record<ButtonSizeType, string> = {
-  sm: "text-base md:text-lg",
-  md: "text-lg md:text-xl",
-};
-const spaceClasses: Record<ButtonSizeType, string> = {
-  sm: "px-4 py-2 md:px-4",
-  md: "px-5 py-[9px] md:px-6",
-};
-
-const iconSizeClasses: Record<ButtonSizeType, string> = {
-  sm: "w-5 h-5",
-  md: "w-5 h-5",
-};
-
-const iconOnlySizeClasses: Record<ButtonSizeType, string> = {
-  sm: "w-10 h-10 md:w-10 md:h-10",
-  md: "w-10 h-10 md:w-11 md:h-11",
-};
-
-const alignClasses: Record<ButtonAlignType, string> = {
-  left: "justify-start",
-  center: "justify-center",
-  right: "justify-end",
-};
-
-const weightClasses: Record<ButtonWeightType, string> = {
-  regular: "font-normal",
-  medium: "font-medium",
 };
 
 export const Button = (props: ButtonProps) => {
@@ -174,7 +150,10 @@ const ButtonInner = ({
           {wordBefore && ` ${wordBefore}`}
           <IconLoader
             icon={icon}
-            className={cx("inline-block translate-y-1", iconSizeClasses[size])}
+            className={cx(
+              "inline-block translate-y-1",
+              buttonIconSizeClasses[size],
+            )}
           />
           {wordAfter && `${wordAfter} `}
         </span>
@@ -197,7 +176,7 @@ const ButtonInner = ({
     ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
       true,
     ["pointer-events-none opacity-75"]: disabled,
-    [weightClasses[weight]]: true,
+    [buttonWeightClasses[weight]]: true,
   };
 
   // icon only button
@@ -211,7 +190,7 @@ const ButtonInner = ({
       >
         <span
           className={cx(sharedClasses, {
-            [iconOnlySizeClasses[size]]: !compact,
+            [buttonIconOnlySizeClasses[size]]: !compact,
           })}
         >
           {ButtonIcon && <ButtonIcon />}
@@ -232,11 +211,11 @@ const ButtonInner = ({
       <span
         className={cx(
           sharedClasses,
-          sizeClasses[size],
-          alignClasses[align],
+          buttonSizeClasses[size],
+          buttonAlignClasses[align],
           { ["w-full flex"]: stretch },
           { ["rounded-full"]: round },
-          { [spaceClasses[size]]: !compact },
+          { [buttonSpaceClasses[size]]: !compact },
         )}
       >
         <span className="no-underline text-left break-words">

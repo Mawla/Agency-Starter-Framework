@@ -22,16 +22,16 @@ export const MobileNav = ({
   return (
     <div className={cx("radix-dialog", { ["hidden"]: !open })}>
       <RadixDialog.Root onOpenChange={onOpenChange} open={open}>
-        <RadixDialog.Overlay className="relative z-60">
-          <div className="fixed inset-0 bg-neutral-500 w-screen h-screen" />
+        <RadixDialog.Overlay className="relative">
+          <div className="fixed inset-0 bg-black/10 w-screen h-screen z-50" />
         </RadixDialog.Overlay>
-        <RadixDialog.Content className="z-60 fixed top-0 right-0 w-screen max-w-sm h-screen">
+        <RadixDialog.Content className="z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen">
           <div className="h-full">
             <div className="h-full">
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="z-60 py-3 px-3 text-neutral-500 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
+              <RadixDialog.Close className="z-[60] py-3 px-3 text-gray-500 hover:text-black bg-white hover:bg-gray-100 transition-colors absolute top-2 right-2">
                 <IconLoader
                   icon="close"
                   className="text-current w-6 h-6 block"
@@ -40,7 +40,7 @@ export const MobileNav = ({
 
               <Link
                 href="/"
-                className="inline-block absolute left-5 top-4 md:top-5 z-60"
+                className="inline-block absolute left-5 top-4 md:top-5 z-[60]"
               >
                 <Logo />
               </Link>
@@ -53,25 +53,29 @@ export const MobileNav = ({
                         <RadixNavigationMenu.Item key={label}>
                           <details
                             open={current}
-                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-neutral-100 bg-white transition-colors duration-75"
+                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-gray-100 bg-white transition-colors duration-75"
                           >
                             <summary className="list-none relative">
                               {href ? (
                                 <Link
                                   href={href}
                                   locale={language}
-                                  className="hover:underline text-xl font-bold text-neutral-500"
+                                  className="hover:underline text-xl font-bold text-gray-500"
                                 >
                                   {label}
                                 </Link>
                               ) : (
-                                <span className="block">{label}</span>
+                                <span className="block font-bold text-gray-500">
+                                  {label}
+                                </span>
                               )}
 
-                              <IconLoader
-                                icon="chevron"
-                                className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
-                              />
+                              {Boolean(children?.length) && (
+                                <IconLoader
+                                  icon="chevron"
+                                  className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
+                                />
+                              )}
                             </summary>
 
                             {Boolean(children?.length) && (
@@ -84,7 +88,7 @@ export const MobileNav = ({
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "text-md font-bold text-neutral-900 hover:underline relative",
+                                            "text-md text-gray-900 hover:underline relative",
                                             {
                                               ["text-action-500"]: current,
                                             },

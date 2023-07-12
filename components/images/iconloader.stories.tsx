@@ -16,7 +16,6 @@ export const Sources = () => (
         icon={icon}
         key={icon}
         className="w-10 h-10"
-        color="action-500"
         removeColors={icon.startsWith("flag") ? false : true}
       />
     ))}

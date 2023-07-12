@@ -1,3 +1,4 @@
+import { widthClasses } from "../components/block/width.options";
 import { IconLoaderProps } from "../components/images/IconLoader";
 import { getClient } from "../helpers/sanity/server";
 import { LanguageType } from "../languages";
@@ -14,6 +15,7 @@ import {
   SitemapItemType,
   SitemapType,
 } from "../queries/sitemap.query";
+import cx from "classnames";
 import type { GetStaticProps } from "next";
 import Link from "next/link";
 import React, { ComponentType, lazy } from "react";
@@ -43,7 +45,7 @@ export default function Sitemap({
       config={config}
       sitemapItem={sitemapItem}
     >
-      <ul className="max-w-inner mx-auto py-20">
+      <ul className={cx("mx-auto py-20", widthClasses.inner)}>
         {sitemap
           .filter(({ title, path }) => title && path)
           .map(({ title, path, _id }: SitemapItemType) => {

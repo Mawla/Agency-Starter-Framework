@@ -12,39 +12,6 @@ import { ColorType } from "./types";
 export const COLORS = {
   white: "#fff",
   black: "#000000",
-
-  "neutral-50": "#f8fafc",
-  "neutral-100": "#f1f5f9",
-  "neutral-200": "#e2e8f0",
-  "neutral-300": "#cbd5e1",
-  "neutral-400": "#94a3b8",
-  "neutral-500": "#64748b",
-  "neutral-600": "#475569",
-  "neutral-700": "#334155",
-  "neutral-800": "#1e293b",
-  "neutral-900": "#0f172a",
-
-  "brand-50": "#eff6ff",
-  "brand-100": "#dbeafe",
-  "brand-200": "#bfdbfe",
-  "brand-300": "#93c5fd",
-  "brand-400": "#60a5fa",
-  "brand-500": "#3b82f6",
-  "brand-600": "#2563eb",
-  "brand-700": "#1d4ed8",
-  "brand-800": "#1e40af",
-  "brand-900": "#1e3a8a",
-
-  "action-50": "#ecfeff",
-  "action-100": "#cffafe",
-  "action-200": "#a5f3fc",
-  "action-300": "#67e8f9",
-  "action-400": "#22d3ee",
-  "action-500": "#06b6d4",
-  "action-600": "#0891b2",
-  "action-700": "#0e7490",
-  "action-800": "#155e75",
-  "action-900": "#164e63",
 };
 
 Object.entries(COLORS).map(([key, value]) => {
