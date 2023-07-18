@@ -9,7 +9,7 @@
     "start": "npm run theme && next start",
     "cms": "sanity dev",
     "build-cms": "sanity build public/cms -y",
-    "storybook": "npm run theme && start-storybook -p 6006",
+    "storybook": "npm run theme && start-storybook -p 6006 --no-open",
     "build-storybook": "npm run theme && build-storybook -o public/storybook --disable-telemetry",
     "create-dialog": "sanity exec ./cli/create-dialog -- --write",
     "create-page": "sanity exec ./cli/create-page -- --write",
