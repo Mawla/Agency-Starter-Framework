@@ -92,6 +92,7 @@ export function formatSafelist(
     ...Object.keys(colors).map((color) => `bg-${clean(color)}`),
     ...Object.keys(colors).map((color) => `text-${clean(color)}`),
     ...Object.keys(colors).map((color) => `border-${clean(color)}`),
+    ...Object.keys(colors).map((color) => `divide-${clean(color)}`),
     ...Object.keys(fonts).map((font) => `font-${clean(font)}`),
   ];
   return safelist;
