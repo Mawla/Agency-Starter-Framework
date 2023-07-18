@@ -39,6 +39,8 @@ class MyDocument extends Document {
             crossOrigin="crossOrigin"
           />
 
+          <link rel="stylesheet" href="/_theme.css" />
+
           <link
             rel="preload"
             href="/icons/menu.svg"
