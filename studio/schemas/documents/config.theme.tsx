@@ -6,7 +6,13 @@ import {
   TextSize,
 } from "@vectopus/atlas-icons-react";
 import React from "react";
-import { defineArrayMember, defineField, defineType, StringRule } from "sanity";
+import {
+  defineArrayMember,
+  defineField,
+  defineType,
+  NumberRule,
+  StringRule,
+} from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "config.theme";
 
@@ -70,6 +76,95 @@ export default defineType({
               type: "string",
               description: "Comma separated list of font names",
               validation: (Rule: StringRule) => Rule.required(),
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "fontWeights",
+      title: "Font weights",
+      type: "array",
+      description: "Fonts weights used in the theme.",
+      of: [
+        {
+          type: "object",
+          title: "Font",
+          preview: {
+            select: {
+              name: "name",
+              value: "value",
+            },
+            prepare({ name, value }) {
+              return {
+                title: name,
+                subtitle: value,
+                media: <TextSize weight="thin" />,
+              };
+            },
+          },
+          fields: [
+            defineField({
+              name: "name",
+              title: "Weight name",
+              type: "string",
+              description:
+                "Name of the font weight, e.g 'thin' or 'extra-bold'",
+              validation: (Rule: StringRule) => Rule.required(),
+            }),
+            defineField({
+              name: "value",
+              title: "value",
+              type: "number",
+              description: "Numeric weight value, e.g 100 or 800",
+              validation: (Rule: NumberRule) => Rule.required(),
+            }),
+          ],
+        },
+      ],
+    }),
+
+    defineField({
+      name: "fontSizes",
+      title: "Font sizes",
+      type: "array",
+      description: "Fonts sizes used in the theme. ",
+      of: [
+        {
+          type: "object",
+          title: "Font size",
+          fields: [
+            defineField({
+              name: "name",
+              title: "Name",
+              type: "string",
+              description: "Name of the font size, e.g 'sm' or '2xl'",
+              validation: (Rule: StringRule) => Rule.required(),
+            }),
+            defineField({
+              name: "size",
+              title: "Size",
+              type: "string",
+              description: "Size, e.g '1rem' or '20px'",
+              validation: (Rule: StringRule) => Rule.required(),
+            }),
+            defineField({
+              name: "lineHeight",
+              title: "Line height",
+              type: "string",
+              description: "Leading, e.g '1rem' or '20px'",
+            }),
+            defineField({
+              name: "letterSpacing",
+              title: "Letter spacing",
+              type: "string",
+              description: "Space between letters, e.g '-0.01em'",
+            }),
+            defineField({
+              name: "fontWeight",
+              title: "Font weight",
+              type: "string",
+              description: "Font weight, e.g '400' or 'bold'",
             }),
           ],
         },

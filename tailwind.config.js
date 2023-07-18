@@ -22,6 +22,12 @@ module.exports = {
     fontFamily: {
       ...(customTheme.fonts || {}),
     },
+    fontSize: {
+      ...(customTheme.fontSizes || {}),
+    },
+    fontWeight: {
+      ...(customTheme.fontWeights || {}),
+    },
     screens: {
       "2xs": "375px",
       ...defaultTheme.screens,
@@ -29,13 +35,6 @@ module.exports = {
     fill: (theme) => ({
       current: "currentColor",
     }),
-    /**
-     * !important
-     * All colors must be defined in
-     * - tailwind.config.js colors
-     * - tailwind.config.js safelist
-     * - colors.ts
-     */
     colors: {
       transparent: "transparent",
       white: "white",
