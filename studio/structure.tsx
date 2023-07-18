@@ -268,6 +268,7 @@ export const structure = (
         list(S, { title: "Config" }).items([
           singleton(S, { id: "config_general", type: "config.general" }),
           singleton(S, { id: "config_seo", type: "config.seo" }),
+          singleton(S, { id: "config_theme", type: "config.theme" }),
           singleton(S, { id: "config_social", type: "config.social" }),
           singleton(S, {
             id: "config_integrations",

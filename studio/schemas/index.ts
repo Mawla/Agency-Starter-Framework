@@ -28,6 +28,7 @@ import configGeneral from "./documents/config.general";
 import configIntegrations from "./documents/config.integrations";
 import configSeo from "./documents/config.seo";
 import configSocial from "./documents/config.social";
+import configTheme from "./documents/config.theme";
 import configTranslations from "./documents/config.translations";
 import dialogForm from "./documents/dialog.form";
 import dialogRichText from "./documents/dialog.richtext";
@@ -78,6 +79,7 @@ export const schemaTypes = [
     configCMS,
     configIntegrations,
     configSocial,
+    configTheme,
     copypaste,
     dialogForm,
     dialogRichText,

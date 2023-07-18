@@ -15,6 +15,7 @@ export const SCHEMAS = {
   "config.integrations": "",
   "config.seo": "",
   "config.social": "",
+  "config.theme": "",
   "config.translations": "",
   "dialog.form": "",
   "dialog.richtext": "",
