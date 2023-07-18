@@ -22,6 +22,11 @@ export const getSchemaSnippet = ({
   import { SPACE_OPTIONS } from "../../components/block/spacing.options";
   import { optionsToList } from "../../studio/utils/fields/optionsToList";
   ${render(fields, "title", `import { HEADING_LEVELS } from "../../types";`)}
+  ${render(
+    fields,
+    "title",
+    `import { TITLE_FONT_OPTIONS, TITLE_WEIGHT_OPTIONS } from "../../components/block/title.options";`,
+  )}
   import { EllipsisVerticalIcon } from "@sanity/icons";
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
@@ -226,6 +231,20 @@ export const getSchemaSnippet = ({
                   type: "select",
                   options: {
                     list: optionsToList(TITLE_SIZE_OPTIONS),
+                  },
+                },
+                {
+                  name: "weight",
+                  type: "select",
+                  options: {
+                    list: optionsToList(TITLE_WEIGHT_OPTIONS),
+                  },
+                },
+                {
+                  name: "font",
+                  type: "select",
+                  options: {
+                    list: optionsToList(TITLE_FONT_OPTIONS),
                   },
                 },
                 {
