@@ -53,3 +53,6 @@ Session.vim
 
 production-*
 development-*
+
+_theme.json
+public/_theme.css
