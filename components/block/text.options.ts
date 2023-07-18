@@ -17,7 +17,7 @@ export type TextSizeType = keyof typeof TEXT_SIZE_OPTIONS;
 export const TEXT_FONT_OPTIONS = pick(FONTS, "heading", "sans", "mono");
 export type TextFontType = keyof typeof TEXT_FONT_OPTIONS;
 
-export const TEXT_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const TEXT_COLOR_OPTIONS = pick(COLORS);
 export type TextColorType = keyof typeof TEXT_COLOR_OPTIONS;
 
 export const textAlignClasses: Record<TextAlignType, string> = {

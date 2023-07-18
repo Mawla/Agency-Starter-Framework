@@ -54,5 +54,5 @@ Session.vim
 production-*
 development-*
 
-_theme.json
+_theme.ts
 styles/_theme.css

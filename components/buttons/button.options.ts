@@ -2,13 +2,13 @@ import { COLORS } from "../../colors";
 import { pick } from "../../helpers/utils/object";
 import { ALIGNMENTS, SIZES, FONT_WEIGHTS } from "../../types";
 
-export const BUTTON_BACKGROUND_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BUTTON_BACKGROUND_COLOR_OPTIONS = pick(COLORS);
 export type BackgroundColorType = keyof typeof BUTTON_BACKGROUND_COLOR_OPTIONS;
 
-export const BUTTON_TEXT_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BUTTON_TEXT_COLOR_OPTIONS = pick(COLORS);
 export type ButtonTextColorType = keyof typeof BUTTON_TEXT_COLOR_OPTIONS;
 
-export const BUTTON_BORDER_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BUTTON_BORDER_COLOR_OPTIONS = pick(COLORS);
 export type ButtonBorderColorType = keyof typeof BUTTON_BORDER_COLOR_OPTIONS;
 
 export const BUTTON_SIZE_OPTIONS = pick(SIZES, "sm", "md");

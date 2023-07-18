@@ -102,8 +102,8 @@ export default async function generateTheme() {
   const theme = await getTheme();
 
   await fs.writeFile(
-    `${__dirname}/../../_theme.json`,
-    JSON.stringify(theme, null, 2),
+    `${__dirname}/../../_theme.ts`,
+    `export default ${JSON.stringify(theme, null, 2)}`,
   );
 
   // write stylesheets to file

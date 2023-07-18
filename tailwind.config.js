@@ -1,4 +1,4 @@
-const customTheme = require("./_theme.json");
+const customTheme = require("./_theme");
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");

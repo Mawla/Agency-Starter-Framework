@@ -19,10 +19,10 @@ export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
 export const TITLE_WEIGHT_OPTIONS = pick(FONT_WEIGHTS, "normal", "bold");
 export type TitleWeightType = keyof typeof TITLE_WEIGHT_OPTIONS;
 
-export const TITLE_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const TITLE_COLOR_OPTIONS = pick(COLORS);
 export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
 
-export const TITLE_EYEBROW_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const TITLE_EYEBROW_COLOR_OPTIONS = pick(COLORS);
 export type TitleEyebrowColorType = keyof typeof TITLE_EYEBROW_COLOR_OPTIONS;
 
 export const titleSizeClasses: Record<TitleSizeType, string> = {

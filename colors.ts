@@ -1,17 +1,11 @@
+import theme from "./_theme";
 import { isDarkColor } from "./helpers/utils/color";
 import { ColorType } from "./types";
-
-/**
- * !important
- * All colors must be defined in
- * - tailwind.config.js colors
- * - tailwind.config.js safelist
- * - colors.ts
- */
 
 export const COLORS = {
   white: "#fff",
   black: "#000000",
+  ...theme.colors,
 };
 
 Object.entries(COLORS).map(([key, value]) => {
@@ -30,12 +24,6 @@ Object.entries(COLORS).map(([key, value]) => {
     COLORS[colorKey] = "#ff0000";
   }
 });
-
-export const ALL_COLORS = Object.keys(COLORS) as ColorType[];
-
-export const STORYBOOK_COLORS_SUBSET = COLORS;
-// use this if you have a lot of colors and don't to use all of them in storybook
-// export const STORYBOOK_COLORS_SUBSET = pick(COLORS, 'white', 'black');
 
 export const backgroundClasses: Record<ColorType, string> = Object.entries(
   COLORS,
