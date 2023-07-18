@@ -130,7 +130,8 @@ export default defineType({
       name: "fontSizes",
       title: "Font sizes",
       type: "array",
-      description: "Fonts sizes used in the theme. ",
+      description:
+        "Fonts sizes used in the theme. Be sure to order these from smallest to largest.",
       of: [
         {
           type: "object",

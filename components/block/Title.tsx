@@ -1,11 +1,10 @@
-import { textClasses } from "../../colors";
+import { textClasses, weightClasses } from "../../colors";
 import { HeadingLevelType } from "../../types";
 import {
   TitleColorType,
   TitleEyebrowColorType,
   titleSizeClasses,
   TitleSizeType,
-  titleWeightClasses,
   TitleWeightType,
 } from "./title.options";
 import cx from "classnames";
@@ -45,7 +44,7 @@ export const Title = ({
         "flex flex-col whitespace-pre-line",
         textClasses[color],
         titleSizeClasses[size],
-        titleWeightClasses[weight],
+        weightClasses[weight],
         className,
       )}
     >

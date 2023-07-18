@@ -1,4 +1,9 @@
-import { backgroundClasses, borderClasses, textClasses } from "../../colors";
+import {
+  backgroundClasses,
+  borderClasses,
+  textClasses,
+  weightClasses,
+} from "../../colors";
 import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
 import { LanguageType } from "../../languages";
 import { IconType } from "../../types";
@@ -17,7 +22,6 @@ import {
   buttonAlignClasses,
   buttonSpaceClasses,
   buttonIconOnlySizeClasses,
-  buttonWeightClasses,
   buttonIconSizeClasses,
 } from "./button.options";
 import cx from "classnames";
@@ -176,7 +180,7 @@ const ButtonInner = ({
     ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
       true,
     ["pointer-events-none opacity-75"]: disabled,
-    [buttonWeightClasses[weight]]: true,
+    [weightClasses[weight]]: true,
   };
 
   // icon only button

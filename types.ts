@@ -1,4 +1,4 @@
-import { COLORS } from "./colors";
+import { COLORS, FONT_WEIGHTS } from "./colors";
 
 export const TRANSLATION_FIELDS = {
   next_slide: {
@@ -45,6 +45,7 @@ export const ICONS = {
 export type IconType = keyof typeof ICONS;
 
 export type ColorType = keyof typeof COLORS;
+export type FontWeightType = keyof typeof FONT_WEIGHTS;
 
 export const FONTS = {
   sans: "Sans",
@@ -139,22 +140,6 @@ export const SIZES = {
 
 export type SizeType = keyof typeof SIZES;
 export type SizesType = { [key in keyof typeof SIZES]: string };
-
-export const FONT_WEIGHTS = {
-  thin: "Thin",
-  extralight: "Extralight",
-  light: "Light",
-  normal: "Normal",
-  regular: "Regular",
-  medium: "Medium",
-  semibold: "Semibold",
-  bold: "Bold",
-  extrabold: "Extrabold",
-  black: "Black",
-};
-
-export type FontWeightType = keyof typeof FONT_WEIGHTS;
-export type FontWeightsType = { [key in keyof typeof FONT_WEIGHTS]: string };
 
 export const ALIGNMENTS = {
   left: "Left",
