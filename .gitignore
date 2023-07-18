@@ -55,4 +55,4 @@ production-*
 development-*
 
 _theme.ts
-styles/_theme.css
+public/_theme.css

@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import ("./_theme.css");
-
-/* End Apercu font definitions */
-
 html {
   scroll-behavior: smooth;
   scroll-padding: 10vh;
