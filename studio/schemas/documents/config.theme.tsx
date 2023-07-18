@@ -4,6 +4,8 @@ import {
   FileArrowUp,
   PaintBrushTool,
   TextSize,
+  Text,
+  SizeText,
 } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
@@ -58,7 +60,7 @@ export default defineType({
               return {
                 title: name,
                 subtitle: value,
-                media: <TextSize weight="thin" />,
+                media: <Text weight="thin" />,
               };
             },
           },
@@ -133,6 +135,30 @@ export default defineType({
         {
           type: "object",
           title: "Font size",
+          preview: {
+            select: {
+              name: "name",
+              size: "size",
+              lineHeight: "lineHeight",
+              letterSpacing: "letterSpacing",
+              fontWeight: "fontWeight",
+            },
+            prepare({
+              name,
+              size,
+              lineHeight = "",
+              letterSpacing = "",
+              fontWeight = "",
+            }) {
+              return {
+                title: name,
+                subtitle: `${size} ${[lineHeight, letterSpacing, fontWeight]
+                  .filter(Boolean)
+                  .join(", ")}`,
+                media: <SizeText weight="thin" />,
+              };
+            },
+          },
           fields: [
             defineField({
               name: "name",
