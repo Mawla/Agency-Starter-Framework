@@ -178,7 +178,7 @@ export function formatSafelist(
     ...Object.keys(colors).map((color) => `divide-${clean(color)}`),
     ...Object.keys(fonts).map((font) => `font-${clean(font)}`),
     ...Object.keys(fontWeights).map((weight) => `font-${clean(weight)}`),
-    ...Object.keys(fontSizes).map((font) => `text-${clean(font)}`),
+    ...Object.keys(fontSizes).map((size) => `text-${clean(size)}`),
   ];
 
   return safelist;

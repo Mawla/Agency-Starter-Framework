@@ -262,7 +262,8 @@ export default defineType({
       name: "stylesheets",
       title: "Stylesheets",
       type: "array",
-      description: "Custom stylesheets to be used in the theme",
+      description:
+        "Custom stylesheets to be used in the theme. This is where you load a custom font.",
       of: [
         defineArrayMember({
           name: "stylesheet",

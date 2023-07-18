@@ -15,6 +15,15 @@ export const PageBody = (props: PageType) => {
 
   return (
     <>
+      <div className="w-10 aspect-square bg-red" />
+      <div className="w-10 aspect-square bg-yellow-200" />
+      <div className="font-thin">font thin</div>
+      <div className="font-light">font light</div>
+      <div className="font-extra-bold">font bold</div>
+      <div className="text-xl">text xl</div>
+      <div className="text-5xl">text 5xl</div>
+      <div className="text-6xl">text 6xl</div>
+
       {Boolean(props?.blocks?.length) && <BlockBuilder items={props.blocks} />}
 
       {Boolean(props?.dialogs?.length) && (

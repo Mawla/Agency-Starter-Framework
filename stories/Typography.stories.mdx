@@ -1,10 +1,9 @@
-import { theme } from "../tailwind.config.js";
+import theme from "../_theme";
 import { Meta, Typeset } from "@storybook/addon-docs";
 import defaultConfig from "tailwindcss/defaultConfig";
 import resolveConfig from "tailwindcss/resolveConfig";
 
-export const tailwindConfig = resolveConfig([theme, defaultConfig])[0];
-export const fontSizes = Object.entries(tailwindConfig.fontSize)
+export const fontSizes = Object.entries(theme.fontSizes)
   .map(([key, value]) => {
     value = Array.isArray(value) ? value[0] : value;
     if (typeof value === "number") {
@@ -27,12 +26,8 @@ export const fontSizes = Object.entries(tailwindConfig.fontSize)
 # Typography
 
 <div>
-  {Object.entries(
-    tailwindConfig.fontFamily || defaultConfig.theme.fontFamily,
-  ).map(([fontName, fontValue]) =>
-    Object.entries(
-      tailwindConfig.fontWeight || defaultConfig.theme.fontWeight,
-    ).map(([weightName, weightValue]) => (
+  {Object.entries(theme.fonts).map(([fontName, fontValue]) =>
+    Object.entries(theme.fontWeights).map(([weightName, weightValue]) => (
       <div key={fontName + weightName}>
         <h2>
           {fontValue[0]} {weightName}
