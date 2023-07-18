@@ -1,11 +1,11 @@
+import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
+import { LanguageType } from "../../languages";
 import {
   backgroundClasses,
   borderClasses,
   textClasses,
   weightClasses,
-} from "../../colors";
-import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
-import { LanguageType } from "../../languages";
+} from "../../theme";
 import { IconType } from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";

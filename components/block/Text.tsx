@@ -1,4 +1,4 @@
-import { proseClasses, textClasses } from "../../colors";
+import { proseClasses, textClasses } from "../../theme";
 import { TextElement } from "../../types";
 import { ColorType } from "../../types";
 import {

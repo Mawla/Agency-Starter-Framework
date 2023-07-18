@@ -1,5 +1,5 @@
-import { COLORS, FONT_WEIGHTS } from "../../colors";
 import { pick } from "../../helpers/utils/object";
+import { COLORS, FONT_WEIGHTS } from "../../theme";
 import { ALIGNMENTS, SIZES } from "../../types";
 
 export const BUTTON_BACKGROUND_COLOR_OPTIONS = pick(COLORS);

@@ -1,6 +1,6 @@
-import { borderClasses, textClasses } from "../../colors";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
+import { borderClasses, textClasses } from "../../theme";
 import { IconLoader } from "../images/IconLoader";
 import { SliderColorType } from "./slider.options";
 import cx from "classnames";

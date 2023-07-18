@@ -3,6 +3,10 @@ import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
+import {
+  TitleFontType,
+  TitleWeightType,
+} from "../../components/block/title.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
@@ -70,6 +74,8 @@ export type Block4Props = {
       color?: TitleColorType;
       size?: TitleSizeType;
       level?: HeadingLevelType;
+      font?: TitleFontType;
+      weight?: TitleWeightType;
     };
 
     intro?: {
@@ -107,6 +113,8 @@ export const Block4 = ({
             size={theme?.title?.size || "4xl"}
             as={theme?.title?.level}
             color={theme?.title?.color}
+            font={theme?.title?.font}
+            weight={theme?.title?.weight}
           >
             {title}
           </Title>

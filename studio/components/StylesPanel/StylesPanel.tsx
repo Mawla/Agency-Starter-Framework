@@ -1,4 +1,4 @@
-import { COLORS } from "../../../colors";
+import { COLORS } from "../../../theme";
 import { ColorType } from "../../../types";
 import { ColorPicker } from "./ColorPicker";
 import { Select } from "./Select";

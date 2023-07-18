@@ -1,5 +1,5 @@
-import { COLORS } from "../../colors";
 import { pick } from "../../helpers/utils/object";
+import { COLORS } from "../../theme";
 import { SIZES } from "../../types";
 
 export const BACKGROUND_COLOR_OPTIONS = pick(COLORS);

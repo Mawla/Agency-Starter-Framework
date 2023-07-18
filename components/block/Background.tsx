@@ -1,4 +1,4 @@
-import { backgroundClasses, textClasses } from "../../colors";
+import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import {
   BackgroundColorType,

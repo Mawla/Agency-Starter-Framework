@@ -1,11 +1,14 @@
-import { COLORS, FONT_SIZES, FONT_WEIGHTS } from "../../colors";
 import { pick } from "../../helpers/utils/object";
+import { COLORS, FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
 
 export const TITLE_SIZE_OPTIONS = pick(FONT_SIZES);
 export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
 
 export const TITLE_WEIGHT_OPTIONS = pick(FONT_WEIGHTS);
 export type TitleWeightType = keyof typeof TITLE_WEIGHT_OPTIONS;
+
+export const TITLE_FONT_OPTIONS = pick(FONTS);
+export type TitleFontType = keyof typeof TITLE_FONT_OPTIONS;
 
 export const TITLE_COLOR_OPTIONS = pick(COLORS);
 export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;

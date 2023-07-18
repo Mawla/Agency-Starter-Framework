@@ -1,4 +1,4 @@
-import { textClasses } from "../../colors";
+import { textClasses } from "../../theme";
 import { IconType, ICONS, ColorType } from "../../types";
 import cx from "classnames";
 import * as DOMPurify from "dompurify";

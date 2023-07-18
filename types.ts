@@ -1,4 +1,4 @@
-import { COLORS, FONT_WEIGHTS } from "./colors";
+import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
   next_slide: {
@@ -46,12 +46,7 @@ export type IconType = keyof typeof ICONS;
 
 export type ColorType = keyof typeof COLORS;
 export type FontWeightType = keyof typeof FONT_WEIGHTS;
-
-export const FONTS = {
-  sans: "Sans",
-  heading: "Heading",
-  mono: "Mono",
-};
+export type FontType = keyof typeof FONTS;
 
 export type TextElement =
   | "h1"

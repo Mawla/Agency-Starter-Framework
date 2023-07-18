@@ -1,6 +1,6 @@
-import { COLORS } from "../../colors";
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { COLORS } from "../../theme";
 import { HEADING_LEVELS } from "../../types";
 import {
   BACKGROUND_COLOR_OPTIONS,

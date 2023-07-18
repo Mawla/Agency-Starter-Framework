@@ -1,5 +1,5 @@
-import { backgroundClasses } from "../../colors";
 import { useInView } from "../../hooks/useInView";
+import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { DialogSchemaName, BlockSchemaName } from "../../types.sanity";
 import cx from "classnames";

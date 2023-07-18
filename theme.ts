@@ -1,11 +1,18 @@
 import theme from "./_theme";
 import { isDarkColor } from "./helpers/utils/color";
-import { ColorType, FontWeightType } from "./types";
+import { ColorType, FontType, FontWeightType } from "./types";
 
 export const COLORS = {
   white: "#fff",
   black: "#000000",
   ...theme.colors,
+};
+
+export const FONTS = {
+  ...Object.keys(theme.fonts).reduce((acc, size) => {
+    acc[size] = size;
+    return acc;
+  }, {} as Record<string, string>),
 };
 
 export const FONT_SIZES = {
@@ -83,6 +90,13 @@ export const proseClasses: Record<ColorType, string> = Object.entries(
         : "prose-coal",
   };
 }, {} as Record<ColorType, string>);
+
+export const fontClasses: Record<FontType, string> = Object.entries(
+  FONTS,
+).reduce<Record<FontWeightType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
+  {} as Record<ColorType, string>,
+);
 
 export const weightClasses: Record<FontWeightType, string> = Object.entries(
   FONT_WEIGHTS,

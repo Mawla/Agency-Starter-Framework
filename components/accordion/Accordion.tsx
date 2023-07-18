@@ -1,4 +1,4 @@
-import { backgroundClasses, divideClasses, textClasses } from "../../colors";
+import { backgroundClasses, divideClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import Text from "../block/Text";
 import { BackgroundColorType } from "../block/background.options";
