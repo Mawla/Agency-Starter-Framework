@@ -1,4 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
+import Warning from "../../components/Warning";
 import {
   FileArrowUp,
   PaintBrushTool,
@@ -23,6 +24,15 @@ export default defineType({
     },
   },
   fields: [
+    defineField({
+      name: "warning",
+      title: "Warning",
+      type: "string",
+      options: { localize: false } as any,
+      components: { field: Warning },
+      description:
+        "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
+    }),
     defineField({
       name: "fonts",
       title: "Fonts",
