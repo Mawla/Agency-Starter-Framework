@@ -18,7 +18,7 @@ export type ThemeType = {
  * Get published theme from Sanity config.theme
  */
 
-async function getTheme(): Promise<ThemeType> {
+export async function getTheme(): Promise<ThemeType> {
   const theme = await client.fetch(`*[_id == "config_theme"][0] {
     colors[] { name, value },
     fonts[] { name, value },
@@ -31,7 +31,7 @@ async function getTheme(): Promise<ThemeType> {
  * Format colours
  */
 
-function formatColors(colors: { name: string; value: string }[]) {
+export function formatColors(colors: { name: string; value: string }[]) {
   const formattedColors = colors.reduce((acc, color) => {
     const { name, value } = color;
     const formattedName = name.replace(/ /g, "-").toLowerCase();
@@ -45,7 +45,7 @@ function formatColors(colors: { name: string; value: string }[]) {
  * Format fonts
  */
 
-function formatFonts(fonts: { name: string; value: string }[]) {
+export function formatFonts(fonts: { name: string; value: string }[]) {
   const formattedFonts = fonts.reduce((acc, font) => {
     const { name, value } = font;
     const formattedName = name.replace(/ /g, "-").toLowerCase();
@@ -64,7 +64,7 @@ function formatFonts(fonts: { name: string; value: string }[]) {
  * e.g safelist: ["bg-primary", "text-primary", "font-primary"]
  */
 
-function formatSafelist(
+export function formatSafelist(
   colors: ThemeType["colors"],
   fonts: ThemeType["colors"],
 ) {
@@ -81,7 +81,7 @@ function formatSafelist(
   return safelist;
 }
 
-async function init() {
+export default async function generateTheme() {
   const theme = await getTheme();
 
   // write colours and fonts to file _theme.json
@@ -90,7 +90,7 @@ async function init() {
   const safelist = formatSafelist(theme.colors, theme.fonts);
 
   await fs.writeFile(
-    "_theme.json",
+    `${__dirname}/../../_theme.json`,
     JSON.stringify(
       {
         colors,
@@ -103,7 +103,10 @@ async function init() {
   );
 
   // write stylesheets to file
-  await fs.writeFile("public/_theme.css", theme.stylesheets.join("\n\n"));
+  await fs.writeFile(
+    `${__dirname}/../../styles/_theme.css`,
+    theme.stylesheets.join("\n\n"),
+  );
 }
 
-init();
+generateTheme();

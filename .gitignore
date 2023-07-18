@@ -55,4 +55,4 @@ production-*
 development-*
 
 _theme.json
-public/_theme.css
+styles/_theme.css
