@@ -1,7 +1,12 @@
+import { backgroundClasses, divideClasses, textClasses } from "../../colors";
+import { ColorType } from "../../types";
 import Text from "../block/Text";
-import { ButtonProps } from "../buttons/Button";
+import { BackgroundColorType } from "../block/background.options";
+import { TitleColorType } from "../block/title.options";
+import { IconLoaderProps } from "../images/IconLoader";
 import PortableText, { PortableTextProps } from "../portabletext/PortableText";
 import * as RadixAccordion from "@radix-ui/react-accordion";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 export type AccordionItemType = {
@@ -10,21 +15,35 @@ export type AccordionItemType = {
   content?: PortableTextProps["content"];
 };
 
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
+);
 export type AccordionProps = {
   items: AccordionItemType[];
+  theme?: {
+    background?: BackgroundColorType;
+    title?: TitleColorType;
+    icon?: ColorType;
+    divider?: ColorType;
+  };
 };
 
-const Button = lazy<ComponentType<ButtonProps>>(
-  () =>
-    import(/* webpackChunkName: "Button" */ "../../components/buttons/Button"),
-);
-
-export const Accordion = ({ items }: AccordionProps) => {
+export const Accordion = ({ items, theme }: AccordionProps) => {
   if (!Boolean(items.filter(Boolean)?.length)) return null;
 
   return (
-    <div className="filter drop-shadow-lg radix-accordion border border-gray-200">
-      <RadixAccordion.Root type="multiple" className="divide-y divide-gray-200">
+    <div className="radix-accordion">
+      <RadixAccordion.Root
+        type="multiple"
+        className={cx(
+          "divide-y",
+          theme?.background && backgroundClasses[theme?.background],
+          divideClasses[theme?.divider || "black"],
+        )}
+      >
         {items?.map(({ _key, title = "", content }) => (
           <RadixAccordion.Item
             value={_key || title}
@@ -32,26 +51,31 @@ export const Accordion = ({ items }: AccordionProps) => {
             id={_key || title}
             className="radix-scroll-margin"
           >
-            <RadixAccordion.Header className="bg-white hover:underline radix-accordion-title">
-              <RadixAccordion.Trigger className="bg-white p-5 md:p-7 lg:p-8 text-base md:text-md lg:text-lg flex items-center w-full radix-accordion-trigger">
-                <div className="pr-3 text-left font-heading text-xl">
-                  {title}
-                </div>
+            <RadixAccordion.Header
+              className={cx(
+                "hover:underline",
+                theme?.title ? textClasses[theme?.title] : "text-current",
+              )}
+            >
+              <RadixAccordion.Trigger className="p-5 text-lg flex items-center w-full group">
+                <div className="pr-6 text-left font-bold">{title}</div>
                 <span className="flex-shrink-0 ml-auto">
-                  <Button
+                  <IconLoader
                     icon="chevron"
-                    label=""
-                    as="div"
-                    theme={{
-                      background: { color: "black" },
-                      text: { color: "white" },
-                    }}
+                    className={cx(
+                      "block w-6 h-6 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180",
+                      theme?.icon ? textClasses[theme?.icon] : "text-current",
+                    )}
                   />
                 </span>
               </RadixAccordion.Trigger>
             </RadixAccordion.Header>
-            <RadixAccordion.Content className="bg-white radix-accordion-content overflow-hidden">
-              <Text className="h-full p-5 md:p-7 lg:p-8 pt-0 md:pt-0 lg:pt-0 text-left">
+            <RadixAccordion.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
+              <Text
+                className="h-full px-5 pb-5 pt-0 text-left"
+                size="md"
+                background={theme?.background}
+              >
                 <PortableText content={content as any} />
               </Text>
             </RadixAccordion.Content>
@@ -62,4 +86,4 @@ export const Accordion = ({ items }: AccordionProps) => {
   );
 };
 
-export const AccordionMemo = React.memo(Accordion);
+export default React.memo(Accordion);
