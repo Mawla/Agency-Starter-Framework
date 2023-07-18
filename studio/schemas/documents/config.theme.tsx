@@ -27,7 +27,8 @@ export default defineType({
       name: "fonts",
       title: "Fonts",
       type: "array",
-      description: "Fonts used in the theme",
+      description:
+        "Fonts used in the theme. Be sure to include at least 'sans'",
       of: [
         {
           type: "object",

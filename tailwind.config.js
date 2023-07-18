@@ -1,3 +1,5 @@
+const customTheme = require("./_theme.json");
+
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 const selectorParser = require("postcss-selector-parser");
@@ -15,19 +17,10 @@ module.exports = {
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   // Be sure to add all colours in the safelist
-  safelist: [
-    {
-      pattern:
-        /(bg|text|border)-(gray)-(100|200|300|400|500|600|700|800|900|950)/,
-    },
-    {
-      pattern: /(bg|text|border)-(white|black|red)/,
-    },
-  ],
+  safelist: [...(customTheme.safelist || [])],
   theme: {
     fontFamily: {
-      sans: ["Apercu, arial"],
-      mono: ["monospace"],
+      ...(customTheme.fonts || {}),
     },
     screens: {
       "2xs": "375px",
@@ -49,6 +42,7 @@ module.exports = {
       black: "black",
       current: "currentColor",
       gray: colors.gray,
+      ...(customTheme.colors || {}),
     },
     extend: {
       maxWidth: {
