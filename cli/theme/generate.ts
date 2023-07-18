@@ -188,7 +188,7 @@ export default async function generateTheme() {
   const theme = await getTheme();
 
   await fs.writeFile(
-    `${__dirname}/../../_theme.ts`,
+    `${__dirname}/../../_theme.js`,
     `export default ${JSON.stringify(theme, null, 2)}`,
   );
 
