@@ -1,6 +1,9 @@
 const PicoSanity = require("picosanity");
 const fs = require("fs").promises;
 
+const tailwindConfig = require("../../tailwind.config.js");
+const SCREENS = Object.keys(tailwindConfig.theme.screens);
+
 const client = new PicoSanity({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "development",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
@@ -158,7 +161,7 @@ export function formatFontSizes(
 
 /**
  * format safelist of colours and fonts
- * e.g safelist: ["bg-primary", "text-primary", "font-primary"]
+ * e.g safelist: ["bg-primary", "text-primary", "font-primary", "md:bg-primary", "lg:bg-primary", ...]
  */
 
 export function formatSafelist(
@@ -181,7 +184,15 @@ export function formatSafelist(
     ...Object.keys(fontSizes).map((size) => `text-${clean(size)}`),
   ];
 
-  return safelist;
+  // safelist all these classes for each breakpoint
+  const safelistWithBreakpoints = safelist.reduce((acc, className) => {
+    SCREENS.forEach((screen) => {
+      acc.push(`${screen}:${className}`);
+    });
+    return acc;
+  }, [] as string[]);
+
+  return safelistWithBreakpoints;
 }
 
 export default async function generateTheme() {
