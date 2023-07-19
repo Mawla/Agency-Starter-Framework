@@ -147,7 +147,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
 
                             {Boolean(children?.length) && (
                               <IconLoader
-                                icon="chevron"
+                                icon="chevrondown"
                                 className={cx(
                                   "w-4 h-4",
                                   "ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-150",
@@ -185,12 +185,13 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               <RadixNavigationMenu.List
                                 className={cx(
                                   "translate-y-2 p-1",
-                                  "shadow-md",
+                                  "shadow-lg",
                                   "rounded-md",
-                                  theme?.submenu?.background &&
-                                    backgroundClasses[
-                                      theme?.submenu?.background
-                                    ],
+                                  theme?.submenu?.background
+                                    ? backgroundClasses[
+                                        theme?.submenu?.background
+                                      ]
+                                    : "bg-white border border-black/10",
                                   theme?.submenu?.text &&
                                     textClasses[theme?.submenu?.text],
                                 )}

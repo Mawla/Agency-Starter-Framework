@@ -60,7 +60,7 @@ export default function Sitemap({
                 }}
               >
                 <IconLoader
-                  icon="chevron"
+                  icon="chevrondown"
                   className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
                 />
                 {path && title && (

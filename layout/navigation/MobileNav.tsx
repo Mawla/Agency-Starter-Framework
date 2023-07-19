@@ -1,7 +1,6 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { backgroundClasses, textClasses } from "../../theme";
-import { ImageType } from "../../types";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { NavigationProps } from "./Navigation";
 import * as RadixDialog from "@radix-ui/react-dialog";
@@ -46,8 +45,9 @@ export const MobileNav = ({
               <RadixNavigationMenu.Root
                 className={cx(
                   "h-full overflow-y-auto overflow-scrolling-touch select-none shadow-2xl text-xl",
-                  theme?.block?.background &&
-                    backgroundClasses[theme?.block?.background],
+                  theme?.block?.background
+                    ? backgroundClasses[theme?.block?.background]
+                    : "bg-white",
                 )}
               >
                 {Boolean(items?.length) && (
@@ -76,7 +76,7 @@ export const MobileNav = ({
 
                               {Boolean(children?.length) && (
                                 <IconLoader
-                                  icon="chevron"
+                                  icon="chevrondown"
                                   className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 transition-transform duration-75 group-open:rotate-180"
                                 />
                               )}

@@ -81,7 +81,7 @@ export const LanguageSwitch = ({
           />
         </span>
         <span>{language.toUpperCase()}</span>
-        <IconLoader icon="chevron" className="w-4 h-4 text-gray-500" />
+        <IconLoader icon="chevrondown" className="w-4 h-4 text-gray-500" />
       </RadixNavigationMenu.Trigger>
 
       <RadixNavigationMenu.Content

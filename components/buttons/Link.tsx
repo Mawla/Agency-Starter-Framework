@@ -43,7 +43,7 @@ export const Link = ({
         {children}
         {target === "_blank" && (
           <IconLoader
-            icon="external-link"
+            icon="externallink"
             className="ml-1 inline-block w-4 h-4"
           />
         )}
@@ -55,10 +55,7 @@ export const Link = ({
     <a href={href} className={className} target={target} rel={rel}>
       {children}
       {target === "_blank" && (
-        <IconLoader
-          icon="external-link"
-          className="ml-1 inline-block w-4 h-4"
-        />
+        <IconLoader icon="externallink" className="ml-1 inline-block w-4 h-4" />
       )}
     </a>
   );

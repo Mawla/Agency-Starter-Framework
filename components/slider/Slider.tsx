@@ -91,7 +91,7 @@ export const Slider = ({
                 : translations?.previous_slide?.[language]}
             </span>
             <IconLoader
-              icon="chevron"
+              icon="chevrondown"
               className={cx("w-5 h-5", {
                 ["rotate-90"]: direction === "prev",
                 ["-rotate-90"]: direction === "next",

@@ -61,7 +61,7 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
                 <div className="pr-6 text-left font-bold">{title}</div>
                 <span className="flex-shrink-0 ml-auto">
                   <IconLoader
-                    icon="chevron"
+                    icon="chevrondown"
                     className={cx(
                       "block w-6 h-6 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180",
                       theme?.icon ? textClasses[theme?.icon] : "text-current",

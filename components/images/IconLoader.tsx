@@ -1,3 +1,4 @@
+import { getClient } from "../../helpers/sanity/server";
 import { textClasses } from "../../theme";
 import { IconType, ICONS, ColorType } from "../../types";
 import cx from "classnames";
@@ -31,51 +32,42 @@ export const IconLoader = ({
   removeColors = true,
 }: IconLoaderProps) => {
   const Element = as;
-  const [isMounted, setIsMounted] = useState(false);
-  const {
-    isLoading,
-    error,
-    data,
-  }: {
-    isLoading?: boolean;
-    error?: Error | null;
-    data?: string;
-  } = useQuery(
-    icon || "",
-    () => {
-      if (!icon) return null;
-      return fetch(`${domain}${path}${ICONS[icon]}`).then(async (res) => {
-        if (res.status !== 200) return "";
-
-        const html = await res.text();
-        if (!html.startsWith("<svg") && !html.startsWith("<?xml")) return "";
-
-        let cleanHTML = DOMPurify?.sanitize?.(html); //
-        cleanHTML = cleanUpAttributes(cleanHTML);
-        if (removeColors) {
-          cleanHTML = replaceColorsWithCurrentColor(cleanHTML);
-        }
-        return cleanHTML;
-      });
-    },
-    { enabled: !icon ? false : Boolean(icon) && Boolean(ICONS[icon]) },
-  );
+  const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
+  const [data, setData] = useState<string | null>(null);
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    if (!icon) return;
+
+    async function getIcon() {
+      const svg = await getClient(false).fetch(`
+        *[_id == 'config_icons'][0] {
+          "icon": coalesce(predefined.${icon}, rest[id == "${icon}"][0].icon)
+        }.icon`);
+
+      if (!svg) return;
+      if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
+
+      let cleanSVG = DOMPurify?.sanitize?.(svg); //
+      cleanSVG = cleanUpAttributes(cleanSVG);
+      if (removeColors) {
+        cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
+      }
+
+      if (cleanSVG) {
+        setState("loaded");
+        setData(cleanSVG);
+        return;
+      }
+
+      setState("error");
+    }
+
+    getIcon();
+  }, [icon]);
 
   if (!icon) return null;
-  if (!ICONS[icon]) return null;
 
-  if (error) {
-    console.log(`Error loading icon ${icon}: ${error?.message}`);
-    return null;
-  }
-
-  if (!isMounted) return null;
-
-  if (isLoading || error)
+  if (state === "loading" || state === "error")
     return (
       <Element
         role="img"
