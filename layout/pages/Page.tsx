@@ -79,6 +79,7 @@ export const Page = ({
             items={page.hideNav === true ? [] : navItems}
             buttons={page.hideNav === true ? [] : navigation.buttons}
             logo={navigation.logo}
+            theme={navigation.theme}
           />
         )}
 

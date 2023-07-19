@@ -1,7 +1,12 @@
+import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
 import buttonSchema from "../../components/buttons/button.schema";
+import { pick } from "../../helpers/utils/object";
 import IconPicker from "../../studio/components/IconPicker";
-import { ICONS } from "../../types";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { COLORS } from "../../theme";
+import { ALIGNMENTS, ICONS } from "../../types";
 import { SchemaName } from "../../types.sanity";
+import { ALIGN_OPTIONS } from "./navigation.options";
 import {
   Chain,
   JustifyAll,
@@ -171,6 +176,110 @@ export default defineType({
           name: "desktop",
           title: "Desktop",
           type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "theme",
+      title: "Theme",
+      type: "object",
+      fields: [
+        defineField({
+          name: "block",
+          title: "Block",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "menu",
+          title: "Menu",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "text",
+                type: "color",
+                title: "Link color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "align",
+                type: "select",
+                options: {
+                  list: optionsToList(ALIGN_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "submenu",
+          title: "Submenu",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                title: "Background color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                title: "Link color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "buttons",
+          title: "Buttons",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                title: "Background color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                title: "Link color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
         }),
       ],
     }),

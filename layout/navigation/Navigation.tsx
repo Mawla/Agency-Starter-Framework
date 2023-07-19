@@ -3,9 +3,10 @@ import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { LanguageType } from "../../languages";
-import { ImageType } from "../../types";
+import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
 import { TopNav } from "./TopNav";
+import { AlignType } from "./navigation.options";
 import router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -27,9 +28,32 @@ export type NavigationProps = {
   items: NavItem[];
   buttons: ButtonProps[];
   logo?: { mobile?: ImageType; desktop?: ImageType };
+  theme?: {
+    block?: {
+      background?: ColorType;
+      text?: ColorType;
+    };
+    menu?: {
+      text?: ColorType;
+      align?: AlignType;
+    };
+    submenu?: {
+      text?: ColorType;
+      background?: ColorType;
+    };
+    buttons?: {
+      text?: ColorType;
+      background?: ColorType;
+    };
+  };
 };
 
-export const Navigation = ({ items, buttons, logo }: NavigationProps) => {
+export const Navigation = ({
+  items,
+  buttons,
+  logo,
+  theme,
+}: NavigationProps) => {
   const { screenWidth, breakpoint } = useBreakpoint();
   const scrollDirection = useScrollDirection();
   const scrollPosition = useScrollPosition();
@@ -75,6 +99,7 @@ export const Navigation = ({ items, buttons, logo }: NavigationProps) => {
         ref={navRef}
         navHeight={spacerHeight}
         logo={logo}
+        theme={theme}
       />
 
       {screenWidth < BREAKPOINTS.lg && (
