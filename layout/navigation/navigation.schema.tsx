@@ -1,10 +1,8 @@
 import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
 import buttonSchema from "../../components/buttons/button.schema";
-import { pick } from "../../helpers/utils/object";
 import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { COLORS } from "../../theme";
-import { ALIGNMENTS, ICONS } from "../../types";
 import { SchemaName } from "../../types.sanity";
 import { ALIGN_OPTIONS } from "./navigation.options";
 import {
@@ -63,6 +61,10 @@ export default defineType({
   icon: () => <JustifyAll weight="thin" size={18} />,
   initialValue: {},
   options: { singleton: true },
+  groups: [
+    { name: "content", title: "Content", default: true },
+    { name: "theme", title: "Theme" },
+  ],
   preview: {
     prepare() {
       return {
@@ -75,6 +77,7 @@ export default defineType({
       name: "items",
       title: "Items",
       type: "array",
+      group: "content",
       of: [
         {
           type: "object",
@@ -130,6 +133,7 @@ export default defineType({
       name: "buttons",
       title: "Buttons",
       type: "array",
+      group: "content",
       of: [
         {
           type: "object",
@@ -154,9 +158,6 @@ export default defineType({
               title: "Icon",
               type: "string",
               components: { input: IconPicker },
-              options: {
-                icons: ICONS,
-              } as any,
             },
           ],
         },
@@ -166,6 +167,7 @@ export default defineType({
       name: "logo",
       title: "Logo",
       type: "object",
+      group: "content",
       fields: [
         defineField({
           name: "mobile",
@@ -183,6 +185,7 @@ export default defineType({
       name: "theme",
       title: "Theme",
       type: "object",
+      group: "theme",
       fields: [
         defineField({
           name: "block",

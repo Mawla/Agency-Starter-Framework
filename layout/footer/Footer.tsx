@@ -3,7 +3,7 @@ import { SpaceType } from "../../components/block/spacing.options";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { backgroundClasses } from "../../theme";
-import { ColorType, IconType, ImageType } from "../../types";
+import { ColorType, ImageType } from "../../types";
 import { FooterBreadcrumb } from "./Footer.Breadcrumb";
 import { FooterLogo } from "./Footer.Logo";
 import { FooterMenu } from "./Footer.Menu";
@@ -11,7 +11,11 @@ import cx from "classnames";
 import React from "react";
 
 export type FooterProps = {
-  socials: { label?: string; href?: string; icon: IconType }[];
+  socials: {
+    label?: string;
+    href?: string;
+    icon: string;
+  }[];
   links: {
     title?: string;
     href?: string;

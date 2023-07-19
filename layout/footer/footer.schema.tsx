@@ -4,7 +4,6 @@ import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { COLORS } from "../../theme";
-import { ICONS } from "../../types";
 import { SchemaName } from "../../types.sanity";
 import { AlignDown, Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -51,6 +50,10 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Footer",
   type: "document",
+  groups: [
+    { name: "content", title: "Content", default: true },
+    { name: "theme", title: "Theme" },
+  ],
   options: { singleton: true },
   icon: () => <AlignDown weight="thin" size={18} />,
   preview: {
@@ -65,6 +68,7 @@ export default defineType({
       name: "links",
       title: "Links",
       type: "array",
+      group: "content",
       description: "Up to 4 lists of links.",
       validation: (Rule) => Rule.max(4),
       of: [
@@ -126,6 +130,7 @@ export default defineType({
       name: "socials",
       title: "Socials",
       type: "array",
+      group: "content",
       of: [
         defineArrayMember({
           type: "object",
@@ -146,9 +151,6 @@ export default defineType({
               title: "Icon",
               type: "string",
               components: { input: IconPicker },
-              options: {
-                icons: ICONS,
-              } as any,
             }),
           ],
         }),
@@ -159,24 +161,28 @@ export default defineType({
       title: "Copyright",
       type: "string",
       description: "Copyright notice",
+      group: "content",
     }),
     defineField({
       name: "legal",
       title: "Legal",
       type: "string",
       description: "Additional legal info",
+      group: "content",
     }),
     defineField({
       name: "info",
       title: "Info",
       type: "string",
       description: "Additional info placed below the footer logo.",
+      group: "content",
     }),
     defineField({
       name: "legalLinks",
       title: "Legal links",
       type: "array",
       description: "List of additional links.",
+      group: "content",
       of: [
         defineArrayMember({
           type: "object",
@@ -196,6 +202,7 @@ export default defineType({
       name: "logo",
       title: "Logo",
       type: "object",
+      group: "content",
       fields: [
         defineField({
           name: "mobile",
@@ -213,6 +220,7 @@ export default defineType({
       name: "theme",
       title: "Theme",
       type: "object",
+      group: "theme",
       fields: [
         defineField({
           name: "block",
