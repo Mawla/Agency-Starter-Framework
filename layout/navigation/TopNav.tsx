@@ -78,7 +78,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             role="navigation"
           >
             {/* logo */}
-            <div className="flex items-center flex-0 border">
+            <div className="flex items-center flex-0">
               <Link
                 href={`/${language}`}
                 className="inline-block relative"
@@ -97,7 +97,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               </Link>
             </div>
 
-            <div className="flex-1 border">
+            <div className="flex-1">
               {/* main menu */}
               {Boolean(items?.length) && (
                 <RadixNavigationMenu.List
@@ -231,7 +231,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             </div>
 
             {/* buttons */}
-            <div className="flex-0 border">
+            <div className="flex-0">
               <RadixNavigationMenu.List className="flex gap-2 xl:gap-4 items-center justify-end">
                 {/* buttons */}
                 {Boolean(buttons?.length) &&
