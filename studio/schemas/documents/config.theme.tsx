@@ -1,4 +1,8 @@
 import { SchemaName } from "../../../types.sanity";
+import ThemeColors from "../../components/Theme/ThemeColors";
+import ThemeFontFamily from "../../components/Theme/ThemeFontFamily";
+import ThemeFontSize from "../../components/Theme/ThemeFontSize";
+import ThemeFontWeight from "../../components/Theme/ThemeFontWeight";
 import Warning from "../../components/Warning";
 import {
   FileArrowUp,
@@ -47,6 +51,9 @@ export default defineType({
       type: "array",
       description:
         "Fonts used in the theme. Be sure to include at least 'sans'",
+      components: {
+        input: ThemeFontFamily,
+      },
       of: [
         {
           type: "object",
@@ -88,6 +95,9 @@ export default defineType({
       title: "Font weights",
       type: "array",
       description: "Fonts weights used in the theme.",
+      components: {
+        input: ThemeFontWeight,
+      },
       of: [
         {
           type: "object",
@@ -132,6 +142,9 @@ export default defineType({
       type: "array",
       description:
         "Fonts sizes used in the theme. Be sure to order these from smallest to largest.",
+      components: {
+        input: ThemeFontSize,
+      },
       of: [
         {
           type: "object",
@@ -203,6 +216,9 @@ export default defineType({
       title: "Colors",
       type: "array",
       description: "Colors used in the theme",
+      components: {
+        input: ThemeColors,
+      },
       of: [
         defineArrayMember({
           name: "color",
