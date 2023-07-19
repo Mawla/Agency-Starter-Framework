@@ -124,3 +124,18 @@ export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
 export const DIALOG_SCHEMAS = pick(SCHEMAS, "dialog.richtext", "dialog.video");
 
 export type DialogSchemaName = keyof typeof DIALOG_SCHEMAS;
+
+declare module "sanity" {
+  // redeclare StringOptions; it will be merged with StringOptions in the sanity module
+  export interface StringOptions {
+    localize?: boolean;
+    max?: string | number;
+  }
+
+  export interface SlugOptions {
+    localize?: boolean;
+  }
+  export interface ObjectOptions {
+    localize?: boolean;
+  }
+}
