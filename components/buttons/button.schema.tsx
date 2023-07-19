@@ -4,7 +4,6 @@ import DialogSelect, {
 import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
-import { ICONS } from "../../types";
 import {
   BUTTON_BACKGROUND_COLOR_OPTIONS,
   BUTTON_BORDER_COLOR_OPTIONS,
@@ -137,9 +136,6 @@ const schema = defineType({
       type: "string",
       group: "theme",
       components: { input: IconPicker },
-      options: {
-        icons: ICONS,
-      } as any,
     }),
     defineField({
       name: "iconPosition",

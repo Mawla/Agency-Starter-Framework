@@ -1,13 +1,12 @@
 import { getClient } from "../../helpers/sanity/server";
 import { textClasses } from "../../theme";
-import { IconType, ICONS, ColorType } from "../../types";
+import { ColorType } from "../../types";
 import cx from "classnames";
 import * as DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 
 export type IconLoaderProps = {
-  icon?: IconType;
+  icon?: string;
   className?: string;
   color?: ColorType;
   as?: React.ElementType;
@@ -27,8 +26,6 @@ export const IconLoader = ({
   title,
   description,
   style,
-  domain = "/",
-  path = "icons/",
   removeColors = true,
 }: IconLoaderProps) => {
   const Element = as;

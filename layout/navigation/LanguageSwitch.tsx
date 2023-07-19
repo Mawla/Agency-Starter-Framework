@@ -2,7 +2,6 @@ import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
 import { getLanguageTitle, languages, LanguageType } from "../../languages";
-import { IconType } from "../../types";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
 import { ComponentType, lazy, useContext } from "react";
@@ -17,10 +16,6 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 type LanguageSwitchProps = {
   align?: "left" | "right";
   position?: "above" | "below";
-};
-
-const FLAGS: Record<LanguageType, IconType> = {
-  en: "flag-uk",
 };
 
 export const LanguageSwitch = ({
@@ -73,14 +68,7 @@ export const LanguageSwitch = ({
           "hover:bg-gray-100 group-hover:bg-gray-100 group-focus-within:bg-gray-100",
         )}
       >
-        <span className="w-5 aspect-square">
-          <IconLoader
-            icon={FLAGS[language]}
-            removeColors={false}
-            className="w-4 h-4"
-          />
-        </span>
-        <span>{language.toUpperCase()}</span>
+        {language.toUpperCase()}
         <IconLoader icon="chevrondown" className="w-4 h-4 text-gray-500" />
       </RadixNavigationMenu.Trigger>
 
@@ -116,11 +104,6 @@ export const LanguageSwitch = ({
                     },
                   )}
                 >
-                  <IconLoader
-                    icon={FLAGS[languageId]}
-                    removeColors={false}
-                    className="w-5 aspect-square"
-                  />
                   {getLanguageTitle(languageId)}
                 </Link>
               )}

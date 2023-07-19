@@ -1,4 +1,4 @@
-import { IconType, ICONS } from "../../types";
+import { PREDEFINED_ICONS } from "../../types";
 import { IconLoader } from "./IconLoader";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -10,7 +10,7 @@ export default {
 
 export const Sources = () => (
   <div className="flex flex-wrap gap-10">
-    {(Object.keys(ICONS) as IconType[]).map((icon: IconType) => (
+    {Object.keys(PREDEFINED_ICONS).map((icon: string) => (
       <IconLoader
         title={icon}
         icon={icon}

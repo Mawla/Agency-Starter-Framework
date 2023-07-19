@@ -6,7 +6,6 @@ import {
   textClasses,
   weightClasses,
 } from "../../theme";
-import { IconType } from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
@@ -37,7 +36,7 @@ export type ButtonProps = {
   as?: "button" | "a" | "div" | "span" | "submit";
   compact?: boolean;
   href?: string;
-  icon?: IconType;
+  icon?: string;
   iconPosition?: ButtonIconPositionType;
   label?: string;
   onClick?: (e: React.MouseEvent) => void;

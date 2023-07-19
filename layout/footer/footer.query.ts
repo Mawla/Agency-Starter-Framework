@@ -2,10 +2,9 @@ import {
   buttonFieldsQuery,
   buttonQuery,
 } from "../../components/buttons/button.query";
-import { getImageQuery, imageQuery } from "../../components/images/image.query";
+import { getImageQuery } from "../../components/images/image.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
-import { ColorType, IconType } from "../../types";
 import { FooterProps } from "./Footer";
 import groq from "groq";
 
@@ -18,7 +17,7 @@ export type FooterItemType = {
 export type FooterSocialsItemProps = {
   label?: string;
   href?: string;
-  icon: IconType;
+  icon?: string;
 };
 
 export type FooterType = {
