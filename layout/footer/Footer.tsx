@@ -76,6 +76,7 @@ export const Footer = ({
                         className="block w-7 h-7 overflow-hidden"
                         rel="noopener noreferrer"
                         target="_blank"
+                        showExternalIcon={false}
                       >
                         <IconLoader icon={icon} />
                       </Link>

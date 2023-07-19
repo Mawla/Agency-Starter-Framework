@@ -6,7 +6,7 @@ import ThemeIcons, {
 import Warning from "../../components/Warning";
 import { TargetArrowBullseye } from "@vectopus/atlas-icons-react";
 import React from "react";
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, SlugRule, StringRule } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "config.icons";
 
@@ -64,11 +64,13 @@ export default defineType({
           preview: {
             select: {
               title: "title",
+              subtitle: "slug.current",
               icon: "icon",
             },
-            prepare({ title, icon }) {
+            prepare({ title, subtitle, icon }) {
               return {
-                title: `${title}`,
+                title,
+                subtitle,
                 media: icon ? (
                   <span dangerouslySetInnerHTML={{ __html: icon }} />
                 ) : null,
@@ -80,12 +82,25 @@ export default defineType({
               name: "title",
               title: "Title",
               type: "string",
+              validation: (Rule: StringRule) => Rule.required(),
+            }),
+            defineField({
+              name: "slug",
+              title: "Slug",
+              type: "slug",
+              validation: (Rule: SlugRule) => Rule.required(),
+              options: {
+                source: (doc: any, options: any) => {
+                  return options.parent.title;
+                },
+              },
             }),
             defineField({
               name: "icon",
               title: "Icon",
               type: "text",
               rows: 6,
+              validation: (Rule: StringRule) => Rule.required(),
             }),
           ],
         },

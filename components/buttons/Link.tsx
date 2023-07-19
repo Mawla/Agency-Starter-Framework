@@ -16,6 +16,7 @@ export type LinkProps = {
   target?: "_blank";
   rel?: string;
   locale?: LanguageType;
+  showExternalIcon?: boolean;
 };
 
 export const Link = ({
@@ -25,6 +26,7 @@ export const Link = ({
   target,
   rel,
   locale,
+  showExternalIcon = true,
 }: LinkProps) => {
   const router = useRouter();
 
@@ -41,7 +43,7 @@ export const Link = ({
         rel={rel}
       >
         {children}
-        {target === "_blank" && (
+        {target === "_blank" && showExternalIcon && (
           <IconLoader
             icon="externallink"
             className="ml-1 inline-block w-4 h-4"
@@ -54,7 +56,7 @@ export const Link = ({
   return (
     <a href={href} className={className} target={target} rel={rel}>
       {children}
-      {target === "_blank" && (
+      {target === "_blank" && showExternalIcon && (
         <IconLoader icon="externallink" className="ml-1 inline-block w-4 h-4" />
       )}
     </a>

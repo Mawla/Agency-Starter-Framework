@@ -38,9 +38,10 @@ export const IconLoader = ({
     async function getIcon() {
       const svg = await getClient(false).fetch(`
         *[_id == 'config_icons'][0] {
-          "icon": coalesce(predefined.${icon}, rest[id == "${icon}"][0].icon)
+          "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
         }.icon`);
 
+      console.log(svg);
       if (!svg) return;
       if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
 
