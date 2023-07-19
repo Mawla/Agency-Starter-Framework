@@ -96,12 +96,7 @@ export const Footer = ({
         </div>
 
         <div className="flex flex-col gap-2 md:items-center mt-10 pt-10 relative">
-          <span
-            className={cx(
-              "absolute inset-x-0 h-px block opacity-10 top-0",
-              backgroundClasses[theme?.block?.text || "black"],
-            )}
-          />
+          <span className="absolute inset-x-0 h-px block opacity-10 top-0 bg-current" />
 
           <div className="flex gap-4 leading-relaxed">
             {copyright && <p className="font-medium ">{copyright}</p>}
