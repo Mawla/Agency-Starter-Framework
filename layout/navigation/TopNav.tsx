@@ -3,7 +3,7 @@ import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PageContext } from "../../context/PageContext";
-import { backgroundClasses, textClasses } from "../../theme";
+import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { NavigationProps } from "./Navigation";
 import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
@@ -68,8 +68,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               "py-2 md:py-3 lg:py-4",
               "mx-auto",
               "px-5 sm:px-8 lg:px-8 xl:px-8",
-              "border-b border-b-gray-200",
+
               widthClasses.outer,
+              theme?.block?.border && borderClasses[theme?.block?.border],
+              {
+                ["border-b"]: theme?.block?.border,
+              },
             )}
             role="navigation"
           >

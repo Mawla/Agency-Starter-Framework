@@ -32,6 +32,7 @@ export type NavigationProps = {
     block?: {
       background?: ColorType;
       text?: ColorType;
+      border?: ColorType;
     };
     menu?: {
       text?: ColorType;

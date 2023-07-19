@@ -204,6 +204,14 @@ export default defineType({
                   colors: COLORS,
                 },
               },
+              {
+                name: "border",
+                type: "color",
+                title: "Bottom border",
+                options: {
+                  colors: COLORS,
+                },
+              },
             ],
           },
         }),
