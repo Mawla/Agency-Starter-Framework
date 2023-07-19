@@ -1,5 +1,9 @@
+import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
+import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { COLORS } from "../../theme";
 import { ICONS } from "../../types";
 import { SchemaName } from "../../types.sanity";
 import { AlignDown, Chain } from "@vectopus/atlas-icons-react";
@@ -202,6 +206,44 @@ export default defineType({
           name: "desktop",
           title: "Desktop",
           type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "theme",
+      title: "Theme",
+      type: "object",
+      fields: [
+        defineField({
+          name: "block",
+          title: "Block",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "space",
+                title: "Space",
+                type: "space",
+                options: {
+                  list: optionsToList(SPACE_OPTIONS),
+                },
+              },
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
         }),
       ],
     }),

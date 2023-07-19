@@ -1,10 +1,13 @@
 import { Wrapper } from "../../components/block/Wrapper";
+import { SpaceType } from "../../components/block/spacing.options";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
-import { IconType, ImageType } from "../../types";
+import { backgroundClasses } from "../../theme";
+import { ColorType, IconType, ImageType } from "../../types";
 import { FooterBreadcrumb } from "./Footer.Breadcrumb";
 import { FooterLogo } from "./Footer.Logo";
 import { FooterMenu } from "./Footer.Menu";
+import cx from "classnames";
 import React from "react";
 
 export type FooterProps = {
@@ -20,6 +23,13 @@ export type FooterProps = {
   legal?: string;
   legalLinks?: { label?: string; href?: string }[];
   logo?: { mobile?: ImageType; desktop?: ImageType };
+  theme?: {
+    block?: {
+      background?: ColorType;
+      space?: SpaceType;
+      text?: ColorType;
+    };
+  };
 };
 
 export const Footer = ({
@@ -30,11 +40,14 @@ export const Footer = ({
   legal,
   legalLinks,
   logo,
+  theme,
 }: FooterProps) => {
   return (
     <footer>
       <Wrapper
-        theme={{ space: { top: "sm", bottom: "sm" } }}
+        theme={{
+          ...theme?.block,
+        }}
         className="text-[14px]"
       >
         <FooterBreadcrumb />
@@ -77,7 +90,14 @@ export const Footer = ({
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 md:items-center mt-10 pt-10 border-t border-black/10">
+        <div className="flex flex-col gap-2 md:items-center mt-10 pt-10 relative">
+          <span
+            className={cx(
+              "absolute inset-x-0 h-px block opacity-10 top-0",
+              backgroundClasses[theme?.block?.text || "black"],
+            )}
+          />
+
           <div className="flex gap-4 leading-relaxed">
             {copyright && <p className="font-medium ">{copyright}</p>}
             {legal && <p>{legal}</p>}

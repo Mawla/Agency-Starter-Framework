@@ -5,7 +5,7 @@ import {
 import { getImageQuery, imageQuery } from "../../components/images/image.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
-import { IconType } from "../../types";
+import { ColorType, IconType } from "../../types";
 import { FooterProps } from "./Footer";
 import groq from "groq";
 
@@ -29,6 +29,7 @@ export type FooterType = {
   info?: string;
   legalLinks?: FooterItemType["items"];
   logo?: FooterProps["logo"];
+  theme?: FooterProps["theme"];
 };
 
 export const getFooterQuery = (language: LanguageType) => groq`
@@ -54,6 +55,7 @@ export const getFooterQuery = (language: LanguageType) => groq`
       icon,
       ${buttonFieldsQuery},
     },
+    theme
   }
 }.footer
 `;

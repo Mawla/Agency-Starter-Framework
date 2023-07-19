@@ -99,6 +99,7 @@ export const Page = ({
             legalLinks={footer.legalLinks}
             logo={footer.logo}
             info={footer.info}
+            theme={footer.theme}
           />
         )}
 
