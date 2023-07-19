@@ -117,7 +117,14 @@ export const MobileNav = ({
                 )}
 
                 <RadixNavigationMenu.List className="mt-3 p-4 flex flex-row gap-3">
-                  <LanguageSwitch align="left" position="above" />
+                  <LanguageSwitch
+                    align="left"
+                    position="above"
+                    theme={{
+                      background: theme?.submenu?.background || "white",
+                      text: theme?.submenu?.text,
+                    }}
+                  />
                   {Boolean(buttons?.length) &&
                     buttons?.map((button) => (
                       <RadixNavigationMenu.Item key={button.label}>

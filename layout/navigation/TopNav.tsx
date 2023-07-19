@@ -4,6 +4,7 @@ import { IconLoaderProps } from "../../components/images/IconLoader";
 import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PageContext } from "../../context/PageContext";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
+import { LanguageSwitch } from "./LanguageSwitch";
 import { NavigationProps } from "./Navigation";
 import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
@@ -184,9 +185,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                             >
                               <RadixNavigationMenu.List
                                 className={cx(
-                                  "translate-y-2 p-1",
-                                  "shadow-lg",
-                                  "rounded-md",
+                                  "translate-y-2 p-1 shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)] rounded-md",
                                   theme?.submenu?.background
                                     ? backgroundClasses[
                                         theme?.submenu?.background
@@ -234,6 +233,15 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             {/* buttons */}
             <div className="flex-0">
               <RadixNavigationMenu.List className="flex gap-2 xl:gap-4 items-center justify-end">
+                <LanguageSwitch
+                  align="right"
+                  position="below"
+                  theme={{
+                    background: theme?.submenu?.background || "white",
+                    text: theme?.submenu?.text,
+                  }}
+                />
+
                 {/* buttons */}
                 {Boolean(buttons?.length) &&
                   buttons?.map((button) => (

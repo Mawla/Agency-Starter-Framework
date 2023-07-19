@@ -46,6 +46,10 @@ export const PREDEFINED_ICONS = {
     title: "Menu",
     description: "Used to open the mobile menu",
   },
+  globe: {
+    title: "Globe",
+    description: "Shown next to the language selector",
+  },
 };
 
 export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;
