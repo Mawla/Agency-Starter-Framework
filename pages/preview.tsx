@@ -74,9 +74,9 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
   locale,
 }) => {
-  const config: ConfigType = await getClient(preview).fetch(
+  const config = (await getClient(preview).fetch(
     getConfigQuery((locale as LanguageType) || baseLanguage),
-  );
+  )) as ConfigType;
 
   return { props: { preview, config }, revalidate: 10 };
 };

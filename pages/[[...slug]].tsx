@@ -105,7 +105,9 @@ export const getStaticProps: GetStaticProps = async ({
   const finalSlug = slug[slug.length - 1];
 
   // fetch sitemap
-  let sitemap: SitemapType = await getClient(preview).fetch(getSitemapQuery());
+  let sitemap = (await getClient(preview).fetch(
+    getSitemapQuery(),
+  )) as SitemapType;
   sitemap = sitemap.filter(Boolean);
 
   if (!sitemap.length) return { notFound: true };
@@ -127,19 +129,19 @@ export const getStaticProps: GetStaticProps = async ({
   if (!sitemapItem) return { notFound: true };
 
   // fetch config
-  const config: ConfigType = await getClient(preview).fetch(
+  const config = (await getClient(preview).fetch(
     getConfigQuery(language),
-  );
+  )) as ConfigType;
 
   // fetch navigation
-  let navigation: NavigationType = await getClient(preview).fetch(
+  let navigation = (await getClient(preview).fetch(
     getNavigationQuery(language),
-  );
+  )) as NavigationType;
 
   // fetch navigation
-  const footer: FooterType = await getClient(preview).fetch(
+  const footer = (await getClient(preview).fetch(
     getFooterQuery(language),
-  );
+  )) as FooterType;
 
   // fetch page
   const page = await getClient(preview).fetch(getPageQuery(language), {
@@ -188,7 +190,9 @@ export const getStaticProps: GetStaticProps = async ({
  */
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const sitemap: SitemapType = await getClient(false).fetch(getSitemapQuery());
+  const sitemap = (await getClient(false).fetch(
+    getSitemapQuery(),
+  )) as SitemapType;
 
   // don't build on previews
   if (

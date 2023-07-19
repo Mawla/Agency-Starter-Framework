@@ -50,14 +50,14 @@ export const getStaticProps: GetStaticProps = async ({
   const language = locale as LanguageType;
 
   // fetch config
-  const config: ConfigType = await getClient(isPreviewMode).fetch(
+  const config = (await getClient(isPreviewMode).fetch(
     getConfigQuery(language),
-  );
+  )) as ConfigType;
 
   // fetch navigation
-  const navigation: NavigationType = await getClient(isPreviewMode).fetch(
+  const navigation = (await getClient(isPreviewMode).fetch(
     getNavigationQuery(language),
-  );
+  )) as NavigationType;
 
   // fetch page
   const sitemapItem: SitemapItemType = {
@@ -68,14 +68,14 @@ export const getStaticProps: GetStaticProps = async ({
     _updatedAt: "",
     excludeFromSitemap: true,
   };
-  const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
+  const page = (await getClient(isPreviewMode).fetch(getPageQuery(language), {
     ...sitemapItem,
-  });
+  })) as PageType;
 
   // fetch navigation
-  const footer: FooterType = await getClient(isPreviewMode).fetch(
+  const footer = (await getClient(isPreviewMode).fetch(
     getFooterQuery(language),
-  );
+  )) as FooterType;
 
   // return object
   const props: StaticProps = {
