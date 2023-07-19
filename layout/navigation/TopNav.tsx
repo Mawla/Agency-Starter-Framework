@@ -52,7 +52,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             "fixed z-50 top-0 left-0 right-0",
             "w-full",
             "transform transition-transform duration-500",
-            "bg-opacity-90 backdrop-blur-[25px]",
+            // "bg-opacity-90 backdrop-blur-[25px]",
             {
               ["-translate-y-full ease-[cubic-bezier(0.2,0.07,0.38,1)]"]:
                 !showNav,
@@ -79,24 +79,26 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             role="navigation"
           >
             {/* logo */}
-            <div className="flex items-center flex-0">
-              <Link
-                href={`/${language}`}
-                className="inline-block relative"
-                aria-label="Homepage"
-              >
-                {logo?.mobile && (
-                  <div className="sm:hidden relative">
-                    <SimpleImage {...logo?.mobile} />
-                  </div>
-                )}
-                {logo?.desktop && (
-                  <div className="hidden sm:block relative">
-                    <SimpleImage {...logo?.desktop} />
-                  </div>
-                )}
-              </Link>
-            </div>
+            {logo && (
+              <div className="flex items-center flex-0">
+                <Link
+                  href={`/${language}`}
+                  className="inline-block relative"
+                  aria-label="Homepage"
+                >
+                  {logo?.mobile && (
+                    <div className="sm:hidden relative">
+                      <SimpleImage {...logo?.mobile} />
+                    </div>
+                  )}
+                  {logo?.desktop && (
+                    <div className="hidden sm:block relative">
+                      <SimpleImage {...logo?.desktop} />
+                    </div>
+                  )}
+                </Link>
+              </div>
+            )}
 
             <div className="flex-1">
               {/* main menu */}

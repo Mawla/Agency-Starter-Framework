@@ -61,7 +61,7 @@ export const LanguageSwitch = ({
         </ul>
       </noscript>
 
-      <RadixNavigationMenu.Trigger className="group flex items-center gap-2 text-md font-bold mr-10 whitespace-nowrap hover:underline">
+      <RadixNavigationMenu.Trigger className="group flex items-center gap-2 text-[14px] font-bold mr-10 whitespace-nowrap hover:underline">
         <IconLoader icon="globe" className="w-4 h-4" />
         {language.toUpperCase()}
         <IconLoader icon="chevrondown" className="w-4 h-4" />
