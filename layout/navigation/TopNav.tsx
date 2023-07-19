@@ -51,7 +51,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             "fixed z-50 top-0 left-0 right-0",
             "w-full",
             "transform transition-transform duration-500",
-            "backdrop-blur-[25px]",
+            "bg-opacity-90 backdrop-blur-[25px]",
             {
               ["-translate-y-full ease-[cubic-bezier(0.2,0.07,0.38,1)]"]:
                 !showNav,
