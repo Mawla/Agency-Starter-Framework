@@ -206,6 +206,7 @@ export function formatSafelist({
 
   // safelist all these classes for each breakpoint
   const safelistWithBreakpoints = safelist.reduce((acc, className) => {
+    acc.push(className);
     Object.keys(defaultTheme.screens).forEach((screen) => {
       acc.push(`${screen}:${className}`);
     });
