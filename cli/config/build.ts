@@ -115,6 +115,10 @@ export function formatColors(colors: { name: string; value: string }[]) {
     acc[formattedName] = value;
     return acc;
   }, {} as ConfigType["theme"]["colors"]);
+
+  if (!formattedColors.white) formattedColors.white = "#ffffff";
+  if (!formattedColors.black) formattedColors.black = "#000000";
+
   return formattedColors;
 }
 

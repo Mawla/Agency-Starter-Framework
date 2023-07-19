@@ -3,8 +3,6 @@ import { isDarkColor } from "./helpers/utils/color";
 import { ColorType, FontType, FontWeightType } from "./types";
 
 export const COLORS = {
-  white: "#ffffff",
-  black: "#000000",
   ...engineConfig.theme.colors,
 };
 
