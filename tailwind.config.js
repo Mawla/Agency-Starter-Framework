@@ -1,4 +1,4 @@
-const customTheme = require("./_theme");
+const engineConfig = require("./engine.config");
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
@@ -16,16 +16,16 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: [...(customTheme.safelist || [])],
+  safelist: [...(engineConfig.safelist || [])],
   theme: {
     fontFamily: {
-      ...(customTheme.theme.fontFamily || {}),
+      ...(engineConfig.theme.fontFamily || {}),
     },
     fontSize: {
-      ...(customTheme.theme.fontSize || {}),
+      ...(engineConfig.theme.fontSize || {}),
     },
     fontWeight: {
-      ...(customTheme.theme.fontWeight || {}),
+      ...(engineConfig.theme.fontWeight || {}),
     },
     screens: {
       "2xs": "375px",
@@ -40,7 +40,7 @@ module.exports = {
       black: "black",
       current: "currentColor",
       gray: colors.gray,
-      ...(customTheme.theme.colors || {}),
+      ...(engineConfig.theme.colors || {}),
     },
     extend: {
       maxWidth: {

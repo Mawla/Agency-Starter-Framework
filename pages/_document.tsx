@@ -39,7 +39,7 @@ class MyDocument extends Document {
             crossOrigin="crossOrigin"
           />
 
-          <link rel="stylesheet" href="/_theme.css" />
+          <link rel="stylesheet" href="/engine.styles.css" />
 
           <link
             rel="preload"

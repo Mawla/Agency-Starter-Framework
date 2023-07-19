@@ -54,5 +54,5 @@ Session.vim
 production-*
 development-*
 
-_theme.js
-public/_theme.css
+engine.config.js
+public/engine.styles.css

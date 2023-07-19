@@ -1,27 +1,27 @@
-import customTheme from "./_theme";
+import engineConfig from "./engine.config";
 import { isDarkColor } from "./helpers/utils/color";
 import { ColorType, FontType, FontWeightType } from "./types";
 
 export const COLORS = {
-  ...customTheme.theme.colors,
+  ...engineConfig.theme.colors,
 };
 
 export const FONTS = {
-  ...Object.keys(customTheme.theme.fontFamily).reduce((acc, size) => {
+  ...Object.keys(engineConfig.theme.fontFamily).reduce((acc, size) => {
     acc[size] = size;
     return acc;
   }, {} as Record<string, string>),
 };
 
 export const FONT_SIZES = {
-  ...Object.keys(customTheme.theme.fontSize).reduce((acc, size) => {
+  ...Object.keys(engineConfig.theme.fontSize).reduce((acc, size) => {
     acc[size] = size;
     return acc;
   }, {} as Record<string, string>),
 };
 
 export const FONT_WEIGHTS = {
-  ...Object.keys(customTheme.theme.fontWeight).reduce((acc, size) => {
+  ...Object.keys(engineConfig.theme.fontWeight).reduce((acc, size) => {
     acc[size] = size;
     return acc;
   }, {} as Record<string, string>),

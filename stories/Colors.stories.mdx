@@ -1,4 +1,4 @@
-import customTheme from "../_theme";
+import engineConfig from "../engine.config";
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
 
 <Meta title="Framework/Colors" />
@@ -6,7 +6,7 @@ import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
 # Colors
 
 <ColorPalette>
-  {Object.entries(customTheme.theme.colors)
+  {Object.entries(engineConfig.theme.colors)
     .filter(([key, value]) => !["current", "transparent"].includes(key))
     .map(([key, value]) => {
       return (

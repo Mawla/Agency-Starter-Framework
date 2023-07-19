@@ -3,9 +3,9 @@
  */
 import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
+import { write } from "../utils/is-write";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { write } from "./get-args";
 import { getBuilderSnippet } from "./templates/builder";
 
 const fs = require("fs");

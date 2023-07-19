@@ -1,9 +1,9 @@
 import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
+import { write } from "../utils/is-write";
 import { prettierFile } from "../utils/prettier-file";
 import { sortLines } from "../utils/sort-lines";
 import { formatName } from "./format-name";
-import { write } from "./get-args";
 
 const fs = require("fs");
 

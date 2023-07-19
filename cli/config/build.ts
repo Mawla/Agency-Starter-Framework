@@ -1,3 +1,5 @@
+import { write } from "../utils/is-write";
+
 const PicoSanity = require("picosanity");
 const fs = require("fs").promises;
 const defaultTheme = require("tailwindcss/defaultTheme");
@@ -208,12 +210,17 @@ export default async function generateTheme() {
   const theme = await getTheme();
 
   await fs.writeFile(
-    `${__dirname}/../../_theme.js`,
-    `export default ${JSON.stringify(theme, null, 2)}`,
+    `${__dirname}/../../engine.config.js`,
+    `// NOTE: This file should not be edited
+    
+export default ${JSON.stringify(theme, null, 2)}`,
   );
 
   // write stylesheets to file
-  await fs.writeFile(`${__dirname}/../../public/_theme.css`, theme.stylesheets);
+  await fs.writeFile(
+    `${__dirname}/../../public/engine.styles.css`,
+    theme.stylesheets,
+  );
 }
 
-generateTheme();
+if (write) generateTheme();

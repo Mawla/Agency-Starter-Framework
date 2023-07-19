@@ -1,7 +1,7 @@
-import customTheme from "../_theme";
+import engineConfig from "../engine.config";
 import { Meta, Typeset } from "@storybook/addon-docs";
 
-export const fontSize = Object.entries(customTheme.theme.fontSize)
+export const fontSize = Object.entries(engineConfig.theme.fontSize)
   .map(([key, value]) => {
     value = Array.isArray(value) ? value[0] : value;
     if (typeof value === "number") {
@@ -24,8 +24,8 @@ export const fontSize = Object.entries(customTheme.theme.fontSize)
 # Typography
 
 <div>
-  {Object.entries(customTheme.theme.fontFamily).map(([fontName, fontValue]) =>
-    Object.entries(customTheme.theme.fontWeight).map(
+  {Object.entries(engineConfig.theme.fontFamily).map(([fontName, fontValue]) =>
+    Object.entries(engineConfig.theme.fontWeight).map(
       ([weightName, weightValue]) => (
         <div key={fontName + weightName}>
           <h2>
