@@ -33,13 +33,15 @@ export const IconLoader = ({
   const [data, setData] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!icon) return;
-
     async function getIcon() {
-      const svg = await getClient(false)?.fetch(`
+      if (!icon) return;
+
+      const svg = await getClient(false)?.fetch(
+        `
         *[_id == 'config_icons'][0] {
           "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
-        }.icon`);
+        }.icon`.replace(/\s/g, ""),
+      );
 
       if (!svg) return;
       if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
