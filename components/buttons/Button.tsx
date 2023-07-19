@@ -61,7 +61,7 @@ export type ButtonProps = {
 export const Button = (props: ButtonProps) => {
   if (props.href && isInternalLink(props.href)) {
     return (
-      <Link href={props.href} locale={props.language}>
+      <Link href={props.href} locale={props.language} showExternalIcon={false}>
         <ButtonInner {...props} as="span" />
       </Link>
     );
@@ -103,7 +103,7 @@ const ButtonInner = ({
   } = {};
 
   if (target === "_blank") {
-    icon = "external-link";
+    icon = "externallink";
     iconPosition = "after";
   }
 

@@ -1,7 +1,3 @@
-import {
-  BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-} from "../../components/block/background.options";
 import { demoImage } from "../../stories/content";
 import { Footer, FooterProps } from "./Footer";
 import { Meta } from "@storybook/react";
@@ -18,7 +14,7 @@ export default {
 const socials: FooterProps["socials"] = [
   {
     label: "Facebook",
-    icon: "external-link",
+    icon: "externallink",
     href: "https://www.facebook.com",
   },
 ];

@@ -41,8 +41,8 @@ const DEMO_CONTENT = {
         ].map((item, index) => (
           <li key={index} className="!pl-0 !relative">
             <IconLoader
-              icon="check-circle"
-              className="absolute left-0 -translate-x-[calc(100%+.75em)] top-[.25em] w-[1em] h-[1em] text-current !mt-0"
+              icon="check"
+              className="absolute left-0 -translate-x-[calc(100%+.75em)] translate-y-1/3 w-[1em] h-[1em] text-current !mt-0"
             />
             <span>{item}</span>
           </li>

@@ -71,7 +71,7 @@ export const IconLoader = ({
       <Element
         role="img"
         aria-hidden="true"
-        aria-label={[title, description].filter(Boolean).join(", ")}
+        aria-label={[title, description, icon].filter(Boolean).join(", ")}
         className={className}
         style={style}
       />
@@ -81,7 +81,7 @@ export const IconLoader = ({
     <Element
       role="img"
       aria-hidden="true"
-      aria-label={[title, description].filter(Boolean).join(", ")}
+      aria-label={[title, description, icon].filter(Boolean).join(", ")}
       className={cx(className, color && textClasses[color])}
       dangerouslySetInnerHTML={{ __html: data }}
       style={style}
