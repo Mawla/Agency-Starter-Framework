@@ -109,7 +109,7 @@ export const Navigation = ({
           buttons={buttons}
           open={mobileNavIsOpen}
           onOpenChange={setMobileNavIsOpen}
-          logo={logo?.mobile}
+          theme={theme}
         />
       )}
     </div>

@@ -1,39 +1,37 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
-import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { backgroundClasses, textClasses } from "../../theme";
 import { ImageType } from "../../types";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { NavigationProps } from "./Navigation";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
-
-const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
-    ),
-);
+import React from "react";
 
 export type MobileNavProps = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  logo?: ImageType;
 } & NavigationProps;
 
 export const MobileNav = ({
   items,
   buttons,
   open,
-  logo,
+  theme,
   onOpenChange,
 }: MobileNavProps) => {
   return (
-    <div className={cx("radix-dialog", { ["hidden"]: !open })}>
+    <div
+      className={cx(
+        "radix-dialog",
+        { ["hidden"]: !open },
+        theme?.block?.text && textClasses[theme?.block?.text],
+      )}
+    >
       <RadixDialog.Root onOpenChange={onOpenChange} open={open}>
         <RadixDialog.Overlay className="relative">
-          <div className="fixed inset-0 bg-black/10 w-screen h-screen z-50" />
+          <div className="fixed inset-0 bg-black/20 w-screen h-screen z-50" />
         </RadixDialog.Overlay>
         <RadixDialog.Content className="z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen">
           <div className="h-full">
@@ -41,21 +39,17 @@ export const MobileNav = ({
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="z-[60] py-3 px-3 text-gray-500 hover:text-black bg-white hover:bg-gray-100 transition-colors absolute top-2 right-2">
-                <IconLoader
-                  icon="close"
-                  className="text-current w-6 h-6 block"
-                />
+              <RadixDialog.Close className="z-[60] py-3 px-3 absolute top-2 right-2">
+                <IconLoader icon="close" className="w-6 h-6 block" />
               </RadixDialog.Close>
 
-              <Link
-                href="/"
-                className="inline-block absolute left-5 top-4 md:top-5 z-[60]"
+              <RadixNavigationMenu.Root
+                className={cx(
+                  "h-full overflow-y-auto overflow-scrolling-touch select-none shadow-2xl text-xl",
+                  theme?.block?.background &&
+                    backgroundClasses[theme?.block?.background],
+                )}
               >
-                {logo && <ResponsiveImage {...logo} />}
-              </Link>
-
-              <RadixNavigationMenu.Root className="h-full overflow-y-auto overflow-scrolling-touch bg-white select-none shadow-2xl text-xl">
                 {Boolean(items?.length) && (
                   <RadixNavigationMenu.List className="pt-20 px-2">
                     {items?.map(
@@ -63,27 +57,27 @@ export const MobileNav = ({
                         <RadixNavigationMenu.Item key={label}>
                           <details
                             open={current}
-                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-gray-100 bg-white transition-colors duration-75"
+                            className="mt-0.5 py-3 px-4 group"
                           >
                             <summary className="list-none relative">
-                              {href ? (
-                                <Link
-                                  href={href}
-                                  locale={language}
-                                  className="hover:underline text-xl font-bold text-gray-500"
-                                >
-                                  {label}
-                                </Link>
-                              ) : (
-                                <span className="block font-bold text-gray-500">
-                                  {label}
-                                </span>
-                              )}
+                              <span className="uppercase font-bold">
+                                {href ? (
+                                  <Link
+                                    href={href}
+                                    locale={language}
+                                    className="hover:underline"
+                                  >
+                                    {label}
+                                  </Link>
+                                ) : (
+                                  <span className="block">{label}</span>
+                                )}
+                              </span>
 
                               {Boolean(children?.length) && (
                                 <IconLoader
                                   icon="chevron"
-                                  className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
+                                  className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 transition-transform duration-75 group-open:rotate-180"
                                 />
                               )}
                             </summary>
@@ -98,9 +92,9 @@ export const MobileNav = ({
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "text-md text-gray-900 hover:underline relative",
+                                            "text-md hover:underline relative",
                                             {
-                                              ["text-action-500"]: current,
+                                              ["underline"]: current,
                                             },
                                           )}
                                         >
@@ -135,15 +129,22 @@ export const MobileNav = ({
                               "bg-action-500",
                               "hover:underline underline-offset-4",
                               "flex items-center gap-2",
-                              "text-white rounded-full text-md font-bold",
-                              "py-[10px] pl-4 pr-3",
+                              "rounded-full text-md",
                               "whitespace-nowrap",
+                              theme?.buttons?.background &&
+                                backgroundClasses[theme?.buttons?.background],
+                              theme?.buttons?.text &&
+                                textClasses[theme?.buttons?.text],
+                              {
+                                ["py-[10px] pl-4 pr-3 rounded-full"]:
+                                  theme?.buttons?.background,
+                              },
                             )}
                           >
                             <span>{button.label}</span>
                             <IconLoader
                               icon={button.icon}
-                              className="inline text-current transform -translate-y-px w-4 h-4"
+                              className="inline transform -translate-y-px w-4 h-4"
                             />
                           </Link>
                         )}
@@ -151,7 +152,7 @@ export const MobileNav = ({
                     ))}
                 </RadixNavigationMenu.List>
 
-                <div className="h-16 bg-white" />
+                <div className="h-16" />
               </RadixNavigationMenu.Root>
             </div>
           </div>
