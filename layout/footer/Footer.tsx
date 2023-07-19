@@ -16,6 +16,7 @@ export type FooterProps = {
     items: { label?: string; href?: string; current?: boolean }[];
   }[];
   copyright?: string;
+  info?: string;
   legal?: string;
   legalLinks?: { label?: string; href?: string }[];
   logo?: { mobile?: ImageType; desktop?: ImageType };
@@ -25,73 +26,76 @@ export const Footer = ({
   socials,
   links,
   copyright = "©",
+  info,
   legal,
   legalLinks,
   logo,
 }: FooterProps) => {
   return (
     <footer>
-      <Wrapper theme={{ space: { top: "none", bottom: "sm" } }}>
+      <Wrapper
+        theme={{ space: { top: "sm", bottom: "sm" } }}
+        className="text-[14px]"
+      >
         <FooterBreadcrumb />
-        <div className="flex flex-col xl:flex-row gap-8">
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-x-8 md:gap-x-8 md:gap-y-10 flex-grow">
+
+        <div className="grid grid-cols-12 gap-10 lg:gap-5">
+          <div className="col-span-12 lg:col-span-4 flex flex-col gap-4">
+            {logo && (
+              <div>
+                <FooterLogo mobile={logo?.mobile} desktop={logo?.desktop} />
+              </div>
+            )}
+
+            {info && <p>{info}</p>}
+
+            {Boolean(socials?.length) && (
+              <ul className="flex gap-4 md:gap-6 items-center">
+                {socials?.map(({ label, href, icon }) => (
+                  <li key={label}>
+                    {href && (
+                      <Link
+                        href={href}
+                        className="block w-7 h-7 overflow-hidden"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <IconLoader icon={icon} />
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* links */}
+          <div className="col-span-12 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
             {links?.map(({ title, ...rest }) => (
               <FooterMenu key={title} title={title} {...rest} />
             ))}
           </div>
         </div>
 
-        <div className="mt-10 md:mt-[100px] text-md text-gray-500">
-          <div className="flex gap-10 flex-wrap">
-            <div className="flex gap-3 md:gap-10 flex-col md:flex-row flex-wrap">
-              {logo && (
-                <div className="translate-y-1">
-                  <FooterLogo mobile={logo?.mobile} desktop={logo?.desktop} />
-                </div>
-              )}
-
-              {(legal || copyright) && (
-                <p className="text-gray-900 text-sm leading-relaxed">
-                  {copyright && <strong className="block">{copyright}</strong>}
-                  {legal && <span className="block">{legal}</span>}
-                </p>
-              )}
-            </div>
-
-            <div className="flex-1">
-              {(Boolean(socials?.length) || Boolean(legalLinks?.length)) && (
-                <ul className="flex md:justify-end gap-4 md:gap-6 items-center">
-                  {legalLinks?.map(({ label, href }) => (
-                    <li
-                      key={label}
-                      className="border-r border-gray-200 pr-4 md:pr-6"
-                    >
-                      {href && (
-                        <Link href={href} className="text-gray-900">
-                          {label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-
-                  {socials?.map(({ label, href, icon }) => (
-                    <li key={label}>
-                      {href && (
-                        <Link
-                          href={href}
-                          className="block w-7 h-7 overflow-hidden text-gray-500"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <IconLoader icon={icon} />
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+        <div className="flex flex-col gap-2 md:items-center mt-10 pt-10 border-t border-black/10">
+          <div className="flex gap-4 leading-relaxed">
+            {copyright && <p className="font-medium ">{copyright}</p>}
+            {legal && <p>{legal}</p>}
           </div>
+
+          {Boolean(legalLinks?.length) && (
+            <ul className="flex gap-5 items-center text-[12px] leading-relaxed">
+              {legalLinks?.map(({ label, href }) => (
+                <li key={label}>
+                  {href && (
+                    <Link href={href} className="hover:underline">
+                      {label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </Wrapper>
     </footer>

@@ -26,6 +26,7 @@ export type FooterType = {
   links: FooterItemType[];
   socials: FooterSocialsItemProps[];
   legal?: string;
+  info?: string;
   legalLinks?: FooterItemType["items"];
   logo?: FooterProps["logo"];
 };
@@ -40,8 +41,9 @@ export const getFooterQuery = (language: LanguageType) => groq`
       "mobile": ${getImageQuery("mobile")},
       "desktop": ${getImageQuery("desktop")},
     },
-    "copyright": copyright,
-    "legal": legal,
+    copyright,
+    legal,
+    info,
     "links": links[] { 
       title, 
       "href": link ${buttonQuery}.href,

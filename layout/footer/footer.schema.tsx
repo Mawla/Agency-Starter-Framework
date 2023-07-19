@@ -61,6 +61,8 @@ export default defineType({
       name: "links",
       title: "Links",
       type: "array",
+      description: "Up to 4 lists of links.",
+      validation: (Rule) => Rule.max(4),
       of: [
         defineArrayMember({
           type: "object",
@@ -152,11 +154,19 @@ export default defineType({
       name: "copyright",
       title: "Copyright",
       type: "string",
+      description: "Copyright notice",
     }),
     defineField({
       name: "legal",
       title: "Legal",
       type: "string",
+      description: "Additional legal info",
+    }),
+    defineField({
+      name: "info",
+      title: "Info",
+      type: "string",
+      description: "Additional info placed below the footer logo.",
     }),
     defineField({
       name: "legalLinks",
