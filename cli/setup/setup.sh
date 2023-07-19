@@ -70,6 +70,7 @@ echo "" >> .env.development
 echo "\033[0;36m-\033[0m Add localhost CORS origin to Sanity"
 sanity cors add http://localhost:3000 --credentials
 sanity cors add http://localhost:3333 --credentials
+sanity cors add http://localhost:6006 --credentials
 
 sanity cors add https://$(echo $vercelProjectName).vercel.app --credentials
 sanity cors add https://*$(echo $vercelProjectName).vercel.app --credentials
