@@ -1,22 +1,32 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { ImageType } from "../../types";
 import { LanguageSwitch } from "./LanguageSwitch";
-import { Logo } from "./Logo";
 import { NavigationProps } from "./Navigation";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    ),
+);
 
 export type MobileNavProps = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  logo?: ImageType;
 } & NavigationProps;
 
 export const MobileNav = ({
   items,
   buttons,
   open,
+  logo,
   onOpenChange,
 }: MobileNavProps) => {
   return (
@@ -42,7 +52,7 @@ export const MobileNav = ({
                 href="/"
                 className="inline-block absolute left-5 top-4 md:top-5 z-[60]"
               >
-                <Logo />
+                {logo && <ResponsiveImage {...logo} />}
               </Link>
 
               <RadixNavigationMenu.Root className="h-full overflow-y-auto overflow-scrolling-touch bg-white select-none shadow-2xl text-xl">

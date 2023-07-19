@@ -2,9 +2,11 @@ import {
   buttonFieldsQuery,
   buttonQuery,
 } from "../../components/buttons/button.query";
+import { getImageQuery, imageQuery } from "../../components/images/image.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
 import { IconType } from "../../types";
+import { FooterProps } from "./Footer";
 import groq from "groq";
 
 export type FooterItemType = {
@@ -25,6 +27,7 @@ export type FooterType = {
   socials: FooterSocialsItemProps[];
   legal?: string;
   legalLinks?: FooterItemType["items"];
+  logo?: FooterProps["logo"];
 };
 
 export const getFooterQuery = (language: LanguageType) => groq`
@@ -33,6 +36,10 @@ export const getFooterQuery = (language: LanguageType) => groq`
 } {
   sitemap,
   "footer": *[_id == "footer__i18n_${language}"][0] {
+    logo {
+      "mobile": ${getImageQuery("mobile")},
+      "desktop": ${getImageQuery("desktop")},
+    },
     "copyright": copyright,
     "legal": legal,
     "links": links[] { 

@@ -157,5 +157,22 @@ export default defineType({
         },
       ],
     },
+    defineField({
+      name: "logo",
+      title: "Logo",
+      type: "object",
+      fields: [
+        defineField({
+          name: "mobile",
+          title: "Mobile",
+          type: "image",
+        }),
+        defineField({
+          name: "desktop",
+          title: "Desktop",
+          type: "image",
+        }),
+      ],
+    }),
   ],
 });

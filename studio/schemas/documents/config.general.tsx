@@ -75,12 +75,12 @@ export default defineType({
           preview: {
             select: {
               title: "title",
-              subtitle: "id",
+              id: "id",
             },
-            prepare({ title, subtitle }) {
+            prepare({ title, id }) {
               return {
                 title,
-                subtitle,
+                subtitle: `/${id}`,
                 media: () => <Geography weight="thin" size={20} />,
               };
             },

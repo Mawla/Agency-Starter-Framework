@@ -48,7 +48,7 @@ const SlugPage = ({
   if (!page || router.isFallback) {
     return (
       <>
-        <Navigation items={[]} buttons={[]} />
+        <Navigation items={[]} buttons={[]} logo={navigation?.logo} />
         <Wrapper>
           <LoadingAnimation />
         </Wrapper>

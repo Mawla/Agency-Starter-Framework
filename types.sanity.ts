@@ -87,8 +87,6 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "config.seo",
   "config.translations",
   "faq.item",
-  "footer",
-  "navigation",
   "person",
   "testimonials.item",
 );

@@ -1,7 +1,7 @@
 import { Wrapper } from "../../components/block/Wrapper";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
-import { IconType } from "../../types";
+import { IconType, ImageType } from "../../types";
 import { FooterBreadcrumb } from "./Footer.Breadcrumb";
 import { FooterLogo } from "./Footer.Logo";
 import { FooterMenu } from "./Footer.Menu";
@@ -18,6 +18,7 @@ export type FooterProps = {
   copyright?: string;
   legal?: string;
   legalLinks?: { label?: string; href?: string }[];
+  logo?: { mobile?: ImageType; desktop?: ImageType };
 };
 
 export const Footer = ({
@@ -26,6 +27,7 @@ export const Footer = ({
   copyright = "©",
   legal,
   legalLinks,
+  logo,
 }: FooterProps) => {
   return (
     <footer>
@@ -42,9 +44,11 @@ export const Footer = ({
         <div className="mt-10 md:mt-[100px] text-md text-gray-500">
           <div className="flex gap-10 flex-wrap">
             <div className="flex gap-3 md:gap-10 flex-col md:flex-row flex-wrap">
-              <div className="translate-y-1 block">
-                <FooterLogo />
-              </div>
+              {logo && (
+                <div className="translate-y-1">
+                  <FooterLogo mobile={logo?.mobile} desktop={logo?.desktop} />
+                </div>
+              )}
 
               {(legal || copyright) && (
                 <p className="text-gray-900 text-sm leading-relaxed">

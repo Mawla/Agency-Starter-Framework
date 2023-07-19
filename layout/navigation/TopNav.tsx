@@ -1,8 +1,8 @@
 import { widthClasses } from "../../components/block/width.options";
 import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
+import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PageContext } from "../../context/PageContext";
-import { Logo } from "./Logo";
 import { NavigationProps } from "./Navigation";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
@@ -15,6 +15,13 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
     ),
 );
 
+const SimpleImage = lazy<ComponentType<SimpleImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "SimpleImage" */ "../../components/images/SimpleImage"
+    ),
+);
+
 export type TopNavProps = {
   showNav?: boolean;
   onHamburgerClick?: () => void;
@@ -22,7 +29,7 @@ export type TopNavProps = {
 } & NavigationProps;
 
 export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
-  ({ items, buttons, showNav = true, onHamburgerClick, navHeight }, navRef) => {
+  ({ items, buttons, showNav = true, onHamburgerClick, logo }, navRef) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const { language } = useContext(PageContext);
 
@@ -56,10 +63,19 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             <div className="flex-1 flex items-center">
               <Link
                 href={`/${language}`}
-                className="inline-block"
+                className="inline-block relative"
                 aria-label="Homepage"
               >
-                <Logo />
+                {logo?.mobile && (
+                  <div className="sm:hidden relative">
+                    <SimpleImage {...logo?.mobile} />
+                  </div>
+                )}
+                {logo?.desktop && (
+                  <div className="hidden sm:block relative">
+                    <SimpleImage {...logo?.desktop} />
+                  </div>
+                )}
               </Link>
             </div>
 
