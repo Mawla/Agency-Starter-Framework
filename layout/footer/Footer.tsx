@@ -14,7 +14,7 @@ export type FooterProps = {
   socials: {
     label?: string;
     href?: string;
-    icon: string;
+    icon?: string;
   }[];
   links: {
     title?: string;
