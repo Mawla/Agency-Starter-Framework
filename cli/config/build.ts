@@ -24,6 +24,7 @@ export type GroqThemeType = {
   }[];
   fontWeight: { name: string; value: string }[];
   stylesheets: string[];
+  icons: { predefined: {}; rest: [] };
 };
 
 export type ConfigType = {
@@ -47,6 +48,7 @@ export type ConfigType = {
   };
   stylesheets: string;
   safelist: string[];
+  icons: string[];
 };
 
 /**
@@ -74,10 +76,19 @@ export async function getConfig(): Promise<ConfigType> {
   ${theme.stylesheets?.join("\n\n")}
   `;
 
+  // get languages
   const languages: LanguagesListType = await client.fetch(`
   *[_id == "config_general"][0] {
     languages[] { id, title }
   }.languages`);
+
+  // get icon names
+  let icons = await client.fetch(`
+  *[_id == 'config_icons'][0] {
+    predefined,
+    "rest": rest[].slug.current
+  }`);
+  icons = [...Object.keys(icons.predefined), ...icons.rest];
 
   return {
     languages,
@@ -89,6 +100,7 @@ export async function getConfig(): Promise<ConfigType> {
     },
     safelist,
     stylesheets,
+    icons,
   };
 }
 

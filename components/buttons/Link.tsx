@@ -43,7 +43,7 @@ export const Link = ({
         rel={rel}
       >
         {children}
-        {target === "_blank" && showExternalIcon && (
+        {target === "_blank" && showExternalIcon !== false && (
           <IconLoader
             icon="externallink"
             className="ml-1 inline-block w-4 h-4"
@@ -56,7 +56,7 @@ export const Link = ({
   return (
     <a href={href} className={className} target={target} rel={rel}>
       {children}
-      {target === "_blank" && showExternalIcon && (
+      {target === "_blank" && showExternalIcon !== false && (
         <IconLoader icon="externallink" className="ml-1 inline-block w-4 h-4" />
       )}
     </a>
