@@ -1,3 +1,4 @@
+import { LanguagesListType } from "../../languages";
 import { write } from "../utils/is-write";
 
 const PicoSanity = require("picosanity");
@@ -25,7 +26,8 @@ export type GroqThemeType = {
   stylesheets: string[];
 };
 
-export type ThemeType = {
+export type ConfigType = {
+  languages: LanguagesListType;
   theme: {
     colors: Record<string, string>;
     fontFamily: Record<string, string[]>;
@@ -51,8 +53,9 @@ export type ThemeType = {
  * Get published theme from Sanity config.theme
  */
 
-export async function getTheme(): Promise<ThemeType> {
-  const theme: GroqThemeType = await client.fetch(`*[_id == "config_theme"][0] {
+export async function getConfig(): Promise<ConfigType> {
+  const theme: GroqThemeType = await client.fetch(`
+  *[_id == "config_theme"][0] {
     colors[] { name, value },
     fontFamily[] { name, value },
     fontSize[] { name, size, lineHeight, letterSpacing, fontWeight },
@@ -71,7 +74,13 @@ export async function getTheme(): Promise<ThemeType> {
   ${theme.stylesheets?.join("\n\n")}
   `;
 
+  const languages: LanguagesListType = await client.fetch(`
+  *[_id == "config_general"][0] {
+    languages[] { id, title }
+  }.languages`);
+
   return {
+    languages,
     theme: {
       colors,
       fontFamily,
@@ -93,7 +102,7 @@ export function formatColors(colors: { name: string; value: string }[]) {
     const formattedName = name.replace(/ /g, "-").toLowerCase();
     acc[formattedName] = value;
     return acc;
-  }, {} as ThemeType["theme"]["colors"]);
+  }, {} as ConfigType["theme"]["colors"]);
   return formattedColors;
 }
 
@@ -131,7 +140,7 @@ export function formatFontWeight(weights: { name: string; value: string }[]) {
         .replace(/'/g, "")
         .trim();
       return acc;
-    }, {} as ThemeType["theme"]["fontWeight"]);
+    }, {} as ConfigType["theme"]["fontWeight"]);
   return formattedFontWeights;
 }
 
@@ -148,7 +157,7 @@ export function formatFontWeight(weights: { name: string; value: string }[]) {
 
 export function formatFontSize(
   fontSizes: GroqThemeType["fontSize"],
-): ThemeType["theme"]["fontSize"] {
+): ConfigType["theme"]["fontSize"] {
   const formattedFontSizes = fontSizes?.reduce((acc, fontSize) => {
     const { name, size, lineHeight, letterSpacing, fontWeight } = fontSize;
     const formattedName = name.replace(/ /g, "-").toLowerCase();
@@ -157,7 +166,7 @@ export function formatFontSize(
       return { ...acc, [formattedName]: size };
     }
 
-    const obj: ThemeType["theme"]["fontSize"][0][1] = {};
+    const obj: ConfigType["theme"]["fontSize"][0][1] = {};
     if (lineHeight) obj["lineHeight"] = lineHeight;
     if (letterSpacing) obj["letterSpacing"] = letterSpacing;
     if (fontWeight) obj["fontWeight"] = fontWeight;
@@ -165,7 +174,7 @@ export function formatFontSize(
     acc[formattedName] = [size, obj];
 
     return acc;
-  }, {} as ThemeType["theme"]["fontSize"]);
+  }, {} as ConfigType["theme"]["fontSize"]);
 
   return formattedFontSizes;
 }
@@ -180,7 +189,7 @@ export function formatSafelist({
   fontFamily = {},
   fontSize = {},
   fontWeight = {},
-}: ThemeType["theme"]) {
+}: ConfigType["theme"]) {
   function clean(str: string) {
     return str.replace(/ /g, "-").toLowerCase();
   }
@@ -206,21 +215,21 @@ export function formatSafelist({
   return safelistWithBreakpoints;
 }
 
-export default async function generateTheme() {
-  const theme = await getTheme();
+export default async function buildConfig() {
+  const config = await getConfig();
 
   await fs.writeFile(
     `${__dirname}/../../engine.config.js`,
     `// NOTE: This file should not be edited
     
-export default ${JSON.stringify(theme, null, 2)}`,
+export default ${JSON.stringify(config, null, 2)}`,
   );
 
   // write stylesheets to file
   await fs.writeFile(
     `${__dirname}/../../public/engine.styles.css`,
-    theme.stylesheets,
+    config.stylesheets,
   );
 }
 
-if (write) generateTheme();
+if (write) buildConfig();

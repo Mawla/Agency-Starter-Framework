@@ -1,6 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
-import { Gear } from "@vectopus/atlas-icons-react";
+import { Gear, Geography } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule } from "sanity";
 
@@ -59,6 +59,51 @@ export default defineType({
         }),
       description:
         "The website domain without slash and protocol, e.g google.com. Used for the canonical url.",
+    }),
+    defineField({
+      name: "languages",
+      title: "Languages",
+      type: "array",
+      description:
+        "Languages used on the website. The first language is the default language.",
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          name: "language",
+          title: "Language",
+          type: "object",
+          preview: {
+            select: {
+              title: "title",
+              subtitle: "id",
+            },
+            prepare({ title, subtitle }) {
+              return {
+                title,
+                subtitle,
+                media: () => <Geography weight="thin" size={20} />,
+              };
+            },
+          },
+          fields: [
+            defineField({
+              name: "id",
+              title: "ID",
+              type: "string",
+              description:
+                'Language identifier for the language, e.g. "en" for English.',
+              validation: (Rule: StringRule) => Rule.required(),
+            }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+              description: 'Name for the language, e.g. "Español" for Spanish.',
+              validation: (Rule: StringRule) => Rule.required(),
+            }),
+          ],
+        },
+      ],
     }),
   ],
 });
