@@ -25,6 +25,7 @@ import navigation from "../../layout/navigation/navigation.schema";
 import { translateFields } from "../utils/language/field-translation";
 import configCMS from "./documents/config.cms";
 import configGeneral from "./documents/config.general";
+import configIcons from "./documents/config.icons";
 import configIntegrations from "./documents/config.integrations";
 import configSeo from "./documents/config.seo";
 import configSocial from "./documents/config.social";
@@ -80,6 +81,7 @@ export const schemaTypes = [
     configIntegrations,
     configSocial,
     configTheme,
+    configIcons,
     copypaste,
     dialogForm,
     dialogRichText,

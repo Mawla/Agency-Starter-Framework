@@ -41,8 +41,40 @@ export const ICONS = {
   twitter: "twitter.svg",
   youtube: "youtube.svg",
 };
-
 export type IconType = keyof typeof ICONS;
+
+export const PREDEFINED_ICONS = {
+  arrow: {
+    title: "Arrow",
+    description: "Used in buttons",
+  },
+  check: {
+    title: "Check",
+    description: "Used in check lists",
+  },
+  chevrondown: {
+    title: "Chevron down",
+    description: "Used in dropdowns, accordions",
+  },
+  close: {
+    title: "Close",
+    description: "Used to close modals",
+  },
+  externallink: {
+    title: "External link",
+    description: "Used for external links",
+  },
+  lock: {
+    title: "Lock",
+    description: "Used for password protected pages",
+  },
+  menu: {
+    title: "Menu",
+    description: "Used to open the mobile menu",
+  },
+};
+
+export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;
 
 export type ColorType = keyof typeof COLORS;
 export type FontWeightType = keyof typeof FONT_WEIGHTS;
