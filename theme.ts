@@ -1,50 +1,31 @@
-import theme from "./_theme";
+import customTheme from "./_theme";
 import { isDarkColor } from "./helpers/utils/color";
 import { ColorType, FontType, FontWeightType } from "./types";
 
 export const COLORS = {
-  white: "#fff",
-  black: "#000000",
-  ...theme.colors,
+  ...customTheme.theme.colors,
 };
 
 export const FONTS = {
-  ...Object.keys(theme.fonts).reduce((acc, size) => {
+  ...Object.keys(customTheme.theme.fontFamily).reduce((acc, size) => {
     acc[size] = size;
     return acc;
   }, {} as Record<string, string>),
 };
 
 export const FONT_SIZES = {
-  ...Object.keys(theme.fontSizes).reduce((acc, size) => {
+  ...Object.keys(customTheme.theme.fontSize).reduce((acc, size) => {
     acc[size] = size;
     return acc;
   }, {} as Record<string, string>),
 };
 
 export const FONT_WEIGHTS = {
-  ...Object.keys(theme.fontWeights).reduce((acc, size) => {
+  ...Object.keys(customTheme.theme.fontWeight).reduce((acc, size) => {
     acc[size] = size;
     return acc;
   }, {} as Record<string, string>),
 };
-
-Object.entries(COLORS).map(([key, value]) => {
-  const colorKey = key as ColorType;
-  if (/^#[0-9A-F]{3}$/i.test(value)) {
-    return (COLORS[colorKey] = value
-      .split("")
-      .map((hex) => `${hex}${hex}`)
-      .join("")
-      .substring(1));
-  }
-  if (!/^#([0-9A-F]{3}){1,2}$/i.test(value)) {
-    console.error(
-      `Found a color in colors.ts (${value}) that is not formatted as a hexadecimal. Make sure all colors are formatted like #ffffff.`,
-    );
-    COLORS[colorKey] = "#ff0000";
-  }
-});
 
 export const backgroundClasses: Record<ColorType, string> = Object.entries(
   COLORS,

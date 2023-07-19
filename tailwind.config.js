@@ -16,17 +16,16 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // Be sure to add all colours in the safelist
   safelist: [...(customTheme.safelist || [])],
   theme: {
     fontFamily: {
-      ...(customTheme.fonts || {}),
+      ...(customTheme.theme.fontFamily || {}),
     },
     fontSize: {
-      ...(customTheme.fontSizes || {}),
+      ...(customTheme.theme.fontSize || {}),
     },
     fontWeight: {
-      ...(customTheme.fontWeights || {}),
+      ...(customTheme.theme.fontWeight || {}),
     },
     screens: {
       "2xs": "375px",
@@ -41,7 +40,7 @@ module.exports = {
       black: "black",
       current: "currentColor",
       gray: colors.gray,
-      ...(customTheme.colors || {}),
+      ...(customTheme.theme.colors || {}),
     },
     extend: {
       maxWidth: {

@@ -42,8 +42,8 @@ export default defineType({
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
     defineField({
-      name: "fonts",
-      title: "Fonts",
+      name: "fontFamily",
+      title: "Font families",
       type: "array",
       description:
         "Fonts used in the theme. Be sure to include at least 'sans'",
@@ -84,7 +84,7 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "fontWeights",
+      name: "fontWeight",
       title: "Font weights",
       type: "array",
       description: "Fonts weights used in the theme.",
@@ -127,7 +127,7 @@ export default defineType({
     }),
 
     defineField({
-      name: "fontSizes",
+      name: "fontSize",
       title: "Font sizes",
       type: "array",
       description:

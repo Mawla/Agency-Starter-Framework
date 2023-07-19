@@ -1,14 +1,12 @@
-import { COLORS } from "../theme";
+import customTheme from "../_theme";
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
-import defaultConfig from "tailwindcss/defaultConfig";
-import resolveConfig from "tailwindcss/resolveConfig";
 
 <Meta title="Framework/Colors" />
 
 # Colors
 
 <ColorPalette>
-  {Object.entries(COLORS)
+  {Object.entries(customTheme.theme.colors)
     .filter(([key, value]) => !["current", "transparent"].includes(key))
     .map(([key, value]) => {
       return (
