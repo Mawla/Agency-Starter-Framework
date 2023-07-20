@@ -106,7 +106,7 @@ export async function getConfig(): Promise<ConfigType> {
     predefined,
     "rest": rest[].slug.current
   }`);
-  icons = [...Object.keys(icons.predefined), ...icons.rest];
+  icons = [...Object.keys(icons?.predefined || {}), ...(icons?.rest || [])];
 
   return {
     languages,

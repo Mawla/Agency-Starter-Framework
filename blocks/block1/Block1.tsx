@@ -96,7 +96,7 @@ export const Block1 = ({
           {features && (
             <div className="pt-8 my-7 border-t border-gray-200">
               <Text
-                size={theme?.intro?.size || "lg"}
+                size={theme?.features?.size || "lg"}
                 color={theme?.features?.color}
               >
                 <PortableText content={features as any} />

@@ -150,7 +150,7 @@ const ButtonInner = ({
         wordAfter?: string;
       }) => (
         <span className=" whitespace-nowrap break-all">
-          {wordBefore && ` ${wordBefore}`}
+          {wordBefore && ` ${wordBefore} `}
           <IconLoader
             icon={icon}
             className={cx(
@@ -158,7 +158,7 @@ const ButtonInner = ({
               buttonIconSizeClasses[size],
             )}
           />
-          {wordAfter && `${wordAfter} `}
+          {wordAfter && ` ${wordAfter}`}
         </span>
       )
     : null;

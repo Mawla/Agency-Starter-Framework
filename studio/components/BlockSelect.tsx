@@ -10,6 +10,7 @@ import {
   Box,
   useToast,
 } from "@sanity/ui";
+import { StarBookmark } from "@vectopus/atlas-icons-react";
 import { nanoid } from "nanoid";
 import React, { ComponentType, useCallback, useEffect, useState } from "react";
 import { FormSetPatch, set, useClient, useFormValue, useSchema } from "sanity";
@@ -156,9 +157,9 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
        */
 
       const options: (OptionType | null)[] = [
+        ...presets,
         ...blockTypes,
         ...studioTypes,
-        ...presets,
       ].map(
         ({
           _type,
@@ -204,7 +205,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
         _type.startsWith("studio."),
       );
       const firstPresetIndex = filteredOptions.findIndex(({ _type }) =>
-        Boolean(_type == "page.preset"),
+        Boolean(_type !== "page.preset"),
       );
 
       if (firstStudioBlockIndex > -1) {
@@ -370,26 +371,27 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
                 </Box>
               )}
 
-              {!option.image && option.icon && (
+              {!option.image && (
                 <Box paddingY={1}>
                   <div
                     style={{
                       fontSize: 0,
-                      border: "1px solid lightgray",
                       padding: 6,
                     }}
                   >
-                    {option.icon}
+                    {option.icon || <StarBookmark weight="thin" size={20} />}
                   </div>
                 </Box>
               )}
 
-              <Box flex={1} paddingX={2}>
+              <Box flex={1} padding={2}>
                 <Stack space={2}>
                   <Text size={2}>{option.label}</Text>
-                  <Text size={1} muted>
-                    {option.description}
-                  </Text>
+                  {option.description && (
+                    <Text size={1} muted>
+                      {option.description}
+                    </Text>
+                  )}
                 </Stack>
               </Box>
 
