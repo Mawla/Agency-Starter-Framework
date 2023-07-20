@@ -15,23 +15,12 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
+    import { WrapperProps } from "../../components/block/Wrapper";
+    import { BlockThemeType } from "../../components/block/block.options";
+    import { TitleProps } from "../../components/title/Title";
+    import { ColorType, ImageType } from "../../types";
     import cx from "classnames";
-    import {  WrapperProps } from '../../components/block/Wrapper';
-    import { BackgroundColorType } from '../../components/block/background.options';
-    import { HtmlTextNodeType } from '../../types';
-    import { SpaceType } from '../../components/block/spacing.options';
-    import { backgroundClasses } from "../../theme";
-    ${render(
-      fields,
-      "title",
-      `import { TitleFontType, TitleWeightType } from "../../components/title/title.options";`,
-    )}
-    import { 
-      ${render(fields, "title", "TitleSizeType,")} 
-      ${render(fields, "title", "TitleColorType,")} 
-      ${render(fields, "intro", "IntroColorType, IntroSizeType,")} 
-      AlignType
-    } from './${lowerName}.options';
+    import React, { ComponentType, lazy } from "react";
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -43,6 +32,7 @@ export const getReactComponentSnippet = ({
       "title",
       `
     import { TitleProps } from "../../components/title/Title";
+    import { TitleThemeType } from "../../components/title/title.options";";
     const Title = lazy<ComponentType<TitleProps>>(
       () => 
       import(/* webpackChunkName: "Title" */ '../../components/title/Title') 
@@ -55,6 +45,7 @@ export const getReactComponentSnippet = ({
       "intro",
       `
     import { TextProps } from "../../components/text/Text";
+    import { TextThemeType } from "../../components/text/text.options";";
     const Text = lazy<ComponentType<TextProps>>(
       () => 
         import(/* webpackChunkName: "Text" */ '../../components/text/Text') 
@@ -95,45 +86,16 @@ export const getReactComponentSnippet = ({
 
     export type ${pascalName}Props = {
       theme?: {
-        block?: {
-          background?: BackgroundColorType;
-          space?: SpaceType;
-          align?: AlignType;
-        }
-        ${render(
-          fields,
-          "title",
-          `
-        title?: {
-          color?: TitleColorType;
-          size?: TitleSizeType;
-          level?: HtmlTextNodeType
-          font?: TitleFontType;
-          weight?: TitleWeightType;
-        },`,
-        )}
-        ${render(
-          fields,
-          "intro",
-          `
-        intro?: {
-          color?: IntroColorType;
-          size?: IntroSizeType;
-        },`,
-        )}
+        block?: BlockThemeType;
+        ${render(fields, "title", `title?: TitleThemeType;`)}
+        ${render(fields, "intro", `intro?: TextThemeType`)}
       };
       ${render(fields, "title", "title?: string;")}
       ${render(fields, "intro", "intro?: React.ReactNode;")}
       ${render(fields, "image", "image?: ImageType;")}
       ${render(fields, "buttons", "buttons?: ButtonProps[];")}
       ${render(fields, "items", "items?: { _key?:string;title?:string }[];")}
-    };
-
-    const alignClasses:Record<AlignType, string> = {
-      left: "text-left",
-      center: "text-center mx-auto",
-      right: "text-right ml-auto",
-    };    
+    }; 
 
     export const ${pascalName} = ({ 
       theme,
@@ -149,7 +111,7 @@ export const getReactComponentSnippet = ({
             ...theme?.block
           }}
         >
-        <div className={cx('max-w-3xl', alignClasses[theme?.block?.align || "center"])}>
+        <div className={cx('max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
           
           ${render(
             fields,
