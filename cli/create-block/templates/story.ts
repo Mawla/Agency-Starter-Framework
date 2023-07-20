@@ -9,14 +9,12 @@ type Props = {
 
 export const getStorySnippet = ({ pascalName, lowerName, fields }: Props) => {
   return `
-    import { demoImage } from "../../stories/content";
     import { ${pascalName}, ${pascalName}Props } from "./${pascalName}";
     import { TextSizeType, TEXT_SIZE_OPTIONS } from "../../components/text/text.options";
     import { TitleSizeType, TITLE_SIZE_OPTIONS } from "../../components/title/title.options";
     import { demoImage } from "../../stories/content";
     import { COLORS } from "../../theme";
     import { ColorType, HorizontalAlignType, HORIZONTAL_ALIGN_OPTIONS } from "../../types";
-    import { Block2 } from "./Block2";
     import { Meta } from "@storybook/react";
     import React from "react";
     
