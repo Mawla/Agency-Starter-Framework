@@ -56,6 +56,12 @@ export type ConfigType = {
  */
 
 export async function getConfig(): Promise<ConfigType> {
+  // get languages
+  const languages: LanguagesListType = await client.fetch(`
+  *[_id == "config_general"][0] {
+    languages[] { id, title }
+  }.languages`);
+
   const theme: GroqThemeType = await client.fetch(`
   *[_id == "config_theme"][0] {
     colors[] { name, value },
@@ -64,6 +70,21 @@ export async function getConfig(): Promise<ConfigType> {
     fontWeight[] { name, value },
     "stylesheets": stylesheets[] { value }.value,
   }`);
+
+  if (!theme) {
+    return {
+      languages,
+      theme: {
+        colors: {},
+        fontFamily: {},
+        fontWeight: {},
+        fontSize: {},
+      },
+      safelist: [],
+      stylesheets: "",
+      icons: [],
+    };
+  }
 
   const colors = formatColors(theme.colors || {});
   const fontFamily = formatFontFamily(theme.fontFamily || {});
@@ -75,12 +96,6 @@ export async function getConfig(): Promise<ConfigType> {
 
   ${theme.stylesheets?.join("\n\n")}
   `;
-
-  // get languages
-  const languages: LanguagesListType = await client.fetch(`
-  *[_id == "config_general"][0] {
-    languages[] { id, title }
-  }.languages`);
 
   // get icon names
   let icons = await client.fetch(`
