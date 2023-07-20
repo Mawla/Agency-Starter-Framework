@@ -21,7 +21,7 @@ export const getSchemaSnippet = ({
   return `
   import { SPACE_OPTIONS } from "../../components/block/spacing.options";
   import { optionsToList } from "../../studio/utils/fields/optionsToList";
-  ${render(fields, "title", `import { HEADING_LEVELS } from "../../types";`)}
+  ${render(fields, "title", `import { HTML_TEXT_NODES } from "../../types";`)}
   ${render(
     fields,
     "title",
@@ -251,7 +251,7 @@ export const getSchemaSnippet = ({
                   name: "level",
                   type: "select",
                   options: {
-                    list: optionsToList(HEADING_LEVELS),
+                    list: optionsToList(HTML_TEXT_NODES),
                   },
                 },
                 {

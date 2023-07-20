@@ -73,7 +73,7 @@ export type TextElement =
   | "cite"
   | "blockquote";
 
-export const HEADING_LEVELS = {
+export const HTML_TEXT_NODES = {
   h1: "Heading 1",
   h2: "Heading 2",
   h3: "Heading 3",
@@ -83,9 +83,9 @@ export const HEADING_LEVELS = {
   span: "Span",
 };
 
-export type HeadingLevelType = keyof typeof HEADING_LEVELS;
+export type HeadingLevelType = keyof typeof HTML_TEXT_NODES;
 export type HeadingLevelsType = {
-  [key in keyof typeof HEADING_LEVELS]: string;
+  [key in keyof typeof HTML_TEXT_NODES]: string;
 };
 
 export type ImageType = {

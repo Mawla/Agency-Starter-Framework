@@ -80,7 +80,7 @@ export const Block9 = ({
           <div className="mb-6">
             <Title
               size={theme?.title?.size || "4xl"}
-              as={theme?.title?.level}
+              as={theme?.title?.as}
               color={theme?.title?.color}
               font={theme?.title?.font}
               weight={theme?.title?.weight}

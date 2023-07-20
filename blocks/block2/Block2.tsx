@@ -92,7 +92,7 @@ export const Block2 = ({
           <div className="mb-4 md:mb-6">
             <Title
               size={theme?.title?.size || "3xl"}
-              as={theme?.title?.level}
+              as={theme?.title?.as}
               color={theme?.title?.color}
               font={theme?.title?.font}
               weight={theme?.title?.weight}
@@ -172,7 +172,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
             <Title
               size={theme?.title?.size || "lg"}
               color={theme?.title?.color}
-              as={theme?.title?.level || "h3"}
+              as={theme?.title?.as || "h3"}
             >
               {title}
             </Title>

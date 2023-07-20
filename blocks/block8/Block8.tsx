@@ -96,7 +96,7 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
             >
               <Title
                 size={theme?.title?.size || "4xl"}
-                as={theme?.title?.level}
+                as={theme?.title?.as}
                 color={theme?.title?.color}
                 font={theme?.title?.font}
                 weight={theme?.title?.weight}
@@ -134,7 +134,7 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
                     key={item._key}
                     align={theme?.block?.align}
                     {...item}
-                    blockTitleLevel={theme?.title?.level}
+                    blockTitleLevel={theme?.title?.as}
                   />
                 );
               })}

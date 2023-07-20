@@ -1,5 +1,5 @@
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { HEADING_LEVELS } from "../../types";
+import { HTML_TEXT_NODES } from "../../types";
 import {
   TITLE_COLOR_OPTIONS,
   TITLE_FONT_OPTIONS,
@@ -36,10 +36,10 @@ export const defaultTitleTheme = defineField({
         },
       },
       {
-        name: "level",
+        name: "as",
         type: "select",
         options: {
-          list: optionsToList(HEADING_LEVELS),
+          list: optionsToList(HTML_TEXT_NODES),
         },
       },
       {

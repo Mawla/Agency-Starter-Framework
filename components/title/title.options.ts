@@ -39,7 +39,7 @@ export const titleSizeClasses: Record<TitleSizeType, string> = Object.keys(
 export type TitleThemeType = {
   color?: TitleColorType;
   size?: TitleSizeType;
-  level?: HeadingLevelType;
+  as?: HeadingLevelType;
   font?: TitleFontType;
   weight?: TitleWeightType;
 };

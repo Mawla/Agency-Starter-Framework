@@ -85,7 +85,7 @@ export const Block6 = ({
           <div className="mb-6">
             <Title
               size={theme?.title?.size || "4xl"}
-              as={theme?.title?.level}
+              as={theme?.title?.as}
               color={theme?.title?.color}
               font={theme?.title?.font}
               weight={theme?.title?.weight}
@@ -151,7 +151,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
             <Title
               size={theme?.title?.size || "xl"}
               color={theme?.title?.color}
-              as={theme?.title?.level || "h3"}
+              as={theme?.title?.as || "h3"}
             >
               {title}
             </Title>
