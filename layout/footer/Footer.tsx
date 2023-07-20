@@ -2,12 +2,10 @@ import { Wrapper } from "../../components/block/Wrapper";
 import { SpaceType } from "../../components/block/spacing.options";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
-import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
 import { FooterBreadcrumb } from "./Footer.Breadcrumb";
 import { FooterLogo } from "./Footer.Logo";
 import { FooterMenu } from "./Footer.Menu";
-import cx from "classnames";
 import React from "react";
 
 export type FooterProps = {
@@ -78,7 +76,8 @@ export const Footer = ({
                         target="_blank"
                         showExternalIcon={false}
                       >
-                        <IconLoader icon={icon} title={label} />
+                        <span className="sr-only">{label}</span>
+                        <IconLoader icon={icon} />
                       </Link>
                     )}
                   </li>
