@@ -1,12 +1,7 @@
 import { TextProps } from "../../components/block/Text";
-import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/block/title.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
@@ -15,6 +10,11 @@ import {
   TestimonialsProps,
   TestimonialType,
 } from "../../components/testimonials/Testimonials";
+import { TitleProps } from "../../components/title/Title";
+import {
+  TitleFontType,
+  TitleWeightType,
+} from "../../components/title/title.options";
 import { HeadingLevelType } from "../../types";
 import {
   TitleSizeType,
@@ -32,7 +32,7 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
+  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
 );
 
 const Text = lazy<ComponentType<TextProps>>(

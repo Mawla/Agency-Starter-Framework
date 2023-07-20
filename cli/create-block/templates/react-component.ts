@@ -43,10 +43,10 @@ export const getReactComponentSnippet = ({
       fields,
       "title",
       `
-    import { TitleProps } from "../../components/block/Title";
+    import { TitleProps } from "../../components/title/Title";
     const Title = lazy<ComponentType<TitleProps>>(
       () => 
-      import(/* webpackChunkName: "Title" */ '../../components/block/Title') 
+      import(/* webpackChunkName: "Title" */ '../../components/title/Title') 
       );
     `,
     )}

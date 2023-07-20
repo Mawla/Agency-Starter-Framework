@@ -6,7 +6,7 @@ import {
 import {
   TITLE_SIZE_OPTIONS as ALL_TITLE_SIZE_OPTIONS,
   TITLE_COLOR_OPTIONS as ALL_TITLE_COLOR_OPTIONS,
-} from "../../components/block/title.options";
+} from "../../components/title/title.options";
 import { pick } from "../../helpers/utils/object";
 import { ALIGNMENTS } from "../../types";
 

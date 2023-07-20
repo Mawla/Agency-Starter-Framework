@@ -2,7 +2,7 @@ import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import {
   TITLE_FONT_OPTIONS,
   TITLE_WEIGHT_OPTIONS,
-} from "../../components/block/title.options";
+} from "../../components/title/title.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
 import {

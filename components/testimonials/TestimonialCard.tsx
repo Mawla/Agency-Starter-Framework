@@ -1,15 +1,15 @@
-import { TitleProps } from "../../components/block/Title";
+import { TitleProps } from "../../components/title/Title";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import { TitleColorType } from "../block/title.options";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
+import { TitleColorType } from "../title/title.options";
 import { TestimonialType } from "./Testimonials";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
+  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(

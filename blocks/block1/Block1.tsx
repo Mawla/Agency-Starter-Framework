@@ -1,14 +1,14 @@
 import { TextProps } from "../../components/block/Text";
-import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { TitleProps } from "../../components/title/Title";
 import {
   TitleFontType,
   TitleWeightType,
-} from "../../components/block/title.options";
-import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
-import { PortableTextProps } from "../../components/portabletext/PortableText";
+} from "../../components/title/title.options";
 import { HeadingLevelType } from "../../types";
 import { ImageType } from "../../types";
 import {
@@ -28,7 +28,7 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/block/Title"),
+  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
 );
 
 const Text = lazy<ComponentType<TextProps>>(

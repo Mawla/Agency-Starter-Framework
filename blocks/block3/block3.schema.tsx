@@ -1,9 +1,9 @@
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
+import { GRADIENT_OPACITY_OPTIONS } from "../../components/gradient/GradientOptions";
 import {
   TITLE_FONT_OPTIONS,
   TITLE_WEIGHT_OPTIONS,
-} from "../../components/block/title.options";
-import { GRADIENT_OPACITY_OPTIONS } from "../../components/gradient/GradientOptions";
+} from "../../components/title/title.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HEADING_LEVELS } from "../../types";
 import {

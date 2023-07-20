@@ -5,8 +5,23 @@ import React from "react";
 
 export default {
   component: Title,
-  title: "Components/Block/Title",
+  title: "Components/Title",
 } as Meta;
+
+export const Default = () => (
+  <Title
+    as="span"
+    size="lg"
+    weight="bold"
+    className="border"
+    color="red"
+    eyebrow="eyebrow"
+    eyebrowColor="black"
+    font="sans"
+  >
+    this is a title
+  </Title>
+);
 
 export const TitleExample = () => (
   <>
