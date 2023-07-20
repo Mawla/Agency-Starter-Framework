@@ -1,7 +1,7 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
-import { BACKGROUND_COLOR_OPTIONS } from "./block2.options";
+import { COLORS } from "../../theme";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { TopVerticalLayout } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -146,7 +146,7 @@ const schema = defineType({
                 name: "background",
                 type: "color",
                 options: {
-                  colors: BACKGROUND_COLOR_OPTIONS,
+                  colors: COLORS,
                 },
               },
             ],
