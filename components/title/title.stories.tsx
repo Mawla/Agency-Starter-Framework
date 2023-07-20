@@ -14,7 +14,7 @@ export const Default = () => (
     size="lg"
     weight="bold"
     className="border"
-    color="red"
+    color="black"
     font="sans"
   >
     this is a title
