@@ -1,10 +1,9 @@
-import { ColorType } from "../../types";
-import { Background } from "./Background";
-import { Text as TextComponent } from "./Text";
+import { Background } from "../block/Background";
 import {
   BackgroundColorType,
   BACKGROUND_COLOR_OPTIONS,
-} from "./background.options";
+} from "../block/background.options";
+import { Text as TextComponent } from "./Text";
 import {
   TextFontType,
   TextSizeType,
@@ -19,7 +18,7 @@ import React from "react";
 
 export default {
   component: TextComponent,
-  title: "Components/Block/Text",
+  title: "Components/Text",
 } as Meta;
 
 export const Text = () => (

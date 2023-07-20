@@ -1,4 +1,3 @@
-import { TextProps } from "../../components/block/Text";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
@@ -6,6 +5,7 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { TextProps } from "../../components/text/Text";
 import { TitleProps } from "../../components/title/Title";
 import {
   TitleFontType,
@@ -32,7 +32,7 @@ const Title = lazy<ComponentType<TitleProps>>(
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/block/Text"),
+  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(

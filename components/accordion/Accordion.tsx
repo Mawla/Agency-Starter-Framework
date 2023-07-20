@@ -1,9 +1,9 @@
 import { backgroundClasses, divideClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import Text from "../block/Text";
 import { BackgroundColorType } from "../block/background.options";
 import { IconLoaderProps } from "../images/IconLoader";
 import PortableText, { PortableTextProps } from "../portabletext/PortableText";
+import Text from "../text/Text";
 import { TitleColorType } from "../title/title.options";
 import * as RadixAccordion from "@radix-ui/react-accordion";
 import cx from "classnames";

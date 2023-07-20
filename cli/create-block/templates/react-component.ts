@@ -55,10 +55,10 @@ export const getReactComponentSnippet = ({
       fields,
       "intro",
       `
-    import { TextProps } from "../../components/block/Text";
+    import { TextProps } from "../../components/text/Text";
     const Text = lazy<ComponentType<TextProps>>(
       () => 
-        import(/* webpackChunkName: "Text" */ '../../components/block/Text') 
+        import(/* webpackChunkName: "Text" */ '../../components/text/Text') 
     );
 
     import { PortableTextProps } from "../../components/portabletext/PortableText";

@@ -2,7 +2,7 @@ import { BACKGROUND_COLOR_OPTIONS as ALL_BACKGROUND_COLOR_OPTIONS } from "../../
 import {
   TEXT_COLOR_OPTIONS,
   TEXT_SIZE_OPTIONS,
-} from "../../components/block/text.options";
+} from "../../components/text/text.options";
 import {
   TITLE_SIZE_OPTIONS as ALL_TITLE_SIZE_OPTIONS,
   TITLE_COLOR_OPTIONS as ALL_TITLE_COLOR_OPTIONS,
