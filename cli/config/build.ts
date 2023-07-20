@@ -75,7 +75,10 @@ export async function getConfig(): Promise<ConfigType> {
     return {
       languages,
       theme: {
-        colors: {},
+        colors: {
+          black: "#000000",
+          white: "#ffffff",
+        },
         fontFamily: {},
         fontWeight: {},
         fontSize: {},
