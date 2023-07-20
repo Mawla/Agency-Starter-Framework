@@ -21,6 +21,7 @@ export const FooterLogo = ({ mobile, desktop }: FooterLogoProps) => {
 
   return (
     <Link href={`/${language}`}>
+      <span className="sr-only">Home</span>
       {mobile && (
         <div className="sm:hidden relative">
           <SimpleImage {...mobile} />

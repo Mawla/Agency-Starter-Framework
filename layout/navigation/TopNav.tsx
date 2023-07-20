@@ -81,11 +81,8 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             {/* logo */}
             {logo && (
               <div className="flex items-center flex-0">
-                <Link
-                  href={`/${language}`}
-                  className="inline-block relative"
-                  aria-label="Homepage"
-                >
+                <Link href={`/${language}`} className="inline-block relative">
+                  <span className="sr-only">Home</span>
                   {logo?.mobile && (
                     <div className="sm:hidden relative">
                       <SimpleImage {...logo?.mobile} />

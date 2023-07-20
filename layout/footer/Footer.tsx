@@ -78,7 +78,7 @@ export const Footer = ({
                         target="_blank"
                         showExternalIcon={false}
                       >
-                        <IconLoader icon={icon} />
+                        <IconLoader icon={icon} title={label} />
                       </Link>
                     )}
                   </li>
