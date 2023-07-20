@@ -1,3 +1,4 @@
+import block0 from "../../blocks/block0/block0.schema";
 import block1 from "../../blocks/block1/block1.schema";
 import block2 from "../../blocks/block2/block2.schema";
 import block3 from "../../blocks/block3/block3.schema";
@@ -66,22 +67,23 @@ import styles from "./objects/styles";
 export const schemaTypes = [
   ...[
     block1,
-    block11,
     block10,
+    block11,
     block2,
     block3,
     block4,
     block6,
     block8,
     block9,
+    block0,
     blockPreset,
     button,
     buttongroup,
     configCMS,
+    configIcons,
     configIntegrations,
     configSocial,
     configTheme,
-    configIcons,
     copypaste,
     dialogForm,
     dialogRichText,
