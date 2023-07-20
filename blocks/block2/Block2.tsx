@@ -156,7 +156,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
   return (
     <div className="flex flex-col items-start gap-4 sm:gap-5 sm:flex-row">
       {image && (
-        <div className="bg-gray-100 rounded-full w-16 lg:w-24 flex items-center justify-center shrink-0 relative aspect-square">
+        <div className="rounded-full w-16 lg:w-24 flex items-center justify-center shrink-0 relative aspect-square">
           <ResponsiveImage {...image} fill className="absolute inset-0" />
         </div>
       )}
@@ -173,7 +173,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
           </div>
         )}
         {intro && (
-          <Text size={theme?.intro?.size || "sm"} color={theme?.intro?.color}>
+          <Text size={theme?.intro?.size || "md"} color={theme?.intro?.color}>
             <PortableText content={intro as any} />
           </Text>
         )}
