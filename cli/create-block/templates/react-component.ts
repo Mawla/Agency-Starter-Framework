@@ -17,10 +17,7 @@ export const getReactComponentSnippet = ({
 
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
-    import { TitleProps } from "../../components/title/Title";
-    import { ColorType, ImageType } from "../../types";
     import cx from "classnames";
-    import React, { ComponentType, lazy } from "react";
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -32,7 +29,7 @@ export const getReactComponentSnippet = ({
       "title",
       `
     import { TitleProps } from "../../components/title/Title";
-    import { TitleThemeType } from "../../components/title/title.options";";
+    import { TitleThemeType } from "../../components/title/title.options";
     const Title = lazy<ComponentType<TitleProps>>(
       () => 
       import(/* webpackChunkName: "Title" */ '../../components/title/Title') 
@@ -45,7 +42,7 @@ export const getReactComponentSnippet = ({
       "intro",
       `
     import { TextProps } from "../../components/text/Text";
-    import { TextThemeType } from "../../components/text/text.options";";
+    import { TextThemeType } from "../../components/text/text.options";
     const Text = lazy<ComponentType<TextProps>>(
       () => 
         import(/* webpackChunkName: "Text" */ '../../components/text/Text') 
