@@ -1,15 +1,27 @@
 import { pick } from "./helpers/utils/object";
 
 export const SCHEMAS = {
+  "block.block1": "",
+  "block.block11": "",
+  "block.block10": "",
+  "block.block2": "",
+  "block.block3": "",
+  "block.block4": "",
+  "block.block6": "",
+  "block.block8": "",
+  "block.block9": "",
   "config.cms": "",
   "config.general": "",
   "config.integrations": "",
   "config.seo": "",
   "config.social": "",
+  "config.theme": "",
+  "config.icons": "",
   "config.translations": "",
   "dialog.form": "",
   "dialog.richtext": "",
   "dialog.video": "",
+  "faq.item": "",
   "page.blog": "",
   "page.blogs": "",
   "page.casestudies": "",
@@ -31,6 +43,7 @@ export const SCHEMAS = {
   "page.tools": "",
   "page.video": "",
   "page.videos": "",
+  "testimonials.item": "",
   footer: "",
   navigation: "",
   password: "",
@@ -74,9 +87,9 @@ export const TRANSLATABLE_SCHEMAS = pick(
   "config.general",
   "config.seo",
   "config.translations",
-  "footer",
-  "navigation",
+  "faq.item",
   "person",
+  "testimonials.item",
 );
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
@@ -93,10 +106,36 @@ export const TAGGABLE_SCHEMAS = pick(
 );
 export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
 
-export const BLOCK_SCHEMAS = pick(SCHEMAS);
+export const BLOCK_SCHEMAS = pick(
+  SCHEMAS,
+  "block.block1",
+  "block.block11",
+  "block.block10",
+  "block.block2",
+  "block.block3",
+  "block.block4",
+  "block.block6",
+  "block.block8",
+  "block.block9",
+);
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
 
 export const DIALOG_SCHEMAS = pick(SCHEMAS, "dialog.richtext", "dialog.video");
 
 export type DialogSchemaName = keyof typeof DIALOG_SCHEMAS;
+
+declare module "sanity" {
+  // redeclare StringOptions; it will be merged with StringOptions in the sanity module
+  export interface StringOptions {
+    localize?: boolean;
+    max?: string | number;
+  }
+
+  export interface SlugOptions {
+    localize?: boolean;
+  }
+  export interface ObjectOptions {
+    localize?: boolean;
+  }
+}

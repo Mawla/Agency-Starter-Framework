@@ -1,3 +1,5 @@
+import { baseLanguage } from "../../languages";
+import { getStructurePath } from "../utils/desk/get-structure-path";
 import { Card, Text, Spinner } from "@sanity/ui";
 import React, { ComponentType, useEffect, useState } from "react";
 import { useClient } from "sanity";
@@ -76,7 +78,9 @@ export const PreviewIframeComponent = ({
       <iframe
         src={`${
           import.meta.env.SANITY_STUDIO_PROJECT_PATH
-        }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}`}
+        }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${
+          getStructurePath()?.language || baseLanguage
+        }`}
       />
     </div>
   );

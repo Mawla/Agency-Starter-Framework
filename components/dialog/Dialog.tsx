@@ -34,19 +34,19 @@ export const Dialog = ({
         </RadixDialog.Overlay>
         <RadixDialog.Content
           className={cx(
-            "fixed z-50 w-screen top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 max-w-90vw",
+            "fixed z-50 w-screen top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 max-w-[90vw]",
             {
-              ["max-h-75vh aspect-ratio-16-9 max-w-inner"]: mode === "video",
-              ["max-w-90vw md:max-w-75vw lg:max-w-text"]: mode === "content",
+              ["max-h-[75vh] aspect-ratio-16-9 max-w-inner"]: mode === "video",
+              ["max-w-[90vw] md:max-w-[75vw] lg:max-w-3xl"]: mode === "content",
               ["inline-flex justify-center"]: mode === "form",
             },
           )}
         >
           <div
             className={cx({
-              ["text-neutral-500 overflow-y-auto overflow-scrolling-touch filter shadow-md bg-white p-10 h-auto max-h-75vh "]:
+              ["text-gray-500 overflow-y-auto overflow-scrolling-touch filter shadow-md bg-white p-10 h-auto max-h-[75vh] "]:
                 mode === "content",
-              ["overflow-y-auto overflow-scrolling-touch h-auto max-h-75vh relative"]:
+              ["overflow-y-auto overflow-scrolling-touch h-auto max-h-[75vh] relative"]:
                 mode === "form",
             })}
           >
@@ -62,7 +62,7 @@ export const Dialog = ({
                 </RadixDialog.Description>
               )}
 
-              <RadixDialog.Close className="py-3 px-3 text-neutral-10 hover:text-neutral-900 bg-white hover:bg-neutral-100 transition-colors absolute top-0 right-0 z-10">
+              <RadixDialog.Close className="py-3 px-3 text-gray-10 hover:text-gray-900 bg-white hover:bg-gray-100 transition-colors absolute top-0 right-0 z-10">
                 <IconLoader
                   icon="close"
                   className="text-current w-8 h-8 block"

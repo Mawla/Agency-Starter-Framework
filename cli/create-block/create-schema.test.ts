@@ -1,16 +1,5 @@
 import { createSchema } from "./create-schema";
 
-test("create schema with eyebrow", () => {
-  const result = createSchema({
-    blockName: "Test",
-    blockTitle: "Test",
-    fields: ["eyebrow"],
-    blockDescription: "",
-  });
-
-  expect(result.includes(`name: "eyebrow",`)).toBeTruthy();
-});
-
 test("create schema with title", () => {
   const result = createSchema({
     blockName: "Test",

@@ -1,4 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
+import CharacterCounter from "../../components/CharacterCounter";
 import Warning from "../../components/Warning";
 import { MagnifyingGlass } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -13,6 +14,12 @@ const SEO_TITLE_FIELD = defineField({
   description: "Around 55-60 characters long.",
   validation: (Rule: any) =>
     Rule.required().warning("It's good practice adding a title for SEO."),
+  components: {
+    input: CharacterCounter,
+  },
+  options: {
+    max: "60",
+  },
 });
 
 const SEO_DESCRIPTION_FIELD = defineField({
@@ -23,6 +30,12 @@ const SEO_DESCRIPTION_FIELD = defineField({
   rows: 3,
   validation: (Rule: any) =>
     Rule.required().warning("It's good practice adding a description for SEO."),
+  components: {
+    input: CharacterCounter,
+  },
+  options: {
+    max: "160",
+  },
 });
 
 const SEO_IMAGE_FIELD = defineField({
@@ -78,8 +91,14 @@ export default defineType({
       description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
-    { ...SEO_TITLE_FIELD, options: { localize: true } as any },
-    { ...SEO_DESCRIPTION_FIELD, options: { localize: true } as any },
+    {
+      ...SEO_TITLE_FIELD,
+      options: { localize: true, ...SEO_TITLE_FIELD.options } as any,
+    },
+    {
+      ...SEO_DESCRIPTION_FIELD,
+      options: { localize: true, ...SEO_DESCRIPTION_FIELD.options } as any,
+    },
     { ...SEO_IMAGE_FIELD, options: { localize: true } as any },
   ],
 });

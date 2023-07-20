@@ -1,7 +1,10 @@
+import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
-import { ICONS } from "../../types";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { COLORS } from "../../theme";
 import { SchemaName } from "../../types.sanity";
+import { ALIGN_OPTIONS } from "./navigation.options";
 import {
   Chain,
   JustifyAll,
@@ -58,6 +61,10 @@ export default defineType({
   icon: () => <JustifyAll weight="thin" size={18} />,
   initialValue: {},
   options: { singleton: true },
+  groups: [
+    { name: "content", title: "Content", default: true },
+    { name: "theme", title: "Theme" },
+  ],
   preview: {
     prepare() {
       return {
@@ -70,6 +77,7 @@ export default defineType({
       name: "items",
       title: "Items",
       type: "array",
+      group: "content",
       of: [
         {
           type: "object",
@@ -125,6 +133,7 @@ export default defineType({
       name: "buttons",
       title: "Buttons",
       type: "array",
+      group: "content",
       of: [
         {
           type: "object",
@@ -149,13 +158,141 @@ export default defineType({
               title: "Icon",
               type: "string",
               components: { input: IconPicker },
-              options: {
-                icons: ICONS,
-              } as any,
             },
           ],
         },
       ],
     },
+    defineField({
+      name: "logo",
+      title: "Logo",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({
+          name: "mobile",
+          title: "Mobile",
+          type: "image",
+        }),
+        defineField({
+          name: "desktop",
+          title: "Desktop",
+          type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "theme",
+      title: "Theme",
+      type: "object",
+      group: "theme",
+      fields: [
+        defineField({
+          name: "block",
+          title: "Block",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                options: {
+                  colors: BACKGROUND_COLOR_OPTIONS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "border",
+                type: "color",
+                title: "Bottom border",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "menu",
+          title: "Menu",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "text",
+                type: "color",
+                title: "Link color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "align",
+                type: "select",
+                options: {
+                  list: optionsToList(ALIGN_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "submenu",
+          title: "Submenu",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                title: "Background color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                title: "Link color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "buttons",
+          title: "Buttons",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+                title: "Background color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+              {
+                name: "text",
+                type: "color",
+                title: "Link color",
+                options: {
+                  colors: COLORS,
+                },
+              },
+            ],
+          },
+        }),
+      ],
+    }),
   ],
 });

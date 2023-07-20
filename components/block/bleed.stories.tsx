@@ -8,33 +8,33 @@ export default {
 } as Meta;
 
 export const BleedNone = () => (
-  <div className="bg-neutral-100">
+  <div className="bg-gray-100">
     <BleedComponent bleed="none">
-      <div className="bg-neutral-900 p-10" />
+      <div className="bg-gray-900 p-10" />
     </BleedComponent>
   </div>
 );
 
 export const BleedSmall = () => (
-  <div className="bg-neutral-100">
+  <div className="bg-gray-100">
     <BleedComponent bleed="sm">
-      <div className="bg-neutral-900 p-10" />
+      <div className="bg-gray-900 p-10" />
     </BleedComponent>
   </div>
 );
 
 export const BleedDefault = () => (
-  <div className="bg-neutral-100">
+  <div className="bg-gray-100">
     <BleedComponent bleed="md">
-      <div className="bg-neutral-900 p-10" />
+      <div className="bg-gray-900 p-10" />
     </BleedComponent>
   </div>
 );
 
 export const BleedLarge = () => (
-  <div className="bg-neutral-100">
+  <div className="bg-gray-100">
     <BleedComponent bleed="lg">
-      <div className="bg-neutral-900 p-10" />
+      <div className="bg-gray-900 p-10" />
     </BleedComponent>
   </div>
 );

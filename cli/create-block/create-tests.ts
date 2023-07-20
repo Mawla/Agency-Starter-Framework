@@ -1,7 +1,7 @@
 import { AnswersType } from ".";
+import { write } from "../utils/is-write";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { write } from "./get-args";
 import { getTestSnippet } from "./templates/tests";
 
 /**

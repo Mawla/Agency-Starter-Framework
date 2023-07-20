@@ -1,7 +1,11 @@
-import { backgroundClasses, borderClasses, textClasses } from "../../colors";
 import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
 import { LanguageType } from "../../languages";
-import { IconType } from "../../types";
+import {
+  backgroundClasses,
+  borderClasses,
+  textClasses,
+  weightClasses,
+} from "../../theme";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
@@ -13,6 +17,11 @@ import {
   ButtonTextColorType,
   BackgroundColorType,
   ButtonBorderColorType,
+  buttonSizeClasses,
+  buttonAlignClasses,
+  buttonSpaceClasses,
+  buttonIconOnlySizeClasses,
+  buttonIconSizeClasses,
 } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -27,7 +36,7 @@ export type ButtonProps = {
   as?: "button" | "a" | "div" | "span" | "submit";
   compact?: boolean;
   href?: string;
-  icon?: IconType;
+  icon?: string;
   iconPosition?: ButtonIconPositionType;
   label?: string;
   onClick?: (e: React.MouseEvent) => void;
@@ -49,40 +58,10 @@ export type ButtonProps = {
   language?: LanguageType;
 };
 
-const sizeClasses: Record<ButtonSizeType, string> = {
-  sm: "text-base md:text-lg",
-  md: "text-lg md:text-xl",
-};
-const spaceClasses: Record<ButtonSizeType, string> = {
-  sm: "px-4 py-2 md:px-4",
-  md: "px-5 py-[9px] md:px-6",
-};
-
-const iconSizeClasses: Record<ButtonSizeType, string> = {
-  sm: "w-5 h-5",
-  md: "w-5 h-5",
-};
-
-const iconOnlySizeClasses: Record<ButtonSizeType, string> = {
-  sm: "w-10 h-10 md:w-10 md:h-10",
-  md: "w-10 h-10 md:w-11 md:h-11",
-};
-
-const alignClasses: Record<ButtonAlignType, string> = {
-  left: "justify-start",
-  center: "justify-center",
-  right: "justify-end",
-};
-
-const weightClasses: Record<ButtonWeightType, string> = {
-  regular: "font-normal",
-  medium: "font-medium",
-};
-
 export const Button = (props: ButtonProps) => {
   if (props.href && isInternalLink(props.href)) {
     return (
-      <Link href={props.href} locale={props.language}>
+      <Link href={props.href} locale={props.language} showExternalIcon={false}>
         <ButtonInner {...props} as="span" />
       </Link>
     );
@@ -124,7 +103,7 @@ const ButtonInner = ({
   } = {};
 
   if (target === "_blank") {
-    icon = "external-link";
+    icon = "externallink";
     iconPosition = "after";
   }
 
@@ -174,7 +153,10 @@ const ButtonInner = ({
           {wordBefore && ` ${wordBefore}`}
           <IconLoader
             icon={icon}
-            className={cx("inline-block translate-y-1", iconSizeClasses[size])}
+            className={cx(
+              "inline-block translate-y-1",
+              buttonIconSizeClasses[size],
+            )}
           />
           {wordAfter && `${wordAfter} `}
         </span>
@@ -211,7 +193,7 @@ const ButtonInner = ({
       >
         <span
           className={cx(sharedClasses, {
-            [iconOnlySizeClasses[size]]: !compact,
+            [buttonIconOnlySizeClasses[size]]: !compact,
           })}
         >
           {ButtonIcon && <ButtonIcon />}
@@ -232,11 +214,11 @@ const ButtonInner = ({
       <span
         className={cx(
           sharedClasses,
-          sizeClasses[size],
-          alignClasses[align],
+          buttonSizeClasses[size],
+          buttonAlignClasses[align],
           { ["w-full flex"]: stretch },
           { ["rounded-full"]: round },
-          { [spaceClasses[size]]: !compact },
+          { [buttonSpaceClasses[size]]: !compact },
         )}
       >
         <span className="no-underline text-left break-words">

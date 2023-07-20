@@ -1,3 +1,4 @@
+import { widthClasses } from "../components/block/width.options";
 import { IconLoaderProps } from "../components/images/IconLoader";
 import { getClient } from "../helpers/sanity/server";
 import { LanguageType } from "../languages";
@@ -14,6 +15,7 @@ import {
   SitemapItemType,
   SitemapType,
 } from "../queries/sitemap.query";
+import cx from "classnames";
 import type { GetStaticProps } from "next";
 import Link from "next/link";
 import React, { ComponentType, lazy } from "react";
@@ -43,7 +45,7 @@ export default function Sitemap({
       config={config}
       sitemapItem={sitemapItem}
     >
-      <ul className="max-w-inner mx-auto py-20">
+      <ul className={cx("mx-auto py-20", widthClasses.inner)}>
         {sitemap
           .filter(({ title, path }) => title && path)
           .map(({ title, path, _id }: SitemapItemType) => {
@@ -58,7 +60,7 @@ export default function Sitemap({
                 }}
               >
                 <IconLoader
-                  icon="chevron"
+                  icon="chevrondown"
                   className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
                 />
                 {path && title && (
@@ -94,14 +96,14 @@ export const getStaticProps: GetStaticProps = async ({
   const language = locale as LanguageType;
 
   // fetch config
-  const config: ConfigType = await getClient(isPreviewMode).fetch(
+  const config = (await getClient(isPreviewMode).fetch(
     getConfigQuery(language),
-  );
+  )) as ConfigType;
 
   // fetch navigation
-  const navigation: NavigationType = await getClient(isPreviewMode).fetch(
+  const navigation = (await getClient(isPreviewMode).fetch(
     getNavigationQuery(language),
-  );
+  )) as NavigationType;
 
   // fetch page
   const sitemapItem: SitemapItemType = {
@@ -117,14 +119,14 @@ export const getStaticProps: GetStaticProps = async ({
   });
 
   // fetch navigation
-  const footer: FooterType = await getClient(isPreviewMode).fetch(
+  const footer = (await getClient(isPreviewMode).fetch(
     getFooterQuery(language),
-  );
+  )) as FooterType;
 
   // fetch sitemap
-  let sitemap: SitemapType = await getClient(isPreviewMode).fetch(
+  let sitemap = (await getClient(isPreviewMode).fetch(
     getSitemapQuery(),
-  );
+  )) as SitemapType;
   sitemap = sitemap
     ?.filter((item: any) => Boolean(item.path))
     ?.filter(

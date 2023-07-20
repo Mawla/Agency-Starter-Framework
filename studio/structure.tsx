@@ -253,6 +253,11 @@ export const structure = (
       }).child(
         list(S, { title: "Collections" }).items([
           documentList(S, { type: "person", title: "People" }),
+          documentList(S, {
+            type: "faq.item",
+            title: "Frequently Asked Questions",
+          }),
+          documentList(S, { type: "testimonials.item", title: "Testimonials" }),
         ]),
       ),
       S.divider(),
@@ -272,6 +277,8 @@ export const structure = (
             id: "config_translations",
             type: "config.translations",
           }),
+          singleton(S, { id: "config_theme", type: "config.theme" }),
+          singleton(S, { id: "config_icons", type: "config.icons" }),
           singleton(S, { id: "secret.config_cms", type: "config.cms" }),
         ]),
       ),

@@ -1,6 +1,6 @@
 import { Autocomplete, Card, Text, Flex } from "@sanity/ui";
-import React, { ComponentType, useCallback, useState } from "react";
-import { set } from "sanity";
+import React, { ComponentType, useCallback, useEffect, useState } from "react";
+import { set, useClient } from "sanity";
 
 type OptionType = {
   value: string;
@@ -9,20 +9,42 @@ type OptionType = {
 };
 
 const IconPicker: ComponentType<any> = (props) => {
-  const { value, onChange, onFocus, onBlur, schemaType }: any = props;
+  const { value, onChange, onFocus, onBlur }: any = props;
+  const client = useClient({ apiVersion: "vX" });
 
-  if (!schemaType?.options?.icons)
-    return <div>Missing options.icons in the schema</div>;
-
-  const items: OptionType[] = Object.entries(schemaType?.options?.icons).map(
-    ([key, value]) => ({
-      label: key,
-      value: key,
-      icon: key,
-    }),
-  );
   const [state, setState] = useState<"default" | "loading">("default");
+  const [items, setItems] = useState<OptionType[]>([]);
+
   const currentIcon = items.find((option) => value === option.value)?.icon;
+
+  useEffect(() => {
+    async function getItems() {
+      const icons = await client.fetch(`
+        *[_id == 'config_icons'][0] {
+          predefined,
+          rest[]
+        }`);
+
+      if (!icons) return;
+
+      const allIcons: OptionType[] = [
+        ...Object.entries(icons?.predefined || {}).map(([key, value]) => ({
+          label: key,
+          value: key,
+          icon: value,
+        })),
+        ...(icons?.rest || {}).map((item: any) => ({
+          label: item.title,
+          value: item.slug.current,
+          icon: item.icon,
+        })),
+      ];
+
+      setItems(allIcons);
+    }
+
+    getItems();
+  }, []);
 
   const onSelect = useCallback(
     (newValue: string) => {
@@ -44,12 +66,7 @@ const IconPicker: ComponentType<any> = (props) => {
       renderOption={(option) => (
         <Card as="button">
           <Flex padding={1} gap={3} align="center">
-            <img
-              style={{ width: 30, height: 30 }}
-              src={`${import.meta.env.SANITY_STUDIO_PROJECT_PATH}icons/${
-                schemaType?.options?.icons[option.icon]
-              }`}
-            />
+            <span dangerouslySetInnerHTML={{ __html: option.icon }}></span>
             <Text size={2}>{option.label}</Text>
           </Flex>
         </Card>
@@ -57,12 +74,7 @@ const IconPicker: ComponentType<any> = (props) => {
       value={value}
       icon={
         currentIcon ? (
-          <img
-            style={{ width: 16, height: 16 }}
-            src={`${import.meta.env.SANITY_STUDIO_PROJECT_PATH}icons/${
-              schemaType?.options?.icons[currentIcon]
-            }`}
-          />
+          <span dangerouslySetInnerHTML={{ __html: currentIcon }}></span>
         ) : null
       }
       id="autocomplete"

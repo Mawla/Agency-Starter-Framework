@@ -1,12 +1,12 @@
-import { textClasses } from "../../colors";
-import { IconType, ICONS, ColorType } from "../../types";
+import { getClient } from "../../helpers/sanity/server";
+import { textClasses } from "../../theme";
+import { ColorType } from "../../types";
 import cx from "classnames";
 import * as DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 
 export type IconLoaderProps = {
-  icon?: IconType;
+  icon?: string;
   className?: string;
   color?: ColorType;
   as?: React.ElementType;
@@ -26,61 +26,52 @@ export const IconLoader = ({
   title,
   description,
   style,
-  domain = "/",
-  path = "icons/",
   removeColors = true,
 }: IconLoaderProps) => {
   const Element = as;
-  const [isMounted, setIsMounted] = useState(false);
-  const {
-    isLoading,
-    error,
-    data,
-  }: {
-    isLoading?: boolean;
-    error?: Error | null;
-    data?: string;
-  } = useQuery(
-    icon || "",
-    () => {
-      if (!icon) return null;
-      return fetch(`${domain}${path}${ICONS[icon]}`).then(async (res) => {
-        if (res.status !== 200) return "";
-
-        const html = await res.text();
-        if (!html.startsWith("<svg") && !html.startsWith("<?xml")) return "";
-
-        let cleanHTML = DOMPurify?.sanitize?.(html); //
-        cleanHTML = cleanUpAttributes(cleanHTML);
-        if (removeColors) {
-          cleanHTML = replaceColorsWithCurrentColor(cleanHTML);
-        }
-        return cleanHTML;
-      });
-    },
-    { enabled: !icon ? false : Boolean(icon) && Boolean(ICONS[icon]) },
-  );
+  const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
+  const [data, setData] = useState<string | null>(null);
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    async function getIcon() {
+      if (!icon) return;
+
+      const svg = await getClient(false)?.fetch(
+        `
+        *[_id == 'config_icons'][0] {
+          "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
+        }.icon`.replace(/\s/g, ""),
+      );
+
+      if (!svg) return;
+      if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
+
+      let cleanSVG = DOMPurify?.sanitize?.(svg); //
+      cleanSVG = cleanUpAttributes(cleanSVG);
+      if (removeColors) {
+        cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
+      }
+
+      if (cleanSVG) {
+        setState("loaded");
+        setData(cleanSVG);
+        return;
+      }
+
+      setState("error");
+    }
+
+    getIcon();
+  }, [icon]);
 
   if (!icon) return null;
-  if (!ICONS[icon]) return null;
 
-  if (error) {
-    console.log(`Error loading icon ${icon}: ${error?.message}`);
-    return null;
-  }
-
-  if (!isMounted) return null;
-
-  if (isLoading || error)
+  if (state === "loading" || state === "error")
     return (
       <Element
         role="img"
         aria-hidden="true"
-        aria-label={[title, description].filter(Boolean).join(", ")}
+        aria-label={[title, description, icon].filter(Boolean).join(", ")}
         className={className}
         style={style}
       />
@@ -90,7 +81,7 @@ export const IconLoader = ({
     <Element
       role="img"
       aria-hidden="true"
-      aria-label={[title, description].filter(Boolean).join(", ")}
+      aria-label={[title, description, icon].filter(Boolean).join(", ")}
       className={cx(className, color && textClasses[color])}
       dangerouslySetInnerHTML={{ __html: data }}
       style={style}

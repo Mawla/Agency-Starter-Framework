@@ -1,7 +1,7 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
+import { backgroundClasses, textClasses } from "../../theme";
 import { LanguageSwitch } from "./LanguageSwitch";
-import { Logo } from "./Logo";
 import { NavigationProps } from "./Navigation";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
@@ -17,35 +17,39 @@ export const MobileNav = ({
   items,
   buttons,
   open,
+  theme,
   onOpenChange,
 }: MobileNavProps) => {
   return (
-    <div className={cx("radix-dialog", { ["hidden"]: !open })}>
+    <div
+      className={cx(
+        "radix-dialog",
+        { ["hidden"]: !open },
+        theme?.block?.text && textClasses[theme?.block?.text],
+      )}
+    >
       <RadixDialog.Root onOpenChange={onOpenChange} open={open}>
-        <RadixDialog.Overlay className="relative z-60">
-          <div className="fixed inset-0 bg-neutral-500 w-screen h-screen" />
+        <RadixDialog.Overlay className="relative">
+          <div className="fixed inset-0 bg-black/20 w-screen h-screen z-50" />
         </RadixDialog.Overlay>
-        <RadixDialog.Content className="z-60 fixed top-0 right-0 w-screen max-w-sm h-screen">
+        <RadixDialog.Content className="z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen">
           <div className="h-full">
             <div className="h-full">
               <RadixDialog.Title className="sr-only">
                 Navigation
               </RadixDialog.Title>
-              <RadixDialog.Close className="z-60 py-3 px-3 text-neutral-500 hover:text-black bg-white hover:bg-neutral-100 transition-colors absolute top-2 right-2">
-                <IconLoader
-                  icon="close"
-                  className="text-current w-6 h-6 block"
-                />
+              <RadixDialog.Close className="z-[60] py-3 px-3 absolute top-2 right-2">
+                <IconLoader icon="close" className="w-6 h-6 block" />
               </RadixDialog.Close>
 
-              <Link
-                href="/"
-                className="inline-block absolute left-5 top-4 md:top-5 z-60"
+              <RadixNavigationMenu.Root
+                className={cx(
+                  "h-full overflow-y-auto overflow-scrolling-touch select-none shadow-2xl text-xl",
+                  theme?.block?.background
+                    ? backgroundClasses[theme?.block?.background]
+                    : "bg-white",
+                )}
               >
-                <Logo />
-              </Link>
-
-              <RadixNavigationMenu.Root className="h-full overflow-y-auto overflow-scrolling-touch bg-white select-none shadow-2xl text-xl">
                 {Boolean(items?.length) && (
                   <RadixNavigationMenu.List className="pt-20 px-2">
                     {items?.map(
@@ -53,25 +57,29 @@ export const MobileNav = ({
                         <RadixNavigationMenu.Item key={label}>
                           <details
                             open={current}
-                            className="mt-0.5 py-3 px-4 group rounded-lg open:bg-neutral-100 bg-white transition-colors duration-75"
+                            className="mt-0.5 py-3 px-4 group"
                           >
                             <summary className="list-none relative">
-                              {href ? (
-                                <Link
-                                  href={href}
-                                  locale={language}
-                                  className="hover:underline text-xl font-bold text-neutral-500"
-                                >
-                                  {label}
-                                </Link>
-                              ) : (
-                                <span className="block">{label}</span>
-                              )}
+                              <span className="uppercase font-bold">
+                                {href ? (
+                                  <Link
+                                    href={href}
+                                    locale={language}
+                                    className="hover:underline"
+                                  >
+                                    {label}
+                                  </Link>
+                                ) : (
+                                  <span className="block">{label}</span>
+                                )}
+                              </span>
 
-                              <IconLoader
-                                icon="chevron"
-                                className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 text-action-500 transition-transform duration-75 group-open:rotate-180"
-                              />
+                              {Boolean(children?.length) && (
+                                <IconLoader
+                                  icon="chevrondown"
+                                  className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 transition-transform duration-75 group-open:rotate-180"
+                                />
+                              )}
                             </summary>
 
                             {Boolean(children?.length) && (
@@ -84,9 +92,9 @@ export const MobileNav = ({
                                           href={href}
                                           locale={language}
                                           className={cx(
-                                            "text-md font-bold text-neutral-900 hover:underline relative",
+                                            "text-md hover:underline relative",
                                             {
-                                              ["text-action-500"]: current,
+                                              ["underline"]: current,
                                             },
                                           )}
                                         >
@@ -109,7 +117,14 @@ export const MobileNav = ({
                 )}
 
                 <RadixNavigationMenu.List className="mt-3 p-4 flex flex-row gap-3">
-                  <LanguageSwitch align="left" position="above" />
+                  <LanguageSwitch
+                    align="left"
+                    position="above"
+                    theme={{
+                      background: theme?.submenu?.background || "white",
+                      text: theme?.submenu?.text,
+                    }}
+                  />
                   {Boolean(buttons?.length) &&
                     buttons?.map((button) => (
                       <RadixNavigationMenu.Item key={button.label}>
@@ -121,15 +136,22 @@ export const MobileNav = ({
                               "bg-action-500",
                               "hover:underline underline-offset-4",
                               "flex items-center gap-2",
-                              "text-white rounded-full text-md font-bold",
-                              "py-[10px] pl-4 pr-3",
+                              "rounded-full text-md",
                               "whitespace-nowrap",
+                              theme?.buttons?.background &&
+                                backgroundClasses[theme?.buttons?.background],
+                              theme?.buttons?.text &&
+                                textClasses[theme?.buttons?.text],
+                              {
+                                ["py-[10px] pl-4 pr-3 rounded-full"]:
+                                  theme?.buttons?.background,
+                              },
                             )}
                           >
                             <span>{button.label}</span>
                             <IconLoader
                               icon={button.icon}
-                              className="inline text-current transform -translate-y-px w-4 h-4"
+                              className="inline transform -translate-y-px w-4 h-4"
                             />
                           </Link>
                         )}
@@ -137,7 +159,7 @@ export const MobileNav = ({
                     ))}
                 </RadixNavigationMenu.List>
 
-                <div className="h-16 bg-white" />
+                <div className="h-16" />
               </RadixNavigationMenu.Root>
             </div>
           </div>

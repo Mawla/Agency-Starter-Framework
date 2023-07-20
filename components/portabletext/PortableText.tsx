@@ -2,6 +2,7 @@ import { VideoType } from "../../types";
 import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import FigCaption from "../images/FigCaption";
+import { IconLoaderProps } from "../images/IconLoader";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { ScriptsType } from "../script/Script";
 import { Table } from "../table/Table";
@@ -33,6 +34,13 @@ const Link = lazy<ComponentType<LinkProps>>(
 
 const Scripts = lazy<ComponentType<ScriptsType>>(
   () => import(/* webpackChunkName: "Script" */ "../script/Script"),
+);
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
 );
 
 export type PortableTextProps = {
@@ -78,6 +86,20 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
         list: {
           bullet: ({ children }) => <ul>{children}</ul>,
           number: ({ children }) => <ol>{children}</ol>,
+          check: ({ children }) => (
+            <ul className="list-none relative">{children}</ul>
+          ),
+        },
+        listItem: {
+          check: ({ children }) => (
+            <li className="!pl-0 !relative">
+              <IconLoader
+                icon="check"
+                className="absolute left-0 -translate-x-[calc(100%+.75em)] translate-y-1/3 w-[1em] h-[1em] text-current !mt-0"
+              />
+              <span>{children}</span>
+            </li>
+          ),
         },
         types: {
           "image.simple"({ value }) {

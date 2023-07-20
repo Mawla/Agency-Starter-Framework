@@ -375,7 +375,7 @@ export const LivePreview = ({
       {Boolean(miniBlocks?.length) && isMiniMapVisible && (
         <div
           className={cx(
-            "fixed top-20 right-4 z-60 bg-white border-2 border-black border-opacity-10 max-h-[calc(100vh-100px)] overflow-y-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]",
+            "fixed top-20 right-4 z-[60] bg-white border-2 border-black border-opacity-10 max-h-[calc(100vh-100px)] overflow-y-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]",
           )}
         >
           <MiniMap

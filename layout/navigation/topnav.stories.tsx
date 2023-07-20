@@ -18,11 +18,11 @@ const items: NavItem[] = [
     children: [
       {
         label: "Product 1",
-        href: "",
+        href: "/foo",
       },
       {
         label: "Product 2",
-        href: "",
+        href: "/foo",
       },
     ],
   },
@@ -35,12 +35,12 @@ const items: NavItem[] = [
     children: [
       {
         label: "Business cases",
-        href: "",
+        href: "/foo",
         current: true,
       },
       {
         label: "Industries",
-        href: "",
+        href: "/foo",
       },
     ],
   },

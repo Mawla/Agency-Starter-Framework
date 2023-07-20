@@ -50,7 +50,7 @@ export const IconAfter = () => (
 );
 
 export const IconBefore = () => (
-  <Button label="Button text" icon="demo" iconPosition="before" />
+  <Button label="Button text" icon="arrow" iconPosition="before" />
 );
 
 export const IconOnly = () => (
@@ -65,13 +65,13 @@ export const IconOnly = () => (
         <Button
           size={size}
           ariaLabel="Button text"
-          icon="demo"
+          icon="arrow"
           iconPosition="before"
         />
         <Button
           size={size}
           ariaLabel="Button text"
-          icon="demo"
+          icon="arrow"
           iconPosition="before"
           compact
         />
@@ -86,17 +86,17 @@ export const OrphanIcons = () => (
 
     <Button
       label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      icon="demo"
+      icon="arrow"
       iconPosition="before"
     />
     <Button
       label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      icon="demo"
+      icon="arrow"
       iconPosition="after"
     />
     <Button
       label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      icon="demo"
+      icon="arrow"
       iconPosition="after"
     />
   </div>

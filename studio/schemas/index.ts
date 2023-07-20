@@ -1,20 +1,35 @@
+import block1 from "../../blocks/block1/block1.schema";
+import block2 from "../../blocks/block2/block2.schema";
+import block3 from "../../blocks/block3/block3.schema";
+import block4 from "../../blocks/block4/block4.schema";
+import block6 from "../../blocks/block6/block6.schema";
+import block8 from "../../blocks/block8/block8.schema";
+import block9 from "../../blocks/block9/block9.schema";
+import block10 from "../../blocks/block10/block10.schema";
+import block11 from "../../blocks/block11/block11.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
+import faq, { faqItem } from "../../components/faq/faq.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import script from "../../components/script/script.schema";
+import testimonials, {
+  testimonialItem,
+} from "../../components/testimonials/testimonials.schema";
 import video from "../../components/video/video.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import { translateFields } from "../utils/language/field-translation";
 import configCMS from "./documents/config.cms";
 import configGeneral from "./documents/config.general";
+import configIcons from "./documents/config.icons";
 import configIntegrations from "./documents/config.integrations";
 import configSeo from "./documents/config.seo";
 import configSocial from "./documents/config.social";
+import configTheme from "./documents/config.theme";
 import configTranslations from "./documents/config.translations";
 import dialogForm from "./documents/dialog.form";
 import dialogRichText from "./documents/dialog.richtext";
@@ -50,19 +65,31 @@ import styles from "./objects/styles";
 
 export const schemaTypes = [
   ...[
+    block1,
+    block11,
+    block10,
+    block2,
+    block3,
+    block4,
+    block6,
+    block8,
+    block9,
+    blockPreset,
     button,
     buttongroup,
     configCMS,
     configIntegrations,
     configSocial,
+    configTheme,
+    configIcons,
     copypaste,
     dialogForm,
     dialogRichText,
     dialogVideo,
+    faq,
     footer,
     imageSimple,
     link,
-    blockPreset,
     navigation,
     pageBlog,
     pageBlogs,
@@ -93,8 +120,16 @@ export const schemaTypes = [
     script,
     studioDivider,
     styles,
+    testimonials,
     video,
   ],
 
-  ...translateFields([configGeneral, configSeo, configTranslations, person]),
+  ...translateFields([
+    configGeneral,
+    configSeo,
+    configTranslations,
+    person,
+    testimonialItem,
+    faqItem,
+  ]),
 ];

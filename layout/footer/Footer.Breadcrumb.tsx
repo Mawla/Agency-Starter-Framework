@@ -8,7 +8,8 @@ export const FooterBreadcrumb = () => {
   if (isHomepage) return null;
 
   return (
-    <div className="pb-4 mb-4 border-b border-b-neutral-200 text-base text-neutral-500">
+    <div className="pb-4 mb-10 text-[14px] relative">
+      <span className="absolute inset-x-0 h-px block opacity-10 bottom-0 bg-current" />
       <Breadcrumb />
     </div>
   );

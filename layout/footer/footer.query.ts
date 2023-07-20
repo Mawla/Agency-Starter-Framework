@@ -2,9 +2,10 @@ import {
   buttonFieldsQuery,
   buttonQuery,
 } from "../../components/buttons/button.query";
+import { getImageQuery } from "../../components/images/image.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
-import { IconType } from "../../types";
+import { FooterProps } from "./Footer";
 import groq from "groq";
 
 export type FooterItemType = {
@@ -16,7 +17,7 @@ export type FooterItemType = {
 export type FooterSocialsItemProps = {
   label?: string;
   href?: string;
-  icon: IconType;
+  icon?: string;
 };
 
 export type FooterType = {
@@ -24,7 +25,10 @@ export type FooterType = {
   links: FooterItemType[];
   socials: FooterSocialsItemProps[];
   legal?: string;
+  info?: string;
   legalLinks?: FooterItemType["items"];
+  logo?: FooterProps["logo"];
+  theme?: FooterProps["theme"];
 };
 
 export const getFooterQuery = (language: LanguageType) => groq`
@@ -33,8 +37,13 @@ export const getFooterQuery = (language: LanguageType) => groq`
 } {
   sitemap,
   "footer": *[_id == "footer__i18n_${language}"][0] {
-    "copyright": copyright,
-    "legal": legal,
+    logo {
+      "mobile": ${getImageQuery("mobile")},
+      "desktop": ${getImageQuery("desktop")},
+    },
+    copyright,
+    legal,
+    info,
     "links": links[] { 
       title, 
       "href": link ${buttonQuery}.href,
@@ -45,6 +54,7 @@ export const getFooterQuery = (language: LanguageType) => groq`
       icon,
       ${buttonFieldsQuery},
     },
+    theme
   }
 }.footer
 `;

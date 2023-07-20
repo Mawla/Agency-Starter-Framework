@@ -3,9 +3,9 @@
  */
 import { AnswersType } from ".";
 import { injectLine } from "../utils/inject-line";
+import { write } from "../utils/is-write";
 import { prettierFile } from "../utils/prettier-file";
 import { formatName } from "./format-name";
-import { write } from "./get-args";
 import { getStructureCollection } from "./templates/structure-collection";
 import { getStructureDocumentList } from "./templates/structure-document-list";
 import { getStructureSingleton } from "./templates/structure-singleton";
