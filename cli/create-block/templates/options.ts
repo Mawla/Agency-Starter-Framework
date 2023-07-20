@@ -15,19 +15,19 @@ export const getOptionsSnippet = ({ fields }: Props) => {
       `import { 
         TITLE_SIZE_OPTIONS as ALL_TITLE_SIZE_OPTIONS, 
         TITLE_COLOR_OPTIONS as ALL_TITLE_COLOR_OPTIONS, 
-      } from "../../components/block/title.options";`,
+      } from "../../components/title/title.options";`,
     )}
     ${render(
       fields,
       "eyebrow",
       `import { 
         TITLE_EYEBROW_COLOR_OPTIONS as ALL_TITLE_EYEBROW_COLOR_OPTIONS 
-      } from "../../components/block/title.options";`,
+      } from "../../components/title/title.options";`,
     )}
     ${render(
       fields,
       "intro",
-      `import { TEXT_COLOR_OPTIONS, TEXT_SIZE_OPTIONS } from "../../components/block/text.options";`,
+      `import { TEXT_COLOR_OPTIONS, TEXT_SIZE_OPTIONS } from "../../components/text/text.options";`,
     )}
     
     import { pick } from "../../helpers/utils/object";

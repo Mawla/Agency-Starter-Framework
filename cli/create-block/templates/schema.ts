@@ -25,7 +25,7 @@ export const getSchemaSnippet = ({
   ${render(
     fields,
     "title",
-    `import { TITLE_FONT_OPTIONS, TITLE_WEIGHT_OPTIONS } from "../../components/block/title.options";`,
+    `import { TITLE_FONT_OPTIONS, TITLE_WEIGHT_OPTIONS } from "../../components/title/title.options";`,
   )}
   import { EllipsisVerticalIcon } from "@sanity/icons";
   import { Question } from "@vectopus/atlas-icons-react";

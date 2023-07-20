@@ -24,7 +24,7 @@ export const getReactComponentSnippet = ({
     ${render(
       fields,
       "title",
-      `import { TitleFontType, TitleWeightType } from "../../components/block/title.options";`,
+      `import { TitleFontType, TitleWeightType } from "../../components/title/title.options";`,
     )}
     import { 
       ${render(fields, "title", "TitleSizeType,")} 
