@@ -6,7 +6,6 @@
  *
  */
 import { createInfo } from "./create-info";
-import { createOptions } from "./create-options";
 import { createQuery } from "./create-query";
 import { createReactComponent } from "./create-react-component";
 import { createSchema } from "./create-schema";
@@ -113,7 +112,6 @@ async function init() {
   createReactComponent(answers);
   createSchema(answers);
   createQuery(answers);
-  createOptions(answers);
   createStory(answers);
   createTests(answers);
   createInfo(answers);
