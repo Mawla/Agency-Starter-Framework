@@ -1,5 +1,5 @@
 import { fontClasses, textClasses, weightClasses } from "../../theme";
-import { HeadingLevelType } from "../../types";
+import { HtmlTextNodeType } from "../../types";
 import {
   TitleColorType,
   TitleEyebrowColorType,
@@ -13,7 +13,7 @@ import React from "react";
 
 export type TitleProps = {
   children: React.ReactElement | React.ReactNode;
-  as?: HeadingLevelType;
+  as?: HtmlTextNodeType;
   size?: TitleSizeType;
   weight?: TitleWeightType;
   className?: string;

@@ -18,7 +18,7 @@ export const getReactComponentSnippet = ({
     import cx from "classnames";
     import {  WrapperProps } from '../../components/block/Wrapper';
     import { BackgroundColorType } from '../../components/block/background.options';
-    import { HeadingLevelType } from '../../types';
+    import { HtmlTextNodeType } from '../../types';
     import { SpaceType } from '../../components/block/spacing.options';
     import { backgroundClasses } from "../../theme";
     ${render(
@@ -116,7 +116,7 @@ export const getReactComponentSnippet = ({
         title?: {
           color?: TitleColorType;
           size?: TitleSizeType;
-          level?: HeadingLevelType
+          level?: HtmlTextNodeType
           font?: TitleFontType;
           weight?: TitleWeightType;
         },`,
@@ -168,11 +168,8 @@ export const getReactComponentSnippet = ({
           {(title || eyebrow) && (
             <div className="mb-6">
               <Title 
+                {...theme?.title}
                 size={theme?.title?.size || '4xl'} 
-                as={theme?.title?.as} 
-                color={theme?.title?.color} 
-                font={theme?.title?.font}
-                weight={theme?.title?.weight}
                 eyebrow={eyebrow} 
                 eyebrowColor={theme?.eyebrow?.color}
               >{title}</Title>
@@ -186,9 +183,7 @@ export const getReactComponentSnippet = ({
           {title && (
             <div className="mb-6">
               <Title 
-                size={theme?.title?.size || '4xl'} 
-                as={theme?.title?.as} 
-                color={theme?.title?.color}
+              {...theme?.title}
               >{title}</Title>
             </div>
           )}`

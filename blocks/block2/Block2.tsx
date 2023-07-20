@@ -90,13 +90,7 @@ export const Block2 = ({
       >
         {title && (
           <div className="mb-4 md:mb-6">
-            <Title
-              size={theme?.title?.size || "3xl"}
-              as={theme?.title?.as}
-              color={theme?.title?.color}
-              font={theme?.title?.font}
-              weight={theme?.title?.weight}
-            >
+            <Title {...theme?.title} size={theme?.title?.size || "3xl"}>
               {title}
             </Title>
           </div>
@@ -170,8 +164,8 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
         {title && (
           <div className="mb-2">
             <Title
+              {...theme?.title}
               size={theme?.title?.size || "lg"}
-              color={theme?.title?.color}
               as={theme?.title?.as || "h3"}
             >
               {title}

@@ -76,13 +76,7 @@ export const Block1 = ({
         <div className="order-1 lg:pt-8">
           {title && (
             <div className="mb-4">
-              <Title
-                size={theme?.title?.size || "4xl"}
-                as={theme?.title?.as}
-                color={theme?.title?.color}
-                font={theme?.title?.font}
-                weight={theme?.title?.weight}
-              >
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
               </Title>
             </div>

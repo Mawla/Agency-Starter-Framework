@@ -1,6 +1,6 @@
 import { pick } from "../../helpers/utils/object";
 import { COLORS, FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
-import { HeadingLevelType } from "../../types";
+import { HtmlTextNodeType } from "../../types";
 
 export const TITLE_SIZE_OPTIONS = pick(FONT_SIZES);
 export type TitleSizeType = keyof typeof TITLE_SIZE_OPTIONS;
@@ -39,7 +39,7 @@ export const titleSizeClasses: Record<TitleSizeType, string> = Object.keys(
 export type TitleThemeType = {
   color?: TitleColorType;
   size?: TitleSizeType;
-  as?: HeadingLevelType;
+  as?: HtmlTextNodeType;
   font?: TitleFontType;
   weight?: TitleWeightType;
 };

@@ -83,10 +83,7 @@ export const HTML_TEXT_NODES = {
   span: "Span",
 };
 
-export type HeadingLevelType = keyof typeof HTML_TEXT_NODES;
-export type HeadingLevelsType = {
-  [key in keyof typeof HTML_TEXT_NODES]: string;
-};
+export type HtmlTextNodeType = keyof typeof HTML_TEXT_NODES;
 
 export type ImageType = {
   src: string;

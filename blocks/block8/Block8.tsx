@@ -10,7 +10,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { bumpHeadingLevel } from "../../helpers/utils/string";
 import { textAlignClasses, textClasses } from "../../theme";
-import { HeadingLevelType, HorizontalAlignType, ImageType } from "../../types";
+import { HtmlTextNodeType, HorizontalAlignType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -94,13 +94,7 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
                 textAlignClasses[theme?.block?.align || "center"],
               )}
             >
-              <Title
-                size={theme?.title?.size || "4xl"}
-                as={theme?.title?.as}
-                color={theme?.title?.color}
-                font={theme?.title?.font}
-                weight={theme?.title?.weight}
-              >
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
               </Title>
             </div>
@@ -152,7 +146,7 @@ type ItemProps = {
   image?: ImageType;
   buttons?: ButtonProps[];
   align?: HorizontalAlignType;
-  blockTitleLevel?: HeadingLevelType;
+  blockTitleLevel?: HtmlTextNodeType;
 };
 
 const Item = ({
@@ -173,7 +167,7 @@ const Item = ({
 
       {title && (
         <Title
-          as={bumpHeadingLevel(blockTitleLevel || "h2") as HeadingLevelType}
+          as={bumpHeadingLevel(blockTitleLevel || "h2") as HtmlTextNodeType}
           size="xl"
           className={cx(
             "text-current mb-2",
