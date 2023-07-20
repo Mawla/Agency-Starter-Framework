@@ -175,7 +175,6 @@ export const getSchemaSnippet = ({
           defaultBlockTheme,
           ${render(fields, "title", `defaultTitleTheme,`)}
           ${render(fields, "intro", `defaultTextTheme,`)}
-          )}
         ],
       }),
     ],
