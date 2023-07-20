@@ -2,7 +2,7 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
-import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import {
@@ -41,10 +41,10 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
-const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+const SimpleImage = lazy<ComponentType<SimpleImageProps>>(
   () =>
     import(
-      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+      /* webpackChunkName: "SimpleImage" */ "../../components/images/SimpleImage"
     ),
 );
 
@@ -103,7 +103,7 @@ export const Block4 = ({
 
         {image && (
           <div className="mt-6">
-            <ResponsiveImage {...image} className="inline-block" />
+            <SimpleImage {...image} className="inline-block" />
           </div>
         )}
       </div>
