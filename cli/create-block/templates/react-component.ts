@@ -18,6 +18,7 @@ export const getReactComponentSnippet = ({
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
     import cx from "classnames";
+    import { textAlignClasses } from "../../components/text/text.options";
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -108,18 +109,15 @@ export const getReactComponentSnippet = ({
             ...theme?.block
           }}
         >
-        <div className={cx('max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
+        <div className={cx('flex flex-col gap-6 max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
           
           ${render(
             fields,
             "title",
             `
             {title && (
-              <div className="mb-6">
-                <Title 
-                {...theme?.title}
-                >{title}</Title>
-              </div>
+                <Title {...theme?.title} size={theme?.title?.size || "4xl"}>{title}</Title>
+        
             )}`,
           )}
 
@@ -128,7 +126,6 @@ export const getReactComponentSnippet = ({
             "intro",
             `
           {intro && (
-            <div className="mb-6">
               <Text 
                 size={theme?.intro?.size || 'xl'} 
                 color={theme?.intro?.color}
@@ -136,7 +133,6 @@ export const getReactComponentSnippet = ({
               >
                 <PortableText content={intro as any} />
               </Text>
-            </div>
           )}`,
           )}
 
@@ -169,7 +165,7 @@ export const getReactComponentSnippet = ({
             "buttons",
             `
           {buttons && Boolean(buttons?.filter(Boolean).length) && (
-            <div className="mt-8 lg:mt-12">
+            <div className="mt-6">
               <ButtonGroup items={buttons} />
             </div>
           )}`,
