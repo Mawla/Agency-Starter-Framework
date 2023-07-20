@@ -28,7 +28,6 @@ const handler = async (req: NextRequest) => {
 
   const page = await sanityClient.fetch(`*[_id == "${id}"][0] {
     "hero": blocks[0] {
-      eyebrow,
       title,
       text,
       image
@@ -107,12 +106,6 @@ const handler = async (req: NextRequest) => {
             height: "100%",
           }}
         >
-          {page?.hero?.eyebrow && (
-            <div style={{ color: "black", fontSize: 40 }}>
-              {page?.hero?.eyebrow}
-            </div>
-          )}
-
           {page?.hero?.title && (
             <div style={{ color: "black", fontSize: 80 }}>
               {page?.hero?.title}

@@ -30,7 +30,6 @@ export const getReactComponentSnippet = ({
       ${render(fields, "title", "TitleSizeType,")} 
       ${render(fields, "title", "TitleColorType,")} 
       ${render(fields, "intro", "IntroColorType, IntroSizeType,")} 
-      ${render(fields, "eyebrow", "EyebrowColorType,")} 
       AlignType
     } from './${lowerName}.options';
 
@@ -103,14 +102,6 @@ export const getReactComponentSnippet = ({
         }
         ${render(
           fields,
-          "eyebrow",
-          `
-        eyebrow?: {
-          color?: EyebrowColorType;
-        },`,
-        )}
-        ${render(
-          fields,
           "title",
           `
         title?: {
@@ -131,7 +122,6 @@ export const getReactComponentSnippet = ({
         },`,
         )}
       };
-      ${render(fields, "eyebrow", "eyebrow?: string;")}
       ${render(fields, "title", "title?: string;")}
       ${render(fields, "intro", "intro?: React.ReactNode;")}
       ${render(fields, "image", "image?: ImageType;")}
@@ -147,7 +137,6 @@ export const getReactComponentSnippet = ({
 
     export const ${pascalName} = ({ 
       theme,
-      ${render(fields, "eyebrow", `eyebrow,`)}
       ${render(fields, "title", `title,`)}
       ${render(fields, "intro", `intro,`)}
       ${render(fields, "image", `image,`)}
@@ -161,34 +150,19 @@ export const getReactComponentSnippet = ({
           }}
         >
         <div className={cx('max-w-3xl', alignClasses[theme?.block?.align || "center"])}>
+          
           ${render(
             fields,
-            "eyebrow",
+            "title",
             `
-          {(title || eyebrow) && (
-            <div className="mb-6">
-              <Title 
+            {title && (
+              <div className="mb-6">
+                <Title 
                 {...theme?.title}
-                size={theme?.title?.size || '4xl'} 
-                eyebrow={eyebrow} 
-                eyebrowColor={theme?.eyebrow?.color}
-              >{title}</Title>
-            </div>
-          )}`,
+                >{title}</Title>
+              </div>
+            )}`,
           )}
-
-          ${
-            !fields?.includes("eyebrow") && fields?.includes("title")
-              ? `
-          {title && (
-            <div className="mb-6">
-              <Title 
-              {...theme?.title}
-              >{title}</Title>
-            </div>
-          )}`
-              : ""
-          }
 
           ${render(
             fields,

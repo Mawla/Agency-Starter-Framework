@@ -14,9 +14,6 @@ export type TitleFontType = keyof typeof TITLE_FONT_OPTIONS;
 export const TITLE_COLOR_OPTIONS = pick(COLORS);
 export type TitleColorType = keyof typeof TITLE_COLOR_OPTIONS;
 
-export const TITLE_EYEBROW_COLOR_OPTIONS = pick(COLORS);
-export type TitleEyebrowColorType = keyof typeof TITLE_EYEBROW_COLOR_OPTIONS;
-
 /**
  * Automatically convert the title size options to tailwind classes for small, medium and large breakpoints
  * e.g 4xl -› text-2xl md:text-3xl lg:text-4xl

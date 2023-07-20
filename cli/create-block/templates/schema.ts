@@ -95,16 +95,6 @@ export const getSchemaSnippet = ({
       }),
       ${render(
         fields,
-        "eyebrow",
-        `defineField({
-        name: "eyebrow",
-        title: "Eyebrow",
-        type: "string",
-        group: "content",
-      }),`,
-      )}
-      ${render(
-        fields,
         "title",
         `defineField({
         name: "title",
