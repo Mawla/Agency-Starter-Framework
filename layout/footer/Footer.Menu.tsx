@@ -30,23 +30,25 @@ export const FooterMenu = ({
       open={!width || width > MAX_MOBILE_SIZE ? true : current}
       className="group relative"
     >
-      <span className="pointer-events-none absolute -inset-x-4 -top-3 border border-white bottom-0 hidden group-open:block md:group-open:hidden group-open:bg-gray-100 rounded-lg -z-10" />
+      <span className="pointer-events-none absolute -inset-x-4 -top-3 bottom-0 hidden group-open:block md:group-open:hidden -z-10" />
       <summary
-        className="text-gray-500 text-xl mb-4 list-none relative"
+        className="mb-4 list-none relative"
         onClick={(e) => {
           if (width && width > MAX_MOBILE_SIZE) e.preventDefault();
         }}
       >
-        {href ? (
-          <Link href={href} className="hover:underline underline-offset-4">
-            {title}
-          </Link>
-        ) : (
-          title
-        )}
+        <span className="uppercase text-medium">
+          {href ? (
+            <Link href={href} className="hover:underline underline-offset-4">
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
+        </span>
 
         <IconLoader
-          icon="chevron"
+          icon="chevrondown"
           className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden transition-transform duration-75 group-open:rotate-180"
         />
       </summary>
@@ -54,7 +56,7 @@ export const FooterMenu = ({
       <ul className="flex flex-col gap-4 pb-6 md:pb-0">
         {items?.map(({ label, href, current }) => {
           return (
-            <li key={href || label} className="text-gray-900 text-md relative">
+            <li key={href || label} className="relative">
               {href ? (
                 <Link
                   href={href}
@@ -67,7 +69,7 @@ export const FooterMenu = ({
               )}
 
               {current && (
-                <span className="md:hidden bg-action-500 w-0.5 h-5 absolute -left-2 top-0" />
+                <span className="md:hidden w-0.5 h-5 absolute -left-2 top-0" />
               )}
             </li>
           );

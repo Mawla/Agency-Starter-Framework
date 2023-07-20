@@ -1,4 +1,4 @@
-import { COLORS } from "./colors";
+import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
   next_slide: {
@@ -17,40 +17,46 @@ export const TRANSLATION_FIELDS = {
 
 export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;
 
-export const ICONS = {
-  "check-circle": "check-circle.svg",
-  "external-link": "external-link.svg",
-  "flag-italy": "flag_italy.svg",
-  "flag-spain": "flag_spain.svg",
-  "flag-uk": "flag_uk.svg",
-  "map-marker": "map-marker.svg",
-  arrow: "arrow.svg",
-  chevron: "chevron.svg",
-  close: "close.svg",
-  demo: "demo.svg",
-  download: "download.svg",
-  facebook: "facebook.svg",
-  info: "info.svg",
-  instagram: "instagram.svg",
-  linkedin: "linkedin.svg",
-  lock: "lock.svg",
-  menu: "menu.svg",
-  pause: "pause.svg",
-  play: "play.svg",
-  quote: "quote.svg",
-  twitter: "twitter.svg",
-  youtube: "youtube.svg",
+export const PREDEFINED_ICONS = {
+  arrow: {
+    title: "Arrow",
+    description: "Used in buttons",
+  },
+  check: {
+    title: "Check",
+    description: "Used in check lists",
+  },
+  chevrondown: {
+    title: "Chevron down",
+    description: "Used in dropdowns, accordions",
+  },
+  close: {
+    title: "Close",
+    description: "Used to close modals",
+  },
+  externallink: {
+    title: "External link",
+    description: "Used for external links",
+  },
+  lock: {
+    title: "Lock",
+    description: "Used for password protected pages",
+  },
+  menu: {
+    title: "Menu",
+    description: "Used to open the mobile menu",
+  },
+  globe: {
+    title: "Globe",
+    description: "Shown next to the language selector",
+  },
 };
 
-export type IconType = keyof typeof ICONS;
+export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;
 
 export type ColorType = keyof typeof COLORS;
-
-export const FONTS = {
-  sans: "Sans",
-  heading: "Heading",
-  mono: "Mono",
-};
+export type FontWeightType = keyof typeof FONT_WEIGHTS;
+export type FontType = keyof typeof FONTS;
 
 export type TextElement =
   | "h1"
@@ -139,22 +145,6 @@ export const SIZES = {
 
 export type SizeType = keyof typeof SIZES;
 export type SizesType = { [key in keyof typeof SIZES]: string };
-
-export const FONT_WEIGHTS = {
-  thin: "Thin",
-  extralight: "Extralight",
-  light: "Light",
-  normal: "Normal",
-  regular: "Regular",
-  medium: "Medium",
-  semibold: "Semibold",
-  bold: "Bold",
-  extrabold: "Extrabold",
-  black: "Black",
-};
-
-export type FontWeightType = keyof typeof FONT_WEIGHTS;
-export type FontWeightsType = { [key in keyof typeof FONT_WEIGHTS]: string };
 
 export const ALIGNMENTS = {
   left: "Left",

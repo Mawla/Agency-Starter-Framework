@@ -1,11 +1,11 @@
-import { textClasses } from "../../colors";
+import { fontClasses, textClasses, weightClasses } from "../../theme";
 import { HeadingLevelType } from "../../types";
 import {
   TitleColorType,
   TitleEyebrowColorType,
+  TitleFontType,
   titleSizeClasses,
   TitleSizeType,
-  titleWeightClasses,
   TitleWeightType,
 } from "./title.options";
 import cx from "classnames";
@@ -20,6 +20,7 @@ export type TitleProps = {
   color?: TitleColorType;
   eyebrow?: string;
   eyebrowColor?: TitleEyebrowColorType;
+  font?: TitleFontType;
 };
 
 export const Title = ({
@@ -31,6 +32,7 @@ export const Title = ({
   color = "black",
   eyebrow,
   eyebrowColor = "black",
+  font = "sans",
 }: TitleProps) => {
   if (!as) as = "h2";
   const Element = as;
@@ -41,11 +43,11 @@ export const Title = ({
       className={cx(
         "hyphens-auto",
         "break-words inline-block",
-        "font-sans",
         "flex flex-col whitespace-pre-line",
         textClasses[color],
         titleSizeClasses[size],
-        titleWeightClasses[weight],
+        weightClasses[weight],
+        fontClasses[font],
         className,
       )}
     >

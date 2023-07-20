@@ -1,19 +1,47 @@
-// CustomStringInput.tsx
-import {useCallback} from 'react'
-import {Box, Stack, Text, TextInput} from '@sanity/ui'
-import {StringInputProps, set, unset} from 'sanity'
+import { Stack, Text } from "@sanity/ui";
+import React from "react";
+import { ComponentType } from "react";
 
-export function CharacterCounter(props: StringInputProps) {
-  const {onChange, value = '', elementProps} = props
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) =>
-      onChange(event.currentTarget.value ? set(event.currentTarget.value) : unset()),
-    [onChange]
-  )
+export type CharacterCounterProps = {
+  value?: any;
+  document?: { _type: string; _id: string };
+  renderDefault?: (props: any) => any;
+  schemaType?: {
+    options?: {
+      max?: number | string;
+    };
+  };
+};
+
+export const CharacterCounter: ComponentType<any> = (
+  props: CharacterCounterProps,
+) => {
+  const { value, renderDefault, schemaType } = props;
+
+  console.log(props);
+
   return (
-    <Stack space={3}>
-      <TextInput {...elementProps} onChange={handleChange} value={value} />
-      <Text size={1}>Characters: {value?.length || 0}</Text>
+    <Stack space={2}>
+      <Text
+        muted
+        size={0}
+        style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          transform: "translateY(-10px)",
+          color:
+            schemaType?.options?.max && value?.length > schemaType.options.max
+              ? "#b7991e"
+              : "",
+        }}
+      >
+        {value?.length || 0}{" "}
+        {schemaType?.options?.max ? ` / ${schemaType.options.max}` : null}
+      </Text>
+      {renderDefault && <div>{renderDefault(props)}</div>}
     </Stack>
-  )
-}
+  );
+};
+
+export default CharacterCounter;

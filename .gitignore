@@ -53,3 +53,6 @@ Session.vim
 
 production-*
 development-*
+
+engine.config.js
+public/engine.styles.css

@@ -1,4 +1,5 @@
 import { ButtonProps } from "../../components/buttons/Button";
+import { demoImage, demoImage2 } from "../../stories/content";
 import { Navigation, NavItem } from "./Navigation";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -63,7 +64,16 @@ const buttons: ButtonProps[] = [
   },
 ];
 
-export const Default = () => <Navigation items={items} buttons={buttons} />;
+export const Default = () => (
+  <Navigation
+    items={items}
+    buttons={buttons}
+    logo={{
+      mobile: { ...demoImage, width: 100 },
+      desktop: { ...demoImage, width: 100 },
+    }}
+  />
+);
 
 export const ScrollBehavior = () => (
   <div>
@@ -77,5 +87,37 @@ export const ScrollBehavior = () => (
     <div style={{ height: "50vh" }} className="bg-gray-500" />
     <div style={{ height: "50vh" }} className="bg-white" />
     <div style={{ height: "50vh" }} className="bg-gray-100" />
+  </div>
+);
+
+export const Theme = () => (
+  <div className="flex flex-col gap-10">
+    <Navigation
+      items={items}
+      buttons={buttons}
+      logo={{
+        mobile: { ...demoImage, width: 100 },
+        desktop: { ...demoImage, width: 100 },
+      }}
+      theme={{
+        block: {
+          background: "black",
+          text: "white",
+          border: "white",
+        },
+        menu: {
+          text: "white",
+          align: "right",
+        },
+        submenu: {
+          text: "white",
+          background: "black",
+        },
+        buttons: {
+          text: "black",
+          background: "white",
+        },
+      }}
+    />
   </div>
 );

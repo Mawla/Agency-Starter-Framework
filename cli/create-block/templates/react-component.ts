@@ -20,6 +20,12 @@ export const getReactComponentSnippet = ({
     import { BackgroundColorType } from '../../components/block/background.options';
     import { HeadingLevelType } from '../../types';
     import { SpaceType } from '../../components/block/spacing.options';
+    import { backgroundClasses } from "../../theme";
+    ${render(
+      fields,
+      "title",
+      `import { TitleFontType, TitleWeightType } from "../../components/block/title.options";`,
+    )}
     import { 
       ${render(fields, "title", "TitleSizeType,")} 
       ${render(fields, "title", "TitleColorType,")} 
@@ -111,6 +117,8 @@ export const getReactComponentSnippet = ({
           color?: TitleColorType;
           size?: TitleSizeType;
           level?: HeadingLevelType
+          font?: TitleFontType;
+          weight?: TitleWeightType;
         },`,
         )}
         ${render(
@@ -163,6 +171,8 @@ export const getReactComponentSnippet = ({
                 size={theme?.title?.size || '4xl'} 
                 as={theme?.title?.level} 
                 color={theme?.title?.color} 
+                font={theme?.title?.font}
+                weight={theme?.title?.weight}
                 eyebrow={eyebrow} 
                 eyebrowColor={theme?.eyebrow?.color}
               >{title}</Title>

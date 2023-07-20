@@ -1,41 +1,31 @@
+import engineConfig from "./engine.config";
 import { isDarkColor } from "./helpers/utils/color";
-import { ColorType } from "./types";
-
-/**
- * !important
- * All colors must be defined in
- * - tailwind.config.js colors
- * - tailwind.config.js safelist
- * - colors.ts
- */
+import { ColorType, FontType, FontWeightType } from "./types";
 
 export const COLORS = {
-  white: "#fff",
-  black: "#000000",
+  ...engineConfig.theme.colors,
 };
 
-Object.entries(COLORS).map(([key, value]) => {
-  const colorKey = key as ColorType;
-  if (/^#[0-9A-F]{3}$/i.test(value)) {
-    return (COLORS[colorKey] = value
-      .split("")
-      .map((hex) => `${hex}${hex}`)
-      .join("")
-      .substring(1));
-  }
-  if (!/^#([0-9A-F]{3}){1,2}$/i.test(value)) {
-    console.error(
-      `Found a color in colors.ts (${value}) that is not formatted as a hexadecimal. Make sure all colors are formatted like #ffffff.`,
-    );
-    COLORS[colorKey] = "#ff0000";
-  }
-});
+export const FONTS = {
+  ...Object.keys(engineConfig.theme.fontFamily).reduce((acc, size) => {
+    acc[size] = size;
+    return acc;
+  }, {} as Record<string, string>),
+};
 
-export const ALL_COLORS = Object.keys(COLORS) as ColorType[];
+export const FONT_SIZES = {
+  ...Object.keys(engineConfig.theme.fontSize).reduce((acc, size) => {
+    acc[size] = size;
+    return acc;
+  }, {} as Record<string, string>),
+};
 
-export const STORYBOOK_COLORS_SUBSET = COLORS;
-// use this if you have a lot of colors and don't to use all of them in storybook
-// export const STORYBOOK_COLORS_SUBSET = pick(COLORS, 'white', 'black');
+export const FONT_WEIGHTS = {
+  ...Object.keys(engineConfig.theme.fontWeight).reduce((acc, size) => {
+    acc[size] = size;
+    return acc;
+  }, {} as Record<string, string>),
+};
 
 export const backgroundClasses: Record<ColorType, string> = Object.entries(
   COLORS,
@@ -81,3 +71,17 @@ export const proseClasses: Record<ColorType, string> = Object.entries(
         : "prose-coal",
   };
 }, {} as Record<ColorType, string>);
+
+export const fontClasses: Record<FontType, string> = Object.entries(
+  FONTS,
+).reduce<Record<FontWeightType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
+  {} as Record<ColorType, string>,
+);
+
+export const weightClasses: Record<FontWeightType, string> = Object.entries(
+  FONT_WEIGHTS,
+).reduce<Record<FontWeightType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
+  {} as Record<ColorType, string>,
+);

@@ -1,10 +1,7 @@
-import { theme } from "../tailwind.config.js";
+import engineConfig from "../engine.config";
 import { Meta, Typeset } from "@storybook/addon-docs";
-import defaultConfig from "tailwindcss/defaultConfig";
-import resolveConfig from "tailwindcss/resolveConfig";
 
-export const tailwindConfig = resolveConfig([theme, defaultConfig])[0];
-export const fontSizes = Object.entries(tailwindConfig.fontSize)
+export const fontSize = Object.entries(engineConfig.theme.fontSize)
   .map(([key, value]) => {
     value = Array.isArray(value) ? value[0] : value;
     if (typeof value === "number") {
@@ -27,23 +24,21 @@ export const fontSizes = Object.entries(tailwindConfig.fontSize)
 # Typography
 
 <div>
-  {Object.entries(
-    tailwindConfig.fontFamily || defaultConfig.theme.fontFamily,
-  ).map(([fontName, fontValue]) =>
-    Object.entries(
-      tailwindConfig.fontWeight || defaultConfig.theme.fontWeight,
-    ).map(([weightName, weightValue]) => (
-      <div key={fontName + weightName}>
-        <h2>
-          {fontValue[0]} {weightName}
-        </h2>
-        <Typeset
-          fontSizes={fontSizes}
-          fontWeight={weightValue}
-          sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          fontFamily={fontValue}
-        />
-      </div>
-    )),
+  {Object.entries(engineConfig.theme.fontFamily).map(([fontName, fontValue]) =>
+    Object.entries(engineConfig.theme.fontWeight).map(
+      ([weightName, weightValue]) => (
+        <div key={fontName + weightName}>
+          <h2>
+            {fontValue[0]} {weightName}
+          </h2>
+          <Typeset
+            fontSizes={fontSize}
+            fontWeight={weightValue}
+            sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            fontFamily={fontValue}
+          />
+        </div>
+      ),
+    ),
   )}
 </div>

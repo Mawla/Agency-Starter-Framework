@@ -1,7 +1,4 @@
-import {
-  BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-} from "../../components/block/background.options";
+import { demoImage } from "../../stories/content";
 import { Footer, FooterProps } from "./Footer";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -17,7 +14,7 @@ export default {
 const socials: FooterProps["socials"] = [
   {
     label: "Facebook",
-    icon: "external-link",
+    icon: "externallink",
     href: "https://www.facebook.com",
   },
 ];
@@ -67,6 +64,11 @@ export const Default = () => (
     copyright={copyright}
     legalLinks={links[0].items}
     legal="Legal text"
+    info="info text"
+    logo={{
+      mobile: { ...demoImage, width: 100 },
+      desktop: { ...demoImage, width: 100 },
+    }}
   />
 );
 
@@ -82,14 +84,33 @@ export const Columns = () => (
   </>
 );
 
-export const Colors = () => (
-  <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color: BackgroundColorType) => (
-        <div key={color} className="mb-10">
-          <Footer socials={socials} links={links} copyright={copyright} />
-        </div>
-      ),
-    )}
-  </>
+export const Theme = () => (
+  <div className="flex flex-col gap-10">
+    <Footer
+      socials={socials}
+      links={links}
+      copyright={copyright}
+      theme={{
+        block: {
+          background: "white",
+          text: "black",
+        },
+      }}
+    />
+    <Footer
+      socials={socials}
+      links={links}
+      copyright={copyright}
+      theme={{
+        block: {
+          background: "black",
+          text: "white",
+          space: {
+            top: "none",
+            bottom: "none",
+          },
+        },
+      }}
+    />
+  </div>
 );

@@ -277,6 +277,8 @@ export const structure = (
             id: "config_translations",
             type: "config.translations",
           }),
+          singleton(S, { id: "config_theme", type: "config.theme" }),
+          singleton(S, { id: "config_icons", type: "config.icons" }),
           singleton(S, { id: "secret.config_cms", type: "config.cms" }),
         ]),
       ),

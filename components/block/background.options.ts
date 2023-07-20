@@ -1,8 +1,8 @@
-import { COLORS } from "../../colors";
 import { pick } from "../../helpers/utils/object";
+import { COLORS } from "../../theme";
 import { SIZES } from "../../types";
 
-export const BACKGROUND_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BACKGROUND_COLOR_OPTIONS = pick(COLORS);
 export type BackgroundColorType = keyof typeof BACKGROUND_COLOR_OPTIONS;
 
 export const BLOCK_RADIUS_OPTIONS = pick(SIZES, "none", "md", "lg");

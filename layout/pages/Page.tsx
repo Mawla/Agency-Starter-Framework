@@ -78,6 +78,8 @@ export const Page = ({
           <Navigation
             items={page.hideNav === true ? [] : navItems}
             buttons={page.hideNav === true ? [] : navigation.buttons}
+            logo={navigation.logo}
+            theme={navigation.theme}
           />
         )}
 
@@ -96,6 +98,9 @@ export const Page = ({
             copyright={footer.copyright}
             legal={footer.legal}
             legalLinks={footer.legalLinks}
+            logo={footer.logo}
+            info={footer.info}
+            theme={footer.theme}
           />
         )}
 

@@ -1,3 +1,5 @@
+import engineConfig from "./engine.config";
+
 export type LanguageType = "en";
 
 export type LanguagesListItemType = {
@@ -6,7 +8,9 @@ export type LanguagesListItemType = {
 };
 export type LanguagesListType = LanguagesListItemType[];
 
-export const languages: LanguagesListType = [{ id: "en", title: "English" }];
+export const languages = (engineConfig.languages || [
+  { id: "en", title: "English" },
+]) as LanguagesListType;
 
 export const baseLanguage: LanguageType = languages[0].id;
 

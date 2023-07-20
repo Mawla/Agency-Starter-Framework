@@ -1,14 +1,18 @@
-import { textClasses } from "../../colors";
 import { TextProps } from "../../components/block/Text";
 import { TitleProps } from "../../components/block/Title";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
+import {
+  TitleFontType,
+  TitleWeightType,
+} from "../../components/block/title.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { bumpHeadingLevel } from "../../helpers/utils/string";
+import { textClasses } from "../../theme";
 import { HeadingLevelType, ImageType } from "../../types";
 import {
   TitleSizeType,
@@ -66,6 +70,8 @@ export type Block8Props = {
       color?: TitleColorType;
       size?: TitleSizeType;
       level?: HeadingLevelType;
+      font?: TitleFontType;
+      weight?: TitleWeightType;
     };
 
     intro?: {
@@ -123,6 +129,8 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
                 size={theme?.title?.size || "4xl"}
                 as={theme?.title?.level}
                 color={theme?.title?.color}
+                font={theme?.title?.font}
+                weight={theme?.title?.weight}
               >
                 {title}
               </Title>

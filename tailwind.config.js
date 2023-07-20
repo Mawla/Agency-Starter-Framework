@@ -1,3 +1,5 @@
+const engineConfig = require("./engine.config");
+
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 const selectorParser = require("postcss-selector-parser");
@@ -14,20 +16,16 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // Be sure to add all colours in the safelist
-  safelist: [
-    {
-      pattern:
-        /(bg|text|border)-(gray)-(100|200|300|400|500|600|700|800|900|950)/,
-    },
-    {
-      pattern: /(bg|text|border)-(white|black|red)/,
-    },
-  ],
+  safelist: [...(engineConfig.safelist || [])],
   theme: {
     fontFamily: {
-      sans: ["Apercu, arial"],
-      mono: ["monospace"],
+      ...(engineConfig.theme.fontFamily || {}),
+    },
+    fontSize: {
+      ...(engineConfig.theme.fontSize || {}),
+    },
+    fontWeight: {
+      ...(engineConfig.theme.fontWeight || {}),
     },
     screens: {
       "2xs": "375px",
@@ -36,19 +34,13 @@ module.exports = {
     fill: (theme) => ({
       current: "currentColor",
     }),
-    /**
-     * !important
-     * All colors must be defined in
-     * - tailwind.config.js colors
-     * - tailwind.config.js safelist
-     * - colors.ts
-     */
     colors: {
       transparent: "transparent",
       white: "white",
       black: "black",
       current: "currentColor",
       gray: colors.gray,
+      ...(engineConfig.theme.colors || {}),
     },
     extend: {
       maxWidth: {
@@ -115,6 +107,20 @@ module.exports = {
           ],
         },
       }),
+      keyframes: {
+        slideDown: {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        slideUp: {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+        slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+      },
     },
   },
   plugins: [

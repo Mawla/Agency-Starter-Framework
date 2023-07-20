@@ -1,5 +1,6 @@
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
+import { borderClasses, textClasses } from "../../theme";
 import { IconLoader } from "../images/IconLoader";
 import { SliderColorType } from "./slider.options";
 import cx from "classnames";
@@ -18,13 +19,6 @@ export type SliderProps = {
   slideStyle?: CSSProperties;
   className?: string;
   slideClassName?: string;
-};
-
-const controlsColorClasses: Record<SliderColorType, string> = {
-  white:
-    "border-white text-white disabled:bg-white/10 disabled:border-white/0 disabled:text-white/75",
-  black:
-    "border-black text-black disabled:bg-black/10 disabled:border-black/0 disabled:text-black/75",
 };
 
 export const Slider = ({
@@ -83,10 +77,9 @@ export const Slider = ({
             key={direction}
             type="button"
             className={cx(
-              "border-2 rounded-full flex items-center justify-center w-10 h-10 transition-colors",
-              controlsColorClasses[
-                (controlsColor as SliderColorType) || "black"
-              ],
+              "border-2 rounded-full flex items-center justify-center w-10 h-10 transition-colors disabled:opacity-20",
+              borderClasses[controlsColor || "black"],
+              textClasses[(controlsColor as SliderColorType) || "black"],
             )}
             ref={(node) =>
               direction === "prev" ? setPrevEl(node) : setNextEl(node)
@@ -98,7 +91,7 @@ export const Slider = ({
                 : translations?.previous_slide?.[language]}
             </span>
             <IconLoader
-              icon="chevron"
+              icon="chevrondown"
               className={cx("w-5 h-5", {
                 ["rotate-90"]: direction === "prev",
                 ["-rotate-90"]: direction === "next",

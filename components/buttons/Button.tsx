@@ -1,7 +1,11 @@
-import { backgroundClasses, borderClasses, textClasses } from "../../colors";
 import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
 import { LanguageType } from "../../languages";
-import { IconType } from "../../types";
+import {
+  backgroundClasses,
+  borderClasses,
+  textClasses,
+  weightClasses,
+} from "../../theme";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
@@ -17,7 +21,6 @@ import {
   buttonAlignClasses,
   buttonSpaceClasses,
   buttonIconOnlySizeClasses,
-  buttonWeightClasses,
   buttonIconSizeClasses,
 } from "./button.options";
 import cx from "classnames";
@@ -33,7 +36,7 @@ export type ButtonProps = {
   as?: "button" | "a" | "div" | "span" | "submit";
   compact?: boolean;
   href?: string;
-  icon?: IconType;
+  icon?: string;
   iconPosition?: ButtonIconPositionType;
   label?: string;
   onClick?: (e: React.MouseEvent) => void;
@@ -58,7 +61,7 @@ export type ButtonProps = {
 export const Button = (props: ButtonProps) => {
   if (props.href && isInternalLink(props.href)) {
     return (
-      <Link href={props.href} locale={props.language}>
+      <Link href={props.href} locale={props.language} showExternalIcon={false}>
         <ButtonInner {...props} as="span" />
       </Link>
     );
@@ -100,7 +103,7 @@ const ButtonInner = ({
   } = {};
 
   if (target === "_blank") {
-    icon = "external-link";
+    icon = "externallink";
     iconPosition = "after";
   }
 
@@ -176,7 +179,7 @@ const ButtonInner = ({
     ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
       true,
     ["pointer-events-none opacity-75"]: disabled,
-    [buttonWeightClasses[weight]]: true,
+    [weightClasses[weight]]: true,
   };
 
   // icon only button

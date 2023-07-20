@@ -49,7 +49,7 @@ export const PageLock = () => {
 
   useEffect(() => {
     async function getPage() {
-      const pageData = await getClient(false).fetch(getPageQuery(language), {
+      const pageData = await getClient(false)?.fetch(getPageQuery(language), {
         ...sitemapItem,
       });
       setPage(pageData);

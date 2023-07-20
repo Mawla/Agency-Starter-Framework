@@ -10,13 +10,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
   res.setHeader("Content-Type", "application/xml");
 
   const domain: ConfigType["general"]["domain"] =
-    (await getClient(false).fetch(
+    (await getClient(false)?.fetch(
       '*[_type == "config.general"] { "domain": domain.en }[0].domain',
     )) || "";
 
-  const pages: SitemapItemType[] = await getClient(false).fetch(
+  const pages = (await getClient(false).fetch(
     getSitemapQuery(),
-  );
+  )) as SitemapItemType[];
 
   const uniqueItemsDict: Record<string, string> = {};
 

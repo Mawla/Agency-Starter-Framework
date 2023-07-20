@@ -1,14 +1,14 @@
-import { COLORS } from "../../colors";
 import { pick } from "../../helpers/utils/object";
-import { ALIGNMENTS, SIZES, FONT_WEIGHTS } from "../../types";
+import { COLORS, FONT_WEIGHTS } from "../../theme";
+import { ALIGNMENTS, SIZES } from "../../types";
 
-export const BUTTON_BACKGROUND_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BUTTON_BACKGROUND_COLOR_OPTIONS = pick(COLORS);
 export type BackgroundColorType = keyof typeof BUTTON_BACKGROUND_COLOR_OPTIONS;
 
-export const BUTTON_TEXT_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BUTTON_TEXT_COLOR_OPTIONS = pick(COLORS);
 export type ButtonTextColorType = keyof typeof BUTTON_TEXT_COLOR_OPTIONS;
 
-export const BUTTON_BORDER_COLOR_OPTIONS = pick(COLORS, "white", "black");
+export const BUTTON_BORDER_COLOR_OPTIONS = pick(COLORS);
 export type ButtonBorderColorType = keyof typeof BUTTON_BORDER_COLOR_OPTIONS;
 
 export const BUTTON_SIZE_OPTIONS = pick(SIZES, "sm", "md");
@@ -23,11 +23,7 @@ export const BUTTON_ICON_POSITION_OPTIONS = {
 };
 export type ButtonIconPositionType = keyof typeof BUTTON_ICON_POSITION_OPTIONS;
 
-export const BUTTON_FONT_WEIGHT_OPTIONS = pick(
-  FONT_WEIGHTS,
-  "regular",
-  "medium",
-);
+export const BUTTON_FONT_WEIGHT_OPTIONS = pick(FONT_WEIGHTS);
 export type ButtonWeightType = keyof typeof BUTTON_FONT_WEIGHT_OPTIONS;
 
 export const buttonSizeClasses: Record<ButtonSizeType, string> = {
@@ -53,9 +49,4 @@ export const buttonAlignClasses: Record<ButtonAlignType, string> = {
   left: "justify-start",
   center: "justify-center",
   right: "justify-end",
-};
-
-export const buttonWeightClasses: Record<ButtonWeightType, string> = {
-  regular: "font-normal",
-  medium: "font-medium",
 };

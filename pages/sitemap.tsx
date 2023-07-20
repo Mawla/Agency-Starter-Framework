@@ -60,7 +60,7 @@ export default function Sitemap({
                 }}
               >
                 <IconLoader
-                  icon="chevron"
+                  icon="chevrondown"
                   className="w-3 h-3 -rotate-90 inline-block mr-1 align-middle"
                 />
                 {path && title && (
@@ -96,14 +96,14 @@ export const getStaticProps: GetStaticProps = async ({
   const language = locale as LanguageType;
 
   // fetch config
-  const config: ConfigType = await getClient(isPreviewMode).fetch(
+  const config = (await getClient(isPreviewMode).fetch(
     getConfigQuery(language),
-  );
+  )) as ConfigType;
 
   // fetch navigation
-  const navigation: NavigationType = await getClient(isPreviewMode).fetch(
+  const navigation = (await getClient(isPreviewMode).fetch(
     getNavigationQuery(language),
-  );
+  )) as NavigationType;
 
   // fetch page
   const sitemapItem: SitemapItemType = {
@@ -119,14 +119,14 @@ export const getStaticProps: GetStaticProps = async ({
   });
 
   // fetch navigation
-  const footer: FooterType = await getClient(isPreviewMode).fetch(
+  const footer = (await getClient(isPreviewMode).fetch(
     getFooterQuery(language),
-  );
+  )) as FooterType;
 
   // fetch sitemap
-  let sitemap: SitemapType = await getClient(isPreviewMode).fetch(
+  let sitemap = (await getClient(isPreviewMode).fetch(
     getSitemapQuery(),
-  );
+  )) as SitemapType;
   sitemap = sitemap
     ?.filter((item: any) => Boolean(item.path))
     ?.filter(

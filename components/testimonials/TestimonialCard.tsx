@@ -1,5 +1,5 @@
-import { backgroundClasses, textClasses } from "../../colors";
 import { TitleProps } from "../../components/block/Title";
+import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { TitleColorType } from "../block/title.options";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";

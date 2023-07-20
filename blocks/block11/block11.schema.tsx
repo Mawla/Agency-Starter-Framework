@@ -1,6 +1,10 @@
-import { COLORS } from "../../colors";
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
+import {
+  TITLE_FONT_OPTIONS,
+  TITLE_WEIGHT_OPTIONS,
+} from "../../components/block/title.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { COLORS } from "../../theme";
 import { HEADING_LEVELS } from "../../types";
 import {
   BACKGROUND_COLOR_OPTIONS,
@@ -135,6 +139,20 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(TITLE_SIZE_OPTIONS),
+                },
+              },
+              {
+                name: "weight",
+                type: "select",
+                options: {
+                  list: optionsToList(TITLE_WEIGHT_OPTIONS),
+                },
+              },
+              {
+                name: "font",
+                type: "select",
+                options: {
+                  list: optionsToList(TITLE_FONT_OPTIONS),
                 },
               },
               {
