@@ -1,19 +1,19 @@
-import { demoImage } from "../../stories/content";
-import { Block2 } from "./Block2";
 import {
-  AlignType,
-  ALIGN_OPTIONS,
-  BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-  IntroColorType,
-  IntroSizeType,
-  INTRO_COLOR_OPTIONS,
-  INTRO_SIZE_OPTIONS,
-  TitleColorType,
+  TextSizeType,
+  TEXT_SIZE_OPTIONS,
+} from "../../components/text/text.options";
+import {
   TitleSizeType,
-  TITLE_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
-} from "./block2.options";
+} from "../../components/title/title.options";
+import { demoImage } from "../../stories/content";
+import { COLORS } from "../../theme";
+import {
+  ColorType,
+  HorizontalAlignType,
+  HORIZONTAL_ALIGN_OPTIONS,
+} from "../../types";
+import { Block2 } from "./Block2";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -80,24 +80,22 @@ export const Default = () => <Block2 {...DEMO_CONTENT} />;
 
 export const BlockBackgrounds = () => (
   <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color) => (
-        <div key={color}>
-          <Block2
-            {...DEMO_CONTENT}
-            theme={{
-              block: { background: color },
-            }}
-          />
-        </div>
-      ),
-    )}
+    {(Object.keys(COLORS) as ColorType[]).map((color) => (
+      <div key={color}>
+        <Block2
+          {...DEMO_CONTENT}
+          theme={{
+            block: { background: color },
+          }}
+        />
+      </div>
+    ))}
   </>
 );
 
 export const TitleColors = () => (
   <>
-    {(Object.keys(TITLE_COLOR_OPTIONS) as TitleColorType[]).map((color) => (
+    {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block2
           {...DEMO_CONTENT}
@@ -127,7 +125,7 @@ export const TitleSizes = () => (
 
 export const IntroColors = () => (
   <>
-    {(Object.keys(INTRO_COLOR_OPTIONS) as IntroColorType[]).map((color) => (
+    {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block2
           {...DEMO_CONTENT}
@@ -142,7 +140,7 @@ export const IntroColors = () => (
 
 export const IntroSizes = () => (
   <>
-    {(Object.keys(INTRO_SIZE_OPTIONS) as IntroSizeType[]).map((size) => (
+    {(Object.keys(TEXT_SIZE_OPTIONS) as TextSizeType[]).map((size) => (
       <div key={size}>
         <Block2
           {...DEMO_CONTENT}
@@ -157,16 +155,18 @@ export const IntroSizes = () => (
 
 export const Alignments = () => (
   <>
-    {(Object.keys(ALIGN_OPTIONS) as AlignType[]).map((align) => (
-      <div key={align}>
-        <Block2
-          {...DEMO_CONTENT}
-          theme={{
-            block: { align },
-          }}
-        />
-      </div>
-    ))}
+    {(Object.keys(HORIZONTAL_ALIGN_OPTIONS) as HorizontalAlignType[]).map(
+      (align) => (
+        <div key={align}>
+          <Block2
+            {...DEMO_CONTENT}
+            theme={{
+              block: { align },
+            }}
+          />
+        </div>
+      ),
+    )}
   </>
 );
 
