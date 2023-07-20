@@ -65,7 +65,11 @@ export function getResponsiveImageUrl({
     newSrc = newSrc.rect(rect.left, rect.top, rect.width, rect.height);
   }
 
-  return newSrc.url();
+  try {
+    return newSrc.url();
+  } catch (error) {
+    return null;
+  }
 }
 
 export function getOriginalImageDimensions(src: string) {
