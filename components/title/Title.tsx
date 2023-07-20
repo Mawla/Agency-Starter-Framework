@@ -23,7 +23,7 @@ export type TitleProps = {
 export const Title = ({
   children,
   as = "h2",
-  size = "sm",
+  size = "4xl",
   weight = "bold",
   className,
   color = "black",
@@ -39,10 +39,10 @@ export const Title = ({
         "hyphens-auto",
         "break-words inline-block",
         "flex flex-col whitespace-pre-line",
-        textClasses[color],
-        titleSizeClasses[size],
-        weightClasses[weight],
-        fontClasses[font],
+        textClasses[color || "current"],
+        titleSizeClasses[size || "4xl"],
+        weightClasses[weight || "bold"],
+        fontClasses[font || "sans"],
         className,
       )}
     >
