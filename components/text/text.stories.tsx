@@ -1,3 +1,5 @@
+import { COLORS } from "../../theme";
+import { ColorType } from "../../types";
 import { Background } from "../block/Background";
 import {
   BackgroundColorType,
@@ -9,9 +11,7 @@ import {
   TextSizeType,
   TEXT_ALIGN_OPTIONS,
   TEXT_FONT_OPTIONS,
-  TEXT_COLOR_OPTIONS,
   TEXT_SIZE_OPTIONS,
-  TextColorType,
 } from "./text.options";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -58,13 +58,11 @@ export const Text = () => (
       </div>
     ))}
 
-    {(Object.keys(TEXT_COLOR_OPTIONS) as TextColorType[]).map(
-      (color: TextColorType) => (
-        <TextComponent color={color} background={color} key={color}>
-          <div className="p-4">Text color {color}</div>
-        </TextComponent>
-      ),
-    )}
+    {(Object.keys(COLORS) as ColorType[]).map((color: ColorType) => (
+      <TextComponent color={color} background={color} key={color}>
+        <div className="p-4">Text color {color}</div>
+      </TextComponent>
+    ))}
     {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
       (color: BackgroundColorType) => (
         <Background theme={{ background: color }} key={color}>

@@ -1,25 +1,15 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
-import { SpaceType } from "../../components/block/spacing.options";
+import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
+import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
+import { TitleThemeType } from "../../components/title/title.options";
 import { backgroundClasses } from "../../theme";
-import { HeadingLevelType, ImageType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  IntroSizeType,
-  AlignType,
-} from "./block2.options";
+import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -59,27 +49,11 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 
 export type Block2Props = {
   theme?: {
-    block?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-      align?: AlignType;
-    };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      size?: IntroSizeType;
-      color?: IntroColorType;
-    };
-
+    block?: BlockThemeType;
+    title?: TitleThemeType;
+    intro?: TextThemeType;
     items?: {
-      background?: BackgroundColorType;
+      background?: ColorType;
     };
   };
 
@@ -180,15 +154,8 @@ type ItemProps = {
   image?: ImageType;
   _key?: string;
   theme?: {
-    title?: {
-      size?: TitleSizeType;
-      color?: TitleColorType;
-      level?: HeadingLevelType;
-    };
-    intro?: {
-      size?: IntroSizeType;
-      color?: IntroColorType;
-    };
+    title?: TitleThemeType;
+    intro?: TextThemeType;
   };
 };
 const Item = ({ title, intro, image, theme }: ItemProps) => {

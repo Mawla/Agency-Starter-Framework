@@ -1,26 +1,16 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
-import { SpaceType } from "../../components/block/spacing.options";
+import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
+import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
+import { TitleThemeType } from "../../components/title/title.options";
 import { bumpHeadingLevel } from "../../helpers/utils/string";
-import { textClasses } from "../../theme";
-import { HeadingLevelType, ImageType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  IntroSizeType,
-  AlignType,
-} from "./block8.options";
+import { textAlignClasses, textClasses } from "../../theme";
+import { HeadingLevelType, HorizontalAlignType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -60,35 +50,14 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
 
 export type Block8Props = {
   theme?: {
-    block?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-      align?: AlignType;
-    };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      color?: IntroColorType;
-      size?: IntroSizeType;
-    };
+    block?: BlockThemeType;
+    title?: TitleThemeType;
+    intro?: TextThemeType;
   };
 
   title?: string;
   intro?: React.ReactNode;
   items?: ItemProps[];
-};
-
-const alignClasses: Record<AlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
 };
 
 const gridClasses: Record<number, string> = {
@@ -108,21 +77,21 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
     >
       <div
         className={cx(
-          alignClasses[theme?.block?.align || "center"],
+          textAlignClasses[theme?.block?.align || "center"],
           theme?.intro?.color && textClasses[theme?.intro?.color],
         )}
       >
         <div
           className={cx(
             "max-w-3xl",
-            alignClasses[theme?.block?.align || "center"],
+            textAlignClasses[theme?.block?.align || "center"],
           )}
         >
           {title && (
             <div
               className={cx(
                 "mb-6",
-                alignClasses[theme?.block?.align || "center"],
+                textAlignClasses[theme?.block?.align || "center"],
               )}
             >
               <Title
@@ -154,7 +123,7 @@ export const Block8 = ({ theme, title, intro, items }: Block8Props) => {
           <div
             className={cx(
               "mt-20 gap-x-12 gap-y-10 md:gap-x-24 max-w-4xl",
-              alignClasses[theme?.block?.align || "center"],
+              textAlignClasses[theme?.block?.align || "center"],
               gridClasses[items?.length <= 4 ? items?.length : 0],
             )}
           >
@@ -182,7 +151,7 @@ type ItemProps = {
   intro?: React.ReactNode;
   image?: ImageType;
   buttons?: ButtonProps[];
-  align?: AlignType;
+  align?: HorizontalAlignType;
   blockTitleLevel?: HeadingLevelType;
 };
 
@@ -206,7 +175,10 @@ const Item = ({
         <Title
           as={bumpHeadingLevel(blockTitleLevel || "h2") as HeadingLevelType}
           size="xl"
-          className={cx("text-current mb-2", alignClasses[align || "center"])}
+          className={cx(
+            "text-current mb-2",
+            textAlignClasses[align || "center"],
+          )}
         >
           {title}
         </Title>

@@ -1,6 +1,5 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
-import { SpaceType } from "../../components/block/spacing.options";
+import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
@@ -10,19 +9,12 @@ import {
   TestimonialType,
 } from "../../components/testimonials/Testimonials";
 import { TextProps } from "../../components/text/Text";
+import {
+  textAlignClasses,
+  TextThemeType,
+} from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
-import { HeadingLevelType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  IntroSizeType,
-  AlignType,
-} from "./block11.options";
+import { TitleThemeType } from "../../components/title/title.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -69,25 +61,9 @@ const TestimonialCard = lazy<ComponentType<TestimonialCardProps>>(
 
 export type Block11Props = {
   theme?: {
-    block?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-      align?: AlignType;
-    };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      color?: IntroColorType;
-      size?: IntroSizeType;
-    };
-
+    block?: BlockThemeType;
+    title?: TitleThemeType;
+    intro?: TextThemeType;
     testimonials?: TestimonialCardProps["theme"];
   };
 
@@ -95,12 +71,6 @@ export type Block11Props = {
   intro?: React.ReactNode;
   buttons?: ButtonProps[];
   testimonials?: TestimonialsProps["items"];
-};
-
-const alignClasses: Record<AlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
 };
 
 const gridClasses: Record<number, string> = {
@@ -141,7 +111,7 @@ export const Block11 = ({
       <div
         className={cx(
           "max-w-3xl",
-          alignClasses[theme?.block?.align || "center"],
+          textAlignClasses[theme?.block?.align || "center"],
         )}
       >
         {title && (
@@ -174,7 +144,7 @@ export const Block11 = ({
       <div
         className={cx(
           "max-w-screen-xl",
-          alignClasses[theme?.block?.align || "center"],
+          textAlignClasses[theme?.block?.align || "center"],
         )}
       >
         {testimonialsColumns?.length && (

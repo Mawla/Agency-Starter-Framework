@@ -1,24 +1,17 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
-import { SpaceType } from "../../components/block/spacing.options";
+import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
+import {
+  textAlignClasses,
+  TextThemeType,
+} from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
-import { HeadingLevelType, ImageType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  IntroSizeType,
-  AlignType,
-} from "./block6.options";
+import { TitleThemeType } from "../../components/title/title.options";
+import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -58,36 +51,15 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 
 export type Block6Props = {
   theme?: {
-    block?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-      align?: AlignType;
-    };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      color?: IntroColorType;
-      size?: IntroSizeType;
-    };
+    block?: BlockThemeType;
+    title?: TitleThemeType;
+    intro?: TextThemeType;
   };
 
   title?: string;
   intro?: React.ReactNode;
   buttons?: ButtonProps[];
   items?: ItemProps[];
-};
-
-const alignClasses: Record<AlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
 };
 
 export const Block6 = ({
@@ -104,7 +76,10 @@ export const Block6 = ({
       }}
     >
       <div
-        className={cx("max-w-3xl", alignClasses[theme?.block?.align || "left"])}
+        className={cx(
+          "max-w-3xl",
+          textAlignClasses[theme?.block?.align || "left"],
+        )}
       >
         {title && (
           <div className="mb-6">
@@ -157,15 +132,8 @@ type ItemProps = {
   image?: ImageType;
   _key?: string;
   theme?: {
-    title?: {
-      size?: TitleSizeType;
-      color?: TitleColorType;
-      level?: HeadingLevelType;
-    };
-    intro?: {
-      size?: IntroSizeType;
-      color?: IntroColorType;
-    };
+    title?: TitleThemeType;
+    intro?: TextThemeType;
   };
 };
 

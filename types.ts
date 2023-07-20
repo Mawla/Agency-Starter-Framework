@@ -1,3 +1,4 @@
+import { pick } from "./helpers/utils/object";
 import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
@@ -160,6 +161,14 @@ export const ALIGNMENTS = {
 
 export type AlignmentType = keyof typeof ALIGNMENTS;
 export type AlignmentsType = { [key in keyof typeof ALIGNMENTS]: string };
+
+export const HORIZONTAL_ALIGN_OPTIONS = pick(
+  ALIGNMENTS,
+  "left",
+  "center",
+  "right",
+);
+export type HorizontalAlignType = keyof typeof HORIZONTAL_ALIGN_OPTIONS;
 
 export const RATIOS = {
   auto: "Auto",

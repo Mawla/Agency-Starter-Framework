@@ -1,5 +1,8 @@
-import { pick } from "../../helpers/utils/object";
-import { ALIGNMENTS } from "../../types";
+import { ColorType, HorizontalAlignType } from "../../types";
+import { SpaceType } from "./spacing.options";
 
-export const ALIGN_OPTIONS = pick(ALIGNMENTS, "left", "center", "right");
-export type AlignType = keyof typeof ALIGN_OPTIONS;
+export type BlockThemeType = {
+  background?: ColorType;
+  space?: SpaceType;
+  align?: HorizontalAlignType;
+};
