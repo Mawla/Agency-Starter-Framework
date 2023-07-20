@@ -1,3 +1,4 @@
+import { pick } from "./helpers/utils/object";
 import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
@@ -72,7 +73,7 @@ export type TextElement =
   | "cite"
   | "blockquote";
 
-export const HEADING_LEVELS = {
+export const HTML_TEXT_NODES = {
   h1: "Heading 1",
   h2: "Heading 2",
   h3: "Heading 3",
@@ -82,10 +83,7 @@ export const HEADING_LEVELS = {
   span: "Span",
 };
 
-export type HeadingLevelType = keyof typeof HEADING_LEVELS;
-export type HeadingLevelsType = {
-  [key in keyof typeof HEADING_LEVELS]: string;
-};
+export type HtmlTextNodeType = keyof typeof HTML_TEXT_NODES;
 
 export type ImageType = {
   src: string;
@@ -160,6 +158,14 @@ export const ALIGNMENTS = {
 
 export type AlignmentType = keyof typeof ALIGNMENTS;
 export type AlignmentsType = { [key in keyof typeof ALIGNMENTS]: string };
+
+export const HORIZONTAL_ALIGN_OPTIONS = pick(
+  ALIGNMENTS,
+  "left",
+  "center",
+  "right",
+);
+export type HorizontalAlignType = keyof typeof HORIZONTAL_ALIGN_OPTIONS;
 
 export const RATIOS = {
   auto: "Auto",

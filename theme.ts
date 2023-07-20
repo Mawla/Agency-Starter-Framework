@@ -1,6 +1,11 @@
 import engineConfig from "./engine.config";
 import { isDarkColor } from "./helpers/utils/color";
-import { ColorType, FontType, FontWeightType } from "./types";
+import {
+  ColorType,
+  FontType,
+  FontWeightType,
+  HorizontalAlignType,
+} from "./types";
 
 export const COLORS = {
   ...engineConfig.theme.colors,
@@ -85,3 +90,9 @@ export const weightClasses: Record<FontWeightType, string> = Object.entries(
   (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
   {} as Record<ColorType, string>,
 );
+
+export const textAlignClasses: Record<HorizontalAlignType, string> = {
+  left: "text-left",
+  center: "text-center mx-auto",
+  right: "text-right ml-auto",
+};

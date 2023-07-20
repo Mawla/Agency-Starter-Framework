@@ -1,19 +1,19 @@
-import { demoImage } from "../../stories/content";
-import { Block8 } from "./Block8";
 import {
-  AlignType,
-  ALIGN_OPTIONS,
-  BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-  IntroColorType,
-  INTRO_COLOR_OPTIONS,
-  IntroSizeType,
-  INTRO_SIZE_OPTIONS,
-  TitleColorType,
+  TextSizeType,
+  TEXT_SIZE_OPTIONS,
+} from "../../components/text/text.options";
+import {
   TitleSizeType,
-  TITLE_COLOR_OPTIONS,
   TITLE_SIZE_OPTIONS,
-} from "./block8.options";
+} from "../../components/title/title.options";
+import { demoImage } from "../../stories/content";
+import { COLORS } from "../../theme";
+import {
+  ColorType,
+  HorizontalAlignType,
+  HORIZONTAL_ALIGN_OPTIONS,
+} from "../../types";
+import { Block8 } from "./Block8";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -94,13 +94,28 @@ export const SixItems = () => (
 
 export const BlockBackgrounds = () => (
   <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color) => (
-        <div key={color}>
+    {(Object.keys(COLORS) as ColorType[]).map((color) => (
+      <div key={color}>
+        <Block8
+          {...DEMO_CONTENT}
+          theme={{
+            block: { background: color },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const Alignments = () => (
+  <>
+    {(Object.keys(HORIZONTAL_ALIGN_OPTIONS) as HorizontalAlignType[]).map(
+      (align) => (
+        <div key={align}>
           <Block8
             {...DEMO_CONTENT}
             theme={{
-              block: { background: color },
+              block: { align },
             }}
           />
         </div>
@@ -109,24 +124,9 @@ export const BlockBackgrounds = () => (
   </>
 );
 
-export const Alignments = () => (
-  <>
-    {(Object.keys(ALIGN_OPTIONS) as AlignType[]).map((align) => (
-      <div key={align}>
-        <Block8
-          {...DEMO_CONTENT}
-          theme={{
-            block: { align },
-          }}
-        />
-      </div>
-    ))}
-  </>
-);
-
 export const TitleColors = () => (
   <>
-    {(Object.keys(TITLE_COLOR_OPTIONS) as TitleColorType[]).map((color) => (
+    {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block8
           title={DEMO_CONTENT.title}
@@ -156,7 +156,7 @@ export const TitleSizes = () => (
 
 export const IntroColors = () => (
   <>
-    {(Object.keys(INTRO_COLOR_OPTIONS) as IntroColorType[]).map((color) => (
+    {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block8
           intro={DEMO_CONTENT.intro}
@@ -171,7 +171,7 @@ export const IntroColors = () => (
 
 export const IntroSizes = () => (
   <>
-    {(Object.keys(INTRO_SIZE_OPTIONS) as IntroSizeType[]).map((size) => (
+    {(Object.keys(TEXT_SIZE_OPTIONS) as TextSizeType[]).map((size) => (
       <div key={size}>
         <Block8
           intro={DEMO_CONTENT.intro}

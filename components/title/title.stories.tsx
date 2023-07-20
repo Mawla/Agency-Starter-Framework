@@ -15,8 +15,6 @@ export const Default = () => (
     weight="bold"
     className="border"
     color="red"
-    eyebrow="eyebrow"
-    eyebrowColor="black"
     font="sans"
   >
     this is a title
@@ -39,10 +37,6 @@ export const TitleExample = () => (
 
 export const TitleAsSpan = () => (
   <Title as="span">Ready to dive in? Start your free trial.</Title>
-);
-
-export const WithEyebrow = () => (
-  <Title eyebrow="Hello">Ready to dive in? Start your free trial.</Title>
 );
 
 export const Sizes = () => (

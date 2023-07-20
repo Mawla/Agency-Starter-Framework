@@ -15,24 +15,10 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
+    import { WrapperProps } from "../../components/block/Wrapper";
+    import { BlockThemeType } from "../../components/block/block.options";
     import cx from "classnames";
-    import {  WrapperProps } from '../../components/block/Wrapper';
-    import { BackgroundColorType } from '../../components/block/background.options';
-    import { HeadingLevelType } from '../../types';
-    import { SpaceType } from '../../components/block/spacing.options';
-    import { backgroundClasses } from "../../theme";
-    ${render(
-      fields,
-      "title",
-      `import { TitleFontType, TitleWeightType } from "../../components/title/title.options";`,
-    )}
-    import { 
-      ${render(fields, "title", "TitleSizeType,")} 
-      ${render(fields, "title", "TitleColorType,")} 
-      ${render(fields, "intro", "IntroColorType, IntroSizeType,")} 
-      ${render(fields, "eyebrow", "EyebrowColorType,")} 
-      AlignType
-    } from './${lowerName}.options';
+    import { textAlignClasses } from "../../components/text/text.options";
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(
       () => 
@@ -44,6 +30,7 @@ export const getReactComponentSnippet = ({
       "title",
       `
     import { TitleProps } from "../../components/title/Title";
+    import { TitleThemeType } from "../../components/title/title.options";
     const Title = lazy<ComponentType<TitleProps>>(
       () => 
       import(/* webpackChunkName: "Title" */ '../../components/title/Title') 
@@ -56,6 +43,7 @@ export const getReactComponentSnippet = ({
       "intro",
       `
     import { TextProps } from "../../components/text/Text";
+    import { TextThemeType } from "../../components/text/text.options";
     const Text = lazy<ComponentType<TextProps>>(
       () => 
         import(/* webpackChunkName: "Text" */ '../../components/text/Text') 
@@ -96,58 +84,19 @@ export const getReactComponentSnippet = ({
 
     export type ${pascalName}Props = {
       theme?: {
-        block?: {
-          background?: BackgroundColorType;
-          space?: SpaceType;
-          align?: AlignType;
-        }
-        ${render(
-          fields,
-          "eyebrow",
-          `
-        eyebrow?: {
-          color?: EyebrowColorType;
-        },`,
-        )}
-        ${render(
-          fields,
-          "title",
-          `
-        title?: {
-          color?: TitleColorType;
-          size?: TitleSizeType;
-          level?: HeadingLevelType
-          font?: TitleFontType;
-          weight?: TitleWeightType;
-        },`,
-        )}
-        ${render(
-          fields,
-          "intro",
-          `
-        intro?: {
-          color?: IntroColorType;
-          size?: IntroSizeType;
-        },`,
-        )}
+        block?: BlockThemeType;
+        ${render(fields, "title", `title?: TitleThemeType;`)}
+        ${render(fields, "intro", `intro?: TextThemeType`)}
       };
-      ${render(fields, "eyebrow", "eyebrow?: string;")}
       ${render(fields, "title", "title?: string;")}
       ${render(fields, "intro", "intro?: React.ReactNode;")}
       ${render(fields, "image", "image?: ImageType;")}
       ${render(fields, "buttons", "buttons?: ButtonProps[];")}
       ${render(fields, "items", "items?: { _key?:string;title?:string }[];")}
-    };
-
-    const alignClasses:Record<AlignType, string> = {
-      left: "text-left",
-      center: "text-center mx-auto",
-      right: "text-right ml-auto",
-    };    
+    }; 
 
     export const ${pascalName} = ({ 
       theme,
-      ${render(fields, "eyebrow", `eyebrow,`)}
       ${render(fields, "title", `title,`)}
       ${render(fields, "intro", `intro,`)}
       ${render(fields, "image", `image,`)}
@@ -160,47 +109,23 @@ export const getReactComponentSnippet = ({
             ...theme?.block
           }}
         >
-        <div className={cx('max-w-3xl', alignClasses[theme?.block?.align || "center"])}>
+        <div className={cx('flex flex-col gap-6 max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
+          
           ${render(
             fields,
-            "eyebrow",
+            "title",
             `
-          {(title || eyebrow) && (
-            <div className="mb-6">
-              <Title 
-                size={theme?.title?.size || '4xl'} 
-                as={theme?.title?.level} 
-                color={theme?.title?.color} 
-                font={theme?.title?.font}
-                weight={theme?.title?.weight}
-                eyebrow={eyebrow} 
-                eyebrowColor={theme?.eyebrow?.color}
-              >{title}</Title>
-            </div>
-          )}`,
+            {title && (
+                <Title {...theme?.title} size={theme?.title?.size || "4xl"}>{title}</Title>
+        
+            )}`,
           )}
-
-          ${
-            !fields?.includes("eyebrow") && fields?.includes("title")
-              ? `
-          {title && (
-            <div className="mb-6">
-              <Title 
-                size={theme?.title?.size || '4xl'} 
-                as={theme?.title?.level} 
-                color={theme?.title?.color}
-              >{title}</Title>
-            </div>
-          )}`
-              : ""
-          }
 
           ${render(
             fields,
             "intro",
             `
           {intro && (
-            <div className="mb-6">
               <Text 
                 size={theme?.intro?.size || 'xl'} 
                 color={theme?.intro?.color}
@@ -208,7 +133,6 @@ export const getReactComponentSnippet = ({
               >
                 <PortableText content={intro as any} />
               </Text>
-            </div>
           )}`,
           )}
 
@@ -241,7 +165,7 @@ export const getReactComponentSnippet = ({
             "buttons",
             `
           {buttons && Boolean(buttons?.filter(Boolean).length) && (
-            <div className="mt-8 lg:mt-12">
+            <div className="mt-6">
               <ButtonGroup items={buttons} />
             </div>
           )}`,

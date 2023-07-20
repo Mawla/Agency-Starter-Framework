@@ -1,8 +1,7 @@
 import { fontClasses, textClasses, weightClasses } from "../../theme";
-import { HeadingLevelType } from "../../types";
+import { HtmlTextNodeType } from "../../types";
 import {
   TitleColorType,
-  TitleEyebrowColorType,
   TitleFontType,
   titleSizeClasses,
   TitleSizeType,
@@ -13,13 +12,11 @@ import React from "react";
 
 export type TitleProps = {
   children: React.ReactElement | React.ReactNode;
-  as?: HeadingLevelType;
+  as?: HtmlTextNodeType;
   size?: TitleSizeType;
   weight?: TitleWeightType;
   className?: string;
   color?: TitleColorType;
-  eyebrow?: string;
-  eyebrowColor?: TitleEyebrowColorType;
   font?: TitleFontType;
 };
 
@@ -30,8 +27,6 @@ export const Title = ({
   weight = "bold",
   className,
   color = "black",
-  eyebrow,
-  eyebrowColor = "black",
   font = "sans",
 }: TitleProps) => {
   if (!as) as = "h2";
@@ -51,17 +46,6 @@ export const Title = ({
         className,
       )}
     >
-      {eyebrow && (
-        <span
-          className={cx(
-            "block mb-[.5em]",
-            titleSizeClasses.md,
-            textClasses[eyebrowColor],
-          )}
-        >
-          {eyebrow}&nbsp;
-        </span>
-      )}
       {typeof children === "string" ? titleWords?.join(" ") : children}
     </Element>
   );

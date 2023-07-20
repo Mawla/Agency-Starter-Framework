@@ -1,6 +1,6 @@
 import { pick } from "../../helpers/utils/object";
-import { COLORS, FONTS } from "../../theme";
-import { ALIGNMENTS, SIZES } from "../../types";
+import { FONTS } from "../../theme";
+import { ALIGNMENTS, ColorType, SIZES } from "../../types";
 
 export const TEXT_ALIGN_OPTIONS = pick(
   ALIGNMENTS,
@@ -16,9 +16,6 @@ export type TextSizeType = keyof typeof TEXT_SIZE_OPTIONS;
 
 export const TEXT_FONT_OPTIONS = pick(FONTS);
 export type TextFontType = keyof typeof TEXT_FONT_OPTIONS;
-
-export const TEXT_COLOR_OPTIONS = pick(COLORS);
-export type TextColorType = keyof typeof TEXT_COLOR_OPTIONS;
 
 export const textAlignClasses: Record<TextAlignType, string> = {
   auto: "",
@@ -39,4 +36,9 @@ export const textFontClasses: Record<TextFontType, string> = {
   sans: "font-sans",
   mono: "font-mono",
   heading: "font-sans",
+};
+
+export type TextThemeType = {
+  size?: TextSizeType;
+  color?: ColorType;
 };

@@ -4,21 +4,11 @@ import { SpaceType } from "../../components/block/spacing.options";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
+import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
-import { HeadingLevelType } from "../../types";
+import { TitleThemeType } from "../../components/title/title.options";
 import { ImageType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  FeaturesColorType,
-  ImagePositionType,
-  IntroSizeType,
-} from "./block1.options";
+import { ImagePositionType } from "./block1.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -55,28 +45,12 @@ export type Block1Props = {
       background?: BackgroundColorType;
       space?: SpaceType;
     };
-
     image?: {
       position?: ImagePositionType;
     };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      size?: IntroSizeType;
-      color?: IntroColorType;
-    };
-
-    features?: {
-      size?: IntroSizeType;
-      color?: FeaturesColorType;
-    };
+    title?: TitleThemeType;
+    intro?: TextThemeType;
+    features?: TextThemeType;
   };
 
   title?: string;
@@ -102,13 +76,7 @@ export const Block1 = ({
         <div className="order-1 lg:pt-8">
           {title && (
             <div className="mb-4">
-              <Title
-                size={theme?.title?.size || "4xl"}
-                as={theme?.title?.level}
-                color={theme?.title?.color}
-                font={theme?.title?.font}
-                weight={theme?.title?.weight}
-              >
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
               </Title>
             </div>

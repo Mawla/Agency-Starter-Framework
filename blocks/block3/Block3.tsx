@@ -1,6 +1,5 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
-import { SpaceType } from "../../components/block/spacing.options";
+import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { GradientProps } from "../../components/gradient/Gradient";
@@ -8,20 +7,13 @@ import { GradientOpacityType } from "../../components/gradient/GradientOptions";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
+import {
+  textAlignClasses,
+  TextThemeType,
+} from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
-import { HeadingLevelType } from "../../types";
+import { TitleThemeType } from "../../components/title/title.options";
 import { ImageType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  AlignType,
-  IntroSizeType,
-} from "./block3.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -68,25 +60,9 @@ const Gradient = lazy<ComponentType<GradientProps>>(
 
 export type Block3Props = {
   theme?: {
-    block?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-      align?: AlignType;
-    };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      color?: IntroColorType;
-      size?: IntroSizeType;
-    };
-
+    block?: BlockThemeType;
+    title?: TitleThemeType;
+    intro?: TextThemeType;
     image?: {
       gradientFromOpacity?: GradientOpacityType;
       gradientToOpacity?: GradientOpacityType;
@@ -97,12 +73,6 @@ export type Block3Props = {
   intro?: React.ReactNode;
   image?: ImageType;
   buttons?: ButtonProps[];
-};
-
-const alignClasses: Record<AlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
 };
 
 export const Block3 = ({
@@ -133,18 +103,12 @@ export const Block3 = ({
       <div
         className={cx(
           "max-w-screen-sm relative z-10",
-          alignClasses[theme?.block?.align || "center"],
+          textAlignClasses[theme?.block?.align || "center"],
         )}
       >
         {title && (
           <div className="mb-4">
-            <Title
-              size={theme?.title?.size || "4xl"}
-              as={theme?.title?.level}
-              color={theme?.title?.color}
-              font={theme?.title?.font}
-              weight={theme?.title?.weight}
-            >
+            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
               {title}
             </Title>
           </div>

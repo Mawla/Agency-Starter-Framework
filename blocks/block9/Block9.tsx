@@ -1,24 +1,15 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
-import { SpaceType } from "../../components/block/spacing.options";
+import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
+import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
-import {
-  TitleFontType,
-  TitleWeightType,
-} from "../../components/title/title.options";
+import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
-import { HeadingLevelType, VideoType } from "../../types";
-import {
-  TitleSizeType,
-  TitleColorType,
-  IntroColorType,
-  IntroSizeType,
-  AlignType,
-} from "./block9.options";
+import { textAlignClasses } from "../../theme";
+import { VideoType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -55,36 +46,15 @@ const Video = lazy<ComponentType<VideoProps>>(
 
 export type Block9Props = {
   theme?: {
-    block?: {
-      background?: BackgroundColorType;
-      space?: SpaceType;
-      align?: AlignType;
-    };
-
-    title?: {
-      color?: TitleColorType;
-      size?: TitleSizeType;
-      level?: HeadingLevelType;
-      font?: TitleFontType;
-      weight?: TitleWeightType;
-    };
-
-    intro?: {
-      color?: IntroColorType;
-      size?: IntroSizeType;
-    };
+    block?: BlockThemeType;
+    title?: TitleThemeType;
+    intro?: TextThemeType;
   };
 
   title?: string;
   intro?: React.ReactNode;
   video?: VideoType;
   buttons?: ButtonProps[];
-};
-
-const alignClasses: Record<AlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
 };
 
 export const Block9 = ({
@@ -103,18 +73,12 @@ export const Block9 = ({
       <div
         className={cx(
           "max-w-3xl",
-          alignClasses[theme?.block?.align || "center"],
+          textAlignClasses[theme?.block?.align || "center"],
         )}
       >
         {title && (
           <div className="mb-6">
-            <Title
-              size={theme?.title?.size || "4xl"}
-              as={theme?.title?.level}
-              color={theme?.title?.color}
-              font={theme?.title?.font}
-              weight={theme?.title?.weight}
-            >
+            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
               {title}
             </Title>
           </div>

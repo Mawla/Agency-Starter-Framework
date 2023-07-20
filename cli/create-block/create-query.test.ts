@@ -16,15 +16,6 @@ test("create query with no fields", () => {
   ).toBeTruthy();
 });
 
-test("create query with eyebrow", () => {
-  const result = createQuery({
-    blockName: "Test",
-    fields: ["eyebrow"],
-  });
-
-  expect(result.includes(`eyebrow,`)).toBeTruthy();
-});
-
 test("create query with title", () => {
   const result = createQuery({
     blockName: "Test",

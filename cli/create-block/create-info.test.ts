@@ -5,7 +5,7 @@ test("create info file", () => {
     blockName: "Block 1",
     blockTitle: "Test",
     blockDescription: "testing 123",
-    fields: ["title", "eyebrow", "intro", "buttons", "image", "items"],
+    fields: ["title", "intro", "buttons", "image", "items"],
   });
 
   const resultObj = JSON.parse(result);
@@ -16,7 +16,7 @@ test("create info file", () => {
     description: "testing 123",
     name: "Block 1",
     schemaName: "block.block1",
-    fields: ["title", "eyebrow", "intro", "buttons", "image", "items"],
+    fields: ["title", "intro", "buttons", "image", "items"],
     date: "test-date",
   });
 });

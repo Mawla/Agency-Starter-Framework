@@ -21,24 +21,23 @@ export const getSchemaSnippet = ({
   return `
   import { SPACE_OPTIONS } from "../../components/block/spacing.options";
   import { optionsToList } from "../../studio/utils/fields/optionsToList";
-  ${render(fields, "title", `import { HEADING_LEVELS } from "../../types";`)}
+
+  import { defaultBlockTheme } from "../../components/block/block.schema";
   ${render(
     fields,
     "title",
-    `import { TITLE_FONT_OPTIONS, TITLE_WEIGHT_OPTIONS } from "../../components/title/title.options";`,
+    `import { defaultTitleTheme } from "../../components/title/title.schema";`,
   )}
+  ${render(
+    fields,
+    "intro",
+    `import { defaultTextTheme } from "../../components/text/text.schema";`,
+  )}
+
   import { EllipsisVerticalIcon } from "@sanity/icons";
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType } from "sanity";
-  import { BACKGROUND_COLOR_OPTIONS, ALIGN_OPTIONS
-    ${render(fields, "title", `, TITLE_COLOR_OPTIONS, TITLE_SIZE_OPTIONS`)}
-    ${render(fields, "eyebrow", `, EYEBROW_COLOR_OPTIONS`)}
-  ${render(
-    fields,
-    "intro",
-    `,INTRO_COLOR_OPTIONS, INTRO_SIZE_OPTIONS`,
-  )} } from "./${lowerName}.options";
 
   const schema = defineType({
     name: "${schemaName}",
@@ -49,17 +48,14 @@ export const getSchemaSnippet = ({
     preview: {
       select: {
         ${render(fields, "title", `title: "title",`)}
-        ${render(fields, "eyebrow", `eyebrow: "eyebrow",`)}
         ${render(fields, "image", `image: "image",`)}
       },
       prepare({ 
-        ${render(fields, "eyebrow", `eyebrow = "", `)}
         ${render(fields, "title", `title = "${blockTitle}", `)}
         ${render(fields, "image", `image`)}
       }: any) {
         return {
           ${render(fields, "title", `title: title,`)}
-          ${render(fields, "eyebrow", `subtitle: eyebrow,`)}
           ${render(
             fields,
             "image",
@@ -97,16 +93,6 @@ export const getSchemaSnippet = ({
         type: "copyPaste",
         group: "tools",
       }),
-      ${render(
-        fields,
-        "eyebrow",
-        `defineField({
-        name: "eyebrow",
-        title: "Eyebrow",
-        type: "string",
-        group: "content",
-      }),`,
-      )}
       ${render(
         fields,
         "title",
@@ -186,132 +172,9 @@ export const getSchemaSnippet = ({
         type: "object",
         group: "theme",
         fields: [
-          defineField({
-            name: "block",
-            title: "Block",
-            type: "styles",
-            options: {
-              fields: [
-                {
-                  name: "space",
-                  title: "Space",
-                  type: "space",
-                  options: {
-                    list: optionsToList(SPACE_OPTIONS),
-                  },
-                },
-                {
-                  name: "background",
-                  type: "color",
-                  options: {
-                    colors: BACKGROUND_COLOR_OPTIONS,
-                  },
-                },
-                {
-                  name: "align",
-                  type: "select",
-                  options: {
-                    list: optionsToList(ALIGN_OPTIONS),
-                  },
-                },
-              ],
-            },
-          }),
-          ${render(
-            fields,
-            "title",
-            `defineField({
-            name: "title",
-            title: "Title",
-            type: "styles",
-            options: {
-              fields: [
-                {
-                  name: "size",
-                  type: "select",
-                  options: {
-                    list: optionsToList(TITLE_SIZE_OPTIONS),
-                  },
-                },
-                {
-                  name: "weight",
-                  type: "select",
-                  options: {
-                    list: optionsToList(TITLE_WEIGHT_OPTIONS),
-                  },
-                },
-                {
-                  name: "font",
-                  type: "select",
-                  options: {
-                    list: optionsToList(TITLE_FONT_OPTIONS),
-                  },
-                },
-                {
-                  name: "level",
-                  type: "select",
-                  options: {
-                    list: optionsToList(HEADING_LEVELS),
-                  },
-                },
-                {
-                  name: "color",
-                  type: "color",
-                  options: {
-                    colors: TITLE_COLOR_OPTIONS,
-                  },
-                },
-              ],
-            },
-          }),`,
-          )}
-          ${render(
-            fields,
-            "eyebrow",
-            `defineField({
-            name: "eyebrow",
-            title: "Eyebrow",
-            type: "styles",
-            options: {
-              fields: [
-                {
-                  name: "color",
-                  type: "color",
-                  options: {
-                    colors: EYEBROW_COLOR_OPTIONS,
-                  },
-                },
-              ],
-            },
-          }),`,
-          )}
-          ${render(
-            fields,
-            "intro",
-            `defineField({
-            name: "intro",
-            title: "Intro",
-            type: "styles",
-            options: {
-              fields: [
-                {
-                  name: "size",
-                  type: "select",
-                  options: {
-                    list: optionsToList(INTRO_SIZE_OPTIONS),
-                  },
-                },
-                {
-                  name: "color",
-                  type: "color",
-                  options: {
-                    colors: INTRO_COLOR_OPTIONS,
-                  },
-                },
-              ],
-            },
-          }),`,
-          )}
+          defaultBlockTheme,
+          ${render(fields, "title", `defaultTitleTheme,`)}
+          ${render(fields, "intro", `defaultTextTheme,`)}
         ],
       }),
     ],

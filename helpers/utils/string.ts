@@ -1,4 +1,4 @@
-import { HeadingLevelType } from "../../types";
+import { HtmlTextNodeType } from "../../types";
 
 export const slugify = (str = "") => {
   return (str || "")
@@ -96,8 +96,8 @@ export function joinList(items: string[]) {
 
 export const bumpHeadingLevel = (
   tagName: string,
-): HeadingLevelType | string => {
+): HtmlTextNodeType | string => {
   const headings = ["h1", "h2", "h3", "h4", "h5"];
   if (!headings.includes(tagName)) return tagName;
-  return `h${+tagName.substring(1) + 1}` as HeadingLevelType;
+  return `h${+tagName.substring(1) + 1}` as HtmlTextNodeType;
 };
