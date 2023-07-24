@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const locales = require("./locales.js");
 
 // This file sets a custom webpack configuration to use your Next.js app
 // with Sentry.
@@ -27,7 +28,7 @@ const moduleExports = {
     excludeServerRoutes: ["/api/opengraph-image"],
   },
   i18n: {
-    locales: ["en", "it", "es"], // can't import typescript file in next.js
+    locales,
     defaultLocale: "en",
     localeDetection: false,
   },

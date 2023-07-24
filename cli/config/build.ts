@@ -8,6 +8,8 @@ import {
   formatSafelist,
 } from "./format-theme";
 
+const DO_NOT_EDIT_FLAG = `// NOTE: This file is auto generated and should not be edited!`;
+
 const PicoSanity = require("picosanity");
 const fs = require("fs").promises;
 
@@ -133,7 +135,7 @@ export default async function buildConfig() {
 
   await fs.writeFile(
     `${__dirname}/../../engine.config.js`,
-    `// NOTE: This file should not be edited
+    `${DO_NOT_EDIT_FLAG}
     
 export default ${JSON.stringify(config, null, 2)}`,
   );
@@ -142,6 +144,14 @@ export default ${JSON.stringify(config, null, 2)}`,
   await fs.writeFile(
     `${__dirname}/../../public/engine.styles.css`,
     config.stylesheets,
+  );
+
+  // write locales to file for use in next.config.js
+  await fs.writeFile(
+    `${__dirname}/../../locales.js`,
+    `${DO_NOT_EDIT_FLAG}
+    
+module.exports = ${JSON.stringify(config.languages.map(({ id }) => id))}`,
   );
 }
 

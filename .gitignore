@@ -56,3 +56,4 @@ development-*
 
 engine.config.js
 public/engine.styles.css
+locales.js
