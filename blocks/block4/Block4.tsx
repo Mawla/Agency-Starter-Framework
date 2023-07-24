@@ -54,7 +54,6 @@ export type Block4Props = {
     block?: BlockThemeType;
     title?: TitleThemeType;
     intro?: TextThemeType;
-    image?: ImageThemeType;
   };
 
   title?: string;
@@ -107,7 +106,7 @@ export const Block4 = ({
           <div className="mt-6">
             <ResponsiveImage
               {...image}
-              {...theme?.image}
+              preserveAspectRatio
               className="inline-block"
             />
           </div>

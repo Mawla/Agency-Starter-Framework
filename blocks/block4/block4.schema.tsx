@@ -1,5 +1,4 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
-import { defaultImageTheme } from "../../components/images/image.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
@@ -78,12 +77,7 @@ const schema = defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [
-        defaultBlockTheme,
-        defaultTitleTheme,
-        defaultTextTheme,
-        defaultImageTheme,
-      ],
+      fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
     }),
   ],
 });
