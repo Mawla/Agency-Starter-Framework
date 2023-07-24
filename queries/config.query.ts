@@ -28,7 +28,7 @@ export type ConfigType = {
   };
   integrations?: {
     gtmid?: string;
-    scripts?: ScriptsType[];
+    globalScripts?: ScriptsType[];
   };
   translations?: Record<TranslationFieldType, Record<LanguageType, string>>;
 };
@@ -47,7 +47,7 @@ export const getConfigQuery = (language: LanguageType) => groq`
   "social": *[_id == 'config_social'][0],
   "integrations": *[_id == 'config_integrations'][0] {
     gtmid,
-    "scripts": scripts[].script -> {
+    "globalScripts": globalScripts[].script -> {
       title,
       items[]
     }

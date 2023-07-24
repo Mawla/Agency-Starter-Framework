@@ -104,16 +104,18 @@ export const Page = ({
           />
         )}
 
-        {!isPreviewMode &&
-          config.integrations?.scripts
-            ?.filter(Boolean)
-            .map((script) => (
-              <Scripts
-                key={script.title}
-                title={script.title}
-                items={script.items}
-              />
-            ))}
+        {[
+          ...(config?.integrations?.globalScripts || []),
+          ...(page.scripts || []),
+        ]
+          ?.filter(Boolean)
+          .map((script) => (
+            <Scripts
+              key={script.title}
+              title={script.title}
+              items={script.items}
+            />
+          ))}
       </PageContext.Provider>
     </SiteContext.Provider>
   );

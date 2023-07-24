@@ -103,13 +103,6 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
         },
         types: {
           "image.simple"({ value }) {
-            const imageJsonLd = {
-              "@context": "https://schema.org/",
-              "@type": "ImageObject",
-              contentUrl: value?.image?.src,
-              description: value?.image?.alt || value?.caption,
-            };
-
             return (
               <div className="not-prose my-8 md:my-12 lg:my-16 prose-media">
                 <figure>
@@ -142,7 +135,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
           csv({ value }) {
             return <Table {...value} />;
           },
-          script({ value }) {
+          scriptRef({ value }) {
             return <Scripts {...value} />;
           },
         },

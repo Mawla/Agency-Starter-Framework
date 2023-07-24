@@ -1,4 +1,5 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
+import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { Programming } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -39,18 +40,7 @@ const schema = defineType({
     },
   ],
   fields: [
-    defineField({
-      name: "preset",
-      title: "Preset",
-      type: "preset",
-      group: "tools",
-    }),
-    defineField({
-      name: "copyPaste",
-      title: "Copy Paste",
-      type: "copyPaste",
-      group: "tools",
-    }),
+    ...defaultBlockTools,
     defineField({
       name: "title",
       title: "Title",
@@ -72,7 +62,28 @@ const schema = defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme],
+      fields: [
+        defaultBlockTheme,
+        defineField({
+          name: "code",
+          title: "Code",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "removeWebsiteStyles",
+                title: "Remove website styles",
+                type: "boolean",
+              },
+              {
+                name: "removeTailwindCompiler",
+                title: "Remove Tailwind compiler",
+                type: "boolean",
+              },
+            ],
+          },
+        }),
+      ],
     }),
   ],
 });

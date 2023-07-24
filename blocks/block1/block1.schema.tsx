@@ -1,8 +1,8 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
+import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { COLORS } from "../../theme";
 import { IMAGE_POSITION_OPTIONS } from "./block1.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { VirtualRealityImage } from "@vectopus/atlas-icons-react";
@@ -44,18 +44,7 @@ const schema = defineType({
     },
   ],
   fields: [
-    defineField({
-      name: "preset",
-      title: "Preset",
-      type: "preset",
-      group: "tools",
-    }),
-    defineField({
-      name: "copyPaste",
-      title: "Copy Paste",
-      type: "copyPaste",
-      group: "tools",
-    }),
+    ...defaultBlockTools,
 
     defineField({
       name: "title",

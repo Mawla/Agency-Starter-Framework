@@ -4,7 +4,7 @@ import {
   formatFontWeight,
   formatFontSize,
   formatSafelist,
-} from "./build";
+} from "./format-theme";
 
 test("format colors", () => {
   const result = formatColors([

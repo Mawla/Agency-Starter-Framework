@@ -18,8 +18,6 @@ export const CharacterCounter: ComponentType<any> = (
 ) => {
   const { value, renderDefault, schemaType } = props;
 
-  console.log(props);
-
   return (
     <Stack space={2}>
       <Text

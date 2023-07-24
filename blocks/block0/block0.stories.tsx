@@ -1,4 +1,4 @@
-import { Block0, Block0Props } from "./Block0";
+import { Block0 } from "./Block0";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -7,8 +7,30 @@ export default {
   title: "Blocks/Block0",
 } as Meta;
 
-const DEMO_CONTENT: Block0Props = {
-  html: "<p>hello</p>",
-};
+export const Default = () => (
+  <Block0
+    html={`<p class="bg-black text-white text-9xl">This should show a tailwind styled paragraph</p>`}
+  />
+);
 
-export const Default = () => <Block0 {...DEMO_CONTENT} />;
+export const WithoutWebsiteStyles = () => (
+  <Block0
+    html={`<p>This should not include a tailwind config from the site, but be an object.</p><script>document.write(JSON.stringify(tailwind.config))</script>`}
+    theme={{
+      code: {
+        removeWebsiteStyles: true,
+      },
+    }}
+  />
+);
+
+export const WithoutTailwindCompiler = () => (
+  <Block0
+    html={`<p>This should render as an unstyled paragraph and be undefined.</p><script>document.write(JSON.stringify(typeof tailwind))</script>`}
+    theme={{
+      code: {
+        removeTailwindCompiler: true,
+      },
+    }}
+  />
+);
