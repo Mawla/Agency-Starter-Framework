@@ -110,7 +110,7 @@ export const Block1 = ({
         {image && (
           <div
             className={cx(
-              "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full",
+              "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
               {
                 ["aspect-video"]: theme?.image?.preserveAspectRatio !== true,
                 ["lg:order-2"]: theme?.layout?.imagePosition !== "left",
