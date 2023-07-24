@@ -37,8 +37,8 @@ export default defineType({
       description: "Formatted as `GTM-XXXXXX`.",
     }),
     defineField({
-      name: "scripts",
-      title: "Scripts",
+      name: "globalScripts",
+      title: "Global scripts",
       type: "array",
       description:
         "Scripts to load on every page. Beware this will slow down the website.",

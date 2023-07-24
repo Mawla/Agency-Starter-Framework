@@ -5,6 +5,7 @@ import { Coding, CodingWebsite } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
   ConditionalPropertyCallback,
+  defineArrayMember,
   defineField,
   defineType,
   StringRule,
@@ -42,18 +43,20 @@ export default defineType({
       type: "array",
       of: [
         defineField({
-          name: "script",
+          name: "item",
           title: "Script",
           type: "object",
           preview: {
             select: {
               title: "title",
               code: "code",
+              html: "html",
+              src: "src",
             },
-            prepare: ({ title, code }) => {
+            prepare: ({ title, code, html, src }) => {
               return {
-                title: title,
-                subtitle: code,
+                title: title || code || html || src,
+                subtitle: code || html || src,
                 media: <Coding weight="thin" />,
               };
             },
@@ -75,7 +78,6 @@ export default defineType({
               title: "Title",
               type: "string",
               description: "Name of the script",
-              validation: (Rule: StringRule) => Rule.required(),
               group: "script",
             }),
             defineField({
@@ -113,7 +115,7 @@ export default defineType({
               description: "Attributes to be placed on the script tag",
               type: "array",
               of: [
-                defineField({
+                defineArrayMember({
                   name: "attribute",
                   title: "Attribute",
                   type: "object",
@@ -179,7 +181,7 @@ export default defineType({
 
 export const SCRIPT_REFERENCE_FIELD = {
   type: "object",
-  name: "script",
+  name: "scriptRef",
   title: "Script",
   icon: () => <CodingWebsite weight="thin" />,
   preview: {

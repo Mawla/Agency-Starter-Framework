@@ -27,7 +27,7 @@ _type == "csv" => {
 }`;
 
 export const richtextScript = `
-_type == "script" => {
+_type == "scriptRef" => {
   ...script-> {
     title,
     items[]

@@ -3,21 +3,19 @@ import cx from "classnames";
 import NextScript from "next/script";
 import React, { useContext } from "react";
 
-export type ScriptType = {
-  _key?: string;
-  title?: string;
-  code?: "string";
-  html?: "string";
-  src?: "string";
-  onload?: "string";
-  onready?: "string";
-  onerror?: "string";
-  attributes: { name?: string; value?: string }[];
-};
-
 export type ScriptsType = {
   title?: string;
-  items?: ScriptType[];
+  items?: {
+    _key?: string;
+    title?: string;
+    code?: "string";
+    html?: "string";
+    src?: "string";
+    onload?: "string";
+    onready?: "string";
+    onerror?: "string";
+    attributes: { name?: string; value?: string }[];
+  }[];
 };
 
 export const Scripts = ({ items }: ScriptsType) => {
