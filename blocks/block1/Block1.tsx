@@ -75,7 +75,7 @@ export const Block1 = ({
       }}
     >
       <div className="gap-8 items-center grid lg:grid-cols-2 xl:gap-16">
-        <div className="order-1 lg:pt-8">
+        <div className="order-1">
           {title && (
             <div className="mb-4">
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
