@@ -151,7 +151,9 @@ export default ${JSON.stringify(config, null, 2)}`,
     `${__dirname}/../../locales.js`,
     `${DO_NOT_EDIT_FLAG}
     
-module.exports = ${JSON.stringify(config.languages.map(({ id }) => id))}`,
+module.exports = ${JSON.stringify(
+      (config.languages || ["en"]).map(({ id }) => id),
+    )}`,
   );
 }
 
