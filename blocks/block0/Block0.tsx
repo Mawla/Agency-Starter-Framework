@@ -25,7 +25,7 @@ export type Block0Props = {
   html?: string;
 };
 
-export const Block0 = ({ theme, _key, html }: Block0Props) => {
+export const Block0 = ({ theme, _key, html = "" }: Block0Props) => {
   const [tailwindConfig, setTailwindConfig] = useState<string>("");
 
   /**
