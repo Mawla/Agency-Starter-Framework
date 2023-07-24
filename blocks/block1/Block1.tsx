@@ -2,6 +2,7 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import { TextThemeType } from "../../components/text/text.options";
@@ -45,9 +46,10 @@ export type Block1Props = {
       background?: BackgroundColorType;
       space?: SpaceType;
     };
-    image?: {
-      position?: ImagePositionType;
+    layout?: {
+      imagePosition?: ImagePositionType;
     };
+    image?: ImageThemeType;
     title?: TitleThemeType;
     intro?: TextThemeType;
     features?: TextThemeType;
@@ -73,7 +75,7 @@ export const Block1 = ({
       }}
     >
       <div className="gap-8 items-center grid lg:grid-cols-2 xl:gap-16">
-        <div className="order-1 lg:pt-8">
+        <div className="order-1">
           {title && (
             <div className="mb-4">
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
@@ -108,14 +110,23 @@ export const Block1 = ({
         {image && (
           <div
             className={cx(
-              "order-0 aspect-video mb-4 w-full lg:mb-0 lg:flex relative md:h-full",
-              theme?.image?.position === "left" ? "lg:order-0" : "lg:order-2",
+              "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
+              {
+                ["aspect-video"]: theme?.image?.preserveAspectRatio !== true,
+                ["lg:order-2"]: theme?.layout?.imagePosition !== "left",
+                ["lg:order-0"]: theme?.layout?.imagePosition === "left",
+              },
             )}
           >
             <ResponsiveImage
               {...image}
-              fill
-              className="absolute inset-0"
+              {...theme?.image}
+              fill={theme?.image?.preserveAspectRatio !== true}
+              className={
+                theme?.image?.preserveAspectRatio !== true
+                  ? "absolute inset-0"
+                  : ""
+              }
               roundSize={25}
             />
           </div>

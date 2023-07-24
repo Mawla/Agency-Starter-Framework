@@ -139,8 +139,8 @@ export const ImagePosition = () => (
     <Block1
       {...DEMO_CONTENT}
       theme={{
-        image: {
-          position: "left",
+        layout: {
+          imagePosition: "left",
         },
       }}
       title="left"
@@ -148,8 +148,8 @@ export const ImagePosition = () => (
     <Block1
       {...DEMO_CONTENT}
       theme={{
-        image: {
-          position: "right",
+        layout: {
+          imagePosition: "right",
         },
       }}
       title="right"

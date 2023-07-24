@@ -77,3 +77,17 @@ const schema = defineType({
 });
 
 export default schema;
+
+export const defaultImageTheme = defineField({
+  name: "image",
+  title: "Image",
+  type: "styles",
+  options: {
+    fields: [
+      {
+        name: "preserveAspectRatio",
+        type: "boolean",
+      },
+    ],
+  },
+});

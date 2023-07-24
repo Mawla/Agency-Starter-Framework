@@ -21,6 +21,7 @@ export const getSchemaSnippet = ({
   return `
   import { SPACE_OPTIONS } from "../../components/block/spacing.options";
   import { optionsToList } from "../../studio/utils/fields/optionsToList";
+  import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 
   import { defaultBlockTheme } from "../../components/block/block.schema";
   ${render(
@@ -81,18 +82,7 @@ export const getSchemaSnippet = ({
       },
     ],
     fields: [
-      defineField({
-        name: "preset",
-        title: "Preset",
-        type: "preset",
-        group: "tools",
-      }),
-      defineField({
-        name: "copyPaste",
-        title: "Copy Paste",
-        type: "copyPaste",
-        group: "tools",
-      }),
+    ...defaultBlockTools,
       ${render(
         fields,
         "title",

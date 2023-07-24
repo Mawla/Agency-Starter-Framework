@@ -63,7 +63,7 @@ export type Block3Props = {
     block?: BlockThemeType;
     title?: TitleThemeType;
     intro?: TextThemeType;
-    image?: {
+    overlay?: {
       gradientFromOpacity?: GradientOpacityType;
       gradientToOpacity?: GradientOpacityType;
     };
@@ -93,8 +93,8 @@ export const Block3 = ({
           <ResponsiveImage {...image} fill className="absolute inset-0" />
 
           <Gradient
-            from={theme?.image?.gradientFromOpacity || 0.2}
-            to={theme?.image?.gradientToOpacity || 0.4}
+            from={theme?.overlay?.gradientFromOpacity || 0.2}
+            to={theme?.overlay?.gradientToOpacity || 0.4}
             className="z-10"
           />
         </div>
