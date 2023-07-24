@@ -2,6 +2,7 @@ import { defaultBlockTheme } from "../../components/block/block.schema";
 import { GRADIENT_OPACITY_OPTIONS } from "../../components/gradient/GradientOptions";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
+import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { ClickBait } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -43,18 +44,7 @@ const schema = defineType({
     },
   ],
   fields: [
-    defineField({
-      name: "preset",
-      title: "Preset",
-      type: "preset",
-      group: "tools",
-    }),
-    defineField({
-      name: "copyPaste",
-      title: "Copy Paste",
-      type: "copyPaste",
-      group: "tools",
-    }),
+    ...defaultBlockTools,
 
     defineField({
       name: "title",
