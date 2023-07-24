@@ -106,7 +106,7 @@ export const Page = ({
 
         {[
           ...(config?.integrations?.globalScripts || []),
-          ...(page.scripts || []),
+          ...(page?.scripts || []),
         ]
           ?.filter(Boolean)
           .map((script) => (
