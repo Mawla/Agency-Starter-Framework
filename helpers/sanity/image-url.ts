@@ -10,6 +10,7 @@ type GetResponsiveImageUrlProps = {
   hotspot: ImageType["hotspot"];
   blur?: number;
   quality?: number | null;
+  preserveAspectRatio?: boolean;
 };
 
 const IMAGE_QUALITY = 85;
@@ -24,18 +25,26 @@ export function getResponsiveImageUrl({
   hotspot,
   blur = 0,
   quality = IMAGE_QUALITY,
+  preserveAspectRatio,
 }: GetResponsiveImageUrlProps) {
   if (!src) return null;
 
-  const { width: originalWidth, height: originalHeight } =
-    getOriginalImageDimensions(src);
+  const {
+    width: originalWidth,
+    height: originalHeight,
+    aspectRatio,
+  } = getOriginalImageDimensions(src);
 
   const dpr = typeof window === "undefined" ? 1 : window.devicePixelRatio || 1;
   let newSrc = imageBuilder.image(src).auto("format");
+
   if (quality) newSrc = newSrc.quality(IMAGE_QUALITY);
   if (blur) newSrc = newSrc.blur(blur);
   if (width) newSrc = newSrc.width(Math.ceil(width * dpr));
-  if (height) newSrc = newSrc.height(Math.ceil(height * dpr));
+  if (height)
+    newSrc = newSrc.height(
+      Math.ceil((preserveAspectRatio ? width / aspectRatio : height) * dpr),
+    );
   if (hotspot?.x && hotspot?.y)
     newSrc = newSrc
       .crop("focalpoint")

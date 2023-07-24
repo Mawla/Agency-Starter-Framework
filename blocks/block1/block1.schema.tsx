@@ -1,4 +1,5 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
+import { defaultImageTheme } from "../../components/images/image.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
@@ -81,15 +82,16 @@ const schema = defineType({
       group: "theme",
       fields: [
         defaultBlockTheme,
+        defaultImageTheme,
         defineField({
-          name: "image",
-          title: "Image",
+          name: "layout",
+          title: "Layout",
           type: "styles",
           options: {
             fields: [
               {
-                name: "position",
-                title: "Position",
+                name: "imagePosition",
+                title: "Image position",
                 type: "select",
                 options: {
                   list: optionsToList(IMAGE_POSITION_OPTIONS),

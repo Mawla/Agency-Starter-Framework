@@ -16,6 +16,7 @@ export type ResponsiveImageProps = {
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
+  preserveAspectRatio?: boolean;
 } & NextImageProps;
 
 const IMAGE_QUALITY = 85;
@@ -44,6 +45,7 @@ export const ResponsiveImage = ({
   ratio,
   roundSize = 0,
   fill = false,
+  preserveAspectRatio,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -66,6 +68,7 @@ export const ResponsiveImage = ({
       hotspot,
       crop,
       blur: 10,
+      preserveAspectRatio,
     });
   }
 
@@ -126,6 +129,7 @@ export const ResponsiveImage = ({
         hotspot,
         crop,
         quality,
+        preserveAspectRatio,
       }),
     );
   }, [

@@ -84,8 +84,8 @@ const schema = defineType({
         defaultTitleTheme,
         defaultTextTheme,
         defineField({
-          name: "image",
-          title: "Image",
+          name: "overlay",
+          title: "Image overlay",
           type: "styles",
           options: {
             fields: [
