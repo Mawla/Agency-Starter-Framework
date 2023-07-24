@@ -62,7 +62,28 @@ const schema = defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme],
+      fields: [
+        defaultBlockTheme,
+        defineField({
+          name: "code",
+          title: "Code",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "removeWebsiteStyles",
+                title: "Remove website styles",
+                type: "boolean",
+              },
+              {
+                name: "removeTailwindCompiler",
+                title: "Remove Tailwind compiler",
+                type: "boolean",
+              },
+            ],
+          },
+        }),
+      ],
     }),
   ],
 });
