@@ -46,7 +46,7 @@ export const Image = () => (
       intro: {
         color: "white",
       },
-      image: {
+      overlay: {
         gradientFromOpacity: 0.5,
         gradientToOpacity: 0.2,
       },
