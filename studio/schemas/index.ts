@@ -63,7 +63,7 @@ import studioDivider from "./documents/studio.divider";
 import copypaste from "./objects/copypaste";
 import preset from "./objects/preset";
 import styles from "./objects/styles";
-import swapSchema from "./objects/swapSchema";
+import swapSchema from "./objects/swapschema";
 
 export const schemaTypes = [
   ...[
