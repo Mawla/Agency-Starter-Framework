@@ -7,7 +7,7 @@ jest.mock("next/dist/client/router", () => require("next-router-mock"));
 describe("Block0", () => {
   it("renders title", async () => {
     await act(() => {
-      render(<Block0 html="<p>hello</p>" />);
+      render(<Block0 bodyHTML="<p>hello</p>" />);
     });
     expect(screen.getByTitle("iframe")).toBeInTheDocument();
   });
