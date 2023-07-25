@@ -48,11 +48,28 @@ const schema = defineType({
       group: "content",
     }),
     defineField({
-      name: "html",
-      title: "HTML",
+      name: "bodyHTML",
+      title: "Body HTML",
       type: "text",
       description:
-        "Be careful, this is raw HTML and can slow down the website. Use with caution. The HTML will be wrapped in an <iframe> tag.",
+        "Html to be placed in the <body>. Be careful, this is raw HTML and can slow down the website. Use with caution. The HTML will be wrapped in an <iframe> tag.",
+      group: "content",
+      rows: 10,
+    }),
+    defineField({
+      name: "tailwindConfig",
+      title: "Tailwind config",
+      type: "text",
+      description: "A config that looks like `tailwind.config = {}`",
+      group: "content",
+      rows: 10,
+    }),
+    defineField({
+      name: "headHTML",
+      title: "Head HTML",
+      type: "text",
+      description:
+        "Html to be placed in the <head>. Be careful, this is raw HTML and can slow down the website. Use with caution. The HTML will be wrapped in an <iframe> tag.",
       group: "content",
       rows: 10,
     }),
@@ -60,7 +77,8 @@ const schema = defineType({
       name: "baseURL",
       title: "Base URL",
       type: "url",
-      description: "The base URL for relative assets in the HTML.",
+      description: "The base URL to resolve relative assets in the HTML.",
+      group: "content",
     }),
 
     defineField({
@@ -76,6 +94,11 @@ const schema = defineType({
           type: "styles",
           options: {
             fields: [
+              {
+                name: "removeWrapper",
+                title: "Remove block wrapper",
+                type: "boolean",
+              },
               {
                 name: "removeWebsiteStyles",
                 title: "Remove website styles",

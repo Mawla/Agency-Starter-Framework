@@ -21,19 +21,43 @@ export type Block0Props = {
     code?: {
       removeWebsiteStyles?: boolean;
       removeTailwindCompiler?: boolean;
+      removeWrapper?: boolean;
     };
   };
   _key?: string;
-  html?: string;
+  headHTML?: string;
+  bodyHTML?: string;
   baseURL?: string;
+  tailwindConfig?: string;
 };
 
-export const Block0 = ({ theme, _key, html = "", baseURL }: Block0Props) => {
+export const Block0 = ({
+  theme,
+  _key,
+  headHTML = "",
+  bodyHTML = "",
+  baseURL,
+  tailwindConfig = "",
+}: Block0Props) => {
   const [websiteHTML, setWebsiteHTML] = useState<string>("");
-  const baseTag = baseURL ? `<base href="${baseURL}" />` : "";
 
-  html = html.replace("<body", "<div").replace("</body", "</div");
+  // remove <head>
+  headHTML = headHTML?.replace("<head>", "").replace("</head", "");
 
+  // remove <body>
+  bodyHTML = bodyHTML?.replace("<body", "<div").replace("</body", "</div");
+
+  // replace src="foo" with src="baseURL/foo"
+  bodyHTML = bodyHTML
+    ?.replace(/(src=")(?!http)(.*?)/g, `$1${baseURL || ""}$2`)
+    ?.replace(/(url\(')(?!http)(.*?)/g, `$1${baseURL || ""}$2`);
+
+  // remove script tags from tailwind config field
+  tailwindConfig = tailwindConfig
+    ?.replace("<script>", "")
+    .replace("</script>", "");
+
+  // add tailwind compiler js
   const tailwindCompilerHTML = theme?.code?.removeTailwindCompiler
     ? ""
     : `<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>`;
@@ -54,7 +78,7 @@ export const Block0 = ({ theme, _key, html = "", baseURL }: Block0Props) => {
         fontWeight[] { name, value },
       }`);
 
-      const tailwindConfig = `
+      const websiteTailwindConfig = `
       if (typeof tailwind !== 'undefined') {
         tailwind.config = {
           theme: {
@@ -77,7 +101,7 @@ export const Block0 = ({ theme, _key, html = "", baseURL }: Block0Props) => {
       setWebsiteHTML(
         `
       <link rel="stylesheet" href="/engine.styles.css" />
-      <script>${tailwindConfig}</script>
+      <script>${websiteTailwindConfig}</script>
       `.replace(/\n/g, ""),
       );
     }
@@ -85,20 +109,25 @@ export const Block0 = ({ theme, _key, html = "", baseURL }: Block0Props) => {
     getTheme();
   }, [theme?.code]);
 
-  if (!html) return null;
+  if (!headHTML && !bodyHTML) return null;
+
+  const iframeProps = {
+    checkOrigin: false,
+    className: "w-full",
+    id: _key,
+    srcDoc: `<html><head>${headHTML}</head><body>${tailwindCompilerHTML}<script>${tailwindConfig}</script>${websiteHTML}${bodyHTML}</script><script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script></body></html>`,
+  };
+
+  if (theme?.code?.removeWrapper) return <IframeResizer {...iframeProps} />;
 
   return (
     <Wrapper
       theme={{
         ...theme?.block,
+        width: "full",
       }}
     >
-      <IframeResizer
-        checkOrigin={false}
-        className="w-full"
-        id={_key}
-        srcDoc={`<html><head>${baseTag}</head><body><script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script>${tailwindCompilerHTML}${websiteHTML}${html}</script></body></html>`}
-      />
+      <IframeResizer {...iframeProps} />
     </Wrapper>
   );
 };
