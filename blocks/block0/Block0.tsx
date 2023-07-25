@@ -30,6 +30,8 @@ export type Block0Props = {
 export const Block0 = ({ theme, _key, html = "" }: Block0Props) => {
   const [websiteHTML, setWebsiteHTML] = useState<string>("");
 
+  html = html.replace("<body", "<div").replace("</body", "</div");
+
   const tailwindCompilerHTML = theme?.code?.removeTailwindCompiler
     ? ""
     : `<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>`;
@@ -93,7 +95,7 @@ export const Block0 = ({ theme, _key, html = "" }: Block0Props) => {
         checkOrigin={false}
         className="w-full"
         id={_key}
-        srcDoc={`<html><head></head><body>${tailwindCompilerHTML}${websiteHTML}${html}</script><script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script></body></html>`}
+        srcDoc={`<html><head></head><body><script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script>${tailwindCompilerHTML}${websiteHTML}${html}</script></body></html>`}
       />
     </Wrapper>
   );
