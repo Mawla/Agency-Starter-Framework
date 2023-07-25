@@ -9,13 +9,13 @@ export default {
 
 export const Default = () => (
   <Block0
-    html={`<p class="bg-black text-white text-9xl">This should show a tailwind styled paragraph</p>`}
+    bodyHTML={`<p class="bg-black text-white text-9xl">This should show a tailwind styled paragraph</p>`}
   />
 );
 
 export const WithoutWebsiteStyles = () => (
   <Block0
-    html={`<p>This should not include a tailwind config from the site, but be an object.</p><script>document.write(JSON.stringify(tailwind.config))</script>`}
+    bodyHTML={`<p>This should not include a tailwind config from the site, but be an object.</p><script>document.write(JSON.stringify(tailwind.config))</script>`}
     theme={{
       code: {
         removeWebsiteStyles: true,
@@ -26,7 +26,7 @@ export const WithoutWebsiteStyles = () => (
 
 export const WithoutTailwindCompiler = () => (
   <Block0
-    html={`<p>This should render as an unstyled paragraph and be undefined.</p><script>document.write(JSON.stringify(typeof tailwind))</script>`}
+    bodyHTML={`<p>This should render as an unstyled paragraph and be undefined.</p><script>document.write(JSON.stringify(typeof tailwind))</script>`}
     theme={{
       code: {
         removeTailwindCompiler: true,
