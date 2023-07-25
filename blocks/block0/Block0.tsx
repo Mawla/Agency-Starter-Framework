@@ -25,10 +25,12 @@ export type Block0Props = {
   };
   _key?: string;
   html?: string;
+  baseURL?: string;
 };
 
-export const Block0 = ({ theme, _key, html = "" }: Block0Props) => {
+export const Block0 = ({ theme, _key, html = "", baseURL }: Block0Props) => {
   const [websiteHTML, setWebsiteHTML] = useState<string>("");
+  const baseTag = baseURL ? `<base href="${baseURL}" />` : "";
 
   html = html.replace("<body", "<div").replace("</body", "</div");
 
@@ -95,7 +97,7 @@ export const Block0 = ({ theme, _key, html = "" }: Block0Props) => {
         checkOrigin={false}
         className="w-full"
         id={_key}
-        srcDoc={`<html><head></head><body><script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script>${tailwindCompilerHTML}${websiteHTML}${html}</script></body></html>`}
+        srcDoc={`<html><head>${baseTag}</head><body><script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script>${tailwindCompilerHTML}${websiteHTML}${html}</script></body></html>`}
       />
     </Wrapper>
   );

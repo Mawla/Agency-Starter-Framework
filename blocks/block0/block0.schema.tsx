@@ -56,6 +56,12 @@ const schema = defineType({
       group: "content",
       rows: 10,
     }),
+    defineField({
+      name: "baseURL",
+      title: "Base URL",
+      type: "url",
+      description: "The base URL for relative assets in the HTML.",
+    }),
 
     defineField({
       name: "theme",

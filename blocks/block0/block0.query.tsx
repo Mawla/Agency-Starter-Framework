@@ -6,4 +6,5 @@ export const getBlock0Query = (language: LanguageType) => groq`
       _key,
       _type,
       html,
+      baseURL
     }`;
