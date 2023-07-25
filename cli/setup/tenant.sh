@@ -75,6 +75,9 @@ sanity cors add https://$(echo $vercelProjectName).vercel.app --credentials
 sanity cors add https://*$(echo $vercelProjectName).vercel.app --credentials
 
 # init vercel
+
+vercel git connect https://github.com/Mawla/growth-websites --yes
+
 vercel link
 
 # nextjs sanity project id
@@ -103,5 +106,9 @@ echo $sanityReadToken | tr -d '\n' | vercel env add SANITY_API_READ_TOKEN produc
 
 # sanity studio write token
 echo $sanityWriteToken | tr -d '\n' | vercel env add SANITY_API_WRITE_TOKEN production
+
+sanity users invite dan@mawla.ie --role administrator
+sanity users invite arjen@mawla.ie --role administrator
+sanity users invite ben@mawla.ie --role administrator
 
 echo "\033[0;36mDone!\033[0m"
