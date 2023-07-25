@@ -54,13 +54,13 @@ echo "SANITY_STUDIO_PROJECT_PATH=http://localhost:3000/" >> ".env.development.lo
 
 echo "\033[0;36m-\033[0m Generating read api key"
 writeJson=$(curl POST "https://api.sanity.io/v2021-06-07/projects/$sanityProjectId/tokens" -H "Authorization: Bearer $authToken" -H "Content-Type: application/json" --data-raw '{"label":"preview-write","roleName":"editor"}')
-writeToken=$(echo $writeJson | npx --yes groq-cli '(*).key' | xargs)
-echo "SANITY_API_WRITE_TOKEN=$writeToken" >> ".env.development.local"
+sanityWriteToken=$(echo $writeJson | npx --yes groq-cli '(*).key' | xargs)
+echo "SANITY_API_WRITE_TOKEN=$sanityWriteToken" >> ".env.development.local"
 
 echo "\033[0;36m-\033[0m Generating write api key"
 readJson=$(curl POST "https://api.sanity.io/v2021-06-07/projects/$sanityProjectId/tokens" -H "Authorization: Bearer $authToken" -H "Content-Type: application/json" --data-raw '{"label":"preview-read","roleName":"viewer"}')
-readToken=$(echo $readJson | npx --yes groq-cli '(*).key' | xargs)
-echo "SANITY_API_READ_TOKEN=$readToken" >> ".env.development.local"
+sanityReadToken=$(echo $readJson | npx --yes groq-cli '(*).key' | xargs)
+echo "SANITY_API_READ_TOKEN=$sanityReadToken" >> ".env.development.local"
 
 # Write sanity api tokens
 echo "" >> ".env.development.local"
