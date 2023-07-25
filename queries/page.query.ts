@@ -99,7 +99,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     },
 
     // blocks
-    "blocks": blocks[!(_type in path('studio.*'))] {
+    "blocks": blocks[!(_type in path('studio.*')) && disabled != true] {
       ${getBlock0Query(language)},
       ${getBlock11Query(language)},
       ${getBlock10Query(language)},

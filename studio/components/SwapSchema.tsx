@@ -109,60 +109,62 @@ export const swapSchema: ComponentType<any> = (props: swapSchemaProps) => {
   }, []);
 
   return (
-    <Stack space={3}>
-      <Text size={1} weight="bold">
-        Change block type
-      </Text>
-      <Text size={1} muted>
-        Warning: Not all data will be compatible between blocks.
-      </Text>
+    <Card shadow={1} padding={3}>
+      <Stack space={2}>
+        <Text size={1} weight="bold">
+          Change block type
+        </Text>
+        <Text size={1} muted>
+          Warning: Not all data will be compatible between blocks.
+        </Text>
 
-      <Autocomplete
-        id="schemaTypeSelect"
-        filterOption={search}
-        fontSize={2}
-        radius={0}
-        icon={SearchIcon}
-        openButton
-        options={blockTypes}
-        renderOption={(option: any) => {
-          return (
-            <Card as="button">
-              <Flex align="center" padding={1} gap={2}>
-                <Box paddingY={1}>
-                  <div
-                    style={{
-                      fontSize: 0,
-                      padding: 6,
-                    }}
-                  >
-                    {option.icon?.() || (
-                      <StarBookmark weight="thin" size={20} />
-                    )}
-                  </div>
-                </Box>
+        <Autocomplete
+          id="schemaTypeSelect"
+          filterOption={search}
+          fontSize={2}
+          radius={0}
+          icon={SearchIcon}
+          openButton
+          options={blockTypes}
+          renderOption={(option: any) => {
+            return (
+              <Card as="button">
+                <Flex align="center" padding={1} gap={2}>
+                  <Box paddingY={1}>
+                    <div
+                      style={{
+                        fontSize: 0,
+                        padding: 6,
+                      }}
+                    >
+                      {option.icon?.() || (
+                        <StarBookmark weight="thin" size={20} />
+                      )}
+                    </div>
+                  </Box>
 
-                <Box flex={1} padding={2}>
-                  <Stack space={2}>
-                    <Text size={2}>{option.label}</Text>
-                    {option.description && (
-                      <Text size={1} muted>
-                        {option.description}
-                      </Text>
-                    )}
-                  </Stack>
-                </Box>
-              </Flex>
-            </Card>
-          );
-        }}
-        padding={3}
-        placeholder="Type to search…"
-        renderValue={(value) => ""}
-        onSelect={onSelect}
-        loading={state === "loading"}
-      />
-    </Stack>
+                  <Box flex={1} padding={2}>
+                    <Stack space={2}>
+                      <Text size={2}>{option.label}</Text>
+                      {option.description && (
+                        <Text size={1} muted>
+                          {option.description}
+                        </Text>
+                      )}
+                    </Stack>
+                  </Box>
+                </Flex>
+              </Card>
+            );
+          }}
+          padding={3}
+          placeholder="Type to search…"
+          renderValue={(value) => ""}
+          onSelect={onSelect}
+          loading={state === "loading"}
+        />
+      </Stack>
+    </Card>
   );
 };
 

@@ -240,133 +240,145 @@ const Preset: ComponentType<any> = (props) => {
   }, [parent, exportPresetId]);
 
   return (
-    <Stack space={4}>
-      {!selectedPresetId && (
-        <Flex gap={2}>
-          {Boolean(list?.length) && (
-            <Card flex={3}>
-              <Autocomplete
-                id="blockSelect"
-                filterOption={search}
-                fontSize={2}
-                radius={0}
-                icon={SearchIcon}
-                openButton
-                options={list}
-                padding={3}
-                placeholder="Import preset"
-                renderOption={(option: OptionType) => {
-                  return (
-                    <Card as="button">
-                      <Flex align="center" padding={1}>
-                        {option.image && (
-                          <Box>
-                            <img
-                              src={`${option.image}?w=100&h=75&q=75`}
-                              alt=""
-                              style={{
-                                border: "1px solid rgba(0,0,0,.1)",
-                                padding: 1,
-                                background: "white",
-                              }}
-                            />
-                          </Box>
-                        )}
+    <Card shadow={1} padding={3}>
+      <Stack space={4}>
+        <Stack space={2}>
+          <Text size={1} weight="bold">
+            Preset
+          </Text>
+          <Text size={1} muted>
+            Create a preset from this block or import data from an existing
+            preset.
+          </Text>
+        </Stack>
 
-                        {!option.image && option.icon && (
-                          <Box paddingY={1}>
-                            <div
-                              style={{
-                                fontSize: 0,
-                                border: "1px solid lightgray",
-                                padding: 6,
-                              }}
-                            >
-                              {option.icon}
-                            </div>
-                          </Box>
-                        )}
+        {!selectedPresetId && (
+          <Flex gap={2}>
+            {Boolean(list?.length) && (
+              <Card flex={3}>
+                <Autocomplete
+                  id="blockSelect"
+                  filterOption={search}
+                  fontSize={2}
+                  radius={0}
+                  icon={SearchIcon}
+                  openButton
+                  options={list}
+                  padding={3}
+                  placeholder="Import preset"
+                  renderOption={(option: OptionType) => {
+                    return (
+                      <Card as="button">
+                        <Flex align="center" padding={1}>
+                          {option.image && (
+                            <Box>
+                              <img
+                                src={`${option.image}?w=100&h=75&q=75`}
+                                alt=""
+                                style={{
+                                  border: "1px solid rgba(0,0,0,.1)",
+                                  padding: 1,
+                                  background: "white",
+                                }}
+                              />
+                            </Box>
+                          )}
 
-                        <Box flex={1} paddingX={2}>
-                          <Stack space={2}>
-                            <Text size={2}>{option.title}</Text>
-                            <Text size={1} muted>
-                              {option.preset?.language && (
-                                <span>[{option.preset.language}]</span>
-                              )}{" "}
-                              {option.description}
-                            </Text>
-                          </Stack>
-                        </Box>
-                      </Flex>
-                    </Card>
-                  );
-                }}
-                renderValue={(value, option) => value}
-                loading={state === "loading"}
-                onSelect={onSelect}
+                          {!option.image && option.icon && (
+                            <Box paddingY={1}>
+                              <div
+                                style={{
+                                  fontSize: 0,
+                                  border: "1px solid lightgray",
+                                  padding: 6,
+                                }}
+                              >
+                                {option.icon}
+                              </div>
+                            </Box>
+                          )}
+
+                          <Box flex={1} paddingX={2}>
+                            <Stack space={2}>
+                              <Text size={2}>{option.title}</Text>
+                              <Text size={1} muted>
+                                {option.preset?.language && (
+                                  <span>[{option.preset.language}]</span>
+                                )}{" "}
+                                {option.description}
+                              </Text>
+                            </Stack>
+                          </Box>
+                        </Flex>
+                      </Card>
+                    );
+                  }}
+                  renderValue={(value, option) => value}
+                  loading={state === "loading"}
+                  onSelect={onSelect}
+                />
+              </Card>
+            )}
+            <Card flex={1}>
+              <Button
+                text="Create preset"
+                icon={AddIcon}
+                mode="ghost"
+                onClick={exportPreset}
+              />
+
+              {/* add hidden intentlink for navigating to the newly created preset */}
+              <IntentLink
+                style={{ display: "none" }}
+                intent="edit"
+                params={{ id: exportPresetId, type: "page.preset" }}
+                target="_blank"
+                rel="noopener noreferrer"
+                ref={exportPresetLink}
               />
             </Card>
-          )}
-          <Card flex={1}>
-            <Button
-              text="Create preset"
-              icon={AddIcon}
-              mode="ghost"
-              onClick={exportPreset}
-            />
+          </Flex>
+        )}
 
-            {/* add hidden intentlink for navigating to the newly created preset */}
-            <IntentLink
-              style={{ display: "none" }}
-              intent="edit"
-              params={{ id: exportPresetId, type: "page.preset" }}
-              target="_blank"
-              rel="noopener noreferrer"
-              ref={exportPresetLink}
-            />
-          </Card>
-        </Flex>
-      )}
+        {selectedPresetId && (
+          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="caution">
+            <Stack space={4}>
+              <Box>
+                <Stack space={4}>
+                  <Text>
+                    Are you sure you want to proceed? This will overwrite
+                    existing content.
+                  </Text>
+                </Stack>
+              </Box>
 
-      {selectedPresetId && (
-        <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="caution">
-          <Stack space={4}>
-            <Box>
-              <Stack space={4}>
-                <Text>
-                  Are you sure you want to proceed? This will overwrite existing
-                  content.
-                </Text>
+              <Stack>
+                <Flex gap={2}>
+                  <Button text="Import" mode="ghost" onClick={importPreset} />
+                  <Button
+                    text="Cancel"
+                    mode="ghost"
+                    onClick={() => setSelectedPresetId(null)}
+                  />
+                </Flex>
               </Stack>
-            </Box>
-
-            <Stack>
-              <Flex gap={2}>
-                <Button text="Import" mode="ghost" onClick={importPreset} />
-                <Button
-                  text="Cancel"
-                  mode="ghost"
-                  onClick={() => setSelectedPresetId(null)}
-                />
-              </Flex>
             </Stack>
-          </Stack>
-        </Card>
-      )}
+          </Card>
+        )}
 
-      {!selectedPresetId && value?._ref && originalPresetTitle && (
-        <Text muted size={1}>
-          Based on:{" "}
-          <IntentLink
-            intent="edit"
-            params={{ id: value._ref, type: "page.preset" }}
-          >
-            {originalPresetTitle}
-          </IntentLink>
-        </Text>
-      )}
-    </Stack>
+        {!selectedPresetId && value?._ref && originalPresetTitle && (
+          <Text muted size={1}>
+            Based on:{" "}
+            <IntentLink
+              intent="edit"
+              params={{ id: value._ref, type: "page.preset" }}
+            >
+              {originalPresetTitle}
+            </IntentLink>
+          </Text>
+        )}
+      </Stack>
+    </Card>
   );
 };
 
