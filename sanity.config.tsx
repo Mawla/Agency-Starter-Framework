@@ -1,6 +1,7 @@
 import { getPathForId } from "./helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
+import { Logo } from "./studio/components/Logo";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import { LINKABLE_SCHEMAS, TRANSLATABLE_SCHEMAS } from "./types.sanity";
@@ -127,5 +128,10 @@ export default defineConfig({
         };
       })
       .filter(Boolean) as Template<any, any>[],
+  },
+  studio: {
+    components: {
+      logo: Logo,
+    },
   },
 });
