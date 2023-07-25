@@ -61,6 +61,8 @@ const INITIAL_SECTIONS_TO_LOAD: number = 2;
 const INVIEW_LOAD_ONLY_SECTIONS: BlockSchemaName[] = [];
 
 export const BlockBuilder = ({ items }: BlockBuilderProps) => {
+  const firstBlock = items?.[0];
+  if (firstBlock && firstBlock.image) firstBlock.image.priority = true;
   return (
     <main>
       {items?.map((item, i) => (
@@ -80,7 +82,6 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               id={item._key}
             >
               {/* all blocks */}
-
               {item._type === "block.block4" && (
                 <Block4 {...(item as Block4Props)} />
               )}
