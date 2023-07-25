@@ -143,16 +143,17 @@ export default ${JSON.stringify(config, null, 2)}`,
   // write stylesheets to file
   await fs.writeFile(
     `${__dirname}/../../public/engine.styles.css`,
-    config.stylesheets,
+    config?.stylesheets,
   );
 
   // write locales to file for use in next.config.js
+
   await fs.writeFile(
     `${__dirname}/../../locales.js`,
     `${DO_NOT_EDIT_FLAG}
     
 module.exports = ${JSON.stringify(
-      (config.languages || ["en"]).map(({ id }) => id),
+      config?.languages ? config.languages.map(({ id }) => id) : ["en"],
     )}`,
   );
 }
