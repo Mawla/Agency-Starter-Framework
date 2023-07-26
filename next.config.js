@@ -64,10 +64,6 @@ const moduleExports = {
   async headers() {
     const headers = [
       {
-        source: "/icons/:path*",
-        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
-      },
-      {
         source: "/opengraph-image",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
       },

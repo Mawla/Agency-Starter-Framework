@@ -40,19 +40,6 @@ class MyDocument extends Document {
           />
 
           <link rel="stylesheet" href="/engine.styles.css" />
-
-          <link
-            rel="preload"
-            href="/icons/menu.svg"
-            as="image"
-            media="(max-width: 1024px)"
-          />
-          <link
-            rel="preload"
-            href="/icons/chevron.svg"
-            as="image"
-            media="(max-width: 1024px)"
-          />
         </Head>
         <body>
           <Main />
