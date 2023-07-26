@@ -73,13 +73,13 @@ export const ResourceCard = ({
       )}
 
       <div className="mt-2 flex flex-col gap-6 p-3">
-        {tags && Boolean(tags?.length) && (
-          <div className="flex gap-1 flex-wrap">
-            {[capitalize(type.replace("page.", "")), ...tags].map((tag) => (
+        <div className="flex gap-1 flex-wrap">
+          {[capitalize(type.replace("page.", "")), ...(tags || [])].map(
+            (tag) => (
               <Tag key={tag} label={tag} theme={{ color: theme?.tag }} />
-            ))}
-          </div>
-        )}
+            ),
+          )}
+        </div>
 
         {title && (
           <Title
