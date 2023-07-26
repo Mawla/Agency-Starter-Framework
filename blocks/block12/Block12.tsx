@@ -1,13 +1,12 @@
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
+import { ResourceCardProps } from "../../components/cards/ResourceCard";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { ColorType } from "../../types";
-import { ResourceGridItemProps } from "./ResourceGrid.Item";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -31,9 +30,11 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
     ),
 );
 
-const ResourceGridItem = lazy<ComponentType<ResourceGridItemProps>>(
+const ResourceCard = lazy<ComponentType<ResourceCardProps>>(
   () =>
-    import(/* webpackChunkName: "ResourceGridItem" */ "./ResourceGrid.Item"),
+    import(
+      /* webpackChunkName: "ResourceCard" */ "../../components/cards/ResourceCard"
+    ),
 );
 
 export type Block12Props = {
@@ -44,11 +45,11 @@ export type Block12Props = {
     tags?: {
       display?: boolean;
     };
-    card?: ResourceGridItemProps["theme"];
+    card?: ResourceCardProps["theme"];
   };
   title?: string;
   intro?: React.ReactNode;
-  items?: ResourceGridItemProps[];
+  items?: ResourceCardProps[];
   tags?: string[];
 };
 
@@ -118,7 +119,7 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredItems?.map((item) => (
               <li key={item._id}>
-                <ResourceGridItem {...item} theme={theme?.card} />
+                <ResourceCard {...item} theme={theme?.card} />
               </li>
             ))}
           </ul>
