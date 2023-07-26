@@ -174,6 +174,7 @@ export const demoTestimonialsList: TestimonialType[] = [
 
 export const demoResourceCards: ResourceCardProps[] = [
   {
+    type: "page.blog",
     href: "/resources/blog/revolutionizing-business-efficiency-with-our-cutting-edge-saas-solution-2",
     intro: "blog article…",
     date: "2023-02-08",
@@ -190,6 +191,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     },
   },
   {
+    type: "page.blog",
     _id: "dc8f969b-f1db-407c-b385-8eb75596759c",
     intro: "intro",
     date: "2023-02-08",
@@ -206,6 +208,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     },
   },
   {
+    type: "page.blog",
     _id: "cfd64e33-3f04-4eb7-b25b-000266d82e88",
     tags: ["Docs"],
     date: "2023-02-08",
@@ -214,6 +217,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     href: "/resources/blog/maximizing-productivity-with-company-name-s-saas-solution-a-comprehensive-guide",
   },
   {
+    type: "page.blog",
     title:
       "The benefits of choosing company names saas solution over traditional software",
     tags: ["Marketing", "Sales", "API", "Docs"],
@@ -257,6 +261,7 @@ export const demoResourceCards: ResourceCardProps[] = [
       "Running a business is complex and time-consuming, but it doesn't have to be. With [Company Name]'s all-in-one SaaS solution, you can streamline your operations, save time and focus on what really matters – growing your business.\n\nOur platform provides a suite of tools and features that can help you manage all aspects of your business, from sales and marketing to finance and operations. With [Company Name], you'll be able to automate routine tasks, track your progress, and make data-driven decisions that can help you grow your business faster and more effectively.\n\nWhat's more, our solution is designed to be flexible and scalable, so it can grow with your business. Whether you're a small start-up or a large enterprise, [Company Name] has everything you need to succeed. And with our 24/7 customer support, you can be sure that you'll always have the help you need, when you need it.\n\nSo why waste time and resources on disparate systems and tools when you can have it all in one place with [Company Name]? Sign up for a free trial today and experience the difference for yourself!",
   },
   {
+    type: "page.blog",
     tags: ["Marketing", "Sales"],
     title:
       "Revolutionizing Business Efficiency with our Cutting-Edge SaaS Solution",
@@ -280,6 +285,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     _id: "68274f0a-8e6d-42c8-ace8-09a8b5498eae",
   },
   {
+    type: "page.blog",
     _id: "77981899-1c64-4af0-9529-78c24c27d9e7",
     title:
       "The Future of Work: How [Company Name]'s SaaS Solution is Empowering Remote Teams",
