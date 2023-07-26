@@ -12,6 +12,7 @@ import {
 } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { ImageType } from "../../types";
 import React, { ComponentType, lazy } from "react";
 
@@ -103,7 +104,12 @@ export const Block4 = ({
         )}
 
         {image && (
-          <div className="mt-6">
+          <div
+            className="mt-6"
+            style={{
+              aspectRatio: getOriginalImageDimensions(image?.src).aspectRatio,
+            }}
+          >
             <ResponsiveImage
               {...image}
               preserveAspectRatio
