@@ -102,10 +102,26 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
             textTransform: "uppercase",
             display: "inline-block",
             padding: 2,
+            textDecoration: Boolean(props.value?.disabled)
+              ? "line-through"
+              : "",
           }}
         >
-          {props.schemaType?.title}{" "}
+          {props.schemaType?.title}
         </span>
+        {Boolean(props.value?.disabled) && (
+          <span
+            style={{
+              fontSize: 7,
+              fontWeight: 500,
+              textTransform: "uppercase",
+              display: "inline-block",
+              padding: 2,
+            }}
+          >
+            disabled
+          </span>
+        )}
       </div>
       {props.renderDefault(props)}
     </div>
