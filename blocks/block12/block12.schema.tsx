@@ -3,7 +3,7 @@ import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { capitalize } from "../../helpers/utils/string";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { TAGGABLE_SCHEMAS } from "../../types.sanity";
+import { RESOURCE_SCHEMAS } from "../../types.sanity";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { FunnelSort } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -68,7 +68,7 @@ const schema = defineType({
           type: "array",
           of: [{ type: "string" }],
           options: {
-            list: Object.keys(TAGGABLE_SCHEMAS).map((key) => {
+            list: Object.keys(RESOURCE_SCHEMAS).map((key) => {
               return {
                 title: capitalize(key.replace("page.", "")),
                 value: key,
@@ -103,6 +103,14 @@ const schema = defineType({
               {
                 name: "display",
                 type: "boolean",
+              },
+              {
+                name: "color",
+                type: "color",
+              },
+              {
+                name: "background",
+                type: "color",
               },
             ],
           },

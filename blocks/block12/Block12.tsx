@@ -7,6 +7,8 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { backgroundClasses, textClasses } from "../../theme";
+import { ColorType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -44,6 +46,8 @@ export type Block12Props = {
     intro?: TextThemeType;
     tags?: {
       display?: boolean;
+      color?: ColorType;
+      background?: ColorType;
     };
     card?: ResourceCardProps["theme"];
   };
@@ -96,7 +100,9 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
                 <li key={tag}>
                   <button
                     className={cx(
-                      "transition-all font-semibold text-md rounded py-1 px-2 bg-black/5 hover:bg-black/10 text-black/80",
+                      "transition-all font-semibold text-md rounded py-1 px-2 bg-black/5 hover:underline text-black/80",
+                      textClasses[theme?.tags?.color || "black"],
+                      backgroundClasses[theme?.tags?.background || "white"],
                       {
                         ["opacity-50"]: currentTag && currentTag !== tag,
                       },

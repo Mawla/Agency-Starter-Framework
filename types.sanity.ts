@@ -96,7 +96,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
 
-export const TAGGABLE_SCHEMAS = pick(
+export const RESOURCE_SCHEMAS = pick(
   LINKABLE_SCHEMAS,
   "page.blog",
   "page.event",
@@ -106,10 +106,10 @@ export const TAGGABLE_SCHEMAS = pick(
   "page.video",
   "page.guide",
 );
-export type TaggableType = keyof typeof TAGGABLE_SCHEMAS;
-export const TAGGABLE_SCHEMAS_LIST = Object.keys(
-  TAGGABLE_SCHEMAS,
-) as TaggableType[];
+export type ResourceType = keyof typeof RESOURCE_SCHEMAS;
+export const RESOURCE_SCHEMAS_LIST = Object.keys(
+  RESOURCE_SCHEMAS,
+) as ResourceType[];
 
 export const BLOCK_SCHEMAS = pick(
   SCHEMAS,

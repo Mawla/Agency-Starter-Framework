@@ -1,6 +1,7 @@
-import { joinList, truncate } from "../../helpers/utils/string";
+import { capitalize, joinList, truncate } from "../../helpers/utils/string";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
+import { ResourceType } from "../../types.sanity";
 import Link from "../buttons/Link";
 import { DateDisplay } from "../date/DateDisplay";
 import ResponsiveImage from "../images/ResponsiveImage";
@@ -16,6 +17,7 @@ const Tag = lazy<ComponentType<TagProps>>(
 
 export type ResourceCardProps = {
   _id: string;
+  type: ResourceType;
   title: string;
   date: string;
   image?: ImageType;
@@ -35,6 +37,7 @@ export type ResourceCardProps = {
 };
 
 export const ResourceCard = ({
+  type,
   title,
   date,
   image,
@@ -72,7 +75,7 @@ export const ResourceCard = ({
       <div className="mt-2 flex flex-col gap-6 p-3">
         {tags && Boolean(tags?.length) && (
           <div className="flex gap-1 flex-wrap">
-            {tags.map((tag) => (
+            {[capitalize(type.replace("page.", "")), ...tags].map((tag) => (
               <Tag key={tag} label={tag} theme={{ color: theme?.tag }} />
             ))}
           </div>

@@ -2,7 +2,7 @@ import { resolveIdHrefQuery } from "../../components/buttons/button.query";
 import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
-import { TAGGABLE_SCHEMAS_LIST } from "../../types.sanity";
+import { RESOURCE_SCHEMAS_LIST } from "../../types.sanity";
 import groq from "groq";
 
 export const getBlock12Query = (language: LanguageType) => groq`
@@ -26,7 +26,7 @@ export const getBlock12Query = (language: LanguageType) => groq`
         ||
         // get pages matching all taggable schemas if no types are defined
         (
-          _type in ['${TAGGABLE_SCHEMAS_LIST.join("','")}']
+          _type in ['${RESOURCE_SCHEMAS_LIST.join("','")}']
           && (
             !defined(^.filter.types)
             || count(^.filter.types) == 0
@@ -45,6 +45,7 @@ export const getBlock12Query = (language: LanguageType) => groq`
       _id,
       publishedAt,
       _createdAt,
+      "type": _type,
       title,
       "href": ${resolveIdHrefQuery},
       "image": select(
