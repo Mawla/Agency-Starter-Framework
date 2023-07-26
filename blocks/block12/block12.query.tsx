@@ -14,10 +14,26 @@ export const getBlock12Query = (language: LanguageType) => groq`
     "tags": *[_type == 'page.tag' && language == "${language}"].title,
     "items": *[
       (
-        _type in ^.filter.types 
-        || !defined(^.filter.types)
-        || count(^.filter.types) == 0
+        // get pages matching filtered types, e.g [page.blog, page.event]
+        (
+          _type in ^.filter.types 
+          && 
+          (
+            defined(^.filter.types)
+            || count(^.filter.types) > 0
+          )
+        )
+        ||
+        // get pages matching all taggable schemas if no types are defined
+        (
+          _type in ['${TAGGABLE_SCHEMAS_LIST.join("','")}']
+          && (
+            !defined(^.filter.types)
+            || count(^.filter.types) == 0
+          )
+        )
       )
+      // filter by tags
       && (
         !defined(^.filter.tags)
         || count(^.filter.tags) == 0
@@ -31,9 +47,11 @@ export const getBlock12Query = (language: LanguageType) => groq`
       _createdAt,
       title,
       "href": ${resolveIdHrefQuery},
-      "image": blocks[0] { "image": ${imageQuery} }.image,
+      "image": blocks[0] { 
+        "image": ${imageQuery} 
+      }.image,
       "intro": coalesce(
-        pt::text(hero[0].intro),
+        pt::text(blocks[0].intro),
         pt::text(modules[_type == 'module.richtext'][0].content),
       ),
       "tags": tags[]->title,

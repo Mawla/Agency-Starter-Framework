@@ -2,6 +2,7 @@ import { defaultBlockTheme } from "../../components/block/block.schema";
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
+import { capitalize } from "../../helpers/utils/string";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { TAGGABLE_SCHEMAS } from "../../types.sanity";
@@ -71,7 +72,7 @@ const schema = defineType({
           options: {
             list: Object.keys(TAGGABLE_SCHEMAS).map((key) => {
               return {
-                title: key.replace("page.", ""),
+                title: capitalize(key.replace("page.", "")),
                 value: key,
               };
             }),
