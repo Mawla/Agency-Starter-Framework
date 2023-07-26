@@ -277,6 +277,14 @@ export const getI18nBaseFieldForSingleton = (schemaType: string) => {
   };
 };
 
+export const IMAGE_FIELD = defineField({
+  name: "image",
+  title: "Image",
+  type: "image",
+  description: "Image used in article grids. Preferred aspect ratio 16/9.",
+  group: ["content"],
+});
+
 export const TAGS_FIELD = defineField({
   name: "tags",
   title: "Tags",
