@@ -1,10 +1,8 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
-import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { capitalize } from "../../helpers/utils/string";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { TAGGABLE_SCHEMAS } from "../../types.sanity";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { FunnelSort } from "@vectopus/atlas-icons-react";
@@ -105,6 +103,23 @@ const schema = defineType({
               {
                 name: "display",
                 type: "boolean",
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "card",
+          title: "Card",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "titleColor",
+                type: "color",
+              },
+              {
+                name: "textColor",
+                type: "color",
               },
             ],
           },

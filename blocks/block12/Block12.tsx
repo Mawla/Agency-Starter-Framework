@@ -6,7 +6,8 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { ResourceFeedItemProps } from "./ResourceFeed.Item";
+import { ColorType } from "../../types";
+import { ResourceGridItemProps } from "./ResourceGrid.Item";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -30,9 +31,9 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
     ),
 );
 
-const ResourceFeedItem = lazy<ComponentType<ResourceFeedItemProps>>(
+const ResourceGridItem = lazy<ComponentType<ResourceGridItemProps>>(
   () =>
-    import(/* webpackChunkName: "ResourceFeedItem" */ "./ResourceFeed.Item"),
+    import(/* webpackChunkName: "ResourceGridItem" */ "./ResourceGrid.Item"),
 );
 
 export type Block12Props = {
@@ -43,10 +44,11 @@ export type Block12Props = {
     tags?: {
       display?: boolean;
     };
+    card?: ResourceGridItemProps["theme"];
   };
   title?: string;
   intro?: React.ReactNode;
-  items?: ResourceFeedItemProps[];
+  items?: ResourceGridItemProps[];
   tags?: string[];
 };
 
@@ -66,7 +68,7 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -92,12 +94,12 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
               {tags?.filter(Boolean).map((tag) => (
                 <li key={tag}>
                   <button
-                    className={cx("text-md py-1 px-2 border", {
-                      ["bg-white hover:underline border-neutral-300"]:
-                        currentTag !== tag,
-                      ["text-white bg-neutral-600 border-neutral-600"]:
-                        currentTag === tag,
-                    })}
+                    className={cx(
+                      "transition-all font-semibold text-md rounded py-1 px-2 bg-black/5 hover:bg-black/10 text-black/80",
+                      {
+                        ["opacity-50"]: currentTag && currentTag !== tag,
+                      },
+                    )}
                     onClick={() =>
                       currentTag === tag
                         ? setCurrentTag(null)
@@ -116,7 +118,7 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredItems?.map((item) => (
               <li key={item._id}>
-                <ResourceFeedItem {...item} />
+                <ResourceGridItem {...item} theme={theme?.card} />
               </li>
             ))}
           </ul>

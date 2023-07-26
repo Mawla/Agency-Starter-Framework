@@ -47,9 +47,12 @@ export const getBlock12Query = (language: LanguageType) => groq`
       _createdAt,
       title,
       "href": ${resolveIdHrefQuery},
-      "image": blocks[0] { 
-        "image": ${imageQuery} 
-      }.image,
+      "image": select(
+        defined(image) => ${imageQuery},
+        defined(blocks[0].image) => blocks[0] { 
+          "image": ${imageQuery} 
+        }.image,
+      ),
       "intro": coalesce(
         pt::text(blocks[0].intro),
         pt::text(modules[_type == 'module.richtext'][0].content),
