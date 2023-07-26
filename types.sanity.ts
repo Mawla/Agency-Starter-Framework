@@ -106,7 +106,10 @@ export const TAGGABLE_SCHEMAS = pick(
   "page.video",
   "page.guide",
 );
-export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
+export type TaggableType = keyof typeof TAGGABLE_SCHEMAS;
+export const TAGGABLE_SCHEMAS_LIST = Object.keys(
+  TAGGABLE_SCHEMAS,
+) as TaggableType[];
 
 export const BLOCK_SCHEMAS = pick(
   SCHEMAS,

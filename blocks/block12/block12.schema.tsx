@@ -15,7 +15,8 @@ const schema = defineType({
   title: "Resources feed",
   type: "object",
   icon: () => <FunnelSort weight="thin" />,
-  description: "Grid of automatically loaded resources, like blogs or events",
+  description:
+    "Feed of automatically loaded resources(like blogs or events) in a grid of cards",
   preview: {
     select: {
       title: "title",
@@ -68,7 +69,12 @@ const schema = defineType({
           type: "array",
           of: [{ type: "string" }],
           options: {
-            list: optionsToList(TAGGABLE_SCHEMAS),
+            list: Object.keys(TAGGABLE_SCHEMAS).map((key) => {
+              return {
+                title: key.replace("page.", ""),
+                value: key,
+              };
+            }),
           },
         }),
         defineField({

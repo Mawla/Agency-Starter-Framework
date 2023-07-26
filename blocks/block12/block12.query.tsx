@@ -2,6 +2,7 @@ import { resolveIdHrefQuery } from "../../components/buttons/button.query";
 import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
+import { TAGGABLE_SCHEMAS_LIST } from "../../types.sanity";
 import groq from "groq";
 
 export const getBlock12Query = (language: LanguageType) => groq`
@@ -10,6 +11,7 @@ export const getBlock12Query = (language: LanguageType) => groq`
     _type,
     title,
     intro[] ${richTextQuery},
+    "tags": *[_type == 'page.tag' && language == "${language}"].title,
     "items": *[
       (
         _type in ^.filter.types 
