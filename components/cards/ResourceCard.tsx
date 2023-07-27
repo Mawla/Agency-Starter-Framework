@@ -1,6 +1,8 @@
+import { PageContext } from "../../context/PageContext";
+import { SiteContext } from "../../context/SiteContext";
 import { capitalize, joinList, truncate } from "../../helpers/utils/string";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
-import { ColorType, ImageType } from "../../types";
+import { ColorType, ImageType, TranslationFieldType } from "../../types";
 import { ResourceType } from "../../types.sanity";
 import Link from "../buttons/Link";
 import { DateDisplay } from "../date/DateDisplay";
@@ -9,7 +11,7 @@ import { TagProps } from "../tags/Tag";
 import Text from "../text/Text";
 import Title from "../title/Title";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, { ComponentType, lazy, useContext } from "react";
 
 const Tag = lazy<ComponentType<TagProps>>(
   () => import(/* webpackChunkName: "Tag" */ "../tags/Tag"),
@@ -47,6 +49,10 @@ export const ResourceCard = ({
   authors,
   theme,
 }: ResourceCardProps) => {
+  const { config } = useContext(SiteContext);
+  const { language } = useContext(PageContext);
+  const translations = config.translations;
+
   return (
     <div
       className={cx(
@@ -74,11 +80,14 @@ export const ResourceCard = ({
 
       <div className="mt-2 flex flex-col gap-6 p-3">
         <div className="flex gap-1 flex-wrap">
-          {[capitalize(type.replace("page.", "")), ...(tags || [])].map(
-            (tag) => (
-              <Tag key={tag} label={tag} theme={{ color: theme?.tag }} />
-            ),
-          )}
+          {[
+            translations?.[type.replace("page.", "") as TranslationFieldType]?.[
+              language
+            ] || capitalize(type.replace("page.", "")),
+            ...(tags || []),
+          ].map((tag) => (
+            <Tag key={tag} label={tag} theme={{ color: theme?.tag }} />
+          ))}
         </div>
 
         {title && (

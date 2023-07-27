@@ -2,21 +2,18 @@ import { pick } from "./helpers/utils/object";
 import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
-  next_slide: {
-    description: "Label for next slide button.",
-  },
-  previous_slide: {
-    description: "Label for previous slide button.",
-  },
-  read_more: {
-    description: "Used on buttons in card grids.",
-  },
-  watch_video: {
-    description: "Label on video play button.",
-  },
-  load_more: {
-    description: "Load more label for pagination.",
-  },
+  next_slide: "Label for next slide button.",
+  previous_slide: "Label for previous slide button.",
+  read_more: "Used on buttons in card grids.",
+  watch_video: "Label on video play button.",
+  load_more: "Load more label for pagination.",
+  blog: "Label for blog section.",
+  event: "Label for event section.",
+  casestudy: "Label for casestudy section.",
+  podcast: "Label for podcast section.",
+  guide: "Label for guide section.",
+  tool: "Label for tool section.",
+  video: "Label for video section.",
 };
 
 export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;

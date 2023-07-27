@@ -32,13 +32,13 @@ export default defineType({
 
     ...Object.entries(TRANSLATION_FIELDS)
       .sort((a, b) => a[0].localeCompare(b[0]))
-      .map(([key, { description }]) =>
+      .map(([key, description]) =>
         defineField({
           name: key,
           title: key,
           type: "string",
           description,
-          validation: (Rule: any) => Rule.required(),
+          validation: (Rule: any) => Rule.required().warning(),
           options: { localize: true } as any,
         }),
       ),
