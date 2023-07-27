@@ -11,7 +11,6 @@ export const getBlock12Query = (language: LanguageType) => groq`
     _type,
     title,
     intro[] ${richTextQuery},
-    "tags": *[_type == 'page.tag' && language == "${language}"].title,
     "items": *[
       (
         // get pages matching filtered types, e.g [page.blog, page.event]

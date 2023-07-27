@@ -96,6 +96,11 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
     setPage((page) => ++page);
   };
 
+  // generate set of unique used tags
+  const availableTags = React.useMemo(() => {
+    return getUniqueTags(items || []);
+  }, [items]);
+
   return (
     <Wrapper
       theme={{
@@ -124,33 +129,35 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
           </Text>
         )}
 
-        {tags && theme?.tags?.display !== false && Boolean(tags?.length) && (
-          <div className="mb-4 md:mb-6">
-            <ul className="flex flex-wrap gap-2">
-              {tags?.filter(Boolean).map((tag) => (
-                <li key={tag}>
-                  <button
-                    className={cx(
-                      "transition-all font-semibold text-md rounded py-1 px-2 bg-black/5 hover:underline text-black/80",
-                      textClasses[theme?.tags?.color || "black"],
-                      backgroundClasses[theme?.tags?.background || "white"],
-                      {
-                        ["opacity-50"]: currentTag && currentTag !== tag,
-                      },
-                    )}
-                    onClick={() =>
-                      currentTag === tag
-                        ? setCurrentTag(null)
-                        : tag && setCurrentTag(tag)
-                    }
-                  >
-                    {tag}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {availableTags &&
+          theme?.tags?.display !== false &&
+          Boolean(availableTags?.length) && (
+            <div className="mb-4 md:mb-6">
+              <ul className="flex flex-wrap gap-2">
+                {availableTags?.filter(Boolean).map((tag) => (
+                  <li key={tag}>
+                    <button
+                      className={cx(
+                        "transition-all font-semibold text-md rounded py-1 px-2 bg-black/5 hover:underline text-black/80",
+                        textClasses[theme?.tags?.color || "black"],
+                        backgroundClasses[theme?.tags?.background || "white"],
+                        {
+                          ["opacity-50"]: currentTag && currentTag !== tag,
+                        },
+                      )}
+                      onClick={() =>
+                        currentTag === tag
+                          ? setCurrentTag(null)
+                          : tag && setCurrentTag(tag)
+                      }
+                    >
+                      {tag}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
         {Boolean(paginatedItems?.length) && (
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -187,3 +194,19 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
 };
 
 export default React.memo(Block12);
+
+const getUniqueTags = (items: ResourceCardProps[]) => {
+  const usedTags: Record<string, string> = {};
+  const tags = items?.reduce((acc, item) => {
+    if (item.tags) {
+      item.tags.forEach((tag) => {
+        if (!usedTags[tag]) {
+          usedTags[tag] = tag;
+          acc.push(tag);
+        }
+      });
+    }
+    return acc;
+  }, [] as string[]);
+  return tags?.sort((a, b) => a.localeCompare(b));
+};
