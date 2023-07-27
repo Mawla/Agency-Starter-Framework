@@ -104,20 +104,19 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
         types: {
           "image.simple"({ value }) {
             return (
-              <div className="not-prose my-8 md:my-12 lg:my-16 prose-media">
-                <figure>
-                  <ResponsiveImage {...value.image} />
-                  <FigCaption
-                    caption={value.caption}
-                    className="mt-2 text-left"
-                  />
-                </figure>
-              </div>
+              <figure>
+                <ResponsiveImage {...value.image} preserveAspectRatio />
+
+                <FigCaption
+                  caption={value.caption}
+                  className="mt-2 text-left"
+                />
+              </figure>
             );
           },
           video({ value }) {
             return (
-              <div className="not-prose my-8 md:my-12 lg:my-16 prose-media">
+              <div className="not-prose not-format">
                 <figure>
                   <Video {...value.video} />
                   <FigCaption caption={value.caption} className="mt-2" />
@@ -127,7 +126,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
           },
           buttons({ value }) {
             return (
-              <div className="not-prose my-8">
+              <div className="not-prose not-format my-8">
                 <ButtonGroup {...value} />
               </div>
             );

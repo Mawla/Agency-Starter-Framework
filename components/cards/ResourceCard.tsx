@@ -134,7 +134,7 @@ export const ResourceCard = ({
         )}
 
         <div className="mt-auto flex flex-col gap-3">
-          {authors && Boolean(authors?.length) && (
+          {authors && Boolean(authors?.length) ? (
             <div className="flex items-start">
               {authors.map(
                 ({ image }) =>
@@ -171,6 +171,15 @@ export const ResourceCard = ({
                 )}
               </span>
             </div>
+          ) : (
+            <span
+              className={cx(
+                "block font-normal text-xs mt-0.5",
+                textClasses[theme?.date || "black"],
+              )}
+            >
+              <DateDisplay datetime={date} />
+            </span>
           )}
         </div>
       </div>

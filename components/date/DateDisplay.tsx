@@ -6,6 +6,7 @@ export type DateDisplayProps = {
   className?: string;
   format?: Intl.DateTimeFormatOptions;
   locale?: string;
+  pubdate?: boolean;
 };
 
 export const DateDisplay = ({
@@ -13,9 +14,15 @@ export const DateDisplay = ({
   format,
   locale,
   className,
+  pubdate,
 }: DateDisplayProps) => {
   return (
-    <time dateTime={datetime} className={className}>
+    <time
+      dateTime={datetime}
+      className={className}
+      // @ts-ignore
+      pubdate
+    >
       {formatDate(datetime, format, locale)}
     </time>
   );

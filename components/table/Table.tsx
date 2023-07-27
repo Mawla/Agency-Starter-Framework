@@ -74,15 +74,12 @@ export const Table = ({ file, fileName }: TableProps) => {
     <div className="overflow-x-auto not-prose">
       <div className="text-sm sm:text-md min-w-[500px]">
         {data && (
-          <table className="border border-collapse table-auto w-full">
+          <table className="border-collapse table-auto w-full">
             {data.meta.fields.length && (
               <thead>
                 <tr>
                   {data.meta?.fields?.map((field) => (
-                    <th
-                      className="align-top border-b p-4 text-left"
-                      key={field}
-                    >
+                    <th className="align-top p-4 text-left" key={field}>
                       {field}
                     </th>
                   ))}
@@ -97,10 +94,7 @@ export const Table = ({ file, fileName }: TableProps) => {
                     key={JSON.stringify(row)}
                   >
                     {Object.keys(row).map((key) => (
-                      <td
-                        className="align-top border-b p-4 text-left"
-                        key={key}
-                      >
+                      <td className="align-top p-4 text-left" key={key}>
                         <Linkify>{row[key] as any}</Linkify>
                       </td>
                     ))}

@@ -51,6 +51,22 @@ export const PREDEFINED_ICONS = {
     title: "Globe",
     description: "Shown next to the language selector",
   },
+  facebook: {
+    title: "Facebook",
+    description: "Shown on the article page share buttons",
+  },
+  twitter: {
+    title: "Twitter",
+    description: "Shown on the article page share buttons",
+  },
+  linkedin: {
+    title: "LinkedIn",
+    description: "Shown on the article page share buttons",
+  },
+  clipboard: {
+    title: "Clipboard",
+    description: "Shown on the article page share buttons",
+  },
 };
 
 export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;

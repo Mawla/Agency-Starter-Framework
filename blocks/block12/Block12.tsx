@@ -64,12 +64,11 @@ export type Block12Props = {
   title?: string;
   intro?: React.ReactNode;
   items?: ResourceCardProps[];
-  tags?: string[];
 };
 
 const PAGE_SIZE = 5 * 3;
 
-export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
+export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
   const { config } = useContext(SiteContext);
   const { language } = useContext(PageContext);
   const translations = config.translations;
