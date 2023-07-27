@@ -42,10 +42,12 @@ export const Block0 = ({
   const [websiteHTML, setWebsiteHTML] = useState<string>("");
 
   // remove <head>
-  headHTML = headHTML?.replace("<head>", "").replace("</head", "");
+  headHTML = (headHTML || "")?.replace("<head>", "").replace("</head>", "");
 
   // remove <body>
-  bodyHTML = bodyHTML?.replace("<body", "<div").replace("</body", "</div");
+  bodyHTML = (bodyHTML || "")
+    ?.replace("<body", "<div")
+    .replace("</body", "</div");
 
   // replace src="foo" with src="baseURL/foo"
   bodyHTML = bodyHTML
@@ -115,7 +117,7 @@ export const Block0 = ({
     checkOrigin: false,
     className: "w-full",
     id: _key,
-    srcDoc: `<html><head>${headHTML}</head><body>${tailwindCompilerHTML}<script>${tailwindConfig}</script>${websiteHTML}${bodyHTML}</script><script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script></body></html>`,
+    srcDoc: `<html><head>${headHTML}</head><body>${tailwindCompilerHTML}<script>${tailwindConfig}</script>${websiteHTML}${bodyHTML}<script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script></body></html>`,
   };
 
   if (theme?.code?.removeWrapper) return <IframeResizer {...iframeProps} />;
