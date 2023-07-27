@@ -64,5 +64,5 @@ export const getBlock12Query = (language: LanguageType) => groq`
         "image": ${imageQuery} 
       },
       "date": coalesce(publishedAt, _createdAt),
-    } | order(publishedAt desc, _createdAt desc)
+    } | order(publishedAt desc, _createdAt desc) 
 }`;

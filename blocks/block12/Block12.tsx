@@ -1,16 +1,19 @@
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ResourceCardProps } from "../../components/cards/ResourceCard";
+import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { PageContext } from "../../context/PageContext";
+import { SiteContext } from "../../context/SiteContext";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, { ComponentType, lazy, useContext } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -39,6 +42,13 @@ const ResourceCard = lazy<ComponentType<ResourceCardProps>>(
     ),
 );
 
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
+);
+
 export type Block12Props = {
   theme?: {
     block?: BlockThemeType;
@@ -57,13 +67,34 @@ export type Block12Props = {
   tags?: string[];
 };
 
+const PAGE_SIZE = 5 * 3;
+
 export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
+  const { config } = useContext(SiteContext);
+  const { language } = useContext(PageContext);
+  const translations = config.translations;
+
   const [currentTag, setCurrentTag] = React.useState<string | null>(null);
+  const [page, setPage] = React.useState(1);
 
   const filteredItems = items?.filter((item) => {
     if (!currentTag) return true;
     return item.tags?.includes(currentTag);
   });
+
+  // poor mans pagination, at some point replace this with actual groq pagination
+  const paginatedItems = filteredItems?.slice(0, PAGE_SIZE * page);
+
+  // show load more button
+  let hasMore =
+    filteredItems &&
+    paginatedItems &&
+    filteredItems?.length > paginatedItems?.length;
+
+  // handle load more
+  const onLoadMoreClick = () => {
+    setPage((page) => ++page);
+  };
 
   return (
     <Wrapper
@@ -121,9 +152,9 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
           </div>
         )}
 
-        {Boolean(filteredItems?.length) && (
+        {Boolean(paginatedItems?.length) && (
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {filteredItems?.map((item) => (
+            {paginatedItems?.map((item) => (
               <li key={item._id}>
                 <ResourceCard {...item} theme={theme?.card} />
               </li>
@@ -131,6 +162,26 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
           </ul>
         )}
       </div>
+
+      {hasMore && (
+        <div className="flex justify-center mt-8">
+          <button
+            type="button"
+            onClick={onLoadMoreClick}
+            className={cx(
+              "font-semibold text-md rounded py-1 px-2 bg-black/5 hover:underline text-black/80 flex gap-1 items-center",
+              textClasses[theme?.tags?.color || "black"],
+              backgroundClasses[theme?.tags?.background || "white"],
+            )}
+          >
+            {translations?.load_more?.[language] || "Load more"}
+            <IconLoader
+              icon="chevrondown"
+              className="block w-5 h-5 text-current"
+            />
+          </button>
+        </div>
+      )}
     </Wrapper>
   );
 };

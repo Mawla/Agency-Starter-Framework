@@ -14,6 +14,9 @@ export const TRANSLATION_FIELDS = {
   watch_video: {
     description: "Label on video play button.",
   },
+  load_more: {
+    description: "Load more label for pagination.",
+  },
 };
 
 export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;
