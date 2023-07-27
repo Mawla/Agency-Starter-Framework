@@ -1,4 +1,5 @@
 import { AccordionProps } from "../components/accordion/Accordion";
+import { ResourceCardProps } from "../components/cards/ResourceCard";
 import { TestimonialType } from "../components/testimonials/Testimonials";
 import { ImageType } from "../types";
 
@@ -168,5 +169,143 @@ export const demoTestimonialsList: TestimonialType[] = [
     image: demoImage,
     name: "Robert Brown",
     jobTitle: "Junior developer at SAP",
+  },
+];
+
+export const demoResourceCards: ResourceCardProps[] = [
+  {
+    type: "page.blog",
+    href: "/resources/blog/revolutionizing-business-efficiency-with-our-cutting-edge-saas-solution-2",
+    intro: "blog article…",
+    date: "2023-02-08",
+    _id: "904fbe64-1f13-446f-93e5-d63d0c12a810",
+    title:
+      "Part 2 Revolutionizing Business Efficiency with our Cutting-Edge SaaS Solution",
+    image: {
+      crop: null,
+      src: "https://cdn.sanity.io/images/vs4fnw8m/development/8176ab31464cc5bc14927e66e0f52433da2a51ea-880x528.jpg",
+      width: 880,
+      height: 528,
+      alt: "chair",
+      hotspot: null,
+    },
+  },
+  {
+    type: "page.blog",
+    _id: "dc8f969b-f1db-407c-b385-8eb75596759c",
+    intro: "intro",
+    date: "2023-02-08",
+    title:
+      "Streamline Your Operations with [Company Name]'s All-in-One SaaS Solution",
+    href: "/resources/blog/streamline-your-operations-with-company-name-s-all-in-one-saas-solution",
+    image: {
+      crop: null,
+      src: "https://cdn.sanity.io/images/vs4fnw8m/development/22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893.jpg",
+      width: 1296,
+      height: 893,
+      alt: "room",
+      hotspot: null,
+    },
+  },
+  {
+    type: "page.blog",
+    _id: "cfd64e33-3f04-4eb7-b25b-000266d82e88",
+    tags: ["Docs"],
+    date: "2023-02-08",
+    title:
+      "Maximizing Productivity with [Company Name]'s SaaS Solution: A Comprehensive Guide",
+    href: "/resources/blog/maximizing-productivity-with-company-name-s-saas-solution-a-comprehensive-guide",
+  },
+  {
+    type: "page.blog",
+    title:
+      "The benefits of choosing company names saas solution over traditional software",
+    tags: ["Marketing", "Sales", "API", "Docs"],
+    image: {
+      crop: null,
+      src: "https://cdn.sanity.io/images/vs4fnw8m/development/22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893.jpg",
+      width: 1296,
+      height: 893,
+      alt: "room",
+      hotspot: null,
+    },
+    authors: [
+      {
+        name: "Dan Malone",
+        image: {
+          src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
+          width: 5184,
+          height: 3456,
+          alt: "",
+          hotspot: null,
+          crop: null,
+        },
+      },
+      {
+        name: "Arjen Scherff-de Water",
+        image: {
+          height: 3456,
+          hotspot: null,
+          crop: null,
+          src: "https://cdn.sanity.io/images/vs4fnw8m/development/91077ecc556ad9ff49921a000f2c10951d2dfd58-5184x3456.jpg",
+          width: 5184,
+          alt: "",
+        },
+      },
+    ],
+    date: "2023-02-07",
+    _id: "52a89185-251e-4358-8811-803150925cff",
+    href: "/resources/blog/the-benefits-of-choosing-company-name-s-saas-solution-over-traditional-software",
+
+    intro:
+      "Running a business is complex and time-consuming, but it doesn't have to be. With [Company Name]'s all-in-one SaaS solution, you can streamline your operations, save time and focus on what really matters – growing your business.\n\nOur platform provides a suite of tools and features that can help you manage all aspects of your business, from sales and marketing to finance and operations. With [Company Name], you'll be able to automate routine tasks, track your progress, and make data-driven decisions that can help you grow your business faster and more effectively.\n\nWhat's more, our solution is designed to be flexible and scalable, so it can grow with your business. Whether you're a small start-up or a large enterprise, [Company Name] has everything you need to succeed. And with our 24/7 customer support, you can be sure that you'll always have the help you need, when you need it.\n\nSo why waste time and resources on disparate systems and tools when you can have it all in one place with [Company Name]? Sign up for a free trial today and experience the difference for yourself!",
+  },
+  {
+    type: "page.blog",
+    tags: ["Marketing", "Sales"],
+    title:
+      "Revolutionizing Business Efficiency with our Cutting-Edge SaaS Solution",
+    href: "/resources/blog/revolutionizing-business-efficiency-with-our-cutting-edge-saas-solution",
+    intro:
+      "In today's fast-paced business world, companies are always looking for ways to streamline their operations and increase efficiency. This is where [Company Name] comes in. Our cutting-edge SaaS solution is designed to help businesses of all sizes optimize their processes and achieve their goals faster and more effectively. From automating mundane tasks to providing real-time insights into performance, our solution is packed with features that will help you work smarter, not harder.\n\nOne of the key benefits of [Company Name]'s SaaS solution is its ability to integrate with a wide range of tools and systems. This means that you can easily connect your existing infrastructure to our platform, eliminating the need for manual data entry and reducing the risk of errors. With our solution, you can access all of your business data in one place, making it easier to track your progress and make informed decisions.\n\nAdditionally, [Company Name]'s SaaS solution is designed to be user-friendly and intuitive. We understand that not everyone is a tech expert, which is why we've made our platform accessible to everyone. Whether you're a small business owner or a busy professional, you'll find our solution easy to use and quick to implement. With [Company Name], you'll be able to focus on what really matters – growing your business and achieving your goals.\n\nSo if you're looking for a powerful and flexible SaaS solution that can help you revolutionize your business efficiency, look no further than [Company Name]. Sign up for a free trial today and experience the difference for yourself!",
+    authors: [
+      {
+        name: "Dan Malone",
+        image: {
+          src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
+          width: 5184,
+          height: 3456,
+          alt: "",
+          hotspot: null,
+          crop: null,
+        },
+      },
+    ],
+    date: "2023-02-06",
+    _id: "68274f0a-8e6d-42c8-ace8-09a8b5498eae",
+  },
+  {
+    type: "page.blog",
+    _id: "77981899-1c64-4af0-9529-78c24c27d9e7",
+    title:
+      "The Future of Work: How [Company Name]'s SaaS Solution is Empowering Remote Teams",
+    href: "/resources/blog/the-future-of-work-how-company-name-s-saas-solution-is-empowering-remote-teams",
+    intro:
+      "The COVID-19 pandemic has completely transformed the way we work. With remote work becoming the new norm, companies are facing new challenges when it comes to managing their teams and staying productive. That's where [Company Name]'s SaaS solution comes in. Our platform is specifically designed to support remote teams, providing a suite of tools and features that make it easy for your team to collaborate, communicate and get things done from anywhere in the world.\n\nWith [Company Name], you'll be able to keep your team connected and engaged, no matter where they are. Our platform provides real-time collaboration tools, like chat, video conferencing, and file sharing, making it easy for your team to work together on projects and stay up-to-date with each other's progress. Additionally, our platform offers robust project management tools that can help you keep your team on track and on schedule, even when they're working remotely.\n\nAt [Company Name], we're committed to helping businesses succeed in the new world of work. Our SaaS solution is designed to be flexible, scalable and easy to use, so you can focus on what really matters – growing your business and achieving your goals. So if you're looking for a powerful solution that can help you manage your remote team, look no further than [Company Name].",
+    authors: [
+      {
+        name: "Dan Malone",
+        image: {
+          src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
+          width: 5184,
+          height: 3456,
+          alt: "",
+          hotspot: null,
+          crop: null,
+        },
+      },
+    ],
+    tags: ["Marketing", "Sales", "API"],
+    date: "2023-02-05",
   },
 ];

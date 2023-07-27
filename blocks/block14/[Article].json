@@ -1,0 +1,8 @@
+{
+  "title": "Article",
+  "description": "Long form resource content with sidebar",
+  "name": "Block 14",
+  "schemaName": "block.block14",
+  "date": "2023-07-27T10:39:26.213Z",
+  "fields": ["title", "intro"]
+}

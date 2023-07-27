@@ -101,3 +101,10 @@ export const bumpHeadingLevel = (
   if (!headings.includes(tagName)) return tagName;
   return `h${+tagName.substring(1) + 1}` as HtmlTextNodeType;
 };
+
+/**
+ * Uppercase first character
+ */
+
+export const capitalize = <T extends string>(s: T) =>
+  (s[0].toUpperCase() + s.slice(1)) as Capitalize<typeof s>;

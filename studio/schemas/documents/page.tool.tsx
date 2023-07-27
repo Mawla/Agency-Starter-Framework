@@ -2,6 +2,7 @@ import { SchemaName } from "../../../types.sanity";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
   getParentDocumentInitialValue,
+  IMAGE_FIELD,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
@@ -36,6 +37,7 @@ export default defineType({
     },
     ...pageBase.fields,
     TAGS_FIELD,
+    IMAGE_FIELD,
     PUBLISHED_AT_FIELD,
   ],
 });

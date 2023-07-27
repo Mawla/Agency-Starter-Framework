@@ -67,7 +67,7 @@ export const Page = ({
         value={{
           isPreviewMode,
           sitemapItem: (sitemapItem || {}) as SitemapItemType,
-          language: router.locale as LanguageType,
+          language: (router.query.language || router.locale) as LanguageType,
           breadcrumb: page?.breadcrumb,
           languageAlternates:
             page?.languageAlternates as LanguageAlternateType[],

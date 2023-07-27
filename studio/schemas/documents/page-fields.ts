@@ -18,6 +18,7 @@ import PagePasswordComponent, {
 import { getISODateString } from "../../utils/datetime";
 import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
+import { referenceFilterCurrentLanguage } from "../../utils/language/reference-filter-current-language";
 import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import {
@@ -171,21 +172,7 @@ export const PARENT_FIELD = defineField({
   type: "reference",
   to: [{ type: "page.content" }, { type: "page.landing" }],
   options: {
-    filter: ({ document }) => {
-      const { language = baseLanguage } = getStructurePath();
-      if (!document._id) return {};
-
-      return {
-        filter: `
-          _id != $id
-          && language == $language
-        `,
-        params: {
-          id: document._id,
-          language,
-        },
-      };
-    },
+    filter: referenceFilterCurrentLanguage,
   },
   group: ["content"],
 });
@@ -277,11 +264,27 @@ export const getI18nBaseFieldForSingleton = (schemaType: string) => {
   };
 };
 
+export const IMAGE_FIELD = defineField({
+  name: "image",
+  title: "Image",
+  type: "image",
+  description: "Image used in article grids. Preferred aspect ratio 16/9.",
+  group: ["content"],
+});
+
 export const TAGS_FIELD = defineField({
   name: "tags",
   title: "Tags",
   type: "array",
-  of: [{ type: "reference", to: [{ type: "page.tag" }] }],
+  of: [
+    {
+      type: "reference",
+      to: [{ type: "page.tag" }],
+      options: {
+        filter: referenceFilterCurrentLanguage,
+      },
+    },
+  ],
   group: ["content"],
 });
 

@@ -1,4 +1,4 @@
-import IconLoader from "../../components/images/IconLoader";
+import { IconLoaderProps } from "../../components/images/IconLoader";
 import {
   TextSizeType,
   TEXT_SIZE_OPTIONS,
@@ -12,7 +12,14 @@ import { COLORS } from "../../theme";
 import { ColorType } from "../../types";
 import { Block1 } from "./Block1";
 import { Meta } from "@storybook/react";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const IconLoader = lazy<ComponentType<IconLoaderProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
+    ),
+);
 
 export default {
   component: Block1,

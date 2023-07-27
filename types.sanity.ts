@@ -1,16 +1,19 @@
 import { pick } from "./helpers/utils/object";
 
 export const SCHEMAS = {
+  "block.block0": "",
   "block.block1": "",
   "block.block10": "",
   "block.block11": "",
+  "block.block12": "",
+  "block.block13": "",
+  "block.block14": "",
   "block.block2": "",
   "block.block3": "",
   "block.block4": "",
   "block.block6": "",
   "block.block8": "",
   "block.block9": "",
-  "block.block0": "",
   "config.cms": "",
   "config.general": "",
   "config.icons": "",
@@ -95,7 +98,7 @@ export const TRANSLATABLE_SCHEMAS = pick(
 
 export type TranslatableSchemaName = keyof typeof TRANSLATABLE_SCHEMAS;
 
-export const TAGGABLE_SCHEMAS = pick(
+export const RESOURCE_SCHEMAS = pick(
   LINKABLE_SCHEMAS,
   "page.blog",
   "page.event",
@@ -105,20 +108,26 @@ export const TAGGABLE_SCHEMAS = pick(
   "page.video",
   "page.guide",
 );
-export type TaggableResourceType = keyof typeof TAGGABLE_SCHEMAS;
+export type ResourceType = keyof typeof RESOURCE_SCHEMAS;
+export const RESOURCE_SCHEMAS_LIST = Object.keys(
+  RESOURCE_SCHEMAS,
+) as ResourceType[];
 
 export const BLOCK_SCHEMAS = pick(
   SCHEMAS,
+  "block.block0",
   "block.block1",
   "block.block10",
   "block.block11",
+  "block.block12",
+  "block.block13",
+  "block.block14",
   "block.block2",
   "block.block3",
   "block.block4",
   "block.block6",
   "block.block8",
   "block.block9",
-  "block.block0",
 );
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;

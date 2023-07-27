@@ -6,20 +6,23 @@ import React from "react";
 
 export type BreadcrumbProps = {
   path?: FlatBreadcrumbType;
+  wrap?: boolean;
 };
 
-export const Breadcrumb = ({ path }: BreadcrumbProps) => {
+export const Breadcrumb = ({ path, wrap }: BreadcrumbProps) => {
   const { breadcrumb } = React.useContext(PageContext);
   path = path || breadcrumb;
 
   if (!path?.length) return null;
 
   return (
-    <nav aria-label="breadcrumbs" className="overflow-auto text-md">
+    <nav aria-label="breadcrumbs" className="overflow-auto text-sm">
       <ol
         itemScope
         itemType="https://schema.org/BreadcrumbList"
-        className="flex font-normal"
+        className={cx("flex font-normal", {
+          ["flex-wrap"]: wrap,
+        })}
       >
         {path?.map((item, index) => (
           <li
@@ -55,3 +58,5 @@ export const Breadcrumb = ({ path }: BreadcrumbProps) => {
     </nav>
   );
 };
+
+export default Breadcrumb;

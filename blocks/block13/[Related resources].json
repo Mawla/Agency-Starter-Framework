@@ -1,0 +1,8 @@
+{
+  "title": "Related resources",
+  "description": "Feed of 4 automatically loaded resources (like blogs or events) in a row",
+  "name": "Block 13",
+  "schemaName": "block.block13",
+  "date": "2023-07-27T06:45:00.872Z",
+  "fields": ["title", "intro"]
+}

@@ -2,18 +2,19 @@ import { pick } from "./helpers/utils/object";
 import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
-  next_slide: {
-    description: "Label for next slide button.",
-  },
-  previous_slide: {
-    description: "Label for previous slide button.",
-  },
-  read_more: {
-    description: "Used on buttons in card grids.",
-  },
-  watch_video: {
-    description: "Label on video play button.",
-  },
+  next_slide: "Label for next slide button.",
+  previous_slide: "Label for previous slide button.",
+  read_more: "Used on buttons in card grids.",
+  watch_video: "Label on video play button.",
+  load_more: "Load more label for pagination.",
+  blog: "Label for blog section.",
+  event: "Label for event section.",
+  casestudy: "Label for casestudy section.",
+  podcast: "Label for podcast section.",
+  guide: "Label for guide section.",
+  tool: "Label for tool section.",
+  video: "Label for video section.",
+  latest_news: "Label for related article sidebar.",
 };
 
 export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;
@@ -50,6 +51,22 @@ export const PREDEFINED_ICONS = {
   globe: {
     title: "Globe",
     description: "Shown next to the language selector",
+  },
+  facebook: {
+    title: "Facebook",
+    description: "Shown on the article page share buttons",
+  },
+  twitter: {
+    title: "Twitter",
+    description: "Shown on the article page share buttons",
+  },
+  linkedin: {
+    title: "LinkedIn",
+    description: "Shown on the article page share buttons",
+  },
+  clipboard: {
+    title: "Clipboard",
+    description: "Shown on the article page share buttons",
   },
 };
 

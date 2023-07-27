@@ -1,0 +1,8 @@
+{
+  "title": "Resources grid",
+  "description": "Feed of automatically loaded resources(like blogs or events) in a grid of cards",
+  "name": "Block 12",
+  "schemaName": "block.block12",
+  "date": "2023-07-26T09:07:52.754Z",
+  "fields": ["title", "intro"]
+}

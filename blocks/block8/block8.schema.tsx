@@ -1,8 +1,10 @@
-import { defaultBlockTheme } from "../../components/block/block.schema";
+import {
+  defaultBlockGroups,
+  defaultBlockTheme,
+} from "../../components/block/block.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { EllipsisVerticalIcon } from "@sanity/icons";
 import { LayoutThree } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -23,22 +25,8 @@ const schema = defineType({
       };
     },
   },
-  groups: [
-    {
-      name: "content",
-      title: "Content",
-      default: true,
-    },
-    {
-      name: "theme",
-      title: "Theme",
-    },
-    {
-      name: "tools",
-      title: " ",
-      icon: EllipsisVerticalIcon,
-    },
-  ],
+
+  groups: defaultBlockGroups,
   fields: [
     ...defaultBlockTools,
 
