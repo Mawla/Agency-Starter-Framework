@@ -14,7 +14,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "block.block13",
-  title: "Resources strip",
+  title: "Related resources",
   type: "object",
   icon: () => <PenFilm weight="thin" />,
   description:
@@ -23,7 +23,7 @@ const schema = defineType({
     select: {
       title: "title",
     },
-    prepare({ title = "Resources strip" }: any) {
+    prepare({ title = "Related resources" }: any) {
       return {
         title: title,
       };
