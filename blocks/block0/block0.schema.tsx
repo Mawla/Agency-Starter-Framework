@@ -3,7 +3,6 @@ import {
   defaultBlockTheme,
 } from "../../components/block/block.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { EllipsisVerticalIcon } from "@sanity/icons";
 import { Programming } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";

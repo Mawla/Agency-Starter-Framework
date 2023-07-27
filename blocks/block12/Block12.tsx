@@ -109,7 +109,7 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
     >
       <div
         className={cx(
-          "flex flex-col gap-6",
+          "flex flex-col gap-6 max-w-3xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -128,7 +128,14 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
             <PortableText content={intro as any} />
           </Text>
         )}
+      </div>
 
+      <div
+        className={cx(
+          "flex flex-col gap-6",
+          textAlignClasses[theme?.block?.align || "center"],
+        )}
+      >
         {availableTags &&
           theme?.tags?.display !== false &&
           Boolean(availableTags?.length) && (

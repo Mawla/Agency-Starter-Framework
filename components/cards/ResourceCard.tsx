@@ -1,20 +1,46 @@
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { TextProps } from "../../components/text/Text";
+import { TitleProps } from "../../components/title/Title";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { capitalize, joinList, truncate } from "../../helpers/utils/string";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { ColorType, ImageType, TranslationFieldType } from "../../types";
 import { ResourceType } from "../../types.sanity";
-import Link from "../buttons/Link";
-import { DateDisplay } from "../date/DateDisplay";
-import ResponsiveImage from "../images/ResponsiveImage";
+import { LinkProps } from "../buttons/Link";
+import { DateDisplayProps } from "../date/DateDisplay";
 import { TagProps } from "../tags/Tag";
-import Text from "../text/Text";
-import Title from "../title/Title";
 import cx from "classnames";
 import React, { ComponentType, lazy, useContext } from "react";
 
 const Tag = lazy<ComponentType<TagProps>>(
   () => import(/* webpackChunkName: "Tag" */ "../tags/Tag"),
+);
+
+const Link = lazy<ComponentType<LinkProps>>(
+  () => import(/* webpackChunkName: "Link" */ "../buttons/Link"),
+);
+
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const Title = lazy<ComponentType<TitleProps>>(
+  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
+);
+
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
+);
+
+const DateDisplay = lazy<ComponentType<DateDisplayProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "DateDisplay" */ "../../components/date/DateDisplay"
+    ),
 );
 
 export type ResourceCardProps = {

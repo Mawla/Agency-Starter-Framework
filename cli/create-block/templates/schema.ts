@@ -21,7 +21,7 @@ export const getSchemaSnippet = ({
   return `
   import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 
-  import { defaultBlockTheme } from "../../components/block/block.schema";
+  import { defaultBlockTheme, defaultBlockGroups } from "../../components/block/block.schema";
   ${render(
     fields,
     "title",
@@ -33,7 +33,6 @@ export const getSchemaSnippet = ({
     `import { defaultTextTheme } from "../../components/text/text.schema";`,
   )}
 
-  import { EllipsisVerticalIcon } from "@sanity/icons";
   import { Question } from "@vectopus/atlas-icons-react";
   import React from "react";
   import { defineField, defineType } from "sanity";
@@ -63,22 +62,7 @@ export const getSchemaSnippet = ({
         };
       },
     },
-    groups: [
-      {
-        name: "content",
-        title: "Content",
-        default: true,
-      },
-      {
-        name: "theme",
-        title: "Theme",
-      },
-      {
-        name: "tools",
-        title: " ",
-        icon: EllipsisVerticalIcon,
-      },
-    ],
+    groups: defaultBlockGroups,
     fields: [
     ...defaultBlockTools,
       ${render(

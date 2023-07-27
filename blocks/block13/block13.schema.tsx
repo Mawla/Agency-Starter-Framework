@@ -8,28 +8,27 @@ import { capitalize } from "../../helpers/utils/string";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { referenceFilterCurrentLanguage } from "../../studio/utils/language/reference-filter-current-language";
 import { RESOURCE_SCHEMAS } from "../../types.sanity";
-import { FunnelSort } from "@vectopus/atlas-icons-react";
+import { PenFilm } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "block.block12",
-  title: "Resources feed",
+  name: "block.block13",
+  title: "Resources strip",
   type: "object",
-  icon: () => <FunnelSort weight="thin" />,
+  icon: () => <PenFilm weight="thin" />,
   description:
-    "Feed of automatically loaded resources (like blogs or events) in a grid of cards",
+    "Feed of 4 automatically loaded resources (like blogs or events) in a row",
   preview: {
     select: {
       title: "title",
     },
-    prepare({ title = "Resources feed" }: any) {
+    prepare({ title = "Resources strip" }: any) {
       return {
         title: title,
       };
     },
   },
-
   groups: defaultBlockGroups,
   fields: [
     ...defaultBlockTools,
@@ -81,75 +80,12 @@ const schema = defineType({
         }),
       ],
     }),
-
     defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [
-        defaultBlockTheme,
-        defaultTitleTheme,
-        defaultTextTheme,
-        defineField({
-          name: "tags",
-          title: "Tags",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "display",
-                type: "boolean",
-              },
-              {
-                name: "color",
-                type: "color",
-              },
-              {
-                name: "background",
-                type: "color",
-              },
-            ],
-          },
-        }),
-        defineField({
-          name: "card",
-          title: "Card",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "background",
-                type: "color",
-              },
-              {
-                name: "border",
-                type: "color",
-              },
-              {
-                name: "title",
-                type: "color",
-              },
-              {
-                name: "text",
-                type: "color",
-              },
-              {
-                name: "tag",
-                type: "color",
-              },
-              {
-                name: "author",
-                type: "color",
-              },
-              {
-                name: "date",
-                type: "color",
-              },
-            ],
-          },
-        }),
-      ],
+      fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
     }),
   ],
 });

@@ -8,7 +8,6 @@ import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { IMAGE_POSITION_OPTIONS } from "./block1.options";
-import { EllipsisVerticalIcon } from "@sanity/icons";
 import { VirtualRealityImage } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";

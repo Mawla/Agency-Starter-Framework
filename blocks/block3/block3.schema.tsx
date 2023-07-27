@@ -6,7 +6,6 @@ import { GRADIENT_OPACITY_OPTIONS } from "../../components/gradient/GradientOpti
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { EllipsisVerticalIcon } from "@sanity/icons";
 import { ClickBait } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";

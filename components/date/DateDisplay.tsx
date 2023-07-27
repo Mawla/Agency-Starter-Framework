@@ -20,3 +20,5 @@ export const DateDisplay = ({
     </time>
   );
 };
+
+export default DateDisplay;
