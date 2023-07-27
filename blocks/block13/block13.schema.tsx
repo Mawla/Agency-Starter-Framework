@@ -85,7 +85,28 @@ const schema = defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
+      fields: [
+        defaultBlockTheme,
+        defaultTitleTheme,
+        defaultTextTheme,
+        defineField({
+          name: "card",
+          title: "Card",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "title",
+                type: "color",
+              },
+              {
+                name: "text",
+                type: "color",
+              },
+            ],
+          },
+        }),
+      ],
     }),
   ],
 });

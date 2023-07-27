@@ -42,18 +42,15 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
-const DateDisplay = lazy<ComponentType<DateDisplayProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "DateDisplay" */ "../../components/date/DateDisplay"
-    ),
-);
-
 export type Block13Props = {
   theme?: {
     block?: BlockThemeType;
     title?: TitleThemeType;
     intro?: TextThemeType;
+    card?: {
+      title?: ColorType;
+      text?: ColorType;
+    };
   };
   title?: string;
   intro?: React.ReactNode;
@@ -64,11 +61,6 @@ export type Block13Props = {
     image?: ImageType;
     href: string;
     intro?: string;
-    theme?: {
-      title?: ColorType;
-      text?: ColorType;
-      date?: ColorType;
-    };
   }[];
 };
 
@@ -109,9 +101,12 @@ export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
         )}
       >
         {Boolean(items?.length) && (
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {items?.map(({ _id, theme, title, image, href, intro }) => (
-              <li key={_id}>
+          <ul className="flex snap-x overflow-scrolling-touch overflow-x-auto lg:grid lg:grid-cols-4 gap-10">
+            {items?.map(({ _id, title, image, href, intro }) => (
+              <li
+                key={_id}
+                className="w-[300px] max-w-[75%] md:max-w-none shrink-0 lg:w-auto snap-center"
+              >
                 <div className="text-left relative group h-full flex flex-col">
                   <Link href={href} className="absolute inset-0 z-10">
                     <span className="sr-only">{title}</span>
@@ -133,14 +128,14 @@ export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
                         as="h3"
                         size="2xl"
                         className="group-hover:underline"
-                        color={theme?.title || "black"}
+                        color={theme?.card?.title || "black"}
                       >
                         {title}
                       </Title>
                     )}
 
                     {intro && (
-                      <Text size="md" color={theme?.text || "black"}>
+                      <Text size="md" color={theme?.card?.text || "black"}>
                         {truncate(intro, 150)}
                       </Text>
                     )}
