@@ -19,8 +19,6 @@ export const getSchemaSnippet = ({
   blockDescription,
 }: Props) => {
   return `
-  import { SPACE_OPTIONS } from "../../components/block/spacing.options";
-  import { optionsToList } from "../../studio/utils/fields/optionsToList";
   import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 
   import { defaultBlockTheme } from "../../components/block/block.schema";

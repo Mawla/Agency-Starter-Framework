@@ -2,6 +2,7 @@ import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { HORIZONTAL_ALIGN_OPTIONS } from "../../types";
 import { BACKGROUND_COLOR_OPTIONS } from "./background.options";
 import { SPACE_OPTIONS } from "./spacing.options";
+import { EllipsisVerticalIcon } from "@sanity/icons";
 import { defineField } from "sanity";
 
 export const defaultBlockTheme = defineField({
@@ -35,3 +36,20 @@ export const defaultBlockTheme = defineField({
     ],
   },
 });
+
+export const defaultBlockGroups = [
+  {
+    name: "content",
+    title: "Content",
+    default: true,
+  },
+  {
+    name: "theme",
+    title: "Theme",
+  },
+  {
+    name: "tools",
+    title: " ",
+    icon: EllipsisVerticalIcon,
+  },
+];

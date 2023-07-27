@@ -1,4 +1,7 @@
-import { defaultBlockTheme } from "../../components/block/block.schema";
+import {
+  defaultBlockGroups,
+  defaultBlockTheme,
+} from "../../components/block/block.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { capitalize } from "../../helpers/utils/string";
@@ -15,7 +18,7 @@ const schema = defineType({
   type: "object",
   icon: () => <FunnelSort weight="thin" />,
   description:
-    "Feed of automatically loaded resources(like blogs or events) in a grid of cards",
+    "Feed of automatically loaded resources (like blogs or events) in a grid of cards",
   preview: {
     select: {
       title: "title",
@@ -26,22 +29,8 @@ const schema = defineType({
       };
     },
   },
-  groups: [
-    {
-      name: "content",
-      title: "Content",
-      default: true,
-    },
-    {
-      name: "theme",
-      title: "Theme",
-    },
-    {
-      name: "tools",
-      title: " ",
-      icon: EllipsisVerticalIcon,
-    },
-  ],
+
+  groups: defaultBlockGroups,
   fields: [
     ...defaultBlockTools,
     defineField({
