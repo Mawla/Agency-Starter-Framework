@@ -1,13 +1,14 @@
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { BreadcrumbProps } from "../../components/breadcrumb/Breadcrumb";
+import Link from "../../components/buttons/Link";
 import { DateDisplayProps } from "../../components/date/DateDisplay";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SocialShareProps } from "../../components/social/SocialShare";
 import { TagProps } from "../../components/tags/Tag";
-import { TextProps } from "../../components/text/Text";
 import { joinList } from "../../helpers/utils/string";
+import { useTranslation } from "../../hooks/useTranslation";
 import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -22,10 +23,6 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
     import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
-);
-
-const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
 );
 
 const Tag = lazy<ComponentType<TagProps>>(
@@ -69,6 +66,11 @@ export type Block14Props = {
   tags?: { title?: string; href?: string }[];
   authors?: { name: string; image?: ImageType }[];
   date?: string;
+  relatedArticles?: {
+    href: string;
+    title?: string;
+    image?: ImageType;
+  }[];
 };
 export const Block14 = ({
   theme,
@@ -77,6 +79,7 @@ export const Block14 = ({
   tags,
   authors,
   date,
+  relatedArticles,
 }: Block14Props) => {
   return (
     <Wrapper
@@ -153,34 +156,31 @@ export const Block14 = ({
               <SocialShare title={title} direction="horizontal" />
             </div>
           </article>
-          <aside
-            className="hidden xl:block col-span-3"
-            aria-labelledby="sidebar-label"
-          >
-            <h3 id="sidebar-label" className="sr-only">
-              Sidebar
-            </h3>
-            <div className="p-5 mb-6 font-medium text-gray-500 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200 shadow">
-              <h4 className="mb-4 text-sm font-bold text-gray-900 uppercase">
-                Latest news
-              </h4>
-              <div className="flex items-center py-4">
-                <a href="#" className="shrink-0">
-                  <img
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/articles/image-1.png"
-                    className="mr-4 w-12 max-w-full h-12 rounded-lg"
-                    alt="Image 1"
-                  />
-                </a>
-                <a href="#">
-                  <h5 className="font-semibold leading-tight text-gray-900 hover:underline">
-                    side bar article
-                  </h5>
-                </a>
-              </div>
-            </div>
-            <div className="p-5 mb-6 bg-white rounded-lg border border-gray-200 shadow">
-              sidebar widget subscribe
+
+          <aside className="hidden xl:block col-span-3 relative">
+            <div className="sticky top-6">
+              {relatedArticles && Boolean(relatedArticles?.length) && (
+                <div className="p-5 mb-6 font-medium bg-white rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow">
+                  <h4 className="mb-4 text-sm font-bold text-gray-900 uppercase">
+                    {useTranslation("latest_news", "Latest news")}
+                  </h4>
+
+                  {relatedArticles.map(({ image, title, href }) => (
+                    <Link href={href} className="flex py-4" key={title}>
+                      {image && (
+                        <div className="relative overflow-hidden shrink-0 mr-4 w-12 max-w-full h-12 rounded-lg">
+                          <ResponsiveImage {...image} fill />
+                        </div>
+                      )}
+                      <div>
+                        <h5 className="font-semibold leading-tight hover:underline">
+                          {title}
+                        </h5>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </aside>
         </div>

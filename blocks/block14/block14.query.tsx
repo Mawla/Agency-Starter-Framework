@@ -19,4 +19,23 @@ export const getBlock14Query = (language: LanguageType) => groq`
       },
       "date": coalesce(^.publishedAt, ^._createdAt),
       body[] ${richTextQuery},
+      "relatedArticles": *[
+        _id != ^.^._id 
+        && _type == ^.^._type
+        && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0
+        && !(_id in path("drafts.*"))
+        && language == "${language}"
+      ] {
+        _id,
+        publishedAt,
+        _createdAt,
+        title,
+        "href": ${resolveIdHrefQuery},
+        "image": select(
+          defined(image) => ${imageQuery},
+          defined(blocks[0].image) => blocks[0] { 
+            "image": ${imageQuery} 
+          }.image,
+        ),
+      } | order(publishedAt desc, _createdAt desc) [0...5]
     }`;

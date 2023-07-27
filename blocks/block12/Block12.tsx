@@ -8,8 +8,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { PageContext } from "../../context/PageContext";
-import { SiteContext } from "../../context/SiteContext";
+import { useTranslation } from "../../hooks/useTranslation";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
@@ -69,10 +68,6 @@ export type Block12Props = {
 const PAGE_SIZE = 5 * 3;
 
 export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
-  const { config } = useContext(SiteContext);
-  const { language } = useContext(PageContext);
-  const translations = config.translations;
-
   const [currentTag, setCurrentTag] = React.useState<string | null>(null);
   const [page, setPage] = React.useState(1);
 
@@ -187,7 +182,7 @@ export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
               backgroundClasses[theme?.tags?.background || "white"],
             )}
           >
-            {translations?.load_more?.[language] || "Load more"}
+            {useTranslation("load_more", "Load more")}
             <IconLoader
               icon="chevrondown"
               className="block w-5 h-5 text-current"
