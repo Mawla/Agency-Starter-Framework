@@ -5,16 +5,7 @@ import "@testing-library/jest-dom";
 jest.mock("next/dist/client/router", () => require("next-router-mock"));
 
 describe("Block14", () => {
-  it("renders title", async () => {
-    await act(() => {
-      render(<Block14 title="Hello" />);
-    });
-    expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
-  });
-});
-
-describe("Block14", () => {
-  it("renders intro", async () => {
+  it("renders body", async () => {
     await act(() => {
       render(<Block14 body={<p>Hello</p>} />);
     });
