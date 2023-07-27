@@ -87,7 +87,7 @@ export const Block14 = ({
         ...theme?.block,
       }}
     >
-      <main className="py-8 lg:py-16 bg-white">
+      <main className="py-8 lg:py-16">
         <div className="grid grid-cols-12 px-4 mx-auto max-w-full gap-12">
           <aside
             className="hidden relative ml-auto lg:block col-span-1"
@@ -160,8 +160,8 @@ export const Block14 = ({
           <aside className="hidden xl:block col-span-3 relative">
             <div className="sticky top-6">
               {relatedArticles && Boolean(relatedArticles?.length) && (
-                <div className="p-5 mb-6 font-medium bg-white rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow">
-                  <h4 className="mb-4 text-sm font-bold text-gray-900 uppercase">
+                <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow text-black/90">
+                  <h4 className="mb-4 text-sm font-bold uppercase">
                     {useTranslation("latest_news", "Latest news")}
                   </h4>
 
@@ -172,11 +172,9 @@ export const Block14 = ({
                           <ResponsiveImage {...image} fill />
                         </div>
                       )}
-                      <div>
-                        <h5 className="font-semibold leading-tight hover:underline">
-                          {title}
-                        </h5>
-                      </div>
+                      <h5 className="font-semibold leading-tight hover:underline">
+                        {title}
+                      </h5>
                     </Link>
                   ))}
                 </div>
