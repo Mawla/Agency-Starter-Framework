@@ -1,7 +1,6 @@
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import Link from "../../components/buttons/Link";
-import { DateDisplayProps } from "../../components/date/DateDisplay";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { MobileScrollerProps } from "../../components/slider/MobileScroller";
@@ -13,7 +12,6 @@ import { TitleThemeType } from "../../components/title/title.options";
 import { truncate } from "../../helpers/utils/string";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
-import { LinkProps } from "next/link";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -104,7 +102,7 @@ export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
 
       <div
         className={cx(
-          "flex flex-col gap-6 mt-6",
+          "flex flex-col gap-6 mt-6 md:mt-8 lg:mt-10",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
