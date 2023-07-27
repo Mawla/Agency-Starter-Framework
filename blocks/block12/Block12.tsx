@@ -132,7 +132,7 @@ export const Block12 = ({ theme, title, intro, items, tags }: Block12Props) => {
         {availableTags &&
           theme?.tags?.display !== false &&
           Boolean(availableTags?.length) && (
-            <div className="mb-4 md:mb-6">
+            <div className="my-4 md:my-6">
               <ul className="flex flex-wrap gap-2">
                 {availableTags?.filter(Boolean).map((tag) => (
                   <li key={tag}>
