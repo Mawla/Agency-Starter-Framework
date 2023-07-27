@@ -4,6 +4,7 @@ import Link from "../../components/buttons/Link";
 import { DateDisplayProps } from "../../components/date/DateDisplay";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { MobileScrollerProps } from "../../components/slider/MobileScroller";
 import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
@@ -39,6 +40,13 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const MobileScroller = lazy<ComponentType<MobileScrollerProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "MobileScroller" */ "../../components/slider/MobileScroller"
     ),
 );
 
@@ -101,9 +109,9 @@ export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
         )}
       >
         {Boolean(items?.length) && (
-          <ul className="flex snap-x overflow-scrolling-touch overflow-x-auto lg:grid lg:grid-cols-4 gap-10">
+          <MobileScroller className="flex lg:grid lg:grid-cols-4 gap-10">
             {items?.map(({ _id, title, image, href, intro }) => (
-              <li
+              <div
                 key={_id}
                 className="w-[300px] max-w-[75%] md:max-w-none shrink-0 lg:w-auto snap-center"
               >
@@ -141,9 +149,9 @@ export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
                     )}
                   </div>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </MobileScroller>
         )}
       </div>
     </Wrapper>
