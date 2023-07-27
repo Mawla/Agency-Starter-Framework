@@ -1,9 +1,10 @@
-import { useTranslation } from "../../hooks/useTranslation";
+import { PageContext } from "../../context/PageContext";
+import { SiteContext } from "../../context/SiteContext";
 import { borderClasses, textClasses } from "../../theme";
 import { IconLoader } from "../images/IconLoader";
 import { SliderColorType } from "./slider.options";
 import cx from "classnames";
-import { CSSProperties, useState } from "react";
+import { CSSProperties, useContext, useState } from "react";
 import { Keyboard, Navigation } from "swiper";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -29,6 +30,11 @@ export const Slider = ({
   className,
   slideClassName,
 }: SliderProps) => {
+  const { config } = useContext(SiteContext);
+  const { language } = useContext(PageContext);
+
+  const translations = config.translations;
+
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
 
@@ -81,8 +87,8 @@ export const Slider = ({
           >
             <span className="sr-only">
               {direction === "prev"
-                ? useTranslation("next_slide", "Next slide")
-                : useTranslation("previous_slide", "Previous slide")}
+                ? translations?.next_slide?.[language]
+                : translations?.previous_slide?.[language]}
             </span>
             <IconLoader
               icon="chevrondown"
