@@ -16,7 +16,7 @@ describe("Block14", () => {
 describe("Block14", () => {
   it("renders intro", async () => {
     await act(() => {
-      render(<Block14 intro={<p>Hello</p>} />);
+      render(<Block14 body={<p>Hello</p>} />);
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });
