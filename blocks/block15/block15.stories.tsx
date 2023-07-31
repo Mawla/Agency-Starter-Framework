@@ -23,8 +23,8 @@ export default {
 
 const DEMO_CONTENT: Block15Props = {
   title: "title",
-  body1: <p>intro</p>,
-  body2: <p>intro</p>,
+  intro: <p>intro</p>,
+  body: <p>intro</p>,
 };
 
 export const Default = () => <Block15 {...DEMO_CONTENT} />;
@@ -96,9 +96,9 @@ export const IntroColors = () => (
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block15
-          body1={DEMO_CONTENT.body1}
+          intro={DEMO_CONTENT.intro}
           theme={{
-            body1: { color },
+            intro: { color },
           }}
         />
       </div>
@@ -111,9 +111,9 @@ export const BodySizes = () => (
     {(Object.keys(TEXT_SIZE_OPTIONS) as TextSizeType[]).map((size) => (
       <div key={size}>
         <Block15
-          body1={DEMO_CONTENT.body1}
+          intro={DEMO_CONTENT.intro}
           theme={{
-            body1: { size },
+            intro: { size },
           }}
         />
       </div>

@@ -12,16 +12,16 @@ describe("Block15", () => {
     expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
   });
 
-  it("renders body1", async () => {
+  it("renders intro", async () => {
     await act(() => {
-      render(<Block15 body1={<p>Hello</p>} />);
+      render(<Block15 intro={<p>Hello</p>} />);
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });
 
-  it("renders body2", async () => {
+  it("renders body", async () => {
     await act(() => {
-      render(<Block15 body2={<p>Hello</p>} />);
+      render(<Block15 body={<p>Hello</p>} />);
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });

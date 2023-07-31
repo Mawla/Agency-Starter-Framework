@@ -33,15 +33,15 @@ export type Block15Props = {
   theme?: {
     block?: BlockThemeType;
     title?: TitleThemeType;
-    body1?: TextThemeType;
-    body2?: TextThemeType;
+    intro?: TextThemeType;
+    body?: TextThemeType;
   };
   title?: string;
-  body1?: React.ReactNode;
-  body2?: React.ReactNode;
+  intro?: React.ReactNode;
+  body?: React.ReactNode;
 };
 
-export const Block15 = ({ theme, title, body1, body2 }: Block15Props) => {
+export const Block15 = ({ theme, title, intro, body }: Block15Props) => {
   return (
     <Wrapper
       theme={{
@@ -61,25 +61,22 @@ export const Block15 = ({ theme, title, body1, body2 }: Block15Props) => {
         )}
       </div>
 
-      {(body1 || body2) && (
+      {(intro || body) && (
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 xl:gap-24 mt-6">
-          {body1 && (
+          {intro && (
             <div className="lg:col-span-6">
               <Text
-                size={theme?.body1?.size || "xl"}
-                color={theme?.body1?.color}
+                size={theme?.intro?.size || "xl"}
+                color={theme?.intro?.color}
               >
-                <PortableText content={body1 as any} />
+                <PortableText content={intro as any} />
               </Text>
             </div>
           )}
-          {body2 && (
+          {body && (
             <div className="lg:col-span-6">
-              <Text
-                size={theme?.body2?.size || "xl"}
-                color={theme?.body2?.color}
-              >
-                <PortableText content={body2 as any} />
+              <Text size={theme?.body?.size || "xl"} color={theme?.body?.color}>
+                <PortableText content={body as any} />
               </Text>
             </div>
           )}

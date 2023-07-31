@@ -7,6 +7,6 @@ export const getBlock15Query = (language: LanguageType) => groq`
       _key,
       _type,
       title,
-      body1[] ${richTextQuery},
-      body2[] ${richTextQuery},
+      intro[] ${richTextQuery},
+      body[] ${richTextQuery},
     }`;
