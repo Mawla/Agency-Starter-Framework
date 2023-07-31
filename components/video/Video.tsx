@@ -60,6 +60,7 @@ export const Video = (props: VideoProps) => {
       {provider === "vimeo" && <VimeoPlayer {...props} />}
       {provider === "mux" && <MuxPlayer {...props} />}
       {provider === "url" && <VideoPlayer {...props} />}
+      {provider === "sanity" && <VideoPlayer {...props} />}
     </div>
   );
 };

@@ -128,6 +128,7 @@ export const VIDEO_PROVIDERS = {
   youtube: "Youtube",
   vimeo: "Vimeo",
   mux: "Mux",
+  sanity: "Sanity",
   url: "URL",
 };
 

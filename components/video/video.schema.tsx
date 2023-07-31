@@ -11,8 +11,9 @@ export const getVideoPreview = (prefix = "") => ({
     video: `${prefix}video`,
     muxPlaybackId: `${prefix}mux.asset.playbackId`,
     vimeo: `${prefix}vimeo`,
+    sanity: `${prefix}sanity.asset.url`,
   },
-  prepare({ caption, youtube, vimeo, muxPlaybackId }: any) {
+  prepare({ caption, youtube, vimeo, muxPlaybackId, sanity }: any) {
     const videoThumbnail = getVideoPreviewThumbnail({
       muxPlaybackId,
       youtube,
@@ -170,6 +171,17 @@ const schema = defineType({
       description: "Mux video ID",
       hidden: (({ parent, value }) =>
         !value && parent?.provider !== "mux") as ConditionalPropertyCallback,
+    }),
+    defineField({
+      title: "CMS",
+      type: "file",
+      name: "sanity",
+      options: {
+        accept: "video/*",
+      },
+      description: "Video in Sanity",
+      hidden: (({ parent, value }) =>
+        !value && parent?.provider !== "sanity") as ConditionalPropertyCallback,
     }),
     defineField({
       title: "URL",

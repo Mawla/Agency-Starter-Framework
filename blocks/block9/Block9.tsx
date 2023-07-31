@@ -101,13 +101,13 @@ export const Block9 = ({
             <ButtonGroup items={buttons} />
           </div>
         )}
-
-        {video && (
-          <div className="mt-8 lg:mt-12 overflow-hidden rounded-xs">
-            <Video {...video} />
-          </div>
-        )}
       </div>
+
+      {video && (
+        <div className="mt-8 lg:mt-12 overflow-hidden rounded-xs">
+          <Video {...video} />
+        </div>
+      )}
     </Wrapper>
   );
 };
