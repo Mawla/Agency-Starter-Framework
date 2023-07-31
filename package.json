@@ -17,7 +17,7 @@
     "create-module": "echo \"Modules are now called blocks. Use yarn create-block instead.\"",
     "build-config": "sanity exec ./cli/config/build.ts -- --write",
     "test-cli": "NODE_ENV=test npx jest ./cli/ ",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test TZ=UTC jest",
     "test-watch": "jest --watch"
   },
   "dependencies": {
