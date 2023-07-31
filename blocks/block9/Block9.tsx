@@ -70,44 +70,46 @@ export const Block9 = ({
         ...theme?.block,
       }}
     >
-      <div
-        className={cx(
-          "max-w-3xl",
-          textAlignClasses[theme?.block?.align || "center"],
-        )}
-      >
-        {title && (
-          <div className="mb-6">
-            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-              {title}
-            </Title>
-          </div>
-        )}
+      <div className="flex flex-col gap-8 md:gap-12">
+        <div
+          className={cx(
+            "max-w-3xl",
+            textAlignClasses[theme?.block?.align || "center"],
+          )}
+        >
+          {title && (
+            <div className="mb-6">
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+                {title}
+              </Title>
+            </div>
+          )}
 
-        {intro && (
-          <div className="mb-6">
-            <Text
-              size={theme?.intro?.size || "xl"}
-              color={theme?.intro?.color}
-              align={theme?.block?.align || "center"}
-            >
-              <PortableText content={intro as any} />
-            </Text>
-          </div>
-        )}
+          {intro && (
+            <div className="mb-6">
+              <Text
+                size={theme?.intro?.size || "xl"}
+                color={theme?.intro?.color}
+                align={theme?.block?.align || "center"}
+              >
+                <PortableText content={intro as any} />
+              </Text>
+            </div>
+          )}
 
-        {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-8 lg:mt-12">
-            <ButtonGroup items={buttons} />
+          {buttons && Boolean(buttons?.filter(Boolean).length) && (
+            <div className="mt-8 lg:mt-12">
+              <ButtonGroup items={buttons} />
+            </div>
+          )}
+        </div>
+
+        {video && (
+          <div className="overflow-hidden rounded-xs">
+            <Video {...video} />
           </div>
         )}
       </div>
-
-      {video && (
-        <div className="mt-8 lg:mt-12 overflow-hidden rounded-xs">
-          <Video {...video} />
-        </div>
-      )}
     </Wrapper>
   );
 };
