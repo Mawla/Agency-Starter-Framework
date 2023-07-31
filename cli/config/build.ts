@@ -1,4 +1,4 @@
-import { LanguagesListType } from "../../languages";
+import { baseLanguage, LanguagesListType } from "../../languages";
 import { write } from "../utils/is-write";
 import {
   formatColors,
@@ -37,6 +37,7 @@ export type GroqThemeType = {
 
 export type ConfigType = {
   languages: LanguagesListType;
+  domain: string;
   theme: {
     colors: Record<string, string>;
     fontFamily: Record<string, string[]>;
@@ -70,6 +71,13 @@ export async function getConfig(): Promise<ConfigType> {
     languages[] { id, title }
   }.languages`);
 
+  // get robotx.txt
+  const domain: string = await client.fetch(`
+  *[_id == "config_general"][0] { 
+    "domain": domain.${baseLanguage}
+  }.domain`);
+
+  // get theme
   const theme: GroqThemeType = await client.fetch(`
   *[_id == "config_theme"][0] {
     colors[] { name, value },
@@ -82,6 +90,7 @@ export async function getConfig(): Promise<ConfigType> {
   if (!theme) {
     return {
       languages,
+      domain,
       theme: {
         colors: {
           black: "#000000",
@@ -118,6 +127,7 @@ export async function getConfig(): Promise<ConfigType> {
 
   return {
     languages,
+    domain,
     theme: {
       colors,
       fontFamily,
@@ -147,7 +157,6 @@ export default ${JSON.stringify(config, null, 2)}`,
   );
 
   // write locales to file for use in next.config.js
-
   await fs.writeFile(
     `${__dirname}/../../locales.js`,
     `${DO_NOT_EDIT_FLAG}
@@ -156,6 +165,30 @@ module.exports = ${JSON.stringify(
       config?.languages ? config.languages.map(({ id }) => id) : ["en"],
     )}`,
   );
+
+  // replace domain in robots.txt
+  const robotsTxt = await fs.readFile(`${__dirname}/../../public/robots.txt`);
+  const robotsTxtLines = robotsTxt
+    .toString()
+    .split("\n")
+    .map((line) => {
+      if (line.startsWith("Host:")) {
+        return `Host: https://${config?.domain || ""}`;
+      }
+
+      if (line.startsWith("Sitemap:")) {
+        return `Sitemap: https://${config?.domain || ""}/sitemap.xml`;
+      }
+
+      return line;
+    });
+
+  await fs.writeFile(
+    `${__dirname}/../../public/robots.txt`,
+    robotsTxtLines.join("\n"),
+  );
 }
 
 if (write) buildConfig();
+
+// https://google.com

@@ -6,7 +6,7 @@ Disallow: /api/*
 Disallow: /cms/*
 
 # Host
-Host: https://google.com
+Host: https://mawla-engine-v2.vercel.app
 
 # Sitemaps
-Sitemap: https://google.com/sitemap.xml
+Sitemap: https://mawla-engine-v2.vercel.app/sitemap.xml
