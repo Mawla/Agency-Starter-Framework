@@ -5,7 +5,6 @@ import {
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { COLORS } from "../../theme";
 import { TopVerticalLayout } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -122,9 +121,10 @@ const schema = defineType({
               {
                 name: "background",
                 type: "color",
-                options: {
-                  colors: COLORS,
-                },
+              },
+              {
+                name: "intro",
+                type: "color",
               },
             ],
           },

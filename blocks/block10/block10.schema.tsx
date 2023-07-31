@@ -75,30 +75,18 @@ const schema = defineType({
               {
                 name: "background",
                 type: "color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "title",
                 type: "color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "icon",
                 type: "color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "divider",
                 type: "color",
-                options: {
-                  colors: COLORS,
-                },
               },
             ],
           },
