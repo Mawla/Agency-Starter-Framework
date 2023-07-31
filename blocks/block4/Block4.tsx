@@ -107,7 +107,8 @@ export const Block4 = ({
           <div
             className="mt-6"
             style={{
-              aspectRatio: getOriginalImageDimensions(image?.src).aspectRatio,
+              aspectRatio:
+                getOriginalImageDimensions(image?.src).aspectRatio || "auto",
             }}
           >
             <ResponsiveImage
