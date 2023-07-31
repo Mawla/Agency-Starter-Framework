@@ -1,7 +1,6 @@
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import {
-  BackgroundColorType,
   BlockRoundedType,
   backgroundRoundedBottomClasses,
   backgroundRoundedTopClasses,
@@ -14,7 +13,7 @@ export type BackgroundProps = {
   className?: string;
   theme?: {
     text?: ColorType;
-    background?: BackgroundColorType;
+    background?: ColorType;
     rounded?: BlockRoundedType;
   };
 };

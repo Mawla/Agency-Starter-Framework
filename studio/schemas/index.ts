@@ -16,6 +16,7 @@ import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
 import faq, { faqItem } from "../../components/faq/faq.schema";
+import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
@@ -99,6 +100,7 @@ export const schemaTypes = [
     dialogVideo,
     faq,
     footer,
+    highlight,
     imageSimple,
     link,
     navigation,

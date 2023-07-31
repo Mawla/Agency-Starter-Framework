@@ -1,6 +1,5 @@
 import { backgroundClasses, divideClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import { BackgroundColorType } from "../block/background.options";
 import { IconLoaderProps } from "../images/IconLoader";
 import PortableText, { PortableTextProps } from "../portabletext/PortableText";
 import Text from "../text/Text";
@@ -24,7 +23,7 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 export type AccordionProps = {
   items: AccordionItemType[];
   theme?: {
-    background?: BackgroundColorType;
+    background?: ColorType;
     title?: TitleColorType;
     icon?: ColorType;
     divider?: ColorType;

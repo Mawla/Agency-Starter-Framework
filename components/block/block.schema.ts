@@ -1,6 +1,6 @@
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { COLORS } from "../../theme";
 import { HORIZONTAL_ALIGN_OPTIONS } from "../../types";
-import { BACKGROUND_COLOR_OPTIONS } from "./background.options";
 import { SPACE_OPTIONS } from "./spacing.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { defineField } from "sanity";
@@ -23,7 +23,7 @@ export const defaultBlockTheme = defineField({
         name: "background",
         type: "color",
         options: {
-          colors: BACKGROUND_COLOR_OPTIONS,
+          colors: COLORS,
         },
       },
       {

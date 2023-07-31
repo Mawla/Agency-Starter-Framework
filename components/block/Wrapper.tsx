@@ -4,7 +4,7 @@ import { Background } from "./Background";
 import { Bleed } from "./Bleed";
 import { Spacing, SpacingProps } from "./Spacing";
 import { Width } from "./Width";
-import { BackgroundColorType, BlockRoundedType } from "./background.options";
+import { BlockRoundedType } from "./background.options";
 import { SpaceType } from "./spacing.options";
 import { WidthType } from "./width.options";
 import React from "react";
@@ -16,7 +16,7 @@ export type WrapperProps = {
   innerClassName?: string;
   theme?: {
     space?: SpaceType;
-    background?: BackgroundColorType;
+    background?: ColorType;
     text?: ColorType;
     rounded?: BlockRoundedType;
     width?: WidthType;

@@ -1,10 +1,6 @@
 import { COLORS } from "../../theme";
 import { ColorType } from "../../types";
 import { Background } from "../block/Background";
-import {
-  BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-} from "../block/background.options";
 import { Text as TextComponent } from "./Text";
 import {
   TextFontType,
@@ -63,14 +59,12 @@ export const Text = () => (
         <div className="p-4">Text color {color}</div>
       </TextComponent>
     ))}
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[]).map(
-      (color: BackgroundColorType) => (
-        <Background theme={{ background: color }} key={color}>
-          <TextComponent color="white" background={color}>
-            <div className="p-4">Block background {color}</div>
-          </TextComponent>
-        </Background>
-      ),
-    )}
+    {(Object.keys(COLORS) as ColorType[]).map((color: ColorType) => (
+      <Background theme={{ background: color }} key={color}>
+        <TextComponent color="white" background={color}>
+          <div className="p-4">Block background {color}</div>
+        </TextComponent>
+      </Background>
+    ))}
   </div>
 );

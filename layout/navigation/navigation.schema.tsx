@@ -1,4 +1,3 @@
-import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
@@ -195,9 +194,6 @@ export default defineType({
               {
                 name: "background",
                 type: "color",
-                options: {
-                  colors: BACKGROUND_COLOR_OPTIONS,
-                },
               },
               {
                 name: "text",
