@@ -1,3 +1,5 @@
+import { COLORS } from "../../theme";
+import { ColorType } from "../../types";
 import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import { defineField } from "sanity";
 
@@ -78,6 +80,14 @@ export default defineField({
             name: "link",
             title: "Link",
             type: "link",
+            options: {
+              modal: { type: "dialog" },
+            },
+          },
+          {
+            name: "color",
+            title: "Color",
+            type: "highlight",
             options: {
               modal: { type: "dialog" },
             },

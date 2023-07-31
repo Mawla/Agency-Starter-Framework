@@ -1,6 +1,7 @@
-import { VideoType } from "../../types";
+import { ColorType, VideoType } from "../../types";
 import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
+import { HighlightProps } from "../highlight/Highlight";
 import FigCaption from "../images/FigCaption";
 import { IconLoaderProps } from "../images/IconLoader";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
@@ -36,6 +37,10 @@ const Scripts = lazy<ComponentType<ScriptsType>>(
   () => import(/* webpackChunkName: "Script" */ "../script/Script"),
 );
 
+const Highlight = lazy<ComponentType<HighlightProps>>(
+  () => import(/* webpackChunkName: "Highlight" */ "../highlight/Highlight"),
+);
+
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () =>
     import(
@@ -67,6 +72,9 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
                 {children}
               </Link>
             );
+          },
+          color: ({ value, children }) => {
+            return <Highlight theme={value?.color}>{children}</Highlight>;
           },
         },
 
