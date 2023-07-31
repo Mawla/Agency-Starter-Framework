@@ -14,7 +14,7 @@ export const TRANSLATION_FIELDS = {
   guide: "Label for guide section.",
   tool: "Label for tool section.",
   video: "Label for video section.",
-  latest_news: "Label for related article sidebar.",
+  related_resources: "Label for related article sidebar.",
 };
 
 export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;
