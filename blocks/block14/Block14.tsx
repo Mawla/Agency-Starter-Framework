@@ -98,7 +98,7 @@ export const Block14 = ({
             </div>
           </aside>
 
-          <article className="col-span-12 lg:col-span-11 xl:col-span-8 format format-sm sm:format-base lg:format-lg format-blue">
+          <article className="col-span-12 lg:col-span-11 xl:col-span-8 format format-sm sm:format-base lg:format-lg">
             <header className="mb-4 lg:mb-6 not-format">
               <nav className="flex" aria-label="Breadcrumb">
                 <Breadcrumb wrap />
@@ -162,7 +162,7 @@ export const Block14 = ({
               {relatedArticles && Boolean(relatedArticles?.length) && (
                 <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow text-black/90">
                   <h4 className="mb-4 text-sm font-bold uppercase">
-                    {useTranslation("latest_news", "Latest news")}
+                    {useTranslation("related_resources", "Related resources")}
                   </h4>
 
                   {relatedArticles.map(({ image, title, href }) => (
