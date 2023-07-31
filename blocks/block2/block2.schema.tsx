@@ -123,10 +123,6 @@ const schema = defineType({
                 name: "background",
                 type: "color",
               },
-              {
-                name: "intro",
-                type: "color",
-              },
             ],
           },
         }),
