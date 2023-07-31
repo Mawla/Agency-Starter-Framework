@@ -171,7 +171,7 @@ module.exports = ${JSON.stringify(
   const robotsTxtLines = robotsTxt
     .toString()
     .split("\n")
-    .map((line) => {
+    .map((line: string) => {
       if (line.startsWith("Host:")) {
         return `Host: https://${config?.domain || ""}`;
       }

@@ -64,8 +64,48 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
 
   const excludeFromSitemap = sitemapItem?.excludeFromSitemap;
 
+  console.log(config);
+
   return (
     <>
+      <NextHead>
+        {config?.seo?.favicon?.apple_touch_icon && (
+          <link
+            rel="icon"
+            type="image/x-icon"
+            href={config?.seo?.favicon?.favicon_ico}
+          />
+        )}
+        {config?.seo?.favicon?.apple_touch_icon && (
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={config?.seo?.favicon?.apple_touch_icon}
+          />
+        )}
+        {config?.seo?.favicon?.favicon_32x32_png && (
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href={config?.seo?.favicon?.favicon_32x32_png}
+          />
+        )}
+        {config?.seo?.favicon?.favicon_16x16_png && (
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href={config?.seo?.favicon?.favicon_16x16_png}
+          />
+        )}
+        {config?.seo?.googleSiteVerification && (
+          <meta
+            name="google-site-verification"
+            content={config?.seo?.googleSiteVerification}
+          />
+        )}
+      </NextHead>
       <NextSeo
         title={seoTitle}
         noindex={excludeFromSitemap === true}

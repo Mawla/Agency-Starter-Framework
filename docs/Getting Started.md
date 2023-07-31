@@ -106,11 +106,11 @@ Create a project on Chromatic to host Storybook there. Replace the `--project-to
 Run `yarn dev`, `yarn cms` and `yarn storybook` in three terminal tabs and start building.
 
 - load demo data `sanity dataset import ./development-demo.tar.gz development`
-- add favicons in `public/favicon` using https://realfavicongenerator.com
+- add favicons in cms using https://realfavicongenerator.com
 - add navigation items in cms
 - add footer items in cms
 - add config data in cms
-- configure colors in `colors.ts` and `tailwind.config.ts`
-- start creating custom page types `yarn create-page`
+- configure colors in cms
 - start creating blocks `yarn create-block`
+- start creating custom page types `yarn create-page`
 - start creating dialogs `yarn create-dialog`

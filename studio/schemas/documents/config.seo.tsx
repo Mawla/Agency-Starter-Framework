@@ -100,5 +100,33 @@ export default defineType({
       options: { localize: true, ...SEO_DESCRIPTION_FIELD.options } as any,
     },
     { ...SEO_IMAGE_FIELD, options: { localize: true } as any },
+    defineField({
+      name: "googleSiteVerification",
+      title: "Google site verification",
+      type: "string",
+      description: "Google site verification code.",
+    }),
+    defineField({
+      name: "favicon",
+      title: "Favicon",
+      type: "object",
+      validation: (Rule: any) =>
+        Rule.required().warning(
+          "It's good practice adding a favicon for SEO and social sharing. Use https://realfavicongenerator.net/ to generate the files.",
+        ),
+      fields: [
+        "favicon.ico",
+        "favicon-16x16.png",
+        "favicon-32x32.png",
+        "apple-touch-icon.png",
+        "mstile-150x150.png",
+      ].map((name) =>
+        defineField({
+          name: name.replace(/-|\./g, "_"),
+          title: name,
+          type: "file",
+        }),
+      ),
+    }),
   ],
 });
