@@ -54,8 +54,8 @@ export const Footer = ({
       >
         <FooterBreadcrumb />
 
-        <div className="grid grid-cols-12 gap-10 lg:gap-5">
-          <div className="col-span-12 lg:col-span-4 flex flex-col gap-4 pr-20">
+        <div className="grid lg:grid-cols-12 lg:gap-10 lg:gap-5">
+          <div className="lg:col-span-12 lg:col-span-4 flex flex-col gap-4 pr-20">
             {logo && (
               <div>
                 <FooterLogo mobile={logo?.mobile} desktop={logo?.desktop} />
