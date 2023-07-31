@@ -11,6 +11,7 @@ import block11 from "../../blocks/block11/block11.schema";
 import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
+import block15 from "../../blocks/block15/block15.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
@@ -77,6 +78,7 @@ export const schemaTypes = [
     block12,
     block13,
     block14,
+    block15,
     block2,
     block3,
     block4,

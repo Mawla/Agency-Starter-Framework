@@ -11,6 +11,7 @@ export default defineField({
       title: "Rich text",
       styles: [
         { title: "Normal", value: "normal" },
+        { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
       ],
@@ -84,6 +85,7 @@ export default defineField({
         ],
       },
     },
+    { type: "image.simple" },
     SCRIPT_REFERENCE_FIELD,
   ],
 });
