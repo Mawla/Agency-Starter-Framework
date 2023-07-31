@@ -2,6 +2,7 @@ import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.opti
 import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
+import Warning from "../../studio/components/Warning";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { COLORS } from "../../theme";
 import { SchemaName } from "../../types.sanity";
@@ -64,6 +65,15 @@ export default defineType({
     },
   },
   fields: [
+    defineField({
+      name: "warning",
+      title: "Warning",
+      type: "string",
+      options: { localize: false } as any,
+      components: { field: Warning },
+      description:
+        "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
+    }),
     defineField({
       name: "links",
       title: "Links",
