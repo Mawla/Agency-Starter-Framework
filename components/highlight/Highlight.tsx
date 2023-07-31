@@ -10,7 +10,7 @@ export type HighlightProps = {
   children: React.ReactNode;
 };
 
-export default ({ theme, children }: HighlightProps) => (
+export const Highlight = ({ theme, children }: HighlightProps) => (
   <span
     className={cx(
       theme?.text && textClasses[theme?.text],
@@ -23,3 +23,5 @@ export default ({ theme, children }: HighlightProps) => (
     {children}
   </span>
 );
+
+export default Highlight;
