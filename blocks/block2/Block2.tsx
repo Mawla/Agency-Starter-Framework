@@ -111,11 +111,15 @@ export const Block2 = ({
       {items && (
         <div
           className={cx(
-            "p-4 mt-8 rounded-lg sm:p-12 lg:mt-16 bg-gray-50",
-            backgroundClasses[theme?.items?.background || "white"],
+            "mt-8 rounded-lg lg:mt-16",
+            theme?.items?.background &&
+              backgroundClasses[theme?.items?.background],
+            {
+              ["p-4 sm:p-12 "]: theme?.items?.background,
+            },
           )}
         >
-          <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:gap-20 lg:grid-cols-2">
             {Boolean(items?.filter(Boolean).length) &&
               items?.map((item) => {
                 return <Item key={item._key} {...item} />;
