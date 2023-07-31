@@ -66,10 +66,14 @@ export type Block14Props = {
   tags?: { title?: string; href?: string }[];
   authors?: { name: string; image?: ImageType }[];
   date?: string;
+  startDate?: string;
+  endDate?: string;
   relatedArticles?: {
     href: string;
     title?: string;
     image?: ImageType;
+    startDate?: string;
+    endDate?: string;
   }[];
 };
 export const Block14 = ({
@@ -80,6 +84,8 @@ export const Block14 = ({
   authors,
   date,
   relatedArticles,
+  startDate,
+  endDate,
 }: Block14Props) => {
   return (
     <Wrapper
@@ -98,7 +104,7 @@ export const Block14 = ({
             </div>
           </aside>
 
-          <article className="col-span-12 lg:col-span-11 xl:col-span-8 format format-sm sm:format-base lg:format-lg">
+          <article className="col-span-12 lg:col-span-11 xl:col-span-8">
             <header className="mb-4 lg:mb-6 not-format">
               <nav className="flex" aria-label="Breadcrumb">
                 <Breadcrumb wrap />
@@ -112,13 +118,7 @@ export const Block14 = ({
                 </div>
               </div>
 
-              {title && (
-                <h1 className="mb-4 text-2xl font-extrabold lg:mb-6 lg:text-4xl">
-                  {title}
-                </h1>
-              )}
-
-              <div className="py-4 border-t border-b border-black/10 text-sm">
+              <div className="py-4 border-t border-b border-black/10 text-sm text-black/90">
                 <address className="flex not-italic">
                   {authors && Boolean(authors?.length) && (
                     <div className="mr-3 inline-flex">
@@ -144,13 +144,23 @@ export const Block14 = ({
                         {joinList(authors.map((a) => a.name))}
                       </span>
                     )}
-                    {date && <DateDisplay datetime={date} pubdate />}
+                    {date && (
+                      <DateDisplay
+                        datetime={date}
+                        from={startDate}
+                        to={endDate}
+                      />
+                    )}
                   </div>
                 </address>
               </div>
             </header>
 
-            {body && <PortableText content={body as any} />}
+            {body && (
+              <div className="format format-sm sm:format-base lg:format-lg">
+                <PortableText content={body as any} />
+              </div>
+            )}
 
             <div className="xl:hidden">
               <SocialShare title={title} direction="horizontal" />
@@ -165,18 +175,30 @@ export const Block14 = ({
                     {useTranslation("related_resources", "Related resources")}
                   </h4>
 
-                  {relatedArticles.map(({ image, title, href }) => (
-                    <Link href={href} className="flex py-4" key={title}>
-                      {image && (
-                        <div className="relative overflow-hidden shrink-0 mr-4 w-12 max-w-full h-12 rounded-lg">
-                          <ResponsiveImage {...image} fill />
+                  {relatedArticles.map(
+                    ({ image, title, href, startDate, endDate }) => (
+                      <Link href={href} className="flex py-4 group" key={title}>
+                        {image && (
+                          <div className="relative overflow-hidden shrink-0 mr-4 w-12 max-w-full h-12 rounded-lg">
+                            <ResponsiveImage {...image} fill />
+                          </div>
+                        )}
+                        <div>
+                          <h5 className="font-semibold leading-tight group-hover:underline">
+                            {title}
+                          </h5>
+
+                          {(startDate || endDate) && (
+                            <DateDisplay
+                              from={startDate}
+                              to={endDate}
+                              className="text-xs font-normal"
+                            />
+                          )}
                         </div>
-                      )}
-                      <h5 className="font-semibold leading-tight hover:underline">
-                        {title}
-                      </h5>
-                    </Link>
-                  ))}
+                      </Link>
+                    ),
+                  )}
                 </div>
               )}
             </div>

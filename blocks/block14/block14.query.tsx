@@ -17,6 +17,8 @@ export const getBlock14Query = (language: LanguageType) => groq`
         name, 
         "image": ${imageQuery} 
       },
+      "startDate": ^.startDate,
+      "endDate": ^.endDate,
       "date": coalesce(^.publishedAt, ^._createdAt),
       body[] ${richTextQuery},
       "relatedArticles": *[
@@ -37,5 +39,7 @@ export const getBlock14Query = (language: LanguageType) => groq`
             "image": ${imageQuery} 
           }.image,
         ),
-      } | order(publishedAt desc, _createdAt desc) [0...5]
+        startDate,
+        endDate
+      } | order(startDate desc, publishedAt desc, _createdAt desc) [0...5]
     }`;

@@ -11,7 +11,7 @@ import {
 } from "./page-fields";
 import { Calendar } from "@vectopus/atlas-icons-react";
 import React from "react";
-import { defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const SCHEMA_NAME: SchemaName = "page.event";
 
@@ -36,6 +36,20 @@ export default defineType({
       },
     },
     ...pageBase.fields,
+    defineField({
+      name: "startDate",
+      title: "Start Date",
+      type: "datetime",
+      validation: (Rule: any) => Rule.required().warning(),
+      group: ["content"],
+    }),
+    defineField({
+      name: "endDate",
+      title: "End Date",
+      type: "datetime",
+      validation: (Rule: any) => Rule.required().warning(),
+      group: ["content"],
+    }),
     TAGS_FIELD,
     IMAGE_FIELD,
     PUBLISHED_AT_FIELD,

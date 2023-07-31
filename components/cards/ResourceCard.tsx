@@ -53,6 +53,8 @@ export type ResourceCardProps = {
   intro?: string;
   tags?: string[];
   authors?: { name: string; image?: ImageType }[];
+  startDate?: string;
+  endDate?: string;
   theme?: {
     background?: ColorType;
     border?: ColorType;
@@ -74,6 +76,8 @@ export const ResourceCard = ({
   tags,
   authors,
   theme,
+  startDate,
+  endDate,
 }: ResourceCardProps) => {
   const { config } = useContext(SiteContext);
   const { language } = useContext(PageContext);
@@ -166,7 +170,11 @@ export const ResourceCard = ({
                       textClasses[theme?.date || "black"],
                     )}
                   >
-                    <DateDisplay datetime={date} />
+                    <DateDisplay
+                      datetime={date}
+                      from={startDate}
+                      to={endDate}
+                    />
                   </span>
                 )}
               </span>
@@ -178,7 +186,7 @@ export const ResourceCard = ({
                 textClasses[theme?.date || "black"],
               )}
             >
-              <DateDisplay datetime={date} />
+              <DateDisplay datetime={date} from={startDate} to={endDate} />
             </span>
           )}
         </div>
