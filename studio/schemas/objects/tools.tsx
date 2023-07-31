@@ -10,6 +10,12 @@ export const defaultBlockTools = [
     group: "tools",
   }),
   defineField({
+    name: "swapSchema",
+    title: "Swap schema",
+    type: "swapSchema",
+    group: "tools",
+  }),
+  defineField({
     name: "preset",
     title: "Preset",
     type: "preset",
@@ -19,12 +25,6 @@ export const defaultBlockTools = [
     name: "copyPaste",
     title: "Copy Paste",
     type: "copyPaste",
-    group: "tools",
-  }),
-  defineField({
-    name: "swapSchema",
-    title: "Swap schema",
-    type: "swapSchema",
     group: "tools",
   }),
 ];

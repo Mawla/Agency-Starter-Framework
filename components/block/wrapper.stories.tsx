@@ -1,11 +1,8 @@
+import { COLORS } from "../../theme";
+import { ColorType } from "../../types";
 import { Spacing as SpacingComponent } from "./Spacing";
 import { Wrapper as WrapperComponent } from "./Wrapper";
-import {
-  BackgroundColorType,
-  BACKGROUND_COLOR_OPTIONS,
-  BlockRadiusType,
-  BLOCK_RADIUS_OPTIONS,
-} from "./background.options";
+import { BlockRadiusType, BLOCK_RADIUS_OPTIONS } from "./background.options";
 import { SPACE_OPTIONS } from "./spacing.options";
 import { WidthType, WIDTH_OPTIONS } from "./width.options";
 import { Meta } from "@storybook/react";
@@ -50,20 +47,18 @@ export const WithBackground = () => (
 
 export const Colors = () => (
   <>
-    {(Object.keys(BACKGROUND_COLOR_OPTIONS) as BackgroundColorType[])
-      .reverse()
-      .map((color: BackgroundColorType) => (
-        <div key={color} className="mb-px">
-          <WrapperComponent
-            theme={{
-              background: color,
-              space: { top: "none", bottom: "none" },
-            }}
-          >
-            {color}
-          </WrapperComponent>
-        </div>
-      ))}
+    {(Object.keys(COLORS) as ColorType[]).reverse().map((color: ColorType) => (
+      <div key={color} className="mb-px">
+        <WrapperComponent
+          theme={{
+            background: color,
+            space: { top: "none", bottom: "none" },
+          }}
+        >
+          {color}
+        </WrapperComponent>
+      </div>
+    ))}
   </>
 );
 

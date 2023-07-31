@@ -12,9 +12,6 @@ export const defaultTextTheme = defineField({
       {
         name: "color",
         type: "color",
-        options: {
-          colors: COLORS,
-        },
       },
       {
         name: "size",

@@ -1,3 +1,5 @@
+import { COLORS } from "../../theme";
+import { ColorType } from "../../types";
 import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import { defineField } from "sanity";
 
@@ -11,6 +13,7 @@ export default defineField({
       title: "Rich text",
       styles: [
         { title: "Normal", value: "normal" },
+        { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
       ],
@@ -81,9 +84,18 @@ export default defineField({
               modal: { type: "dialog" },
             },
           },
+          {
+            name: "color",
+            title: "Color",
+            type: "highlight",
+            options: {
+              modal: { type: "dialog" },
+            },
+          },
         ],
       },
     },
+    { type: "image.simple" },
     SCRIPT_REFERENCE_FIELD,
   ],
 });

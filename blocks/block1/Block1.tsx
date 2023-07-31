@@ -1,5 +1,4 @@
 import { WrapperProps } from "../../components/block/Wrapper";
-import { BackgroundColorType } from "../../components/block/background.options";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ImageThemeType } from "../../components/images/image.options";
@@ -8,7 +7,7 @@ import { TextProps } from "../../components/text/Text";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { ImageType } from "../../types";
+import { ColorType, ImageType } from "../../types";
 import { ImagePositionType } from "./block1.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -43,7 +42,7 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 export type Block1Props = {
   theme?: {
     block?: {
-      background?: BackgroundColorType;
+      background?: ColorType;
       space?: SpaceType;
     };
     layout?: {

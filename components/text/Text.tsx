@@ -42,6 +42,7 @@ export const Text = ({
           "break-words prose font-regular leading-relaxed",
           "prose-strong:font-bold prose-strong:text-current prose-headings:text-current",
           "prose-a:text-current prose-a:underline prose-a:underline-offset-4",
+          "[&>*:first-child_img]:mt-0",
           align && textAlignClasses[align],
           size && textSizeClasses[size],
           font && textFontClasses[font],

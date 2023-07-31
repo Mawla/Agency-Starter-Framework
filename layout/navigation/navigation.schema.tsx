@@ -1,9 +1,7 @@
-import { BACKGROUND_COLOR_OPTIONS } from "../../components/block/background.options";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
 import Warning from "../../studio/components/Warning";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { COLORS } from "../../theme";
 import { SchemaName } from "../../types.sanity";
 import { ALIGN_OPTIONS } from "./navigation.options";
 import {
@@ -206,24 +204,15 @@ export default defineType({
               {
                 name: "background",
                 type: "color",
-                options: {
-                  colors: BACKGROUND_COLOR_OPTIONS,
-                },
               },
               {
                 name: "text",
                 type: "color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "border",
                 type: "color",
                 title: "Bottom border",
-                options: {
-                  colors: COLORS,
-                },
               },
             ],
           },
@@ -238,9 +227,6 @@ export default defineType({
                 name: "text",
                 type: "color",
                 title: "Link color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "align",
@@ -262,17 +248,11 @@ export default defineType({
                 name: "background",
                 type: "color",
                 title: "Background color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "text",
                 type: "color",
                 title: "Link color",
-                options: {
-                  colors: COLORS,
-                },
               },
             ],
           },
@@ -287,17 +267,11 @@ export default defineType({
                 name: "background",
                 type: "color",
                 title: "Background color",
-                options: {
-                  colors: COLORS,
-                },
               },
               {
                 name: "text",
                 type: "color",
                 title: "Link color",
-                options: {
-                  colors: COLORS,
-                },
               },
             ],
           },

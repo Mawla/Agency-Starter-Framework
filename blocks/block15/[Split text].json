@@ -1,0 +1,11 @@
+{
+  "title": "Split text",
+  "description": "Side by side text block",
+  "name": "Block 15",
+  "schemaName": "block.block15",
+  "date": "2023-07-31T11:55:20.097Z",
+  "fields": [
+    "title",
+    "intro"
+  ]
+}
