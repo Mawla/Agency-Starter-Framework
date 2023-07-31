@@ -126,14 +126,14 @@ export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
 
       <div
         className={cx(
-          "flex flex-col gap-6",
+          "flex flex-col gap-6 pt-6",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
         {availableTags &&
           theme?.tags?.display !== false &&
           Boolean(availableTags?.length) && (
-            <div className="my-4 md:my-6">
+            <div className="mb-4 md:mb-6">
               <ul className="flex flex-wrap gap-2">
                 {availableTags?.filter(Boolean).map((tag) => (
                   <li key={tag}>
