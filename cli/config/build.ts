@@ -1,4 +1,4 @@
-import { baseLanguage, LanguagesListType } from "../../languages";
+import { LanguagesListType } from "../../languages";
 import { write } from "../utils/is-write";
 import {
   formatColors,
@@ -74,7 +74,7 @@ export async function getConfig(): Promise<ConfigType> {
   // get robotx.txt
   const domain: string = await client.fetch(`
   *[_id == "config_general"][0] { 
-    "domain": domain.${baseLanguage}
+    domain
   }.domain`);
 
   // get theme
@@ -173,11 +173,13 @@ module.exports = ${JSON.stringify(
     .split("\n")
     .map((line: string) => {
       if (line.startsWith("Host:")) {
-        return `Host: https://${config?.domain || ""}`;
+        return `Host: https://${config?.domain ? config?.domain : ""}`;
       }
 
       if (line.startsWith("Sitemap:")) {
-        return `Sitemap: https://${config?.domain || ""}/sitemap.xml`;
+        return `Sitemap: https://${
+          config?.domain ? config?.domain : ""
+        }/sitemap.xml`;
       }
 
       return line;

@@ -41,7 +41,6 @@ export default defineType({
     defineField({
       name: "domain",
       type: "string",
-      options: { localize: true } as any,
       title: "Domain",
       validation: (Rule: StringRule) =>
         Rule.required().custom(async (value, context) => {
