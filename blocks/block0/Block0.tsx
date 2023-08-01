@@ -126,7 +126,6 @@ export const Block0 = ({
     <Wrapper
       theme={{
         ...theme?.block,
-        width: "full",
       }}
     >
       <IframeResizer {...iframeProps} />

@@ -180,3 +180,40 @@ export const Widths = () => (
     ))}
   </div>
 );
+
+export const Complex = () => (
+  <div className="flex flex-col gap-10">
+    <WrapperComponent
+      theme={{
+        background: "gray-900",
+        outerBackground: "gray-500",
+        text: "white",
+        width: "inner",
+        margin: {
+          top: "lg",
+          bottom: "lg",
+        },
+        rounded: {
+          top: "lg",
+          bottom: "lg",
+        },
+        padding: {
+          top: "none",
+          bottom: "none",
+        },
+      }}
+    >
+      …
+    </WrapperComponent>
+    <WrapperComponent
+      theme={{
+        background: "gray-900",
+        outerBackground: "gray-500",
+        text: "white",
+        width: "inner",
+      }}
+    >
+      …
+    </WrapperComponent>
+  </div>
+);

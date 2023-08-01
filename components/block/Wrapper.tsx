@@ -1,4 +1,5 @@
 import { slugify } from "../../helpers/utils/string";
+import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { Background } from "./Background";
 import { Bleed } from "./Bleed";
@@ -7,6 +8,7 @@ import { Width } from "./Width";
 import { BlockRoundedType } from "./background.options";
 import { SpaceType } from "./spacing.options";
 import { WidthType } from "./width.options";
+import cx from "classnames";
 import React from "react";
 
 export type WrapperProps = {
@@ -18,6 +20,7 @@ export type WrapperProps = {
     padding?: SpaceType;
     margin?: SpaceType;
     background?: ColorType;
+    outerBackground?: ColorType;
     text?: ColorType;
     rounded?: BlockRoundedType;
     width?: WidthType;
@@ -32,14 +35,14 @@ export const Wrapper = ({
   innerClassName,
 }: WrapperProps) => {
   /**
-   * with background
-   * [spacing top/bottom]
-   *   [small bleed]
-   *     [full width]
-   *       [background]
-   *         [medium bleed]
-   *           [inner width]
-   *             [content]
+   * [small bleed]
+   *   [margin top/bottom]
+   *       [width]
+   *         [background]
+   *            [padding top/bottom]
+   *              [bleed]
+   *                [inner width]
+   *                  [content]
    */
 
   if (!theme) theme = {};
@@ -49,16 +52,15 @@ export const Wrapper = ({
     <Bleed
       bleed={theme?.width === "full" ? "none" : "sm"}
       id={id ? slugify(id) : ""}
-      className={className}
+      className={cx(
+        className,
+        theme?.outerBackground && backgroundClasses[theme?.outerBackground],
+      )}
     >
       <Spacing
-        margin={{
+        padding={{
           top: theme?.margin?.top || "none",
           bottom: theme?.margin?.bottom || "none",
-        }}
-        padding={{
-          top: "none",
-          bottom: "none",
         }}
       >
         <Width width={theme?.width || "full"}>

@@ -13,28 +13,23 @@ export const defaultBlockTheme = defineField({
   options: {
     fields: [
       {
-        name: "background",
-        type: "color",
-      },
-      {
         name: "text",
         type: "color",
+        group: "Inner block",
+      },
+      {
+        name: "background",
+        type: "color",
+        group: "Inner block",
       },
       {
         name: "padding",
-        title: "Inside space",
+        title: "Padding",
         type: "topbottom",
         options: {
           list: optionsToList(SPACE_OPTIONS),
         },
-      },
-      {
-        name: "margin",
-        title: "Outside space",
-        type: "topbottom",
-        options: {
-          list: optionsToList(SPACE_OPTIONS),
-        },
+        group: "Inner block",
       },
       {
         name: "width",
@@ -42,6 +37,7 @@ export const defaultBlockTheme = defineField({
         options: {
           list: optionsToList(WIDTH_OPTIONS),
         },
+        group: "Inner block",
       },
       {
         name: "rounded",
@@ -49,6 +45,7 @@ export const defaultBlockTheme = defineField({
         options: {
           list: optionsToList(BLOCK_RADIUS_OPTIONS),
         },
+        group: "Inner block",
       },
 
       {
@@ -57,6 +54,22 @@ export const defaultBlockTheme = defineField({
         options: {
           list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
         },
+        group: "Inner block",
+      },
+      {
+        name: "margin",
+        title: "Margin",
+        type: "topbottom",
+        options: {
+          list: optionsToList(SPACE_OPTIONS),
+        },
+        group: "Outer block",
+      },
+      {
+        name: "outerBackground",
+        title: "Background",
+        type: "color",
+        group: "Outer block",
       },
     ],
   },
