@@ -8,7 +8,8 @@
 const useBreakpoints = require("use-breakpoints-width").default;
 
 export const BREAKPOINTS = {
-  xs: 0,
+  none: 0,
+  xs: 400,
   sm: 640,
   md: 768,
   lg: 1024,
