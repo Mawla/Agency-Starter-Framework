@@ -1,7 +1,8 @@
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { COLORS } from "../../theme";
 import { HORIZONTAL_ALIGN_OPTIONS } from "../../types";
+import { BLOCK_RADIUS_OPTIONS } from "./background.options";
 import { SPACE_OPTIONS } from "./spacing.options";
+import { WIDTH_OPTIONS } from "./width.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
 import { defineField } from "sanity";
 
@@ -12,9 +13,17 @@ export const defaultBlockTheme = defineField({
   options: {
     fields: [
       {
+        name: "background",
+        type: "color",
+      },
+      {
+        name: "text",
+        type: "color",
+      },
+      {
         name: "padding",
         title: "Inside space",
-        type: "space",
+        type: "topbottom",
         options: {
           list: optionsToList(SPACE_OPTIONS),
         },
@@ -22,28 +31,32 @@ export const defaultBlockTheme = defineField({
       {
         name: "margin",
         title: "Outside space",
-        type: "space",
+        type: "topbottom",
         options: {
           list: optionsToList(SPACE_OPTIONS),
         },
       },
       {
-        name: "background",
-        type: "color",
+        name: "width",
+        type: "select",
         options: {
-          colors: COLORS,
+          list: optionsToList(WIDTH_OPTIONS),
         },
       },
+      {
+        name: "rounded",
+        type: "topbottom",
+        options: {
+          list: optionsToList(BLOCK_RADIUS_OPTIONS),
+        },
+      },
+
       {
         name: "align",
         type: "select",
         options: {
           list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
         },
-      },
-      {
-        name: "text",
-        type: "color",
       },
     ],
   },

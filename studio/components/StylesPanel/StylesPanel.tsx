@@ -15,7 +15,7 @@ export type StyleItemProps = {
   onChange: (name: string, val: any) => void;
   title?: string;
   name: string;
-  type: "color" | "boolean" | "select" | "string" | "space";
+  type: "color" | "boolean" | "select" | "string" | "topbottom";
   options?: {
     colors?: { [key: string]: ColorType };
     list?: { title: string; value: string }[];
@@ -336,7 +336,7 @@ const StyleItem = ({
       />
     )}
 
-    {type === "space" && (
+    {type === "topbottom" && (
       <Space
         options={options?.list}
         value={value?.[name]}
@@ -374,7 +374,7 @@ const formatValue = (value: any, type: StyleItemProps["type"]) => {
     return value;
   }
 
-  if (type === "space") {
+  if (type === "topbottom") {
     let val = [];
     if (value?.top) val.push(`top: ${value?.top}`);
     if (value?.bottom) val.push(`bottom: ${value?.bottom}`);
