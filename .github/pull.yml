@@ -2,6 +2,6 @@
 
 version: "1"
 rules:
-  - base: master
-    upstream: Mawla:master
+  - base: main
+    upstream: Mawla:main
     mergeMethod: hardreset
