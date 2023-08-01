@@ -78,8 +78,8 @@ export const Slider = ({
             type="button"
             className={cx(
               "border-2 rounded-full flex items-center justify-center w-10 h-10 transition-colors disabled:opacity-20",
-              borderClasses[controlsColor || "black"],
-              textClasses[(controlsColor as SliderColorType) || "black"],
+              controlsColor && borderClasses[controlsColor],
+              controlsColor && textClasses[controlsColor as SliderColorType],
             )}
             ref={(node) =>
               direction === "prev" ? setPrevEl(node) : setNextEl(node)

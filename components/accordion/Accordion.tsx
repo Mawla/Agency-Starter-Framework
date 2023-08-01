@@ -40,7 +40,7 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
         className={cx(
           "divide-y",
           theme?.background && backgroundClasses[theme?.background],
-          divideClasses[theme?.divider || "black"],
+          theme?.divider ? divideClasses[theme?.divider] : "divide-current",
         )}
       >
         {items?.map(({ _key, title = "", content }) => (

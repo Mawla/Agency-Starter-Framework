@@ -15,20 +15,42 @@ export const Tag = ({ label, theme, href }: TagProps) => {
   if (!label) return null;
 
   const classes = cx(
-    "text-xs font-semibold px-2 py-0.5 rounded",
-    theme?.color ? textClasses[theme?.color] : "text-black/80",
-    theme?.background ? backgroundClasses[theme?.background] : "bg-black/10",
+    "text-xs font-semibold px-2 py-0.5 relative rounded",
+    theme?.color && textClasses[theme?.color],
+    theme?.background && backgroundClasses[theme?.background],
   );
 
   if (href) {
     return (
       <a href={href} className={cx(classes, "hover:underline")}>
-        {label}
+        <InnerTag label={label} />
       </a>
     );
   }
 
-  return <span className={classes}>{label}</span>;
+  return (
+    <span className={classes}>
+      <InnerTag label={label} />
+    </span>
+  );
+};
+
+const InnerTag = ({
+  label,
+  background,
+}: {
+  label?: string;
+  background?: ColorType;
+}) => {
+  if (background) return <>label</>;
+
+  return (
+    <>
+      <span className="absolute inset-0 bg-current opacity-10 rounded" />
+
+      {label && <span className="relative">{label}</span>}
+    </>
+  );
 };
 
 export default Tag;

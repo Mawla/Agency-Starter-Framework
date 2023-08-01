@@ -26,7 +26,7 @@ export const Title = ({
   size = "4xl",
   weight = "bold",
   className,
-  color = "black",
+  color,
   font = "sans",
 }: TitleProps) => {
   if (!as) as = "h2";
@@ -39,7 +39,7 @@ export const Title = ({
         "hyphens-auto",
         "break-words inline-block",
         "flex flex-col whitespace-pre-line",
-        textClasses[color || "current"],
+        color ? textClasses[color] : "text-current",
         titleSizeClasses[size || "4xl"],
         weightClasses[weight || "bold"],
         fontClasses[font || "sans"],

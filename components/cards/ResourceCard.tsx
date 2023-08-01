@@ -87,8 +87,8 @@ export const ResourceCard = ({
     <div
       className={cx(
         "text-left relative rounded p-4 shadow-md group h-full border flex flex-col",
-        borderClasses[theme?.border || "black"],
-        backgroundClasses[theme?.background || "white"],
+        theme?.border && borderClasses[theme?.border],
+        theme?.background && backgroundClasses[theme?.background],
         {
           ["border-opacity-10"]: !theme?.border,
         },
@@ -125,14 +125,14 @@ export const ResourceCard = ({
             as="h3"
             size="2xl"
             className="group-hover:underline"
-            color={theme?.title || "black"}
+            color={theme?.title}
           >
             {title}
           </Title>
         )}
 
         {intro && (
-          <Text size="md" color={theme?.text || "black"}>
+          <Text size="md" color={theme?.text}>
             {truncate(intro, 150)}
           </Text>
         )}
@@ -158,7 +158,7 @@ export const ResourceCard = ({
               <span
                 className={cx(
                   "text-sm ml-3 font-semibold",
-                  textClasses[theme?.author || "black"],
+                  theme?.author && textClasses[theme?.author],
                 )}
               >
                 {joinList(authors.map((a) => a.name))}
@@ -167,7 +167,7 @@ export const ResourceCard = ({
                   <span
                     className={cx(
                       "block font-normal text-xs mt-0.5",
-                      textClasses[theme?.date || "black"],
+                      theme?.date && textClasses[theme?.date],
                     )}
                   >
                     <DateDisplay
@@ -183,7 +183,7 @@ export const ResourceCard = ({
             <span
               className={cx(
                 "block font-normal text-xs mt-0.5",
-                textClasses[theme?.date || "black"],
+                theme?.date && textClasses[theme?.date],
               )}
             >
               <DateDisplay datetime={date} from={startDate} to={endDate} />

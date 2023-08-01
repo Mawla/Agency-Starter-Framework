@@ -2,8 +2,6 @@ import {
   defaultBlockTheme,
   defaultBlockGroups,
 } from "../../components/block/block.schema";
-import { defaultTextTheme } from "../../components/text/text.schema";
-import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import { NewspaperArticle } from "@vectopus/atlas-icons-react";

@@ -134,14 +134,14 @@ export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
                         as="h3"
                         size="2xl"
                         className="group-hover:underline"
-                        color={theme?.card?.title || "black"}
+                        color={theme?.card?.title}
                       >
                         {title}
                       </Title>
                     )}
 
                     {intro && (
-                      <Text size="md" color={theme?.card?.text || "black"}>
+                      <Text size="md" color={theme?.card?.text}>
                         {truncate(intro, 150)}
                       </Text>
                     )}

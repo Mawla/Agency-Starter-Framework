@@ -139,9 +139,9 @@ export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
                   <li key={tag}>
                     <button
                       className={cx(
-                        "transition-all font-semibold text-md rounded py-1 px-2 bg-black/5 hover:underline text-black/80",
-                        textClasses[theme?.tags?.color || "black"],
-                        backgroundClasses[theme?.tags?.background || "white"],
+                        "relative transition-all font-semibold text-md rounded py-1 px-2 hover:underline",
+                        theme?.tags?.color && textClasses[theme?.tags?.color],
+
                         {
                           ["opacity-50"]: currentTag && currentTag !== tag,
                         },
@@ -152,7 +152,17 @@ export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
                           : tag && setCurrentTag(tag)
                       }
                     >
-                      {tag}
+                      <span
+                        className={cx(
+                          "absolute inset-0",
+                          theme?.tags?.background &&
+                            backgroundClasses[theme?.tags?.background],
+                          {
+                            ["opacity-5 bg-current"]: !theme?.tags?.background,
+                          },
+                        )}
+                      />
+                      <span className="relative">{tag}</span>
                     </button>
                   </li>
                 ))}
@@ -177,9 +187,10 @@ export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
             type="button"
             onClick={onLoadMoreClick}
             className={cx(
-              "font-semibold text-md rounded py-1 px-2 bg-black/5 hover:underline text-black/80 flex gap-1 items-center",
-              textClasses[theme?.tags?.color || "black"],
-              backgroundClasses[theme?.tags?.background || "white"],
+              "font-semibold text-md rounded py-1 px-2 hover:underline flex gap-1 items-center",
+              theme?.tags?.color && textClasses[theme?.tags?.color],
+              theme?.tags?.background &&
+                backgroundClasses[theme?.tags?.background],
             )}
           >
             {useTranslation("load_more", "Load more")}
