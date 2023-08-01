@@ -181,7 +181,7 @@ export const Widths = () => (
   </div>
 );
 
-export const Complex = () => (
+export const OutsideBackground = () => (
   <div className="flex flex-col gap-10">
     <WrapperComponent
       theme={{
