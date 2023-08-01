@@ -7,7 +7,7 @@ import React from "react";
 import { useQuery } from "react-query";
 
 export type IconLoaderProps = {
-  icon: string;
+  icon?: string;
   className?: string;
   color?: ColorType;
   as?: React.ElementType;
@@ -30,6 +30,9 @@ export const IconLoader = ({
   removeColors = true,
 }: IconLoaderProps) => {
   const Element = as;
+
+  if (!icon) return null;
+
   const {
     data: svg,
     isLoading,
