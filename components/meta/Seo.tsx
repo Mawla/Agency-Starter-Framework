@@ -64,8 +64,6 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
 
   const excludeFromSitemap = sitemapItem?.excludeFromSitemap;
 
-  console.log(config);
-
   return (
     <>
       <NextHead>
