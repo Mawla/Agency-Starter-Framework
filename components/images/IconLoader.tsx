@@ -62,7 +62,7 @@ export const IconLoader = ({
     }
 
     getIcon();
-  }, [icon]);
+  }, [icon, removeColors]);
 
   if (!icon) return null;
 
