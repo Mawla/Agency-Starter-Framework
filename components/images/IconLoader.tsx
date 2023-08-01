@@ -3,10 +3,11 @@ import { textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import * as DOMPurify from "dompurify";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 
 export type IconLoaderProps = {
-  icon?: string;
+  icon: string;
   className?: string;
   color?: ColorType;
   as?: React.ElementType;
@@ -29,44 +30,33 @@ export const IconLoader = ({
   removeColors = true,
 }: IconLoaderProps) => {
   const Element = as;
-  const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
-  const [data, setData] = useState<string | null>(null);
+  const {
+    data: svg,
+    isLoading,
+    isError,
+  } = useQuery(icon, () =>
+    getClient(false).fetch(
+      `
+  *[_id == 'config_icons'][0] {
+    "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
+  }.icon`.replace(/\s/g, ""),
+    ),
+  );
 
-  useEffect(() => {
-    async function getIcon() {
-      if (!icon) return;
+  let cleanSVG = "";
+  if (svg) {
+    if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return null;
 
-      const svg = await getClient(false)?.fetch(
-        `
-        *[_id == 'config_icons'][0] {
-          "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
-        }.icon`.replace(/\s/g, ""),
-      );
-
-      if (!svg) return;
-      if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
-
-      let cleanSVG = DOMPurify?.sanitize?.(svg); //
-      cleanSVG = cleanUpAttributes(cleanSVG);
-      if (removeColors) {
-        cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
-      }
-
-      if (cleanSVG) {
-        setState("loaded");
-        setData(cleanSVG);
-        return;
-      }
-
-      setState("error");
+    cleanSVG = DOMPurify?.sanitize?.(svg); //
+    cleanSVG = cleanUpAttributes(cleanSVG);
+    if (removeColors) {
+      cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
     }
+  }
 
-    getIcon();
-  }, [icon, removeColors]);
+  if (!cleanSVG) return null;
 
-  if (!icon) return null;
-
-  if (state === "loading" || state === "error")
+  if (isLoading || isError)
     return (
       <Element
         role="img"
@@ -83,7 +73,7 @@ export const IconLoader = ({
       aria-hidden="true"
       aria-label={[title, description, icon].filter(Boolean).join(", ")}
       className={cx(className, color && textClasses[color])}
-      dangerouslySetInnerHTML={{ __html: data }}
+      dangerouslySetInnerHTML={{ __html: cleanSVG }}
       style={style}
     />
   );
