@@ -1,4 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
+import { ColorInput } from "../../components/ColorInput";
 import ThemeColors from "../../components/Theme/ThemeColors";
 import ThemeFontFamily from "../../components/Theme/ThemeFontFamily";
 import ThemeFontSize from "../../components/Theme/ThemeFontSize";
@@ -257,6 +258,9 @@ export default defineType({
               title: "Value",
               type: "string",
               description: "Hexadecimal value of the color, e.g #ff0000",
+              components: {
+                input: ColorInput,
+              },
               validation: (Rule) =>
                 Rule.custom((value) => {
                   if (typeof value === "undefined") return true;
