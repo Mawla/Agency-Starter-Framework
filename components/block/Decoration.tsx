@@ -2,6 +2,7 @@ import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { ImageType } from "../../types";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
+import DOMPurify from "dompurify";
 import { ComponentType, CSSProperties, lazy } from "react";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
@@ -22,6 +23,7 @@ export type DecorationType = {
   opacity?: number;
   hidden?: boolean;
   image?: ImageType;
+  html?: string;
 };
 
 export type DecorationProps = {
@@ -53,6 +55,7 @@ export const Decoration = ({
   let styleObj: CSSProperties = {};
   let hidden = Boolean(mobile?.hidden);
   let image = mobile?.image;
+  let html = mobile?.html;
 
   styleObj = pickOnlyCSSProperties(mobile);
 
@@ -64,6 +67,7 @@ export const Decoration = ({
     });
     hidden = Boolean(tablet.hidden);
     image = tablet.image;
+    html = tablet.html;
   }
 
   // desktop view
@@ -74,29 +78,33 @@ export const Decoration = ({
     });
     hidden = Boolean(desktop.hidden);
     image = desktop.image;
+    html = desktop.html;
   }
 
   if (hidden) return null;
 
-  if (image) {
-    return (
-      <i className="absolute inset-0 overflow-hidden">
-        <i
-          className="absolute"
-          style={{
-            ...styleObj,
-            aspectRatio:
-              getOriginalImageDimensions(image?.src).aspectRatio || "auto",
-          }}
-        >
-          <ResponsiveImage {...image} fill preserveAspectRatio />
-        </i>
-      </i>
-    );
-  }
+  if (html) html = DOMPurify?.sanitize?.(html);
+
   return (
     <i className="absolute inset-0 overflow-hidden">
-      <i className="absolute" style={styleObj}></i>
+      <i
+        className="absolute"
+        style={{
+          ...styleObj,
+          aspectRatio: image
+            ? getOriginalImageDimensions(image?.src).aspectRatio || "auto"
+            : "unset",
+        }}
+        dangerouslySetInnerHTML={
+          html
+            ? {
+                __html: html,
+              }
+            : undefined
+        }
+      >
+        {image && <ResponsiveImage {...image} fill preserveAspectRatio />}
+      </i>
     </i>
   );
 };

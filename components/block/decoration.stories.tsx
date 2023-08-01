@@ -124,3 +124,16 @@ export const Image = () => (
     </div>
   </div>
 );
+
+export const HTML = () => (
+  <div className="border relative p-20">
+    <Decoration
+      mobile={{
+        ...SQUARE,
+        right: 20,
+        bottom: 20,
+        html: `<div style="background: red; width: 50%; height: 50%; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);"></div>`,
+      }}
+    />
+  </div>
+);
