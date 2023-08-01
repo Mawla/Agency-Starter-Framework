@@ -1,8 +1,7 @@
-import { SPACE_OPTIONS } from "../../components/block/spacing.options";
+import { defaultBlockTheme } from "../../components/block/block.schema";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
 import Warning from "../../studio/components/Warning";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { SchemaName } from "../../types.sanity";
 import { AlignDown, Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -229,33 +228,7 @@ export default defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [
-        defineField({
-          name: "block",
-          title: "Block",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "space",
-                title: "Space",
-                type: "space",
-                options: {
-                  list: optionsToList(SPACE_OPTIONS),
-                },
-              },
-              {
-                name: "background",
-                type: "color",
-              },
-              {
-                name: "text",
-                type: "color",
-              },
-            ],
-          },
-        }),
-      ],
+      fields: [defaultBlockTheme],
     }),
   ],
 });

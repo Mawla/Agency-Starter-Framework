@@ -15,7 +15,8 @@ export type WrapperProps = {
   className?: string;
   innerClassName?: string;
   theme?: {
-    space?: SpaceType;
+    padding?: SpaceType;
+    margin?: SpaceType;
     background?: ColorType;
     text?: ColorType;
     rounded?: BlockRoundedType;
@@ -50,29 +51,40 @@ export const Wrapper = ({
       id={id ? slugify(id) : ""}
       className={className}
     >
-      <Width width={theme?.width || "full"}>
-        <Background
-          theme={{
-            ...theme,
-            rounded: {
-              top: theme?.rounded?.top,
-              bottom: theme?.rounded?.bottom,
-            },
-          }}
-          className={innerClassName}
-        >
-          <Spacing
-            space={{
-              top: theme?.space?.top || "md",
-              bottom: theme?.space?.bottom || "md",
+      <Spacing
+        margin={{
+          top: theme?.margin?.top || "none",
+          bottom: theme?.margin?.bottom || "none",
+        }}
+        padding={{
+          top: "none",
+          bottom: "none",
+        }}
+      >
+        <Width width={theme?.width || "full"}>
+          <Background
+            theme={{
+              ...theme,
+              rounded: {
+                top: theme?.rounded?.top,
+                bottom: theme?.rounded?.bottom,
+              },
             }}
+            className={innerClassName}
           >
-            <Bleed bleed="lg">
-              <Width width="inner">{children}</Width>
-            </Bleed>
-          </Spacing>
-        </Background>
-      </Width>
+            <Spacing
+              padding={{
+                top: theme?.padding?.top || "md",
+                bottom: theme?.padding?.bottom || "md",
+              }}
+            >
+              <Bleed bleed="lg">
+                <Width width="inner">{children}</Width>
+              </Bleed>
+            </Spacing>
+          </Background>
+        </Width>
+      </Spacing>
     </Bleed>
   );
 };

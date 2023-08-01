@@ -105,10 +105,6 @@ export const Theme = () => (
         block: {
           background: "black",
           text: "white",
-          space: {
-            top: "none",
-            bottom: "none",
-          },
         },
       }}
     />

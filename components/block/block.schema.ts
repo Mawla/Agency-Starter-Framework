@@ -12,8 +12,16 @@ export const defaultBlockTheme = defineField({
   options: {
     fields: [
       {
-        name: "space",
-        title: "Space",
+        name: "padding",
+        title: "Inside space",
+        type: "space",
+        options: {
+          list: optionsToList(SPACE_OPTIONS),
+        },
+      },
+      {
+        name: "margin",
+        title: "Outside space",
         type: "space",
         options: {
           list: optionsToList(SPACE_OPTIONS),
@@ -32,6 +40,10 @@ export const defaultBlockTheme = defineField({
         options: {
           list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
         },
+      },
+      {
+        name: "text",
+        type: "color",
       },
     ],
   },

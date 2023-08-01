@@ -35,7 +35,7 @@ class BlockErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       if (IS_PRODUCTION) return null;
       return (
-        <Spacing space={{ top: "sm", bottom: "sm" }}>
+        <Spacing padding={{ top: "sm", bottom: "sm" }}>
           <Width>
             <strong className="block">
               {(this.props.children as React.ReactElement)?.props?.block}

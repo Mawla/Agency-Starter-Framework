@@ -10,7 +10,7 @@ export type SpaceType = {
   bottom?: keyof typeof SPACE_OPTIONS;
 };
 
-export const spaceTopClasses: Record<SpaceTopType, string> = {
+export const paddingTopClasses: Record<SpaceTopType, string> = {
   none: "pt-0",
   xs: "pt-5 sm:pt-5 md:pt-8 lg:pt-10",
   sm: "pt-10 sm:pt-10 md:pt-16 lg:pt-20",
@@ -19,11 +19,29 @@ export const spaceTopClasses: Record<SpaceTopType, string> = {
   xl: "pt-16 sm:pt-16 md:pt-30 lg:pt-40",
 };
 
-export const spaceBottomClasses: Record<SpaceBottomType, string> = {
+export const paddingBottomClasses: Record<SpaceBottomType, string> = {
   none: "pb-0",
   xs: "pb-5 sm:pb-5 md:pb-8 lg:pb-10",
   sm: "pb-10 sm:pb-10 md:pb-16 lg:pb-20",
   md: "pb-10 sm:pb-10 md:pb-20 lg:pb-25",
   lg: "pb-12 sm:pb-12 md:pb-24 lg:pb-30",
   xl: "pb-16 sm:pb-16 md:pb-30 lg:pb-40",
+};
+
+export const marginTopClasses: Record<SpaceTopType, string> = {
+  none: "mt-0",
+  xs: "mt-5 sm:mt-5 md:mt-8 lg:mt-10",
+  sm: "mt-10 sm:mt-10 md:mt-16 lg:mt-20",
+  md: "mt-10 sm:mt-10 md:mt-20 lg:mt-25",
+  lg: "mt-12 sm:mt-12 md:mt-24 lg:mt-30",
+  xl: "mt-16 sm:mt-16 md:mt-30 lg:mt-40",
+};
+
+export const marginBottomClasses: Record<SpaceBottomType, string> = {
+  none: "mb-0",
+  xs: "mb-5 sm:mb-5 md:mb-8 lg:mb-10",
+  sm: "mb-10 sm:mb-10 md:mb-16 lg:mb-20",
+  md: "mb-10 sm:mb-10 md:mb-20 lg:mb-25",
+  lg: "mb-12 sm:mb-12 md:mb-24 lg:mb-30",
+  xl: "mb-16 sm:mb-16 md:mb-30 lg:mb-40",
 };

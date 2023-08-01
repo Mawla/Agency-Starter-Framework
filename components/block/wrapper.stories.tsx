@@ -18,7 +18,7 @@ export const WithoutBackground = () => (
     <WrapperComponent
       theme={{
         background: null as any,
-        space: {
+        padding: {
           top: "none",
           bottom: "none",
         },
@@ -34,7 +34,7 @@ export const WithBackground = () => (
     <WrapperComponent
       theme={{
         background: "black",
-        space: {
+        padding: {
           top: "none",
           bottom: "none",
         },
@@ -52,7 +52,7 @@ export const Colors = () => (
         <WrapperComponent
           theme={{
             background: color,
-            space: { top: "none", bottom: "none" },
+            padding: { top: "none", bottom: "none" },
           }}
         >
           {color}
@@ -73,11 +73,30 @@ export const Spacing = () => (
       <div key={label} className="border mb-4 px-4">
         <WrapperComponent
           theme={{
-            space: { top: size, bottom: size },
+            padding: { top: size, bottom: size },
             background: "black",
+            text: "white",
           }}
         >
-          Block space {label}
+          Block padding {label}
+        </WrapperComponent>
+      </div>
+    ))}
+    {(
+      Object.entries(SPACE_OPTIONS) as [
+        key: keyof typeof SPACE_OPTIONS,
+        label: string,
+      ][]
+    ).map(([size, label]) => (
+      <div key={label} className="border mb-4 px-4">
+        <WrapperComponent
+          theme={{
+            margin: { top: size, bottom: size },
+            background: "black",
+            text: "white",
+          }}
+        >
+          Block margin {label}
         </WrapperComponent>
       </div>
     ))}
@@ -90,13 +109,13 @@ export const WithContent = () => (
       theme={{
         background: "black",
         text: "white",
-        space: {
+        padding: {
           top: "lg",
           bottom: "lg",
         },
       }}
     >
-      <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
+      <SpacingComponent padding={{ top: "sm", bottom: "sm" }}>
         <div className="font-bold text-2xl">…</div>
       </SpacingComponent>
     </WrapperComponent>
@@ -118,7 +137,7 @@ export const Rounded = () => (
               },
             }}
           >
-            <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
+            <SpacingComponent padding={{ top: "sm", bottom: "sm" }}>
               <div className="font-bold text-2xl">{radius}</div>
             </SpacingComponent>
           </WrapperComponent>
@@ -133,7 +152,7 @@ export const Rounded = () => (
               },
             }}
           >
-            <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
+            <SpacingComponent padding={{ top: "sm", bottom: "sm" }}>
               <div className="font-bold text-2xl">{radius}</div>
             </SpacingComponent>
           </WrapperComponent>
@@ -154,7 +173,7 @@ export const Widths = () => (
           width,
         }}
       >
-        <SpacingComponent space={{ top: "sm", bottom: "sm" }}>
+        <SpacingComponent padding={{ top: "sm", bottom: "sm" }}>
           <div className="font-bold text-2xl">{width}</div>
         </SpacingComponent>
       </WrapperComponent>

@@ -35,7 +35,7 @@ export const Image = () => (
     image={demoImage}
     theme={{
       block: {
-        space: {
+        padding: {
           top: "xl",
           bottom: "xl",
         },

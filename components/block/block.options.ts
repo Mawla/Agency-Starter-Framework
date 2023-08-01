@@ -3,6 +3,7 @@ import { SpaceType } from "./spacing.options";
 
 export type BlockThemeType = {
   background?: ColorType;
-  space?: SpaceType;
+  padding?: SpaceType;
+  margin?: SpaceType;
   align?: HorizontalAlignType;
 };

@@ -18,25 +18,17 @@ export type BackgroundProps = {
   };
 };
 
-export const Background = ({
-  children,
-  theme = {
-    text: "black",
-    background: "white",
-    rounded: { top: "lg", bottom: "lg" },
-  },
-  className,
-}: BackgroundProps) => {
+export const Background = ({ children, theme, className }: BackgroundProps) => {
   return (
     <div
       data-background
       className={cx(
         "relative",
         {
-          [backgroundRoundedTopClasses.md]: theme.rounded?.top === "md",
-          [backgroundRoundedBottomClasses.md]: theme.rounded?.bottom === "md",
-          [backgroundRoundedTopClasses.lg]: theme.rounded?.top === "lg",
-          [backgroundRoundedBottomClasses.lg]: theme.rounded?.bottom === "lg",
+          [backgroundRoundedTopClasses.md]: theme?.rounded?.top === "md",
+          [backgroundRoundedBottomClasses.md]: theme?.rounded?.bottom === "md",
+          [backgroundRoundedTopClasses.lg]: theme?.rounded?.top === "lg",
+          [backgroundRoundedBottomClasses.lg]: theme?.rounded?.bottom === "lg",
         },
         theme?.background && backgroundClasses[theme?.background],
         theme?.text && textClasses[theme?.text],
