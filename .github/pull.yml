@@ -3,5 +3,5 @@
 version: "1"
 rules:
   - base: main
-    upstream: Mawla:main
+    upstream: Mawla/mawla-engine-v2:main
     mergeMethod: hardreset
