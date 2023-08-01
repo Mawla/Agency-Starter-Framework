@@ -31,20 +31,20 @@ export const IconLoader = ({
 }: IconLoaderProps) => {
   const Element = as;
 
-  if (!icon) return null;
-
   const {
     data: svg,
     isLoading,
     isError,
-  } = useQuery(icon, () =>
-    getClient(false).fetch(
-      `
-  *[_id == 'config_icons'][0] {
-    "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
-  }.icon`.replace(/\s/g, ""),
-    ),
-  );
+  } = useQuery({
+    queryKey: icon || "",
+    enabled: !!icon,
+    queryFn: () =>
+      getClient(false).fetch(
+        `*[_id == 'config_icons'][0] {
+        "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
+      }.icon`,
+      ),
+  });
 
   let cleanSVG = "";
   if (svg) {
