@@ -5,7 +5,7 @@ export const decorationsQuery = groq`
 decorations[] {
   _key,
   title,
-  position,
+  location,
   breakout,
   mobile {
     ...,
