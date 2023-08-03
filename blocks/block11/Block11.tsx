@@ -1,3 +1,4 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
@@ -66,7 +67,7 @@ export type Block11Props = {
     intro?: TextThemeType;
     testimonials?: TestimonialCardProps["theme"];
   };
-
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   buttons?: ButtonProps[];
@@ -81,6 +82,7 @@ const gridClasses: Record<number, string> = {
 
 export const Block11 = ({
   theme,
+  decorations,
   title,
   intro,
   testimonials,
@@ -107,6 +109,7 @@ export const Block11 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <div
         className={cx(

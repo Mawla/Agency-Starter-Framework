@@ -114,6 +114,12 @@ const schema = defineType({
       group: "theme",
       fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
     }),
+    defineField({
+      name: "decorations",
+      title: "Decorations",
+      type: "decorations",
+      group: "decorations",
+    }),
   ],
 });
 

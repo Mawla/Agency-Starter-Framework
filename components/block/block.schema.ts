@@ -86,6 +86,10 @@ export const defaultBlockGroups = [
     title: "Theme",
   },
   {
+    name: "decorations",
+    title: "Decorations",
+  },
+  {
     name: "tools",
     title: " ",
     icon: EllipsisVerticalIcon,

@@ -1,3 +1,4 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import Link from "../../components/buttons/Link";
@@ -58,6 +59,7 @@ export type Block13Props = {
       text?: ColorType;
     };
   };
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   items?: {
@@ -70,12 +72,19 @@ export type Block13Props = {
   }[];
 };
 
-export const Block13 = ({ theme, title, intro, items }: Block13Props) => {
+export const Block13 = ({
+  theme,
+  decorations,
+  title,
+  intro,
+  items,
+}: Block13Props) => {
   return (
     <Wrapper
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <div
         className={cx(

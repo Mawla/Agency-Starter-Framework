@@ -278,6 +278,7 @@ export const LivePreview = ({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
+      // scroll to block
       if (e.data.type == "preview-view-scroll-to-block" && e.data.blockKey) {
         const element = document.querySelector(
           `[data-id="${e.data.blockKey}"]`,
@@ -285,6 +286,36 @@ export const LivePreview = ({
 
         if (element) {
           window.scrollBy({ top: element?.getBoundingClientRect().top - 60 });
+        }
+      }
+
+      // highlight block or decorations on hover
+      if (e.data.type == "preview-view-highlight-hover" && e.data.key) {
+        const element = document.querySelector(
+          `[data-key="${e.data.key}"]`,
+        ) as HTMLElement;
+
+        if (element) {
+          if (e.data.enabled) {
+            element.classList.add("preview-highlight-hover");
+          } else {
+            element.classList.remove("preview-highlight-hover");
+          }
+        }
+      }
+
+      // highlight block or decorations on open
+      if (e.data.type == "preview-view-highlight-open" && e.data.key) {
+        const element = document.querySelector(
+          `[data-key="${e.data.key}"]`,
+        ) as HTMLElement;
+
+        if (element) {
+          if (e.data.enabled) {
+            element.classList.add("preview-highlight-open");
+          } else {
+            element.classList.remove("preview-highlight-open");
+          }
         }
       }
     }
