@@ -124,8 +124,8 @@ export const Decoration = ({
     });
     hidden = Boolean(tablet.hidden);
     image = tablet.image || image;
-    html = tablet.html;
-    repeat = tablet?.repeat;
+    html = tablet.html || html;
+    repeat = tablet?.repeat || repeat;
   }
 
   // desktop view
@@ -136,8 +136,8 @@ export const Decoration = ({
     });
     hidden = Boolean(desktop.hidden);
     image = desktop.image || image;
-    html = desktop.html;
-    repeat = desktop?.repeat;
+    html = desktop.html || html;
+    repeat = desktop?.repeat || repeat;
   }
 
   if (hidden) return null;
