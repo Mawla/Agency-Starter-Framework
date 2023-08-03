@@ -91,7 +91,7 @@ export const decorations = defineField({
           description:
             "Stay inside the border radius of the block or allow the decoration to break outside.",
           hidden: ({ parent, value }) =>
-            !value && Boolean(parent?.position !== "inside"),
+            !value && Boolean(parent?.location !== "inside"),
         }),
         defineField({
           name: "mobile",
