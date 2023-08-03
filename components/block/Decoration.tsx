@@ -1,4 +1,5 @@
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { removeEmptyValues } from "../../helpers/utils/object";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { ImageType } from "../../types";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
@@ -81,6 +82,10 @@ export const Decoration = ({
   let image = mobile?.image;
   let html = mobile?.html;
 
+  mobile = removeEmptyValues(mobile);
+  if (tablet) tablet = removeEmptyValues(tablet);
+  if (desktop) desktop = removeEmptyValues(desktop);
+
   styleObj = pickOnlyCSSProperties(mobile);
 
   // tablet view
@@ -90,7 +95,7 @@ export const Decoration = ({
       ...tablet,
     });
     hidden = Boolean(tablet.hidden);
-    image = tablet.image;
+    image = tablet.image || image;
     html = tablet.html;
   }
 
@@ -101,19 +106,11 @@ export const Decoration = ({
       ...desktop,
     });
     hidden = Boolean(desktop.hidden);
-    image = desktop.image;
+    image = desktop.image || image;
     html = desktop.html;
   }
 
-  // use image dimensions to set decoration size
-  if (image && !styleObj.width && !styleObj.height) {
-    const { width, height } = getOriginalImageDimensions(image?.src);
-    styleObj.width = width;
-    styleObj.height = height;
-  }
-
   if (hidden) return null;
-
   if (html) html = DOMPurify?.sanitize?.(html);
 
   return (

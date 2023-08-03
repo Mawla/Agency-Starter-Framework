@@ -16,3 +16,17 @@ export function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
   });
   return ret;
 }
+
+/**
+ * remove null, undefined and ""
+ */
+
+export const removeEmptyValues = (obj: Record<string, unknown>) => {
+  if (!obj) return {};
+  return Object.keys(obj).reduce((acc, key) => {
+    if (obj[key] !== null && obj[key] !== undefined && obj[key] !== "") {
+      acc[key] = obj[key];
+    }
+    return acc;
+  }, {} as Record<string, unknown>);
+};
