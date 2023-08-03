@@ -59,7 +59,7 @@ const addUnit = (value: string, unit = "px") => {
   return value;
 };
 
-const pickOnlyCSSProperties = (obj: Record<string, unknown>): CSSProperties => {
+const createStyleObject = (obj: Record<string, unknown>): CSSProperties => {
   if (!obj) return {};
   const newObj = {
     top: addUnit(obj.top as string),
@@ -114,12 +114,10 @@ export const Decoration = ({
   if (tablet) tablet = removeEmptyValues(tablet);
   if (desktop) desktop = removeEmptyValues(desktop);
 
-  styleObj = pickOnlyCSSProperties(mobile);
-
   // tablet view
-  if (screenWidth > BREAKPOINTS.sm && tablet) {
-    styleObj = pickOnlyCSSProperties({
-      ...styleObj,
+  if (screenWidth > BREAKPOINTS.md && tablet) {
+    styleObj = createStyleObject({
+      ...mobile,
       ...tablet,
     });
     hidden = Boolean(tablet.hidden);
@@ -130,7 +128,7 @@ export const Decoration = ({
 
   // desktop view
   if (screenWidth > BREAKPOINTS.lg && desktop) {
-    styleObj = pickOnlyCSSProperties({
+    styleObj = createStyleObject({
       ...styleObj,
       ...desktop,
     });
@@ -142,8 +140,6 @@ export const Decoration = ({
 
   if (hidden) return null;
   if (html) html = DOMPurify?.sanitize?.(html);
-
-  console.log(styleObj);
 
   return (
     <i
