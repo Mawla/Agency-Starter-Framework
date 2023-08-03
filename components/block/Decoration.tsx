@@ -156,6 +156,7 @@ export const Decoration = ({
       })}
     >
       <div
+        key={_key}
         aria-hidden="true"
         className="absolute"
         data-key={_key}
@@ -167,16 +168,20 @@ export const Decoration = ({
               : undefined,
           backgroundImage: image && repeat ? `url(${image?.src})` : undefined,
         }}
-        dangerouslySetInnerHTML={
-          html
-            ? {
-                __html: html,
-              }
-            : undefined
-        }
       >
         {image && !repeat && (
           <ResponsiveImage {...image} fill preserveAspectRatio />
+        )}
+        {html && (
+          <div
+            dangerouslySetInnerHTML={
+              html
+                ? {
+                    __html: html,
+                  }
+                : undefined
+            }
+          />
         )}
       </div>
     </div>
