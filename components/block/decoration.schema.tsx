@@ -1,4 +1,4 @@
-import { ArrayItemPreviewIndicator } from "../../studio/components/ArrayItemPreviewIndicator";
+import { ArrayItemPreviewHighlight } from "../../studio/components/ArrayItemPreviewHighlight";
 import {
   DecorationPositionInput,
   DecorationPositionInputWrapper,
@@ -15,7 +15,7 @@ export const decorations = defineField({
     {
       type: "object",
       components: {
-        item: ArrayItemPreviewIndicator,
+        item: ArrayItemPreviewHighlight,
       },
       preview: {
         select: {

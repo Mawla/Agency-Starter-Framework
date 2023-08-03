@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
-export const ArrayItemPreviewIndicator: React.ComponentType<any> = (props) => {
+export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
