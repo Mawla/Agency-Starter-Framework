@@ -2,6 +2,13 @@ import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { ImageType } from "../../types";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
+import {
+  backgroundRoundedBottomClasses,
+  backgroundRoundedTopClasses,
+  BlockRoundedType,
+} from "./background.options";
+import { DecorationPositionType } from "./decoration.options";
+import cx from "classnames";
 import DOMPurify from "dompurify";
 import { ComponentType, CSSProperties, lazy } from "react";
 
@@ -27,25 +34,40 @@ export type DecorationType = {
 };
 
 export type DecorationProps = {
+  breakout?: boolean;
+  theme?: {
+    rounded?: BlockRoundedType;
+  };
+  position?: DecorationPositionType;
+  rounded?: boolean;
   mobile?: DecorationType;
   tablet?: DecorationType;
   desktop?: DecorationType;
 };
 
+const addUnit = (value: string) => {
+  if (!value) return undefined;
+  if (!isNaN(+value)) return `${value}px`;
+  return value;
+};
+
 const pickOnlyCSSProperties = (obj: Record<string, unknown>): CSSProperties => {
+  if (!obj) return {};
   return {
-    top: obj.top,
-    right: obj.right,
-    bottom: obj.bottom,
-    left: obj.left,
-    width: obj.width,
-    height: obj.height,
+    top: addUnit(obj.top as string),
+    right: addUnit(obj.right as string),
+    bottom: addUnit(obj.bottom as string),
+    left: addUnit(obj.left as string),
+    width: addUnit(obj.width as string),
+    height: addUnit(obj.height as string),
     background: obj.background,
     opacity: obj.opacity,
   } as CSSProperties;
 };
 
 export const Decoration = ({
+  breakout,
+  theme,
   mobile = {},
   tablet,
   desktop,
@@ -81,12 +103,27 @@ export const Decoration = ({
     html = desktop.html;
   }
 
+  // use image dimensions to set decoration size
+  if (image && !styleObj.width && !styleObj.height) {
+    const { width, height } = getOriginalImageDimensions(image?.src);
+    styleObj.width = width;
+    styleObj.height = height;
+  }
+
   if (hidden) return null;
 
   if (html) html = DOMPurify?.sanitize?.(html);
 
   return (
-    <i className="absolute inset-0 overflow-hidden">
+    <i
+      className={cx("absolute inset-0", {
+        ["overflow-hidden"]: breakout !== true,
+        [backgroundRoundedTopClasses.md]: theme?.rounded?.top === "md",
+        [backgroundRoundedBottomClasses.md]: theme?.rounded?.bottom === "md",
+        [backgroundRoundedTopClasses.lg]: theme?.rounded?.top === "lg",
+        [backgroundRoundedBottomClasses.lg]: theme?.rounded?.bottom === "lg",
+      })}
+    >
       <i
         className="absolute"
         style={{
@@ -108,3 +145,5 @@ export const Decoration = ({
     </i>
   );
 };
+
+export default Decoration;

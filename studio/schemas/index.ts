@@ -12,6 +12,10 @@ import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
+import {
+  decoration,
+  decorations,
+} from "../../components/block/decoration.schema";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
@@ -95,6 +99,8 @@ export const schemaTypes = [
     configSocial,
     configTheme,
     copypaste,
+    decoration,
+    decorations,
     dialogForm,
     dialogRichText,
     dialogVideo,
