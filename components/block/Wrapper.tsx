@@ -56,11 +56,11 @@ export const Wrapper = ({
   if (!theme?.width) theme.width = "full";
 
   const innerDecorations = decorations?.filter(
-    ({ location }) => location === "inside",
+    ({ location }) => location === "inside" || !location,
   );
 
   const outerDecorations = decorations?.filter(
-    ({ location }) => location === "outside" || !location,
+    ({ location }) => location === "outside",
   );
 
   return (
