@@ -8,7 +8,12 @@ test("create react component with no fields", () => {
   expect(
     result
       .replace(/\s/g, "")
-      .includes(`<Wrapper theme={{ ...theme?.block }}>`.replace(/\s/g, "")),
+      .includes(
+        `<Wrapper theme={{ ...theme?.block }} decorations={decorations}>`.replace(
+          /\s/g,
+          "",
+        ),
+      ),
   ).toBeTruthy();
 });
 

@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
           <link rel="stylesheet" href="/engine.styles.css" />
         </Head>
-        <body>
+        <body className="overflow-x-hidden">
           <Main />
           <NextScript />
         </body>

@@ -705,7 +705,6 @@ const DEMO_CONTENT = {
       style: "normal",
     },
   ],
-  decorations: null,
   relatedArticles: [
     {
       href: "/resources/blog/maximizing-productivity-with-company-name-s-saas-solution-a-comprehensive-guide",

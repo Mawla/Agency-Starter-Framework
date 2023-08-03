@@ -1,3 +1,4 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ResourceCardProps } from "../../components/cards/ResourceCard";
@@ -60,6 +61,7 @@ export type Block12Props = {
     };
     card?: ResourceCardProps["theme"];
   };
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   items?: ResourceCardProps[];
@@ -67,7 +69,13 @@ export type Block12Props = {
 
 const PAGE_SIZE = 5 * 3;
 
-export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
+export const Block12 = ({
+  theme,
+  decorations,
+  title,
+  intro,
+  items,
+}: Block12Props) => {
   const [currentTag, setCurrentTag] = React.useState<string | null>(null);
   const [page, setPage] = React.useState(1);
 
@@ -100,6 +108,7 @@ export const Block12 = ({ theme, title, intro, items }: Block12Props) => {
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <div
         className={cx(

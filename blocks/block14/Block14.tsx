@@ -1,3 +1,4 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { BreadcrumbProps } from "../../components/breadcrumb/Breadcrumb";
@@ -61,6 +62,7 @@ export type Block14Props = {
   theme?: {
     block?: Omit<BlockThemeType, "align">;
   };
+  decorations?: DecorationProps[];
   title?: string;
   body?: React.ReactNode;
   tags?: { title?: string; href?: string }[];
@@ -78,6 +80,7 @@ export type Block14Props = {
 };
 export const Block14 = ({
   theme,
+  decorations,
   title,
   body,
   tags,
@@ -92,6 +95,7 @@ export const Block14 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <main className="py-8 lg:py-16">
         <div className="grid grid-cols-12 px-4 mx-auto max-w-full gap-12">

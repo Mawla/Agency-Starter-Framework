@@ -149,6 +149,12 @@ export const getSchemaSnippet = ({
           ${render(fields, "intro", `defaultTextTheme,`)}
         ],
       }),
+      defineField({
+        name: "decorations",
+        title: "Decorations",
+        type: "decorations",
+        group: "decorations",
+      }),
     ],
   });
 

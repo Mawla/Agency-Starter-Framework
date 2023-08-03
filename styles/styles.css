@@ -124,3 +124,15 @@ script[type='application/ld+json'] {
   color: #111;
 }
 */
+
+.preview-highlight-hover {
+  outline: 3px solid rgba(255, 0, 0, 0.75);
+  outline-offset: -2px;
+  opacity: 1 !important;
+  transition: opacity 0.25s;
+}
+
+.preview-highlight-open {
+  outline: 3px solid rgba(255, 0, 0, 0.75);
+  outline-offset: -2px;
+}

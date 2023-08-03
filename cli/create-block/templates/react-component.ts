@@ -15,6 +15,7 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
+    import { DecorationProps } from "../../components/block/Decoration";
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
     import cx from "classnames";
@@ -88,6 +89,7 @@ export const getReactComponentSnippet = ({
         ${render(fields, "title", `title?: TitleThemeType;`)}
         ${render(fields, "intro", `intro?: TextThemeType`)}
       };
+      decorations?: DecorationProps[];
       ${render(fields, "title", "title?: string;")}
       ${render(fields, "intro", "intro?: React.ReactNode;")}
       ${render(fields, "image", "image?: ImageType;")}
@@ -97,6 +99,7 @@ export const getReactComponentSnippet = ({
 
     export const ${pascalName} = ({ 
       theme,
+      decorations,
       ${render(fields, "title", `title,`)}
       ${render(fields, "intro", `intro,`)}
       ${render(fields, "image", `image,`)}
@@ -108,6 +111,7 @@ export const getReactComponentSnippet = ({
           theme={{
             ...theme?.block
           }}
+          decorations={decorations}
         >
         <div className={cx('flex flex-col gap-6 max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
           

@@ -4,6 +4,7 @@ import {
   formatFontSize,
   formatFontWeight,
 } from "../../cli/config/format-theme";
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { getClient } from "../../helpers/sanity/server";
@@ -24,6 +25,7 @@ export type Block0Props = {
       removeWrapper?: boolean;
     };
   };
+  decorations?: DecorationProps[];
   _key?: string;
   headHTML?: string;
   bodyHTML?: string;
@@ -33,6 +35,7 @@ export type Block0Props = {
 
 export const Block0 = ({
   theme,
+  decorations,
   _key,
   headHTML = "",
   bodyHTML = "",
@@ -127,6 +130,7 @@ export const Block0 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <IframeResizer {...iframeProps} />
     </Wrapper>
