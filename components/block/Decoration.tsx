@@ -146,7 +146,7 @@ export const Decoration = ({
   if (html) html = DOMPurify?.sanitize?.(html);
 
   return (
-    <i
+    <div
       className={cx("absolute inset-0", {
         ["overflow-hidden"]: breakout !== true,
         [backgroundRoundedTopClasses.md]: theme?.rounded?.top === "md",
@@ -155,7 +155,7 @@ export const Decoration = ({
         [backgroundRoundedBottomClasses.lg]: theme?.rounded?.bottom === "lg",
       })}
     >
-      <i
+      <div
         aria-hidden="true"
         className="absolute"
         data-key={_key}
@@ -178,8 +178,8 @@ export const Decoration = ({
         {image && !repeat && (
           <ResponsiveImage {...image} fill preserveAspectRatio />
         )}
-      </i>
-    </i>
+      </div>
+    </div>
   );
 };
 
