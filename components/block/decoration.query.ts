@@ -3,6 +3,7 @@ import groq from "groq";
 
 export const decorationsQuery = groq`
 decorations[] {
+  _key,
   title,
   position,
   breakout,

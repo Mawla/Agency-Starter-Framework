@@ -1,3 +1,4 @@
+import { ArrayItemPreviewIndicator } from "../../studio/components/ArrayItemPreviewIndicator";
 import {
   DecorationPositionInput,
   DecorationPositionInputWrapper,
@@ -13,6 +14,9 @@ export const decorations = defineField({
   of: [
     {
       type: "object",
+      components: {
+        item: ArrayItemPreviewIndicator,
+      },
       preview: {
         select: {
           title: "title",
@@ -47,7 +51,6 @@ export const decorations = defineField({
               (isImage && "Image") ||
               (isHTML && "HTML") ||
               "Decoration",
-            subtitle: JSON.stringify({ ...mobile, ...tablet, ...desktop }),
             media: mobileImage || tabletImage || desktopImage || (
               <div
                 style={{

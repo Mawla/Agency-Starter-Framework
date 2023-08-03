@@ -74,7 +74,11 @@ export const Wrapper = ({
       )}
     >
       {outerDecorations?.map((decoration) => (
-        <Decoration {...decoration} key={JSON.stringify(decoration)} />
+        <Decoration
+          {...decoration}
+          key={decoration._key}
+          _key={decoration._key}
+        />
       ))}
       <Spacing
         padding={{
@@ -96,7 +100,8 @@ export const Wrapper = ({
             {innerDecorations?.map((decoration) => (
               <Decoration
                 {...decoration}
-                key={JSON.stringify(decoration)}
+                key={decoration._key}
+                _key={decoration._key}
                 theme={{
                   rounded: {
                     top: theme?.rounded?.top,

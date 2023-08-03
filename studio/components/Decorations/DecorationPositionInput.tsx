@@ -14,6 +14,7 @@ export const DecorationPositionInput = (props: any) => {
         style={{
           width: 70,
         }}
+        type={props.value && !isNaN(props.value) ? "number" : "text"}
       />
     </Inline>
   );

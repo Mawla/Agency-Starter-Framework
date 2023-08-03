@@ -34,6 +34,7 @@ export type DecorationType = {
 };
 
 export type DecorationProps = {
+  _key?: string;
   breakout?: boolean;
   theme?: {
     rounded?: BlockRoundedType;
@@ -66,6 +67,7 @@ const pickOnlyCSSProperties = (obj: Record<string, unknown>): CSSProperties => {
 };
 
 export const Decoration = ({
+  _key,
   breakout,
   theme,
   mobile = {},
@@ -126,6 +128,7 @@ export const Decoration = ({
     >
       <i
         className="absolute"
+        data-key={_key}
         style={{
           ...styleObj,
           aspectRatio: image
