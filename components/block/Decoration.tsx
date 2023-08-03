@@ -8,7 +8,7 @@ import {
   backgroundRoundedTopClasses,
   BlockRoundedType,
 } from "./background.options";
-import { DecorationPositionType } from "./decoration.options";
+import { DecorationLocationType } from "./decoration.options";
 import cx from "classnames";
 import DOMPurify from "dompurify";
 import { createCSSTransformBuilder } from "easy-css-transform-builder";
@@ -45,7 +45,7 @@ export type DecorationProps = {
   theme?: {
     rounded?: BlockRoundedType;
   };
-  position?: DecorationPositionType;
+  location?: DecorationLocationType;
   rounded?: boolean;
   mobile?: DecorationType;
   tablet?: DecorationType;

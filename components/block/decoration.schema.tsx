@@ -5,7 +5,7 @@ import {
   DecorationPositionInputWrapper,
 } from "../../studio/components/Decorations/DecorationPositionInput";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { DECORATION_OPTIONS } from "./decoration.options";
+import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
 import { defineField, NumberRule, StringRule } from "sanity";
 
 export const decorations = defineField({
@@ -76,11 +76,11 @@ export const decorations = defineField({
             "A descriptive title for this decoration, used in the CMS.",
         }),
         defineField({
-          name: "position",
-          title: "Position",
+          name: "location",
+          title: "Location",
           type: "string",
           options: {
-            list: optionsToList(DECORATION_OPTIONS),
+            list: optionsToList(DECORATION_LOCATION_OPTIONS),
           },
           description: "Position the decoration inside or outside the block.",
         }),

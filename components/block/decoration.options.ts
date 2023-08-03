@@ -1,5 +1,5 @@
-export const DECORATION_OPTIONS = {
+export const DECORATION_LOCATION_OPTIONS = {
   inside: "Inside",
   outside: "Outside",
 };
-export type DecorationPositionType = keyof typeof DECORATION_OPTIONS;
+export type DecorationLocationType = keyof typeof DECORATION_LOCATION_OPTIONS;
