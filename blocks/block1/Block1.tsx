@@ -1,3 +1,4 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
@@ -53,7 +54,7 @@ export type Block1Props = {
     intro?: TextThemeType;
     features?: TextThemeType;
   };
-
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   features?: React.ReactNode;
@@ -62,6 +63,7 @@ export type Block1Props = {
 
 export const Block1 = ({
   theme,
+  decorations,
   title,
   intro,
   features,
@@ -72,6 +74,7 @@ export const Block1 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <div className="gap-8 items-center grid lg:grid-cols-2 xl:gap-16">
         <div className="order-1">

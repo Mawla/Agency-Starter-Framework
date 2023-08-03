@@ -62,6 +62,12 @@ const schema = defineType({
         { ...defaultTextTheme, name: "body", title: "Body (right)" },
       ],
     }),
+    defineField({
+      name: "decorations",
+      title: "Decorations",
+      type: "decorations",
+      group: "decorations",
+    }),
   ],
 });
 

@@ -1,9 +1,9 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
-import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import {
@@ -56,7 +56,7 @@ export type Block4Props = {
     title?: TitleThemeType;
     intro?: TextThemeType;
   };
-
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   image?: ImageType;
@@ -65,6 +65,7 @@ export type Block4Props = {
 
 export const Block4 = ({
   theme,
+  decorations,
   title,
   intro,
   image,
@@ -75,6 +76,7 @@ export const Block4 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <div
         className={`flex flex-col gap-6 max-w-screen-lg relative z-10 ${

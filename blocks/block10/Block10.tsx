@@ -1,4 +1,5 @@
 import { AccordionProps } from "../../components/accordion/Accordion";
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
@@ -51,7 +52,7 @@ export type Block10Props = {
     intro?: TextThemeType;
     faq?: AccordionProps["theme"];
   };
-
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   buttons?: ButtonProps[];
@@ -60,6 +61,7 @@ export type Block10Props = {
 
 export const Block10 = ({
   theme,
+  decorations,
   title,
   intro,
   faq,
@@ -70,6 +72,7 @@ export const Block10 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       <div
         className={cx(

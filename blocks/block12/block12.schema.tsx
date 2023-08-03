@@ -151,6 +151,12 @@ const schema = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "decorations",
+      title: "Decorations",
+      type: "decorations",
+      group: "decorations",
+    }),
   ],
 });
 

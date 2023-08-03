@@ -1,3 +1,4 @@
+import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
@@ -68,7 +69,7 @@ export type Block3Props = {
       gradientToOpacity?: GradientOpacityType;
     };
   };
-
+  decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   image?: ImageType;
@@ -77,6 +78,7 @@ export type Block3Props = {
 
 export const Block3 = ({
   theme,
+  decorations,
   title,
   intro,
   image,
@@ -87,6 +89,7 @@ export const Block3 = ({
       theme={{
         ...theme?.block,
       }}
+      decorations={decorations}
     >
       {image && (
         <div className="absolute inset-0 z-0">
