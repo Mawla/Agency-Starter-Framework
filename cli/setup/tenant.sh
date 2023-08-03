@@ -76,9 +76,9 @@ sanity cors add https://*$(echo $vercelProjectName).vercel.app --credentials
 
 # init vercel
 
-vercel git connect https://github.com/Mawla/growth-websites --yes
+# vercel git connect https://github.com/Mawla/growth-websites --yes
 
-vercel link
+# vercel link
 
 # nextjs sanity project id
 echo $sanityProjectId | tr -d '\n' | vercel env add NEXT_PUBLIC_SANITY_PROJECT_ID production
