@@ -1,11 +1,12 @@
 import { ArrayItemPreviewHighlight } from "../../studio/components/ArrayItemPreviewHighlight";
+import { ColorInput } from "../../studio/components/ColorInput";
 import {
   DecorationPositionInput,
   DecorationPositionInputWrapper,
 } from "../../studio/components/Decorations/DecorationPositionInput";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DECORATION_OPTIONS } from "./decoration.options";
-import { defineField } from "sanity";
+import { defineField, NumberRule, StringRule } from "sanity";
 
 export const decorations = defineField({
   name: "decorations",
@@ -151,6 +152,17 @@ export const decoration = defineField({
         type: "string",
         description: `Use % or px. Use 'auto' to unset.`,
         group: "position",
+        validation: (Rule: StringRule) =>
+          Rule.custom((value: any) => {
+            if (typeof value === "undefined") return true;
+            if (value.trim().length === 0) return true;
+            const isPixel = !isNaN(+value) || value.trim().endsWith("px");
+            const isPercent = value.trim().endsWith("%");
+            const isAuto = value.trim() === "auto";
+            if (!isPixel && !isPercent && !isAuto)
+              return `This field must end with either px or % or 'auto'.`;
+            return true;
+          }),
         components: {
           input: DecorationPositionInput,
           field: DecorationPositionInputWrapper,
@@ -162,6 +174,16 @@ export const decoration = defineField({
       type: "string",
       description: `Value between 0 and 360. Use 'auto' to unset.`,
       group: "position",
+      validation: (Rule: StringRule) =>
+        Rule.custom((value: any) => {
+          if (typeof value === "undefined") return true;
+          if (value.trim().length === 0) return true;
+          const isAuto = value.trim() === "auto";
+          if (!isAuto && (value < -360 || value > 360))
+            return `This field must be between -360 and 360 or 'auto'.`;
+
+          return true;
+        }),
       components: {
         input: DecorationPositionInput,
         field: DecorationPositionInputWrapper,
@@ -172,16 +194,37 @@ export const decoration = defineField({
       type: "string",
       description: `Value around 1. Where 1 is 100% and 0 is hidden. Use 'auto' to unset.`,
       group: "position",
-      components: {
-        input: DecorationPositionInput,
-        field: DecorationPositionInputWrapper,
-      },
+      validation: (Rule: StringRule) =>
+        Rule.custom((value: any) => {
+          if (typeof value === "undefined") return true;
+          if (value.trim().length === 0) return true;
+          const isAuto = value.trim() === "auto";
+          if (!isAuto && (value < 0 || value > 1))
+            return `This field must be between 0 and 1 or 'auto'.`;
+
+          return true;
+        }),
     }),
     defineField({
       name: "background",
       type: "string",
       description: "Hex color code for the background of the decoration.",
       group: "style",
+      components: {
+        input: ColorInput,
+      },
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (typeof value === "undefined") return true;
+          if (value.trim().length === 0) return true;
+          if (!value.startsWith("#")) {
+            return "value must start with #";
+          }
+          if (value.length !== 7) {
+            return "value must be 7 characters long";
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "opacity",
@@ -189,6 +232,7 @@ export const decoration = defineField({
       description:
         "Number between 0 and 1 setting the opacity of the decoration.",
       group: "style",
+      validation: (Rule: NumberRule) => Rule.max(1).positive(),
     }),
     defineField({
       name: "image",
