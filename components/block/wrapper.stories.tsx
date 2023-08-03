@@ -185,8 +185,8 @@ export const OutsideBackground = () => (
   <div className="flex flex-col gap-10">
     <WrapperComponent
       theme={{
-        background: "gray-900",
-        outerBackground: "gray-500",
+        background: "white",
+        outerBackground: "black",
         text: "white",
         width: "inner",
         margin: {
@@ -207,9 +207,9 @@ export const OutsideBackground = () => (
     </WrapperComponent>
     <WrapperComponent
       theme={{
-        background: "gray-900",
-        outerBackground: "gray-500",
-        text: "white",
+        background: "white",
+        outerBackground: "black",
+        text: "black",
         width: "inner",
       }}
     >

@@ -13,7 +13,7 @@ export const Widths = () => (
     {(Object.keys(WIDTH_OPTIONS) as WidthType[]).map((width: WidthType) => (
       <div className="bg-gray-100" key={width}>
         <WidthComponent width={width}>
-          <div className="bg-gray-900 p-10">{width}</div>
+          <div className="bg-black/10 p-10">{width}</div>
         </WidthComponent>
       </div>
     ))}
