@@ -114,6 +114,10 @@ export const Decoration = ({
   if (tablet) tablet = removeEmptyValues(tablet);
   if (desktop) desktop = removeEmptyValues(desktop);
 
+  styleObj = createStyleObject({
+    ...mobile,
+  });
+
   // tablet view
   if (screenWidth > BREAKPOINTS.md && tablet) {
     styleObj = createStyleObject({
