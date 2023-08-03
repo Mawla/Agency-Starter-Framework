@@ -3,7 +3,6 @@ import React from "react";
 import { set } from "sanity";
 
 export const DecorationPositionInput = (props: any) => {
-  console.log(props.validation);
   return (
     <Inline space={1}>
       <TextInput

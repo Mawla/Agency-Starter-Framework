@@ -37,6 +37,7 @@ export type DecorationType = {
   hidden?: boolean;
   image?: ImageType;
   html?: string;
+  repeat?: boolean;
 };
 
 export type DecorationProps = {
@@ -107,6 +108,7 @@ export const Decoration = ({
   let hidden = Boolean(mobile?.hidden);
   let image = mobile?.image;
   let html = mobile?.html;
+  let repeat = mobile?.repeat;
 
   mobile = removeEmptyValues(mobile);
   if (tablet) tablet = removeEmptyValues(tablet);
@@ -123,6 +125,7 @@ export const Decoration = ({
     hidden = Boolean(tablet.hidden);
     image = tablet.image || image;
     html = tablet.html;
+    repeat = tablet?.repeat;
   }
 
   // desktop view
@@ -134,10 +137,13 @@ export const Decoration = ({
     hidden = Boolean(desktop.hidden);
     image = desktop.image || image;
     html = desktop.html;
+    repeat = desktop?.repeat;
   }
 
   if (hidden) return null;
   if (html) html = DOMPurify?.sanitize?.(html);
+
+  console.log(styleObj);
 
   return (
     <i
@@ -155,9 +161,11 @@ export const Decoration = ({
         data-key={_key}
         style={{
           ...styleObj,
-          aspectRatio: image
-            ? getOriginalImageDimensions(image?.src).aspectRatio || "auto"
-            : undefined,
+          aspectRatio:
+            image && !repeat
+              ? getOriginalImageDimensions(image?.src).aspectRatio || "auto"
+              : undefined,
+          backgroundImage: image && repeat ? `url(${image?.src})` : undefined,
         }}
         dangerouslySetInnerHTML={
           html
@@ -167,7 +175,9 @@ export const Decoration = ({
             : undefined
         }
       >
-        {image && <ResponsiveImage {...image} fill preserveAspectRatio />}
+        {image && !repeat && (
+          <ResponsiveImage {...image} fill preserveAspectRatio />
+        )}
       </i>
     </i>
   );

@@ -90,8 +90,6 @@ export const decorations = defineField({
           type: "boolean",
           description:
             "Stay inside the border radius of the block or allow the decoration to break outside.",
-          hidden: ({ parent, value }) =>
-            !value && Boolean(parent?.location !== "inside"),
         }),
         defineField({
           name: "mobile",
@@ -199,11 +197,15 @@ export const decoration = defineField({
           if (typeof value === "undefined") return true;
           if (value.trim().length === 0) return true;
           const isAuto = value.trim() === "auto";
-          if (!isAuto && (value < 0 || value > 1))
+          if (!isAuto && value < 0)
             return `This field must be between 0 and 1 or 'auto'.`;
 
           return true;
         }),
+      components: {
+        input: DecorationPositionInput,
+        field: DecorationPositionInputWrapper,
+      },
     }),
     defineField({
       name: "background",
@@ -240,6 +242,16 @@ export const decoration = defineField({
       description: "Use an image as decoration",
       group: "content",
       hidden: ({ parent, value }) => !value && Boolean(parent?.html),
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: "repeat",
+      type: "boolean",
+      description: "Set as repeating background",
+      group: "content",
+      hidden: ({ parent, value }) => !value && !Boolean(parent?.image),
     }),
     defineField({
       name: "html",
