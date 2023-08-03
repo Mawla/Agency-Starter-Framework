@@ -57,6 +57,7 @@
     "classnames": "^2.3.2",
     "dompurify": "^2.4.3",
     "dotenv": "^16.0.3",
+    "easy-css-transform-builder": "^0.1.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.7",
     "flowbite-typography": "^1.0.3",

@@ -136,7 +136,16 @@ export const decoration = defineField({
       description: "Hide this decoration on this breakpoint.",
       group: ["style", "position", "content"],
     }),
-    ...["width", "height", "top", "right", "bottom", "left"].map((name) =>
+    ...[
+      "width",
+      "height",
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "translateX",
+      "translateY",
+    ].map((name) =>
       defineField({
         name,
         type: "string",
@@ -148,6 +157,26 @@ export const decoration = defineField({
         },
       }),
     ),
+    defineField({
+      name: "rotate",
+      type: "string",
+      description: `Value between 0 and 360. Use 'auto' to unset.`,
+      group: "position",
+      components: {
+        input: DecorationPositionInput,
+        field: DecorationPositionInputWrapper,
+      },
+    }),
+    defineField({
+      name: "scale",
+      type: "string",
+      description: `Value around 1. Where 1 is 100% and 0 is hidden. Use 'auto' to unset.`,
+      group: "position",
+      components: {
+        input: DecorationPositionInput,
+        field: DecorationPositionInputWrapper,
+      },
+    }),
     defineField({
       name: "background",
       type: "string",

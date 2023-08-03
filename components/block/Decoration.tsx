@@ -11,6 +11,7 @@ import {
 import { DecorationPositionType } from "./decoration.options";
 import cx from "classnames";
 import DOMPurify from "dompurify";
+import { createCSSTransformBuilder } from "easy-css-transform-builder";
 import { ComponentType, CSSProperties, lazy } from "react";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
@@ -27,6 +28,10 @@ export type DecorationType = {
   left?: number | string;
   width?: number | string;
   height?: number | string;
+  translateX?: number | string;
+  translateY?: number | string;
+  rotate?: number | string;
+  scale?: number | string;
   background?: string;
   opacity?: number;
   hidden?: boolean;
@@ -47,15 +52,15 @@ export type DecorationProps = {
   desktop?: DecorationType;
 };
 
-const addUnit = (value: string) => {
+const addUnit = (value: string, unit = "px") => {
   if (!value) return undefined;
-  if (!isNaN(+value)) return `${value}px`;
+  if (!isNaN(+value)) return `${value}${unit}`;
   return value;
 };
 
 const pickOnlyCSSProperties = (obj: Record<string, unknown>): CSSProperties => {
   if (!obj) return {};
-  return {
+  const newObj = {
     top: addUnit(obj.top as string),
     right: addUnit(obj.right as string),
     bottom: addUnit(obj.bottom as string),
@@ -65,6 +70,27 @@ const pickOnlyCSSProperties = (obj: Record<string, unknown>): CSSProperties => {
     background: obj.background,
     opacity: obj.opacity,
   } as CSSProperties;
+
+  // css transforms
+  if (obj.translateX || obj.translateY || obj.rotate || obj.scale) {
+    const transformStyleBuilder = createCSSTransformBuilder({
+      angle: "deg",
+      length: "px",
+    });
+
+    const transformObj: Record<string, string> = {};
+    if (obj.translateX)
+      transformObj.translateX = addUnit(obj.translateX as string) || "";
+    if (obj.translateY)
+      transformObj.translateY = addUnit(obj.translateY as string) || "";
+    if (obj.rotate)
+      transformObj.rotate = addUnit(obj.rotate as string, "deg") || "";
+    if (obj.scale) transformObj.scale = (obj.scale as string) || "";
+
+    newObj.transform = transformStyleBuilder(transformObj);
+  }
+
+  return newObj;
 };
 
 export const Decoration = ({
@@ -124,6 +150,7 @@ export const Decoration = ({
       })}
     >
       <i
+        aria-hidden="true"
         className="absolute"
         data-key={_key}
         style={{
