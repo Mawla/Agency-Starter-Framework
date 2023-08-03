@@ -26,7 +26,7 @@ export type WrapperProps = {
     margin?: SpaceType;
     background?: ColorType;
     outerBackground?: ColorType;
-    Decoration?: ColorType;
+    text?: ColorType;
     rounded?: BlockRoundedType;
     width?: WidthType;
   };
