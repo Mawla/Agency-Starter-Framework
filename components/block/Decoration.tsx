@@ -157,7 +157,7 @@ export const Decoration = ({
           ...styleObj,
           aspectRatio: image
             ? getOriginalImageDimensions(image?.src).aspectRatio || "auto"
-            : "unset",
+            : undefined,
         }}
         dangerouslySetInnerHTML={
           html
