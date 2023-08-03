@@ -117,7 +117,9 @@ export const Wrapper = ({
               }}
             >
               <Bleed bleed="lg">
-                <Width width="inner">{children}</Width>
+                <Width width="inner" className="relative z-10">
+                  {children}
+                </Width>
               </Bleed>
             </Spacing>
           </Background>
