@@ -3,26 +3,25 @@ import { LanguageType } from "../../languages";
 import {
   backgroundClasses,
   borderClasses,
+  borderRadiusClasses,
+  paddingXClasses,
+  paddingYClasses,
   textClasses,
   weightClasses,
 } from "../../theme";
+import {
+  BorderRadiusType,
+  BorderWidthType,
+  ColorType,
+  FontSizeType,
+  FontType,
+  FontWeightType,
+  PaddingType,
+} from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
-import {
-  ButtonAlignType,
-  ButtonSizeType,
-  ButtonIconPositionType,
-  ButtonWeightType,
-  ButtonTextColorType,
-  BackgroundColorType,
-  ButtonBorderColorType,
-  buttonSizeClasses,
-  buttonAlignClasses,
-  buttonSpaceClasses,
-  buttonIconOnlySizeClasses,
-  buttonIconSizeClasses,
-} from "./button.options";
+import { ButtonIconPositionType } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -31,31 +30,40 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 );
 
 export type ButtonProps = {
-  align?: ButtonAlignType;
   ariaLabel?: string;
   as?: "button" | "a" | "div" | "span" | "submit";
-  compact?: boolean;
   href?: string;
   icon?: string;
   iconPosition?: ButtonIconPositionType;
   label?: string;
   onClick?: (e: React.MouseEvent) => void;
-  plain?: boolean;
-  round?: boolean;
-  size?: ButtonSizeType;
   stretch?: boolean;
   target?: "_blank";
-  theme?: {
-    text?: { color?: ButtonTextColorType };
-    background?: { color?: BackgroundColorType };
-    border?: { color?: ButtonBorderColorType };
-  };
   disabled?: boolean;
   loading?: boolean;
-  weight?: ButtonWeightType;
   download?: boolean;
   hideLabel?: boolean;
   language?: LanguageType;
+
+  theme?: {
+    label?: {
+      color?: ColorType;
+      font?: FontType;
+      size?: FontSizeType;
+      uppercase?: boolean;
+      weight?: FontWeightType;
+    };
+    background?: {
+      color?: ColorType;
+      paddingX?: PaddingType;
+      paddingY?: PaddingType;
+    };
+    border?: {
+      color?: ColorType;
+      radius?: BorderRadiusType;
+      width?: BorderWidthType;
+    };
+  };
 };
 
 export const Button = (props: ButtonProps) => {
@@ -71,10 +79,8 @@ export const Button = (props: ButtonProps) => {
 };
 
 const ButtonInner = ({
-  align = "center",
   ariaLabel,
   as = "a",
-  compact = false,
   disabled = false,
   download = false,
   hideLabel = false,
@@ -84,13 +90,9 @@ const ButtonInner = ({
   label = "",
   loading = false,
   onClick,
-  plain = false,
-  round = true,
-  size = "md",
   stretch = false,
   target,
   theme,
-  weight = "medium",
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
   const props: {
@@ -151,13 +153,7 @@ const ButtonInner = ({
       }) => (
         <span className=" whitespace-nowrap break-all">
           {wordBefore && ` ${wordBefore} `}
-          <IconLoader
-            icon={icon}
-            className={cx(
-              "inline-block translate-y-1",
-              buttonIconSizeClasses[size],
-            )}
-          />
+          <IconLoader icon={icon} className="inline-block translate-y-1" />
           {wordAfter && ` ${wordAfter}`}
         </span>
       )
@@ -165,21 +161,21 @@ const ButtonInner = ({
 
   const sharedClasses = cx(
     theme?.background?.color && backgroundClasses[theme?.background?.color],
-    theme?.background?.color && borderClasses[theme?.background?.color],
-    theme?.text?.color && textClasses[theme?.text?.color],
+    theme?.label?.color && textClasses[theme?.label?.color],
+    theme?.label?.weight && weightClasses[theme?.label?.weight],
+    theme?.border?.color && borderClasses[theme?.border?.color],
+    theme?.background?.paddingX && paddingXClasses[theme?.background?.paddingX],
+    theme?.background?.paddingY && paddingYClasses[theme?.background?.paddingY],
+    theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
     {
       ["btn"]: true,
       ["cursor-pointer"]: true,
-      ["border"]: true,
       ["transition-colors duration-200"]: true,
-      ["rounded-full"]: round,
       ["inline-flex items-center justify-center"]: !stretch,
-      ["bg-opacity-0 border-opacity-0"]: plain,
-      ["hover:bg-opacity-0 focus:bg-opacity-0"]: plain,
       ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
         true,
       ["pointer-events-none opacity-75"]: disabled,
-      [weightClasses[weight]]: true,
+      ["uppercase"]: theme?.label?.uppercase,
     },
   );
 
@@ -187,11 +183,7 @@ const ButtonInner = ({
   if (!label?.trim().length) {
     return (
       <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
-        <span
-          className={cx(sharedClasses, {
-            [buttonIconOnlySizeClasses[size]]: !compact,
-          })}
-        >
+        <span className={sharedClasses}>
           {ButtonIcon && <ButtonIcon />}
           {loading && <ButtonLoader />}
         </span>
@@ -203,14 +195,9 @@ const ButtonInner = ({
   return (
     <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
       <span
-        className={cx(
-          sharedClasses,
-          buttonSizeClasses[size],
-          buttonAlignClasses[align],
-          { ["w-full flex"]: stretch },
-          { ["rounded-full"]: round },
-          { [buttonSpaceClasses[size]]: !compact },
-        )}
+        className={cx(sharedClasses, {
+          ["w-full flex"]: stretch,
+        })}
       >
         <span className="no-underline text-left break-words">
           {ButtonIcon ? (

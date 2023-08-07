@@ -1,6 +1,6 @@
 import { pick } from "../../helpers/utils/object";
-import { COLORS, FONT_WEIGHTS } from "../../theme";
-import { ALIGNMENTS, SIZES } from "../../types";
+import { COLORS, FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
+import { ALIGNMENTS } from "../../types";
 
 export const BUTTON_BACKGROUND_COLOR_OPTIONS = pick(COLORS);
 export type BackgroundColorType = keyof typeof BUTTON_BACKGROUND_COLOR_OPTIONS;
@@ -11,11 +11,14 @@ export type ButtonTextColorType = keyof typeof BUTTON_TEXT_COLOR_OPTIONS;
 export const BUTTON_BORDER_COLOR_OPTIONS = pick(COLORS);
 export type ButtonBorderColorType = keyof typeof BUTTON_BORDER_COLOR_OPTIONS;
 
-export const BUTTON_SIZE_OPTIONS = pick(SIZES, "sm", "md");
-export type ButtonSizeType = keyof typeof BUTTON_SIZE_OPTIONS;
+export const BUTTON_FONT_SIZE_OPTIONS = pick(FONT_SIZES);
+export type ButtonSizeType = keyof typeof BUTTON_FONT_SIZE_OPTIONS;
 
 export const BUTTON_ALIGN_OPTIONS = pick(ALIGNMENTS, "left", "center", "right");
 export type ButtonAlignType = keyof typeof BUTTON_ALIGN_OPTIONS;
+
+export const BUTTON_FONT_OPTIONS = pick(FONTS);
+export type TitleFontType = keyof typeof BUTTON_FONT_OPTIONS;
 
 export const BUTTON_ICON_POSITION_OPTIONS = {
   before: "Before",

@@ -1,6 +1,11 @@
 /**
  * Format colours
  */
+import {
+  BORDER_RADIUS_OPTIONS,
+  BORDER_WIDTH_OPTIONS,
+  PADDING_OPTIONS,
+} from "../../types";
 import { ConfigType, GroqThemeType } from "./build";
 
 const defaultTheme = require("tailwindcss/defaultTheme");
@@ -116,6 +121,12 @@ export function formatSafelist({
     ...Object.keys(fontFamily).map((font) => `font-${clean(font)}`),
     ...Object.keys(fontWeight).map((weight) => `font-${clean(weight)}`),
     ...Object.keys(fontSize).map((size) => `text-${clean(size)}`),
+    ...Object.keys(PADDING_OPTIONS).map((px) => `px-${clean(px)}`),
+    ...Object.keys(PADDING_OPTIONS).map((py) => `px-${clean(py)}`),
+    ...Object.keys(BORDER_WIDTH_OPTIONS).map((size) => `border-${clean(size)}`),
+    ...Object.keys(BORDER_RADIUS_OPTIONS).map(
+      (size) => `rounded-${clean(size)}`,
+    ),
   ];
 
   // safelist all these classes for each breakpoint
