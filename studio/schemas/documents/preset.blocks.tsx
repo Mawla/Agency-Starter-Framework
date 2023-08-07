@@ -7,8 +7,8 @@ import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
 const schema = defineType({
-  name: "page.preset",
-  title: "Preset",
+  name: "preset.blocks",
+  title: "Blocks preset",
   type: "document",
   icon: () => <StarBookmark weight="thin" size={20} />,
   preview: {
@@ -17,7 +17,7 @@ const schema = defineType({
       description: "description",
       screenshot: "image",
     },
-    prepare({ title = "Preset", description = "", screenshot }) {
+    prepare({ title = "Blocks preset", description = "", screenshot }) {
       return {
         title: title,
         subtitle: description,
