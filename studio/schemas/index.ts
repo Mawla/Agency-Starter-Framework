@@ -58,7 +58,6 @@ import pageLanding from "./documents/page.landing";
 import pageNotFound from "./documents/page.notfound";
 import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
-import blockPreset from "./documents/page.preset";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
 import pageTool from "./documents/page.tool";
@@ -67,6 +66,9 @@ import pageVideo from "./documents/page.video";
 import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
+import presetBlocks from "./documents/preset.blocks";
+import presetButton from "./documents/preset.button";
+import presetDecoration from "./documents/preset.decoration";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
 import copypaste from "./objects/copypaste";
@@ -90,7 +92,6 @@ export const schemaTypes = [
     block6,
     block8,
     block9,
-    blockPreset,
     button,
     buttongroup,
     configCMS,
@@ -135,6 +136,9 @@ export const schemaTypes = [
     portableTextFull,
     portableTextSimple,
     preset,
+    presetBlocks,
+    presetButton,
+    presetDecoration,
     redirect,
     script,
     studioDivider,

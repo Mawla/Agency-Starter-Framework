@@ -10,6 +10,7 @@ import { PreviewIframe } from "./views/PreviewIframe";
 import { SeoPane } from "./views/SeoPane";
 import { Sitemap } from "./views/Sitemap";
 import {
+  BlueprintPaper,
   Diagram,
   Eye,
   Gear,
@@ -285,7 +286,16 @@ export const structure = (
       documentList(S, { type: "redirect", title: "Redirects" }),
       documentList(S, { type: "script", title: "Scripts" }),
       S.divider(),
-      S.documentTypeListItem("page.preset").title("Presets"),
+      group(S, {
+        title: "Presets",
+        icon: () => <BlueprintPaper weight="thin" size={20} />,
+      }).child(
+        list(S, { title: "Presets" }).items([
+          S.documentTypeListItem("preset.blocks").title("Blocks"),
+          S.documentTypeListItem("preset.button").title("Buttons"),
+          S.documentTypeListItem("preset.decoration").title("Decorations"),
+        ]),
+      ),
 
       S.divider(),
       S.listItem()
@@ -309,12 +319,12 @@ export const defaultDocumentNode = (
 
   // add preview iframe for pages
   const views: any[] = [S.view.form()];
-  if (schemaType.startsWith("page.") || schemaType === "script") {
+  if (schemaType.startsWith("page.") || schemaType === "script" || schemaType.startsWith('preset.')) {
     views.push(PreviewView(S));
 
     if (
       schemaType.startsWith("page.") &&
-      !["page.preset", "page.notfound", "page.sitemap"].includes(schemaType)
+      !["preset.blocks", "page.notfound", "page.sitemap"].includes(schemaType)
     ) {
       views.push(SeoView(S));
     }
