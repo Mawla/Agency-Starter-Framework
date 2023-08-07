@@ -4,6 +4,7 @@ import {
   BorderRadiusType,
   BorderWidthType,
   ColorType,
+  FontSizeType,
   FontType,
   FontWeightType,
   HorizontalAlignType,
@@ -84,14 +85,21 @@ export const fontClasses: Record<FontType, string> = Object.entries(
   FONTS,
 ).reduce<Record<FontWeightType, string>>(
   (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
-  {} as Record<ColorType, string>,
+  {},
+);
+
+export const fontSizeClasses: Record<FontSizeType, string> = Object.entries(
+  FONT_SIZES,
+).reduce<Record<FontSizeType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `text-${key}` }),
+  {},
 );
 
 export const weightClasses: Record<FontWeightType, string> = Object.entries(
   FONT_WEIGHTS,
 ).reduce<Record<FontWeightType, string>>(
   (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
-  {} as Record<ColorType, string>,
+  {},
 );
 
 export const textAlignClasses: Record<HorizontalAlignType, string> = {

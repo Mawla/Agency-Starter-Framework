@@ -6,6 +6,7 @@ import {
   borderRadiusClasses,
   borderWidthClasses,
   fontClasses,
+  fontSizeClasses,
   paddingXClasses,
   paddingYClasses,
   textClasses,
@@ -173,65 +174,95 @@ const ButtonInner = ({
       )
     : null;
 
+  function getClasses(
+    scope: "label" | "background" | "border",
+    prop: string,
+    classes: Record<string, string>,
+  ) {
+    const x = theme?.mobile?.[scope];
+    x;
+
+    return [
+      theme.mobile?.[scope]?.[prop] && classes[theme.mobile?.[scope]?.[prop]],
+      theme.tablet?.[scope]?.[prop] &&
+        `md:${classes[theme.tablet?.[scope]?.[prop]]}`,
+      theme.desktop?.[scope]?.[prop] &&
+        `lg:${classes[theme.desktop?.[scope]?.[prop]]}`,
+    ];
+
+    return [];
+  }
+
   const sharedClasses = twMerge(
     cx(
-      theme?.mobile?.label?.font && fontClasses[theme?.mobile?.label?.font],
-      theme?.mobile?.background?.color &&
-        backgroundClasses[theme?.mobile?.background?.color],
-      theme?.mobile?.label?.color && textClasses[theme?.mobile?.label?.color],
-      theme?.mobile?.label?.weight &&
-        weightClasses[theme?.mobile?.label?.weight],
-      theme?.mobile?.background?.paddingX &&
-        paddingXClasses[theme?.mobile?.background?.paddingX],
-      theme?.mobile?.background?.paddingY &&
-        paddingYClasses[theme?.mobile?.background?.paddingY],
-      theme?.mobile?.border?.color && `border`,
-      theme?.mobile?.border?.color &&
-        borderClasses[theme?.mobile?.border?.color],
-      theme?.mobile?.border?.radius &&
-        borderRadiusClasses[theme?.mobile?.border?.radius],
-      theme?.mobile?.border?.width &&
-        borderWidthClasses[theme?.mobile?.border?.width],
+      ...getClasses("label", "color", textClasses),
+      ...getClasses("label", "font", fontClasses),
+      ...getClasses("label", "size", fontSizeClasses),
+      ...getClasses("label", "weight", weightClasses),
+      ...getClasses("background", "color", backgroundClasses),
+      ...getClasses("background", "paddingX", paddingXClasses),
+      ...getClasses("background", "paddingY", paddingYClasses),
+      ...getClasses("border", "color", borderClasses),
+      ...getClasses("border", "radius", borderRadiusClasses),
+      ...getClasses("border", "width", borderWidthClasses),
 
-      theme?.tablet?.label?.font &&
-        `md:${fontClasses[theme?.tablet?.label?.font]}`,
-      theme?.tablet?.background?.color &&
-        `md:${backgroundClasses[theme?.tablet?.background?.color]}`,
-      theme?.tablet?.label?.color &&
-        `md:${textClasses[theme?.tablet?.label?.color]}`,
-      theme?.tablet?.label?.weight &&
-        `md:${weightClasses[theme?.tablet?.label?.weight]}`,
-      theme?.tablet?.background?.paddingX &&
-        `md:${paddingXClasses[theme?.tablet?.background?.paddingX]}`,
-      theme?.tablet?.background?.paddingY &&
-        `md:${paddingYClasses[theme?.tablet?.background?.paddingY]}`,
-      theme?.tablet?.border?.color && `md:border`,
-      theme?.tablet?.border?.color &&
-        `md:${borderClasses[theme?.tablet?.border?.color]}`,
-      theme?.tablet?.border?.radius &&
-        `md:${borderRadiusClasses[theme?.tablet?.border?.radius]}`,
-      theme?.tablet?.border?.width &&
-        `md:${borderWidthClasses[theme?.tablet?.border?.width]}`,
+      // theme?.mobile?.label?.font && fontClasses[theme?.mobile?.label?.font],
+      // theme?.mobile?.background?.color &&
+      //   backgroundClasses[theme?.mobile?.background?.color],
+      // theme?.mobile?.label?.color && textClasses[theme?.mobile?.label?.color],
+      // theme?.mobile?.label?.weight &&
+      //   weightClasses[theme?.mobile?.label?.weight],
+      // theme?.mobile?.background?.paddingX &&
+      //   paddingXClasses[theme?.mobile?.background?.paddingX],
+      // theme?.mobile?.background?.paddingY &&
+      //   paddingYClasses[theme?.mobile?.background?.paddingY],
+      // theme?.mobile?.border?.color && `border`,
+      // theme?.mobile?.border?.color &&
+      //   borderClasses[theme?.mobile?.border?.color],
+      // theme?.mobile?.border?.radius &&
+      //   borderRadiusClasses[theme?.mobile?.border?.radius],
+      // theme?.mobile?.border?.width &&
+      //   borderWidthClasses[theme?.mobile?.border?.width],
 
-      theme?.desktop?.label?.font &&
-        `lg:${fontClasses[theme?.desktop?.label?.font]}`,
-      theme?.desktop?.background?.color &&
-        `lg:${backgroundClasses[theme?.desktop?.background?.color]}`,
-      theme?.desktop?.label?.color &&
-        `lg:${textClasses[theme?.desktop?.label?.color]}`,
-      theme?.desktop?.label?.weight &&
-        `lg:${weightClasses[theme?.desktop?.label?.weight]}`,
-      theme?.desktop?.background?.paddingX &&
-        `lg:${paddingXClasses[theme?.desktop?.background?.paddingX]}`,
-      theme?.desktop?.background?.paddingY &&
-        `lg:${paddingYClasses[theme?.desktop?.background?.paddingY]}`,
-      theme?.desktop?.border?.color && `lg:border`,
-      theme?.desktop?.border?.color &&
-        `lg:${borderClasses[theme?.desktop?.border?.color]}`,
-      theme?.desktop?.border?.radius &&
-        `lg:${borderRadiusClasses[theme?.desktop?.border?.radius]}`,
-      theme?.desktop?.border?.width &&
-        `lg:${borderWidthClasses[theme?.desktop?.border?.width]}`,
+      // theme?.tablet?.label?.font &&
+      //   `md:${fontClasses[theme?.tablet?.label?.font]}`,
+      // theme?.tablet?.background?.color &&
+      //   `md:${backgroundClasses[theme?.tablet?.background?.color]}`,
+      // theme?.tablet?.label?.color &&
+      //   `md:${textClasses[theme?.tablet?.label?.color]}`,
+      // theme?.tablet?.label?.weight &&
+      //   `md:${weightClasses[theme?.tablet?.label?.weight]}`,
+      // theme?.tablet?.background?.paddingX &&
+      //   `md:${paddingXClasses[theme?.tablet?.background?.paddingX]}`,
+      // theme?.tablet?.background?.paddingY &&
+      //   `md:${paddingYClasses[theme?.tablet?.background?.paddingY]}`,
+      // theme?.tablet?.border?.color && `md:border`,
+      // theme?.tablet?.border?.color &&
+      //   `md:${borderClasses[theme?.tablet?.border?.color]}`,
+      // theme?.tablet?.border?.radius &&
+      //   `md:${borderRadiusClasses[theme?.tablet?.border?.radius]}`,
+      // theme?.tablet?.border?.width &&
+      //   `md:${borderWidthClasses[theme?.tablet?.border?.width]}`,
+
+      // theme?.desktop?.label?.font &&
+      //   `lg:${fontClasses[theme?.desktop?.label?.font]}`,
+      // theme?.desktop?.background?.color &&
+      //   `lg:${backgroundClasses[theme?.desktop?.background?.color]}`,
+      // theme?.desktop?.label?.color &&
+      //   `lg:${textClasses[theme?.desktop?.label?.color]}`,
+      // theme?.desktop?.label?.weight &&
+      //   `lg:${weightClasses[theme?.desktop?.label?.weight]}`,
+      // theme?.desktop?.background?.paddingX &&
+      //   `lg:${paddingXClasses[theme?.desktop?.background?.paddingX]}`,
+      // theme?.desktop?.background?.paddingY &&
+      //   `lg:${paddingYClasses[theme?.desktop?.background?.paddingY]}`,
+      // theme?.desktop?.border?.color && `lg:border`,
+      // theme?.desktop?.border?.color &&
+      //   `lg:${borderClasses[theme?.desktop?.border?.color]}`,
+      // theme?.desktop?.border?.radius &&
+      //   `lg:${borderRadiusClasses[theme?.desktop?.border?.radius]}`,
+      // theme?.desktop?.border?.width &&
+      //   `lg:${borderWidthClasses[theme?.desktop?.border?.width]}`,
       {
         ["cursor-pointer"]: true,
         [`btn-${theme?.name}`]: theme?.name,
@@ -248,6 +279,8 @@ const ButtonInner = ({
       className,
     ),
   );
+
+  // return <pre>{JSON.stringify(sharedClasses, null, 2)}</pre>;
 
   // icon only button
   if (!label?.trim().length) {

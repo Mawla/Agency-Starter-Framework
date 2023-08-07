@@ -118,7 +118,7 @@ export const Theme = () => (
           label: {
             color: "gray-600",
             font: "mono",
-            size: "lg",
+            size: "4xl",
             uppercase: true,
             weight: "bold",
           },
