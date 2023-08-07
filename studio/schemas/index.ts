@@ -16,6 +16,9 @@ import {
   decoration,
   decorations,
 } from "../../components/block/decoration.schema";
+import presetButton, {
+  buttonTheme,
+} from "../../components/buttons/button.preset";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
@@ -67,7 +70,6 @@ import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
 import presetBlocks from "./documents/preset.blocks";
-import presetButton, { buttonTheme } from "./documents/preset.button";
 import presetDecoration from "./documents/preset.decoration";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";

@@ -1,10 +1,12 @@
-import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../../theme";
+import IconPicker from "../../studio/components/IconPicker";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
 import {
   BORDER_RADIUS_OPTIONS,
   BORDER_WIDTH_OPTIONS,
   PADDING_OPTIONS,
-} from "../../../types";
-import { optionsToList } from "../../utils/fields/optionsToList";
+} from "../../types";
+import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -35,7 +37,7 @@ export default defineType({
     }),
     defineField({
       name: "slug",
-      title: "Identifier",
+      title: "Unique identifier",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
       options: {
@@ -47,6 +49,23 @@ export default defineType({
       title: "Default",
       type: "boolean",
       description: "Use this preset as the default for all buttons.",
+    }),
+    defineField({
+      name: "icon",
+      title: "Icon",
+      type: "string",
+      components: { input: IconPicker },
+    }),
+    defineField({
+      name: "iconPosition",
+      title: "Icon position",
+      type: "string",
+      options: {
+        layout: "radio",
+        direction: "horizontal",
+        list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
+      },
+      initialValue: "after",
     }),
     defineField({
       name: "mobile",

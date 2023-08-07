@@ -5,6 +5,7 @@ import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
 import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
+import presetButtonSchema from "./button.preset";
 import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
@@ -124,34 +125,24 @@ const schema = defineType({
       initialValue: false,
       description: "Make the button open in a new browser window",
     }),
-
     defineField({
-      name: "icon",
-      title: "Icon",
-      type: "string",
-      group: "theme",
-      components: { input: IconPicker },
-    }),
-    defineField({
-      name: "iconPosition",
-      title: "Icon position",
-      type: "string",
-      options: {
-        layout: "radio",
-        direction: "horizontal",
-        list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
-      },
-      initialValue: "after",
-      group: "theme",
-      description: "Make the button stretch as wide as it can go.",
-    }),
-    defineField({
-      name: "theme",
+      name: "presetTheme",
       title: "Theme",
       type: "reference",
       group: "theme",
       to: [{ type: "preset.button" }],
       weak: true,
+    }),
+    defineField({
+      name: "customTheme",
+      title: "Custom theme",
+      description: "Overrides the theme from the preset",
+      type: "object",
+      group: "theme",
+      options: { collapsible: true, collapsed: true },
+      fields: presetButtonSchema.fields.filter(
+        (field) => !["title", "slug", "default"].includes(field.name),
+      ),
     }),
   ],
   preview: {

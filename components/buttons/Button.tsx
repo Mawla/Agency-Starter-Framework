@@ -37,8 +37,6 @@ export type ButtonProps = {
   ariaLabel?: string;
   as?: "button" | "a" | "div" | "span" | "submit";
   href?: string;
-  icon?: string;
-  iconPosition?: ButtonIconPositionType;
   label?: string;
   onClick?: (e: React.MouseEvent) => void;
   stretch?: boolean;
@@ -49,8 +47,17 @@ export type ButtonProps = {
   hideLabel?: boolean;
   language?: LanguageType;
   className?: string;
-  theme?: {
+  presetTheme?: {
     name?: string;
+    icon?: string;
+    iconPosition?: ButtonIconPositionType;
+    mobile?: ButtonThemeType;
+    tablet?: ButtonThemeType;
+    desktop?: ButtonThemeType;
+  };
+  customTheme?: {
+    icon?: string;
+    iconPosition?: ButtonIconPositionType;
     mobile?: ButtonThemeType;
     tablet?: ButtonThemeType;
     desktop?: ButtonThemeType;
@@ -96,15 +103,13 @@ const ButtonInner = ({
   download = false,
   hideLabel = false,
   href,
-  icon,
-  iconPosition = "after",
   label = "",
   loading = false,
   onClick,
   stretch = false,
   target,
-  className,
-  theme,
+  presetTheme,
+  customTheme,
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
   const props: {
@@ -116,9 +121,16 @@ const ButtonInner = ({
     disabled?: boolean;
   } = {};
 
+  const theme: ButtonProps["presetTheme"] = {
+    name: presetTheme?.name || "custom",
+    icon: customTheme?.icon || presetTheme?.icon || undefined,
+    iconPosition:
+      customTheme?.iconPosition || presetTheme?.iconPosition || undefined,
+  };
+
   if (target === "_blank") {
-    icon = "externallink";
-    iconPosition = "after";
+    theme.icon = "externallink";
+    theme.iconPosition = "after";
   }
 
   if (hideLabel) {
@@ -128,7 +140,7 @@ const ButtonInner = ({
   }
 
   label = label || "";
-  iconPosition = iconPosition || "after";
+  theme.iconPosition = theme.iconPosition || "after";
 
   // prevent orphan icon by adding first / last word to icon
   const labelWords = label?.split(" ");
@@ -155,7 +167,7 @@ const ButtonInner = ({
   const handleClick = (e: React.MouseEvent) =>
     disabled ? () => {} : onClick ? onClick(e) : () => {};
 
-  const ButtonIcon = icon
+  const ButtonIcon = theme.icon
     ? ({
         wordBefore,
         wordAfter,
@@ -166,8 +178,8 @@ const ButtonInner = ({
         <span className="whitespace-nowrap break-all">
           {wordBefore && ` ${wordBefore} `}
           <IconLoader
-            icon={icon}
-            className="inline-block translate-y-1 w-5 h-5"
+            icon={theme?.icon}
+            className="inline-block translate-y-1 w-[1em] h-[1em]"
           />
           {wordAfter && ` ${wordAfter}`}
         </span>
@@ -179,16 +191,26 @@ const ButtonInner = ({
 
     const arr: string[] = [];
 
-    const newTheme = { ...(theme as any) };
+    const newPresetTheme = { ...(presetTheme as any) };
+    const newCustomTheme = { ...(customTheme as any) };
 
-    if (newTheme?.mobile?.[group]?.[prop])
-      arr.push(classes[newTheme.mobile[group][prop]]);
+    if (newPresetTheme?.mobile?.[group]?.[prop])
+      arr.push(classes[newPresetTheme.mobile[group][prop]]);
 
-    if (newTheme?.tablet?.[group]?.[prop])
-      arr.push(`md:${classes[newTheme.tablet[group][prop]]}`);
+    if (newPresetTheme?.tablet?.[group]?.[prop])
+      arr.push(`md:${classes[newPresetTheme.tablet[group][prop]]}`);
 
-    if (newTheme?.desktop?.[group]?.[prop])
-      arr.push(`lg:${classes[newTheme.desktop[group][prop]]}`);
+    if (newPresetTheme?.desktop?.[group]?.[prop])
+      arr.push(`lg:${classes[newPresetTheme.desktop[group][prop]]}`);
+
+    if (newCustomTheme?.mobile?.[group]?.[prop])
+      arr.push(classes[newCustomTheme.mobile[group][prop]]);
+
+    if (newCustomTheme?.tablet?.[group]?.[prop])
+      arr.push(`md:${classes[newCustomTheme.tablet[group][prop]]}`);
+
+    if (newCustomTheme?.desktop?.[group]?.[prop])
+      arr.push(`lg:${classes[newCustomTheme.desktop[group][prop]]}`);
 
     return arr;
   }
@@ -208,7 +230,6 @@ const ButtonInner = ({
         ...getClasses("border.width", borderWidthClasses),
         {
           ["cursor-pointer"]: true,
-          [`btn-${theme?.name}`]: theme?.name,
           ["transition-colors duration-200"]: true,
           ["inline-flex items-center justify-center"]: !stretch,
           ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
@@ -244,13 +265,13 @@ const ButtonInner = ({
         <span className="no-underline text-left break-words">
           {ButtonIcon ? (
             <>
-              {ButtonIcon && iconPosition === "before" && (
+              {ButtonIcon && theme.iconPosition === "before" && (
                 <ButtonIcon wordAfter={labelWords[0]} />
               )}
-              {iconPosition === "before"
+              {theme.iconPosition === "before"
                 ? labelWords.slice(1).join(" ")
                 : labelWords.slice(0, -1).join(" ")}
-              {ButtonIcon && iconPosition === "after" && (
+              {ButtonIcon && theme.iconPosition === "after" && (
                 <ButtonIcon wordBefore={labelWords[labelWords.length - 1]} />
               )}
               {loading && <ButtonLoader />}
@@ -268,7 +289,7 @@ const ButtonInner = ({
 };
 
 const ButtonLoader = () => (
-  <span className="h-5 w-5 inline-flex self-center align-middle ml-2 -mb-1">
+  <span className="h-[1em] w-[1em] inline-flex self-center align-middle ml-2 -mb-1">
     <Spinner />
   </span>
 );

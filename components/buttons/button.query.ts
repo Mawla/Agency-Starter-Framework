@@ -38,15 +38,22 @@ export const buttonFieldsQuery = groq`
   language,
   "href": ${buttonHrefQuery},
   label,
-  icon,
-  iconPosition,
   download,
   theme,
-  "theme": select(
-    defined(theme) => theme -> {...}, 
-    *[_type == 'preset.button' && default][0]
+  "presetTheme": select(
+    defined(presetTheme) => presetTheme -> {...}, 
+    !defined(customTheme) => *[_type == 'preset.button' && default][0]
   ) { 
     "name": slug.current,
+    icon,
+    iconPosition,
+    mobile,
+    tablet,
+    desktop
+  },
+  customTheme { 
+    icon,
+    iconPosition,
     mobile,
     tablet,
     desktop
