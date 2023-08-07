@@ -122,7 +122,7 @@ export function formatSafelist({
     ...Object.keys(fontWeight).map((weight) => `font-${clean(weight)}`),
     ...Object.keys(fontSize).map((size) => `text-${clean(size)}`),
     ...Object.keys(PADDING_OPTIONS).map((px) => `px-${clean(px)}`),
-    ...Object.keys(PADDING_OPTIONS).map((py) => `px-${clean(py)}`),
+    ...Object.keys(PADDING_OPTIONS).map((py) => `py-${clean(py)}`),
     ...Object.keys(BORDER_WIDTH_OPTIONS).map((size) => `border-${clean(size)}`),
     ...Object.keys(BORDER_RADIUS_OPTIONS).map(
       (size) => `rounded-${clean(size)}`,

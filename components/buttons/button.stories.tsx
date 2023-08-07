@@ -1,12 +1,4 @@
 import { Button } from "./Button";
-import {
-  BackgroundColorType,
-  ButtonBorderColorType,
-  ButtonTextColorType,
-  BUTTON_BACKGROUND_COLOR_OPTIONS,
-  BUTTON_BORDER_COLOR_OPTIONS,
-  BUTTON_TEXT_COLOR_OPTIONS,
-} from "./button.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -93,22 +85,83 @@ export const Theme = () => (
     <Button
       label="This is a button"
       theme={{
-        background: {
-          color: "gray-900",
-          paddingX: 8,
-          paddingY: 4,
+        mobile: {
+          background: {
+            color: "gray-900",
+            paddingX: "8",
+            paddingY: "4",
+          },
+          border: {
+            radius: "xl",
+            width: 4,
+            color: "black",
+          },
+          label: {
+            color: "gray-200",
+            font: "serif",
+            size: "lg",
+            uppercase: true,
+            weight: "bold",
+          },
         },
-        border: {
-          radius: "xl",
-          width: 4,
+        tablet: {
+          background: {
+            color: "gray-100",
+            paddingX: "12",
+            paddingY: "14",
+          },
+          border: {
+            radius: "lg",
+            width: 2,
+            color: "black",
+          },
+          label: {
+            color: "gray-600",
+            font: "mono",
+            size: "lg",
+            uppercase: true,
+            weight: "bold",
+          },
         },
-        label: {
-          color: "gray-200",
-          font: "serif",
-          size: "lg",
-          uppercase: true,
-          weight: "bold",
+        desktop: {
+          background: {
+            color: "gray-300",
+            paddingX: "0",
+            paddingY: "0",
+          },
+          border: {
+            radius: "none",
+            width: 4,
+            color: "black",
+          },
+          label: {
+            color: "gray-900",
+            font: "sans",
+            size: "xl",
+            uppercase: false,
+            weight: "thin",
+          },
         },
+      }}
+    />
+  </>
+);
+
+export const CssClass = () => (
+  <>
+    <style
+      dangerouslySetInnerHTML={{
+        __html: `
+        .btn-primary {
+          border: 10px solid red;
+        }`,
+      }}
+    ></style>
+
+    <Button
+      label="This is a button"
+      theme={{
+        name: "primary",
       }}
     />
   </>

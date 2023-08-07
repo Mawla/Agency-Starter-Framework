@@ -67,7 +67,7 @@ import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
 import presetBlocks from "./documents/preset.blocks";
-import presetButton from "./documents/preset.button";
+import presetButton, { buttonTheme } from "./documents/preset.button";
 import presetDecoration from "./documents/preset.decoration";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
@@ -138,6 +138,7 @@ export const schemaTypes = [
     preset,
     presetBlocks,
     presetButton,
+    buttonTheme,
     presetDecoration,
     redirect,
     script,

@@ -54,113 +54,136 @@ export default defineType({
     }),
 
     defineField({
-      name: "theme",
-      title: "Theme",
-      type: "object",
-      components: {
-        field: (props) => (
-          <div>
-            <pre>{JSON.stringify(props.value, null, 2)}</pre>
-            {props.renderDefault(props)}
-          </div>
-        ),
+      name: "mobile",
+      title: "Mobile",
+      type: "buttonTheme",
+      description: 'The base theme, used on "mobile" breakpoints and higher.',
+    }),
+    defineField({
+      name: "tablet",
+      title: "Tablet",
+      type: "buttonTheme",
+      options: { collapsible: true, collapsed: true },
+      description:
+        'Override the base theme for "tablet" breakpoints and higher.',
+    }),
+    defineField({
+      name: "desktop",
+      title: "Desktop",
+      type: "buttonTheme",
+      options: { collapsible: true, collapsed: true },
+      description:
+        'Override the base theme for "desktop" breakpoints and higher.',
+    }),
+  ],
+});
+
+export const buttonTheme = defineField({
+  name: "buttonTheme",
+  title: "Theme",
+  type: "object",
+  components: {
+    field: (props) => (
+      <div>
+        <pre>{JSON.stringify(props.value, null, 2)}</pre>
+        {props.renderDefault(props)}
+      </div>
+    ),
+  },
+  fields: [
+    defineField({
+      name: "label",
+      title: "Label",
+      type: "styles",
+      options: {
+        fields: [
+          {
+            name: "size",
+            type: "select",
+            options: {
+              list: optionsToList(BUTTON_FONT_SIZE_OPTIONS),
+            },
+          },
+          {
+            name: "weight",
+            type: "select",
+            options: {
+              list: optionsToList(BUTTON_FONT_WEIGHT_OPTIONS),
+            },
+          },
+          {
+            name: "font",
+            type: "select",
+            options: {
+              list: optionsToList(BUTTON_FONT_OPTIONS),
+            },
+          },
+          {
+            name: "color",
+            type: "color",
+          },
+          {
+            name: "uppercase",
+            type: "boolean",
+          },
+        ],
       },
-      fields: [
-        defineField({
-          name: "label",
-          title: "Label",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "size",
-                type: "select",
-                options: {
-                  list: optionsToList(BUTTON_FONT_SIZE_OPTIONS),
-                },
-              },
-              {
-                name: "weight",
-                type: "select",
-                options: {
-                  list: optionsToList(BUTTON_FONT_WEIGHT_OPTIONS),
-                },
-              },
-              {
-                name: "font",
-                type: "select",
-                options: {
-                  list: optionsToList(BUTTON_FONT_OPTIONS),
-                },
-              },
-              {
-                name: "color",
-                type: "color",
-              },
-              {
-                name: "uppercase",
-                type: "boolean",
-              },
-            ],
-          },
-        }),
+    }),
 
-        defineField({
-          name: "background",
-          title: "Background",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-              },
-              {
-                name: "paddingX",
-                type: "select",
-                options: {
-                  list: optionsToList(PADDING_OPTIONS, true),
-                },
-              },
-              {
-                name: "paddingY",
-                type: "select",
-                options: {
-                  list: optionsToList(PADDING_OPTIONS, true),
-                },
-              },
-            ],
+    defineField({
+      name: "background",
+      title: "Background",
+      type: "styles",
+      options: {
+        fields: [
+          {
+            name: "color",
+            type: "color",
           },
-        }),
+          {
+            name: "paddingX",
+            type: "select",
+            options: {
+              list: optionsToList(PADDING_OPTIONS, true),
+            },
+          },
+          {
+            name: "paddingY",
+            type: "select",
+            options: {
+              list: optionsToList(PADDING_OPTIONS, true),
+            },
+          },
+        ],
+      },
+    }),
 
-        defineField({
-          name: "border",
-          title: "Border",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-              },
-              {
-                name: "width",
-                type: "select",
-                options: {
-                  list: optionsToList(BORDER_WIDTH_OPTIONS),
-                },
-              },
-              {
-                name: "radius",
-                type: "select",
-                options: {
-                  list: optionsToList(BORDER_RADIUS_OPTIONS),
-                },
-              },
-            ],
+    defineField({
+      name: "border",
+      title: "Border",
+      type: "styles",
+      options: {
+        fields: [
+          {
+            name: "color",
+            type: "color",
           },
-        }),
-      ],
+          {
+            name: "width",
+            type: "select",
+            options: {
+              list: optionsToList(BORDER_WIDTH_OPTIONS),
+            },
+          },
+          {
+            name: "radius",
+            type: "select",
+            options: {
+              list: optionsToList(BORDER_RADIUS_OPTIONS),
+            },
+          },
+        ],
+      },
     }),
   ],
 });
