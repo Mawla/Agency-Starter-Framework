@@ -1,8 +1,4 @@
-import {
-  BUTTON_FONT_OPTIONS,
-  BUTTON_FONT_SIZE_OPTIONS,
-  BUTTON_FONT_WEIGHT_OPTIONS,
-} from "../../../components/buttons/button.options";
+import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../../theme";
 import {
   BORDER_RADIUS_OPTIONS,
   BORDER_WIDTH_OPTIONS,
@@ -101,21 +97,21 @@ export const buttonTheme = defineField({
             name: "size",
             type: "select",
             options: {
-              list: optionsToList(BUTTON_FONT_SIZE_OPTIONS),
+              list: optionsToList(FONT_SIZES),
             },
           },
           {
             name: "weight",
             type: "select",
             options: {
-              list: optionsToList(BUTTON_FONT_WEIGHT_OPTIONS),
+              list: optionsToList(FONT_WEIGHTS),
             },
           },
           {
             name: "font",
             type: "select",
             options: {
-              list: optionsToList(BUTTON_FONT_OPTIONS),
+              list: optionsToList(FONTS),
             },
           },
           {

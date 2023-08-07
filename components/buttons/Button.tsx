@@ -162,9 +162,12 @@ const ButtonInner = ({
         wordBefore?: string;
         wordAfter?: string;
       }) => (
-        <span className=" whitespace-nowrap break-all">
+        <span className="whitespace-nowrap break-all">
           {wordBefore && ` ${wordBefore} `}
-          <IconLoader icon={icon} className="inline-block translate-y-1" />
+          <IconLoader
+            icon={icon}
+            className="inline-block translate-y-1 w-5 h-5"
+          />
           {wordAfter && ` ${wordAfter}`}
         </span>
       )
