@@ -166,7 +166,7 @@ export const Block14 = ({
               </div>
             )}
 
-            <div className="xl:hidden">
+            <div className="lg:hidden mt-10">
               <SocialShare title={title} direction="horizontal" />
             </div>
           </article>
