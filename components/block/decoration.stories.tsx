@@ -122,6 +122,22 @@ export const Image = () => (
         }}
       />
     </div>
+    repeat
+    <div className="border relative p-20">
+      <Decoration
+        mobile={{
+          width: "100%",
+          height: "100%",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          image: { ...demoImage },
+          background: "red",
+          repeat: true,
+        }}
+      />
+    </div>
   </div>
 );
 
@@ -135,6 +151,21 @@ export const HTML = () => (
         width: 100,
         height: 100,
         html: `<div style="background: red; width: 100px; height: 100px; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);"></div>`,
+      }}
+    />
+  </div>
+);
+
+export const Background = () => (
+  <div className="border relative p-20">
+    <Decoration
+      mobile={{
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        background:
+          "linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%), linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%)",
       }}
     />
   </div>

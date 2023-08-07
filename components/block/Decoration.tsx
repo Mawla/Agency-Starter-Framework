@@ -54,7 +54,11 @@ export type DecorationProps = {
 };
 
 const addUnit = (value: string, unit = "px") => {
-  if (!value) return undefined;
+  if (typeof value === "undefined") return undefined;
+  if (typeof value === "string" && !value.trim()?.length) return undefined;
+  if (typeof value === "number" && isNaN(value)) return undefined;
+  if (value === "auto") return value;
+
   if (!isNaN(+value)) return `${value}${unit}`;
   return value;
 };
@@ -145,6 +149,15 @@ export const Decoration = ({
   if (hidden) return null;
   if (html) html = DOMPurify?.sanitize?.(html);
 
+  if (image && repeat) {
+    styleObj.background = `url(${image?.src})`;
+  }
+
+  if (image && !repeat) {
+    styleObj.aspectRatio =
+      getOriginalImageDimensions(image?.src).aspectRatio || "auto";
+  }
+
   return (
     <div
       className={cx("absolute inset-0", {
@@ -162,11 +175,6 @@ export const Decoration = ({
         data-key={_key}
         style={{
           ...styleObj,
-          aspectRatio:
-            image && !repeat
-              ? getOriginalImageDimensions(image?.src).aspectRatio || "auto"
-              : undefined,
-          backgroundImage: image && repeat ? `url(${image?.src})` : undefined,
         }}
       >
         {image && !repeat && (

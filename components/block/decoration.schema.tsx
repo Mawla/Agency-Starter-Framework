@@ -57,7 +57,7 @@ export const decorations = defineField({
                 style={{
                   width: "100%",
                   height: "100%",
-                  backgroundColor:
+                  background:
                     mobile?.background ||
                     tablet?.background ||
                     desktop?.background,
@@ -210,23 +210,12 @@ export const decoration = defineField({
     defineField({
       name: "background",
       type: "string",
-      description: "Hex color code for the background of the decoration.",
+      description:
+        "Hex color code or valid CSS background for the background of the decoration, e.g #ff0000 or linear-gradient(to right, #e96443, #904e95).",
       group: "style",
       components: {
         input: ColorInput,
       },
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (typeof value === "undefined") return true;
-          if (value.trim().length === 0) return true;
-          if (!value.startsWith("#")) {
-            return "value must start with #";
-          }
-          if (value.length !== 7) {
-            return "value must be 7 characters long";
-          }
-          return true;
-        }),
     }),
     defineField({
       name: "opacity",
