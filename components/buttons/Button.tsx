@@ -163,34 +163,30 @@ const ButtonInner = ({
       )
     : null;
 
-  const sharedClasses = {
-    ["cursor-pointer"]: true,
-    ["border"]: true,
-    ["transition-colors duration-200"]: true,
-    ["rounded-full"]: round,
-    [backgroundClasses[theme?.background?.color || "white"]]: true,
-    [borderClasses[
-      theme?.border?.color || theme?.background?.color || "white"
-    ]]: true,
-    [textClasses[theme?.text?.color || "black"]]: true,
-    ["inline-flex items-center justify-center"]: !stretch,
-    ["bg-opacity-0 border-opacity-0"]: plain,
-    ["hover:bg-opacity-0 focus:bg-opacity-0"]: plain,
-    ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
-      true,
-    ["pointer-events-none opacity-75"]: disabled,
-    [weightClasses[weight]]: true,
-  };
+  const sharedClasses = cx(
+    theme?.background?.color && backgroundClasses[theme?.background?.color],
+    theme?.background?.color && borderClasses[theme?.background?.color],
+    theme?.text?.color && textClasses[theme?.text?.color],
+    {
+      ["btn"]: true,
+      ["cursor-pointer"]: true,
+      ["border"]: true,
+      ["transition-colors duration-200"]: true,
+      ["rounded-full"]: round,
+      ["inline-flex items-center justify-center"]: !stretch,
+      ["bg-opacity-0 border-opacity-0"]: plain,
+      ["hover:bg-opacity-0 focus:bg-opacity-0"]: plain,
+      ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
+        true,
+      ["pointer-events-none opacity-75"]: disabled,
+      [weightClasses[weight]]: true,
+    },
+  );
 
   // icon only button
   if (!label?.trim().length) {
     return (
-      <Element
-        {...props}
-        aria-label={ariaLabel || label}
-        onClick={handleClick}
-        className="btn"
-      >
+      <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
         <span
           className={cx(sharedClasses, {
             [buttonIconOnlySizeClasses[size]]: !compact,
@@ -205,12 +201,7 @@ const ButtonInner = ({
 
   // icon + text button
   return (
-    <Element
-      {...props}
-      aria-label={ariaLabel || label}
-      onClick={handleClick}
-      className="btn"
-    >
+    <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
       <span
         className={cx(
           sharedClasses,
