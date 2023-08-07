@@ -193,34 +193,33 @@ const ButtonInner = ({
     return arr;
   }
 
-  const sharedClasses = twMerge(
-    cx(
-      ...getClasses("label.color", textClasses),
-      ...getClasses("label.font", fontClasses),
-      ...getClasses("label.size", fontSizeClasses),
-      ...getClasses("label.weight", weightClasses),
-      ...getClasses("background.color", backgroundClasses),
-      ...getClasses("background.paddingX", paddingXClasses),
-      ...getClasses("background.paddingY", paddingYClasses),
-      ...getClasses("border.color", borderClasses),
-      ...getClasses("border.radius", borderRadiusClasses),
-      ...getClasses("border.width", borderWidthClasses),
-      {
-        ["cursor-pointer"]: true,
-        [`btn-${theme?.name}`]: theme?.name,
-        ["transition-colors duration-200"]: true,
-        ["inline-flex items-center justify-center"]: !stretch,
-        ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
-          true,
-        ["pointer-events-none opacity-75"]: disabled,
-        ["uppercase"]: theme?.mobile?.label?.uppercase,
-        ["sm:uppercase"]: theme?.tablet?.label?.uppercase,
-        ["lg:uppercase"]: theme?.desktop?.label?.uppercase,
-      },
-      "btn",
-      className,
-    ),
-  );
+  const sharedClasses =
+    twMerge(
+      cx(
+        ...getClasses("label.color", textClasses),
+        ...getClasses("label.font", fontClasses),
+        ...getClasses("label.size", fontSizeClasses),
+        ...getClasses("label.weight", weightClasses),
+        ...getClasses("background.color", backgroundClasses),
+        ...getClasses("background.paddingX", paddingXClasses),
+        ...getClasses("background.paddingY", paddingYClasses),
+        ...getClasses("border.color", borderClasses),
+        ...getClasses("border.radius", borderRadiusClasses),
+        ...getClasses("border.width", borderWidthClasses),
+        {
+          ["cursor-pointer"]: true,
+          [`btn-${theme?.name}`]: theme?.name,
+          ["transition-colors duration-200"]: true,
+          ["inline-flex items-center justify-center"]: !stretch,
+          ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
+            true,
+          ["pointer-events-none opacity-75"]: disabled,
+          ["uppercase"]: theme?.mobile?.label?.uppercase,
+          ["sm:uppercase"]: theme?.tablet?.label?.uppercase,
+          ["lg:uppercase"]: theme?.desktop?.label?.uppercase,
+        },
+      ),
+    ) + ` btn btn-${theme?.name}`;
 
   // icon only button
   if (!label?.trim().length) {

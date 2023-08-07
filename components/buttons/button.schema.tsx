@@ -4,12 +4,7 @@ import DialogSelect, {
 import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
-import {
-  BUTTON_BACKGROUND_COLOR_OPTIONS,
-  BUTTON_BORDER_COLOR_OPTIONS,
-  BUTTON_ICON_POSITION_OPTIONS,
-  BUTTON_TEXT_COLOR_OPTIONS,
-} from "./button.options";
+import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
 import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
@@ -150,62 +145,13 @@ const schema = defineType({
       group: "theme",
       description: "Make the button stretch as wide as it can go.",
     }),
-
     defineField({
       name: "theme",
       title: "Theme",
-      type: "object",
+      type: "reference",
       group: "theme",
-      fields: [
-        defineField({
-          name: "text",
-          title: "Text",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-                options: {
-                  colors: BUTTON_TEXT_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-        defineField({
-          name: "background",
-          title: "Background",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-                options: {
-                  colors: BUTTON_BACKGROUND_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-        defineField({
-          name: "border",
-          title: "Border",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-                options: {
-                  colors: BUTTON_BORDER_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-      ],
+      to: [{ type: "preset.button" }],
+      weak: true,
     }),
   ],
   preview: {

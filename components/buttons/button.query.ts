@@ -42,6 +42,15 @@ export const buttonFieldsQuery = groq`
   iconPosition,
   download,
   theme,
+  "theme": select(
+    defined(theme) => theme -> {...}, 
+    *[_type == 'preset.button' && default][0]
+  ) { 
+    "name": slug.current,
+    mobile,
+    tablet,
+    desktop
+  },
   "target": select(newWindow => '_blank') 
 `;
 

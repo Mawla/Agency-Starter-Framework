@@ -43,12 +43,11 @@ export default defineType({
       },
     }),
     defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
-      rows: 2,
+      name: "default",
+      title: "Default",
+      type: "boolean",
+      description: "Use this preset as the default for all buttons.",
     }),
-
     defineField({
       name: "mobile",
       title: "Mobile",
@@ -78,14 +77,6 @@ export const buttonTheme = defineField({
   name: "buttonTheme",
   title: "Theme",
   type: "object",
-  components: {
-    field: (props) => (
-      <div>
-        <pre>{JSON.stringify(props.value, null, 2)}</pre>
-        {props.renderDefault(props)}
-      </div>
-    ),
-  },
   fields: [
     defineField({
       name: "label",
