@@ -1,10 +1,8 @@
 import DialogSelect, {
   DialogSelectWrapper,
 } from "../../studio/components/DialogSelect";
-import IconPicker from "../../studio/components/IconPicker";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { UnsetObjectButton } from "../../studio/components/UnsetObjectButton";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
-import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
 import presetButtonSchema from "./button.preset";
 import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -140,6 +138,9 @@ const schema = defineType({
       type: "object",
       group: "theme",
       options: { collapsible: true, collapsed: true },
+      components: {
+        field: UnsetObjectButton,
+      },
       fields: presetButtonSchema.fields.filter(
         (field) => !["title", "slug", "default"].includes(field.name),
       ),

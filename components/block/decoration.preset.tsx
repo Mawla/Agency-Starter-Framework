@@ -2,7 +2,7 @@ import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
-import { defineField, defineType, StringRule, SlugRule } from "sanity";
+import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "preset.decoration",

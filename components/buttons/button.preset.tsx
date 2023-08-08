@@ -83,11 +83,8 @@ export default defineType({
           title: "Position",
           type: "string",
           options: {
-            layout: "radio",
-            direction: "horizontal",
             list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
           },
-          initialValue: "after",
         }),
       ],
     }),

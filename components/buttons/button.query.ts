@@ -54,14 +54,14 @@ export const buttonFieldsQuery = groq`
   "href": ${buttonHrefQuery},
   label,
   download,
-  "presetTheme": select(
-    defined(presetTheme) => presetTheme -> {...}, 
-    !defined(customTheme) => *[_type == 'preset.button' && default][0]
-  ) { 
-    "name": slug.current,
+  "theme": customTheme { 
     ${buttonThemeFieldsQuery}
   },
-  "theme": customTheme { 
+  "presetTheme": select(
+    defined(presetTheme) => presetTheme -> {...}, 
+    !defined(customTheme.mobile) => *[_type == 'preset.button' && default][0]
+  ) { 
+    "name": slug.current,
     ${buttonThemeFieldsQuery}
   },
   "target": select(newWindow => '_blank') 

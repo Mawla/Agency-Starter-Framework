@@ -4,8 +4,7 @@ import {
   DecorationPositionInput,
   DecorationPositionInputWrapper,
 } from "../../studio/components/Decorations/DecorationPositionInput";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
+import { UnsetObjectButton } from "../../studio/components/UnsetObjectButton";
 import decorationPresetSchema from "./decoration.preset";
 import { defineField, NumberRule, StringRule } from "sanity";
 
@@ -133,6 +132,9 @@ export const decoration = defineField({
   name: "decoration",
   title: "Decoration",
   type: "object",
+  components: {
+    field: UnsetObjectButton,
+  },
   groups: [
     { name: "content", title: "Content", default: true },
     { name: "position", title: "Position" },
