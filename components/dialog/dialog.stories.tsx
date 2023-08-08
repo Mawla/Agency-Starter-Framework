@@ -43,7 +43,7 @@ export const Info = () => {
             <li>Do more things…</li>
           </ul>
 
-          <Button label="Try now" icon="externallink" iconPosition="before" />
+          <Button label="Try now" />
         </div>
       </Dialog>
     </div>
@@ -78,7 +78,7 @@ export const Text = () => {
             jab him, tab him, grab him, stop that pigeon now.
           </p>
 
-          <Button label="Try now" icon="externallink" iconPosition="after" />
+          <Button label="Try now" />
 
           <h3>And more</h3>
 

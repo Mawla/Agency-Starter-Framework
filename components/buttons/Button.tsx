@@ -57,7 +57,7 @@ export type ButtonProps = {
     tablet?: ButtonThemeType;
     desktop?: ButtonThemeType;
   };
-  customTheme?: {
+  theme?: {
     icon?: {
       name?: string;
       position?: ButtonIconPositionType;
@@ -113,7 +113,7 @@ const ButtonInner = ({
   stretch = false,
   target,
   presetTheme,
-  customTheme,
+  theme,
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
   const props: {
@@ -125,16 +125,16 @@ const ButtonInner = ({
     disabled?: boolean;
   } = {};
 
-  const theme: ButtonProps["presetTheme"] = {
+  const themeObj: ButtonProps["presetTheme"] = {
     name: presetTheme?.name || "custom",
-    icon: customTheme?.icon || presetTheme?.icon,
+    icon: theme?.icon || presetTheme?.icon,
   };
 
-  if (!theme?.icon) theme.icon = {};
+  if (!themeObj?.icon) themeObj.icon = {};
 
   if (target === "_blank") {
-    theme.icon.name = "externallink";
-    theme.icon.position = "after";
+    themeObj.icon.name = "externallink";
+    themeObj.icon.position = "after";
   }
 
   if (hideLabel) {
@@ -144,7 +144,7 @@ const ButtonInner = ({
   }
 
   label = label || "";
-  theme.icon.position = theme.icon.position || "after";
+  themeObj.icon.position = themeObj.icon.position || "after";
 
   if (as === "button") {
     props.type = "button";
@@ -174,7 +174,7 @@ const ButtonInner = ({
     const arr: string[] = [];
 
     const newPresetTheme = { ...(presetTheme as any) };
-    const newCustomTheme = { ...(customTheme as any) };
+    const newtheme = { ...(theme as any) };
 
     if (newPresetTheme?.mobile?.[group]?.[prop])
       arr.push(classes[newPresetTheme.mobile[group][prop]]);
@@ -185,14 +185,14 @@ const ButtonInner = ({
     if (newPresetTheme?.desktop?.[group]?.[prop])
       arr.push(`lg:${classes[newPresetTheme.desktop[group][prop]]}`);
 
-    if (newCustomTheme?.mobile?.[group]?.[prop])
-      arr.push(classes[newCustomTheme.mobile[group][prop]]);
+    if (newtheme?.mobile?.[group]?.[prop])
+      arr.push(classes[newtheme.mobile[group][prop]]);
 
-    if (newCustomTheme?.tablet?.[group]?.[prop])
-      arr.push(`md:${classes[newCustomTheme.tablet[group][prop]]}`);
+    if (newtheme?.tablet?.[group]?.[prop])
+      arr.push(`md:${classes[newtheme.tablet[group][prop]]}`);
 
-    if (newCustomTheme?.desktop?.[group]?.[prop])
-      arr.push(`lg:${classes[newCustomTheme.desktop[group][prop]]}`);
+    if (newtheme?.desktop?.[group]?.[prop])
+      arr.push(`lg:${classes[newtheme.desktop[group][prop]]}`);
 
     return arr;
   }
@@ -228,23 +228,23 @@ const ButtonInner = ({
               },
             ),
           ),
-          ` btn btn-${theme?.name}`,
+          ` btn btn-${themeObj?.name}`,
         )}
       >
-        {label && theme.icon.position === "after" && label}
-        {theme.icon.name && (
+        {label && themeObj.icon.position === "after" && label}
+        {themeObj.icon.name && (
           <IconLoader
-            icon={theme.icon.name}
+            icon={themeObj.icon.name}
             className={cx(
               "inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5",
               {
-                ["mr-1.5"]: label && theme.icon.position === "before",
-                ["ml-1.5"]: label && theme.icon.position !== "before",
+                ["mr-1.5"]: label && themeObj.icon.position === "before",
+                ["ml-1.5"]: label && themeObj.icon.position !== "before",
               },
             )}
           />
         )}
-        {label && theme.icon.position === "before" && label}
+        {label && themeObj.icon.position === "before" && label}
         {loading && <ButtonLoader />}
       </span>
     </Element>

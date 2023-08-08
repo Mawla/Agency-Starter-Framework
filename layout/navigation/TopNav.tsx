@@ -269,7 +269,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                         >
                           <span>{button.label}</span>
                           <IconLoader
-                            icon={button.icon}
+                            icon={button.theme?.icon?.name}
                             className="inline transform -translate-y-px w-4 h-4"
                           />
                         </Link>

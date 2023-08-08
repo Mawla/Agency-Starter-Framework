@@ -164,7 +164,7 @@ export const CustomTheme = () => (
   <>
     <Button
       label="This is a button"
-      customTheme={{
+      theme={{
         mobile: {
           background: {
             color: "gray-900",

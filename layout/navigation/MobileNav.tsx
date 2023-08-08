@@ -150,7 +150,7 @@ export const MobileNav = ({
                           >
                             <span>{button.label}</span>
                             <IconLoader
-                              icon={button.icon}
+                              icon={button.theme?.icon?.name}
                               className="inline transform -translate-y-px w-4 h-4"
                             />
                           </Link>

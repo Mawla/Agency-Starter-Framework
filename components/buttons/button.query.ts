@@ -50,7 +50,7 @@ export const buttonFieldsQuery = groq`
     tablet,
     desktop
   },
-  customTheme { 
+  "theme": customTheme { 
     icon,
     mobile,
     tablet,

@@ -11,7 +11,7 @@ export default {
 } as Meta;
 
 const buttons: ButtonProps[] = [
-  { label: "Button text", icon: "arrow" },
+  { label: "Button text", theme: { icon: { name: "arrow" } } },
   { label: "Button text" },
 ];
 
