@@ -12,7 +12,7 @@ import { DecorationLocationType } from "./decoration.options";
 import cx from "classnames";
 import DOMPurify from "dompurify";
 import { createCSSTransformBuilder } from "easy-css-transform-builder";
-import { ComponentType, CSSProperties, lazy } from "react";
+import { ComponentType, CSSProperties, lazy, useEffect, useState } from "react";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
@@ -114,6 +114,8 @@ export const Decoration = ({
   let html = mobile?.html;
   let repeat = mobile?.repeat;
 
+  const [innerHTML, setInnerHTML] = useState<null | string>(null);
+
   mobile = removeEmptyValues(mobile);
   if (tablet) tablet = removeEmptyValues(tablet);
   if (desktop) desktop = removeEmptyValues(desktop);
@@ -158,6 +160,10 @@ export const Decoration = ({
       getOriginalImageDimensions(image?.src).aspectRatio || "auto";
   }
 
+  useEffect(() => {
+    if (html) setInnerHTML(html);
+  }, [html]);
+
   return (
     <div
       className={cx("absolute inset-0", {
@@ -180,12 +186,12 @@ export const Decoration = ({
         {image && !repeat && (
           <ResponsiveImage {...image} fill preserveAspectRatio />
         )}
-        {html && (
+        {innerHTML && (
           <div
             dangerouslySetInnerHTML={
               html
                 ? {
-                    __html: html,
+                    __html: innerHTML,
                   }
                 : undefined
             }
