@@ -323,7 +323,8 @@ export const defaultDocumentNode = (
     schemaType.startsWith("page.") ||
     schemaType === "script" ||
     schemaType === "preset.blocks" ||
-    schemaType === "navigation"
+    schemaType === "navigation" ||
+    schemaType === "footer"
   ) {
     views.push(PreviewView(S));
 

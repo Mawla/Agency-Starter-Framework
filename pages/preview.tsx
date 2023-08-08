@@ -2,7 +2,8 @@ import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
-import { FooterType } from "../layout/footer/footer.query";
+import { Footer } from "../layout/footer/Footer";
+import { FooterType, getFooterQuery } from "../layout/footer/footer.query";
 import { Navigation } from "../layout/navigation/Navigation";
 import {
   getNavigationQuery,
@@ -38,6 +39,10 @@ export default function PreviewPage({
     ? router.query.id[0]
     : router.query.id;
 
+  let documentType = Array.isArray(router.query.type)
+    ? router.query.type[0]
+    : router.query.type || "page";
+
   const language = router.query.language as LanguageType;
 
   useEffect(() => {
@@ -51,13 +56,11 @@ export default function PreviewPage({
     if (router.query.type === "navigation") {
       return getNavigationQuery(language);
     }
+    if (router.query.type === "footer") {
+      return getFooterQuery(language);
+    }
     return getPageQuery(language);
   };
-
-  let previewType: "page" | "navigation" = "page";
-  if (router.query.type === "navigation") {
-    previewType = "navigation";
-  }
 
   return (
     <div>
@@ -68,12 +71,12 @@ export default function PreviewPage({
           id={id}
           config={sanityConfig}
           getQuery={getQuery}
-          position={previewType === "navigation" ? "bottom" : "top"}
-          showMiniMap={previewType === "page"}
+          position={documentType === "navigation" ? "bottom" : "top"}
+          showMiniMap={documentType === "page"}
         />
       )}
 
-      {previewType === "page" && data && (
+      {documentType === "page" && data && (
         <Page
           navigation={null as unknown as NavigationType}
           page={data}
@@ -83,7 +86,8 @@ export default function PreviewPage({
         />
       )}
 
-      {previewType === "navigation" && data && <Navigation {...data} />}
+      {documentType === "navigation" && data && <Navigation {...data} />}
+      {documentType === "footer" && data && <Footer {...data} />}
     </div>
   );
 }
