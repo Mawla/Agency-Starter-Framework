@@ -132,7 +132,7 @@ export const MiniMap = ({ blocks, isLoading, onReorder }: MiniMapProps) => {
     setActiveId(active.id);
   }
 
-  function handleDragEnd(event: any) {
+  async function handleDragEnd(event: any) {
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -143,7 +143,7 @@ export const MiniMap = ({ blocks, isLoading, onReorder }: MiniMapProps) => {
       };
 
       setItems(newItems);
-      onReorder(active.id, over.id, items);
+      await onReorder(active.id, over.id, items);
     }
 
     if (!over || active.id === over.id) {
