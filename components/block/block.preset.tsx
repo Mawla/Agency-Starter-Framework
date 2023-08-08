@@ -1,7 +1,11 @@
-import { BLOCK_SCHEMAS } from "../../../types.sanity";
-import CaptureScreenshot from "../../components/CaptureScreenshot/CaptureScreenshot";
-import PresetUsage from "../../components/Presets/PresetUsage";
-import { BLOCKS_FIELD, pageBase } from "./page-fields";
+import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
+import PresetUsage from "../../studio/components/Presets/PresetUsage";
+import Warning from "../../studio/components/Warning";
+import {
+  BLOCKS_FIELD,
+  pageBase,
+} from "../../studio/schemas/documents/page-fields";
+import { BLOCK_SCHEMAS } from "../../types.sanity";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -27,6 +31,16 @@ const schema = defineType({
   },
   groups: [...pageBase.groups],
   fields: [
+    defineField({
+      name: "warning",
+      title: "Warning",
+      type: "string",
+      options: { localize: false } as any,
+      components: { field: Warning },
+      group: ["content"],
+      description:
+        "Block presets do not synchronize with instances. Updating a block preset will not automatically update to blocks already used on the website.",
+    }),
     defineField({
       name: "title",
       title: "Title",

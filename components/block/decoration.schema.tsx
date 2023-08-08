@@ -12,110 +12,126 @@ export const decorations = defineField({
   name: "decorations",
   title: "Decorations",
   type: "array",
-  of: [
-    {
-      type: "object",
-      components: {
-        item: ArrayItemPreviewHighlight,
-      },
-      preview: {
-        select: {
-          title: "title",
-          mobile: "mobile",
-          mobileImage: "mobile.image",
-          mobileHTML: "mobile.html",
-          tablet: "tablet",
-          tabletImage: "tablet.image",
-          tabletHTML: "tablet.html",
-          desktop: "desktop",
-          desktopImage: "desktop.image",
-          desktopHTML: "desktop.html",
-        },
-        prepare({
-          title,
-          mobile = {},
-          tablet = {},
-          desktop = {},
-          mobileImage,
-          tabletImage,
-          desktopImage,
-          mobileHTML,
-          tabletHTML,
-          desktopHTML,
-        }) {
-          const isImage = Boolean(mobileImage || tabletImage || desktopImage);
-          const isHTML = Boolean(mobileHTML || tabletHTML || desktopHTML);
+  of: [{ type: "decorationWrapper" }],
+});
 
-          return {
-            title:
-              title ||
-              (isImage && "Image") ||
-              (isHTML && "HTML") ||
-              "Decoration",
-            media: mobileImage || tabletImage || desktopImage || (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  background:
-                    mobile?.background ||
-                    tablet?.background ||
-                    desktop?.background,
-                }}
-              />
-            ),
-          };
-        },
-      },
-      fields: [
-        defineField({
-          name: "title",
-          title: "Title",
-          type: "string",
-          description:
-            "A descriptive title for this decoration, used in the CMS.",
-        }),
-        defineField({
-          name: "location",
-          title: "Location",
-          type: "string",
-          options: {
-            list: optionsToList(DECORATION_LOCATION_OPTIONS),
-          },
-          description: "Position the decoration inside or outside the block.",
-        }),
-        defineField({
-          name: "breakout",
-          title: "Breakout",
-          type: "boolean",
-          description:
-            "Stay inside the border radius of the block or allow the decoration to break outside.",
-        }),
-        defineField({
-          name: "mobile",
-          title: "Mobile",
-          type: "decoration",
-          description:
-            'The base decoration, used on "mobile" breakpoints and higher.',
-        }),
-        defineField({
-          name: "tablet",
-          title: "Tablet",
-          type: "decoration",
-          options: { collapsible: true, collapsed: true },
-          description:
-            'Override the base decoration for "tablet" breakpoints and higher.',
-        }),
-        defineField({
-          name: "desktop",
-          title: "Desktop",
-          type: "decoration",
-          options: { collapsible: true, collapsed: true },
-          description:
-            'Override the base decoration for "desktop" breakpoints and higher.',
-        }),
-      ],
+export const decorationWrapper = defineField({
+  name: "decorationWrapper",
+  title: "Decoration wrapper",
+  type: "object",
+  components: {
+    item: ArrayItemPreviewHighlight,
+  },
+  preview: {
+    select: {
+      title: "title",
+      mobile: "mobile",
+      mobileImage: "mobile.image",
+      mobileHTML: "mobile.html",
+      tablet: "tablet",
+      tabletImage: "tablet.image",
+      tabletHTML: "tablet.html",
+      desktop: "desktop",
+      desktopImage: "desktop.image",
+      desktopHTML: "desktop.html",
     },
+    prepare({
+      title,
+      mobile = {},
+      tablet = {},
+      desktop = {},
+      mobileImage,
+      tabletImage,
+      desktopImage,
+      mobileHTML,
+      tabletHTML,
+      desktopHTML,
+    }) {
+      const isImage = Boolean(mobileImage || tabletImage || desktopImage);
+      const isHTML = Boolean(mobileHTML || tabletHTML || desktopHTML);
+
+      return {
+        title:
+          title || (isImage && "Image") || (isHTML && "HTML") || "Decoration",
+        media: mobileImage || tabletImage || desktopImage || (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              background:
+                mobile?.background || tablet?.background || desktop?.background,
+            }}
+          />
+        ),
+      };
+    },
+  },
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "A descriptive title for this decoration, used in the CMS.",
+    }),
+    defineField({
+      name: "location",
+      title: "Location",
+      type: "string",
+      options: {
+        list: optionsToList(DECORATION_LOCATION_OPTIONS),
+      },
+      description: "Position the decoration inside or outside the block.",
+    }),
+    defineField({
+      name: "breakout",
+      title: "Breakout",
+      type: "boolean",
+      description:
+        "Stay inside the border radius of the block or allow the decoration to break outside.",
+    }),
+    defineField({
+      name: "mobile",
+      title: "Mobile",
+      type: "decoration",
+      description:
+        'The base decoration, used on "mobile" breakpoints and higher.',
+    }),
+    defineField({
+      name: "tablet",
+      title: "Tablet",
+      type: "decoration",
+      options: { collapsible: true, collapsed: true },
+      description:
+        'Override the base decoration for "tablet" breakpoints and higher.',
+    }),
+    defineField({
+      name: "desktop",
+      title: "Desktop",
+      type: "decoration",
+      options: { collapsible: true, collapsed: true },
+      description:
+        'Override the base decoration for "desktop" breakpoints and higher.',
+    }),
+
+    // defineField({
+    //   name: "presetDecoration",
+    //   title: "Preset",
+    //   type: "reference",
+    //   group: "theme",
+    //   to: [{ type: "preset.button" }],
+    //   weak: true,
+    // }),
+    // defineField({
+    //   name: "customTheme",
+    //   title: "Custom theme",
+    //   description: "Overrides the theme from the preset",
+    //   type: "object",
+    //   group: "theme",
+    //   options: { collapsible: true, collapsed: true },
+    //   fields: presetButtonSchema.fields.filter(
+    //     (field) => !["title", "slug", "default"].includes(field.name),
+    //   ),
+    // }),
   ],
 });
 

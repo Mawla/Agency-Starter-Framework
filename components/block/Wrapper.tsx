@@ -55,13 +55,13 @@ export const Wrapper = ({
   if (!theme) theme = {};
   if (!theme?.width) theme.width = "full";
 
-  const innerDecorations = decorations?.filter(
-    ({ location }) => location === "inside" || !location,
-  );
+  const innerDecorations = decorations
+    ?.filter(Boolean)
+    .filter(({ location }) => location === "inside" || !location);
 
-  const outerDecorations = decorations?.filter(
-    ({ location }) => location === "outside",
-  );
+  const outerDecorations = decorations
+    ?.filter(Boolean)
+    .filter(({ location }) => location === "outside");
 
   return (
     <Bleed

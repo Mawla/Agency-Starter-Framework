@@ -127,7 +127,7 @@ const schema = defineType({
     }),
     defineField({
       name: "presetTheme",
-      title: "Theme",
+      title: "Preset",
       type: "reference",
       group: "theme",
       to: [{ type: "preset.button" }],

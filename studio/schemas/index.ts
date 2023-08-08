@@ -12,9 +12,12 @@ import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
+import presetBlocks from "../../components/block/block.preset";
+import presetDecoration from "../../components/block/decoration.preset";
 import {
   decoration,
   decorations,
+  decorationWrapper,
 } from "../../components/block/decoration.schema";
 import presetButton, {
   buttonTheme,
@@ -69,8 +72,6 @@ import pageVideo from "./documents/page.video";
 import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
-import presetBlocks from "./documents/preset.blocks";
-import presetDecoration from "./documents/preset.decoration";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
 import copypaste from "./objects/copypaste";
@@ -104,6 +105,7 @@ export const schemaTypes = [
     copypaste,
     decoration,
     decorations,
+    decorationWrapper,
     dialogForm,
     dialogRichText,
     dialogVideo,

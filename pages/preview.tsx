@@ -1,3 +1,5 @@
+import Wrapper from "../components/block/Wrapper";
+import { decorationFieldsQuery } from "../components/block/decoration.query";
 import Button from "../components/buttons/Button";
 import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
@@ -62,16 +64,26 @@ export default function PreviewPage({
     if (documentType === "navigation") {
       return getNavigationQuery(language);
     }
+
     if (documentType === "footer") {
       return getFooterQuery(language);
     }
+
     if (documentType === "preset.button") {
       return `
       *[_id == $_id][0] {
         _rev,
         _updatedAt,
-        // TODO: this fetches the global default preset
         ${buttonThemeFieldsQuery}
+      }
+      `;
+    }
+    if (documentType === "preset.decoration") {
+      return `
+      *[_id == $_id][0] {
+        _rev,
+        _updatedAt,
+        ${decorationFieldsQuery}
       }
       `;
     }
@@ -87,7 +99,11 @@ export default function PreviewPage({
           id={id}
           config={sanityConfig}
           getQuery={getQuery}
-          position={previewType === "navigation" ? "bottom" : "top"}
+          position={
+            ["navigation", "preset.decoration"].includes(previewType)
+              ? "bottom"
+              : "top"
+          }
           showMiniMap={previewType === "page"}
         />
       )}
@@ -103,12 +119,33 @@ export default function PreviewPage({
       )}
 
       {previewType === "navigation" && data && <Navigation {...data} />}
+
       {previewType === "footer" && data && <Footer {...data} />}
 
       {previewType === "preset.button" && data && (
         <div className="p-4 bg-[#fafafa]">
           <Button theme={data} label="This is a button" href="/" />
         </div>
+      )}
+
+      {previewType === "preset.decoration" && data && (
+        <Wrapper
+          theme={{
+            background: "white",
+            outerBackground: "gray-100",
+            text: "white",
+            width: "inner",
+            margin: {
+              top: "lg",
+              bottom: "lg",
+            },
+            padding: {
+              top: "xl",
+              bottom: "xl",
+            },
+          }}
+          decorations={[data]}
+        />
       )}
     </div>
   );
