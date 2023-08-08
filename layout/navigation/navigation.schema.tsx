@@ -144,30 +144,30 @@ export default defineType({
       group: "content",
       of: [
         {
-          type: "object",
           title: "Button",
-          ...PREVIEW,
-          fields: [
-            { ...LABEL_FIELD, group: null as any },
-            {
-              ...INTERNAL_FIELD,
-              hidden: (({ parent, value }) =>
-                !value && parent?.href) as ConditionalPropertyCallback,
-              group: null as any,
-            },
-            {
-              ...HREF_FIELD,
-              hidden: (({ parent, value }) =>
-                !value && parent?.internal) as ConditionalPropertyCallback,
-              group: null as any,
-            },
-            {
-              name: "icon",
-              title: "Icon",
-              type: "string",
-              components: { input: IconPicker },
-            },
-          ],
+          type: "button",
+          // ...PREVIEW,
+          // fields: [
+          //   { ...LABEL_FIELD, group: null as any },
+          //   {
+          //     ...INTERNAL_FIELD,
+          //     hidden: (({ parent, value }) =>
+          //       !value && parent?.href) as ConditionalPropertyCallback,
+          //     group: null as any,
+          //   },
+          //   {
+          //     ...HREF_FIELD,
+          //     hidden: (({ parent, value }) =>
+          //       !value && parent?.internal) as ConditionalPropertyCallback,
+          //     group: null as any,
+          //   },
+          //   {
+          //     name: "icon",
+          //     title: "Icon",
+          //     type: "string",
+          //     components: { input: IconPicker },
+          //   },
+          // ],
         },
       ],
     },

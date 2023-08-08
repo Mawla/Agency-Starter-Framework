@@ -68,6 +68,8 @@ export default function PreviewPage({
           id={id}
           config={sanityConfig}
           getQuery={getQuery}
+          position={previewType === "navigation" ? "bottom" : "top"}
+          showMiniMap={previewType === "page"}
         />
       )}
 

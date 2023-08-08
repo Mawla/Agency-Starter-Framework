@@ -10,6 +10,7 @@ import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
 import React, { ComponentType, lazy, useContext, useRef } from "react";
+import { ButtonProps } from "reakit/ts";
 
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () =>
@@ -23,6 +24,11 @@ const SimpleImage = lazy<ComponentType<SimpleImageProps>>(
     import(
       /* webpackChunkName: "SimpleImage" */ "../../components/images/SimpleImage"
     ),
+);
+
+const Button = lazy<ComponentType<ButtonProps>>(
+  () =>
+    import(/* webpackChunkName: "Button" */ "../../components/buttons/Button"),
 );
 
 export type TopNavProps = {
@@ -248,32 +254,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                       key={button.label}
                       className="hidden md:block"
                     >
-                      {button.href && (
-                        <Link
-                          href={button.href}
-                          locale={button.language}
-                          className={cx(
-                            "hover:underline underline-offset-4",
-                            "flex items-center gap-2",
-                            "text-md",
-                            "whitespace-nowrap font-medium",
-                            theme?.buttons?.background &&
-                              backgroundClasses[theme?.buttons?.background],
-                            theme?.buttons?.text &&
-                              textClasses[theme?.buttons?.text],
-                            {
-                              ["py-[10px] pl-4 pr-3 rounded-full"]:
-                                theme?.buttons?.background,
-                            },
-                          )}
-                        >
-                          <span>{button.label}</span>
-                          <IconLoader
-                            icon={button.theme?.icon?.name}
-                            className="inline transform -translate-y-px w-4 h-4"
-                          />
-                        </Link>
-                      )}
+                      <Button {...button} />
                     </RadixNavigationMenu.Item>
                   ))}
 
