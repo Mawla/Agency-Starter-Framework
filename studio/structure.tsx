@@ -321,8 +321,8 @@ export const defaultDocumentNode = (
   const views: any[] = [S.view.form()];
   if (
     schemaType.startsWith("page.") ||
+    schemaType.startsWith("preset.") ||
     schemaType === "script" ||
-    schemaType === "preset.blocks" ||
     schemaType === "navigation" ||
     schemaType === "footer"
   ) {

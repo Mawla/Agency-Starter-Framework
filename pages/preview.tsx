@@ -1,3 +1,5 @@
+import Button from "../components/buttons/Button";
+import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
@@ -11,7 +13,7 @@ import {
 } from "../layout/navigation/navigation.query";
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
-import { getPageQuery, PageType } from "../queries/page.query";
+import { getPageQuery } from "../queries/page.query";
 import type { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
@@ -42,7 +44,10 @@ export default function PreviewPage({
   let documentType = Array.isArray(router.query.type)
     ? router.query.type[0]
     : router.query.type || "page";
-  let previewType = documentType.startsWith("page.") ? "page" : documentType;
+  let previewType =
+    documentType.startsWith("page.") || documentType === "preset.blocks"
+      ? "page"
+      : documentType;
 
   const language = router.query.language as LanguageType;
 
@@ -54,11 +59,21 @@ export default function PreviewPage({
   id = id.startsWith("drafts.") ? id : `drafts.${id}`;
 
   const getQuery = () => {
-    if (router.query.type === "navigation") {
+    if (documentType === "navigation") {
       return getNavigationQuery(language);
     }
-    if (router.query.type === "footer") {
+    if (documentType === "footer") {
       return getFooterQuery(language);
+    }
+    if (documentType === "preset.button") {
+      return `
+      *[_id == $_id][0] {
+        _rev,
+        _updatedAt,
+        // TODO: this fetches the global default preset
+        ${buttonThemeFieldsQuery}
+      }
+      `;
     }
     return getPageQuery(language);
   };
@@ -89,6 +104,12 @@ export default function PreviewPage({
 
       {previewType === "navigation" && data && <Navigation {...data} />}
       {previewType === "footer" && data && <Footer {...data} />}
+
+      {previewType === "preset.button" && data && (
+        <div className="p-4 bg-[#fafafa]">
+          <Button theme={data} label="This is a button" href="/" />
+        </div>
+      )}
     </div>
   );
 }

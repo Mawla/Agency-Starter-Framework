@@ -41,6 +41,13 @@ label,
 download,
 `;
 
+export const buttonThemeFieldsQuery = groq`
+icon,
+mobile,
+tablet,
+desktop
+`;
+
 export const buttonFieldsQuery = groq`
   _key,
   language,
@@ -52,16 +59,10 @@ export const buttonFieldsQuery = groq`
     !defined(customTheme) => *[_type == 'preset.button' && default][0]
   ) { 
     "name": slug.current,
-    icon,
-    mobile,
-    tablet,
-    desktop
+    ${buttonThemeFieldsQuery}
   },
   "theme": customTheme { 
-    icon,
-    mobile,
-    tablet,
-    desktop
+    ${buttonThemeFieldsQuery}
   },
   "target": select(newWindow => '_blank') 
 `;

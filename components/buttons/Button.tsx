@@ -226,7 +226,8 @@ const ButtonInner = ({
                 ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
                   href?.trim()?.length,
                 ["pointer-events-none opacity-75"]: disabled,
-                ["w-full"]: stretch,
+                ["w-full block"]: stretch,
+                ["inline-block"]: !stretch,
                 ["no-underline text-left break-words"]: true,
               },
             ),
