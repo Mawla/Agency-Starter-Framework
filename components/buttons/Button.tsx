@@ -38,17 +38,18 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 export type ButtonProps = {
   ariaLabel?: string;
   as?: "button" | "a" | "div" | "span" | "submit";
+  className?: string;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  download?: boolean;
+  hideLabel?: boolean;
   href?: string;
   label?: string;
+  language?: LanguageType;
+  loading?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   stretch?: boolean;
   target?: "_blank";
-  disabled?: boolean;
-  loading?: boolean;
-  download?: boolean;
-  hideLabel?: boolean;
-  language?: LanguageType;
-  className?: string;
   presetTheme?: {
     name?: string;
     icon?: {
@@ -105,6 +106,7 @@ export const Button = (props: ButtonProps) => {
 const ButtonInner = ({
   ariaLabel,
   as = "a",
+  children,
   disabled = false,
   download = false,
   hideLabel = false,
@@ -222,7 +224,7 @@ const ButtonInner = ({
                 ["cursor-pointer"]: true,
                 ["transition-colors duration-200"]: true,
                 ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
-                  true,
+                  href?.trim()?.length,
                 ["pointer-events-none opacity-75"]: disabled,
                 ["w-full"]: stretch,
                 ["no-underline text-left break-words"]: true,
@@ -246,6 +248,7 @@ const ButtonInner = ({
             )}
           />
         )}
+        {children}
         {label && themeObj.icon.position === "before" && label}
         {loading && <ButtonLoader />}
       </span>

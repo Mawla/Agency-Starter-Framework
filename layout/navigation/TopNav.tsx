@@ -114,12 +114,13 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                 >
                   {items?.filter(Boolean).map((item) => {
                     if (item?.children?.length) {
-                      if (!item.button) item.button = {};
-                      if (!item.button?.theme) item.button.theme = {};
-                      if (!item.button.theme.icon) {
-                        item.button.theme.icon = {};
-                        item.button.theme.icon.name = "chevrondown";
-                      }
+                      // if (!item.button) item.button = {};
+                      // if (!item.button?.theme) item.button.theme = {};
+                      // if (!item.button.theme.icon) {
+                      //   item.button.theme.icon = {};
+                      //   item.button.theme.icon.name = "chevrondown";
+                      // }
+                      delete item?.button?.theme?.icon;
                     }
 
                     return (
@@ -128,15 +129,23 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                         className="relative group"
                       >
                         {Boolean(item.children?.length) ? (
-                          <RadixNavigationMenu.Trigger>
+                          <>
                             <Button
                               {...item.button}
                               as={item?.button?.href ? "a" : "span"}
                               className={cx({
                                 ["!underline"]: item?.current,
                               })}
-                            />
-                          </RadixNavigationMenu.Trigger>
+                            >
+                              <RadixNavigationMenu.Trigger>
+                                <IconLoader
+                                  icon="chevrondown"
+                                  className="inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5 ml-1.5"
+                                />
+                                <span className="absolute inset-0" />
+                              </RadixNavigationMenu.Trigger>
+                            </Button>
+                          </>
                         ) : (
                           <Button
                             {...item.button}
