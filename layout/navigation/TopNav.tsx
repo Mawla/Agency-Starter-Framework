@@ -90,14 +90,14 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                 <Link href={`/${language}`} className="inline-block relative">
                   <span className="sr-only">Home</span>
                   {logo?.mobile && (
-                    <div className="sm:hidden relative">
+                    <span className="block sm:hidden relative">
                       <SimpleImage {...logo?.mobile} />
-                    </div>
+                    </span>
                   )}
                   {logo?.desktop && (
-                    <div className="hidden sm:block relative">
+                    <span className="hidden sm:block relative">
                       <SimpleImage {...logo?.desktop} />
-                    </div>
+                    </span>
                   )}
                 </Link>
               </div>
