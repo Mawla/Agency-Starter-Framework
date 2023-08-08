@@ -122,6 +122,13 @@ export const BORDER_WIDTH_OPTIONS = {
 };
 export type BorderWidthType = keyof typeof BORDER_WIDTH_OPTIONS;
 
+export const TEXT_TRANSFORM_OPTIONS = {
+  uppercase: "UPPERCASE",
+  lowercase: "lowercase",
+  capitalize: "Capitalize",
+};
+export type TextTransformType = keyof typeof TEXT_TRANSFORM_OPTIONS;
+
 export const PADDING_OPTIONS = {
   ["0"]: "0px",
   ["px"]: "1px",

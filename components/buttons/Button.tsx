@@ -10,6 +10,7 @@ import {
   paddingXClasses,
   paddingYClasses,
   textClasses,
+  textTransformClasses,
   weightClasses,
 } from "../../theme";
 import {
@@ -20,6 +21,7 @@ import {
   FontType,
   FontWeightType,
   PaddingType,
+  TextTransformType,
 } from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
@@ -73,7 +75,7 @@ type ButtonThemeType = {
     color?: ColorType;
     font?: FontType;
     size?: FontSizeType;
-    uppercase?: boolean;
+    transform?: TextTransformType;
     weight?: FontWeightType;
   };
   background?: {
@@ -207,6 +209,7 @@ const ButtonInner = ({
               ...getClasses("label.font", fontClasses),
               ...getClasses("label.size", fontSizeClasses),
               ...getClasses("label.weight", weightClasses),
+              ...getClasses("label.transform", textTransformClasses),
               ...getClasses("background.color", backgroundClasses),
               ...getClasses("background.paddingX", paddingXClasses),
               ...getClasses("background.paddingY", paddingYClasses),
@@ -220,9 +223,6 @@ const ButtonInner = ({
                 ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
                   true,
                 ["pointer-events-none opacity-75"]: disabled,
-                ["uppercase"]: theme?.mobile?.label?.uppercase,
-                ["sm:uppercase"]: theme?.tablet?.label?.uppercase,
-                ["lg:uppercase"]: theme?.desktop?.label?.uppercase,
                 ["w-full"]: stretch,
                 ["no-underline text-left break-words"]: true,
               },

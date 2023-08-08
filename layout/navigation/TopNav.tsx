@@ -1,4 +1,5 @@
 import { widthClasses } from "../../components/block/width.options";
+import { ButtonProps } from "../../components/buttons/Button";
 import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { SimpleImageProps } from "../../components/images/SimpleImage";
@@ -10,7 +11,6 @@ import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
 import React, { ComponentType, lazy, useContext, useRef } from "react";
-import { ButtonProps } from "reakit/ts";
 
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () =>
@@ -112,125 +112,79 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                     alignClasses[theme?.menu?.align || "center"],
                   )}
                 >
-                  {items?.map(
-                    ({ label, href, children, current, language }) => {
-                      const Element = Boolean(children?.length)
-                        ? RadixNavigationMenu.Trigger
-                        : "div";
+                  {items?.filter(Boolean).map((item) => {
+                    if (item?.children?.length) {
+                      if (!item.button) item.button = {};
+                      if (!item.button?.theme) item.button.theme = {};
+                      if (!item.button.theme.icon) {
+                        item.button.theme.icon = {};
+                        item.button.theme.icon.name = "chevrondown";
+                      }
+                    }
 
-                      return (
-                        <RadixNavigationMenu.Item
-                          key={label}
-                          className="relative group"
-                        >
-                          <Element
+                    return (
+                      <RadixNavigationMenu.Item
+                        key={item.button?.label}
+                        className="relative group"
+                      >
+                        {Boolean(item.children?.length) ? (
+                          <RadixNavigationMenu.Trigger>
+                            <Button
+                              {...item.button}
+                              as={item?.button?.href ? "a" : "span"}
+                            />
+                          </RadixNavigationMenu.Trigger>
+                        ) : (
+                          <Button
+                            {...item.button}
+                            as={item?.button?.href ? "a" : "span"}
+                          />
+                        )}
+
+                        {Boolean(item.children?.length) && (
+                          <noscript>
+                            <ul>
+                              {item.children?.map((item) => (
+                                <li key={item.label}>
+                                  <Button {...item} />
+                                </li>
+                              ))}
+                            </ul>
+                          </noscript>
+                        )}
+
+                        {/* submenu */}
+                        {Boolean(item.children?.length) && (
+                          <RadixNavigationMenu.Content
                             className={cx(
-                              "flex items-center gap-2",
-                              "text-md rounded-xs",
-                              "py-[6px] px-3",
-                              "whitespace-nowrap",
-                              "hover:underline group-hover:underline group-focus-within:underline underline-offset-4",
-                              theme?.menu?.text &&
-                                textClasses[theme?.menu?.text],
-                              {
-                                ["underline"]:
-                                  current ||
-                                  Boolean(
-                                    children?.filter(({ current }) =>
-                                      Boolean(current),
-                                    ).length,
-                                  ),
-                              },
+                              "w-[200px]",
+                              "absolute bottom-0 left-1/2",
+                              "translate-y-full -translate-x-1/2",
                             )}
                           >
-                            {href ? (
-                              <Link href={href} locale={language}>
-                                {label}
-                              </Link>
-                            ) : (
-                              <span className="">{label}</span>
-                            )}
-
-                            {Boolean(children?.length) && (
-                              <IconLoader
-                                icon="chevrondown"
-                                className={cx(
-                                  "w-4 h-4",
-                                  "ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-150",
-                                  "group-hover:rotate-180 group-focus-within:rotate-180",
-                                )}
-                              />
-                            )}
-                          </Element>
-
-                          {Boolean(children?.length) && (
-                            <noscript>
-                              <ul>
-                                {children?.map(({ label, href, language }) => (
-                                  <li key={label}>
-                                    {href && (
-                                      <Link href={href} locale={language}>
-                                        {label}
-                                      </Link>
-                                    )}
-                                  </li>
-                                ))}
-                              </ul>
-                            </noscript>
-                          )}
-
-                          {/* submenu */}
-                          {Boolean(children?.length) && (
-                            <RadixNavigationMenu.Content
+                            <RadixNavigationMenu.List
                               className={cx(
-                                "w-[200px]",
-                                "absolute bottom-0 left-1/2",
-                                "translate-y-full -translate-x-1/2",
+                                "translate-y-2 p-1 shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)] rounded-md",
+                                theme?.submenu?.background
+                                  ? backgroundClasses[
+                                      theme?.submenu?.background
+                                    ]
+                                  : "bg-white border border-black/10",
                               )}
                             >
-                              <RadixNavigationMenu.List
-                                className={cx(
-                                  "translate-y-2 p-1 shadow-[0_16px_32px_-4px_rgba(89,93,106,0.15)] rounded-md",
-                                  theme?.submenu?.background
-                                    ? backgroundClasses[
-                                        theme?.submenu?.background
-                                      ]
-                                    : "bg-white border border-black/10",
-                                  theme?.submenu?.text &&
-                                    textClasses[theme?.submenu?.text],
-                                )}
-                              >
-                                {children?.map(
-                                  ({ label, current, href, language }) => (
-                                    <RadixNavigationMenu.Item key={label}>
-                                      <span className="block p-3">
-                                        {href ? (
-                                          <Link
-                                            href={href}
-                                            locale={language}
-                                            className={cx(
-                                              "flex transition-colors hover:underline",
-                                              {
-                                                ["font-bold"]: current,
-                                              },
-                                            )}
-                                          >
-                                            {label}
-                                          </Link>
-                                        ) : (
-                                          label
-                                        )}
-                                      </span>
-                                    </RadixNavigationMenu.Item>
-                                  ),
-                                )}
-                              </RadixNavigationMenu.List>
-                            </RadixNavigationMenu.Content>
-                          )}
-                        </RadixNavigationMenu.Item>
-                      );
-                    },
-                  )}
+                              {item.children?.map((item) => (
+                                <RadixNavigationMenu.Item key={item?.label}>
+                                  <span className="block p-3">
+                                    <Button {...item} />
+                                  </span>
+                                </RadixNavigationMenu.Item>
+                              ))}
+                            </RadixNavigationMenu.List>
+                          </RadixNavigationMenu.Content>
+                        )}
+                      </RadixNavigationMenu.Item>
+                    );
+                  })}
                 </RadixNavigationMenu.List>
               )}
             </div>
@@ -243,7 +197,6 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                   position="below"
                   theme={{
                     background: theme?.submenu?.background || "white",
-                    text: theme?.submenu?.text,
                   }}
                 />
 

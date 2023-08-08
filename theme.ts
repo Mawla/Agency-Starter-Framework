@@ -9,6 +9,7 @@ import {
   FontWeightType,
   HorizontalAlignType,
   PaddingType,
+  TextTransformType,
 } from "./types";
 
 export const COLORS = {
@@ -106,6 +107,12 @@ export const textAlignClasses: Record<HorizontalAlignType, string> = {
   left: "text-left",
   center: "text-center mx-auto",
   right: "text-right ml-auto",
+};
+
+export const textTransformClasses: Record<TextTransformType, string> = {
+  uppercase: "uppercase",
+  lowercase: "lowercase",
+  capitalize: "capitalize",
 };
 
 export const borderRadiusClasses: Record<BorderRadiusType, string> = {

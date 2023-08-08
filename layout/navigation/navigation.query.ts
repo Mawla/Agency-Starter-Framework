@@ -1,8 +1,5 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import {
-  buttonQuery,
-  buttonWithChildrenQuery,
-} from "../../components/buttons/button.query";
+import { buttonFieldsWithoutDefaultThemeQuery } from "../../components/buttons/button.query";
 import { getImageQuery } from "../../components/images/image.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
@@ -28,8 +25,11 @@ export const getNavigationQuery = (language: LanguageType) => groq`
   "navigation": *[_id == "navigation__i18n_${language}"][0] {
     _updatedAt,
     _rev,
-    "items": items[] ${buttonWithChildrenQuery},
-    "buttons": buttons[] ${buttonQuery},
+    "items": items[] {
+      button ${buttonFieldsWithoutDefaultThemeQuery},
+      children[] ${buttonFieldsWithoutDefaultThemeQuery}
+    },
+    "buttons": buttons[] ${buttonFieldsWithoutDefaultThemeQuery},
     logo {
       "mobile": ${getImageQuery("mobile")},
       "desktop": ${getImageQuery("desktop")},

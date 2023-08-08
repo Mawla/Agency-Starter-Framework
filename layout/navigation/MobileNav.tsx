@@ -1,3 +1,4 @@
+import { Button } from "../../components/buttons/Button";
 import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { backgroundClasses, textClasses } from "../../theme";
@@ -52,67 +53,67 @@ export const MobileNav = ({
               >
                 {Boolean(items?.length) && (
                   <RadixNavigationMenu.List className="pt-20 px-2">
-                    {items?.map(
-                      ({ label, href, children, current, language }) => (
-                        <RadixNavigationMenu.Item key={label}>
-                          <details
-                            open={current}
-                            className="mt-0.5 py-3 px-4 group"
-                          >
-                            <summary className="list-none relative">
-                              <span className="uppercase font-bold">
-                                {href ? (
-                                  <Link
-                                    href={href}
-                                    locale={language}
-                                    className="hover:underline"
-                                  >
-                                    {label}
-                                  </Link>
-                                ) : (
-                                  <span className="block">{label}</span>
-                                )}
-                              </span>
-
-                              {Boolean(children?.length) && (
-                                <IconLoader
-                                  icon="chevrondown"
-                                  className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 transition-transform duration-75 group-open:rotate-180"
-                                />
+                    {items?.map((item) => (
+                      <RadixNavigationMenu.Item key={item.button?.label}>
+                        <details
+                          open={item.current}
+                          className="mt-0.5 py-3 px-4 group"
+                        >
+                          <summary className="list-none relative">
+                            <span className="uppercase font-bold">
+                              {item.button?.href ? (
+                                <Link
+                                  href={item.button?.href}
+                                  locale={item.button?.language}
+                                  className="hover:underline"
+                                >
+                                  {item.button?.label}
+                                </Link>
+                              ) : (
+                                <span className="block">
+                                  {item.button?.label}
+                                </span>
                               )}
-                            </summary>
+                            </span>
 
-                            {Boolean(children?.length) && (
-                              <ul className="flex flex-col gap-2 pt-6 pb-3">
-                                {children?.map(
-                                  ({ label, current, href, language }) => (
-                                    <li key={label}>
-                                      {href && (
-                                        <Link
-                                          href={href}
-                                          locale={language}
-                                          className={cx(
-                                            "text-md hover:underline relative",
-                                            {
-                                              ["underline"]: current,
-                                            },
-                                          )}
-                                        >
-                                          {current && (
-                                            <span className="bg-action-500 w-0.5 h-5 absolute -left-2 -top-0.5" />
-                                          )}
-                                          {label}
-                                        </Link>
-                                      )}
-                                    </li>
-                                  ),
-                                )}
-                              </ul>
+                            {Boolean(item.children?.length) && (
+                              <IconLoader
+                                icon="chevrondown"
+                                className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 transition-transform duration-75 group-open:rotate-180"
+                              />
                             )}
-                          </details>
-                        </RadixNavigationMenu.Item>
-                      ),
-                    )}
+                          </summary>
+
+                          {Boolean(item?.children?.length) && (
+                            <ul className="flex flex-col gap-2 pt-6 pb-3">
+                              {item?.children?.map(
+                                ({ label, current, href, language }) => (
+                                  <li key={label}>
+                                    {href && (
+                                      <Link
+                                        href={href}
+                                        locale={language}
+                                        className={cx(
+                                          "text-md hover:underline relative",
+                                          {
+                                            ["underline"]: current,
+                                          },
+                                        )}
+                                      >
+                                        {current && (
+                                          <span className="bg-action-500 w-0.5 h-5 absolute -left-2 -top-0.5" />
+                                        )}
+                                        {label}
+                                      </Link>
+                                    )}
+                                  </li>
+                                ),
+                              )}
+                            </ul>
+                          )}
+                        </details>
+                      </RadixNavigationMenu.Item>
+                    ))}
                   </RadixNavigationMenu.List>
                 )}
 
@@ -122,39 +123,12 @@ export const MobileNav = ({
                     position="above"
                     theme={{
                       background: theme?.submenu?.background || "white",
-                      text: theme?.submenu?.text,
                     }}
                   />
                   {Boolean(buttons?.length) &&
                     buttons?.map((button) => (
                       <RadixNavigationMenu.Item key={button.label}>
-                        {button.href && (
-                          <Link
-                            href={button.href}
-                            locale={button.language}
-                            className={cx(
-                              "bg-action-500",
-                              "hover:underline underline-offset-4",
-                              "flex items-center gap-2",
-                              "rounded-full text-md",
-                              "whitespace-nowrap",
-                              theme?.buttons?.background &&
-                                backgroundClasses[theme?.buttons?.background],
-                              theme?.buttons?.text &&
-                                textClasses[theme?.buttons?.text],
-                              {
-                                ["py-[10px] pl-4 pr-3 rounded-full"]:
-                                  theme?.buttons?.background,
-                              },
-                            )}
-                          >
-                            <span>{button.label}</span>
-                            <IconLoader
-                              icon={button.theme?.icon?.name}
-                              className="inline transform -translate-y-px w-4 h-4"
-                            />
-                          </Link>
-                        )}
+                        <Button {...button} />
                       </RadixNavigationMenu.Item>
                     ))}
                 </RadixNavigationMenu.List>

@@ -5,6 +5,7 @@ import {
   BORDER_RADIUS_OPTIONS,
   BORDER_WIDTH_OPTIONS,
   PADDING_OPTIONS,
+  TEXT_TRANSFORM_OPTIONS,
 } from "../../types";
 import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
@@ -20,11 +21,12 @@ export default defineType({
     select: {
       title: "title",
       description: "description",
+      isDefault: "default",
     },
-    prepare({ title = "Button preset", description = "" }) {
+    prepare({ title = "Button preset", description = "", isDefault = false }) {
       return {
         title: title,
-        subtitle: description,
+        subtitle: `${isDefault ? "[default] " : ""}${description}`,
       };
     },
   },
@@ -137,8 +139,11 @@ export const buttonTheme = defineField({
             type: "color",
           },
           {
-            name: "uppercase",
-            type: "boolean",
+            name: "transform",
+            type: "select",
+            options: {
+              list: optionsToList(TEXT_TRANSFORM_OPTIONS),
+            },
           },
         ],
       },
