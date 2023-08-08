@@ -116,6 +116,7 @@ const ButtonInner = ({
   target,
   presetTheme,
   theme,
+  className,
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
   const props: {
@@ -228,6 +229,7 @@ const ButtonInner = ({
               },
             ),
           ),
+          className,
           ` btn btn-${themeObj?.name}`,
         )}
       >

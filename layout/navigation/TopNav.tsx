@@ -132,12 +132,18 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                             <Button
                               {...item.button}
                               as={item?.button?.href ? "a" : "span"}
+                              className={cx({
+                                ["!underline"]: item?.current,
+                              })}
                             />
                           </RadixNavigationMenu.Trigger>
                         ) : (
                           <Button
                             {...item.button}
                             as={item?.button?.href ? "a" : "span"}
+                            className={cx({
+                              ["!underline"]: item?.current,
+                            })}
                           />
                         )}
 
@@ -175,7 +181,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               {item.children?.map((item) => (
                                 <RadixNavigationMenu.Item key={item?.label}>
                                   <span className="block p-3">
-                                    <Button {...item} />
+                                    <Button
+                                      {...item}
+                                      className={cx({
+                                        ["!underline"]: item.current,
+                                      })}
+                                    />
                                   </span>
                                 </RadixNavigationMenu.Item>
                               ))}
