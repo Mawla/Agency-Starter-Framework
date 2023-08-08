@@ -4,7 +4,6 @@ import groq from "groq";
 export const decorationFieldsQuery = groq`
 _key,
 title,
-location,
 breakout,
 mobile {
   ...,
@@ -22,5 +21,9 @@ desktop {
 
 export const decorationsQuery = groq`
 decorations[] {
- ${decorationFieldsQuery}
+  "location": coalesce(location, preset->location),
+ ${decorationFieldsQuery},
+ preset -> {
+  ${decorationFieldsQuery}
+ }
 }`;

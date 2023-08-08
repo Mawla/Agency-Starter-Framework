@@ -27,17 +27,24 @@ export const DecorationPositionInputWrapper = (props: any) => {
   return (
     <Stack space={2}>
       <Inline space={2} style={{ marginTop: "-1.5em" }}>
-        <Flex>
-          <Inline space={1}>{props.children}</Inline>
+        <Flex gap={2}>
+          <Inline
+            space={1}
+            style={{
+              flexShrink: 0,
+            }}
+          >
+            {props.children}
+          </Inline>
+          <Stack space={2}>
+            <Text size={1} weight="bold">
+              {props.schemaType.title}
+            </Text>
+            <Text size={1} muted>
+              {props.schemaType.description}
+            </Text>
+          </Stack>
         </Flex>
-        <Stack space={2}>
-          <Text size={1} weight="bold">
-            {props.schemaType.title}
-          </Text>
-          <Text size={1} muted>
-            {props.schemaType.description}
-          </Text>
-        </Stack>
       </Inline>
       {props.validation.length > 0 && (
         <Text size={1} style={{ color: "#c33529" }}>

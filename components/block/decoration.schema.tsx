@@ -6,6 +6,7 @@ import {
 } from "../../studio/components/Decorations/DecorationPositionInput";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
+import decorationPresetSchema from "./decoration.preset";
 import { defineField, NumberRule, StringRule } from "sanity";
 
 export const decorations = defineField({
@@ -34,6 +35,17 @@ export const decorationWrapper = defineField({
       desktop: "desktop",
       desktopImage: "desktop.image",
       desktopHTML: "desktop.html",
+
+      presetTitle: "preset.title",
+      presetMobile: "preset.mobile",
+      presetMobileImage: "preset.mobile.image",
+      presetMobileHTML: "preset.mobile.html",
+      presetTablet: "preset.tablet",
+      presetTabletImage: "preset.tablet.image",
+      presetTabletHTML: "preset.tablet.html",
+      presetDesktop: "preset.desktop",
+      presetDesktopImage: "preset.desktop.image",
+      presetDesktopHTML: "preset.desktop.html",
     },
     prepare({
       title,
@@ -46,92 +58,74 @@ export const decorationWrapper = defineField({
       mobileHTML,
       tabletHTML,
       desktopHTML,
+
+      presetTitle,
+      presetMobile = {},
+      presetTablet = {},
+      presetDesktop = {},
+      presetMobileImage,
+      presetTabletImage,
+      presetDesktopImage,
+      presetMobileHTML,
+      presetTabletHTML,
+      presetDesktopHTML,
     }) {
-      const isImage = Boolean(mobileImage || tabletImage || desktopImage);
-      const isHTML = Boolean(mobileHTML || tabletHTML || desktopHTML);
+      const isImage = Boolean(
+        mobileImage ||
+          tabletImage ||
+          desktopImage ||
+          presetMobileImage ||
+          presetTabletImage ||
+          presetDesktopImage,
+      );
+      const isHTML = Boolean(
+        mobileHTML ||
+          tabletHTML ||
+          desktopHTML ||
+          presetMobileHTML ||
+          presetTabletHTML ||
+          presetDesktopHTML,
+      );
 
       return {
         title:
-          title || (isImage && "Image") || (isHTML && "HTML") || "Decoration",
-        media: mobileImage || tabletImage || desktopImage || (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              background:
-                mobile?.background || tablet?.background || desktop?.background,
-            }}
-          />
-        ),
+          title ||
+          presetTitle ||
+          (isImage && "Image") ||
+          (isHTML && "HTML") ||
+          "Decoration",
+        media: mobileImage ||
+          tabletImage ||
+          desktopImage ||
+          presetMobileImage ||
+          presetTabletImage ||
+          presetDesktopImage || (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background:
+                  mobile?.background ||
+                  tablet?.background ||
+                  desktop?.background ||
+                  presetMobile?.background ||
+                  presetTablet?.background ||
+                  presetDesktop?.background,
+              }}
+            />
+          ),
       };
     },
   },
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-      description: "A descriptive title for this decoration, used in the CMS.",
+      name: "preset",
+      title: "Preset",
+      type: "reference",
+      to: [{ type: "preset.decoration" }],
+      weak: true,
     }),
-    defineField({
-      name: "location",
-      title: "Location",
-      type: "string",
-      options: {
-        list: optionsToList(DECORATION_LOCATION_OPTIONS),
-      },
-      description: "Position the decoration inside or outside the block.",
-    }),
-    defineField({
-      name: "breakout",
-      title: "Breakout",
-      type: "boolean",
-      description:
-        "Stay inside the border radius of the block or allow the decoration to break outside.",
-    }),
-    defineField({
-      name: "mobile",
-      title: "Mobile",
-      type: "decoration",
-      description:
-        'The base decoration, used on "mobile" breakpoints and higher.',
-    }),
-    defineField({
-      name: "tablet",
-      title: "Tablet",
-      type: "decoration",
-      options: { collapsible: true, collapsed: true },
-      description:
-        'Override the base decoration for "tablet" breakpoints and higher.',
-    }),
-    defineField({
-      name: "desktop",
-      title: "Desktop",
-      type: "decoration",
-      options: { collapsible: true, collapsed: true },
-      description:
-        'Override the base decoration for "desktop" breakpoints and higher.',
-    }),
-
-    // defineField({
-    //   name: "presetDecoration",
-    //   title: "Preset",
-    //   type: "reference",
-    //   group: "theme",
-    //   to: [{ type: "preset.button" }],
-    //   weak: true,
-    // }),
-    // defineField({
-    //   name: "customTheme",
-    //   title: "Custom theme",
-    //   description: "Overrides the theme from the preset",
-    //   type: "object",
-    //   group: "theme",
-    //   options: { collapsible: true, collapsed: true },
-    //   fields: presetButtonSchema.fields.filter(
-    //     (field) => !["title", "slug", "default"].includes(field.name),
-    //   ),
-    // }),
+    ...decorationPresetSchema.fields,
   ],
 });
 

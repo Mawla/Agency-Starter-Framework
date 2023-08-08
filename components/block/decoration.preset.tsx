@@ -1,4 +1,3 @@
-import { ArrayItemPreviewHighlight } from "../../studio/components/ArrayItemPreviewHighlight";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
@@ -10,10 +9,6 @@ const schema = defineType({
   title: "Decoration preset",
   type: "document",
   icon: () => <StarBookmark weight="thin" size={20} />,
-
-  components: {
-    item: ArrayItemPreviewHighlight,
-  },
   preview: {
     select: {
       title: "title",
@@ -79,7 +74,7 @@ const schema = defineType({
       title: "Breakout",
       type: "boolean",
       description:
-        "Stay inside the border radius of the block or allow the decoration to break outside.",
+        "Stay inside the bounding box of the block or allow the decoration to break outside.",
     }),
     defineField({
       name: "mobile",
