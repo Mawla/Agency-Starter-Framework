@@ -42,6 +42,7 @@ export default function PreviewPage({
   let documentType = Array.isArray(router.query.type)
     ? router.query.type[0]
     : router.query.type || "page";
+  let previewType = documentType.startsWith("page.") ? "page" : documentType;
 
   const language = router.query.language as LanguageType;
 
@@ -71,12 +72,12 @@ export default function PreviewPage({
           id={id}
           config={sanityConfig}
           getQuery={getQuery}
-          position={documentType === "navigation" ? "bottom" : "top"}
-          showMiniMap={documentType === "page"}
+          position={previewType === "navigation" ? "bottom" : "top"}
+          showMiniMap={previewType === "page"}
         />
       )}
 
-      {documentType === "page" && data && (
+      {previewType === "page" && data && (
         <Page
           navigation={null as unknown as NavigationType}
           page={data}
@@ -86,8 +87,8 @@ export default function PreviewPage({
         />
       )}
 
-      {documentType === "navigation" && data && <Navigation {...data} />}
-      {documentType === "footer" && data && <Footer {...data} />}
+      {previewType === "navigation" && data && <Navigation {...data} />}
+      {previewType === "footer" && data && <Footer {...data} />}
     </div>
   );
 }
