@@ -114,12 +114,6 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                 >
                   {items?.filter(Boolean).map((item) => {
                     if (item?.children?.length) {
-                      // if (!item.button) item.button = {};
-                      // if (!item.button?.theme) item.button.theme = {};
-                      // if (!item.button.theme.icon) {
-                      //   item.button.theme.icon = {};
-                      //   item.button.theme.icon.name = "chevrondown";
-                      // }
                       delete item?.button?.theme?.icon;
                     }
 
