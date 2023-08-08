@@ -22,7 +22,7 @@ export const UnsetObjectButton = (props: any) => {
           style={{ marginTop: 10 }}
           fontSize={1}
           padding={2}
-          text={`Delete ${props.title}`}
+          text={`Clear ${props.title} value`}
           mode="ghost"
           tone="critical"
           onClick={handleClick}
