@@ -60,7 +60,7 @@ export const MiniMap = ({ blocks, isLoading, onReorder }: MiniMapProps) => {
   useEffect(() => {
     async function getBlockPreviews() {
       const previews = blocks.map(({ _key }) => {
-        const element = document.querySelector(`[data-id="${_key}"]`);
+        const element = document.querySelector(`[data-key="${_key}"]`);
         const preview = element?.innerHTML;
         return {
           _key,

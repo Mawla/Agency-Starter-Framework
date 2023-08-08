@@ -49,12 +49,12 @@ export const LazyLoadInView = ({
   }, [forceLoad, networkIdle]);
 
   return (
-    <section ref={wrapperRef} data-block={block} data-id={id}>
+    <section ref={wrapperRef} data-block={block} data-key={id}>
       {doLoad || forceLoad ? (
         children
       ) : (
         <div
-          data-id="block-placeholder"
+          data-key="block-placeholder"
           className={cx(
             "animate-[block-placeholder-fade_2s_linear_infinite] h-[450px] opacity-100 relative overflow-hidden",
             background !== "transparent" && backgroundClasses[background],
