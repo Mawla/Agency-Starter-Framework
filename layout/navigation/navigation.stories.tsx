@@ -11,26 +11,23 @@ export default {
 
 const items: NavItem[] = [
   {
-    label: "Product",
+    button: { label: "Product" },
     children: [
       {
         label: "Product 1",
-        description: "Tagline goes here",
         href: "",
       },
       {
         label: "Product 2",
-        description: "with description",
         href: "",
       },
     ],
   },
   {
-    label: "Pricing",
-    href: "/",
+    button: { label: "Pricing", href: "/" },
   },
   {
-    label: "Solutions",
+    button: { label: "Solutions" },
     children: [
       {
         label: "Business cases",
@@ -44,12 +41,16 @@ const items: NavItem[] = [
     ],
   },
   {
-    label: "Resources",
-    href: "/",
+    button: {
+      label: "Resources",
+      href: "/",
+    },
   },
   {
-    label: "Support",
-    href: "/",
+    button: {
+      label: "Support",
+      href: "/",
+    },
   },
 ];
 
@@ -106,16 +107,10 @@ export const Theme = () => (
           border: "white",
         },
         menu: {
-          text: "white",
           align: "right",
         },
         submenu: {
-          text: "white",
           background: "black",
-        },
-        buttons: {
-          text: "black",
-          background: "white",
         },
       }}
     />
