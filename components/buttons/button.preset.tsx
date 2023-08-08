@@ -53,20 +53,28 @@ export default defineType({
     defineField({
       name: "icon",
       title: "Icon",
-      type: "string",
-      components: { input: IconPicker },
+      type: "object",
+      fields: [
+        defineField({
+          name: "name",
+          title: "Icon",
+          type: "string",
+          components: { input: IconPicker },
+        }),
+        defineField({
+          name: "position",
+          title: "Position",
+          type: "string",
+          options: {
+            layout: "radio",
+            direction: "horizontal",
+            list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
+          },
+          initialValue: "after",
+        }),
+      ],
     }),
-    defineField({
-      name: "iconPosition",
-      title: "Icon position",
-      type: "string",
-      options: {
-        layout: "radio",
-        direction: "horizontal",
-        list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
-      },
-      initialValue: "after",
-    }),
+
     defineField({
       name: "mobile",
       title: "Mobile",

@@ -49,15 +49,19 @@ export type ButtonProps = {
   className?: string;
   presetTheme?: {
     name?: string;
-    icon?: string;
-    iconPosition?: ButtonIconPositionType;
+    icon?: {
+      name?: string;
+      position?: ButtonIconPositionType;
+    };
     mobile?: ButtonThemeType;
     tablet?: ButtonThemeType;
     desktop?: ButtonThemeType;
   };
   customTheme?: {
-    icon?: string;
-    iconPosition?: ButtonIconPositionType;
+    icon?: {
+      name?: string;
+      position?: ButtonIconPositionType;
+    };
     mobile?: ButtonThemeType;
     tablet?: ButtonThemeType;
     desktop?: ButtonThemeType;
@@ -123,14 +127,14 @@ const ButtonInner = ({
 
   const theme: ButtonProps["presetTheme"] = {
     name: presetTheme?.name || "custom",
-    icon: customTheme?.icon || presetTheme?.icon || undefined,
-    iconPosition:
-      customTheme?.iconPosition || presetTheme?.iconPosition || undefined,
+    icon: customTheme?.icon || presetTheme?.icon,
   };
 
+  if (!theme?.icon) theme.icon = {};
+
   if (target === "_blank") {
-    theme.icon = "externallink";
-    theme.iconPosition = "after";
+    theme.icon.name = "externallink";
+    theme.icon.position = "after";
   }
 
   if (hideLabel) {
@@ -140,10 +144,7 @@ const ButtonInner = ({
   }
 
   label = label || "";
-  theme.iconPosition = theme.iconPosition || "after";
-
-  // prevent orphan icon by adding first / last word to icon
-  const labelWords = label?.split(" ");
+  theme.icon.position = theme.icon.position || "after";
 
   if (as === "button") {
     props.type = "button";
@@ -166,25 +167,6 @@ const ButtonInner = ({
 
   const handleClick = (e: React.MouseEvent) =>
     disabled ? () => {} : onClick ? onClick(e) : () => {};
-
-  const ButtonIcon = theme.icon
-    ? ({
-        wordBefore,
-        wordAfter,
-      }: {
-        wordBefore?: string;
-        wordAfter?: string;
-      }) => (
-        <span className="whitespace-nowrap break-all">
-          {wordBefore && ` ${wordBefore} `}
-          <IconLoader
-            icon={theme?.icon}
-            className="inline-block translate-y-1 w-[1em] h-[1em]"
-          />
-          {wordAfter && ` ${wordAfter}`}
-        </span>
-      )
-    : null;
 
   function getClasses(scope: string, classes: Record<string, string>) {
     const [group, prop] = scope.split(".");
@@ -215,81 +197,62 @@ const ButtonInner = ({
     return arr;
   }
 
-  const sharedClasses =
-    twMerge(
-      cx(
-        ...getClasses("label.color", textClasses),
-        ...getClasses("label.font", fontClasses),
-        ...getClasses("label.size", fontSizeClasses),
-        ...getClasses("label.weight", weightClasses),
-        ...getClasses("background.color", backgroundClasses),
-        ...getClasses("background.paddingX", paddingXClasses),
-        ...getClasses("background.paddingY", paddingYClasses),
-        ...getClasses("border.color", borderClasses),
-        ...getClasses("border.radius", borderRadiusClasses),
-        ...getClasses("border.width", borderWidthClasses),
-        {
-          ["cursor-pointer"]: true,
-          ["transition-colors duration-200"]: true,
-          ["inline-flex items-center justify-center"]: !stretch,
-          ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
-            true,
-          ["pointer-events-none opacity-75"]: disabled,
-          ["uppercase"]: theme?.mobile?.label?.uppercase,
-          ["sm:uppercase"]: theme?.tablet?.label?.uppercase,
-          ["lg:uppercase"]: theme?.desktop?.label?.uppercase,
-        },
-      ),
-    ) + ` btn btn-${theme?.name}`;
-
-  // icon only button
-  if (!label?.trim().length) {
-    return (
-      <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
-        <span className={sharedClasses}>
-          {ButtonIcon && <ButtonIcon />}
-          {loading && <ButtonLoader />}
-        </span>
-      </Element>
-    );
-  }
-
-  // icon + text button
   return (
     <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
       <span
-        className={cx(sharedClasses, {
-          ["w-full flex"]: stretch,
-        })}
+        className={cx(
+          twMerge(
+            cx(
+              ...getClasses("label.color", textClasses),
+              ...getClasses("label.font", fontClasses),
+              ...getClasses("label.size", fontSizeClasses),
+              ...getClasses("label.weight", weightClasses),
+              ...getClasses("background.color", backgroundClasses),
+              ...getClasses("background.paddingX", paddingXClasses),
+              ...getClasses("background.paddingY", paddingYClasses),
+              ...getClasses("border.color", borderClasses),
+              ...getClasses("border.radius", borderRadiusClasses),
+              ...getClasses("border.width", borderWidthClasses),
+              {
+                ["group"]: true,
+                ["cursor-pointer"]: true,
+                ["transition-colors duration-200"]: true,
+                ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
+                  true,
+                ["pointer-events-none opacity-75"]: disabled,
+                ["uppercase"]: theme?.mobile?.label?.uppercase,
+                ["sm:uppercase"]: theme?.tablet?.label?.uppercase,
+                ["lg:uppercase"]: theme?.desktop?.label?.uppercase,
+                ["w-full"]: stretch,
+                ["no-underline text-left break-words"]: true,
+              },
+            ),
+          ),
+          ` btn btn-${theme?.name}`,
+        )}
       >
-        <span className="no-underline text-left break-words">
-          {ButtonIcon ? (
-            <>
-              {ButtonIcon && theme.iconPosition === "before" && (
-                <ButtonIcon wordAfter={labelWords[0]} />
-              )}
-              {theme.iconPosition === "before"
-                ? labelWords.slice(1).join(" ")
-                : labelWords.slice(0, -1).join(" ")}
-              {ButtonIcon && theme.iconPosition === "after" && (
-                <ButtonIcon wordBefore={labelWords[labelWords.length - 1]} />
-              )}
-              {loading && <ButtonLoader />}
-            </>
-          ) : (
-            <span className="flex">
-              {label}
-              {loading && <ButtonLoader />}
-            </span>
-          )}
-        </span>
+        {label && theme.icon.position === "after" && label}
+        {theme.icon.name && (
+          <IconLoader
+            icon={theme.icon.name}
+            className={cx(
+              "inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5",
+              {
+                ["mr-1.5"]: label && theme.icon.position === "before",
+                ["ml-1.5"]: label && theme.icon.position !== "before",
+              },
+            )}
+          />
+        )}
+        {label && theme.icon.position === "before" && label}
+        {loading && <ButtonLoader />}
       </span>
     </Element>
   );
 };
 
 const ButtonLoader = () => (
-  <span className="h-[1em] w-[1em] inline-flex self-center align-middle ml-2 -mb-1">
+  <span className="h-[2em] w-[2em] inline-flex self-center align-middle ml-2 -mb-1">
     <Spinner />
   </span>
 );

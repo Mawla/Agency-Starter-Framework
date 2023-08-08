@@ -14,53 +14,53 @@ export const AsLink = () => (
 );
 
 export const AsDiv = () => (
-  <Button label="Button text" as="div" presetTheme={{ icon: "arrow" }} />
-);
-
-export const IconAfter = () => (
-  <Button
-    label="Read more"
-    presetTheme={{ icon: "arrow", iconPosition: "after" }}
-  />
-);
-
-export const IconBefore = () => (
   <Button
     label="Button text"
-    presetTheme={{ icon: "arrow", iconPosition: "before" }}
+    as="div"
+    presetTheme={{ icon: { name: "arrow" } }}
   />
+);
+
+export const IconPosition = () => (
+  <div style={{ maxWidth: 200 }} className="grid gap-4 border p-0.5">
+    <Button label="Default" presetTheme={{ icon: { name: "arrow" } }} />
+    <Button
+      label="After"
+      presetTheme={{ icon: { name: "arrow", position: "after" } }}
+    />
+    <Button
+      label="Before"
+      presetTheme={{ icon: { name: "arrow", position: "before" } }}
+    />
+    <Button
+      label="Before Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+      presetTheme={{ icon: { name: "arrow", position: "before" } }}
+    />
+    <Button
+      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt after"
+      presetTheme={{ icon: { name: "arrow", position: "after" } }}
+    />
+    <Button
+      label="Lorem"
+      presetTheme={{
+        icon: { name: "arrow", position: "after" },
+        mobile: { label: { size: "3xl" } },
+      }}
+    />
+  </div>
 );
 
 export const IconOnly = () => (
   <>
     <Button
       ariaLabel="Button text"
-      presetTheme={{ icon: "arrow", iconPosition: "after" }}
+      presetTheme={{ icon: { name: "arrow", position: "after" } }}
     />
     <Button
       ariaLabel="Button text"
-      presetTheme={{ icon: "arrow", iconPosition: "before" }}
+      presetTheme={{ icon: { name: "arrow", position: "before" } }}
     />
   </>
-);
-
-export const OrphanIcons = () => (
-  <div style={{ maxWidth: 200 }} className="grid gap-4 border p-0.5">
-    <Button label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " />
-
-    <Button
-      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      presetTheme={{ icon: "arrow", iconPosition: "before" }}
-    />
-    <Button
-      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      presetTheme={{ icon: "arrow", iconPosition: "after" }}
-    />
-    <Button
-      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      presetTheme={{ icon: "arrow", iconPosition: "after" }}
-    />
-  </div>
 );
 
 export const Target = () => (
@@ -70,24 +70,24 @@ export const Target = () => (
     <Button
       label="External with icon"
       href="https://www.google.com"
-      presetTheme={{ icon: "close" }}
+      presetTheme={{ icon: { name: "close" } }}
       target="_blank"
     />
     <Button
       label="External with icon"
       href="https://www.google.com"
-      presetTheme={{ icon: "close", iconPosition: "before" }}
+      presetTheme={{ icon: { name: "close", position: "before" } }}
       target="_blank"
     />
     <Button
       label="External with icon"
       href="https://www.google.com"
-      presetTheme={{ icon: "close" }}
+      presetTheme={{ icon: { name: "close" } }}
       target="_blank"
     />
     <Button
       href="https://www.google.com"
-      presetTheme={{ icon: "close" }}
+      presetTheme={{ icon: { name: "close" } }}
       target="_blank"
     />
   </div>

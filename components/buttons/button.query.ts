@@ -46,14 +46,12 @@ export const buttonFieldsQuery = groq`
   ) { 
     "name": slug.current,
     icon,
-    iconPosition,
     mobile,
     tablet,
     desktop
   },
   customTheme { 
     icon,
-    iconPosition,
     mobile,
     tablet,
     desktop
