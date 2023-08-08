@@ -77,6 +77,8 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
   }, [props.value?._key]);
 
   return (
-    <div ref={elementRef}>{props.children || props.renderDefault(props)}</div>
+    <div ref={elementRef}>
+      {props.renderChildren ? props.children : props.renderDefault(props)}
+    </div>
   );
 };

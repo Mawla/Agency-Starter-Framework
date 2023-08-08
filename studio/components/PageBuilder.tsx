@@ -80,7 +80,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
   }, [props.value?._key]);
 
   return (
-    <ArrayItemPreviewHighlight {...props}>
+    <ArrayItemPreviewHighlight {...props} renderChildren>
       <div
         style={{
           borderBottom: "1px solid rgba(0,0,0,.1)",
