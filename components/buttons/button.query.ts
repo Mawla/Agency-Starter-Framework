@@ -45,7 +45,7 @@ export const buttonThemeFieldsQuery = groq`
 icon,
 mobile,
 tablet,
-desktop
+desktop,
 `;
 
 export const buttonFieldsQuery = groq`

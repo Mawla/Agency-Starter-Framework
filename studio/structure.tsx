@@ -285,7 +285,6 @@ export const structure = (
       ),
       documentList(S, { type: "redirect", title: "Redirects" }),
       documentList(S, { type: "script", title: "Scripts" }),
-      S.divider(),
       group(S, {
         title: "Presets",
         icon: () => <BlueprintPaper weight="thin" size={20} />,

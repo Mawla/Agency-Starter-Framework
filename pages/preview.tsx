@@ -74,6 +74,7 @@ export default function PreviewPage({
       *[_id == $_id][0] {
         _rev,
         _updatedAt,
+        "name": slug.current,
         ${buttonThemeFieldsQuery}
       }
       `;
@@ -124,7 +125,7 @@ export default function PreviewPage({
 
       {previewType === "preset.button" && data && (
         <div className="p-4 bg-[#fafafa]">
-          <Button theme={data} label="This is a button" href="/" />
+          <Button presetTheme={data} label="This is a button" href="/" />
         </div>
       )}
 

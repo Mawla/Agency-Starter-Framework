@@ -8,6 +8,7 @@ import {
   TEXT_TRANSFORM_OPTIONS,
 } from "../../types";
 import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
+import { Text, Stack } from "@sanity/ui";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
@@ -40,10 +41,24 @@ export default defineType({
     defineField({
       name: "slug",
       title: "Unique identifier",
+      description:
+        "Used to generate a class name for this button that can be used in a custom CSS stylesheet.",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
       options: {
         source: (doc, options) => (options.parent as any).title,
+      },
+      components: {
+        field: (props) => (
+          <Stack space={2}>
+            {props.renderDefault(props)}{" "}
+            {props.value && (
+              <Text size={1} muted>
+                {`.btn-${props.value.current} { … }`}
+              </Text>
+            )}
+          </Stack>
+        ),
       },
     }),
     defineField({
