@@ -3,7 +3,11 @@ import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
 import { FooterType } from "../layout/footer/footer.query";
-import { NavigationType } from "../layout/navigation/navigation.query";
+import { Navigation } from "../layout/navigation/Navigation";
+import {
+  getNavigationQuery,
+  NavigationType,
+} from "../layout/navigation/navigation.query";
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery, PageType } from "../queries/page.query";
@@ -28,9 +32,7 @@ export default function PreviewPage({
   const isPreviewMode = preview;
   const router = useRouter();
 
-  const [page, setPage] = useState<PageType | null>(null);
-  const [navigation] = useState<NavigationType | null>(null);
-  const [footer] = useState<FooterType | null>(null);
+  const [data, setData] = useState<any>(null);
 
   let id = Array.isArray(router.query.id)
     ? router.query.id[0]
@@ -45,27 +47,41 @@ export default function PreviewPage({
   if (!id) return null;
   id = id.startsWith("drafts.") ? id : `drafts.${id}`;
 
+  const getQuery = () => {
+    if (router.query.type === "navigation") {
+      return getNavigationQuery(language);
+    }
+    return getPageQuery(language);
+  };
+
+  let previewType: "page" | "navigation" = "page";
+  if (router.query.type === "navigation") {
+    previewType = "navigation";
+  }
+
   return (
     <div>
       {isPreviewMode && (
         <LivePreview
-          setPageData={setPage}
-          updatedAt={page?._updatedAt}
-          pageId={id}
+          setData={setData}
+          updatedAt={data?._updatedAt}
+          id={id}
           config={sanityConfig}
-          getQuery={() => getPageQuery(language)}
+          getQuery={getQuery}
         />
       )}
 
-      {page && (
+      {previewType === "page" && data && (
         <Page
-          navigation={navigation as NavigationType}
-          page={page}
+          navigation={null as unknown as NavigationType}
+          page={data}
           isPreviewMode={isPreviewMode}
-          footer={footer as FooterType}
+          footer={null as unknown as FooterType}
           config={config}
         />
       )}
+
+      {previewType === "navigation" && data && <Navigation {...data} />}
     </div>
   );
 }

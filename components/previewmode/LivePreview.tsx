@@ -25,17 +25,17 @@ const createLivePreviewFrontendClient = (
 };
 
 export type LivePreviewProps = {
-  setPageData: (page: any) => void;
+  setData: (data: any) => void;
   getQuery: () => string;
-  pageId: string;
+  id: string;
   updatedAt?: string;
   config: ClientConfig;
 };
 
 export const LivePreview = ({
-  setPageData,
+  setData,
   getQuery,
-  pageId,
+  id,
   updatedAt,
   config,
 }: LivePreviewProps) => {
@@ -60,12 +60,12 @@ export const LivePreview = ({
   }, []);
 
   /**
-   * Reload page data
+   * Reload data
    */
 
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
-    if (!pageId) return;
+    if (!id) return;
 
     // clear timeout
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -82,21 +82,21 @@ export const LivePreview = ({
     // stop after 15 tries
     if (reloadAttempts.current > 15) return;
 
-    // fetch the new page
+    // fetch the new data
     setPreviewLoading(true);
-    const newPage = await frontendClient.current.fetch(getQuery(), {
-      _id: pageId.replace("drafts.", ""),
+    const newData = await frontendClient.current.fetch(getQuery(), {
+      _id: id.replace("drafts.", ""),
     });
-    if (!newPage) {
+    if (!newData) {
       setPreviewLoading(false);
       return;
     }
 
     // revision mismatch
-    if (mutationRevision.current && newPage._rev !== mutationRevision.current) {
+    if (mutationRevision.current && newData._rev !== mutationRevision.current) {
       console.log(`Revisions don't match`);
       console.log(
-        `- Expecting ${mutationRevision.current} got ${newPage._rev}`,
+        `- Expecting ${mutationRevision.current} got ${newData._rev}`,
       );
       console.log(`- Reloading`);
 
@@ -106,21 +106,21 @@ export const LivePreview = ({
       return;
     }
 
-    timeLog(newPage._updatedAt, "got new page data");
-    currentRevision.current = newPage._rev;
+    timeLog(newData._updatedAt, "got new data");
+    currentRevision.current = newData._rev;
 
-    if (newPage?.breadcrumb) {
-      newPage.breadcrumb = [
-        ...getFlatBreadcrumb(newPage?.breadcrumb),
-        newPage?.homepage,
+    if (newData?.breadcrumb) {
+      newData.breadcrumb = [
+        ...getFlatBreadcrumb(newData?.breadcrumb),
+        newData?.homepage,
       ]
         .filter(Boolean)
         .reverse();
     }
 
-    setPageData(newPage);
+    setData(newData);
 
-    const newMiniBlocks = newPage?.blocks?.map(
+    const newMiniBlocks = newData?.blocks?.map(
       ({
         _key,
         _type,
@@ -140,10 +140,10 @@ export const LivePreview = ({
 
     setPreviewLoading(false);
     reloadAttempts.current = 0;
-  }, [frontendClient, pageId, updatedAt]);
+  }, [frontendClient, id, updatedAt]);
 
   useEffect(() => {
-    if (!pageId) return;
+    if (!id) return;
     let listener: any;
 
     /**
@@ -184,7 +184,7 @@ export const LivePreview = ({
       );
 
       listener = frontendClient?.current
-        ?.listen(`*[_id == "${pageId}"][0] { _rev }`, {
+        ?.listen(`*[_id == "${id}"][0] { _rev }`, {
           includeResult: false,
         })
         .subscribe((mutation: any) => {
@@ -213,10 +213,10 @@ export const LivePreview = ({
     return () => {
       if (listener?.unsubscribe) listener.unsubscribe();
     };
-  }, [pageId, config]);
+  }, [id, config]);
 
   /**
-   * Always keep a draft of the page in preview mode
+   * Always keep a draft of the document in preview mode
    */
 
   useEffect(() => {
@@ -232,14 +232,14 @@ export const LivePreview = ({
 
       // fetch minimal document
       const doc = await frontendClient.current.fetch(
-        `*[_originalId == "${pageId}"] { _rev }`,
+        `*[_originalId == "${id}"] { _rev }`,
       );
       initialRevision.current = doc?._rev;
 
       reloadPreview();
     }
     reload();
-  }, [pageId, frontendClient, reloadPreview]);
+  }, [id, frontendClient, reloadPreview]);
 
   /**
    * Allow reordering of blocks
@@ -261,14 +261,14 @@ export const LivePreview = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          pageId,
+          id,
           changedBlockKey,
           replacesBlockKey,
           newBlocksOrder: items,
         }),
       });
     },
-    [pageId],
+    [id],
   );
 
   /**
@@ -326,6 +326,7 @@ export const LivePreview = ({
 
   return (
     <div>
+      {id}
       <div
         className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white"
         ref={previewTools}

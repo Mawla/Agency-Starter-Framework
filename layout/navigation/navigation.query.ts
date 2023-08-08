@@ -26,6 +26,8 @@ export const getNavigationQuery = (language: LanguageType) => groq`
 } {
   sitemap,
   "navigation": *[_id == "navigation__i18n_${language}"][0] {
+    _updatedAt,
+    _rev,
     "items": items[] ${buttonWithChildrenQuery},
     "buttons": buttons[] ${buttonQuery},
     logo {
