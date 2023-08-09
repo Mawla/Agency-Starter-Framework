@@ -96,6 +96,7 @@ export default defineField({
       },
     },
     { type: "image.simple" },
+    { type: "video" },
     SCRIPT_REFERENCE_FIELD,
   ],
 });
