@@ -49,8 +49,10 @@ export const Page = ({
     ...item,
     current:
       pagePath === "/"
-        ? item.href === "/"
-        : pagePath.startsWith(item.href || "") && item.href !== "/",
+        ? item?.button?.href === "/"
+        : pagePath.startsWith(item?.button?.href || "") &&
+          Boolean(item?.button?.href) &&
+          item?.button?.href !== "/",
     children: item.children?.map((subitem) => ({
       ...subitem,
       current: pagePath === subitem.href,

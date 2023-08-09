@@ -12,10 +12,16 @@ import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
+import presetBlocks from "../../components/block/block.preset";
+import presetDecoration from "../../components/block/decoration.preset";
 import {
   decoration,
   decorations,
+  decorationWrapper,
 } from "../../components/block/decoration.schema";
+import presetButton, {
+  buttonTheme,
+} from "../../components/buttons/button.preset";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
@@ -58,7 +64,6 @@ import pageLanding from "./documents/page.landing";
 import pageNotFound from "./documents/page.notfound";
 import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
-import blockPreset from "./documents/page.preset";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
 import pageTool from "./documents/page.tool";
@@ -90,7 +95,6 @@ export const schemaTypes = [
     block6,
     block8,
     block9,
-    blockPreset,
     button,
     buttongroup,
     configCMS,
@@ -101,6 +105,7 @@ export const schemaTypes = [
     copypaste,
     decoration,
     decorations,
+    decorationWrapper,
     dialogForm,
     dialogRichText,
     dialogVideo,
@@ -135,6 +140,10 @@ export const schemaTypes = [
     portableTextFull,
     portableTextSimple,
     preset,
+    presetBlocks,
+    presetButton,
+    buttonTheme,
+    presetDecoration,
     redirect,
     script,
     studioDivider,

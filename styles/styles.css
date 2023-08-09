@@ -126,13 +126,21 @@ script[type='application/ld+json'] {
 */
 
 .preview-highlight-hover {
-  outline: 3px solid rgba(255, 0, 0, 0.75);
-  outline-offset: -2px;
-  opacity: 1 !important;
+  position: relative;
+}
+
+.preview-highlight-open:after,
+.preview-highlight-hover:after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  outline: 3px dashed rgba(65, 105, 225, 1);
+  outline-offset: -4px;
   transition: opacity 0.25s;
+  z-index: 999;
 }
 
 .preview-highlight-open {
-  outline: 3px solid rgba(255, 0, 0, 0.75);
-  outline-offset: -2px;
+  position: relative;
 }

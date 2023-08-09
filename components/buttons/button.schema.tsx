@@ -1,15 +1,9 @@
 import DialogSelect, {
   DialogSelectWrapper,
 } from "../../studio/components/DialogSelect";
-import IconPicker from "../../studio/components/IconPicker";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { UnsetObjectButton } from "../../studio/components/UnsetObjectButton";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
-import {
-  BUTTON_BACKGROUND_COLOR_OPTIONS,
-  BUTTON_BORDER_COLOR_OPTIONS,
-  BUTTON_ICON_POSITION_OPTIONS,
-  BUTTON_TEXT_COLOR_OPTIONS,
-} from "./button.options";
+import presetButtonSchema from "./button.preset";
 import { Chain } from "@vectopus/atlas-icons-react";
 import React from "react";
 import {
@@ -129,83 +123,27 @@ const schema = defineType({
       initialValue: false,
       description: "Make the button open in a new browser window",
     }),
-
     defineField({
-      name: "icon",
-      title: "Icon",
-      type: "string",
+      name: "presetTheme",
+      title: "Preset",
+      type: "reference",
       group: "theme",
-      components: { input: IconPicker },
+      to: [{ type: "preset.button" }],
+      weak: true,
     }),
     defineField({
-      name: "iconPosition",
-      title: "Icon position",
-      type: "string",
-      options: {
-        layout: "radio",
-        direction: "horizontal",
-        list: optionsToList(BUTTON_ICON_POSITION_OPTIONS),
-      },
-      initialValue: "after",
-      group: "theme",
-      description: "Make the button stretch as wide as it can go.",
-    }),
-
-    defineField({
-      name: "theme",
-      title: "Theme",
+      name: "customTheme",
+      title: "Custom theme",
+      description: "Overrides the theme from the preset",
       type: "object",
       group: "theme",
-      fields: [
-        defineField({
-          name: "text",
-          title: "Text",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-                options: {
-                  colors: BUTTON_TEXT_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-        defineField({
-          name: "background",
-          title: "Background",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-                options: {
-                  colors: BUTTON_BACKGROUND_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-        defineField({
-          name: "border",
-          title: "Border",
-          type: "styles",
-          options: {
-            fields: [
-              {
-                name: "color",
-                type: "color",
-                options: {
-                  colors: BUTTON_BORDER_COLOR_OPTIONS,
-                },
-              },
-            ],
-          },
-        }),
-      ],
+      options: { collapsible: true, collapsed: true },
+      components: {
+        field: UnsetObjectButton,
+      },
+      fields: presetButtonSchema.fields.filter(
+        (field) => !["title", "slug", "default"].includes(field.name),
+      ),
     }),
   ],
   preview: {

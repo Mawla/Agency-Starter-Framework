@@ -170,3 +170,63 @@ export const Background = () => (
     />
   </div>
 );
+
+export const Preset = () => (
+  <>
+    preset applies correctly when box is blue 50x50
+    <div className="border relative p-20">
+      <Decoration
+        mobile={{ ...SQUARE }}
+        preset={{
+          mobile: {
+            background: "red",
+            width: 300,
+            height: 300,
+          },
+        }}
+      />
+    </div>
+    preset applies correctly when box is red 50x50
+    <div className="border relative p-20">
+      <Decoration
+        preset={{
+          mobile: {
+            background: "red",
+            width: 50,
+            height: 50,
+          },
+        }}
+      />
+    </div>
+    preset applies correctly when box is red 50x50 on desktop
+    <div className="border relative p-20">
+      <Decoration
+        preset={{
+          desktop: {
+            background: "red",
+            width: 50,
+            height: 50,
+          },
+        }}
+      />
+    </div>
+    preset applies correctly when box is red 50x50 on desktop
+    <div className="border relative p-20">
+      <Decoration
+        mobile={{ ...SQUARE }}
+        preset={{
+          desktop: {
+            background: "red",
+            width: 50,
+            height: 50,
+            left: 0,
+            top: 0,
+            bottom: "auto",
+            right: "auto",
+            opacity: 1,
+          },
+        }}
+      />
+    </div>
+  </>
+);

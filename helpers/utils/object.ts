@@ -30,3 +30,11 @@ export const removeEmptyValues = (obj: Record<string, unknown>) => {
     return acc;
   }, {} as Record<string, unknown>);
 };
+
+/**
+ * Is emty object
+ */
+
+export function isEmptyObject(obj: Record<string, unknown>) {
+  return Object.keys(obj).length === 0;
+}

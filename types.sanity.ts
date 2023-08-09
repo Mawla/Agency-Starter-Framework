@@ -41,7 +41,7 @@ export const SCHEMAS = {
   "page.notfound": "",
   "page.podcast": "",
   "page.podcasts": "",
-  "page.preset": "",
+  "preset.blocks": "",
   "page.sitemap": "",
   "page.tag": "",
   "page.tool": "",

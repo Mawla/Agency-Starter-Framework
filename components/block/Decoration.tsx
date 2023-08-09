@@ -1,5 +1,5 @@
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
-import { removeEmptyValues } from "../../helpers/utils/object";
+import { isEmptyObject, removeEmptyValues } from "../../helpers/utils/object";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { ImageType } from "../../types";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
@@ -12,7 +12,7 @@ import { DecorationLocationType } from "./decoration.options";
 import cx from "classnames";
 import DOMPurify from "dompurify";
 import { createCSSTransformBuilder } from "easy-css-transform-builder";
-import { ComponentType, CSSProperties, lazy } from "react";
+import { ComponentType, CSSProperties, lazy, useEffect, useState } from "react";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
@@ -40,18 +40,22 @@ export type DecorationType = {
   repeat?: boolean;
 };
 
-export type DecorationProps = {
-  _key?: string;
+export type DecorationWrapperType = {
   breakout?: boolean;
-  theme?: {
-    rounded?: BlockRoundedType;
-  };
   location?: DecorationLocationType;
-  rounded?: boolean;
   mobile?: DecorationType;
   tablet?: DecorationType;
   desktop?: DecorationType;
 };
+
+export type DecorationProps = {
+  _key?: string;
+  theme?: {
+    rounded?: BlockRoundedType;
+  };
+  rounded?: boolean;
+  preset?: DecorationWrapperType;
+} & DecorationWrapperType;
 
 const addUnit = (value: string, unit = "px") => {
   if (typeof value === "undefined") return undefined;
@@ -105,49 +109,72 @@ export const Decoration = ({
   mobile = {},
   tablet,
   desktop,
+  preset,
 }: DecorationProps) => {
   const { screenWidth } = useBreakpoint();
 
   let styleObj: CSSProperties = {};
-  let hidden = Boolean(mobile?.hidden);
-  let image = mobile?.image;
-  let html = mobile?.html;
-  let repeat = mobile?.repeat;
+  let hidden = Boolean(mobile?.hidden) || Boolean(preset?.mobile?.hidden);
+  let image = mobile?.image || preset?.mobile?.image;
+  let html = mobile?.html || preset?.mobile?.html;
+  let repeat = mobile?.repeat || preset?.mobile?.repeat;
+
+  const [innerHTML, setInnerHTML] = useState<null | string>(null);
+
+  useEffect(() => {
+    if (html) setInnerHTML(DOMPurify?.sanitize?.(html));
+  }, [html]);
 
   mobile = removeEmptyValues(mobile);
   if (tablet) tablet = removeEmptyValues(tablet);
   if (desktop) desktop = removeEmptyValues(desktop);
+
+  if (preset?.mobile) {
+    mobile = { ...removeEmptyValues(preset.mobile), ...(mobile || {}) };
+  }
+  if (preset?.tablet) {
+    tablet = { ...removeEmptyValues(preset.tablet), ...(tablet || {}) };
+  }
+  if (preset?.desktop) {
+    desktop = { ...removeEmptyValues(preset.desktop), ...(desktop || {}) };
+  }
 
   styleObj = createStyleObject({
     ...mobile,
   });
 
   // tablet view
-  if (screenWidth > BREAKPOINTS.md && tablet) {
+  if (screenWidth > BREAKPOINTS.md && tablet && !isEmptyObject(tablet)) {
     styleObj = createStyleObject({
-      ...mobile,
+      ...styleObj,
       ...tablet,
     });
-    hidden = Boolean(tablet.hidden);
-    image = tablet.image || image;
-    html = tablet.html || html;
-    repeat = tablet?.repeat || repeat;
+    image = tablet.image || preset?.tablet?.image || image;
+    html = tablet.html || preset?.tablet?.html || html;
+    repeat = tablet?.repeat || preset?.tablet?.repeat || repeat;
+
+    if (tablet?.hidden === false || preset?.tablet?.hidden === false)
+      hidden = false;
+    if (tablet?.hidden === true || preset?.tablet?.hidden === true)
+      hidden = true;
   }
 
   // desktop view
-  if (screenWidth > BREAKPOINTS.lg && desktop) {
+  if (screenWidth > BREAKPOINTS.lg && desktop && !isEmptyObject(desktop)) {
     styleObj = createStyleObject({
       ...styleObj,
       ...desktop,
     });
-    hidden = Boolean(desktop.hidden);
-    image = desktop.image || image;
-    html = desktop.html || html;
-    repeat = desktop?.repeat || repeat;
-  }
 
-  if (hidden) return null;
-  if (html) html = DOMPurify?.sanitize?.(html);
+    image = desktop.image || preset?.desktop?.image || image;
+    html = desktop.html || preset?.desktop?.html || html;
+    repeat = desktop?.repeat || preset?.desktop?.repeat || repeat;
+
+    if (desktop?.hidden === false || preset?.desktop?.hidden === false)
+      hidden = false;
+    if (desktop?.hidden === true || preset?.desktop?.hidden === true)
+      hidden = true;
+  }
 
   if (image && repeat) {
     styleObj.background = `url(${image?.src})`;
@@ -157,6 +184,8 @@ export const Decoration = ({
     styleObj.aspectRatio =
       getOriginalImageDimensions(image?.src).aspectRatio || "auto";
   }
+
+  if (hidden) return null;
 
   return (
     <div
@@ -180,12 +209,12 @@ export const Decoration = ({
         {image && !repeat && (
           <ResponsiveImage {...image} fill preserveAspectRatio />
         )}
-        {html && (
+        {innerHTML && (
           <div
             dangerouslySetInnerHTML={
               html
                 ? {
-                    __html: html,
+                    __html: innerHTML,
                   }
                 : undefined
             }

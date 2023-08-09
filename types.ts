@@ -1,5 +1,5 @@
 import { pick } from "./helpers/utils/object";
-import { COLORS, FONTS, FONT_WEIGHTS } from "./theme";
+import { COLORS, FONTS, FONT_SIZES, FONT_WEIGHTS } from "./theme";
 
 export const TRANSLATION_FIELDS = {
   next_slide: "Label for next slide button.",
@@ -75,6 +75,7 @@ export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;
 export type ColorType = keyof typeof COLORS;
 export type FontWeightType = keyof typeof FONT_WEIGHTS;
 export type FontType = keyof typeof FONTS;
+export type FontSizeType = keyof typeof FONT_SIZES;
 
 export type TextElement =
   | "h1"
@@ -99,6 +100,58 @@ export const HTML_TEXT_NODES = {
   h6: "Heading 6",
   span: "Span",
 };
+
+export const BORDER_RADIUS_OPTIONS = {
+  none: "none",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+  "2xl": "2xl",
+  "3xl": "3xl",
+  full: "full",
+};
+export type BorderRadiusType = keyof typeof BORDER_RADIUS_OPTIONS;
+
+export const BORDER_WIDTH_OPTIONS = {
+  0: "0px",
+  px: "1px",
+  2: "2px",
+  4: "4px",
+  8: "8px",
+};
+export type BorderWidthType = keyof typeof BORDER_WIDTH_OPTIONS;
+
+export const TEXT_TRANSFORM_OPTIONS = {
+  uppercase: "UPPERCASE",
+  lowercase: "lowercase",
+  capitalize: "Capitalize",
+};
+export type TextTransformType = keyof typeof TEXT_TRANSFORM_OPTIONS;
+
+export const PADDING_OPTIONS = {
+  ["0"]: "0px",
+  ["px"]: "1px",
+  ["0.5"]: "2px",
+  ["1"]: "4px",
+  ["1.5"]: "6px",
+  ["2"]: "8px",
+  ["2.5"]: "10px",
+  ["3"]: "12px",
+  ["3.5"]: "14px",
+  ["4"]: "16px",
+  ["5"]: "20px",
+  ["6"]: "24px",
+  ["7"]: "28px",
+  ["8"]: "32px",
+  ["9"]: "36px",
+  ["10"]: "40px",
+  ["11"]: "44px",
+  ["12"]: "48px",
+  ["14"]: "56px",
+  ["16"]: "64px",
+};
+export type PaddingType = keyof typeof PADDING_OPTIONS;
 
 export type HtmlTextNodeType = keyof typeof HTML_TEXT_NODES;
 

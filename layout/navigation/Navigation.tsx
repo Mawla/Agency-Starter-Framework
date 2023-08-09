@@ -2,7 +2,6 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
-import { LanguageType } from "../../languages";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
 import { TopNav } from "./TopNav";
@@ -11,17 +10,9 @@ import router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 
 export type NavItem = {
-  label?: string;
-  href?: string;
+  button?: ButtonProps & { current?: boolean };
   current?: boolean;
-  language?: LanguageType;
-  children?: {
-    label?: string;
-    href?: string;
-    description?: string;
-    current?: boolean;
-    language?: LanguageType;
-  }[];
+  children?: (ButtonProps & { current?: boolean })[];
 };
 
 export type NavigationProps = {
@@ -35,15 +26,9 @@ export type NavigationProps = {
       border?: ColorType;
     };
     menu?: {
-      text?: ColorType;
       align?: AlignType;
     };
     submenu?: {
-      text?: ColorType;
-      background?: ColorType;
-    };
-    buttons?: {
-      text?: ColorType;
       background?: ColorType;
     };
   };

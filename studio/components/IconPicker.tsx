@@ -28,12 +28,14 @@ const IconPicker: ComponentType<any> = (props) => {
       if (!icons) return;
 
       const allIcons: OptionType[] = [
-        ...Object.entries(icons?.predefined || {}).map(([key, value]) => ({
-          label: key,
-          value: key,
-          icon: value,
-        })),
-        ...(icons?.rest || {}).map((item: any) => ({
+        ...Object.entries((icons || {}).predefined || {}).map(
+          ([key, value]) => ({
+            label: key,
+            value: key,
+            icon: value,
+          }),
+        ),
+        ...((icons || {}).rest || []).map((item: any) => ({
           label: item.title,
           value: item.slug.current,
           icon: item.icon,

@@ -4,118 +4,127 @@ import {
   DecorationPositionInput,
   DecorationPositionInputWrapper,
 } from "../../studio/components/Decorations/DecorationPositionInput";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
+import { UnsetObjectButton } from "../../studio/components/UnsetObjectButton";
+import decorationPresetSchema from "./decoration.preset";
 import { defineField, NumberRule, StringRule } from "sanity";
 
 export const decorations = defineField({
   name: "decorations",
   title: "Decorations",
   type: "array",
-  of: [
-    {
-      type: "object",
-      components: {
-        item: ArrayItemPreviewHighlight,
-      },
-      preview: {
-        select: {
-          title: "title",
-          mobile: "mobile",
-          mobileImage: "mobile.image",
-          mobileHTML: "mobile.html",
-          tablet: "tablet",
-          tabletImage: "tablet.image",
-          tabletHTML: "tablet.html",
-          desktop: "desktop",
-          desktopImage: "desktop.image",
-          desktopHTML: "desktop.html",
-        },
-        prepare({
-          title,
-          mobile = {},
-          tablet = {},
-          desktop = {},
-          mobileImage,
-          tabletImage,
-          desktopImage,
-          mobileHTML,
-          tabletHTML,
-          desktopHTML,
-        }) {
-          const isImage = Boolean(mobileImage || tabletImage || desktopImage);
-          const isHTML = Boolean(mobileHTML || tabletHTML || desktopHTML);
+  of: [{ type: "decorationWrapper" }],
+});
 
-          return {
-            title:
-              title ||
-              (isImage && "Image") ||
-              (isHTML && "HTML") ||
-              "Decoration",
-            media: mobileImage || tabletImage || desktopImage || (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  background:
-                    mobile?.background ||
-                    tablet?.background ||
-                    desktop?.background,
-                }}
-              />
-            ),
-          };
-        },
-      },
-      fields: [
-        defineField({
-          name: "title",
-          title: "Title",
-          type: "string",
-          description:
-            "A descriptive title for this decoration, used in the CMS.",
-        }),
-        defineField({
-          name: "location",
-          title: "Location",
-          type: "string",
-          options: {
-            list: optionsToList(DECORATION_LOCATION_OPTIONS),
-          },
-          description: "Position the decoration inside or outside the block.",
-        }),
-        defineField({
-          name: "breakout",
-          title: "Breakout",
-          type: "boolean",
-          description:
-            "Stay inside the border radius of the block or allow the decoration to break outside.",
-        }),
-        defineField({
-          name: "mobile",
-          title: "Mobile",
-          type: "decoration",
-          description:
-            'The base decoration, used on "mobile" breakpoints and higher.',
-        }),
-        defineField({
-          name: "tablet",
-          title: "Tablet",
-          type: "decoration",
-          options: { collapsible: true, collapsed: true },
-          description:
-            'Override the base decoration for "tablet" breakpoints and higher.',
-        }),
-        defineField({
-          name: "desktop",
-          title: "Desktop",
-          type: "decoration",
-          options: { collapsible: true, collapsed: true },
-          description:
-            'Override the base decoration for "desktop" breakpoints and higher.',
-        }),
-      ],
+export const decorationWrapper = defineField({
+  name: "decorationWrapper",
+  title: "Decoration wrapper",
+  type: "object",
+  components: {
+    item: ArrayItemPreviewHighlight,
+  },
+  preview: {
+    select: {
+      title: "title",
+      mobile: "mobile",
+      mobileImage: "mobile.image",
+      mobileHTML: "mobile.html",
+      tablet: "tablet",
+      tabletImage: "tablet.image",
+      tabletHTML: "tablet.html",
+      desktop: "desktop",
+      desktopImage: "desktop.image",
+      desktopHTML: "desktop.html",
+
+      presetTitle: "preset.title",
+      presetMobile: "preset.mobile",
+      presetMobileImage: "preset.mobile.image",
+      presetMobileHTML: "preset.mobile.html",
+      presetTablet: "preset.tablet",
+      presetTabletImage: "preset.tablet.image",
+      presetTabletHTML: "preset.tablet.html",
+      presetDesktop: "preset.desktop",
+      presetDesktopImage: "preset.desktop.image",
+      presetDesktopHTML: "preset.desktop.html",
     },
+    prepare({
+      title,
+      mobile = {},
+      tablet = {},
+      desktop = {},
+      mobileImage,
+      tabletImage,
+      desktopImage,
+      mobileHTML,
+      tabletHTML,
+      desktopHTML,
+
+      presetTitle,
+      presetMobile = {},
+      presetTablet = {},
+      presetDesktop = {},
+      presetMobileImage,
+      presetTabletImage,
+      presetDesktopImage,
+      presetMobileHTML,
+      presetTabletHTML,
+      presetDesktopHTML,
+    }) {
+      const isImage = Boolean(
+        mobileImage ||
+          tabletImage ||
+          desktopImage ||
+          presetMobileImage ||
+          presetTabletImage ||
+          presetDesktopImage,
+      );
+      const isHTML = Boolean(
+        mobileHTML ||
+          tabletHTML ||
+          desktopHTML ||
+          presetMobileHTML ||
+          presetTabletHTML ||
+          presetDesktopHTML,
+      );
+
+      return {
+        title:
+          title ||
+          presetTitle ||
+          (isImage && "Image") ||
+          (isHTML && "HTML") ||
+          "Decoration",
+        media: mobileImage ||
+          tabletImage ||
+          desktopImage ||
+          presetMobileImage ||
+          presetTabletImage ||
+          presetDesktopImage || (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background:
+                  mobile?.background ||
+                  tablet?.background ||
+                  desktop?.background ||
+                  presetMobile?.background ||
+                  presetTablet?.background ||
+                  presetDesktop?.background,
+              }}
+            />
+          ),
+      };
+    },
+  },
+  fields: [
+    defineField({
+      name: "preset",
+      title: "Preset",
+      type: "reference",
+      to: [{ type: "preset.decoration" }],
+      weak: true,
+    }),
+    ...decorationPresetSchema.fields,
   ],
 });
 
@@ -123,6 +132,9 @@ export const decoration = defineField({
   name: "decoration",
   title: "Decoration",
   type: "object",
+  components: {
+    field: UnsetObjectButton,
+  },
   groups: [
     { name: "content", title: "Content", default: true },
     { name: "position", title: "Position" },
