@@ -68,6 +68,11 @@ const handler = async (req: NextRequest) => {
     },
   }`);
 
+  // seo image takes precedence
+  if (data?.seoImage) {
+    return new ImageResponse(CoverImage(data?.seoImage));
+  }
+
   let titleFontURL;
   try {
     titleFontURL = new URL(
@@ -101,11 +106,6 @@ const handler = async (req: NextRequest) => {
   let logoHeight;
   if (data?.logoImage) {
     logoHeight = getOriginalImageDimensions(data?.logoImage).height;
-  }
-
-  // seo image takes precedence
-  if (data?.seoImage) {
-    return new ImageResponse(CoverImage(data?.seoImage));
   }
 
   let heroImage;
