@@ -94,7 +94,7 @@ export const BLOCKS_FIELD = defineField({
     { type: "studio.divider" },
   ],
   options: {
-    filterType: /block|studio\./,
+    filterType: /block\.|studio\./,
     updateField: "blocks",
     placeholder: "Add a block…",
   } as any,
