@@ -1,7 +1,9 @@
+import { OPENGRAPH_IMAGE_FONTS } from "../../../types";
 import { SchemaName } from "../../../types.sanity";
 import CharacterCounter from "../../components/CharacterCounter";
 import { ColorInput } from "../../components/ColorInput";
 import Warning from "../../components/Warning";
+import { optionsToList } from "../../utils/fields/optionsToList";
 import { MagnifyingGlass } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -82,6 +84,16 @@ const OPEN_GRAPH_IMAGE_CONFIG_FIELD = defineField({
           }
           return true;
         }).required(),
+    }),
+    defineField({
+      name: "font",
+      title: "Font",
+      type: "string",
+      description:
+        "Font used in the open graph image. Default is Inter Medium.",
+      options: {
+        list: optionsToList(OPENGRAPH_IMAGE_FONTS),
+      },
     }),
   ],
 });

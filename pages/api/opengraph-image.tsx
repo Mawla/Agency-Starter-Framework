@@ -5,41 +5,17 @@ import {
 } from "../../helpers/sanity/image-url";
 import { withSentryOptional } from "../../helpers/sentry/with-sentry-optional";
 import { baseLanguage } from "../../languages";
-import { ImageType } from "../../types";
+import { ImageType, OpenGraphFontType } from "../../types";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
-
-const InterBlackFont = fetch(
-  new URL("../../public/fonts/Inter-Black.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterBoldFont = fetch(
-  new URL("../../public/fonts/Inter-Bold.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterExtraBoldFont = fetch(
-  new URL("../../public/fonts/Inter-ExtraBold.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterExtraLightFont = fetch(
-  new URL("../../public/fonts/Inter-ExtraLight.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterLightFont = fetch(
-  new URL("../../public/fonts/Inter-Light.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterMediumFont = fetch(
-  new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterRegularFont = fetch(
-  new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterSemiBoldFont = fetch(
-  new URL("../../public/fonts/Inter-SemiBold.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const InterThinFont = fetch(
-  new URL("../../public/fonts/Inter-Thin.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
 
 export const config = {
   runtime: "edge",
 };
+
+const InterMediumFont = fetch(
+  new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url),
+).then((res) => res.arrayBuffer());
 
 const PicoSanity = require("picosanity");
 
@@ -54,15 +30,7 @@ const sanityClient = new PicoSanity({
 const handler = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
-  const InterBlackFontData = await InterBlackFont;
-  const InterBoldFontData = await InterBoldFont;
-  const InterExtraBoldFontData = await InterExtraBoldFont;
-  const InterExtraLightFontData = await InterExtraLightFont;
-  const InterLightFontData = await InterLightFont;
   const InterMediumFontData = await InterMediumFont;
-  const InterRegularFontData = await InterRegularFont;
-  const InterSemiBoldFontData = await InterSemiBoldFont;
-  const InterThinFontData = await InterThinFont;
 
   let id = searchParams.get("id");
   let language = searchParams.get("language") || baseLanguage;
@@ -76,6 +44,7 @@ const handler = async (req: NextRequest) => {
     globalOpenGraphImage?: {
       background?: string;
       color?: string;
+      font?: OpenGraphFontType;
     };
     date?: string;
     authors?: {
@@ -93,7 +62,8 @@ const handler = async (req: NextRequest) => {
     "seoImage": seo.image.asset -> url,
     "globalOpenGraphImage": *[_id == 'config_seo'][0].opengraphimage {
       "background": background.asset -> url,
-      color
+      color,
+      font
     },
     "date": publishedAt,
     "authors": authors[]-> { 
@@ -101,6 +71,10 @@ const handler = async (req: NextRequest) => {
       "image": ${imageQuery} 
     },
   }`);
+
+  const fontData = await getFontData(
+    data?.globalOpenGraphImage?.font || "Inter-Medium",
+  );
 
   let logoHeight;
   if (data?.logoImage) {
@@ -188,9 +162,9 @@ const handler = async (req: NextRequest) => {
               <div
                 style={{
                   color: data?.globalOpenGraphImage?.color || "#111",
-                  fontSize: 60,
+                  fontSize: heroImage ? 40 : 60,
                   fontWeight: 600,
-                  fontFamily: "InterMedium",
+                  fontFamily: "Font",
                   width: "100%",
                   display: "flex",
                   justifyContent: heroImage ? "flex-start" : "center",
@@ -228,6 +202,7 @@ const handler = async (req: NextRequest) => {
             bottom: 60,
             gap: 12,
             alignItems: "center",
+            fontFamily: "InterMedium",
           }}
         >
           {data?.authors && (
@@ -264,9 +239,8 @@ const handler = async (req: NextRequest) => {
                       style={{
                         color: data?.globalOpenGraphImage?.color || "#111",
                         fontSize: 24,
-                        opacity: 0.5,
+                        opacity: 0.6,
                         fontWeight: 600,
-                        fontFamily: "InterMedium",
                         textAlign: "center",
                       }}
                     >
@@ -282,9 +256,8 @@ const handler = async (req: NextRequest) => {
               style={{
                 color: data?.globalOpenGraphImage?.color || "#111",
                 fontSize: 24,
-                opacity: 0.75,
+                opacity: 0.6,
                 fontWeight: 600,
-                fontFamily: "InterMedium",
                 textAlign: "center",
                 marginLeft: "auto",
               }}
@@ -299,23 +272,8 @@ const handler = async (req: NextRequest) => {
       width: 1200,
       height: 630,
       fonts: [
-        { name: "InterBlack", data: InterBlackFontData, style: "normal" },
-        { name: "InterBold", data: InterBoldFontData, style: "normal" },
-        {
-          name: "InterExtraBold",
-          data: InterExtraBoldFontData,
-          style: "normal",
-        },
-        {
-          name: "InterExtraLight",
-          data: InterExtraLightFontData,
-          style: "normal",
-        },
-        { name: "InterLight", data: InterLightFontData, style: "normal" },
+        { name: "Font", data: fontData, style: "normal" },
         { name: "InterMedium", data: InterMediumFontData, style: "normal" },
-        { name: "InterRegular", data: InterRegularFontData, style: "normal" },
-        { name: "InterSemiBold", data: InterSemiBoldFontData, style: "normal" },
-        { name: "InterThin", data: InterThinFontData, style: "normal" },
       ],
     },
   );
@@ -357,3 +315,71 @@ const CoverImage = (imageURL: string) => {
   }
   return <div />;
 };
+
+async function getFontData(fontName: OpenGraphFontType = "Inter-Medium") {
+  let fontData;
+
+  switch (fontName) {
+    case "Inter-Black":
+      const InterBlackFont = fetch(
+        new URL("../../public/fonts/Inter-Black.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterBlackFont;
+      break;
+    case "Inter-Bold":
+      const InterBoldFont = fetch(
+        new URL("../../public/fonts/Inter-Bold.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterBoldFont;
+      break;
+    case "Inter-ExtraBold":
+      const InterExtraBoldFont = fetch(
+        new URL("../../public/fonts/Inter-ExtraBold.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterExtraBoldFont;
+      break;
+    case "Inter-ExtraLight":
+      const InterExtraLightFont = fetch(
+        new URL("../../public/fonts/Inter-ExtraLight.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterExtraLightFont;
+      break;
+    case "Inter-Light":
+      const InterLightFont = fetch(
+        new URL("../../public/fonts/Inter-Light.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterLightFont;
+      break;
+    case "Inter-Medium":
+      const InterMediumFont = fetch(
+        new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterMediumFont;
+      break;
+    case "Inter-Regular":
+      const InterRegularFont = fetch(
+        new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterRegularFont;
+      break;
+    case "Inter-SemiBold":
+      const InterSemiBoldFont = fetch(
+        new URL("../../public/fonts/Inter-SemiBold.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterSemiBoldFont;
+      break;
+    case "Inter-Thin":
+      const InterThinFont = fetch(
+        new URL("../../public/fonts/Inter-Thin.ttf", import.meta.url),
+      ).then((res) => res.arrayBuffer());
+      fontData = InterThinFont;
+      break;
+  }
+
+  return (
+    fontData ||
+    fetch(new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url)).then(
+      (res) => res.arrayBuffer(),
+    )
+  );
+}

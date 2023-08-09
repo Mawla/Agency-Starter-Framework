@@ -276,3 +276,4 @@ export const OPENGRAPH_IMAGE_FONTS = {
   "Inter-SemiBold": "Inter SemiBold",
   "Inter-Thin": "Inter Thin",
 };
+export type OpenGraphFontType = keyof typeof OPENGRAPH_IMAGE_FONTS;
