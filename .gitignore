@@ -57,3 +57,5 @@ development-*
 engine.config.js
 public/engine.styles.css
 locales.js
+public/downloads/*
+!public/downloads/.gitkeep

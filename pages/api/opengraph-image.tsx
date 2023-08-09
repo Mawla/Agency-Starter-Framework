@@ -5,17 +5,13 @@ import {
 } from "../../helpers/sanity/image-url";
 import { withSentryOptional } from "../../helpers/sentry/with-sentry-optional";
 import { baseLanguage } from "../../languages";
-import { ImageType, OpenGraphFontType } from "../../types";
+import { ImageType } from "../../types";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
 
 export const config = {
   runtime: "edge",
 };
-
-const InterMediumFont = fetch(
-  new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
 
 const PicoSanity = require("picosanity");
 
@@ -30,8 +26,6 @@ const sanityClient = new PicoSanity({
 const handler = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
-  const InterMediumFontData = await InterMediumFont;
-
   let id = searchParams.get("id");
   let language = searchParams.get("language") || baseLanguage;
   if (!id) id = `page_homepage__i18n_${language}`;
@@ -44,7 +38,8 @@ const handler = async (req: NextRequest) => {
     globalOpenGraphImage?: {
       background?: string;
       color?: string;
-      font?: OpenGraphFontType;
+      titleFont?: string;
+      metaFont?: string;
     };
     date?: string;
     authors?: {
@@ -63,7 +58,8 @@ const handler = async (req: NextRequest) => {
     "globalOpenGraphImage": *[_id == 'config_seo'][0].opengraphimage {
       "background": background.asset -> url,
       color,
-      font
+      "titleFont": titleFont.asset -> originalFilename,
+      "metaFont": metaFont.asset -> originalFilename,
     },
     "date": publishedAt,
     "authors": authors[]-> { 
@@ -72,9 +68,35 @@ const handler = async (req: NextRequest) => {
     },
   }`);
 
-  const fontData = await getFontData(
-    data?.globalOpenGraphImage?.font || "Inter-Medium",
+  let titleFontURL;
+  try {
+    titleFontURL = new URL(
+      `../../public/downloads/ogTitleFont.ttf`,
+      import.meta.url,
+    );
+  } catch (err) {
+    titleFontURL = new URL(
+      `../../public/fonts/Inter-Bold.ttf`,
+      import.meta.url,
+    );
+  }
+
+  let metaFontURL;
+  try {
+    metaFontURL = new URL(
+      `../../public/downloads/ogMetaFont.ttf`,
+      import.meta.url,
+    );
+  } catch (err) {
+    metaFontURL = new URL(
+      `../../public/fonts/Inter-Medium.ttf`,
+      import.meta.url,
+    );
+  }
+  let TitleFontData = await fetch(titleFontURL).then((res) =>
+    res.arrayBuffer(),
   );
+  let MetaFontData = await fetch(titleFontURL).then((res) => res.arrayBuffer());
 
   let logoHeight;
   if (data?.logoImage) {
@@ -164,11 +186,12 @@ const handler = async (req: NextRequest) => {
                   color: data?.globalOpenGraphImage?.color || "#111",
                   fontSize: heroImage ? 40 : 60,
                   fontWeight: 600,
-                  fontFamily: "Font",
+                  fontFamily: "TitleFont",
                   width: "100%",
                   display: "flex",
                   justifyContent: heroImage ? "flex-start" : "center",
                   textAlign: heroImage ? "left" : "center",
+                  lineHeight: 1.2,
                 }}
               >
                 {data?.title}
@@ -202,7 +225,7 @@ const handler = async (req: NextRequest) => {
             bottom: 60,
             gap: 12,
             alignItems: "center",
-            fontFamily: "InterMedium",
+            fontFamily: "MetaFont",
           }}
         >
           {data?.authors && (
@@ -272,8 +295,8 @@ const handler = async (req: NextRequest) => {
       width: 1200,
       height: 630,
       fonts: [
-        { name: "Font", data: fontData, style: "normal" },
-        { name: "InterMedium", data: InterMediumFontData, style: "normal" },
+        { name: "TitleFont", data: TitleFontData, style: "normal" },
+        { name: "MetaFont", data: MetaFontData, style: "normal" },
       ],
     },
   );
@@ -315,71 +338,3 @@ const CoverImage = (imageURL: string) => {
   }
   return <div />;
 };
-
-async function getFontData(fontName: OpenGraphFontType = "Inter-Medium") {
-  let fontData;
-
-  switch (fontName) {
-    case "Inter-Black":
-      const InterBlackFont = fetch(
-        new URL("../../public/fonts/Inter-Black.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterBlackFont;
-      break;
-    case "Inter-Bold":
-      const InterBoldFont = fetch(
-        new URL("../../public/fonts/Inter-Bold.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterBoldFont;
-      break;
-    case "Inter-ExtraBold":
-      const InterExtraBoldFont = fetch(
-        new URL("../../public/fonts/Inter-ExtraBold.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterExtraBoldFont;
-      break;
-    case "Inter-ExtraLight":
-      const InterExtraLightFont = fetch(
-        new URL("../../public/fonts/Inter-ExtraLight.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterExtraLightFont;
-      break;
-    case "Inter-Light":
-      const InterLightFont = fetch(
-        new URL("../../public/fonts/Inter-Light.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterLightFont;
-      break;
-    case "Inter-Medium":
-      const InterMediumFont = fetch(
-        new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterMediumFont;
-      break;
-    case "Inter-Regular":
-      const InterRegularFont = fetch(
-        new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterRegularFont;
-      break;
-    case "Inter-SemiBold":
-      const InterSemiBoldFont = fetch(
-        new URL("../../public/fonts/Inter-SemiBold.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterSemiBoldFont;
-      break;
-    case "Inter-Thin":
-      const InterThinFont = fetch(
-        new URL("../../public/fonts/Inter-Thin.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
-      fontData = InterThinFont;
-      break;
-  }
-
-  return (
-    fontData ||
-    fetch(new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url)).then(
-      (res) => res.arrayBuffer(),
-    )
-  );
-}
