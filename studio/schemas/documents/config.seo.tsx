@@ -42,11 +42,20 @@ const SEO_IMAGE_FIELD = defineField({
   name: "image",
   title: "Image",
   type: "image",
-  description: "Preferred size: 1200x630",
+  description:
+    "Used as fallback image if no page seo data is found. Size: 1200x630",
   validation: (Rule: any) =>
     Rule.required().warning(
       "It's good practice adding an image for SEO and social sharing.",
     ),
+});
+
+const SEO_BACKGROUND_FIELD = defineField({
+  name: "backgroundImage",
+  title: "Background Image",
+  type: "image",
+  description:
+    "Used as background on all auto generated SEO images. The website logo and page title will be placed over it. Size: 1200x630",
 });
 
 const SEO_EXCLUDE_FROM_SITEMAP_FIELD = defineField({
@@ -100,6 +109,7 @@ export default defineType({
       options: { localize: true, ...SEO_DESCRIPTION_FIELD.options } as any,
     },
     { ...SEO_IMAGE_FIELD, options: { localize: true } as any },
+    SEO_BACKGROUND_FIELD,
     defineField({
       name: "googleSiteVerification",
       title: "Google site verification",

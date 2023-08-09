@@ -62,7 +62,7 @@ export const SeoPane: ComponentType<any> = ({
             <Card>
               <Stack space={4}>
                 <img
-                  src={`${process.env.SANITY_STUDIO_PROJECT_PATH}api/opengraph-image?id=${document?.displayed?._id}&date=${document?.displayed?._updatedAt}`}
+                  src={`${process.env.SANITY_STUDIO_PROJECT_PATH}api/opengraph-image?id=${document?.displayed?._id}&date=${document?.displayed?._updatedAt}&language=${currentLanguage}`}
                   style={{
                     width: "100%",
                     aspectRatio: "1200/630",
