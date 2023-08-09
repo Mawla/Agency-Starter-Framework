@@ -28,7 +28,7 @@ export const ButtonGroup = ({
   return (
     <div
       className={cx(
-        "flex-wrap gap-3 md:gap-4",
+        "btn-group flex-wrap gap-3 md:gap-4",
         {
           ["flex-col"]: direction === "vertical",
           ["inline-flex"]: !stretch,

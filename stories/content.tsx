@@ -31,6 +31,20 @@ export const demoImage4: ImageType = {
   height: 546,
 };
 
+export const demoLogo1: ImageType = {
+  src: "https://cdn.sanity.io/images/vs4fnw8m/development/28670a334fcc033f2d0e674353f1be23b60b524e-2500x752.svg?w=2000&fit=max&auto=format",
+  alt: "demoimage4",
+  width: 2500,
+  height: 752,
+};
+
+export const demoLogo2: ImageType = {
+  src: "https://cdn.sanity.io/images/vs4fnw8m/development/7c5fc664f37fa832f540d5dbc731424c221e64ed-2500x816.svg?w=2000&fit=max&auto=format",
+  alt: "demoimage4",
+  width: 2500,
+  height: 816,
+};
+
 export const demoFAQList: AccordionProps["items"] = [
   {
     title: "What is the best thing about Switzerland?",

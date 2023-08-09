@@ -12,6 +12,7 @@ import { getBlock12Query } from "../blocks/block12/block12.query";
 import { getBlock13Query } from "../blocks/block13/block13.query";
 import { getBlock14Query } from "../blocks/block14/block14.query";
 import { getBlock15Query } from "../blocks/block15/block15.query";
+import { getBlock16Query } from "../blocks/block16/block16.query";
 import { decorationsQuery } from "../components/block/decoration.query";
 import {
   FlatBreadcrumbItemType,
@@ -105,6 +106,7 @@ export const getPageQuery = (language: LanguageType) => groq`
 
     // blocks
     "blocks": blocks[!(_type in path('studio.*')) && disabled != true] {
+      ${getBlock16Query(language)},
       ${getBlock15Query(language)},
       ${getBlock14Query(language)},
       ${getBlock13Query(language)},

@@ -12,6 +12,7 @@ import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
+import block16 from "../../blocks/block16/block16.schema";
 import presetBlocks from "../../components/block/block.preset";
 import presetDecoration from "../../components/block/decoration.preset";
 import {
@@ -89,6 +90,7 @@ export const schemaTypes = [
     block13,
     block14,
     block15,
+    block16,
     block2,
     block3,
     block4,
@@ -96,6 +98,7 @@ export const schemaTypes = [
     block8,
     block9,
     button,
+    buttonTheme,
     buttongroup,
     configCMS,
     configIcons,
@@ -104,8 +107,8 @@ export const schemaTypes = [
     configTheme,
     copypaste,
     decoration,
-    decorations,
     decorationWrapper,
+    decorations,
     dialogForm,
     dialogRichText,
     dialogVideo,
@@ -142,7 +145,6 @@ export const schemaTypes = [
     preset,
     presetBlocks,
     presetButton,
-    buttonTheme,
     presetDecoration,
     redirect,
     script,

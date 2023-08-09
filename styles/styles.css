@@ -131,6 +131,7 @@ script[type='application/ld+json'] {
 
 .preview-highlight-open:after,
 .preview-highlight-hover:after {
+  pointer-events: none;
   content: "";
   display: block;
   position: absolute;
