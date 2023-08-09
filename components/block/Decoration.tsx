@@ -189,7 +189,7 @@ export const Decoration = ({
 
   return (
     <div
-      className={cx("absolute inset-0", {
+      className={cx("absolute inset-0 pointer-events-none", {
         ["overflow-hidden"]: breakout !== true,
         [backgroundRoundedTopClasses.md]: theme?.rounded?.top === "md",
         [backgroundRoundedBottomClasses.md]: theme?.rounded?.bottom === "md",
