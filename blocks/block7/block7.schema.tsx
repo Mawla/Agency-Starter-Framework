@@ -5,7 +5,7 @@ import {
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { Question } from "@vectopus/atlas-icons-react";
+import { Bookshelf } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -13,7 +13,7 @@ const schema = defineType({
   name: "block.block7",
   title: "Item shelf",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <Bookshelf weight="thin" />,
   description: "Item shelf",
   preview: {
     select: {
