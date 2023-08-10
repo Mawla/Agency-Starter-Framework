@@ -66,7 +66,6 @@ export const Block7 = ({
   decorations,
   title,
   intro,
-
   buttons,
   items,
 }: Block7Props) => {
