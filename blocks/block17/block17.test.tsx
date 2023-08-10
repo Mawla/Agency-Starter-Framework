@@ -5,10 +5,10 @@ import "@testing-library/jest-dom";
 jest.mock("next/dist/client/router", () => require("next-router-mock"));
 
 describe("Block17", () => {
-  it("renders title", async () => {
+  it("renders testimonials", async () => {
     await act(() => {
-      render(<Block17 title="Hello" />);
+      render(<Block17 testimonials={[{ title: "hello" }]} />);
     });
-    expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
+    expect(screen.getByText("hello")).toBeInTheDocument();
   });
 });
