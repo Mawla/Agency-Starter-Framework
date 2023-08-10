@@ -148,6 +148,8 @@ export const Multiple = () => (
         content: <p>This is slide 1</p>,
       },
       (DEMO_CONTENT.testimonials || [])[0],
+      (DEMO_CONTENT.testimonials || [])[0],
+      (DEMO_CONTENT.testimonials || [])[0],
       {
         ...(DEMO_CONTENT.testimonials || [])[0],
         content: <p>And the last slide</p>,

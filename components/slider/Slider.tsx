@@ -19,6 +19,7 @@ export type SliderProps = {
   slideStyle?: CSSProperties;
   className?: string;
   slideClassName?: string;
+  effect?: "fade" | "slide";
 };
 
 export const Slider = ({
@@ -29,6 +30,7 @@ export const Slider = ({
   slideStyle,
   className,
   slideClassName,
+  effect,
 }: SliderProps) => {
   const { config } = useContext(SiteContext);
   const { language } = useContext(PageContext);
@@ -48,7 +50,7 @@ export const Slider = ({
         slidesPerView={columns}
         grabCursor={!slides?.some((slide) => slide?.props?.href)}
         modules={[Keyboard, Navigation, EffectFade]}
-        effect="fade"
+        effect={effect === "fade" ? "fade" : undefined}
         simulateTouch={true}
         navigation={{ prevEl, nextEl }}
         keyboard={{

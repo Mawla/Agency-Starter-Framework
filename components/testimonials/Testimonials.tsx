@@ -46,6 +46,8 @@ export const Testimonials = ({
 
       {slider && (
         <Slider
+          gap={100}
+          effect="fade"
           slides={items?.filter(Boolean).map((item) => (
             <RenderElement
               {...item}
