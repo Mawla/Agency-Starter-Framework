@@ -147,7 +147,7 @@ export const Multiple = () => (
         ...(DEMO_CONTENT.testimonials || [])[0],
         content: <p>This is slide 1</p>,
       },
-      { ...(DEMO_CONTENT.testimonials || [])[0], content: <p>Slide 2</p> },
+      (DEMO_CONTENT.testimonials || [])[0],
       {
         ...(DEMO_CONTENT.testimonials || [])[0],
         content: <p>And the last slide</p>,

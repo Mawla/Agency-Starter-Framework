@@ -72,7 +72,7 @@ export const Slider = ({
         ))}
       </Swiper>
 
-      <div className="flex justify-end gap-3">
+      <div className="inline-flex justify-end gap-3">
         {["prev", "next"].map((direction) => (
           <button
             key={direction}

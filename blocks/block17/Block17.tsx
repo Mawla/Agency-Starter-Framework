@@ -4,6 +4,7 @@ import { BlockThemeType } from "../../components/block/block.options";
 import { TestimonialPosterProps } from "../../components/testimonials/TestimonialPoster";
 import { TestimonialsProps } from "../../components/testimonials/Testimonials";
 import { textAlignClasses } from "../../components/text/text.options";
+import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -57,7 +58,15 @@ export const Block17 = ({ theme, decorations, testimonials }: Block17Props) => {
           <Testimonials
             items={testimonials}
             RenderElement={(props) => (
-              <TestimonialPoster {...props} theme={theme?.testimonial} />
+              <div
+                className={cx(
+                  "h-full",
+                  theme?.block?.background &&
+                    backgroundClasses[theme?.block?.background],
+                )}
+              >
+                <TestimonialPoster {...props} theme={theme?.testimonial} />
+              </div>
             )}
             slider={testimonials?.length > 1}
             sliderControlsColor={theme?.slider?.controlsColor}
