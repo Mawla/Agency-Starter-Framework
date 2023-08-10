@@ -93,7 +93,7 @@ const schema = defineType({
             defineField({
               name: "intro",
               title: "Intro",
-              type: "portabletext.basic",
+              type: "portabletext.full",
               group: "content",
             }),
             defineField({
