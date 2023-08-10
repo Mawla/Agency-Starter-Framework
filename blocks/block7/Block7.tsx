@@ -83,7 +83,7 @@ export const Block7 = ({
         )}
       >
         <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/3 md:order-first order-last">
+          <div className="md:w-2/12 md:order-first order-last">
             {title && (
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
@@ -107,7 +107,7 @@ export const Block7 = ({
             )}
           </div>
 
-          <div className="md:w-2/3">
+          <div className="md:w-10/12">
             {items && Boolean(items?.filter(Boolean).length) && (
               <div className="md:pl-24 flex flex-row space-x-4">
                 {items?.map(({ image, _key }) => (
