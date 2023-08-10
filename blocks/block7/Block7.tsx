@@ -111,7 +111,7 @@ export const Block7 = ({
             {items && Boolean(items?.filter(Boolean).length) && (
               <div className="pl-24 flex flex-row space-x-4">
                 {items?.map(({ image, _key }) => (
-                  <div className="overflow-hidden mr-4 w-64 h-12 rounded-lg relative">
+                  <div className="overflow-hidden mr-4 w-64 h-96 rounded-lg relative">
                     {image && <ResponsiveImage key={_key} {...image} fill />}
                   </div>
                 ))}
