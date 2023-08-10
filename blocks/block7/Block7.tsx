@@ -82,37 +82,43 @@ export const Block7 = ({
           textAlignClasses[theme?.block?.align || "left"]
         )}
       >
-        {title && (
-          <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-            {title}
-          </Title>
-        )}
+        <div className="flex flex-row">
+          <div>
+            {title && (
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+                {title}
+              </Title>
+            )}
 
-        {intro && (
-          <Text
-            size={theme?.intro?.size || "xl"}
-            color={theme?.intro?.color}
-            align={theme?.block?.align || "left"}
-          >
-            <PortableText content={intro as any} />
-          </Text>
-        )}
+            {intro && (
+              <Text
+                size={theme?.intro?.size || "xl"}
+                color={theme?.intro?.color}
+                align={theme?.block?.align || "left"}
+              >
+                <PortableText content={intro as any} />
+              </Text>
+            )}
 
-        {items && Boolean(items?.filter(Boolean).length) && (
-          <div className="flex flex-row space-x-4">
-            {items?.map(({ image, _key }) => (
-              <div className="relative overflow-hidden shrink-0 mr-4 w-12 max-w-full h-12 rounded-lg">
-                <ResponsiveImage key={_key} {...image} fill />
+            {buttons && Boolean(buttons?.filter(Boolean).length) && (
+              <div className="mt-6">
+                <ButtonGroup items={buttons} />
               </div>
-            ))}
+            )}
           </div>
-        )}
 
-        {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-6">
-            <ButtonGroup items={buttons} />
+          <div>
+            {items && Boolean(items?.filter(Boolean).length) && (
+              <div className="flex flex-row space-x-4">
+                {items?.map(({ image, _key }) => (
+                  <div className="relative overflow-hidden shrink-0 mr-4 w-12 max-w-full h-12 rounded-lg">
+                    <ResponsiveImage key={_key} {...image} fill />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </Wrapper>
   );
