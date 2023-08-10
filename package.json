@@ -38,7 +38,6 @@
     "@sanity/language-filter": "^3.0.0",
     "@sanity/vision": "^3.0.0",
     "@sanity/webhook": "^2.0.0",
-    "@sentry/nextjs": "^7.28.1",
     "@storybook/addon-viewport": "^7.2.2",
     "@storybook/react": "^7.2.2",
     "@svgr/webpack": "^6.5.1",

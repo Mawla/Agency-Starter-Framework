@@ -1,4 +1,3 @@
-import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = string;
@@ -40,4 +39,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   res.end();
 };
 
-export default withSentryOptional(handler);
+export default handler;

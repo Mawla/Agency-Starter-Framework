@@ -1,4 +1,3 @@
-import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -40,4 +39,4 @@ const handler = async (
     .json({ previewToken: `${user.id}${process.env.SANITY_API_READ_TOKEN}` });
 };
 
-export default withSentryOptional(handler as any);
+export default handler;

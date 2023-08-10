@@ -1,12 +1,8 @@
 # Getting started
 
 1. On Github click 'use this template' in the mawla-engine repository.
-2. Connect the Github project in Vercel through the Vercel web interface. The first deployment will fail because it doesn't have env vars and it's not connected to Sentry.
-3. Connect Sentry
-   a. Allow access in the Vercel organisation integrations dialog.
-   b. Connect Sentry project and Vercel project in https://sentry.io/settings/mawla/integrations/vercel/117885/
-
-4. Follow the steps 👇
+2. Connect the Github project in Vercel through the Vercel web interface.
+3. Follow the steps 👇
 
 ---
 

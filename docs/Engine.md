@@ -10,7 +10,6 @@ The Engine is built using these technologies:
 - [Storybook](https://storybook.js.org/) Static block development
 - [Typescript](https://www.typescriptlang.org/) Javascript Type Checking
 - [TailwindCSS](https://tailwindcss.com/) Interface styling
-- [Sentry](https://getsentry.com/) Error tracking
 
 Both the frontend app and the Sanity Studio are hosted on the same domain on vercel.
 
