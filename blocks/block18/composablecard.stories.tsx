@@ -36,6 +36,7 @@ const SQUARE = {
 const DEMO_CONTENT = {
   type: "card.composable",
   title: "Title",
+  subtitle: "subtitle",
   content: (
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
@@ -69,6 +70,12 @@ export const Default = () => (
         paddingY: "10",
       },
       title: {
+        color: "white",
+        font: "serif",
+        size: "lg",
+        weight: "bold",
+      },
+      subtitle: {
         color: "white",
         font: "serif",
         size: "lg",

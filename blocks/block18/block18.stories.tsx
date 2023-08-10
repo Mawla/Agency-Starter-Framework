@@ -37,6 +37,7 @@ const DEMO_CONTENT: Block18Props = {
     {
       _key: "1",
       title: "Title",
+      subtitle: "subtitle",
       content: (
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -49,12 +50,16 @@ const DEMO_CONTENT: Block18Props = {
       image: demoIcon1,
       theme: {
         title: { size: "lg" },
+        subtitle: { size: "sm" },
+        border: { color: "black", width: 1, radius: "lg" },
+        background: { paddingX: "10", paddingY: "10" },
         content: { size: "lg" },
       },
     },
     {
       _key: "2",
       title: "Title",
+      subtitle: "subtitle",
       content: (
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -67,12 +72,16 @@ const DEMO_CONTENT: Block18Props = {
       image: demoIcon1,
       theme: {
         title: { size: "lg" },
+        subtitle: { size: "sm" },
+        border: { color: "black", width: 1, radius: "lg" },
+        background: { paddingX: "10", paddingY: "10" },
         content: { size: "lg" },
       },
     },
     {
       _key: "3",
       title: "Title",
+      subtitle: "subtitle",
       content: (
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -85,12 +94,16 @@ const DEMO_CONTENT: Block18Props = {
       image: demoIcon1,
       theme: {
         title: { size: "lg" },
+        subtitle: { size: "sm" },
+        border: { color: "black", width: 1, radius: "lg" },
+        background: { paddingX: "10", paddingY: "10" },
         content: { size: "lg" },
       },
     },
     {
       _key: "4",
       title: "Title",
+      subtitle: "subtitle",
       content: (
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -103,6 +116,9 @@ const DEMO_CONTENT: Block18Props = {
       image: demoIcon1,
       theme: {
         title: { size: "lg" },
+        subtitle: { size: "sm" },
+        border: { color: "black", width: 1, radius: "lg" },
+        background: { paddingX: "10", paddingY: "10" },
         content: { size: "lg" },
       },
     },

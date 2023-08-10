@@ -67,6 +67,7 @@ export type ComposableCardProps = {
   _key?: string;
   image?: ImageType;
   title?: string;
+  subtitle?: string;
   content?: PortableTextProps["content"];
   buttons?: ButtonProps[];
   decorations?: DecorationProps[];
@@ -76,6 +77,7 @@ export type ComposableCardProps = {
       align?: HorizontalAlignType;
     };
     title?: TitleThemeType;
+    subtitle?: TitleThemeType;
     content?: TitleThemeType;
     background?: {
       color?: ColorType;
@@ -121,6 +123,7 @@ const ratioClasses: Record<ImageRatioType, string> = {
 
 export const ComposableCard = ({
   title,
+  subtitle,
   content,
   buttons,
   image,
@@ -186,6 +189,11 @@ export const ComposableCard = ({
         {title && (
           <Title as="span" {...theme?.title} className="mb-4">
             {title}
+          </Title>
+        )}
+        {subtitle && (
+          <Title as="span" {...theme?.subtitle} className="mb-4">
+            {subtitle}
           </Title>
         )}
         {content && (
