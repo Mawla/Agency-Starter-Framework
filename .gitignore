@@ -43,8 +43,6 @@ build-storybook.log
 public/cms
 *.tar.gz
 !development-demo.tar.gz
-# Sentry
-.sentryclirc
 
 tmp/
 

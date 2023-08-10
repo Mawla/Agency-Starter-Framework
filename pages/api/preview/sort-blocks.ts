@@ -1,4 +1,3 @@
-import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import { sanityClient } from "../sanity-client";
 import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -76,5 +75,3 @@ const handler = async (
     changedBlockKey: blockData._key,
   });
 };
-
-export default withSentryOptional(handler);

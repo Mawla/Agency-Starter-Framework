@@ -3,7 +3,6 @@ import {
   getOriginalImageDimensions,
   getResponsiveImageUrl,
 } from "../../helpers/sanity/image-url";
-import { withSentryOptional } from "../../helpers/sentry/with-sentry-optional";
 import { baseLanguage } from "../../languages";
 import { ImageType } from "../../types";
 import { ImageResponse } from "@vercel/og";
@@ -280,7 +279,7 @@ const handler = async (req: NextRequest) => {
   );
 };
 
-export default withSentryOptional(handler);
+export default handler;
 
 const CoverImage = (imageURL: string) => {
   let image;
