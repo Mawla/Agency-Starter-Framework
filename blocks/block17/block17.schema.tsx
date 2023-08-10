@@ -10,7 +10,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "block.block17",
-  title: "Testimonial",
+  title: "Testimonial poster",
   type: "object",
   icon: () => <HeartPaper weight="thin" />,
   description: "Large testimonial quote",
