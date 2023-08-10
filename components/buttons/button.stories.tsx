@@ -110,7 +110,7 @@ export const Theme = () => (
             color: "black",
           },
           label: {
-            color: "gray-200",
+            color: "white",
             font: "serif",
             size: "lg",
             transform: "lowercase",

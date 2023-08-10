@@ -13,6 +13,7 @@ import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
 import block16 from "../../blocks/block16/block16.schema";
+import block17 from "../../blocks/block17/block17.schema";
 import presetBlocks from "../../components/block/block.preset";
 import presetDecoration from "../../components/block/decoration.preset";
 import {
@@ -91,6 +92,7 @@ export const schemaTypes = [
     block14,
     block15,
     block16,
+    block17,
     block2,
     block3,
     block4,
