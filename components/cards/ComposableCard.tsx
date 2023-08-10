@@ -5,6 +5,7 @@ import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import {
   backgroundClasses,
   borderClasses,
@@ -162,10 +163,17 @@ export const ComposableCard = ({
             <div
               className={cx(
                 "mb-4 relative inline-flex overflow-hidden max-w-full",
-                imageHeightClasses[theme?.image?.height || "sm"],
+                imageHeightClasses[theme?.image?.height || "xs"],
                 theme?.image?.ratio && ratioClasses[theme?.image?.ratio],
                 theme?.image?.rounded && roundedClasses[theme?.image?.rounded],
               )}
+              style={{
+                aspectRatio:
+                  image && !theme?.image?.ratio
+                    ? getOriginalImageDimensions(image.src).aspectRatio ||
+                      "auto"
+                    : undefined,
+              }}
             >
               <ResponsiveImage {...image} fill />
             </div>
