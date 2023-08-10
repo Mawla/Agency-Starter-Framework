@@ -30,7 +30,7 @@ const TestimonialPoster = lazy<ComponentType<TestimonialPosterProps>>(
 export type Block17Props = {
   theme?: {
     block?: BlockThemeType;
-    title?: TitleThemeType;
+    testimonial?: TestimonialPosterProps["theme"];
   };
   decorations?: DecorationProps[];
   testimonials?: TestimonialsProps["items"];
@@ -54,10 +54,7 @@ export const Block17 = ({ theme, decorations, testimonials }: Block17Props) => {
           <Testimonials
             items={testimonials}
             RenderElement={(props) => (
-              <TestimonialPoster
-                {...props}
-                // theme={theme?.testimonials}
-              />
+              <TestimonialPoster {...props} theme={theme?.testimonial} />
             )}
           />
         )}

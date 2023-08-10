@@ -1,17 +1,9 @@
-import { TextProps } from "../../components/text/Text";
 import { TitleProps } from "../../components/title/Title";
-import { textClasses } from "../../theme";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
-import { TextThemeType } from "../text/text.options";
 import { TitleThemeType } from "../title/title.options";
 import { TestimonialType } from "./Testimonials";
-import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
-
-const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
-);
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
@@ -34,7 +26,7 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 export type TestimonialPosterProps = {
   theme?: {
     title?: TitleThemeType;
-    content?: TextThemeType;
+    content?: TitleThemeType;
     name?: TitleThemeType;
     jobTitle?: TitleThemeType;
   };
@@ -53,19 +45,15 @@ export const TestimonialPoster = ({
       {(title || content) && (
         <blockquote>
           {title && (
-            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+            <Title as="span" {...theme?.title}>
               {title}
             </Title>
           )}
           {content && (
             <div className="mt-6">
-              <Text
-                size={theme?.content?.size || "xl"}
-                color={theme?.content?.color}
-                align="center"
-              >
+              <Title as="div" {...theme?.content}>
                 <PortableText content={content as any} />
-              </Text>
+              </Title>
             </div>
           )}
         </blockquote>
@@ -79,14 +67,17 @@ export const TestimonialPoster = ({
         )}
 
         {(name || jobTitle) && (
-          <div>
+          <div className="flex gap-[.25em]">
             {name && (
-              <span>
-                {name}
-                {jobTitle && <span>, </span>}
-              </span>
+              <Title as="span" {...theme?.name}>
+                {`${name}${jobTitle ? "," : ""}`}
+              </Title>
             )}
-            {jobTitle && <span>{jobTitle}</span>}
+            {jobTitle && (
+              <Title as="span" {...theme?.jobTitle}>
+                {jobTitle}
+              </Title>
+            )}
           </div>
         )}
       </figcaption>

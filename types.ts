@@ -99,6 +99,7 @@ export const HTML_TEXT_NODES = {
   h5: "Heading 5",
   h6: "Heading 6",
   span: "Span",
+  div: "Div",
 };
 
 export const BORDER_RADIUS_OPTIONS = {

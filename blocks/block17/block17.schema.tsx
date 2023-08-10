@@ -2,7 +2,6 @@ import {
   defaultBlockTheme,
   defaultBlockGroups,
 } from "../../components/block/block.schema";
-import { testimonialItemObject } from "../../components/testimonials/testimonials.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { HeartPaper } from "@vectopus/atlas-icons-react";
@@ -45,7 +44,25 @@ const schema = defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme, defaultTitleTheme],
+      fields: [
+        defaultBlockTheme,
+        defaultTitleTheme,
+        defineField({
+          name: "testimonial",
+          title: "Testimonial",
+          type: "object",
+          options: {
+            collapsible: false,
+            collapsed: false,
+          },
+          fields: [
+            { ...defaultTitleTheme, name: "title", title: "Title" },
+            { ...defaultTitleTheme, name: "content", title: "Content" },
+            { ...defaultTitleTheme, name: "name", title: "Name" },
+            { ...defaultTitleTheme, name: "jobTitle", title: "Job title" },
+          ],
+        }),
+      ],
     }),
     defineField({
       name: "decorations",
