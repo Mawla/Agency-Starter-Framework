@@ -64,6 +64,7 @@ const Decoration = lazy<ComponentType<DecorationProps>>(
 );
 
 export type ComposableCardProps = {
+  _key?: string;
   image?: ImageType;
   title?: string;
   content?: PortableTextProps["content"];
@@ -161,7 +162,7 @@ export const ComposableCard = ({
           <div className="inline">
             <div
               className={cx(
-                "relative inline-flex overflow-hidden max-w-full",
+                "mb-4 relative inline-flex overflow-hidden max-w-full",
                 imageHeightClasses[theme?.image?.height || "sm"],
                 ratioClasses[theme?.image?.ratio || "16/9"],
               )}
