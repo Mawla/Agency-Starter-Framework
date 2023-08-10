@@ -110,7 +110,7 @@ export const Theme = () => (
             color: "black",
           },
           label: {
-            color: "gray-200",
+            color: "white",
             font: "serif",
             size: "lg",
             transform: "lowercase",
@@ -119,7 +119,7 @@ export const Theme = () => (
         },
         tablet: {
           background: {
-            color: "gray-100",
+            color: "white",
             paddingX: "12",
             paddingY: "14",
           },
@@ -129,7 +129,7 @@ export const Theme = () => (
             color: "black",
           },
           label: {
-            color: "gray-600",
+            color: "black",
             font: "mono",
             size: "4xl",
             transform: "capitalize",
@@ -138,7 +138,7 @@ export const Theme = () => (
         },
         desktop: {
           background: {
-            color: "gray-300",
+            color: "black",
             paddingX: "0",
             paddingY: "0",
           },
@@ -148,7 +148,7 @@ export const Theme = () => (
             color: "black",
           },
           label: {
-            color: "black",
+            color: "white",
             font: "sans",
             size: "xl",
             transform: "uppercase",

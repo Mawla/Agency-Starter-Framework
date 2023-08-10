@@ -130,23 +130,24 @@ export default function PreviewPage({
       )}
 
       {previewType === "preset.decoration" && data && (
-        <Wrapper
-          theme={{
-            background: "white",
-            outerBackground: "gray-100",
-            text: "white",
-            width: "inner",
-            margin: {
-              top: "lg",
-              bottom: "lg",
-            },
-            padding: {
-              top: "xl",
-              bottom: "xl",
-            },
-          }}
-          decorations={[data]}
-        />
+        <div className="bg-black/10">
+          <Wrapper
+            theme={{
+              background: "white",
+              text: "white",
+              width: "inner",
+              margin: {
+                top: "lg",
+                bottom: "lg",
+              },
+              padding: {
+                top: "xl",
+                bottom: "xl",
+              },
+            }}
+            decorations={[data]}
+          />
+        </div>
       )}
     </div>
   );
