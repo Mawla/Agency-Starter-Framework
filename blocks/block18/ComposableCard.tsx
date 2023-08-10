@@ -187,12 +187,20 @@ export const ComposableCard = ({
           </div>
         )}
         {title && (
-          <Title as="span" {...theme?.title} className="mb-4">
+          <Title
+            {...theme?.title}
+            as={theme?.title?.as || "span"}
+            className="mb-4"
+          >
             {title}
           </Title>
         )}
         {subtitle && (
-          <Title as="span" {...theme?.subtitle} className="mb-4">
+          <Title
+            {...theme?.subtitle}
+            as={theme?.title?.as || "span"}
+            className="mb-4"
+          >
             {subtitle}
           </Title>
         )}
