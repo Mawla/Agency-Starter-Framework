@@ -100,7 +100,7 @@ export const Theme = () => (
       presetTheme={{
         mobile: {
           background: {
-            color: "gray-900",
+            color: "black",
             paddingX: "8",
             paddingY: "4",
           },
@@ -148,7 +148,7 @@ export const Theme = () => (
             color: "black",
           },
           label: {
-            color: "gray-900",
+            color: "black",
             font: "sans",
             size: "xl",
             transform: "uppercase",
@@ -167,7 +167,7 @@ export const CustomTheme = () => (
       theme={{
         mobile: {
           background: {
-            color: "gray-900",
+            color: "black",
             paddingX: "8",
             paddingY: "4",
           },
