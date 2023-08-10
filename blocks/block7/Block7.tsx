@@ -93,7 +93,11 @@ export const Block7 = ({
         <div className="flex flex-col md:space-x-16 md:flex-row">
           <div className="md:w-2/12 md:order-first order-last">
             {title && (
-              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+              <Title
+                className="mt-6 md:mt-0"
+                {...theme?.title}
+                size={theme?.title?.size || "4xl"}
+              >
                 {title}
               </Title>
             )}
@@ -117,19 +121,15 @@ export const Block7 = ({
 
           <div className="md:w-10/12">
             {items && Boolean(items?.filter(Boolean).length) && (
-              <div className="">
-                <MobileScroller className="flex md:grid md:grid-cols-5 gap-10">
-                  {items?.map(({ image, _key }) => (
-                    <div className="w-[200px] md:max-w-none shrink-0 lg:w-auto snap-center">
-                      <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-                        {image && (
-                          <ResponsiveImage key={_key} {...image} fill />
-                        )}
-                      </div>
+              <MobileScroller className="flex md:grid md:grid-cols-5 gap-10">
+                {items?.map(({ image, _key }) => (
+                  <div className="w-[200px] md:max-w-none shrink-0 lg:w-auto snap-center">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+                      {image && <ResponsiveImage key={_key} {...image} fill />}
                     </div>
-                  ))}
-                </MobileScroller>
-              </div>
+                  </div>
+                ))}
+              </MobileScroller>
             )}
           </div>
         </div>
