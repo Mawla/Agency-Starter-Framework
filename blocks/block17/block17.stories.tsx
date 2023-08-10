@@ -132,6 +132,35 @@ const DEMO_CONTENT: Block17Props = {
 };
 
 export const Theme = () => <Block17 {...DEMO_CONTENT} />;
+export const Single = () => (
+  <Block17 testimonials={DEMO_CONTENT.testimonials} />
+);
+export const Multiple = () => (
+  <Block17
+    theme={{
+      block: {
+        margin: {
+          top: "xl",
+          bottom: "xl",
+        },
+        outerBackground: "black",
+        background: "white",
+        width: "inner",
+      },
+    }}
+    testimonials={[
+      {
+        ...(DEMO_CONTENT.testimonials || [])[0],
+        content: <p>This is slide 1</p>,
+      },
+      { ...(DEMO_CONTENT.testimonials || [])[0], content: <p>Slide 2</p> },
+      {
+        ...(DEMO_CONTENT.testimonials || [])[0],
+        content: <p>And the last slide</p>,
+      },
+    ]}
+  />
+);
 
 export const BlockBackgrounds = () => (
   <>

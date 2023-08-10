@@ -26,12 +26,13 @@ const TestimonialPoster = lazy<ComponentType<TestimonialPosterProps>>(
       /* webpackChunkName: "TestimonialPoster" */ "../../components/testimonials/TestimonialPoster"
     ),
 );
+
 export type Block17Props = {
   theme?: {
     block?: BlockThemeType;
     testimonial?: TestimonialPosterProps["theme"];
-    icon?: {
-      color?: ColorType;
+    slider?: {
+      controlsColor?: ColorType;
     };
   };
   decorations?: DecorationProps[];
@@ -58,6 +59,8 @@ export const Block17 = ({ theme, decorations, testimonials }: Block17Props) => {
             RenderElement={(props) => (
               <TestimonialPoster {...props} theme={theme?.testimonial} />
             )}
+            slider={testimonials?.length > 1}
+            sliderControlsColor={theme?.slider?.controlsColor}
           />
         )}
       </div>

@@ -62,6 +62,19 @@ const schema = defineType({
             { ...defaultTitleTheme, name: "jobTitle", title: "Job title" },
           ],
         }),
+        defineField({
+          name: "slider",
+          title: "Slider",
+          type: "styles",
+          options: {
+            fields: [
+              defineField({
+                name: "controlsColor",
+                type: "color",
+              }),
+            ],
+          },
+        }),
       ],
     }),
     defineField({
