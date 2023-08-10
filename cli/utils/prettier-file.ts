@@ -4,7 +4,7 @@ const { exec } = require("child_process");
 
 export const prettierFile = (filePath: string) => {
   exec(
-    `${__dirname}/../../node_modules/prettier/bin-prettier.js --write ${filePath} --trailing-comma all`,
+    `${__dirname}/../../node_modules/prettier/bin-prettier.js --write "${filePath}" --trailing-comma all`,
     (error: Error, stdout: StdioPipe, stderr: StdioPipe) => {
       if (error) {
         console.log(`error: ${error.message}`);
@@ -17,7 +17,6 @@ export const prettierFile = (filePath: string) => {
         console.log(stdout);
         return;
       }
-      // console.log(stdout);
-    },
+    }
   );
 };
