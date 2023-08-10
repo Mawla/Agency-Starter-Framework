@@ -80,7 +80,7 @@ export const Block7 = ({
       <div
         className={cx(
           "flex flex-col gap-6 max-w-3xl",
-          textAlignClasses[theme?.block?.align || "center"]
+          textAlignClasses[theme?.block?.align || "left"]
         )}
       >
         {title && (
@@ -93,7 +93,7 @@ export const Block7 = ({
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
-            align={theme?.block?.align || "center"}
+            align={theme?.block?.align || "left"}
           >
             <PortableText content={intro as any} />
           </Text>
