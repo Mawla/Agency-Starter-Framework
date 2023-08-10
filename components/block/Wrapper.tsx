@@ -7,6 +7,7 @@ import { DecorationProps } from "./Decoration";
 import { Spacing, SpacingProps } from "./Spacing";
 import { Width } from "./Width";
 import { BlockRoundedType } from "./background.options";
+import { BlockThemeType } from "./block.options";
 import { SpaceType } from "./spacing.options";
 import { WidthType } from "./width.options";
 import cx from "classnames";
@@ -21,15 +22,7 @@ export type WrapperProps = {
   children?: React.ReactElement | React.ReactNode;
   className?: string;
   innerClassName?: string;
-  theme?: {
-    padding?: SpaceType;
-    margin?: SpaceType;
-    background?: ColorType;
-    outerBackground?: ColorType;
-    text?: ColorType;
-    rounded?: BlockRoundedType;
-    width?: WidthType;
-  };
+  theme?: BlockThemeType;
   decorations?: DecorationProps[];
 } & Partial<SpacingProps>;
 

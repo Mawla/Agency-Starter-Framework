@@ -166,11 +166,13 @@ export const decoration = defineField({
           Rule.custom((value: any) => {
             if (typeof value === "undefined") return true;
             if (value.trim().length === 0) return true;
-            const isPixel = !isNaN(+value) || value.trim().endsWith("px");
-            const isPercent = value.trim().endsWith("%");
+            const isPixel = !isNaN(+value) || value?.trim().endsWith("px");
+            const isValidUnit = value
+              .trim()
+              .match(/(em|ex|\%|px|cm|mm|in|pt|pc|ch|rem|vh|vw|vmin|vmax)$/);
             const isAuto = value.trim() === "auto";
-            if (!isPixel && !isPercent && !isAuto)
-              return `This field must end with either px or % or 'auto'.`;
+            if (!isPixel && !isValidUnit && !isAuto)
+              return `This field must end with either a valid CSS unit (e.g 100px or 10%) or 'auto'.`;
             return true;
           }),
         components: {

@@ -4,7 +4,7 @@ import { BlockThemeType } from "../../components/block/block.options";
 import { TestimonialPosterProps } from "../../components/testimonials/TestimonialPoster";
 import { TestimonialsProps } from "../../components/testimonials/Testimonials";
 import { textAlignClasses } from "../../components/text/text.options";
-import { TitleThemeType } from "../../components/title/title.options";
+import { ColorType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -26,11 +26,13 @@ const TestimonialPoster = lazy<ComponentType<TestimonialPosterProps>>(
       /* webpackChunkName: "TestimonialPoster" */ "../../components/testimonials/TestimonialPoster"
     ),
 );
-
 export type Block17Props = {
   theme?: {
     block?: BlockThemeType;
     testimonial?: TestimonialPosterProps["theme"];
+    icon?: {
+      color?: ColorType;
+    };
   };
   decorations?: DecorationProps[];
   testimonials?: TestimonialsProps["items"];

@@ -59,22 +59,21 @@ export const TestimonialPoster = ({
         </blockquote>
       )}
 
-      <figcaption className="flex items-center gap-3 justify-center mt-8">
-        {image && (
-          <div className="w-8 h-8 rounded-full overflow-hidden">
-            <ResponsiveImage {...image} />
-          </div>
-        )}
-
-        {(name || jobTitle) && (
-          <div className="flex gap-[.25em]">
+      <figcaption className="inline-block gap-3 mt-8">
+        {(name || jobTitle || image) && (
+          <div className="inline-flex gap-[.25em] items-center">
+            {image && (
+              <div className="w-8 h-8 rounded-full overflow-hidden mr-1">
+                <ResponsiveImage {...image} />
+              </div>
+            )}
             {name && (
               <Title as="span" {...theme?.name}>
                 {`${name}${jobTitle ? "," : ""}`}
               </Title>
             )}
             {jobTitle && (
-              <Title as="span" {...theme?.jobTitle}>
+              <Title as="span" {...theme?.jobTitle} className="ml-1">
                 {jobTitle}
               </Title>
             )}

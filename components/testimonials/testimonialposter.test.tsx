@@ -30,7 +30,7 @@ describe("Testimonials", () => {
 
     expect(screen.getByText("Hello")).toBeInTheDocument();
     expect(screen.getByText("from")).toBeInTheDocument();
-    expect(screen.getByText("John")).toBeInTheDocument();
+    expect(screen.getByText("John,")).toBeInTheDocument();
     expect(screen.getByText("Doe")).toBeInTheDocument();
     expect(screen.getAllByAltText("demoimage"));
   });
