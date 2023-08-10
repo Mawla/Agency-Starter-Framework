@@ -20,6 +20,14 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "blocks/block18/CardGrid.tsx",
+    "blocks/block18/CardGrid.test.x",
+    "blocks/block18/CardGrid.stories.x"
+  ],
   "exclude": ["node_modules", "studio/"]
 }

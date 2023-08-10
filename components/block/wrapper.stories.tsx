@@ -217,3 +217,55 @@ export const OutsideBackground = () => (
     </WrapperComponent>
   </div>
 );
+
+const SQUARE = {
+  background: "blue",
+  opacity: 0.5,
+  bottom: 0,
+  left: 0,
+  width: 50,
+  height: 50,
+};
+
+export const Decorations = () => (
+  <div>
+    <WrapperComponent
+      theme={{
+        background: "white",
+        outerBackground: "black",
+        text: "black",
+        width: "inner",
+        padding: { top: "xl", bottom: "xl" },
+        margin: { top: "xl", bottom: "xl" },
+      }}
+      decorations={[
+        { mobile: SQUARE },
+        { mobile: SQUARE, location: "outside" },
+        {
+          mobile: {
+            ...SQUARE,
+            translateY: "-50%",
+            translateX: "-50%",
+            top: 0,
+            bottom: "auto",
+          },
+          location: "inside",
+          breakout: true,
+        },
+        {
+          mobile: {
+            ...SQUARE,
+            translateY: "-50%",
+            translateX: "-50%",
+            top: 0,
+            bottom: "auto",
+          },
+          location: "outside",
+          breakout: true,
+        },
+      ]}
+    >
+      <div style={{ height: 100 }} />
+    </WrapperComponent>
+  </div>
+);

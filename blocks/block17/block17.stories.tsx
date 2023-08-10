@@ -1,7 +1,3 @@
-import {
-  TitleSizeType,
-  TITLE_SIZE_OPTIONS,
-} from "../../components/title/title.options";
 import { demoImage2 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
@@ -77,44 +73,8 @@ const DEMO_CONTENT: Block17Props = {
             {
               _type: "span",
               marks: [],
-              text: "This software will",
+              text: "This software will change the way you work it’s professional and saves time, giving you back lost hours spent on paperwork.",
               _key: "e142140e67870",
-            },
-            {
-              _type: "span",
-              marks: ["strong"],
-              text: " change ",
-              _key: "eea3e1f115dc",
-            },
-            {
-              _type: "span",
-              marks: [],
-              text: "the ",
-              _key: "d76d4a07f5e2",
-            },
-            {
-              _type: "span",
-              marks: ["em"],
-              text: "way",
-              _key: "5908e19c6315",
-            },
-            {
-              _type: "span",
-              marks: [],
-              text: " you work it’s professional and saves time, giving you back ",
-              _key: "489fbf3c1121",
-            },
-            {
-              marks: ["b03490dc486e"],
-              text: "lost hours spent",
-              _key: "467b6d67c638",
-              _type: "span",
-            },
-            {
-              text: " on paperwork.",
-              _key: "bef5e7f8ab6e",
-              _type: "span",
-              marks: [],
             },
           ],
         },
@@ -140,20 +100,33 @@ export const Multiple = () => (
         outerBackground: "black",
         background: "white",
         width: "inner",
+        rounded: {
+          top: "lg",
+          bottom: "lg",
+        },
+      },
+      testimonial: {
+        title: {
+          size: "base",
+          weight: "normal",
+        },
+        content: {
+          size: "3xl",
+        },
+        name: {
+          size: "base",
+          weight: "bold",
+        },
+        jobTitle: {
+          size: "base",
+          weight: "normal",
+        },
       },
     }}
     testimonials={[
-      {
-        ...(DEMO_CONTENT.testimonials || [])[0],
-        content: <p>This is slide 1</p>,
-      },
       (DEMO_CONTENT.testimonials || [])[0],
       (DEMO_CONTENT.testimonials || [])[0],
       (DEMO_CONTENT.testimonials || [])[0],
-      {
-        ...(DEMO_CONTENT.testimonials || [])[0],
-        content: <p>And the last slide</p>,
-      },
     ]}
   />
 );

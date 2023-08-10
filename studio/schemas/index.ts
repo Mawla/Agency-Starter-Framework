@@ -14,6 +14,7 @@ import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
 import block16 from "../../blocks/block16/block16.schema";
 import block17 from "../../blocks/block17/block17.schema";
+import block18 from "../../blocks/block18/block18.schema";
 import presetBlocks from "../../components/block/block.preset";
 import presetDecoration from "../../components/block/decoration.preset";
 import {
@@ -27,6 +28,7 @@ import presetButton, {
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
+import composableCard from "../../components/cards/composablecard.schema";
 import faq, { faqItem } from "../../components/faq/faq.schema";
 import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";
@@ -94,6 +96,7 @@ export const schemaTypes = [
     block15,
     block16,
     block17,
+    block18,
     block2,
     block3,
     block4,
@@ -101,8 +104,9 @@ export const schemaTypes = [
     block8,
     block9,
     button,
-    buttonTheme,
     buttongroup,
+    buttonTheme,
+    composableCard,
     configCMS,
     configIcons,
     configIntegrations,
@@ -110,8 +114,8 @@ export const schemaTypes = [
     configTheme,
     copypaste,
     decoration,
-    decorationWrapper,
     decorations,
+    decorationWrapper,
     dialogForm,
     dialogRichText,
     dialogVideo,

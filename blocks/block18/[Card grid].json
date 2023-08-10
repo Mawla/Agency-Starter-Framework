@@ -1,0 +1,8 @@
+{
+  "title": "Card grid",
+  "description": "Generic grid of theme-able cards",
+  "name": "Block 18",
+  "schemaName": "block.block18",
+  "date": "2023-08-10T11:23:13.269Z",
+  "fields": ["title", "intro", "items", "buttons"]
+}

@@ -33,16 +33,23 @@ export const demoImage4: ImageType = {
 
 export const demoLogo1: ImageType = {
   src: "/storybook/amazon-2500x752.svg",
-  alt: "demoimage4",
+  alt: "demologo1",
   width: 2500,
   height: 752,
 };
 
 export const demoLogo2: ImageType = {
   src: "/storybook/google-2500x816.svg",
-  alt: "demoimage4",
+  alt: "demologo2",
   width: 2500,
   height: 816,
+};
+
+export const demoIcon1: ImageType = {
+  src: "/storybook/demo-icon-30x30.svg",
+  alt: "demoicon",
+  width: 30,
+  height: 30,
 };
 
 export const demoFAQList: AccordionProps["items"] = [
