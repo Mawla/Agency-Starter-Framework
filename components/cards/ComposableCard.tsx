@@ -75,15 +75,13 @@ export type ComposableCardProps = {
     card?: {
       color?: ColorType;
       align?: HorizontalAlignType;
+      background?: ColorType;
+      paddingX?: PaddingType;
+      paddingY?: PaddingType;
     };
     title?: TitleThemeType;
     subtitle?: TitleThemeType;
     content?: TitleThemeType;
-    background?: {
-      color?: ColorType;
-      paddingX?: PaddingType;
-      paddingY?: PaddingType;
-    };
     border?: {
       color?: ColorType;
       radius?: BorderRadiusType;
@@ -139,11 +137,9 @@ export const ComposableCard = ({
         theme?.border?.color && borderClasses[theme?.border?.color],
         theme?.border?.width && borderWidthClasses[theme?.border?.width],
         theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
-        theme?.background?.color && backgroundClasses[theme?.background?.color],
-        theme?.background?.paddingY &&
-          paddingYClasses[theme?.background?.paddingY],
-        theme?.background?.paddingX &&
-          paddingXClasses[theme?.background?.paddingX],
+        theme?.card?.background && backgroundClasses[theme?.card?.background],
+        theme?.card?.paddingY && paddingYClasses[theme?.card?.paddingY],
+        theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
       )}
     >
       {decorations?.filter(Boolean).map((decoration) => (
@@ -162,27 +158,16 @@ export const ComposableCard = ({
         })}
       >
         {image && (
-          <div className="inline">
+          <div className="block">
             <div
               className={cx(
                 "mb-4 relative inline-flex overflow-hidden max-w-full",
                 imageHeightClasses[theme?.image?.height || "sm"],
-                ratioClasses[theme?.image?.ratio || "16/9"],
+                theme?.image?.ratio && ratioClasses[theme?.image?.ratio],
+                theme?.image?.rounded && roundedClasses[theme?.image?.rounded],
               )}
-              style={{
-                aspectRatio:
-                  theme?.image?.ratio === "auto" || !theme?.image?.height
-                    ? `${image?.width} / ${image?.height}`
-                    : undefined,
-              }}
             >
-              <ResponsiveImage
-                fill
-                {...image}
-                className={
-                  theme?.image?.rounded && roundedClasses[theme?.image?.rounded]
-                }
-              />
+              <ResponsiveImage {...image} fill />
             </div>
           </div>
         )}
@@ -198,7 +183,7 @@ export const ComposableCard = ({
         {subtitle && (
           <Title
             {...theme?.subtitle}
-            as={theme?.title?.as || "span"}
+            as={theme?.subtitle?.as || "span"}
             className="mb-4"
           >
             {subtitle}

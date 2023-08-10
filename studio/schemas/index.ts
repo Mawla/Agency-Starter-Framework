@@ -28,6 +28,7 @@ import presetButton, {
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
+import composableCard from "../../components/cards/composablecard.schema";
 import faq, { faqItem } from "../../components/faq/faq.schema";
 import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";
@@ -103,8 +104,9 @@ export const schemaTypes = [
     block8,
     block9,
     button,
-    buttonTheme,
     buttongroup,
+    buttonTheme,
+    composableCard,
     configCMS,
     configIcons,
     configIntegrations,
@@ -112,8 +114,8 @@ export const schemaTypes = [
     configTheme,
     copypaste,
     decoration,
-    decorationWrapper,
     decorations,
+    decorationWrapper,
     dialogForm,
     dialogRichText,
     dialogVideo,

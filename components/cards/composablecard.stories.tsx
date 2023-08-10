@@ -64,8 +64,8 @@ export const Default = () => (
         width: 2,
         radius: "xl",
       },
-      background: {
-        color: "black",
+      card: {
+        background: "black",
         paddingX: "10",
         paddingY: "10",
       },
@@ -100,7 +100,7 @@ export const BackgroundColors = () => (
           title="title"
           content={<p>content</p>}
           theme={{
-            background: { color },
+            card: { background: color },
           }}
         />
       </div>

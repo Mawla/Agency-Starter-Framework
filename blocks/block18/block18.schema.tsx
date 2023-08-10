@@ -5,7 +5,13 @@ import {
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { Question } from "@vectopus/atlas-icons-react";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import {
+  BUTTON_POSITION_OPTIONS,
+  COLUMN_OPTIONS,
+  GAP_OPTIONS,
+} from "./block18.options";
+import { Grid } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -13,8 +19,8 @@ const schema = defineType({
   name: "block.block18",
   title: "Card grid",
   type: "object",
-  icon: () => <Question weight="thin" />,
-  description: "Generic grid of theme-able cards",
+  icon: () => <Grid weight="thin" />,
+  description: "Flexible grid or slider with styleable cards.",
   preview: {
     select: {
       title: "title",
@@ -49,36 +55,89 @@ const schema = defineType({
     }),
     defineField({
       name: "items",
-      title: "Items",
+      title: "Cards",
       type: "array",
-      description: "List of items",
+      description: "One or more cards",
       group: ["content"],
-      of: [
-        defineField({
-          title: "Item",
-          name: "item",
-          type: "object",
-          preview: {
-            select: {
-              title: "title",
-            },
-          },
-          fields: [
-            defineField({
-              name: "title",
-              title: "Title",
-              type: "string",
-            }),
-          ],
-        }),
-      ],
+      of: [{ type: "card.composable" }],
     }),
     defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
+      fields: [
+        defaultBlockTheme,
+        defaultTitleTheme,
+        defaultTextTheme,
+        defineField({
+          name: "grid",
+          type: "styles",
+          title: "Grid",
+          options: {
+            fields: [
+              defineField({
+                name: "columns",
+                type: "select",
+                options: {
+                  list: optionsToList(COLUMN_OPTIONS),
+                },
+              }),
+              defineField({
+                name: "gapHorizontal",
+                type: "select",
+                options: {
+                  list: optionsToList(GAP_OPTIONS),
+                },
+              }),
+              defineField({
+                name: "gapVertical",
+                type: "select",
+                options: {
+                  list: optionsToList(GAP_OPTIONS),
+                },
+              }),
+            ],
+          },
+        }),
+        defineField({
+          name: "slider",
+          type: "styles",
+          title: "Slider",
+          options: {
+            fields: [
+              defineField({
+                name: "mobile",
+                type: "boolean",
+              }),
+              defineField({
+                name: "desktop",
+                type: "boolean",
+              }),
+              defineField({
+                name: "color",
+                type: "color",
+              }),
+            ],
+          },
+        }),
+        defineField({
+          name: "buttons",
+          type: "styles",
+          title: "Buttons",
+          options: {
+            fields: [
+              defineField({
+                name: "position",
+                type: "select",
+                options: {
+                  list: optionsToList(BUTTON_POSITION_OPTIONS),
+                },
+              }),
+            ],
+          },
+        }),
+      ],
     }),
     defineField({
       name: "decorations",

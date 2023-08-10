@@ -3,6 +3,10 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import {
+  ComposableCard,
+  ComposableCardProps,
+} from "../../components/cards/ComposableCard";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SliderProps } from "../../components/slider/Slider";
 import { SliderColorType } from "../../components/slider/slider.options";
@@ -17,7 +21,6 @@ import {
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
-import { ComposableCard, ComposableCardProps } from "./ComposableCard";
 import {
   gapHorizontalClasses,
   gapVerticalClasses,
@@ -142,7 +145,7 @@ export const Block18 = ({
       <div
         className={cx(
           "flex flex-col gap-6 max-w-3xl",
-          textAlignClasses[theme?.block?.align || "center"],
+          theme?.block?.align && textAlignClasses[theme?.block?.align],
         )}
       >
         {title && (
@@ -155,7 +158,7 @@ export const Block18 = ({
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
-            align={theme?.block?.align || "center"}
+            align={theme?.block?.align}
           >
             <PortableText content={intro as any} />
           </Text>
@@ -187,9 +190,11 @@ export const Block18 = ({
               gap={sliderGapSize}
               columns={slideColumns}
               slides={filteredItems?.map((item) => (
-                <CardWrapper>
-                  <ComposableCard {...item} key={item._key} />
-                </CardWrapper>
+                <div key={item._key} className="h-full text-left">
+                  <CardWrapper>
+                    <ComposableCard {...item} key={item._key} />
+                  </CardWrapper>
+                </div>
               ))}
               controlsColor={theme?.slider?.color}
             />
@@ -209,7 +214,7 @@ export const Block18 = ({
             >
               {filteredItems?.map((item, i) => {
                 return (
-                  <div key={item._key} className="h-full">
+                  <div key={item._key} className="h-full text-left">
                     <CardWrapper>
                       <ComposableCard {...item} />
                     </CardWrapper>
@@ -276,9 +281,9 @@ const Block18Buttons = ({ buttons, theme }: Block18ButtonsProps) => {
   return (
     <div
       className={cx("flex", {
-        ["md:justify-start"]: theme?.block?.align === "left",
-        ["md:justify-center"]: theme?.block?.align === "center",
-        ["md:justify-end"]: theme?.block?.align === "right",
+        ["justify-start"]: theme?.block?.align === "left",
+        ["justify-center"]: theme?.block?.align === "center",
+        ["justify-end"]: theme?.block?.align === "right",
       })}
     >
       <ButtonGroup
@@ -287,9 +292,7 @@ const Block18Buttons = ({ buttons, theme }: Block18ButtonsProps) => {
         direction="horizontal"
         align={
           // this is needed to control the wrapping of multiple buttons
-          screenWidth < BREAKPOINTS.md
-            ? "left"
-            : theme?.block?.align === "center"
+          theme?.block?.align === "center"
             ? "center"
             : theme?.block?.align === "right"
             ? "right"
