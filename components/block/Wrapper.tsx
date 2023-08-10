@@ -1,15 +1,11 @@
 import { slugify } from "../../helpers/utils/string";
 import { backgroundClasses } from "../../theme";
-import { ColorType } from "../../types";
 import { Background } from "./Background";
 import { Bleed } from "./Bleed";
 import { DecorationProps } from "./Decoration";
 import { Spacing, SpacingProps } from "./Spacing";
 import { Width } from "./Width";
-import { BlockRoundedType } from "./background.options";
 import { BlockThemeType } from "./block.options";
-import { SpaceType } from "./spacing.options";
-import { WidthType } from "./width.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
