@@ -32,6 +32,7 @@ import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
+import portableTextPlain from "../../components/portabletext/portabletextplain.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import script from "../../components/script/script.schema";
 import testimonials, {
@@ -143,6 +144,7 @@ export const schemaTypes = [
     password,
     portableTextBasic,
     portableTextFull,
+    portableTextPlain,
     portableTextSimple,
     preset,
     presetBlocks,

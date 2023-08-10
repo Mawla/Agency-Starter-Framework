@@ -1,12 +1,17 @@
+import { TextProps } from "../../components/text/Text";
 import { TitleProps } from "../../components/title/Title";
-import { backgroundClasses, textClasses } from "../../theme";
-import { ColorType } from "../../types";
+import { textClasses } from "../../theme";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
-import { TitleColorType } from "../title/title.options";
+import { TextThemeType } from "../text/text.options";
+import { TitleThemeType } from "../title/title.options";
 import { TestimonialType } from "./Testimonials";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+
+const Text = lazy<ComponentType<TextProps>>(
+  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
+);
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
@@ -28,11 +33,10 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 
 export type TestimonialPosterProps = {
   theme?: {
-    background?: ColorType;
-    title?: TitleColorType;
-    content?: ColorType;
-    name?: ColorType;
-    jobTitle?: ColorType;
+    title?: TitleThemeType;
+    content?: TextThemeType;
+    name?: TitleThemeType;
+    jobTitle?: TitleThemeType;
   };
 } & TestimonialType;
 
@@ -45,62 +49,44 @@ export const TestimonialPoster = ({
   theme,
 }: TestimonialPosterProps) => {
   return (
-    <figure
-      className={cx(
-        "p-6 rounded-sm text-left",
-        theme?.background && backgroundClasses[theme?.background],
-        theme?.content && textClasses[theme?.content],
-        {
-          ["bg-[rgba(0,0,0,.03)]"]: !theme?.background,
-        },
-      )}
-    >
+    <figure className="flex flex-col">
       {(title || content) && (
-        <blockquote className="text-sm">
+        <blockquote>
           {title && (
-            <Title
-              size={"xl"}
-              as="span"
-              className="text-current mb-6"
-              color={theme?.title}
-            >
+            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
               {title}
             </Title>
           )}
           {content && (
-            <div className="mb-6 text-lg">
-              <PortableText content={content as any} />
+            <div className="mt-6">
+              <Text
+                size={theme?.content?.size || "xl"}
+                color={theme?.content?.color}
+                align="center"
+              >
+                <PortableText content={content as any} />
+              </Text>
             </div>
           )}
         </blockquote>
       )}
 
-      <figcaption className="flex items-center space-x-3">
+      <figcaption className="flex items-center gap-3 justify-center mt-8">
         {image && (
-          <div className="w-9 h-9 rounded-full overflow-hidden">
+          <div className="w-8 h-8 rounded-full overflow-hidden">
             <ResponsiveImage {...image} />
           </div>
         )}
 
         {(name || jobTitle) && (
-          <div className="space-y-0.5 font-medium">
+          <div>
             {name && (
-              <span
-                className={cx("block", theme?.name && textClasses[theme?.name])}
-              >
+              <span>
                 {name}
+                {jobTitle && <span>, </span>}
               </span>
             )}
-            {jobTitle && (
-              <span
-                className={cx(
-                  "block text-sm",
-                  theme?.jobTitle && textClasses[theme?.jobTitle],
-                )}
-              >
-                {jobTitle}
-              </span>
-            )}
+            {jobTitle && <span>{jobTitle}</span>}
           </div>
         )}
       </figcaption>
