@@ -128,7 +128,7 @@ export const borderRadiusClasses: Record<BorderRadiusType, string> = {
 
 export const borderWidthClasses: Record<BorderWidthType, string> = {
   0: "border-0",
-  px: "border",
+  1: "border",
   2: "border-2",
   4: "border-4",
   8: "border-8",
