@@ -2,6 +2,7 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
+import { demoImage2 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   ColorType,
@@ -118,14 +119,7 @@ const DEMO_CONTENT: Block17Props = {
           ],
         },
       ],
-      image: {
-        crop: null,
-        src: "https://cdn.sanity.io/images/vs4fnw8m/development/e81b568f43492f747e5fef048d7fef778f44f197-542x542.png",
-        width: 542,
-        height: 542,
-        alt: "",
-        hotspot: null,
-      },
+      image: demoImage2,
       name: "Arjen",
     },
   ],

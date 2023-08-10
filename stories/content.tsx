@@ -4,42 +4,42 @@ import { TestimonialType } from "../components/testimonials/Testimonials";
 import { ImageType } from "../types";
 
 export const demoImage: ImageType = {
-  src: "https://cdn.sanity.io/images/lra7ykt5/development/8176ab31464cc5bc14927e66e0f52433da2a51ea-880x528.jpg",
+  src: "/storybook/demoimage1.jpg",
   alt: "demoimage",
   width: 880,
   height: 528,
 };
 
 export const demoImage2: ImageType = {
-  src: "https://cdn.sanity.io/images/lra7ykt5/development/22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893.jpg",
+  src: "/storybook/demoimage2.jpg",
   alt: "demoimage2",
   width: 1296,
   height: 893,
 };
 
 export const demoImage3: ImageType = {
-  src: "https://cdn.sanity.io/images/lra7ykt5/development/7eaa67f5bb42ecf6d53e5949f32f898e1c4f16ae-800x1200.webp",
+  src: "/storybook/demoimage3.jpg",
   alt: "demoimage3",
   width: 800,
   height: 1200,
 };
 
 export const demoImage4: ImageType = {
-  src: "https://cdn.sanity.io/images/lra7ykt5/development/f008ee1237df81834de2329e6e74d9e693962a85-970x546.webp",
+  src: "/storybook/demoimage4.webp",
   alt: "demoimage4",
   width: 970,
   height: 546,
 };
 
 export const demoLogo1: ImageType = {
-  src: "https://cdn.sanity.io/images/vs4fnw8m/development/28670a334fcc033f2d0e674353f1be23b60b524e-2500x752.svg?w=2000&fit=max&auto=format",
+  src: "/storybook/amazon.svg",
   alt: "demoimage4",
   width: 2500,
   height: 752,
 };
 
 export const demoLogo2: ImageType = {
-  src: "https://cdn.sanity.io/images/vs4fnw8m/development/7c5fc664f37fa832f540d5dbc731424c221e64ed-2500x816.svg?w=2000&fit=max&auto=format",
+  src: "/storybook/google.svg",
   alt: "demoimage4",
   width: 2500,
   height: 816,
@@ -195,14 +195,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     _id: "904fbe64-1f13-446f-93e5-d63d0c12a810",
     title:
       "Part 2 Revolutionizing Business Efficiency with our Cutting-Edge SaaS Solution",
-    image: {
-      crop: null,
-      src: "https://cdn.sanity.io/images/vs4fnw8m/development/8176ab31464cc5bc14927e66e0f52433da2a51ea-880x528.jpg",
-      width: 880,
-      height: 528,
-      alt: "chair",
-      hotspot: null,
-    },
+    image: demoImage,
   },
   {
     type: "page.blog",
@@ -212,14 +205,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     title:
       "Streamline Your Operations with [Company Name]'s All-in-One SaaS Solution",
     href: "/resources/blog/streamline-your-operations-with-company-name-s-all-in-one-saas-solution",
-    image: {
-      crop: null,
-      src: "https://cdn.sanity.io/images/vs4fnw8m/development/22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893.jpg",
-      width: 1296,
-      height: 893,
-      alt: "room",
-      hotspot: null,
-    },
+    image: demoImage,
   },
   {
     type: "page.blog",
@@ -235,36 +221,15 @@ export const demoResourceCards: ResourceCardProps[] = [
     title:
       "The benefits of choosing company names saas solution over traditional software",
     tags: ["Marketing", "Sales", "API", "Docs"],
-    image: {
-      crop: null,
-      src: "https://cdn.sanity.io/images/vs4fnw8m/development/22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893.jpg",
-      width: 1296,
-      height: 893,
-      alt: "room",
-      hotspot: null,
-    },
+    image: demoImage2,
     authors: [
       {
         name: "Dan Malone",
-        image: {
-          src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
-          width: 5184,
-          height: 3456,
-          alt: "",
-          hotspot: null,
-          crop: null,
-        },
+        image: demoImage2,
       },
       {
         name: "Arjen Scherff-de Water",
-        image: {
-          height: 3456,
-          hotspot: null,
-          crop: null,
-          src: "https://cdn.sanity.io/images/vs4fnw8m/development/91077ecc556ad9ff49921a000f2c10951d2dfd58-5184x3456.jpg",
-          width: 5184,
-          alt: "",
-        },
+        image: demoImage4,
       },
     ],
     date: "2023-02-07",
@@ -285,14 +250,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     authors: [
       {
         name: "Dan Malone",
-        image: {
-          src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
-          width: 5184,
-          height: 3456,
-          alt: "",
-          hotspot: null,
-          crop: null,
-        },
+        image: demoImage,
       },
     ],
     date: "2023-02-06",
@@ -309,14 +267,7 @@ export const demoResourceCards: ResourceCardProps[] = [
     authors: [
       {
         name: "Dan Malone",
-        image: {
-          src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
-          width: 5184,
-          height: 3456,
-          alt: "",
-          hotspot: null,
-          crop: null,
-        },
+        image: demoImage,
       },
     ],
     tags: ["Marketing", "Sales", "API"],

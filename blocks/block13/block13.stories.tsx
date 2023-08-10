@@ -6,6 +6,7 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
+import { demoImage } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   ColorType,
@@ -32,14 +33,7 @@ const DEMO_CONTENT: Block13Props = {
       title:
         "Streamline Your Operations with [Company Name]'s All-in-One SaaS Solution",
       href: "/resources/blog/streamline-your-operations-with-company-name-s-all-in-one-saas-solution",
-      image: {
-        src: "https://cdn.sanity.io/images/vs4fnw8m/development/22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893.jpg",
-        width: 1296,
-        height: 893,
-        alt: "room",
-        hotspot: null,
-        crop: null,
-      },
+      image: demoImage,
     },
     {
       date: "2023-02-08",
