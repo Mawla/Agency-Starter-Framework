@@ -5,6 +5,7 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { MobileScrollerProps } from "../../components/slider/MobileScroller";
 import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
@@ -21,6 +22,13 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/title/Title")
+);
+
+const MobileScroller = lazy<ComponentType<MobileScrollerProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "MobileScroller" */ "../../components/slider/MobileScroller"
+    )
 );
 
 const Text = lazy<ComponentType<TextProps>>(
@@ -109,13 +117,13 @@ export const Block7 = ({
 
           <div className="md:w-10/12">
             {items && Boolean(items?.filter(Boolean).length) && (
-              <div className="md:pl-24 flex flex-row space-x-4">
+              <MobileScroller className="md:pl-24 flex flex-row space-x-4">
                 {items?.map(({ image, _key }) => (
                   <div className="overflow-hidden w-64 h-72 rounded-lg relative">
                     {image && <ResponsiveImage key={_key} {...image} fill />}
                   </div>
                 ))}
-              </div>
+              </MobileScroller>
             )}
           </div>
         </div>
