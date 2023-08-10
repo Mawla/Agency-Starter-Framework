@@ -100,13 +100,13 @@ export const Block7 = ({
         )}
 
         {items && Boolean(items?.filter(Boolean).length) && (
-          <ul className="pt-8">
+          <div className="flex flex-row space-x-4">
             {items?.map(({ image, _key }) => (
               <div>
                 <ResponsiveImage {...image} fill />
               </div>
             ))}
-          </ul>
+          </div>
         )}
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (

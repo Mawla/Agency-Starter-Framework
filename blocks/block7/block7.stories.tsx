@@ -27,7 +27,7 @@ const DEMO_CONTENT: Block7Props = {
   intro: <p>intro</p>,
 
   buttons: [{ label: "Button" }],
-  items: [{ title: "Item" }],
+  items: [{ image: demoImage }],
 };
 
 export const Default = () => <Block7 {...DEMO_CONTENT} />;
@@ -59,7 +59,7 @@ export const Alignments = () => (
             }}
           />
         </div>
-      ),
+      )
     )}
   </>
 );
