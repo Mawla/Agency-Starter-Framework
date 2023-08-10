@@ -3,40 +3,48 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
+    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper")
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
+  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title")
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
+  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text")
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    ),
+    )
 );
 
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
-    ),
+    )
+);
+const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    )
 );
 
 export type Block7Props = {
@@ -50,7 +58,7 @@ export type Block7Props = {
   intro?: React.ReactNode;
 
   buttons?: ButtonProps[];
-  items?: { _key?: string; title?: string }[];
+  items?: { _key?: string; image?: ImageType }[];
 };
 
 export const Block7 = ({
@@ -72,7 +80,7 @@ export const Block7 = ({
       <div
         className={cx(
           "flex flex-col gap-6 max-w-3xl",
-          textAlignClasses[theme?.block?.align || "center"],
+          textAlignClasses[theme?.block?.align || "center"]
         )}
       >
         {title && (
@@ -93,10 +101,10 @@ export const Block7 = ({
 
         {items && Boolean(items?.filter(Boolean).length) && (
           <ul className="pt-8">
-            {items?.map(({ title, _key }) => (
-              <li key={_key} className="">
-                {title}
-              </li>
+            {items?.map(({ image, _key }) => (
+              <div>
+                <ResponsiveImage {...image} fill />
+              </div>
             ))}
           </ul>
         )}

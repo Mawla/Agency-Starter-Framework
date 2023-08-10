@@ -65,9 +65,9 @@ const schema = defineType({
           },
           fields: [
             defineField({
-              name: "title",
-              title: "Title",
-              type: "string",
+              name: "image",
+              title: "Image",
+              type: "image",
             }),
           ],
         }),
