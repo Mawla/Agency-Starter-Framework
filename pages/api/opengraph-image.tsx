@@ -73,35 +73,13 @@ const handler = async (req: NextRequest) => {
     return new ImageResponse(CoverImage(data?.seoImage));
   }
 
-  let titleFontURL;
-  try {
-    titleFontURL = new URL(
-      `../../public/downloads/ogTitleFont.ttf`,
-      import.meta.url,
-    );
-  } catch (err) {
-    titleFontURL = new URL(
-      `../../public/fonts/Inter-Bold.ttf`,
-      import.meta.url,
-    );
-  }
+  const titleFontData = await fetch(
+    new URL("../../public/downloads/ogTitleFont.ttf", import.meta.url),
+  ).then((res) => res.arrayBuffer());
 
-  let metaFontURL;
-  try {
-    metaFontURL = new URL(
-      `../../public/downloads/ogMetaFont.ttf`,
-      import.meta.url,
-    );
-  } catch (err) {
-    metaFontURL = new URL(
-      `../../public/fonts/Inter-Medium.ttf`,
-      import.meta.url,
-    );
-  }
-  let TitleFontData = await fetch(titleFontURL).then((res) =>
-    res.arrayBuffer(),
-  );
-  let MetaFontData = await fetch(titleFontURL).then((res) => res.arrayBuffer());
+  const metaFontData = await fetch(
+    new URL("../../public/downloads/ogTitleFont.ttf", import.meta.url),
+  ).then((res) => res.arrayBuffer());
 
   let logoHeight;
   if (data?.logoImage) {
@@ -295,8 +273,8 @@ const handler = async (req: NextRequest) => {
       width: 1200,
       height: 630,
       fonts: [
-        { name: "TitleFont", data: TitleFontData, style: "normal" },
-        { name: "MetaFont", data: MetaFontData, style: "normal" },
+        { name: "TitleFont", data: titleFontData, style: "normal" },
+        { name: "MetaFont", data: metaFontData, style: "normal" },
       ],
     },
   );
