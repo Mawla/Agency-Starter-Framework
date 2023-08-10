@@ -128,13 +128,14 @@ type ItemProps = {
   intro?: React.ReactNode;
   image?: ImageType;
   _key?: string;
+  buttons?: ButtonProps[];
   theme?: {
     title?: TitleThemeType;
     intro?: TextThemeType;
   };
 };
 
-const Item = ({ title, intro, image, theme }: ItemProps) => {
+const Item = ({ title, intro, image, buttons, theme }: ItemProps) => {
   return (
     <div className="text-left">
       {image && (
@@ -158,6 +159,12 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
           <Text size={theme?.intro?.size || "md"} color={theme?.intro?.color}>
             <PortableText content={intro as any} />
           </Text>
+        )}
+
+        {buttons && Boolean(buttons?.filter(Boolean).length) && (
+          <div className="mt-8 lg:mt-12">
+            <ButtonGroup items={buttons} direction="vertical" />
+          </div>
         )}
       </div>
     </div>

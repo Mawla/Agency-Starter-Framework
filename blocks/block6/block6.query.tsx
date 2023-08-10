@@ -16,6 +16,7 @@ export const getBlock6Query = (language: LanguageType) => groq`
         title,
         intro[] ${richTextQuery},
         "image": ${imageQuery},
-        theme
+        theme,
+        buttons[] ${buttonQuery},
       },
     }`;

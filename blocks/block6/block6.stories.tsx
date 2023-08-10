@@ -43,6 +43,11 @@ const DEMO_CONTENT = {
           marketing plan.
         </p>
       ),
+      buttons: [
+        {
+          label: "help",
+        },
+      ],
     },
     {
       image: demoImage,
