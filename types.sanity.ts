@@ -14,6 +14,7 @@ export const SCHEMAS = {
   "block.block3": "",
   "block.block4": "",
   "block.block6": "",
+  "block.block7": "",
   "block.block8": "",
   "block.block9": "",
   "config.cms": "",
@@ -130,6 +131,7 @@ export const BLOCK_SCHEMAS = pick(
   "block.block3",
   "block.block4",
   "block.block6",
+  "block.block7",
   "block.block8",
   "block.block9",
 );
