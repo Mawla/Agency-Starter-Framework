@@ -25,7 +25,7 @@ export default {
 const DEMO_CONTENT = {
   title: "Start your free trial today",
   intro: <p>Try Platform for 30 days. No credit card required. </p>,
-  buttons: [{ label: "Free trail", href: "/" }],
+  buttons: [{ label: "Free trial", href: "/" }],
 };
 
 export const Default = () => <Block3 {...DEMO_CONTENT} />;
