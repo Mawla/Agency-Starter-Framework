@@ -121,7 +121,7 @@ export const Block7 = ({
 
           <div className="lg:w-9/12">
             {items && Boolean(items?.filter(Boolean).length) && (
-              <MobileScroller className="flex lg:grid lg:grid-cols-5 gap-10">
+              <MobileScroller className="flex lg:grid lg:grid-cols-5 gap-2">
                 {items?.map(({ image, _key }) => (
                   <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
                     <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
