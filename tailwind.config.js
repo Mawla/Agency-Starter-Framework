@@ -50,6 +50,9 @@ module.exports = {
       spacing: {
         30: "120px",
       },
+      aspectRatio: {
+        "3/4": "3 / 4",
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
@@ -145,8 +148,8 @@ module.exports = {
                 classNode.parent.insertBefore(
                   classNode,
                   selectorParser().astSync(
-                    `.${prefixClass("group")}:${pseudoClass} `,
-                  ),
+                    `.${prefixClass("group")}:${pseudoClass} `
+                  )
                 );
               });
             }).processSync(selector);

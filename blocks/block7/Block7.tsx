@@ -120,8 +120,8 @@ export const Block7 = ({
               <div className="">
                 <MobileScroller className="flex md:grid md:grid-cols-5 gap-10">
                   {items?.map(({ image, _key }) => (
-                    <div className="w-[200px] h-[300px] md:max-w-none shrink-0 lg:w-auto snap-center">
-                      <div className="relative aspect-video overflow-hidden rounded-lg">
+                    <div className="w-[200px] md:max-w-none shrink-0 lg:w-auto snap-center">
+                      <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                         {image && (
                           <ResponsiveImage key={_key} {...image} fill />
                         )}
