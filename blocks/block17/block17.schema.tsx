@@ -2,9 +2,10 @@ import {
   defaultBlockTheme,
   defaultBlockGroups,
 } from "../../components/block/block.schema";
+import { testimonialItemObject } from "../../components/testimonials/testimonials.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
-import { Question } from "@vectopus/atlas-icons-react";
+import { HeartPaper } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -12,7 +13,7 @@ const schema = defineType({
   name: "block.block17",
   title: "Testimonial",
   type: "object",
-  icon: () => <Question weight="thin" />,
+  icon: () => <HeartPaper weight="thin" />,
   description: "Large testimonial quote",
   preview: {
     select: {
@@ -33,7 +34,12 @@ const schema = defineType({
       type: "string",
       group: "content",
     }),
-
+    defineField({
+      name: "testimonials",
+      title: "Testimonials",
+      type: "testimonials.list",
+      group: "content",
+    }),
     defineField({
       name: "theme",
       title: "Theme",

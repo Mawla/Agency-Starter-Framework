@@ -1,8 +1,9 @@
 import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
+import { TestimonialPosterProps } from "../../components/testimonials/TestimonialPoster";
+import { TestimonialsProps } from "../../components/testimonials/Testimonials";
 import { textAlignClasses } from "../../components/text/text.options";
-import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -12,8 +13,18 @@ const Wrapper = lazy<ComponentType<WrapperProps>>(
     import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
 );
 
-const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
+const Testimonials = lazy<ComponentType<TestimonialsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Testimonials" */ "../../components/testimonials/Testimonials"
+    ),
+);
+
+const TestimonialPoster = lazy<ComponentType<TestimonialPosterProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "TestimonialPoster" */ "../../components/testimonials/TestimonialPoster"
+    ),
 );
 
 export type Block17Props = {
@@ -22,10 +33,10 @@ export type Block17Props = {
     title?: TitleThemeType;
   };
   decorations?: DecorationProps[];
-  title?: string;
+  testimonials?: TestimonialsProps["items"];
 };
 
-export const Block17 = ({ theme, decorations, title }: Block17Props) => {
+export const Block17 = ({ theme, decorations, testimonials }: Block17Props) => {
   return (
     <Wrapper
       theme={{
@@ -39,10 +50,16 @@ export const Block17 = ({ theme, decorations, title }: Block17Props) => {
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
-        {title && (
-          <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-            {title}
-          </Title>
+        {testimonials && Boolean(testimonials?.filter(Boolean).length) && (
+          <Testimonials
+            items={testimonials}
+            RenderElement={(props) => (
+              <TestimonialPoster
+                {...props}
+                // theme={theme?.testimonials}
+              />
+            )}
+          />
         )}
       </div>
     </Wrapper>
