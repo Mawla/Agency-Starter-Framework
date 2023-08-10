@@ -23,8 +23,14 @@ export default {
 } as Meta;
 
 const DEMO_CONTENT: Block7Props = {
-  title: "title",
-  intro: <p>intro</p>,
+  title: "Diam",
+  intro: (
+    <p>
+      Ornare tortor enim non vitae ac iaculis in non nibh. Nec ultrices interdum
+      vitae blandit egestas sit. Platea phasellus congue elit volutpat fermentum
+      nullam quam enim. Eu consequat id.
+    </p>
+  ),
 
   buttons: [{ label: "Button" }],
   items: [{ image: demoImage }],
