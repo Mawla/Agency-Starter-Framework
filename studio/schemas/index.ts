@@ -13,6 +13,7 @@ import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
 import block16 from "../../blocks/block16/block16.schema";
+import block17 from "../../blocks/block17/block17.schema";
 import presetBlocks from "../../components/block/block.preset";
 import presetDecoration from "../../components/block/decoration.preset";
 import {
@@ -31,6 +32,7 @@ import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
+import portableTextPlain from "../../components/portabletext/portabletextplain.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import script from "../../components/script/script.schema";
 import testimonials, {
@@ -91,6 +93,7 @@ export const schemaTypes = [
     block14,
     block15,
     block16,
+    block17,
     block2,
     block3,
     block4,
@@ -141,6 +144,7 @@ export const schemaTypes = [
     password,
     portableTextBasic,
     portableTextFull,
+    portableTextPlain,
     portableTextSimple,
     preset,
     presetBlocks,

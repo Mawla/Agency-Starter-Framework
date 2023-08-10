@@ -5,11 +5,11 @@ import { IconLoader } from "../images/IconLoader";
 import { SliderColorType } from "./slider.options";
 import cx from "classnames";
 import { CSSProperties, useContext, useState } from "react";
-import { Keyboard, Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import { Keyboard, Navigation, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
 
 export type SliderProps = {
   slides?: (React.ReactElement | null)[];
@@ -19,6 +19,7 @@ export type SliderProps = {
   slideStyle?: CSSProperties;
   className?: string;
   slideClassName?: string;
+  effect?: "fade" | "slide";
 };
 
 export const Slider = ({
@@ -29,6 +30,7 @@ export const Slider = ({
   slideStyle,
   className,
   slideClassName,
+  effect,
 }: SliderProps) => {
   const { config } = useContext(SiteContext);
   const { language } = useContext(PageContext);
@@ -47,7 +49,8 @@ export const Slider = ({
         spaceBetween={gap}
         slidesPerView={columns}
         grabCursor={!slides?.some((slide) => slide?.props?.href)}
-        modules={[Keyboard, Navigation]}
+        modules={[Keyboard, Navigation, EffectFade]}
+        effect={effect === "fade" ? "fade" : undefined}
         simulateTouch={true}
         navigation={{ prevEl, nextEl }}
         keyboard={{
@@ -71,7 +74,7 @@ export const Slider = ({
         ))}
       </Swiper>
 
-      <div className="flex justify-end gap-3">
+      <div className="inline-flex justify-end gap-3">
         {["prev", "next"].map((direction) => (
           <button
             key={direction}

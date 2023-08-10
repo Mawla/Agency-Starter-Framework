@@ -1,5 +1,6 @@
 import { act, render, screen } from "../../jest.utils";
 import { demoImage } from "../../stories/content";
+import TestimonialPoster from "./TestimonialPoster";
 import Testimonials from "./Testimonials";
 import "@testing-library/jest-dom";
 import { TextEncoder, TextDecoder } from "util";
@@ -22,17 +23,15 @@ describe("Testimonials", () => {
               image: demoImage,
             },
           ]}
-          RenderElement={(props) => (
-            <pre data-testid="pre">{JSON.stringify(props, null, 2)}</pre>
-          )}
+          RenderElement={(props) => <TestimonialPoster {...props} />}
         />,
       );
     });
 
-    expect(screen.getByTestId("pre")).toHaveTextContent("Hello");
-    expect(screen.getByTestId("pre")).toHaveTextContent("from");
-    expect(screen.getByTestId("pre")).toHaveTextContent("John");
-    expect(screen.getByTestId("pre")).toHaveTextContent("Doe");
-    expect(screen.getByTestId("pre")).toHaveTextContent("demoimage");
+    expect(screen.getByText("Hello")).toBeInTheDocument();
+    expect(screen.getByText("from")).toBeInTheDocument();
+    expect(screen.getByText("John,")).toBeInTheDocument();
+    expect(screen.getByText("Doe")).toBeInTheDocument();
+    expect(screen.getAllByAltText("demoimage"));
   });
 });

@@ -11,7 +11,7 @@ import { richTextQuery } from "../portabletext/portabletext.query";
  * }
  */
 
-export const getTestimonialsQuery = (language: LanguageType) => `
+export const getTestimonialQuery = (language: LanguageType) => `
 {
   _type == 'testimonials.reference' => @-> ,
   _type != 'reference' => @ 

@@ -59,7 +59,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
   if (!content) return null;
   return (
     <PortableTextReact
-      value={content}
+      value={content as PortableTextBlock[]}
       components={{
         marks: {
           link: ({ value, children }) => {

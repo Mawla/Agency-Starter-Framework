@@ -48,7 +48,7 @@ const testimonialItemObject = defineField({
     defineField({
       name: "content",
       title: "Content",
-      type: "portabletext.simple",
+      type: "portabletext.plain",
       description: "The testimonial itself.",
       options: { localize: true } as any,
     }),
