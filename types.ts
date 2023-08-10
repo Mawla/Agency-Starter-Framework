@@ -116,7 +116,7 @@ export type BorderRadiusType = keyof typeof BORDER_RADIUS_OPTIONS;
 
 export const BORDER_WIDTH_OPTIONS = {
   0: "0px",
-  px: "1px",
+  1: "1px",
   2: "2px",
   4: "4px",
   8: "8px",
