@@ -13,7 +13,7 @@ export const Ratios = () => (
   <div className="grid grid-cols-3 gap-10">
     {(Object.keys(IMAGE_RATIO_OPTIONS) as ImageRatioType[]).map(
       (ratio: ImageRatioType) => (
-        <div className="relative">
+        <div className="relative" key={ratio}>
           <span className="absolute left-6 top-6 bg-white py-2 px-4 z-10 rounded-full">
             {ratio}
           </span>
