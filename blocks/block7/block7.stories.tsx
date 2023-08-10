@@ -38,6 +38,7 @@ const DEMO_CONTENT: Block7Props = {
     { image: demoImage },
     { image: demoImage },
     { image: demoImage },
+    { image: demoImage },
   ],
 };
 
