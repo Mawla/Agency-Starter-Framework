@@ -4,42 +4,42 @@ import { TestimonialType } from "../components/testimonials/Testimonials";
 import { ImageType } from "../types";
 
 export const demoImage: ImageType = {
-  src: "/storybook/demoimage1.jpg",
+  src: "/storybook/demoimage1-880x528.jpg",
   alt: "demoimage",
   width: 880,
   height: 528,
 };
 
 export const demoImage2: ImageType = {
-  src: "/storybook/demoimage2.jpg",
+  src: "/storybook/demoimage2-1296x893.jpg",
   alt: "demoimage2",
   width: 1296,
   height: 893,
 };
 
 export const demoImage3: ImageType = {
-  src: "/storybook/demoimage3.jpg",
+  src: "/storybook/demoimage3-800x1200.jpg",
   alt: "demoimage3",
   width: 800,
   height: 1200,
 };
 
 export const demoImage4: ImageType = {
-  src: "/storybook/demoimage4.webp",
+  src: "/storybook/demoimage4-970x546.webp",
   alt: "demoimage4",
   width: 970,
   height: 546,
 };
 
 export const demoLogo1: ImageType = {
-  src: "/storybook/amazon.svg",
+  src: "/storybook/amazon-2500x752.svg",
   alt: "demoimage4",
   width: 2500,
   height: 752,
 };
 
 export const demoLogo2: ImageType = {
-  src: "/storybook/google.svg",
+  src: "/storybook/google-2500x816.svg",
   alt: "demoimage4",
   width: 2500,
   height: 816,
