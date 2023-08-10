@@ -79,7 +79,7 @@ describe("Composable card", () => {
                   },
                 ],
                 theme: {
-                  background: { color: "black" },
+                  card: { background: "black" },
                   title: { size: "md", color: "white" },
                   content: { size: "md", color: "white" },
                   image: { height: "lg", ratio: "16/9", rounded: "xl" },
