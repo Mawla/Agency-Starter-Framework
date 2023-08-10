@@ -90,7 +90,7 @@ export const Block7 = ({
           textAlignClasses[theme?.block?.align || "left"]
         )}
       >
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:space-x-16 md:flex-row">
           <div className="md:w-2/12 md:order-first order-last">
             {title && (
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
