@@ -78,12 +78,12 @@ export const Block7 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col",
           textAlignClasses[theme?.block?.align || "left"]
         )}
       >
         <div className="flex flex-row">
-          <div>
+          <div className="w-1/3">
             {title && (
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
@@ -107,11 +107,11 @@ export const Block7 = ({
             )}
           </div>
 
-          <div>
+          <div className="w-2/3">
             {items && Boolean(items?.filter(Boolean).length) && (
               <div className="pl-24 flex flex-row space-x-4">
                 {items?.map(({ image, _key }) => (
-                  <div className="overflow-hidden mr-4 w-64 h-96 rounded-lg relative">
+                  <div className="overflow-hidden w-64 h-72 rounded-lg relative">
                     {image && <ResponsiveImage key={_key} {...image} fill />}
                   </div>
                 ))}

@@ -33,7 +33,12 @@ const DEMO_CONTENT: Block7Props = {
   ),
 
   buttons: [{ label: "Button" }],
-  items: [{ image: demoImage }],
+  items: [
+    { image: demoImage },
+    { image: demoImage },
+    { image: demoImage },
+    { image: demoImage },
+  ],
 };
 
 export const Default = () => <Block7 {...DEMO_CONTENT} />;
