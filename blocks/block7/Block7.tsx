@@ -117,13 +117,19 @@ export const Block7 = ({
 
           <div className="md:w-10/12">
             {items && Boolean(items?.filter(Boolean).length) && (
-              <MobileScroller className="md:pl-24 flex flex-row space-x-4">
-                {items?.map(({ image, _key }) => (
-                  <div className="overflow-hidden w-64 h-72 rounded-lg relative">
-                    {image && <ResponsiveImage key={_key} {...image} fill />}
-                  </div>
-                ))}
-              </MobileScroller>
+              <div className="">
+                <MobileScroller className="flex lg:grid lg:grid-cols-4 gap-10">
+                  {items?.map(({ image, _key }) => (
+                    <div className="w-[300px] max-w-[75%] md:max-w-none shrink-0 lg:w-auto snap-center">
+                      <div className="relative aspect-video overflow-hidden rounded-lg">
+                        {image && (
+                          <ResponsiveImage key={_key} {...image} fill />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </MobileScroller>
+              </div>
             )}
           </div>
         </div>
