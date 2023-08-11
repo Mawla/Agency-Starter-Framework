@@ -91,13 +91,9 @@ export const Block7 = ({
         )}
       >
         <div className="flex flex-col lg:space-x-16 lg:flex-row">
-          <div className="lg:w-3/12 lg:order-first order-last">
+          <div className="gap-6 lg:w-3/12 lg:order-first order-last">
             {title && (
-              <Title
-                className="mt-6 lg:mt-0"
-                {...theme?.title}
-                size={theme?.title?.size || "4xl"}
-              >
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
               </Title>
             )}
@@ -113,9 +109,7 @@ export const Block7 = ({
             )}
 
             {buttons && Boolean(buttons?.filter(Boolean).length) && (
-              <div className="mt-6">
-                <ButtonGroup items={buttons} />
-              </div>
+              <ButtonGroup items={buttons} />
             )}
           </div>
 
