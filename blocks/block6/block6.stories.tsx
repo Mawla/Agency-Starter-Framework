@@ -198,11 +198,11 @@ export const IntroSizes = () => (
 
 export const NumberOfItems = () => (
   <>
-    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 1)} />;
-    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 2)} />;
-    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 3)} />;
-    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 4)} />;
-    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 5)} />;
-    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 6)} />;
+    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 1)} />
+    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 2)} />
+    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 3)} />
+    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 4)} />
+    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 5)} />
+    <Block6 {...DEMO_CONTENT} items={[...DEMO_CONTENT.items].splice(0, 6)} />
   </>
 );
