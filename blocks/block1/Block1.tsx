@@ -218,6 +218,7 @@ export const Block1 = ({
               title={script.title}
               items={script.items}
             />
+            <Decorations decorations={decorations} location="image" />
           </div>
         )}
       </div>
