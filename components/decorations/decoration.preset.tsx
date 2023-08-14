@@ -1,3 +1,4 @@
+import { DecorationLocationSelect } from "../../studio/components/Decorations/DecorationLocationSelect";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
 import { StarBookmark } from "@vectopus/atlas-icons-react";
@@ -64,8 +65,8 @@ const schema = defineType({
       name: "location",
       title: "Location",
       type: "string",
-      options: {
-        list: optionsToList(DECORATION_LOCATION_OPTIONS),
+      components: {
+        field: DecorationLocationSelect,
       },
       description: "Position the decoration inside or outside the block.",
     }),

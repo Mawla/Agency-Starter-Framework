@@ -1,4 +1,3 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
@@ -7,6 +6,7 @@ import {
   ComposableCard,
   ComposableCardProps,
 } from "../../components/cards/ComposableCard";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SliderProps } from "../../components/slider/Slider";
 import { SliderColorType } from "../../components/slider/slider.options";

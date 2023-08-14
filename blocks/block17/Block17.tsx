@@ -1,6 +1,6 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { TestimonialPosterProps } from "../../components/testimonials/TestimonialPoster";
 import { TestimonialsProps } from "../../components/testimonials/Testimonials";
 import { textAlignClasses } from "../../components/text/text.options";

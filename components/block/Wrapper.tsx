@@ -1,8 +1,9 @@
 import { slugify } from "../../helpers/utils/string";
 import { backgroundClasses } from "../../theme";
+import { DecorationProps } from "../decorations/Decoration";
+import { DecorationsProps } from "../decorations/Decorations";
 import { Background } from "./Background";
 import { Bleed } from "./Bleed";
-import { DecorationProps } from "./Decoration";
 import { Spacing, SpacingProps } from "./Spacing";
 import { Width } from "./Width";
 import { BlockThemeType } from "./block.options";
@@ -10,7 +11,13 @@ import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Decoration = lazy<ComponentType<DecorationProps>>(
-  () => import(/* webpackChunkName: "Decoration" */ "./Decoration"),
+  () =>
+    import(/* webpackChunkName: "Decoration" */ "../decorations/Decoration"),
+);
+
+const Decorations = lazy<ComponentType<DecorationsProps>>(
+  () =>
+    import(/* webpackChunkName: "Decorations" */ "../decorations/Decorations"),
 );
 
 export type WrapperProps = {
@@ -48,10 +55,6 @@ export const Wrapper = ({
     ?.filter(Boolean)
     .filter(({ location }) => location === "inside" || !location);
 
-  const outerDecorations = decorations
-    ?.filter(Boolean)
-    .filter(({ location }) => location === "outside");
-
   return (
     <Bleed
       bleed={theme?.width === "full" ? "none" : "sm"}
@@ -62,13 +65,7 @@ export const Wrapper = ({
         theme?.outerBackground && backgroundClasses[theme?.outerBackground],
       )}
     >
-      {outerDecorations?.map((decoration) => (
-        <Decoration
-          {...decoration}
-          key={decoration._key}
-          _key={decoration._key}
-        />
-      ))}
+      <Decorations decorations={decorations} location="outside" />
       <Spacing
         padding={{
           top: theme?.margin?.top || "none",
@@ -106,7 +103,7 @@ export const Wrapper = ({
               }}
             >
               <Bleed bleed="lg">
-                <Width width="inner" className="relative z-10">
+                <Width width="inner" className=" z-10">
                   {children}
                 </Width>
               </Bleed>

@@ -2,12 +2,12 @@ import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { isEmptyObject, removeEmptyValues } from "../../helpers/utils/object";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { ImageType } from "../../types";
-import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import {
   backgroundRoundedBottomClasses,
   backgroundRoundedTopClasses,
   BlockRoundedType,
-} from "./background.options";
+} from "../block/background.options";
+import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { DecorationLocationType } from "./decoration.options";
 import cx from "classnames";
 import DOMPurify from "dompurify";

@@ -16,12 +16,6 @@ import block16 from "../../blocks/block16/block16.schema";
 import block17 from "../../blocks/block17/block17.schema";
 import block18 from "../../blocks/block18/block18.schema";
 import presetBlocks from "../../components/block/block.preset";
-import presetDecoration from "../../components/block/decoration.preset";
-import {
-  decoration,
-  decorations,
-  decorationWrapper,
-} from "../../components/block/decoration.schema";
 import presetButton, {
   buttonTheme,
 } from "../../components/buttons/button.preset";
@@ -29,6 +23,12 @@ import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
 import composableCard from "../../components/cards/composablecard.schema";
+import presetDecoration from "../../components/decorations/decoration.preset";
+import {
+  decoration,
+  decorations,
+  decorationWrapper,
+} from "../../components/decorations/decoration.schema";
 import faq, { faqItem } from "../../components/faq/faq.schema";
 import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";

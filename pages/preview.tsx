@@ -1,7 +1,7 @@
 import Wrapper from "../components/block/Wrapper";
-import { decorationFieldsQuery } from "../components/block/decoration.query";
 import Button from "../components/buttons/Button";
 import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
+import { decorationFieldsQuery } from "../components/decorations/Decoration.query";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";

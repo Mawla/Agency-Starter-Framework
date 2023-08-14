@@ -1,9 +1,9 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { BreadcrumbProps } from "../../components/breadcrumb/Breadcrumb";
 import Link from "../../components/buttons/Link";
 import { DateDisplayProps } from "../../components/date/DateDisplay";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SocialShareProps } from "../../components/social/SocialShare";

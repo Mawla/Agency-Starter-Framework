@@ -15,12 +15,12 @@ import { getBlock15Query } from "../blocks/block15/block15.query";
 import { getBlock16Query } from "../blocks/block16/block16.query";
 import { getBlock17Query } from "../blocks/block17/block17.query";
 import { getBlock18Query } from "../blocks/block18/block18.query";
-import { decorationsQuery } from "../components/block/decoration.query";
 import {
   FlatBreadcrumbItemType,
   FlatBreadcrumbType,
   getBreadcrumbQuery,
 } from "../components/breadcrumb/breadcrumb.query";
+import { decorationsQuery } from "../components/decorations/Decoration.query";
 import {
   imageQuery,
   getImageQuery as getImageComponentQuery,

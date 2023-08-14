@@ -1,8 +1,8 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { GradientProps } from "../../components/gradient/Gradient";
 import { GradientOpacityType } from "../../components/gradient/GradientOptions";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";

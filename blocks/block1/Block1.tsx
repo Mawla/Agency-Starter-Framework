@@ -1,8 +1,9 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
+import { DecorationsProps } from "../../components/decorations/Decorations";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
@@ -56,6 +57,13 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+    ),
+);
+
+const Decorations = lazy<ComponentType<DecorationsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Decorations" */ "../../components/decorations/Decorations"
     ),
 );
 
@@ -149,22 +157,34 @@ export const Block1 = ({
             )}
           >
             {image && (
-              <ResponsiveImage
-                {...image}
-                {...theme?.image}
-                fill={theme?.image?.preserveAspectRatio !== true}
-                className={
-                  theme?.image?.preserveAspectRatio !== true
-                    ? "absolute inset-0"
-                    : ""
-                }
-                roundSize={25}
-              />
-            )}
+              <div className="relative w-full">
+                <ResponsiveImage
+                  {...image}
+                  {...theme?.image}
+                  fill={theme?.image?.preserveAspectRatio !== true}
+                  className={
+                    theme?.image?.preserveAspectRatio !== true
+                      ? "absolute inset-0"
+                      : ""
+                  }
+                  roundSize={25}
+                />
 
+                <Decorations decorations={decorations} location="image" />
+              </div>
+            )}
             {video && (
-              <div>
-                <Video {...video} />
+              <div
+                className={cx(
+                  "w-full h-full flex",
+                  theme?.layout?.verticalAlign &&
+                    verticalAlignClasses[theme.layout.verticalAlign],
+                )}
+              >
+                <div className="relative w-full">
+                  <Video {...video} className="w-full" />
+                  <Decorations decorations={decorations} location="image" />
+                </div>
               </div>
             )}
           </div>

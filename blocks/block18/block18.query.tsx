@@ -1,5 +1,5 @@
-import { decorationsQuery } from "../../components/block/decoration.query";
 import { buttonQuery } from "../../components/buttons/button.query";
+import { decorationsQuery } from "../../components/decorations/Decoration.query";
 import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";

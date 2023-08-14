@@ -5,7 +5,7 @@ import React from "react";
 
 export default {
   component: Decoration,
-  title: "Components/Block/Decoration",
+  title: "components/decorations/Decoration",
 } as Meta;
 
 const SQUARE = {

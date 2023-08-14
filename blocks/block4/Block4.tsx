@@ -1,8 +1,9 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
+import { DecorationsProps } from "../../components/decorations/Decorations";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
@@ -47,6 +48,13 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
+    ),
+);
+
+const Decorations = lazy<ComponentType<DecorationsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Decorations" */ "../../components/decorations/Decorations"
     ),
 );
 
@@ -107,7 +115,7 @@ export const Block4 = ({
 
         {image && (
           <div
-            className="mt-6"
+            className="mt-6 relative"
             style={{
               aspectRatio:
                 getOriginalImageDimensions(image?.src).aspectRatio || "auto",
@@ -118,6 +126,7 @@ export const Block4 = ({
               preserveAspectRatio
               className="inline-block"
             />
+            <Decorations decorations={decorations} location="image" />
           </div>
         )}
       </div>

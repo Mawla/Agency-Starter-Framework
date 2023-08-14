@@ -35,12 +35,3 @@
 *[class*="bg-"] .swiper {
   overflow: visible !important;
 }
-
-@media only screen and (min-width: 768px) {
-  *[class*="bg-"]:not([class*="bg-white"]) .bleed {
-    overflow: hidden !important;
-  }
-  /* *[class*='bg-']:not([class*='bg-white']) .swiper {
-    overflow: hidden !important;
-  }*/
-}

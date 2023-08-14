@@ -1,6 +1,6 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TitleProps } from "../../components/title/Title";
@@ -24,6 +24,7 @@ import {
   ImageType,
   PaddingType,
 } from "../../types";
+import { DecorationsProps } from "../decorations/Decorations";
 import {
   ImageHeightType,
   ImageRatioType,
@@ -57,10 +58,10 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
-const Decoration = lazy<ComponentType<DecorationProps>>(
+const Decorations = lazy<ComponentType<DecorationsProps>>(
   () =>
     import(
-      /* webpackChunkName: "Decoration" */ "../../components/block/Decoration"
+      /* webpackChunkName: "Decorations" */ "../../components/decorations/Decorations"
     ),
 );
 
@@ -143,14 +144,7 @@ export const ComposableCard = ({
         theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
       )}
     >
-      {decorations?.filter(Boolean).map((decoration) => (
-        <Decoration
-          {...decoration}
-          key={decoration._key}
-          _key={decoration._key}
-        />
-      ))}
-
+      <Decorations decorations={decorations} />
       <div
         className={cx("relative z-10 flex flex-col", {
           ["items-center"]: theme?.card?.align === "center",

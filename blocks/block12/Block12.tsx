@@ -1,7 +1,7 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ResourceCardProps } from "../../components/cards/ResourceCard";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";

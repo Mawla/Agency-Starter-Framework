@@ -4,9 +4,9 @@ import {
   formatFontSize,
   formatFontWeight,
 } from "../../cli/config/format-theme";
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { getClient } from "../../helpers/sanity/server";
 import IframeResizer from "iframe-resizer-react";
 import React, { ComponentType, lazy, useEffect, useState } from "react";

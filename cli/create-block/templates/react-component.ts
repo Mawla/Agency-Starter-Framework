@@ -15,7 +15,7 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
-    import { DecorationProps } from "../../components/block/Decoration";
+    import { DecorationProps } from "../../components/decorations/Decoration";
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
     import cx from "classnames";
