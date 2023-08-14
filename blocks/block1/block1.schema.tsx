@@ -67,14 +67,25 @@ const schema = defineType({
       options: {
         hotspot: true,
       },
-      hidden: ({ parent, value }) => !value && Boolean(parent?.video),
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.video || parent?.script),
     }),
     defineField({
       name: "video",
       title: "Video",
       type: "video",
       group: "content",
-      hidden: ({ parent, value }) => !value && Boolean(parent?.image),
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.image || parent?.script),
+    }),
+    defineField({
+      name: "script",
+      title: "Script",
+      type: "reference",
+      to: [{ type: "script" }],
+      group: "content",
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.image || parent?.video),
     }),
     defineField({
       name: "theme",
@@ -91,7 +102,7 @@ const schema = defineType({
           options: {
             fields: [
               defineField({
-                name: "imagePosition",
+                name: "mediaPosition",
                 title: "Image position",
                 type: "select",
                 options: {

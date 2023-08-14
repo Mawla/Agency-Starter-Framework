@@ -14,5 +14,9 @@ export const getBlock1Query = (language: LanguageType) => groq`
     body[] ${richTextQuery},
     "image": ${imageQuery},
     "video": ${videoQuery},
+    script -> {
+      title,
+      items[]
+    },
     buttons[] ${buttonQuery},
   }`;

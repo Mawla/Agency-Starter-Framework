@@ -162,14 +162,14 @@ export const verticalAlign = () => (
   </>
 );
 
-export const ImagePosition = () => (
+export const mediaPosition = () => (
   <>
     <Block1 {...DEMO_CONTENT} title="default" />
     <Block1
       {...DEMO_CONTENT}
       theme={{
         layout: {
-          imagePosition: "left",
+          mediaPosition: "left",
         },
       }}
       title="left"
@@ -178,7 +178,7 @@ export const ImagePosition = () => (
       {...DEMO_CONTENT}
       theme={{
         layout: {
-          imagePosition: "right",
+          mediaPosition: "right",
         },
       }}
       title="right"
@@ -370,6 +370,50 @@ export const Decorations = () => (
           },
         },
       ]}
+    />
+  </>
+);
+export const Scripts = () => (
+  <>
+    <Block1
+      {...DEMO_CONTENT}
+      image={undefined}
+      video={undefined}
+      script={{
+        title: "youtube embed",
+        items: [
+          {
+            html: `<div class='w-full h-full border border-[royalblue] p-10'>this is a script</div>`,
+          },
+        ],
+      }}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      image={undefined}
+      video={undefined}
+      theme={{
+        layout: {
+          mediaPosition: "left",
+        },
+      }}
+      script={{
+        title: "youtube embed",
+        items: [
+          {
+            src: `//js-eu1.hsforms.net/forms/v2.js`,
+            onload: `
+          hbspt.forms.create({
+            region: "na1",
+            portalId: "8176446",
+            formId: "e1c83e9f-aaea-4c98-a17d-776b82668276",
+            target: "#hubspot-form-id"
+          });
+          `,
+            html: `<div id="hubspot-form-id">loading form</div>`,
+          },
+        ],
+      }}
     />
   </>
 );

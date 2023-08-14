@@ -5,17 +5,19 @@ import React, { useContext } from "react";
 
 export type ScriptsType = {
   title?: string;
-  items?: {
-    _key?: string;
-    title?: string;
-    code?: "string";
-    html?: "string";
-    src?: "string";
-    onload?: "string";
-    onready?: "string";
-    onerror?: "string";
-    attributes: { name?: string; value?: string }[];
-  }[];
+  items?: ScriptType[];
+};
+
+export type ScriptType = {
+  _key?: string;
+  title?: string;
+  code?: string;
+  html?: string;
+  src?: string;
+  onload?: string;
+  onready?: string;
+  onerror?: string;
+  attributes?: { name?: string; value?: string }[];
 };
 
 export const Scripts = ({ items }: ScriptsType) => {
@@ -59,9 +61,12 @@ export const Scripts = ({ items }: ScriptsType) => {
         return (
           <div
             key={script._key}
-            className={cx("script", {
-              ["relative"]: isPreviewMode,
-            })}
+            className={cx(
+              "script w-full h-full [&>div]:w-full [&>div]:h-full",
+              {
+                ["relative"]: isPreviewMode,
+              },
+            )}
           >
             {isPreviewMode && (
               <span className="absolute right-0 top-0 text-[10px] p-1 bg-[#ddd]">

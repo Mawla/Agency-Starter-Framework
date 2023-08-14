@@ -7,6 +7,7 @@ import { DecorationsProps } from "../../components/decorations/Decorations";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
+import { ScriptsType } from "../../components/script/Script";
 import { TextProps } from "../../components/text/Text";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
@@ -18,7 +19,7 @@ import {
   VerticalAlignType,
   VideoType,
 } from "../../types";
-import { ImagePositionType } from "./block1.options";
+import { mediaPositionType } from "./block1.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -67,6 +68,11 @@ const Decorations = lazy<ComponentType<DecorationsProps>>(
     ),
 );
 
+const Scripts = lazy<ComponentType<ScriptsType>>(
+  () =>
+    import(/* webpackChunkName: "Scripts" */ "../../components/script/Script"),
+);
+
 export type Block1Props = {
   theme?: {
     block?: {
@@ -74,7 +80,7 @@ export type Block1Props = {
       space?: SpaceType;
     };
     layout?: {
-      imagePosition?: ImagePositionType;
+      mediaPosition?: mediaPositionType;
       verticalAlign?: VerticalAlignType;
     };
     image?: ImageThemeType;
@@ -88,6 +94,7 @@ export type Block1Props = {
   body?: React.ReactNode;
   image?: ImageType;
   video?: VideoType;
+  script?: ScriptsType;
   buttons?: ButtonProps[];
 };
 
@@ -106,6 +113,7 @@ export const Block1 = ({
   image,
   video,
   buttons,
+  script,
 }: Block1Props) => {
   return (
     <Wrapper
@@ -151,15 +159,15 @@ export const Block1 = ({
               "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
               {
                 ["aspect-video"]: theme?.image?.preserveAspectRatio !== true,
-                ["lg:order-2"]: theme?.layout?.imagePosition !== "left",
-                ["lg:order-0"]: theme?.layout?.imagePosition === "left",
+                ["lg:order-2"]: theme?.layout?.mediaPosition !== "left",
+                ["lg:order-0"]: theme?.layout?.mediaPosition === "left",
               },
             )}
           >
             {image && (
               <div className="relative h-full lg:h-auto w-full">
                 <div
-                  className={cx("border relative", {
+                  className={cx("relative", {
                     ["h-full"]: theme?.image?.preserveAspectRatio !== true,
                   })}
                 >
@@ -188,13 +196,28 @@ export const Block1 = ({
                 )}
               >
                 <div className="w-full">
-                  <div className="relative  border w-full h-auto aspect-video">
+                  <div className="relative w-full h-auto aspect-video">
                     <Video {...video} className="w-full" />
                     <Decorations decorations={decorations} location="image" />
                   </div>
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {script && (
+          <div
+            className={cx("w-full flex relative order-2", {
+              ["lg:order-2"]: theme?.layout?.mediaPosition !== "left",
+              ["lg:order-0"]: theme?.layout?.mediaPosition === "left",
+            })}
+          >
+            <Scripts
+              key={script.title}
+              title={script.title}
+              items={script.items}
+            />
           </div>
         )}
       </div>

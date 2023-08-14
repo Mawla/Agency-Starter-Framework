@@ -1,7 +1,7 @@
 import { Seo } from "../../components/meta/Seo";
 import { PageLock } from "../../components/pagelock/PageLock";
 import { PreviewButton } from "../../components/previewmode/PreviewButton";
-import { Scripts } from "../../components/script/Script";
+import { ScriptsType } from "../../components/script/Script";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { LanguageType } from "../../languages";
@@ -18,7 +18,12 @@ import { NavigationProps } from "../navigation/Navigation";
 import { PageBody } from "./PageBody";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Scripts = lazy<ComponentType<ScriptsType>>(
+  () =>
+    import(/* webpackChunkName: "Scripts" */ "../../components/script/Script"),
+);
 
 export type PageProps = {
   isPreviewMode: boolean;
