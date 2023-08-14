@@ -3,7 +3,6 @@ import { getBlock1Query } from "../blocks/block1/block1.query";
 import { getBlock2Query } from "../blocks/block2/block2.query";
 import { getBlock4Query } from "../blocks/block4/block4.query";
 import { getBlock8Query } from "../blocks/block8/block8.query";
-import { getBlock9Query } from "../blocks/block9/block9.query";
 import { getBlock10Query } from "../blocks/block10/block10.query";
 import { getBlock11Query } from "../blocks/block11/block11.query";
 import { getBlock12Query } from "../blocks/block12/block12.query";
@@ -120,7 +119,6 @@ export const getPageQuery = (language: LanguageType) => groq`
       ${getBlock2Query(language)},
       ${getBlock4Query(language)},
       ${getBlock8Query(language)},
-      ${getBlock9Query(language)},
       _key,
       _type,
       decorations,
