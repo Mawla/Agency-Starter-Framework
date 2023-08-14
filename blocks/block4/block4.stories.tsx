@@ -31,7 +31,7 @@ const DEMO_CONTENT = {
       the scope you want at the pace you need.
     </p>
   ),
-  buttons: [{ label: "Free trail", href: "/" }],
+  buttons: [{ label: "Free trial", href: "/" }],
   image: demoImage2,
 };
 
