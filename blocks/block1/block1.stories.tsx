@@ -371,6 +371,66 @@ export const Decorations = () => (
         },
       ]}
     />
+    <Block1
+      {...DEMO_CONTENT}
+      image={undefined}
+      video={undefined}
+      script={{
+        title: "youtube embed",
+        items: [
+          {
+            src: `//js-eu1.hsforms.net/forms/v2.js`,
+            onload: `
+          hbspt.forms.create({
+            region: "na1",
+            portalId: "8176446",
+            formId: "e1c83e9f-aaea-4c98-a17d-776b82668276",
+            target: "#hubspot-form-id"
+          });
+          `,
+            html: `<div id="hubspot-form-id">loading form</div>`,
+          },
+        ],
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
   </>
 );
 export const Scripts = () => (
