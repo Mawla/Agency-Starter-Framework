@@ -76,7 +76,7 @@ async function init() {
 
   let fields = await multiselect({
     message: "Which fields do you want get started with?",
-    initialValue: ["title", "intro", "image"],
+    initialValue: ["title", "intro", "buttons"],
     options: [
       { value: "title", label: "Title" },
       { value: "intro", label: "Intro" },
