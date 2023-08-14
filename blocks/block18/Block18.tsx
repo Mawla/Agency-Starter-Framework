@@ -192,7 +192,11 @@ export const Block18 = ({
               slides={filteredItems?.map((item) => (
                 <div key={item._key} className="h-full text-left">
                   <CardWrapper>
-                    <ComposableCard {...item} key={item._key} />
+                    <ComposableCard
+                      {...item}
+                      key={item._key}
+                      blockTitleLevel={theme?.title?.as || "h2"}
+                    />
                   </CardWrapper>
                 </div>
               ))}
@@ -216,7 +220,10 @@ export const Block18 = ({
                 return (
                   <div key={item._key} className="h-full text-left">
                     <CardWrapper>
-                      <ComposableCard {...item} />
+                      <ComposableCard
+                        {...item}
+                        blockTitleLevel={theme?.title?.as || "h2"}
+                      />
                     </CardWrapper>
                   </div>
                 );

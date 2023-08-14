@@ -6,6 +6,7 @@ import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { bumpHeadingLevel } from "../../helpers/utils/string";
 import {
   backgroundClasses,
   borderClasses,
@@ -21,6 +22,7 @@ import {
   BorderWidthType,
   ColorType,
   HorizontalAlignType,
+  HtmlTextNodeType,
   ImageType,
   PaddingType,
 } from "../../types";
@@ -73,6 +75,7 @@ export type ComposableCardProps = {
   content?: PortableTextProps["content"];
   buttons?: ButtonProps[];
   decorations?: DecorationProps[];
+  blockTitleLevel?: HtmlTextNodeType;
   theme?: {
     card?: {
       color?: ColorType;
@@ -129,6 +132,7 @@ export const ComposableCard = ({
   image,
   theme,
   decorations,
+  blockTitleLevel = "span",
 }: ComposableCardProps) => {
   return (
     <div
@@ -176,7 +180,10 @@ export const ComposableCard = ({
         {title && (
           <Title
             {...theme?.title}
-            as={theme?.title?.as || "span"}
+            as={
+              theme?.title?.as ||
+              (bumpHeadingLevel(blockTitleLevel) as HtmlTextNodeType)
+            }
             className="mb-4"
           >
             {title}
@@ -185,7 +192,12 @@ export const ComposableCard = ({
         {subtitle && (
           <Title
             {...theme?.subtitle}
-            as={theme?.subtitle?.as || "span"}
+            as={
+              theme?.subtitle?.as ||
+              (bumpHeadingLevel(
+                bumpHeadingLevel(blockTitleLevel),
+              ) as HtmlTextNodeType)
+            }
             className="mb-4"
           >
             {subtitle}

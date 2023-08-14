@@ -2,7 +2,6 @@ import { Block0Props } from "../../blocks/block0/Block0";
 import { Block1Props } from "../../blocks/block1/Block1";
 import { Block2Props } from "../../blocks/block2/Block2";
 import { Block4Props } from "../../blocks/block4/Block4";
-import { Block8Props } from "../../blocks/block8/Block8";
 import { Block10Props } from "../../blocks/block10/Block10";
 import { Block11Props } from "../../blocks/block11/Block11";
 import { Block12Props } from "../../blocks/block12/Block12";
@@ -67,9 +66,6 @@ const Block10 = lazy<ComponentType<Block10Props>>(
     import(/* webpackChunkName: "Block10" */ "../../blocks/block10/Block10"),
 );
 
-const Block8 = lazy<ComponentType<Block8Props>>(
-  () => import(/* webpackChunkName: "Block8" */ "../../blocks/block8/Block8"),
-);
 const Block4 = lazy<ComponentType<Block4Props>>(
   () => import(/* webpackChunkName: "Block4" */ "../../blocks/block4/Block4"),
 );
@@ -120,9 +116,6 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               )}
               {item._type === "block.block1" && (
                 <Block1 {...(item as Block1Props)} />
-              )}
-              {item._type === "block.block8" && (
-                <Block8 {...(item as Block8Props)} />
               )}
               {item._type === "block.block10" && (
                 <Block10 {...(item as Block10Props)} />
