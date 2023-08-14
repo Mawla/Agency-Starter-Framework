@@ -157,20 +157,26 @@ export const Block1 = ({
             )}
           >
             {image && (
-              <div className="relative w-full">
-                <ResponsiveImage
-                  {...image}
-                  {...theme?.image}
-                  fill={theme?.image?.preserveAspectRatio !== true}
-                  className={
-                    theme?.image?.preserveAspectRatio !== true
-                      ? "absolute inset-0"
-                      : ""
-                  }
-                  roundSize={25}
-                />
+              <div className="relative h-full lg:h-auto w-full">
+                <div
+                  className={cx("border relative", {
+                    ["h-full"]: theme?.image?.preserveAspectRatio !== true,
+                  })}
+                >
+                  <ResponsiveImage
+                    {...image}
+                    {...theme?.image}
+                    fill={theme?.image?.preserveAspectRatio !== true}
+                    className={
+                      theme?.image?.preserveAspectRatio !== true
+                        ? "absolute inset-0"
+                        : ""
+                    }
+                    roundSize={25}
+                  />
 
-                <Decorations decorations={decorations} location="image" />
+                  <Decorations decorations={decorations} location="image" />
+                </div>
               </div>
             )}
             {video && (
@@ -181,9 +187,11 @@ export const Block1 = ({
                     verticalAlignClasses[theme.layout.verticalAlign],
                 )}
               >
-                <div className="relative w-full">
-                  <Video {...video} className="w-full" />
-                  <Decorations decorations={decorations} location="image" />
+                <div className="w-full">
+                  <div className="relative  border w-full h-auto aspect-video">
+                    <Video {...video} className="w-full" />
+                    <Decorations decorations={decorations} location="image" />
+                  </div>
                 </div>
               </div>
             )}

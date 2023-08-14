@@ -9,7 +9,11 @@ import {
 } from "../../components/title/title.options";
 import { demoImage } from "../../stories/content";
 import { COLORS } from "../../theme";
-import { ColorType } from "../../types";
+import {
+  ColorType,
+  VERTICAL_ALIGN_OPTIONS,
+  VerticalAlignType,
+} from "../../types";
 import { Block1 } from "./Block1";
 import { Meta } from "@storybook/react";
 import React, { ComponentType, lazy } from "react";
@@ -140,6 +144,24 @@ export const IntroColors = () => (
   </>
 );
 
+export const verticalAlign = () => (
+  <>
+    {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
+      (verticalAlign) => (
+        <div key={verticalAlign}>
+          <Block1
+            title={`verticalAlign: ${verticalAlign}`}
+            image={demoImage}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+
 export const ImagePosition = () => (
   <>
     <Block1 {...DEMO_CONTENT} title="default" />
@@ -160,6 +182,194 @@ export const ImagePosition = () => (
         },
       }}
       title="right"
+    />
+  </>
+);
+
+export const Video = () => (
+  <Block1
+    {...DEMO_CONTENT}
+    image={undefined}
+    video={{
+      provider: "youtube",
+      videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    }}
+  />
+);
+
+export const PreserveAspectRatio = () => (
+  <>
+    <Block1
+      {...DEMO_CONTENT}
+      title="preserveAspectRatio false"
+      theme={{
+        image: {
+          preserveAspectRatio: false,
+        },
+      }}
+    />
+    <Block1
+      title="preserveAspectRatio false"
+      image={demoImage}
+      theme={{
+        image: {
+          preserveAspectRatio: false,
+        },
+      }}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      title="preserveAspectRatio true"
+      theme={{
+        image: {
+          preserveAspectRatio: true,
+        },
+      }}
+    />
+    <Block1
+      title="preserveAspectRatio true"
+      image={demoImage}
+      theme={{
+        image: {
+          preserveAspectRatio: true,
+        },
+      }}
+    />
+  </>
+);
+
+export const Decorations = () => (
+  <>
+    <Block1
+      {...DEMO_CONTENT}
+      theme={{
+        image: { preserveAspectRatio: true },
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      image={undefined}
+      video={{
+        provider: "youtube",
+        videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
     />
   </>
 );
