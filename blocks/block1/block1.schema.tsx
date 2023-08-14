@@ -7,17 +7,18 @@ import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { VERTICAL_ALIGN_OPTIONS } from "../../types";
 import { IMAGE_POSITION_OPTIONS } from "./block1.options";
-import { VirtualRealityImage } from "@vectopus/atlas-icons-react";
+import { Image } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "block.block1",
-  title: "Image with feature list",
+  title: "Text and Media",
   type: "object",
-  icon: () => <VirtualRealityImage weight="thin" />,
-  description: "Text, image and feature list left or right",
+  icon: () => <Image weight="thin" />,
+  description: "Text, image or video and feature list left or right",
   preview: {
     select: {
       title: "title",
@@ -26,7 +27,7 @@ const schema = defineType({
     prepare({ title = "Block 1", image }: any) {
       return {
         title: title,
-        media: image || <VirtualRealityImage weight="thin" />,
+        media: image || <Image weight="thin" />,
       };
     },
   },
@@ -47,9 +48,15 @@ const schema = defineType({
       group: "content",
     }),
     defineField({
-      name: "features",
-      title: "Features",
+      name: "body",
+      title: "Body",
       type: "portabletext.basic",
+      group: "content",
+    }),
+    defineField({
+      name: "buttons",
+      title: "Buttons",
+      type: "buttongroup",
       group: "content",
     }),
     defineField({
@@ -60,8 +67,15 @@ const schema = defineType({
       options: {
         hotspot: true,
       },
+      hidden: ({ parent, value }) => !value && Boolean(parent?.video),
     }),
-
+    defineField({
+      name: "video",
+      title: "Video",
+      type: "video",
+      group: "content",
+      hidden: ({ parent, value }) => !value && Boolean(parent?.image),
+    }),
     defineField({
       name: "theme",
       title: "Theme",
@@ -76,20 +90,28 @@ const schema = defineType({
           type: "styles",
           options: {
             fields: [
-              {
+              defineField({
                 name: "imagePosition",
                 title: "Image position",
                 type: "select",
                 options: {
                   list: optionsToList(IMAGE_POSITION_OPTIONS),
                 },
-              },
+              }),
+              defineField({
+                name: "verticalAlign",
+                title: "Vertical align",
+                type: "select",
+                options: {
+                  list: optionsToList(VERTICAL_ALIGN_OPTIONS),
+                },
+              }),
             ],
           },
         }),
         defaultTitleTheme,
         defaultTextTheme,
-        { ...defaultTextTheme, name: "features", title: "Features" },
+        { ...defaultTextTheme, name: "body", title: "Body" },
       ],
     }),
     defineField({

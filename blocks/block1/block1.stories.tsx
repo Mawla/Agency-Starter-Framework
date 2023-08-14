@@ -36,7 +36,7 @@ const DEMO_CONTENT = {
       toil, and deploy changes with ease.
     </p>
   ),
-  features: (
+  body: (
     <>
       <ul className="list-none relative">
         {[
@@ -114,10 +114,10 @@ export const IntroSizes = () => (
       <div key={size}>
         <Block1
           intro={DEMO_CONTENT.intro}
-          features={DEMO_CONTENT.features}
+          body={DEMO_CONTENT.body}
           theme={{
             intro: { size },
-            features: { size },
+            body: { size },
           }}
         />
       </div>

@@ -23,9 +23,9 @@ describe("Block1", () => {
 });
 
 describe("Block1", () => {
-  it("renders features", async () => {
+  it("renders body", async () => {
     await act(() => {
-      render(<Block1 features={<p>Hello</p>} />);
+      render(<Block1 body={<p>Hello</p>} />);
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });
@@ -46,5 +46,14 @@ describe("Block1", () => {
       );
     });
     expect(screen.getAllByAltText("hello"));
+  });
+});
+
+describe("Block1", () => {
+  it("renders buttons", async () => {
+    await act(() => {
+      render(<Block1 buttons={[{ label: "hello" }]} />);
+    });
+    expect(screen.getByText("hello")).toBeInTheDocument();
   });
 });

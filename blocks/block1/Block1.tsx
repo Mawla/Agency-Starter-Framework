@@ -1,6 +1,8 @@
 import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { SpaceType } from "../../components/block/spacing.options";
+import { ButtonProps } from "../../components/buttons/Button";
+import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
@@ -8,7 +10,13 @@ import { TextProps } from "../../components/text/Text";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { ColorType, ImageType } from "../../types";
+import { VideoProps } from "../../components/video/Video";
+import {
+  ColorType,
+  ImageType,
+  VerticalAlignType,
+  VideoType,
+} from "../../types";
 import { ImagePositionType } from "./block1.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -40,6 +48,17 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
+const Video = lazy<ComponentType<VideoProps>>(
+  () => import(/* webpackChunkName: "Video" */ "../../components/video/Video"),
+);
+
+const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+    ),
+);
+
 export type Block1Props = {
   theme?: {
     block?: {
@@ -48,17 +67,26 @@ export type Block1Props = {
     };
     layout?: {
       imagePosition?: ImagePositionType;
+      verticalAlign?: VerticalAlignType;
     };
     image?: ImageThemeType;
     title?: TitleThemeType;
     intro?: TextThemeType;
-    features?: TextThemeType;
+    body?: TextThemeType;
   };
   decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
-  features?: React.ReactNode;
+  body?: React.ReactNode;
   image?: ImageType;
+  video?: VideoType;
+  buttons?: ButtonProps[];
+};
+
+export const verticalAlignClasses: Record<VerticalAlignType, string> = {
+  top: "lg:items-start",
+  middle: "lg:items-center",
+  bottom: "lg:items-end",
 };
 
 export const Block1 = ({
@@ -66,8 +94,10 @@ export const Block1 = ({
   decorations,
   title,
   intro,
-  features,
+  body,
   image,
+  video,
+  buttons,
 }: Block1Props) => {
   return (
     <Wrapper
@@ -76,40 +106,38 @@ export const Block1 = ({
       }}
       decorations={decorations}
     >
-      <div className="gap-8 items-center grid lg:grid-cols-2 xl:gap-16">
-        <div className="order-1">
+      <div
+        className={cx(
+          "gap-8 grid lg:grid-cols-2 xl:gap-16",
+          theme?.layout?.verticalAlign &&
+            verticalAlignClasses[theme.layout.verticalAlign],
+        )}
+      >
+        <div className="order-1 flex flex-col gap-8">
           {title && (
-            <div className="mb-4">
-              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-                {title}
-              </Title>
-            </div>
+            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+              {title}
+            </Title>
           )}
 
           {intro && (
-            <div className="mb-8">
-              <Text
-                size={theme?.intro?.size || "lg"}
-                color={theme?.intro?.color}
-              >
-                <PortableText content={intro as any} />
-              </Text>
-            </div>
+            <Text size={theme?.intro?.size || "lg"} color={theme?.intro?.color}>
+              <PortableText content={intro as any} />
+            </Text>
           )}
 
-          {features && (
-            <div className="pt-8 my-7 border-t border-gray-200">
-              <Text
-                size={theme?.features?.size || "lg"}
-                color={theme?.features?.color}
-              >
-                <PortableText content={features as any} />
-              </Text>
-            </div>
+          {body && (
+            <Text size={theme?.body?.size || "lg"} color={theme?.body?.color}>
+              <PortableText content={body as any} />
+            </Text>
+          )}
+
+          {buttons && Boolean(buttons?.filter(Boolean).length) && (
+            <ButtonGroup items={buttons} />
           )}
         </div>
 
-        {image && (
+        {(image || video) && (
           <div
             className={cx(
               "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
@@ -120,17 +148,25 @@ export const Block1 = ({
               },
             )}
           >
-            <ResponsiveImage
-              {...image}
-              {...theme?.image}
-              fill={theme?.image?.preserveAspectRatio !== true}
-              className={
-                theme?.image?.preserveAspectRatio !== true
-                  ? "absolute inset-0"
-                  : ""
-              }
-              roundSize={25}
-            />
+            {image && (
+              <ResponsiveImage
+                {...image}
+                {...theme?.image}
+                fill={theme?.image?.preserveAspectRatio !== true}
+                className={
+                  theme?.image?.preserveAspectRatio !== true
+                    ? "absolute inset-0"
+                    : ""
+                }
+                roundSize={25}
+              />
+            )}
+
+            {video && (
+              <div>
+                <Video {...video} />
+              </div>
+            )}
           </div>
         )}
       </div>

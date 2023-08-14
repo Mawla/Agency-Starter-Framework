@@ -239,6 +239,14 @@ export const HORIZONTAL_ALIGN_OPTIONS = pick(
 );
 export type HorizontalAlignType = keyof typeof HORIZONTAL_ALIGN_OPTIONS;
 
+export const VERTICAL_ALIGN_OPTIONS = pick(
+  ALIGNMENTS,
+  "top",
+  "middle",
+  "bottom",
+);
+export type VerticalAlignType = keyof typeof VERTICAL_ALIGN_OPTIONS;
+
 export const RATIOS = {
   auto: "Auto",
   "1/1": "Square",
