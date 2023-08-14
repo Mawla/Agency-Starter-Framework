@@ -28,7 +28,7 @@ describe("Block18", () => {
     await act(() => {
       render(<Block18 items={[{ title: "Hello", _key: "" }]} />);
     });
-    expect(screen.getByText("Hello", { selector: "span" })).toBeInTheDocument();
+    expect(screen.getByText("Hello", { selector: "h3" })).toBeInTheDocument();
   });
 });
 
@@ -95,10 +95,10 @@ describe("Composable card", () => {
     expect(screen.getByLabelText("button")).toBeInTheDocument();
 
     expect(
-      screen.getByText("card title", { selector: "span" }),
+      screen.getByText("card title", { selector: "h3" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("card subtitle", { selector: "span" }),
+      screen.getByText("card subtitle", { selector: "h4" }),
     ).toBeInTheDocument();
     expect(screen.getByText("card text")).toBeInTheDocument();
     expect(
