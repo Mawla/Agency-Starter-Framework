@@ -19,7 +19,7 @@ import {
   FlatBreadcrumbType,
   getBreadcrumbQuery,
 } from "../components/breadcrumb/breadcrumb.query";
-import { decorationsQuery } from "../components/decorations/Decoration.query";
+import { decorationsQuery } from "../components/decorations/decoration.query";
 import {
   imageQuery,
   getImageQuery as getImageComponentQuery,
