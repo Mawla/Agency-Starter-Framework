@@ -275,7 +275,6 @@ type Block18ButtonsProps = {
 };
 
 const Block18Buttons = ({ buttons, theme }: Block18ButtonsProps) => {
-  const { screenWidth } = useBreakpoint();
   if (!buttons) return null;
 
   return (
