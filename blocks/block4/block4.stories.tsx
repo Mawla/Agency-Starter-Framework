@@ -36,6 +36,16 @@ const DEMO_CONTENT = {
 };
 
 export const Default = () => <Block4 {...DEMO_CONTENT} />;
+export const Video = () => (
+  <Block4
+    {...DEMO_CONTENT}
+    image={undefined}
+    video={{
+      provider: "youtube",
+      videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    }}
+  />
+);
 
 export const BlockBackgrounds = () => (
   <>
@@ -127,5 +137,96 @@ export const Alignments = () => (
         </div>
       ),
     )}
+  </>
+);
+
+export const Decorations = () => (
+  <>
+    <Block4
+      {...DEMO_CONTENT}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
+    <Block4
+      {...DEMO_CONTENT}
+      video={{
+        provider: "youtube",
+        videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
   </>
 );

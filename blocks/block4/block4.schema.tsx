@@ -14,7 +14,7 @@ const schema = defineType({
   title: "Default content",
   type: "object",
   icon: () => <AlignCenter weight="thin" />,
-  description: "Basic title, intro, buttons and image block",
+  description: "Basic title, intro, buttons and image or video block",
   preview: {
     select: {
       title: "title",
@@ -59,7 +59,12 @@ const schema = defineType({
       type: "buttongroup",
       group: "content",
     }),
-
+    defineField({
+      name: "video",
+      title: "Video",
+      type: "video",
+      group: "content",
+    }),
     defineField({
       name: "theme",
       title: "Theme",

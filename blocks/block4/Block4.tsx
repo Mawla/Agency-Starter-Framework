@@ -13,8 +13,9 @@ import {
 } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
-import { ImageType } from "../../types";
+import { ImageType, VideoType } from "../../types";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -58,6 +59,10 @@ const Decorations = lazy<ComponentType<DecorationsProps>>(
     ),
 );
 
+const Video = lazy<ComponentType<VideoProps>>(
+  () => import(/* webpackChunkName: "Video" */ "../../components/video/Video"),
+);
+
 export type Block4Props = {
   theme?: {
     block?: BlockThemeType;
@@ -68,6 +73,7 @@ export type Block4Props = {
   title?: string;
   intro?: React.ReactNode;
   image?: ImageType;
+  video?: VideoType;
   buttons?: ButtonProps[];
 };
 
@@ -77,6 +83,7 @@ export const Block4 = ({
   title,
   intro,
   image,
+  video,
   buttons,
 }: Block4Props) => {
   return (
@@ -126,6 +133,13 @@ export const Block4 = ({
               preserveAspectRatio
               className="inline-block"
             />
+            <Decorations decorations={decorations} location="image" />
+          </div>
+        )}
+
+        {video && (
+          <div className="rounded-xs relative">
+            <Video {...video} />
             <Decorations decorations={decorations} location="image" />
           </div>
         )}
