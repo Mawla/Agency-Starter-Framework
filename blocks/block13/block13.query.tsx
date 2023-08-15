@@ -84,7 +84,7 @@ export const getBlock13Query = (language: LanguageType) => {
         ),
         "intro": coalesce(
           pt::text(blocks[0].intro),
-          pt::text(modules[_type == 'module.richtext'][0].content),
+          pt::text(blocks[_type == 'block.block14'][0].body),
         ),
         "date": coalesce(publishedAt, _createdAt),
       } | order(publishedAt desc, _createdAt desc) [0...4]

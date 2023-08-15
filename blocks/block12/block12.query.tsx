@@ -56,7 +56,7 @@ export const getBlock12Query = (language: LanguageType) => groq`
       ),
       "intro": coalesce(
         pt::text(blocks[0].intro),
-        pt::text(modules[_type == 'module.richtext'][0].content),
+        pt::text(blocks[_type == 'block.block14'][0].body)
       ),
       "tags": tags[]->title,
       "authors": authors[]-> { 
