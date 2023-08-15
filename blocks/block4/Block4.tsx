@@ -116,7 +116,11 @@ export const Block4 = ({
 
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
           <div className="mt-6">
-            <ButtonGroup items={buttons} />
+            <ButtonGroup
+              items={buttons}
+              align={theme?.block?.align || "center"}
+              direction="horizontal"
+            />
           </div>
         )}
 
