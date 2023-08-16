@@ -1,19 +1,14 @@
 import { Link } from "../../components/buttons/Link";
-import { IconLoaderProps } from "../../components/images/IconLoader";
+import IconLoader, {
+  IconLoaderProps,
+} from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
-import { getLanguageTitle, languages, LanguageType } from "../../languages";
+import { getLanguageTitle, languages } from "../../languages";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
 import { ComponentType, lazy, useContext } from "react";
-
-const IconLoader = lazy<ComponentType<IconLoaderProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "IconLoader" */ "../../components/images/IconLoader"
-    ),
-);
 
 type LanguageSwitchProps = {
   align?: "left" | "right";
