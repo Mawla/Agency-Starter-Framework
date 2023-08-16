@@ -13,6 +13,7 @@ import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
+import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import {
   ColorType,
   ImageType,
@@ -178,27 +179,33 @@ export const Block1 = ({
               <div className="relative h-full w-full">
                 <div
                   className={cx(
-                    "relative",
+                    "relative aspect-video lg:aspect-auto flex w-full h-full",
                     theme?.layout?.verticalAlign &&
                       verticalAlignClasses[theme.layout.verticalAlign],
-                    {
-                      ["aspect-video lg:aspect-auto h-full"]:
-                        theme?.image?.fullHeight,
-                      ["flex h-full [&>div]:!h-auto"]:
-                        !theme?.image?.fullHeight,
-                    },
                   )}
                 >
-                  <ResponsiveImage
-                    {...image}
-                    fill={theme?.image?.fullHeight}
-                    className={
-                      theme?.image?.fullHeight ? "absolute inset-0" : ""
-                    }
-                    roundSize={25}
-                  />
+                  <div
+                    className={cx("relative w-full", {
+                      ["lg:h-full"]: theme?.image?.fullHeight,
+                    })}
+                    style={{
+                      aspectRatio: !theme?.image?.fullHeight
+                        ? getOriginalImageDimensions(image?.src).aspectRatio ||
+                          "auto"
+                        : undefined,
+                    }}
+                  >
+                    <ResponsiveImage
+                      {...image}
+                      fill
+                      className={
+                        theme?.image?.fullHeight ? "absolute inset-0" : ""
+                      }
+                      roundSize={25}
+                    />
 
-                  <Decorations decorations={decorations} location="image" />
+                    <Decorations decorations={decorations} location="image" />
+                  </div>
                 </div>
               </div>
             )}
