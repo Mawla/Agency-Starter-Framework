@@ -7,10 +7,12 @@ import { DecorationProps } from "../../components/decorations/Decoration";
 import { FAQProps } from "../../components/faq/FAQ";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
-import { TextThemeType } from "../../components/text/text.options";
+import {
+  TextThemeType,
+  textAlignClasses,
+} from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { textAlignClasses } from "../../theme";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 

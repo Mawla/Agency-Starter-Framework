@@ -14,7 +14,6 @@ import {
   borderWidthClasses,
   paddingXClasses,
   paddingYClasses,
-  textAlignClasses,
   textClasses,
 } from "../../theme";
 import {
@@ -27,6 +26,7 @@ import {
   PaddingType,
 } from "../../types";
 import { DecorationsProps } from "../decorations/Decorations";
+import { textAlignClasses } from "../text/text.options";
 import {
   ImageHeightType,
   ImageRatioType,

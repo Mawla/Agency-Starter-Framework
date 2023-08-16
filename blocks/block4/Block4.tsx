@@ -16,6 +16,7 @@ import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { ImageType, VideoType } from "../../types";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -98,9 +99,10 @@ export const Block4 = ({
     >
       <div className="flex flex-col gap-6">
         <div
-          className={`flex flex-col gap-6 max-w-3xl relative z-10 ${
-            textAlignClasses[theme?.block?.align || "center"]
-          }`}
+          className={cx(
+            "flex flex-col gap-6 max-w-3xl relative z-10",
+            textAlignClasses[theme?.block?.align || "center"],
+          )}
         >
           {title && (
             <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
