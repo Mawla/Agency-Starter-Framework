@@ -133,28 +133,6 @@ export const ORDER_PUBLISHED_DESC: SortOrdering = {
   by: [{ field: "publishedAt", direction: "desc" }],
 };
 
-export const EMPTY_RICHTEXT_BLOCK = {
-  _type: "block.richtext",
-  _key: nanoid(),
-  background: "white",
-  content: [
-    {
-      _type: "block",
-      _key: nanoid(),
-      style: "normal",
-      markDefs: [],
-      children: [
-        {
-          _type: "span",
-          _key: nanoid(),
-          text: "",
-          marks: [],
-        },
-      ],
-    },
-  ],
-};
-
 export const PASSWORD = defineField({
   name: "locked",
   title: "Locked",
