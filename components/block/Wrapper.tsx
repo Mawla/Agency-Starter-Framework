@@ -1,4 +1,3 @@
-import { slugify } from "../../helpers/utils/string";
 import { backgroundClasses } from "../../theme";
 import { DecorationProps } from "../decorations/Decoration";
 import { DecorationsProps } from "../decorations/Decorations";
@@ -58,7 +57,6 @@ export const Wrapper = ({
   return (
     <Bleed
       bleed={theme?.width === "full" ? "none" : "sm"}
-      id={id ? slugify(id) : ""}
       className={cx(
         "relative",
         className,

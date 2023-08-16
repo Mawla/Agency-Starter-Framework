@@ -105,7 +105,8 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               networkIdle={INVIEW_LOAD_ONLY_SECTIONS.indexOf(item._type) === -1}
               background={item.theme?.background}
               block={item._type}
-              id={item._key}
+              _key={item._key}
+              slug={item.slug}
             >
               {/* all blocks */}
               {item._type === "block.block4" && (
