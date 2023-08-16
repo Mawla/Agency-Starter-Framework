@@ -1,7 +1,7 @@
 import { Link } from "../../components/buttons/Link";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { ComponentType, lazy } from "react";
+import { ComponentType, Suspense, lazy } from "react";
 
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () =>
@@ -47,10 +47,12 @@ export const FooterMenu = ({
           )}
         </span>
 
-        <IconLoader
-          icon="chevrondown"
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden transition-transform duration-75 group-open:rotate-180"
-        />
+        <Suspense>
+          <IconLoader
+            icon="chevrondown"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4  md:hidden transition-transform duration-75 group-open:rotate-180"
+          />
+        </Suspense>
       </summary>
 
       <ul className="flex flex-col gap-4 pb-6 md:pb-0">
