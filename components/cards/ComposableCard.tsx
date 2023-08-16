@@ -27,11 +27,7 @@ import {
 } from "../../types";
 import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
-import {
-  ImageHeightType,
-  ImageRatioType,
-  ImageRoundedType,
-} from "./composablecard.options";
+import { ImageHeightType, ImageRatioType } from "./composablecard.options";
 import cx from "classnames";
 import { ComponentType, lazy } from "react";
 
@@ -95,7 +91,7 @@ export type ComposableCardProps = {
     image?: {
       ratio?: ImageRatioType;
       height?: ImageHeightType;
-      rounded?: ImageRoundedType;
+      rounded?: BorderRadiusType;
     };
   };
 };
@@ -106,15 +102,6 @@ const imageHeightClasses: Record<ImageHeightType, string> = {
   md: "h-24",
   lg: "h-[210px]",
   xl: "h-[230px]",
-};
-
-const roundedClasses: Record<ImageRoundedType, string> = {
-  none: "",
-  sm: "rounded-lg",
-  md: "rounded-xl",
-  lg: "rounded-2xl",
-  xl: "rounded-3xl",
-  full: "rounded-full",
 };
 
 const ratioClasses: Record<ImageRatioType, string> = {
@@ -157,13 +144,14 @@ export const ComposableCard = ({
         })}
       >
         {image && (
-          <div className="block">
+          <div className="block border border-black">
             <div
               className={cx(
-                "relative inline-flex overflow-hidden max-w-full",
+                "relative inline-flex overflow-hidden max-w-full border-[red]",
                 imageHeightClasses[theme?.image?.height || "xs"],
                 theme?.image?.ratio && ratioClasses[theme?.image?.ratio],
-                theme?.image?.rounded && roundedClasses[theme?.image?.rounded],
+                theme?.image?.rounded &&
+                  borderRadiusClasses[theme?.image?.rounded],
               )}
               style={{
                 aspectRatio:

@@ -5,6 +5,8 @@ import {
 import { demoIcon1, demoImage } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
+  BORDER_RADIUS_OPTIONS,
+  BorderRadiusType,
   ColorType,
   HORIZONTAL_ALIGN_OPTIONS,
   HorizontalAlignType,
@@ -116,7 +118,7 @@ export const BorderColors = () => (
           title="title"
           content={<p>content</p>}
           theme={{
-            border: { color },
+            border: { color, width: 2 },
           }}
         />
       </div>
@@ -213,6 +215,23 @@ export const ImageSizes = () => (
         />
       </div>
     ))}
+  </div>
+);
+
+export const ImageRounded = () => (
+  <div className="grid grid-cols-5">
+    {(Object.keys(BORDER_RADIUS_OPTIONS) as BorderRadiusType[]).map(
+      (rounded) => (
+        <div key={rounded}>
+          <ComposableCard
+            image={demoImage}
+            theme={{
+              image: { rounded, height: "xl" },
+            }}
+          />
+        </div>
+      ),
+    )}
   </div>
 );
 
