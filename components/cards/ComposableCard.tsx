@@ -150,7 +150,7 @@ export const ComposableCard = ({
     >
       <Decorations decorations={decorations} />
       <div
-        className={cx("relative z-10 flex flex-col", {
+        className={cx("relative z-10 flex flex-col gap-4", {
           ["items-center"]: theme?.card?.align === "center",
           ["items-start"]: theme?.card?.align === "left",
           ["items-end"]: theme?.card?.align === "right",
@@ -160,7 +160,7 @@ export const ComposableCard = ({
           <div className="block">
             <div
               className={cx(
-                "mb-4 relative inline-flex overflow-hidden max-w-full",
+                "relative inline-flex overflow-hidden max-w-full",
                 imageHeightClasses[theme?.image?.height || "xs"],
                 theme?.image?.ratio && ratioClasses[theme?.image?.ratio],
                 theme?.image?.rounded && roundedClasses[theme?.image?.rounded],
@@ -184,7 +184,6 @@ export const ComposableCard = ({
               theme?.title?.as ||
               (bumpHeadingLevel(blockTitleLevel) as HtmlTextNodeType)
             }
-            className="mb-4"
           >
             {title}
           </Title>
@@ -198,7 +197,6 @@ export const ComposableCard = ({
                 bumpHeadingLevel(blockTitleLevel),
               ) as HtmlTextNodeType)
             }
-            className="mb-4"
           >
             {subtitle}
           </Title>
@@ -209,7 +207,7 @@ export const ComposableCard = ({
           </Title>
         )}
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-6">
+          <div>
             <ButtonGroup items={buttons} />
           </div>
         )}
