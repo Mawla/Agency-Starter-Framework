@@ -1,7 +1,16 @@
 import { pick } from "../../helpers/utils/object";
 import { SIZES } from "../../types";
 
-export const SPACE_OPTIONS = pick(SIZES, "none", "xs", "sm", "md", "lg", "xl");
+export const SPACE_OPTIONS = pick(
+  SIZES,
+  "none",
+  "2xs",
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+);
 export type SpaceTopType = keyof typeof SPACE_OPTIONS;
 export type SpaceBottomType = keyof typeof SPACE_OPTIONS;
 
@@ -12,6 +21,7 @@ export type SpaceType = {
 
 export const paddingTopClasses: Record<SpaceTopType, string> = {
   none: "pt-0",
+  "2xs": "pt-2.5 sm:pt-2.5 md:pt-4 lg:pt-5",
   xs: "pt-5 sm:pt-5 md:pt-8 lg:pt-10",
   sm: "pt-10 sm:pt-10 md:pt-16 lg:pt-20",
   md: "pt-10 sm:pt-10 md:pt-20 lg:pt-25",
@@ -21,6 +31,7 @@ export const paddingTopClasses: Record<SpaceTopType, string> = {
 
 export const paddingBottomClasses: Record<SpaceBottomType, string> = {
   none: "pb-0",
+  "2xs": "pb-2.5 sm:pb-2.5 md:pb-4 lg:pb-5",
   xs: "pb-5 sm:pb-5 md:pb-8 lg:pb-10",
   sm: "pb-10 sm:pb-10 md:pb-16 lg:pb-20",
   md: "pb-10 sm:pb-10 md:pb-20 lg:pb-25",
@@ -30,6 +41,7 @@ export const paddingBottomClasses: Record<SpaceBottomType, string> = {
 
 export const marginTopClasses: Record<SpaceTopType, string> = {
   none: "mt-0",
+  "2xs": "mt-2.5 sm:mt-2.5 md:mt-4 lg:mt-5",
   xs: "mt-5 sm:mt-5 md:mt-8 lg:mt-10",
   sm: "mt-10 sm:mt-10 md:mt-16 lg:mt-20",
   md: "mt-10 sm:mt-10 md:mt-20 lg:mt-25",
@@ -39,6 +51,7 @@ export const marginTopClasses: Record<SpaceTopType, string> = {
 
 export const marginBottomClasses: Record<SpaceBottomType, string> = {
   none: "mb-0",
+  "2xs": "mb-2.5 sm:mb-2.5 md:mb-4 lg:mb-5",
   xs: "mb-5 sm:mb-5 md:mb-8 lg:mb-10",
   sm: "mb-10 sm:mb-10 md:mb-16 lg:mb-20",
   md: "mb-10 sm:mb-10 md:mb-20 lg:mb-25",
