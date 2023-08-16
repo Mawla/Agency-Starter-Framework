@@ -99,6 +99,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
         .filter((type) =>
           typeFilter ? new RegExp(typeFilter).test(type) : true,
         )
+        .filter((type) => !type.startsWith("preset."))
         .filter((type) => !type.startsWith("studio."))
         .filter((type) => type !== "block")
         .map((type) => allSchemas[type].get(type))
