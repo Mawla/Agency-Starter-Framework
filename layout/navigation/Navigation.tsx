@@ -84,7 +84,6 @@ export const Navigation = ({
         onHamburgerClick={onHamburgerClick}
         showNav={showNav}
         ref={navRef}
-        navHeight={spacerHeight}
         logo={logo}
         theme={theme}
       />

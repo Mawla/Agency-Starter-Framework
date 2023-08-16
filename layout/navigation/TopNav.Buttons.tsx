@@ -21,6 +21,14 @@ export const TopNavButtons = ({
   return (
     <RadixNavigationMenu.Root>
       <RadixNavigationMenu.List className="flex gap-2 xl:gap-4 items-center justify-end">
+        <LanguageSwitch
+          align="right"
+          position="below"
+          theme={{
+            background: theme?.submenu?.background || "white",
+          }}
+        />
+
         {/* buttons */}
         {Boolean(buttons?.length) &&
           buttons?.map((button) => (
