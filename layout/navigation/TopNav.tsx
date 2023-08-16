@@ -119,7 +119,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
 
                     return (
                       <RadixNavigationMenu.Item
-                        key={item.button?.label}
+                        key={item._key}
                         className="relative group"
                       >
                         {Boolean(item.children?.length) ? (
@@ -154,7 +154,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                           <noscript>
                             <ul>
                               {item.children?.map((item) => (
-                                <li key={item.label}>
+                                <li key={item._key}>
                                   <Button {...item} />
                                 </li>
                               ))}
@@ -182,7 +182,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               )}
                             >
                               {item.children?.map((item) => (
-                                <RadixNavigationMenu.Item key={item?.label}>
+                                <RadixNavigationMenu.Item key={item?._key}>
                                   <span className="block p-3">
                                     <Button
                                       {...item}
@@ -218,7 +218,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                 {Boolean(buttons?.length) &&
                   buttons?.map((button) => (
                     <RadixNavigationMenu.Item
-                      key={button.label}
+                      key={button._key}
                       className="hidden md:block"
                     >
                       <Button {...button} />

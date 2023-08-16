@@ -28,6 +28,15 @@ export const Scripts = ({ items }: ScriptsType) => {
   return (
     <React.Fragment>
       {items.filter(Boolean).map((script) => {
+        if (script.code) {
+          script.code = `
+          try {
+            ${script.code}
+          } catch (error) {
+            console.error(error);
+          }`;
+        }
+
         const nextScriptProps = {
           ...script.attributes?.reduce((acc, { name, value }) => {
             if (name && value) {

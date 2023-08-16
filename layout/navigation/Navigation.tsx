@@ -10,14 +10,15 @@ import router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 
 export type NavItem = {
+  _key?: string;
   button?: ButtonProps & { current?: boolean };
   current?: boolean;
-  children?: (ButtonProps & { current?: boolean })[];
+  children?: (ButtonProps & { current?: boolean; _key?: string })[];
 };
 
 export type NavigationProps = {
   items: NavItem[];
-  buttons: ButtonProps[];
+  buttons: (ButtonProps & { _key?: string })[];
   logo?: { mobile?: ImageType; desktop?: ImageType };
   theme?: {
     block?: {
