@@ -68,8 +68,6 @@ const schema = defineType({
       group: "theme",
       fields: [
         defaultBlockTheme,
-        defaultTitleTheme,
-        defaultTextTheme,
         defineField({
           name: "grid",
           type: "styles",
@@ -100,6 +98,8 @@ const schema = defineType({
             ],
           },
         }),
+        defaultTitleTheme,
+        defaultTextTheme,
         defineField({
           name: "slider",
           type: "styles",
