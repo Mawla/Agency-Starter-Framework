@@ -256,10 +256,16 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
     }[] = [];
 
     if (presetId) {
-      newBlocks = [...(selectedOption?.blocks || [])].map((block) => ({
-        _type: selectedType as BlockSchemaName,
-        ...block,
-      }));
+      newBlocks = [...(selectedOption?.blocks || [])].map((block) => {
+        const data = { ...block };
+        delete data.hidden;
+        delete data.icon;
+
+        return {
+          _type: selectedType as BlockSchemaName,
+          ...data,
+        };
+      });
     } else {
       newBlocks = [
         {
