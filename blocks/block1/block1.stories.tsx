@@ -10,6 +10,8 @@ import {
 import { demoImage, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
+  BORDER_RADIUS_OPTIONS,
+  BorderRadiusType,
   ColorType,
   VERTICAL_ALIGN_OPTIONS,
   VerticalAlignType,
@@ -144,6 +146,31 @@ export const IntroColors = () => (
   </>
 );
 
+export const ImageRadius = () => (
+  <>
+    {(Object.keys(BORDER_RADIUS_OPTIONS) as BorderRadiusType[]).map(
+      (rounded) => (
+        <div key={rounded}>
+          <Block1
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded },
+            }}
+          />
+          <Block1
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded, fullHeight: true },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+
 export const verticalAlignContent = () => (
   <>
     {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
@@ -269,10 +296,11 @@ export const Video = () => (
   />
 );
 
-export const imageHeight = () => (
+export const ImageHeight = () => (
   <>
     <Block1
       {...DEMO_CONTENT}
+      intro={<p style={{ height: 600 }}>…</p>}
       title="fullHeight false"
       theme={{
         image: {
@@ -312,6 +340,51 @@ export const imageHeight = () => (
 
 export const Decorations = () => (
   <>
+    <Block1
+      {...DEMO_CONTENT}
+      intro={<p style={{ height: 600 }}>intro…</p>}
+      theme={{
+        image: { fullHeight: false },
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
     <Block1
       {...DEMO_CONTENT}
       theme={{

@@ -14,7 +14,9 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { borderRadiusClasses } from "../../theme";
 import {
+  BorderRadiusType,
   ColorType,
   ImageType,
   VerticalAlignType,
@@ -87,6 +89,7 @@ export type Block1Props = {
     };
     image?: {
       fullHeight?: boolean;
+      rounded?: BorderRadiusType;
     };
     title?: TitleThemeType;
     intro?: TextThemeType;
@@ -198,9 +201,11 @@ export const Block1 = ({
                     <ResponsiveImage
                       {...image}
                       fill
-                      className={
-                        theme?.image?.fullHeight ? "absolute inset-0" : ""
-                      }
+                      className={cx(
+                        theme?.image?.rounded &&
+                          borderRadiusClasses[theme?.image?.rounded],
+                        theme?.image?.fullHeight ? "absolute inset-0" : "",
+                      )}
                       roundSize={25}
                     />
 
@@ -219,7 +224,14 @@ export const Block1 = ({
               >
                 <div className="w-full">
                   <div className="relative w-full h-auto aspect-video">
-                    <Video {...video} className="w-full" />
+                    <Video
+                      {...video}
+                      className={cx(
+                        "w-full",
+                        theme?.image?.rounded &&
+                          borderRadiusClasses[theme?.image?.rounded],
+                      )}
+                    />
                     <Decorations decorations={decorations} location="image" />
                   </div>
                 </div>

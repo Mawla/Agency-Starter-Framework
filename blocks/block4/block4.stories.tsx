@@ -6,12 +6,14 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
-import { demoImage2, demoImage3 } from "../../stories/content";
+import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   ColorType,
   HorizontalAlignType,
   HORIZONTAL_ALIGN_OPTIONS,
+  BORDER_RADIUS_OPTIONS,
+  BorderRadiusType,
 } from "../../types";
 import { Block4 } from "./Block4";
 import { Meta } from "@storybook/react";
@@ -244,5 +246,29 @@ export const Decorations = () => (
         },
       ]}
     />
+  </>
+);
+export const ImageRadius = () => (
+  <>
+    {(Object.keys(BORDER_RADIUS_OPTIONS) as BorderRadiusType[]).map(
+      (rounded) => (
+        <div key={rounded}>
+          <Block4
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded },
+            }}
+          />
+          <Block4
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded },
+            }}
+          />
+        </div>
+      ),
+    )}
   </>
 );

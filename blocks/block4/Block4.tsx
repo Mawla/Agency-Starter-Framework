@@ -15,7 +15,8 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
-import { ImageType, VideoType } from "../../types";
+import { borderRadiusClasses } from "../../theme";
+import { BorderRadiusType, ImageType, VideoType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -70,6 +71,9 @@ export type Block4Props = {
     title?: TitleThemeType;
     subtitle?: TitleThemeType;
     intro?: TextThemeType;
+    image?: {
+      rounded?: BorderRadiusType;
+    };
   };
   decorations?: DecorationProps[];
   title?: string;
@@ -156,7 +160,11 @@ export const Block4 = ({
               <ResponsiveImage
                 {...image}
                 preserveAspectRatio
-                className="inline-block"
+                className={cx(
+                  "inline-block",
+                  theme?.image?.rounded &&
+                    borderRadiusClasses[theme?.image?.rounded],
+                )}
               />
               <Decorations decorations={decorations} location="image" />
             </div>
@@ -164,7 +172,13 @@ export const Block4 = ({
 
           {video && (
             <div className="rounded-xs relative">
-              <Video {...video} />
+              <Video
+                {...video}
+                className={cx(
+                  theme?.image?.rounded &&
+                    borderRadiusClasses[theme?.image?.rounded],
+                )}
+              />
               <Decorations decorations={decorations} location="image" />
             </div>
           )}
