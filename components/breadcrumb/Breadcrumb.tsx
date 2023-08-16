@@ -26,7 +26,7 @@ export const Breadcrumb = ({ path, wrap }: BreadcrumbProps) => {
       >
         {path?.map((item, index) => (
           <li
-            key={item.path}
+            key={item.path || index}
             itemProp="itemListElement"
             itemScope
             itemType="https://schema.org/ListItem"

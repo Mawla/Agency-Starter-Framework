@@ -13,6 +13,7 @@ export const getBlock18Query = (language: LanguageType) => groq`
     intro[] ${richTextQuery},
     buttons[] ${buttonQuery},
     items[] { 
+      _key,
       theme,
       ${decorationsQuery},
       "image": ${imageQuery},

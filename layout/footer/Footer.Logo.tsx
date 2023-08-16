@@ -23,14 +23,14 @@ export const FooterLogo = ({ mobile, desktop }: FooterLogoProps) => {
     <Link href={`/${language}`}>
       <span className="sr-only">Home</span>
       {mobile && (
-        <div className="sm:hidden relative">
+        <span className="sm:hidden relative">
           <SimpleImage {...mobile} />
-        </div>
+        </span>
       )}
       {desktop && (
-        <div className="hidden sm:block relative">
+        <span className="hidden sm:block relative">
           <SimpleImage {...desktop} />
-        </div>
+        </span>
       )}
     </Link>
   );
