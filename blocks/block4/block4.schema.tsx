@@ -39,6 +39,12 @@ const schema = defineType({
       group: "content",
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+      group: "content",
+    }),
+    defineField({
       name: "intro",
       title: "Intro",
       type: "portabletext.simple",
@@ -70,7 +76,12 @@ const schema = defineType({
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
+      fields: [
+        defaultBlockTheme,
+        defaultTitleTheme,
+        { ...defaultTitleTheme, name: "subtitle" },
+        defaultTextTheme,
+      ],
     }),
     defineField({
       name: "decorations",

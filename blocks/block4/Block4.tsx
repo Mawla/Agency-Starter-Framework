@@ -67,10 +67,12 @@ export type Block4Props = {
   theme?: {
     block?: BlockThemeType;
     title?: TitleThemeType;
+    subtitle?: TitleThemeType;
     intro?: TextThemeType;
   };
   decorations?: DecorationProps[];
   title?: string;
+  subtitle?: string;
   intro?: React.ReactNode;
   image?: ImageType;
   video?: VideoType;
@@ -81,6 +83,7 @@ export const Block4 = ({
   theme,
   decorations,
   title,
+  subtitle,
   intro,
   image,
   video,
@@ -102,6 +105,15 @@ export const Block4 = ({
           {title && (
             <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
               {title}
+            </Title>
+          )}
+          {subtitle && (
+            <Title
+              {...theme?.subtitle}
+              size={theme?.subtitle?.size || "2xl"}
+              as={theme?.subtitle?.as || "h3"}
+            >
+              {subtitle}
             </Title>
           )}
 

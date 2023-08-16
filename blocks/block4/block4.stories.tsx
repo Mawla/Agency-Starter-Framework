@@ -24,6 +24,7 @@ export default {
 
 const DEMO_CONTENT = {
   title: "We didn't reinvent the wheel ",
+  subtitle: "We just made it better.",
   intro: (
     <p>
       We are strategists, designers and developers. Innovators and problem
@@ -85,6 +86,21 @@ export const TitleSizes = () => (
           {...DEMO_CONTENT}
           theme={{
             title: { size },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const SubtitleSizes = () => (
+  <>
+    {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
+      <div key={size}>
+        <Block4
+          {...DEMO_CONTENT}
+          theme={{
+            subtitle: { size },
           }}
         />
       </div>
