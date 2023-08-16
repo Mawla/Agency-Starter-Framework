@@ -176,6 +176,7 @@ export const verticalAlignMedia = () => (
           <Block1
             {...DEMO_CONTENT}
             image={demoImage3}
+            intro={<p style={{ height: 600 }}>…content…</p>}
             title={`verticalAlign: ${verticalAlign}`}
             theme={{
               layout: { verticalAlign },
@@ -268,41 +269,41 @@ export const Video = () => (
   />
 );
 
-export const PreserveAspectRatio = () => (
+export const imageHeight = () => (
   <>
     <Block1
       {...DEMO_CONTENT}
-      title="preserveAspectRatio false"
+      title="fullHeight false"
       theme={{
         image: {
-          preserveAspectRatio: false,
+          fullHeight: false,
         },
       }}
     />
     <Block1
-      title="preserveAspectRatio false"
-      image={demoImage}
+      title="full height false"
+      image={demoImage3}
       theme={{
         image: {
-          preserveAspectRatio: false,
+          fullHeight: false,
         },
       }}
     />
     <Block1
       {...DEMO_CONTENT}
-      title="preserveAspectRatio true"
+      title="full height true"
       theme={{
         image: {
-          preserveAspectRatio: true,
+          fullHeight: true,
         },
       }}
     />
     <Block1
-      title="preserveAspectRatio true"
-      image={demoImage}
+      title="full height true"
+      image={demoImage3}
       theme={{
         image: {
-          preserveAspectRatio: true,
+          fullHeight: true,
         },
       }}
     />
@@ -314,7 +315,7 @@ export const Decorations = () => (
     <Block1
       {...DEMO_CONTENT}
       theme={{
-        image: { preserveAspectRatio: true },
+        image: { fullHeight: true },
       }}
       decorations={[
         {

@@ -95,7 +95,19 @@ const schema = defineType({
       group: "theme",
       fields: [
         defaultBlockTheme,
-        defaultImageTheme,
+        defineField({
+          name: "image",
+          title: "Image",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "fullHeight",
+                type: "boolean",
+              },
+            ],
+          },
+        }),
         defineField({
           name: "layout",
           title: "Layout",

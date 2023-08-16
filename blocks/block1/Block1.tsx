@@ -6,7 +6,6 @@ import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { DecorationsProps } from "../../components/decorations/Decorations";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
-import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { ScriptsType } from "../../components/script/Script";
 import { TextProps } from "../../components/text/Text";
@@ -85,7 +84,9 @@ export type Block1Props = {
       verticalAlign?: VerticalAlignType;
       verticalSpace?: SpaceType;
     };
-    image?: ImageThemeType;
+    image?: {
+      fullHeight?: boolean;
+    };
     title?: TitleThemeType;
     intro?: TextThemeType;
     body?: TextThemeType;
@@ -124,16 +125,16 @@ export const Block1 = ({
       }}
       decorations={decorations}
     >
-      <div className="gap-8 grid lg:grid-cols-2 xl:gap-16 border">
+      <div className="gap-8 grid lg:grid-cols-2 xl:gap-16">
         <Spacing
           padding={theme?.layout?.verticalSpace}
           className={cx(
-            "flex pt-0 sm:pt-0 md:pt-0 pb-0 sm:pb-0 md:pb-0 border",
+            "order-2 flex pt-0 sm:pt-0 md:pt-0 pb-0 sm:pb-0 md:pb-0",
             theme?.layout?.verticalAlign &&
               verticalAlignClasses[theme.layout.verticalAlign],
           )}
         >
-          <div className="order-2 flex flex-col gap-8 border">
+          <div className="flex flex-col gap-8">
             {title && (
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
@@ -164,37 +165,36 @@ export const Block1 = ({
         {(image || video) && (
           <div
             className={cx(
-              "border order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
+              "order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
               theme?.layout?.verticalAlign &&
                 verticalAlignClasses[theme.layout.verticalAlign],
               {
-                // ["aspect-video"]: theme?.image?.preserveAspectRatio !== true,
                 ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
                 ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
           >
             {image && (
-              <div className="relative h-full lg:h-auto w-full">
+              <div className="relative h-full w-full">
                 <div
                   className={cx(
                     "relative",
                     theme?.layout?.verticalAlign &&
                       verticalAlignClasses[theme.layout.verticalAlign],
                     {
-                      // ["h-full"]: theme?.image?.preserveAspectRatio !== true,
+                      ["aspect-video lg:aspect-auto h-full"]:
+                        theme?.image?.fullHeight,
+                      ["flex h-full [&>div]:!h-auto"]:
+                        !theme?.image?.fullHeight,
                     },
                   )}
                 >
                   <ResponsiveImage
                     {...image}
-                    {...theme?.image}
-                    // fill={theme?.image?.preserveAspectRatio !== true}
-                    // className={
-                    //   theme?.image?.preserveAspectRatio !== true
-                    //     ? "absolute inset-0"
-                    //     : ""
-                    // }
+                    fill={theme?.image?.fullHeight}
+                    className={
+                      theme?.image?.fullHeight ? "absolute inset-0" : ""
+                    }
                     roundSize={25}
                   />
 
