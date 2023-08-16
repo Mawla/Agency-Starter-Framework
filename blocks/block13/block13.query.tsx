@@ -87,6 +87,7 @@ export const getBlock13Query = (language: LanguageType) => {
           pt::text(blocks[_type == 'block.block14'][0].body),
         ),
         "date": coalesce(publishedAt, _createdAt),
-      } | order(publishedAt desc, _createdAt desc) [0...4]
+        "matchedTags": coalesce(count(tags[@._ref in ^.^.^.tags[]._ref]), 0)
+      } | order(matchedTags desc, publishedAt desc, _createdAt desc) [0...4]
     }`;
 };
