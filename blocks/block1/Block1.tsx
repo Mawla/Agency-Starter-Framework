@@ -1,3 +1,4 @@
+import Spacing from "../../components/block/Spacing";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
@@ -5,7 +6,6 @@ import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { DecorationsProps } from "../../components/decorations/Decorations";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
-import { ImageThemeType } from "../../components/images/image.options";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { ScriptsType } from "../../components/script/Script";
 import { TextProps } from "../../components/text/Text";
@@ -13,7 +13,10 @@ import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
+import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { borderRadiusClasses } from "../../theme";
 import {
+  BorderRadiusType,
   ColorType,
   ImageType,
   VerticalAlignType,
@@ -82,8 +85,12 @@ export type Block1Props = {
     layout?: {
       mediaPosition?: mediaPositionType;
       verticalAlign?: VerticalAlignType;
+      verticalSpace?: SpaceType;
     };
-    image?: ImageThemeType;
+    image?: {
+      fullHeight?: boolean;
+      rounded?: BorderRadiusType;
+    };
     title?: TitleThemeType;
     intro?: TextThemeType;
     body?: TextThemeType;
@@ -122,68 +129,88 @@ export const Block1 = ({
       }}
       decorations={decorations}
     >
-      <div
-        className={cx(
-          "gap-8 grid lg:grid-cols-2 xl:gap-16",
-          theme?.layout?.verticalAlign &&
-            verticalAlignClasses[theme.layout.verticalAlign],
-        )}
-      >
-        <div className="order-1 flex flex-col gap-8">
-          {title && (
-            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-              {title}
-            </Title>
+      <div className="gap-8 grid lg:grid-cols-2 xl:gap-16">
+        <Spacing
+          padding={theme?.layout?.verticalSpace}
+          className={cx(
+            "order-2 flex pt-0 sm:pt-0 md:pt-0 pb-0 sm:pb-0 md:pb-0",
+            theme?.layout?.verticalAlign &&
+              verticalAlignClasses[theme.layout.verticalAlign],
           )}
+        >
+          <div className="flex flex-col gap-8">
+            {title && (
+              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+                {title}
+              </Title>
+            )}
 
-          {intro && (
-            <Text size={theme?.intro?.size || "lg"} color={theme?.intro?.color}>
-              <PortableText content={intro as any} />
-            </Text>
-          )}
+            {intro && (
+              <Text
+                size={theme?.intro?.size || "lg"}
+                color={theme?.intro?.color}
+              >
+                <PortableText content={intro as any} />
+              </Text>
+            )}
 
-          {body && (
-            <Text size={theme?.body?.size || "lg"} color={theme?.body?.color}>
-              <PortableText content={body as any} />
-            </Text>
-          )}
+            {body && (
+              <Text size={theme?.body?.size || "lg"} color={theme?.body?.color}>
+                <PortableText content={body as any} />
+              </Text>
+            )}
 
-          {buttons && Boolean(buttons?.filter(Boolean).length) && (
-            <ButtonGroup items={buttons} />
-          )}
-        </div>
+            {buttons && Boolean(buttons?.filter(Boolean).length) && (
+              <ButtonGroup items={buttons} />
+            )}
+          </div>
+        </Spacing>
 
         {(image || video) && (
           <div
             className={cx(
-              "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
+              "order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
+              theme?.layout?.verticalAlign &&
+                verticalAlignClasses[theme.layout.verticalAlign],
               {
-                ["aspect-video"]: theme?.image?.preserveAspectRatio !== true,
-                ["lg:order-2"]: theme?.layout?.mediaPosition !== "left",
-                ["lg:order-0"]: theme?.layout?.mediaPosition === "left",
+                ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
+                ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
           >
             {image && (
-              <div className="relative h-full lg:h-auto w-full">
+              <div className="relative h-full w-full">
                 <div
-                  className={cx("relative", {
-                    ["h-full"]: theme?.image?.preserveAspectRatio !== true,
-                  })}
+                  className={cx(
+                    "relative aspect-video lg:aspect-auto flex w-full h-full",
+                    theme?.layout?.verticalAlign &&
+                      verticalAlignClasses[theme.layout.verticalAlign],
+                  )}
                 >
-                  <ResponsiveImage
-                    {...image}
-                    {...theme?.image}
-                    fill={theme?.image?.preserveAspectRatio !== true}
-                    className={
-                      theme?.image?.preserveAspectRatio !== true
-                        ? "absolute inset-0"
-                        : ""
-                    }
-                    roundSize={25}
-                  />
+                  <div
+                    className={cx("relative w-full", {
+                      ["lg:h-full"]: theme?.image?.fullHeight,
+                    })}
+                    style={{
+                      aspectRatio: !theme?.image?.fullHeight
+                        ? getOriginalImageDimensions(image?.src).aspectRatio ||
+                          "auto"
+                        : undefined,
+                    }}
+                  >
+                    <ResponsiveImage
+                      {...image}
+                      fill
+                      className={cx(
+                        theme?.image?.rounded &&
+                          borderRadiusClasses[theme?.image?.rounded],
+                        theme?.image?.fullHeight ? "absolute inset-0" : "",
+                      )}
+                      roundSize={25}
+                    />
 
-                  <Decorations decorations={decorations} location="image" />
+                    <Decorations decorations={decorations} location="image" />
+                  </div>
                 </div>
               </div>
             )}
@@ -197,7 +224,14 @@ export const Block1 = ({
               >
                 <div className="w-full">
                   <div className="relative w-full h-auto aspect-video">
-                    <Video {...video} className="w-full" />
+                    <Video
+                      {...video}
+                      className={cx(
+                        "w-full",
+                        theme?.image?.rounded &&
+                          borderRadiusClasses[theme?.image?.rounded],
+                      )}
+                    />
                     <Decorations decorations={decorations} location="image" />
                   </div>
                 </div>
@@ -208,10 +242,16 @@ export const Block1 = ({
 
         {script && (
           <div
-            className={cx("w-full flex relative order-2", {
-              ["lg:order-2"]: theme?.layout?.mediaPosition !== "left",
-              ["lg:order-0"]: theme?.layout?.mediaPosition === "left",
-            })}
+            className={cx(
+              "w-full flex relative order-3",
+              "[&>div]:w-full [&>div>div]:w-full",
+              theme?.layout?.verticalAlign &&
+                verticalAlignClasses[theme.layout.verticalAlign],
+              {
+                ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
+                ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
+              },
+            )}
           >
             <Scripts
               key={script.title}

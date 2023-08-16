@@ -122,7 +122,7 @@ export const Block14 = ({
                 </div>
               </div>
 
-              <div className="py-4 border-t border-b border-black/10 text-sm text-black/90">
+              <div className="py-4 border-t border-b border-black/10 text-sm">
                 <address className="flex not-italic">
                   {authors && Boolean(authors?.length) && (
                     <div className="mr-3 inline-flex">
@@ -174,7 +174,7 @@ export const Block14 = ({
           <aside className="hidden xl:block col-span-3 relative">
             <div className="sticky top-6">
               {relatedArticles && Boolean(relatedArticles?.length) && (
-                <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow text-black/90">
+                <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow">
                   <h4 className="mb-4 text-sm font-bold uppercase">
                     {useTranslation("related_resources", "Related resources")}
                   </h4>

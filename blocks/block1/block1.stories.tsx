@@ -7,9 +7,11 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
-import { demoImage } from "../../stories/content";
+import { demoImage, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
+  BORDER_RADIUS_OPTIONS,
+  BorderRadiusType,
   ColorType,
   VERTICAL_ALIGN_OPTIONS,
   VerticalAlignType,
@@ -144,7 +146,32 @@ export const IntroColors = () => (
   </>
 );
 
-export const verticalAlign = () => (
+export const ImageRadius = () => (
+  <>
+    {(Object.keys(BORDER_RADIUS_OPTIONS) as BorderRadiusType[]).map(
+      (rounded) => (
+        <div key={rounded}>
+          <Block1
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded },
+            }}
+          />
+          <Block1
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded, fullHeight: true },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+
+export const verticalAlignContent = () => (
   <>
     {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
       (verticalAlign) => (
@@ -154,6 +181,78 @@ export const verticalAlign = () => (
             image={demoImage}
             theme={{
               layout: { verticalAlign },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+export const verticalAlignMedia = () => (
+  <>
+    {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
+      (verticalAlign) => (
+        <div key={verticalAlign}>
+          <Block1
+            {...DEMO_CONTENT}
+            title={`verticalAlign: ${verticalAlign}`}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            image={demoImage3}
+            intro={<p style={{ height: 600 }}>…content…</p>}
+            title={`verticalAlign: ${verticalAlign}`}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            image={undefined}
+            video={{
+              provider: "youtube",
+              videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+            }}
+            title={`verticalAlign: ${verticalAlign}`}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            title={`verticalAlign: ${verticalAlign}`}
+            image={undefined}
+            video={undefined}
+            theme={{
+              layout: { verticalAlign },
+            }}
+            script={{
+              title: "embed",
+              items: [
+                {
+                  html: `<div class='w-full h-[200px] border border-[royalblue] p-10'>this is a script</div>`,
+                },
+              ],
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            title={`verticalAlign: ${verticalAlign}`}
+            image={undefined}
+            video={undefined}
+            theme={{
+              layout: { verticalAlign },
+            }}
+            script={{
+              title: "embed",
+              items: [
+                {
+                  html: `<div class='w-full h-[600px] border border-[royalblue] p-10'>this is a script</div>`,
+                },
+              ],
             }}
           />
         </div>
@@ -197,41 +296,42 @@ export const Video = () => (
   />
 );
 
-export const PreserveAspectRatio = () => (
+export const ImageHeight = () => (
   <>
     <Block1
       {...DEMO_CONTENT}
-      title="preserveAspectRatio false"
+      intro={<p style={{ height: 600 }}>…</p>}
+      title="fullHeight false"
       theme={{
         image: {
-          preserveAspectRatio: false,
+          fullHeight: false,
         },
       }}
     />
     <Block1
-      title="preserveAspectRatio false"
-      image={demoImage}
+      title="full height false"
+      image={demoImage3}
       theme={{
         image: {
-          preserveAspectRatio: false,
+          fullHeight: false,
         },
       }}
     />
     <Block1
       {...DEMO_CONTENT}
-      title="preserveAspectRatio true"
+      title="full height true"
       theme={{
         image: {
-          preserveAspectRatio: true,
+          fullHeight: true,
         },
       }}
     />
     <Block1
-      title="preserveAspectRatio true"
-      image={demoImage}
+      title="full height true"
+      image={demoImage3}
       theme={{
         image: {
-          preserveAspectRatio: true,
+          fullHeight: true,
         },
       }}
     />
@@ -242,8 +342,53 @@ export const Decorations = () => (
   <>
     <Block1
       {...DEMO_CONTENT}
+      intro={<p style={{ height: 600 }}>intro…</p>}
       theme={{
-        image: { preserveAspectRatio: true },
+        image: { fullHeight: false },
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      theme={{
+        image: { fullHeight: true },
       }}
       decorations={[
         {
@@ -440,14 +585,14 @@ export const Scripts = () => (
       image={undefined}
       video={undefined}
       script={{
-        title: "youtube embed",
+        title: "embed",
         items: [
           {
             html: `<div class='w-full h-full border border-[royalblue] p-10'>this is a script</div>`,
           },
         ],
       }}
-    />
+    />{" "}
     <Block1
       {...DEMO_CONTENT}
       image={undefined}
@@ -458,7 +603,7 @@ export const Scripts = () => (
         },
       }}
       script={{
-        title: "youtube embed",
+        title: "embed",
         items: [
           {
             src: `//js-eu1.hsforms.net/forms/v2.js`,
@@ -471,6 +616,24 @@ export const Scripts = () => (
           });
           `,
             html: `<div id="hubspot-form-id">loading form</div>`,
+          },
+        ],
+      }}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      image={undefined}
+      video={undefined}
+      theme={{
+        layout: {
+          mediaPosition: "right",
+        },
+      }}
+      script={{
+        title: "embed",
+        items: [
+          {
+            html: `<div class='w-full h-full border border-[royalblue] p-10'>this is a script</div>`,
           },
         ],
       }}

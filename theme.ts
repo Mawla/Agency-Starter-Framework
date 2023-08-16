@@ -103,12 +103,6 @@ export const weightClasses: Record<FontWeightType, string> = Object.entries(
   {},
 );
 
-export const textAlignClasses: Record<HorizontalAlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
-};
-
 export const textTransformClasses: Record<TextTransformType, string> = {
   uppercase: "uppercase",
   lowercase: "lowercase",

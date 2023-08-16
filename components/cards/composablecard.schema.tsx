@@ -12,7 +12,6 @@ import {
 import {
   IMAGE_HEIGHT_OPTIONS,
   IMAGE_RATIO_OPTIONS,
-  IMAGE_ROUNDED_OPTIONS,
 } from "./composablecard.options";
 import { Postcard } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -186,7 +185,7 @@ const schema = defineType({
                 name: "rounded",
                 type: "select",
                 options: {
-                  list: optionsToList(IMAGE_ROUNDED_OPTIONS),
+                  list: optionsToList(BORDER_RADIUS_OPTIONS),
                 },
               }),
             ],

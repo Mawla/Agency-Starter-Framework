@@ -26,10 +26,19 @@ export const getNavigationQuery = (language: LanguageType) => groq`
     _updatedAt,
     _rev,
     "items": items[] {
-      button ${buttonFieldsWithoutDefaultThemeQuery},
-      children[] ${buttonFieldsWithoutDefaultThemeQuery}
+      _key,
+      button {
+        ${buttonFieldsWithoutDefaultThemeQuery}
+      },
+      children[] {
+        _key,
+        ${buttonFieldsWithoutDefaultThemeQuery}
+      }
     },
-    "buttons": buttons[] ${buttonFieldsWithoutDefaultThemeQuery},
+    "buttons": buttons[] {
+      _key,
+      ${buttonFieldsWithoutDefaultThemeQuery}
+    },
     logo {
       "mobile": ${getImageQuery("mobile")},
       "desktop": ${getImageQuery("desktop")},

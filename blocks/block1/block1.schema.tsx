@@ -2,12 +2,12 @@ import {
   defaultBlockGroups,
   defaultBlockTheme,
 } from "../../components/block/block.schema";
-import { defaultImageTheme } from "../../components/images/image.schema";
+import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { VERTICAL_ALIGN_OPTIONS } from "../../types";
+import { BORDER_RADIUS_OPTIONS, VERTICAL_ALIGN_OPTIONS } from "../../types";
 import { IMAGE_POSITION_OPTIONS } from "./block1.options";
 import { Image } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -94,7 +94,26 @@ const schema = defineType({
       group: "theme",
       fields: [
         defaultBlockTheme,
-        defaultImageTheme,
+        defineField({
+          name: "image",
+          title: "Image",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "fullHeight",
+                type: "boolean",
+              },
+              {
+                name: "rounded",
+                type: "select",
+                options: {
+                  list: optionsToList(BORDER_RADIUS_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
         defineField({
           name: "layout",
           title: "Layout",
@@ -115,6 +134,14 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(VERTICAL_ALIGN_OPTIONS),
+                },
+              }),
+              defineField({
+                name: "verticalSpace",
+                title: "Content space",
+                type: "topbottom",
+                options: {
+                  list: optionsToList(SPACE_OPTIONS),
                 },
               }),
             ],

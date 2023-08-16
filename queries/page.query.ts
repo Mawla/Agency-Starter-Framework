@@ -121,6 +121,7 @@ export const getPageQuery = (language: LanguageType) => groq`
       _type,
       decorations,
       theme,
+      "slug": coalesce(slug.current, title, _key),
       ${decorationsQuery}
     },
 

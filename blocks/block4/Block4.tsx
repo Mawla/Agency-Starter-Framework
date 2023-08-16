@@ -15,7 +15,9 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
-import { ImageType, VideoType } from "../../types";
+import { borderRadiusClasses } from "../../theme";
+import { BorderRadiusType, ImageType, VideoType } from "../../types";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
@@ -67,10 +69,15 @@ export type Block4Props = {
   theme?: {
     block?: BlockThemeType;
     title?: TitleThemeType;
+    subtitle?: TitleThemeType;
     intro?: TextThemeType;
+    image?: {
+      rounded?: BorderRadiusType;
+    };
   };
   decorations?: DecorationProps[];
   title?: string;
+  subtitle?: string;
   intro?: React.ReactNode;
   image?: ImageType;
   video?: VideoType;
@@ -81,6 +88,7 @@ export const Block4 = ({
   theme,
   decorations,
   title,
+  subtitle,
   intro,
   image,
   video,
@@ -93,56 +101,88 @@ export const Block4 = ({
       }}
       decorations={decorations}
     >
-      <div
-        className={`flex flex-col gap-6 max-w-screen-lg relative z-10 ${
-          textAlignClasses[theme?.block?.align || "center"]
-        }`}
-      >
-        {title && (
-          <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-            {title}
-          </Title>
-        )}
+      <div className="flex flex-col gap-6">
+        <div
+          className={cx(
+            "flex flex-col gap-6 max-w-3xl relative z-10",
+            textAlignClasses[theme?.block?.align || "center"],
+          )}
+        >
+          {title && (
+            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+              {title}
+            </Title>
+          )}
+          {subtitle && (
+            <Title
+              {...theme?.subtitle}
+              size={theme?.subtitle?.size || "2xl"}
+              as={theme?.subtitle?.as || "h3"}
+            >
+              {subtitle}
+            </Title>
+          )}
 
-        {intro && (
-          <Text
-            size={theme?.intro?.size || "xl"}
-            color={theme?.intro?.color}
-            align={theme?.block?.align || "center"}
-          >
-            <PortableText content={intro as any} />
-          </Text>
-        )}
+          {intro && (
+            <Text
+              size={theme?.intro?.size || "xl"}
+              color={theme?.intro?.color}
+              align={theme?.block?.align || "center"}
+            >
+              <PortableText content={intro as any} />
+            </Text>
+          )}
 
-        {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-6">
-            <ButtonGroup items={buttons} />
-          </div>
-        )}
+          {buttons && Boolean(buttons?.filter(Boolean).length) && (
+            <div className="mt-6">
+              <ButtonGroup
+                items={buttons}
+                align={theme?.block?.align || "center"}
+                direction="horizontal"
+              />
+            </div>
+          )}
+        </div>
 
-        {image && (
-          <div
-            className="mt-6 relative"
-            style={{
-              aspectRatio:
-                getOriginalImageDimensions(image?.src).aspectRatio || "auto",
-            }}
-          >
-            <ResponsiveImage
-              {...image}
-              preserveAspectRatio
-              className="inline-block"
-            />
-            <Decorations decorations={decorations} location="image" />
-          </div>
-        )}
+        <div
+          className={`flex flex-col gap-6 max-w-screen-lg relative z-10 ${
+            textAlignClasses[theme?.block?.align || "center"]
+          }`}
+        >
+          {image && (
+            <div
+              className="mt-6 relative"
+              style={{
+                aspectRatio:
+                  getOriginalImageDimensions(image?.src).aspectRatio || "auto",
+              }}
+            >
+              <ResponsiveImage
+                {...image}
+                preserveAspectRatio
+                className={cx(
+                  "inline-block",
+                  theme?.image?.rounded &&
+                    borderRadiusClasses[theme?.image?.rounded],
+                )}
+              />
+              <Decorations decorations={decorations} location="image" />
+            </div>
+          )}
 
-        {video && (
-          <div className="rounded-xs relative">
-            <Video {...video} />
-            <Decorations decorations={decorations} location="image" />
-          </div>
-        )}
+          {video && (
+            <div className="rounded-xs relative">
+              <Video
+                {...video}
+                className={cx(
+                  theme?.image?.rounded &&
+                    borderRadiusClasses[theme?.image?.rounded],
+                )}
+              />
+              <Decorations decorations={decorations} location="image" />
+            </div>
+          )}
+        </div>
       </div>
     </Wrapper>
   );

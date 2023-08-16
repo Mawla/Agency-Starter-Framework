@@ -3,7 +3,7 @@ import { textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import * as DOMPurify from "dompurify";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 export type IconLoaderProps = {
@@ -31,6 +31,8 @@ export const IconLoader = ({
 }: IconLoaderProps) => {
   const Element = as;
 
+  const [innerHTML, setInnerHTML] = useState<null | string>(null);
+
   const {
     data: svg,
     isLoading,
@@ -46,20 +48,19 @@ export const IconLoader = ({
       ),
   });
 
-  let cleanSVG = "";
-  if (svg) {
-    if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return null;
+  useEffect(() => {
+    if (!svg) return;
+    if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
 
-    cleanSVG = DOMPurify?.sanitize?.(svg); //
+    let cleanSVG = DOMPurify?.sanitize?.(svg); //
     cleanSVG = cleanUpAttributes(cleanSVG);
     if (removeColors) {
       cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
     }
-  }
+    setInnerHTML(cleanSVG);
+  }, [svg]);
 
-  if (!cleanSVG) return null;
-
-  if (isLoading || isError)
+  if (isLoading || isError || !innerHTML)
     return (
       <Element
         role="img"
@@ -76,7 +77,7 @@ export const IconLoader = ({
       aria-hidden="true"
       aria-label={[title, description, icon].filter(Boolean).join(", ")}
       className={cx(className, color && textClasses[color])}
-      dangerouslySetInnerHTML={{ __html: cleanSVG }}
+      dangerouslySetInnerHTML={{ __html: innerHTML }}
       style={style}
     />
   );

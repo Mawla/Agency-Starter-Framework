@@ -67,7 +67,7 @@ export const buttonFieldsQuery = groq`
   "target": select(newWindow => '_blank') 
 `;
 
-export const buttonFieldsWithoutDefaultThemeQuery = groq`{
+export const buttonFieldsWithoutDefaultThemeQuery = groq`
   ${buttonFieldsQuery
     .replace(
       "defined(presetTheme) => presetTheme -> {...},",
@@ -77,7 +77,7 @@ export const buttonFieldsWithoutDefaultThemeQuery = groq`{
       "!defined(customTheme) => *[_type == 'preset.button' && default][0]",
       "",
     )}
-}`;
+`;
 
 export const buttonQuery = groq`{
   ${buttonFieldsQuery}

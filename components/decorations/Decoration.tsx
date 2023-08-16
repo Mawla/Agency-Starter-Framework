@@ -206,9 +206,7 @@ export const Decoration = ({
           ...styleObj,
         }}
       >
-        {image && !repeat && (
-          <ResponsiveImage {...image} fill preserveAspectRatio />
-        )}
+        {image && !repeat && <ResponsiveImage {...image} fill roundSize={25} />}
         {innerHTML && (
           <div
             dangerouslySetInnerHTML={

@@ -137,7 +137,7 @@ export const decoration = defineField({
   },
   groups: [
     { name: "content", title: "Content", default: true },
-    { name: "position", title: "Position" },
+    { name: "position", title: "Size & Position" },
     { name: "style", title: "Style" },
   ],
   fields: [
