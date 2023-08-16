@@ -15,6 +15,7 @@ import { Footer } from "../footer/Footer";
 import { FooterType } from "../footer/footer.query";
 import { Navigation } from "../navigation/Navigation";
 import { NavigationProps } from "../navigation/Navigation";
+import ErrorBoundary from "../pagebuilder/ErrorBoundary";
 import { PageBody } from "./PageBody";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
@@ -82,12 +83,14 @@ export const Page = ({
       >
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
         {page && navigation && !isPreviewMode && (
-          <Navigation
-            items={page.hideNav === true ? [] : navItems}
-            buttons={page.hideNav === true ? [] : navigation.buttons}
-            logo={navigation.logo}
-            theme={navigation.theme}
-          />
+          <ErrorBoundary>
+            <Navigation
+              items={page.hideNav === true ? [] : navItems}
+              buttons={page.hideNav === true ? [] : navigation.buttons}
+              logo={navigation.logo}
+              theme={navigation.theme}
+            />
+          </ErrorBoundary>
         )}
 
         <PageBody {...page} />
@@ -99,16 +102,18 @@ export const Page = ({
         )}
         {locked && !isPreviewMode && <PageLock />}
         {page && footer && !isPreviewMode && (
-          <Footer
-            links={page.hideFooter === true ? [] : footer.links}
-            socials={page.hideFooter === true ? [] : footer.socials}
-            copyright={footer.copyright}
-            legal={footer.legal}
-            legalLinks={footer.legalLinks}
-            logo={footer.logo}
-            info={footer.info}
-            theme={footer.theme}
-          />
+          <ErrorBoundary>
+            <Footer
+              links={page.hideFooter === true ? [] : footer.links}
+              socials={page.hideFooter === true ? [] : footer.socials}
+              copyright={footer.copyright}
+              legal={footer.legal}
+              legalLinks={footer.legalLinks}
+              logo={footer.logo}
+              info={footer.info}
+              theme={footer.theme}
+            />
+          </ErrorBoundary>
         )}
 
         {[

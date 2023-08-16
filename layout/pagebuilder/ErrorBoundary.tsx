@@ -22,6 +22,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   public static getDerivedStateFromError(error: Error): State {
     // Update state so the next render will show the fallback UI.
+    console.error("Uncaught error:", error);
     return { hasError: true, error: error };
   }
 
@@ -31,10 +32,10 @@ class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      if (IS_PRODUCTION) return null;
+      if (IS_PRODUCTION) return <div />;
       return (
-        <div className="bg-white p-10 rounded-xl">
-          <p>{this.state.error?.toString()}</p>
+        <div className="bg-white p-10">
+          <p>Error: {this.state.error?.toString()}</p>
         </div>
       );
     }
