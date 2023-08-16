@@ -93,60 +93,68 @@ export const Block4 = ({
       }}
       decorations={decorations}
     >
-      <div
-        className={`flex flex-col gap-6 max-w-screen-lg relative z-10 ${
-          textAlignClasses[theme?.block?.align || "center"]
-        }`}
-      >
-        {title && (
-          <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
-            {title}
-          </Title>
-        )}
+      <div className="flex flex-col gap-6">
+        <div
+          className={`flex flex-col gap-6 max-w-3xl relative z-10 ${
+            textAlignClasses[theme?.block?.align || "center"]
+          }`}
+        >
+          {title && (
+            <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+              {title}
+            </Title>
+          )}
 
-        {intro && (
-          <Text
-            size={theme?.intro?.size || "xl"}
-            color={theme?.intro?.color}
-            align={theme?.block?.align || "center"}
-          >
-            <PortableText content={intro as any} />
-          </Text>
-        )}
-
-        {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div className="mt-6">
-            <ButtonGroup
-              items={buttons}
+          {intro && (
+            <Text
+              size={theme?.intro?.size || "xl"}
+              color={theme?.intro?.color}
               align={theme?.block?.align || "center"}
-              direction="horizontal"
-            />
-          </div>
-        )}
+            >
+              <PortableText content={intro as any} />
+            </Text>
+          )}
 
-        {image && (
-          <div
-            className="mt-6 relative"
-            style={{
-              aspectRatio:
-                getOriginalImageDimensions(image?.src).aspectRatio || "auto",
-            }}
-          >
-            <ResponsiveImage
-              {...image}
-              preserveAspectRatio
-              className="inline-block"
-            />
-            <Decorations decorations={decorations} location="image" />
-          </div>
-        )}
+          {buttons && Boolean(buttons?.filter(Boolean).length) && (
+            <div className="mt-6">
+              <ButtonGroup
+                items={buttons}
+                align={theme?.block?.align || "center"}
+                direction="horizontal"
+              />
+            </div>
+          )}
+        </div>
 
-        {video && (
-          <div className="rounded-xs relative">
-            <Video {...video} />
-            <Decorations decorations={decorations} location="image" />
-          </div>
-        )}
+        <div
+          className={`flex flex-col gap-6 max-w-screen-lg relative z-10 ${
+            textAlignClasses[theme?.block?.align || "center"]
+          }`}
+        >
+          {image && (
+            <div
+              className="mt-6 relative"
+              style={{
+                aspectRatio:
+                  getOriginalImageDimensions(image?.src).aspectRatio || "auto",
+              }}
+            >
+              <ResponsiveImage
+                {...image}
+                preserveAspectRatio
+                className="inline-block"
+              />
+              <Decorations decorations={decorations} location="image" />
+            </div>
+          )}
+
+          {video && (
+            <div className="rounded-xs relative">
+              <Video {...video} />
+              <Decorations decorations={decorations} location="image" />
+            </div>
+          )}
+        </div>
       </div>
     </Wrapper>
   );
