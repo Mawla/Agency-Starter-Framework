@@ -129,7 +129,7 @@ export const Block1 = ({
             verticalAlignClasses[theme.layout.verticalAlign],
         )}
       >
-        <div className="order-1 flex flex-col gap-8">
+        <div className="order-2 flex flex-col gap-8">
           {title && (
             <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
               {title}
@@ -156,11 +156,11 @@ export const Block1 = ({
         {(image || video) && (
           <div
             className={cx(
-              "order-0 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
+              "order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
               {
                 ["aspect-video"]: theme?.image?.preserveAspectRatio !== true,
-                ["lg:order-2"]: theme?.layout?.mediaPosition !== "left",
-                ["lg:order-0"]: theme?.layout?.mediaPosition === "left",
+                ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
+                ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
           >
@@ -208,9 +208,9 @@ export const Block1 = ({
 
         {script && (
           <div
-            className={cx("w-full flex relative order-2", {
-              ["lg:order-2"]: theme?.layout?.mediaPosition !== "left",
-              ["lg:order-0"]: theme?.layout?.mediaPosition === "left",
+            className={cx("w-full flex relative order-3", {
+              ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
+              ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
             })}
           >
             <Scripts

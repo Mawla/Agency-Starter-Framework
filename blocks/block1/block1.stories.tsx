@@ -440,14 +440,14 @@ export const Scripts = () => (
       image={undefined}
       video={undefined}
       script={{
-        title: "youtube embed",
+        title: "embed",
         items: [
           {
             html: `<div class='w-full h-full border border-[royalblue] p-10'>this is a script</div>`,
           },
         ],
       }}
-    />
+    />{" "}
     <Block1
       {...DEMO_CONTENT}
       image={undefined}
@@ -458,7 +458,7 @@ export const Scripts = () => (
         },
       }}
       script={{
-        title: "youtube embed",
+        title: "embed",
         items: [
           {
             src: `//js-eu1.hsforms.net/forms/v2.js`,
@@ -471,6 +471,24 @@ export const Scripts = () => (
           });
           `,
             html: `<div id="hubspot-form-id">loading form</div>`,
+          },
+        ],
+      }}
+    />
+    <Block1
+      {...DEMO_CONTENT}
+      image={undefined}
+      video={undefined}
+      theme={{
+        layout: {
+          mediaPosition: "right",
+        },
+      }}
+      script={{
+        title: "embed",
+        items: [
+          {
+            html: `<div class='w-full h-full border border-[royalblue] p-10'>this is a script</div>`,
           },
         ],
       }}
