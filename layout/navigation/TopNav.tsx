@@ -10,7 +10,13 @@ import { NavigationProps } from "./Navigation";
 import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
-import React, { ComponentType, lazy, useContext, useRef } from "react";
+import React, {
+  ComponentType,
+  Suspense,
+  lazy,
+  useContext,
+  useRef,
+} from "react";
 
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () =>
@@ -58,7 +64,6 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             "fixed z-50 top-0 left-0 right-0",
             "w-full",
             "transform transition-transform duration-500",
-            // "bg-opacity-90 backdrop-blur-[25px]",
             {
               ["-translate-y-full ease-[cubic-bezier(0.2,0.07,0.38,1)]"]:
                 !showNav,
@@ -89,16 +94,18 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               <div className="flex items-center flex-0">
                 <Link href={`/${language}`} className="inline-block relative">
                   <span className="sr-only">Home</span>
-                  {logo?.mobile && (
-                    <span className="block sm:hidden relative">
-                      <SimpleImage {...logo?.mobile} />
-                    </span>
-                  )}
-                  {logo?.desktop && (
-                    <span className="hidden sm:block relative">
-                      <SimpleImage {...logo?.desktop} />
-                    </span>
-                  )}
+                  <Suspense>
+                    {logo?.mobile && (
+                      <span className="block sm:hidden relative">
+                        <SimpleImage {...logo?.mobile} />
+                      </span>
+                    )}
+                    {logo?.desktop && (
+                      <span className="hidden sm:block relative">
+                        <SimpleImage {...logo?.desktop} />
+                      </span>
+                    )}
+                  </Suspense>
                 </Link>
               </div>
             )}
@@ -132,10 +139,12 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                               })}
                             >
                               <RadixNavigationMenu.Trigger>
-                                <IconLoader
-                                  icon="chevrondown"
-                                  className="inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5 ml-1.5"
-                                />
+                                <Suspense>
+                                  <IconLoader
+                                    icon="chevrondown"
+                                    className="inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5 ml-1.5"
+                                  />
+                                </Suspense>
                                 <span className="absolute inset-0" />
                               </RadixNavigationMenu.Trigger>
                             </Button>
@@ -239,7 +248,9 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
                     className="flex"
                   >
                     <span className="w-6 h-6 block relative">
-                      <IconLoader icon="menu" />
+                      <Suspense>
+                        <IconLoader icon="menu" />
+                      </Suspense>
                       <span className="absolute -inset-2 opacity-0" />
                     </span>
                   </button>
