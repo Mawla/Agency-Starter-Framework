@@ -2,6 +2,7 @@ import {
   defaultBlockGroups,
   defaultBlockTheme,
 } from "../../components/block/block.schema";
+import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { defaultImageTheme } from "../../components/images/image.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
@@ -115,6 +116,14 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(VERTICAL_ALIGN_OPTIONS),
+                },
+              }),
+              defineField({
+                name: "verticalSpace",
+                title: "Content space",
+                type: "topbottom",
+                options: {
+                  list: optionsToList(SPACE_OPTIONS),
                 },
               }),
             ],

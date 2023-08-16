@@ -70,12 +70,9 @@ export const Scripts = ({ items }: ScriptsType) => {
         return (
           <div
             key={script._key}
-            className={cx(
-              "script w-full h-full [&>div]:w-full [&>div]:h-full",
-              {
-                ["relative"]: isPreviewMode,
-              },
-            )}
+            className={cx("script", {
+              ["relative"]: isPreviewMode,
+            })}
           >
             {isPreviewMode && (
               <span className="absolute right-0 top-0 text-[10px] p-1 bg-[#ddd]">

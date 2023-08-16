@@ -7,7 +7,7 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
-import { demoImage } from "../../stories/content";
+import { demoImage, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   ColorType,
@@ -144,7 +144,7 @@ export const IntroColors = () => (
   </>
 );
 
-export const verticalAlign = () => (
+export const verticalAlignContent = () => (
   <>
     {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
       (verticalAlign) => (
@@ -154,6 +154,77 @@ export const verticalAlign = () => (
             image={demoImage}
             theme={{
               layout: { verticalAlign },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+export const verticalAlignMedia = () => (
+  <>
+    {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
+      (verticalAlign) => (
+        <div key={verticalAlign}>
+          <Block1
+            {...DEMO_CONTENT}
+            title={`verticalAlign: ${verticalAlign}`}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            image={demoImage3}
+            title={`verticalAlign: ${verticalAlign}`}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            image={undefined}
+            video={{
+              provider: "youtube",
+              videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+            }}
+            title={`verticalAlign: ${verticalAlign}`}
+            theme={{
+              layout: { verticalAlign },
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            title={`verticalAlign: ${verticalAlign}`}
+            image={undefined}
+            video={undefined}
+            theme={{
+              layout: { verticalAlign },
+            }}
+            script={{
+              title: "embed",
+              items: [
+                {
+                  html: `<div class='w-full h-[200px] border border-[royalblue] p-10'>this is a script</div>`,
+                },
+              ],
+            }}
+          />
+          <Block1
+            {...DEMO_CONTENT}
+            title={`verticalAlign: ${verticalAlign}`}
+            image={undefined}
+            video={undefined}
+            theme={{
+              layout: { verticalAlign },
+            }}
+            script={{
+              title: "embed",
+              items: [
+                {
+                  html: `<div class='w-full h-[600px] border border-[royalblue] p-10'>this is a script</div>`,
+                },
+              ],
             }}
           />
         </div>
