@@ -30,6 +30,7 @@ import { textAlignClasses } from "../text/text.options";
 import { ImageHeightType, ImageRatioType } from "./composablecard.options";
 import cx from "classnames";
 import { ComponentType, lazy } from "react";
+import { twMerge } from "tailwind-merge";
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
@@ -144,14 +145,15 @@ export const ComposableCard = ({
         })}
       >
         {image && (
-          <div className="block border border-black">
+          <div className="block w-full">
             <div
-              className={cx(
-                "relative inline-flex overflow-hidden max-w-full border-[red]",
+              className={twMerge(
+                "relative inline-flex overflow-hidden max-w-full",
                 imageHeightClasses[theme?.image?.height || "xs"],
                 theme?.image?.ratio && ratioClasses[theme?.image?.ratio],
                 theme?.image?.rounded &&
                   borderRadiusClasses[theme?.image?.rounded],
+                theme?.image?.height === "xl" && "w-full h-auto",
               )}
               style={{
                 aspectRatio:
