@@ -91,7 +91,7 @@ export const Block7 = ({
         )}
       >
         <div className="flex flex-col lg:space-x-16 lg:flex-row">
-          <div className="gap-6 lg:w-3/12 lg:order-first order-last">
+          <div className="lg:w-3/12 lg:order-first order-last">
             {title && (
               <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
                 {title}
@@ -103,13 +103,14 @@ export const Block7 = ({
                 size={theme?.intro?.size || "xl"}
                 color={theme?.intro?.color}
                 align={theme?.block?.align || "left"}
+                className="mt-4"
               >
                 <PortableText content={intro as any} />
               </Text>
             )}
 
             {buttons && Boolean(buttons?.filter(Boolean).length) && (
-              <ButtonGroup items={buttons} />
+              <ButtonGroup className="mt-4" items={buttons} />
             )}
           </div>
 
