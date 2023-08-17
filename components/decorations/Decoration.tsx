@@ -79,28 +79,38 @@ const createStyleObject = (obj: Record<string, unknown>): CSSProperties => {
     height: addUnit(obj.height as string),
     background: obj.background,
     opacity: obj.opacity,
+    transform: obj.transform,
   } as CSSProperties;
 
-  // css transforms
-  if (obj.translateX || obj.translateY || obj.rotate || obj.scale) {
-    const transformStyleBuilder = createCSSTransformBuilder({
-      angle: "deg",
-      length: "px",
-    });
-
-    const transformObj: Record<string, string> = {};
-    if (obj.translateX)
-      transformObj.translateX = addUnit(obj.translateX as string) || "";
-    if (obj.translateY)
-      transformObj.translateY = addUnit(obj.translateY as string) || "";
-    if (obj.rotate)
-      transformObj.rotate = addUnit(obj.rotate as string, "deg") || "";
-    if (obj.scale) transformObj.scale = (obj.scale as string) || "";
-
-    newObj.transform = transformStyleBuilder(transformObj);
-  }
-
   return newObj;
+};
+
+type TransformProps = {
+  translateX?: DecorationType["translateX"];
+  translateY?: DecorationType["translateY"];
+  rotate?: DecorationType["rotate"];
+  scale?: DecorationType["scale"];
+};
+
+const createTransformStyle = ({
+  translateX,
+  translateY,
+  rotate,
+  scale,
+}: TransformProps) => {
+  const transformStyleBuilder = createCSSTransformBuilder({
+    angle: "deg",
+    length: "px",
+  });
+
+  const transformObj: Record<string, string> = {};
+  if (translateX) transformObj.translateX = addUnit(translateX as string) || "";
+  if (translateY) transformObj.translateY = addUnit(translateY as string) || "";
+  if (rotate) transformObj.rotate = addUnit(rotate as string, "deg") || "";
+  if (scale) transformObj.scale = (scale as string) || "";
+
+  if (!Object.keys(transformObj).length) return undefined;
+  return transformStyleBuilder(transformObj);
 };
 
 export const Decoration = ({
@@ -143,6 +153,12 @@ export const Decoration = ({
 
   styleObj = createStyleObject({
     ...mobile,
+    transform: createTransformStyle({
+      translateX: mobile?.translateX,
+      translateY: mobile?.translateY,
+      rotate: mobile?.rotate,
+      scale: mobile?.scale,
+    }),
   });
 
   // tablet view
@@ -150,6 +166,12 @@ export const Decoration = ({
     styleObj = createStyleObject({
       ...styleObj,
       ...tablet,
+      transform: createTransformStyle({
+        translateX: tablet?.translateX || mobile?.translateX,
+        translateY: tablet?.translateY || mobile?.translateY,
+        rotate: tablet?.rotate || mobile?.rotate,
+        scale: tablet?.scale || mobile?.scale,
+      }),
     });
     image = tablet.image || preset?.tablet?.image || image;
     html = tablet.html || preset?.tablet?.html || html;
@@ -166,6 +188,14 @@ export const Decoration = ({
     styleObj = createStyleObject({
       ...styleObj,
       ...desktop,
+      transform: createTransformStyle({
+        translateX:
+          desktop?.translateX || tablet?.translateX || mobile?.translateX,
+        translateY:
+          desktop?.translateY || tablet?.translateY || mobile?.translateY,
+        rotate: desktop?.rotate || tablet?.rotate || mobile?.rotate,
+        scale: desktop?.scale || tablet?.scale || mobile?.scale,
+      }),
     });
 
     image = desktop.image || preset?.desktop?.image || image;
