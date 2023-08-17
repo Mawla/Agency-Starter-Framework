@@ -11,9 +11,11 @@ export type NavigationItemType = ButtonProps & {
 };
 
 export type NavigationType = {
-  title: string;
   items: NavigationItemType[];
   buttons: NavigationItemType[];
+  breadcrumb?: {
+    hidden?: boolean;
+  };
   theme?: NavigationProps["theme"];
 };
 
@@ -43,7 +45,7 @@ export const getNavigationQuery = (language: LanguageType) => groq`
       "mobile": ${getImageQuery("mobile")},
       "desktop": ${getImageQuery("desktop")},
     },
-    theme
-  }
+    theme,
+  },
 }.navigation
 `;

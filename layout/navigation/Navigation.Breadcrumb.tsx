@@ -10,7 +10,7 @@ import { Suspense } from "react";
 
 export type NavigationBreadcrumbProps = {
   theme?: {
-    enabled?: boolean;
+    hidden?: boolean;
     background?: ColorType;
     text?: ColorType;
     border?: ColorType;
@@ -23,24 +23,27 @@ export const NavigationBreadcrumb = ({ theme }: NavigationBreadcrumbProps) => {
   const isHomepage = pathname === "/" || isLanguage(pathname?.replace("/", ""));
   if (isHomepage && !isPreview) return null;
 
-  if (theme?.enabled === false) return null;
-
   return (
     <div
       className={cx(
-        "py-2 md:py-3 lg:py-5",
-        "mx-auto",
-        "px-5 sm:px-8 lg:px-8 xl:px-8",
-        widthClasses.outer,
         theme?.background && backgroundClasses[theme.background],
         theme?.text && textClasses[theme.text],
         theme?.border && borderClasses[theme?.border],
         theme?.border && "border-b",
       )}
     >
-      <Suspense>
-        <Breadcrumb />
-      </Suspense>
+      <div
+        className={cx(
+          "py-2 md:py-3 lg:py-5",
+          "mx-auto",
+          "px-5 sm:px-8 lg:px-8 xl:px-8",
+          widthClasses.outer,
+        )}
+      >
+        <Suspense>
+          <Breadcrumb />
+        </Suspense>
+      </div>
     </div>
   );
 };

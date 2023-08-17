@@ -23,7 +23,13 @@ export type NavItem = {
 export type NavigationProps = {
   items: NavItem[];
   buttons: (ButtonProps & { _key?: string })[];
-  logo?: { mobile?: ImageType; desktop?: ImageType };
+  logo?: {
+    mobile?: ImageType;
+    desktop?: ImageType;
+  };
+  breadcrumb?: {
+    hidden?: boolean;
+  };
   theme?: {
     block?: {
       background?: ColorType;
@@ -103,7 +109,9 @@ export const Navigation = ({
         />
       )}
 
-      <NavigationBreadcrumb theme={theme?.breadcrumb} />
+      {theme?.breadcrumb?.hidden !== true && (
+        <NavigationBreadcrumb theme={theme?.breadcrumb} />
+      )}
     </div>
   );
 };

@@ -176,7 +176,7 @@ export default defineType({
           options: {
             fields: [
               {
-                name: "enabled",
+                name: "hidden",
                 type: "boolean",
               },
               {
