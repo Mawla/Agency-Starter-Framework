@@ -90,7 +90,7 @@ export const Block14 = ({
       decorations={decorations}
     >
       <main className="py-8 lg:py-16">
-        <div className="grid grid-cols-12 px-4 mx-auto max-w-full gap-12">
+        <div className="grid grid-cols-12 mx-auto gap-0 lg:gap-12">
           <aside
             className="hidden relative ml-auto lg:block col-span-1"
             aria-labelledby="sidebar-label"
