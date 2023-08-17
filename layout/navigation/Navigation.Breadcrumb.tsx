@@ -10,6 +10,7 @@ import { Suspense } from "react";
 
 export type NavigationBreadcrumbProps = {
   theme?: {
+    enabled?: boolean;
     background?: ColorType;
     text?: ColorType;
     border?: ColorType;
@@ -21,6 +22,8 @@ export const NavigationBreadcrumb = ({ theme }: NavigationBreadcrumbProps) => {
   const pathname = usePathname() || "";
   const isHomepage = pathname === "/" || isLanguage(pathname?.replace("/", ""));
   if (isHomepage && !isPreview) return null;
+
+  if (theme?.enabled === false) return null;
 
   return (
     <div

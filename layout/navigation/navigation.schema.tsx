@@ -176,6 +176,10 @@ export default defineType({
           options: {
             fields: [
               {
+                name: "enabled",
+                type: "boolean",
+              },
+              {
                 name: "background",
                 type: "color",
               },
