@@ -60,6 +60,12 @@ const Link = lazy<ComponentType<LinkProps>>(
   () => import(/* webpackChunkName: "Link" */ "../../components/buttons/Link")
 );
 
+type ItemProps = {
+  _key?: string;
+  image?: ImageType;
+  link?: LinkProps;
+};
+
 export type Block7Props = {
   theme?: {
     block?: BlockThemeType;
@@ -71,7 +77,7 @@ export type Block7Props = {
   intro?: React.ReactNode;
 
   buttons?: ButtonProps[];
-  items?: { _key?: string; image?: ImageType; link?: LinkProps }[];
+  items?: ItemProps[];
 };
 
 export const Block7 = ({
@@ -125,22 +131,10 @@ export const Block7 = ({
                 {items?.map(({ image, _key, link }) =>
                   link ? (
                     <Link {...link}>
-                      <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
-                        <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-                          {image && (
-                            <ResponsiveImage key={_key} {...image} fill />
-                          )}
-                        </div>
-                      </div>
+                      <Item {...{ image, _key }} />
                     </Link>
                   ) : (
-                    <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
-                      <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-                        {image && (
-                          <ResponsiveImage key={_key} {...image} fill />
-                        )}
-                      </div>
-                    </div>
+                    <Item {...{ image, _key }} />
                   )
                 )}
               </MobileScroller>
@@ -149,6 +143,16 @@ export const Block7 = ({
         </div>
       </div>
     </Wrapper>
+  );
+};
+
+const Item = ({ _key, image }: Omit<ItemProps, "link">) => {
+  return (
+    <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+        {image && <ResponsiveImage key={_key} {...image} fill />}
+      </div>
+    </div>
   );
 };
 
