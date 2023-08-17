@@ -228,7 +228,7 @@ const ButtonInner = ({
                 ["pointer-events-none opacity-75"]: disabled,
                 ["w-full block"]: stretch,
                 ["inline-block"]: !stretch,
-                ["no-underline text-left break-words"]: true,
+                ["no-underline text-left break-words whitespace-nowrap"]: true,
               },
             ),
           ),
