@@ -12,7 +12,7 @@ import { TopNav } from "./TopNav";
 import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
 import router from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 export type NavItem = {
   _key?: string;
@@ -112,7 +112,9 @@ export const Navigation = ({
       )}
 
       {theme?.breadcrumb?.hidden !== true && (
-        <NavigationBreadcrumb theme={theme?.breadcrumb} />
+        <Suspense>
+          <NavigationBreadcrumb theme={theme?.breadcrumb} />
+        </Suspense>
       )}
     </div>
   );
