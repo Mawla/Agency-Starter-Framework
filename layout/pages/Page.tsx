@@ -88,6 +88,7 @@ export const Page = ({
               items={page.hideNav === true ? [] : navItems}
               buttons={page.hideNav === true ? [] : navigation.buttons}
               logo={navigation.logo}
+              banner={navigation.banner}
               theme={{
                 ...(navigation.theme || {}),
                 breadcrumb: {
