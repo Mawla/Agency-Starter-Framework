@@ -292,6 +292,16 @@ export const HIDE_FOOTER_FIELD = defineField({
   group: ["meta"],
 });
 
+export const HIDE_BREADCRUMB_FIELD = defineField({
+  name: "hideBreadcrumb",
+  title: "Hide breadcrumb",
+  type: "boolean",
+  description:
+    "Option to hide the breadcrumb (if enabled in navigation theme settings)",
+  initialValue: false,
+  group: ["meta"],
+});
+
 export const SCRIPTS_FIELD = defineField({
   name: "scripts",
   title: "Scripts",
@@ -326,6 +336,7 @@ export const pageBase = {
     { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
+    HIDE_BREADCRUMB_FIELD,
     LANGUAGE_FIELD,
     I18N_BASE_FIELD,
     SCRIPTS_FIELD,

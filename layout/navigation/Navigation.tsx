@@ -4,10 +4,15 @@ import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
+import {
+  NavigationBreadcrumb,
+  NavigationBreadcrumbProps,
+} from "./Navigation.Breadcrumb";
 import { TopNav } from "./TopNav";
+import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
 import router from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 export type NavItem = {
   _key?: string;
@@ -19,7 +24,11 @@ export type NavItem = {
 export type NavigationProps = {
   items: NavItem[];
   buttons: (ButtonProps & { _key?: string })[];
-  logo?: { mobile?: ImageType; desktop?: ImageType };
+  logo?: {
+    mobile?: ImageType;
+    desktop?: ImageType;
+  };
+  banner?: TopNavBannerProps;
   theme?: {
     block?: {
       background?: ColorType;
@@ -32,6 +41,8 @@ export type NavigationProps = {
     submenu?: {
       background?: ColorType;
     };
+    breadcrumb?: NavigationBreadcrumbProps["theme"];
+    banner?: TopNavBannerProps["theme"];
   };
 };
 
@@ -39,6 +50,7 @@ export const Navigation = ({
   items,
   buttons,
   logo,
+  banner,
   theme,
 }: NavigationProps) => {
   const { screenWidth, breakpoint } = useBreakpoint();
@@ -86,6 +98,7 @@ export const Navigation = ({
         ref={navRef}
         logo={logo}
         theme={theme}
+        banner={banner}
       />
 
       {screenWidth < BREAKPOINTS.lg && (
@@ -96,6 +109,12 @@ export const Navigation = ({
           onOpenChange={setMobileNavIsOpen}
           theme={theme}
         />
+      )}
+
+      {theme?.breadcrumb?.hidden !== true && (
+        <Suspense>
+          <NavigationBreadcrumb theme={theme?.breadcrumb} />
+        </Suspense>
       )}
     </div>
   );

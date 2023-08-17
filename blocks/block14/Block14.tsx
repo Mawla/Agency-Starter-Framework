@@ -1,6 +1,5 @@
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
-import { BreadcrumbProps } from "../../components/breadcrumb/Breadcrumb";
 import Link from "../../components/buttons/Link";
 import { DateDisplayProps } from "../../components/date/DateDisplay";
 import { DecorationProps } from "../../components/decorations/Decoration";
@@ -34,13 +33,6 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    ),
-);
-
-const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "Breadcrumb" */ "../../components/breadcrumb/Breadcrumb"
     ),
 );
 
@@ -98,7 +90,7 @@ export const Block14 = ({
       decorations={decorations}
     >
       <main className="py-8 lg:py-16">
-        <div className="grid grid-cols-12 px-4 mx-auto max-w-full gap-12">
+        <div className="grid grid-cols-12 mx-auto gap-0 lg:gap-12">
           <aside
             className="hidden relative ml-auto lg:block col-span-1"
             aria-labelledby="sidebar-label"
@@ -110,10 +102,7 @@ export const Block14 = ({
 
           <article className="col-span-12 lg:col-span-11 xl:col-span-8">
             <header className="mb-4 lg:mb-6 not-format">
-              <nav className="flex" aria-label="Breadcrumb">
-                <Breadcrumb wrap />
-              </nav>
-              <div className="flex items-center my-4 md:my-6">
+              <div className="flex items-center mb-4 md:mb-6">
                 <div className="flex gap-1 flex-wrap">
                   {Boolean(tags?.length) &&
                     tags?.map((tag) => (

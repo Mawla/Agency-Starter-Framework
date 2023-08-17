@@ -75,10 +75,12 @@ export const buttonFieldsWithoutDefaultThemeQuery = groq`
       "defined(presetTheme) => presetTheme -> {...},",
     )
     .replace(
-      "!defined(customTheme) => *[_type == 'preset.button' && default][0]",
+      "!defined(customTheme.mobile) => *[_type == 'preset.button' && default][0]",
       "",
     )}
 `;
+
+export const linkQuery = groq` { ${buttonFieldsWithoutDefaultThemeQuery} }`;
 
 export const buttonQuery = groq`{
   ${buttonFieldsQuery}
