@@ -52,6 +52,10 @@ export const PREDEFINED_ICONS = {
     title: "Globe",
     description: "Shown next to the language selector",
   },
+  home: {
+    title: "Home",
+    description: "Shown in the breadcrumb",
+  },
   facebook: {
     title: "Facebook",
     description: "Shown on the article page share buttons",

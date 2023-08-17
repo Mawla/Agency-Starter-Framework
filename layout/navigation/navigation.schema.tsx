@@ -169,6 +169,28 @@ export default defineType({
             ],
           },
         }),
+        defineField({
+          name: "breadcrumb",
+          title: "Breadcrumb",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+              },
+              {
+                name: "text",
+                type: "color",
+              },
+              {
+                name: "border",
+                type: "color",
+                title: "Bottom border",
+              },
+            ],
+          },
+        }),
       ],
     }),
   ],

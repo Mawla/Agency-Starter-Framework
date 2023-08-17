@@ -4,6 +4,10 @@ import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
+import {
+  NavigationBreadcrumb,
+  NavigationBreadcrumbProps,
+} from "./Navigation.Breadcrumb";
 import { TopNav } from "./TopNav";
 import { AlignType } from "./navigation.options";
 import router from "next/router";
@@ -32,6 +36,7 @@ export type NavigationProps = {
     submenu?: {
       background?: ColorType;
     };
+    breadcrumb?: NavigationBreadcrumbProps["theme"];
   };
 };
 
@@ -97,6 +102,8 @@ export const Navigation = ({
           theme={theme}
         />
       )}
+
+      <NavigationBreadcrumb theme={theme?.breadcrumb} />
     </div>
   );
 };
