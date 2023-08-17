@@ -249,3 +249,57 @@ export const ImageRatios = () => (
     ))}
   </div>
 );
+
+export const Clickable = () => (
+  <div className="grid grid-cols-4 gap-20">
+    <ComposableCard
+      title="Card clickable if single button"
+      buttons={[{ label: "click me", href: "/" }]}
+      theme={{
+        border: {
+          width: 1,
+          color: "black",
+        },
+      }}
+    />
+    <ComposableCard
+      title="Card clickable, buttons hidden"
+      buttons={[{ label: "click me", href: "/" }]}
+      theme={{
+        buttons: { hidden: true },
+        border: {
+          width: 1,
+          color: "black",
+        },
+      }}
+    />
+    <ComposableCard
+      title="Card not clickable"
+      subtitle="when there is more than 1 button"
+      buttons={[
+        { label: "click me", href: "/" },
+        { label: "click me 2", href: "/" },
+      ]}
+      theme={{
+        border: {
+          width: 1,
+          color: "black",
+        },
+      }}
+    />
+    <ComposableCard
+      title="Card not clickable (multiple buttons), buttons hidden"
+      buttons={[
+        { label: "click me", href: "/" },
+        { label: "click me2", href: "/" },
+      ]}
+      theme={{
+        buttons: { hidden: true },
+        border: {
+          width: 1,
+          color: "black",
+        },
+      }}
+    />
+  </div>
+);

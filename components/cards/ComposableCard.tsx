@@ -25,6 +25,7 @@ import {
   ImageType,
   PaddingType,
 } from "../../types";
+import { LinkProps } from "../buttons/Link";
 import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
 import { ImageHeightType, ImageRatioType } from "./composablecard.options";
@@ -64,6 +65,10 @@ const Decorations = lazy<ComponentType<DecorationsProps>>(
     ),
 );
 
+const Link = lazy<ComponentType<LinkProps>>(
+  () => import(/* webpackChunkName: "Link" */ "../../components/buttons/Link"),
+);
+
 export type ComposableCardProps = {
   _key?: string;
   image?: ImageType;
@@ -94,6 +99,9 @@ export type ComposableCardProps = {
       height?: ImageHeightType;
       rounded?: BorderRadiusType;
     };
+    buttons?: {
+      hidden?: boolean;
+    };
   };
 };
 
@@ -122,10 +130,12 @@ export const ComposableCard = ({
   decorations,
   blockTitleLevel = "span",
 }: ComposableCardProps) => {
+  const cardClickable = buttons?.length === 1 && buttons?.[0]?.href;
+
   return (
     <div
       className={cx(
-        "h-full relative overflow-hidden",
+        "h-full relative overflow-hidden group",
         theme?.card?.color && textClasses[theme?.card?.color],
         theme?.card?.align && textAlignClasses[theme?.card?.align],
         theme?.border?.color && borderClasses[theme?.border?.color],
@@ -136,6 +146,14 @@ export const ComposableCard = ({
         theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
       )}
     >
+      {cardClickable && buttons?.[0]?.href && (
+        <Link href={buttons?.[0]?.href}>
+          <a className="absolute inset-0 z-20 opacity-0]">
+            <span className="sr-only">{buttons?.[0].label}</span>
+          </a>
+        </Link>
+      )}
+
       <Decorations decorations={decorations} />
       <div
         className={cx("relative z-10 flex flex-col gap-4", {
@@ -174,6 +192,9 @@ export const ComposableCard = ({
               theme?.title?.as ||
               (bumpHeadingLevel(blockTitleLevel) as HtmlTextNodeType)
             }
+            className={cx(
+              cardClickable && "group-hover:underline underline-offset-4",
+            )}
           >
             {title}
           </Title>
@@ -197,7 +218,7 @@ export const ComposableCard = ({
           </Title>
         )}
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
-          <div>
+          <div className={cx(theme?.buttons?.hidden && "hidden")}>
             <ButtonGroup items={buttons} />
           </div>
         )}
