@@ -88,7 +88,17 @@ export const Page = ({
               items={page.hideNav === true ? [] : navItems}
               buttons={page.hideNav === true ? [] : navigation.buttons}
               logo={navigation.logo}
-              theme={navigation.theme}
+              banner={navigation.banner}
+              theme={{
+                ...(navigation.theme || {}),
+                breadcrumb: {
+                  ...(navigation.theme?.breadcrumb || {}),
+                  hidden:
+                    page.breadcrumb === null ||
+                    page.hideBreadcrumb ||
+                    navigation.theme?.breadcrumb?.hidden,
+                },
+              }}
             />
           </ErrorBoundary>
         )}
@@ -112,6 +122,7 @@ export const Page = ({
               logo={footer.logo}
               info={footer.info}
               theme={footer.theme}
+              hideBreadcrumb={page.hideBreadcrumb}
             />
           </ErrorBoundary>
         )}

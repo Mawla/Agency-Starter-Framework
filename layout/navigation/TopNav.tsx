@@ -1,6 +1,7 @@
 import { widthClasses } from "../../components/block/width.options";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { NavigationProps } from "./Navigation";
+import { TopNavBanner } from "./TopNav.Banner";
 import { TopNavButtons } from "./TopNav.Buttons";
 import { TopNavLogo } from "./TopNav.Logo";
 import { TopNavMenu } from "./TopNav.Menu";
@@ -14,7 +15,7 @@ export type TopNavProps = {
 
 export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
   (
-    { items, buttons, showNav = true, onHamburgerClick, logo, theme },
+    { items, buttons, showNav = true, onHamburgerClick, logo, banner, theme },
     navRef,
   ) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -34,6 +35,8 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
           )}
           ref={navRef}
         >
+          <TopNavBanner theme={theme?.banner} {...banner} />
+
           <nav
             aria-label="main"
             data-aria-orientation="horizontal"

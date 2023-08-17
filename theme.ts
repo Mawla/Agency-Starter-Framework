@@ -7,7 +7,6 @@ import {
   FontSizeType,
   FontType,
   FontWeightType,
-  HorizontalAlignType,
   PaddingType,
   TextTransformType,
 } from "./types";

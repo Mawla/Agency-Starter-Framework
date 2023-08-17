@@ -40,6 +40,7 @@ export type PageType = {
   title: string;
   hideNav?: boolean;
   hideFooter?: boolean;
+  hideBreadcrumb?: boolean;
   seo: SeoType;
   blocks: {}[];
   dialogs: {}[];
@@ -63,6 +64,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     title,
     hideNav,
     hideFooter,
+    hideBreadcrumb,
     "locked": locked,
 
     // homepage for language

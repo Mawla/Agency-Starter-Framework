@@ -86,13 +86,32 @@ export default defineType({
         },
       ],
     }),
-    {
+    defineField({
       name: "buttons",
       title: "Buttons",
       type: "array",
       group: "content",
       of: [{ title: "Button", type: "button" }],
-    },
+    }),
+    defineField({
+      name: "banner",
+      type: "object",
+      title: "Banner",
+      group: "content",
+      description: "Message or call to action above the navigation",
+      fields: [
+        defineField({
+          name: "content",
+          title: "Content",
+          type: "text",
+        }),
+        defineField({
+          name: "link",
+          title: "Link",
+          type: "link",
+        }),
+      ],
+    }),
     defineField({
       name: "logo",
       title: "Logo",
@@ -165,6 +184,65 @@ export default defineType({
                 name: "background",
                 type: "color",
                 title: "Background color",
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "banner",
+          title: "Banner",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "hidden",
+                type: "boolean",
+              },
+              {
+                name: "background",
+                type: "color",
+              },
+              {
+                name: "text",
+                type: "color",
+              },
+              {
+                name: "border",
+                type: "color",
+                title: "Bottom border",
+              },
+              {
+                name: "align",
+                type: "select",
+                options: {
+                  list: optionsToList(ALIGN_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+        defineField({
+          name: "breadcrumb",
+          title: "Breadcrumb",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "hidden",
+                type: "boolean",
+              },
+              {
+                name: "background",
+                type: "color",
+              },
+              {
+                name: "text",
+                type: "color",
+              },
+              {
+                name: "border",
+                type: "color",
+                title: "Bottom border",
               },
             ],
           },

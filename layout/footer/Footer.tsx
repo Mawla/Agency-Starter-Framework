@@ -38,6 +38,7 @@ export type FooterProps = {
       text?: ColorType;
     };
   };
+  hideBreadcrumb?: boolean;
 };
 
 export const Footer = ({
@@ -49,6 +50,7 @@ export const Footer = ({
   legalLinks,
   logo,
   theme,
+  hideBreadcrumb,
 }: FooterProps) => {
   return (
     <footer>
@@ -58,7 +60,7 @@ export const Footer = ({
         }}
         className="text-[14px]"
       >
-        <FooterBreadcrumb />
+        {hideBreadcrumb !== true && <FooterBreadcrumb />}
 
         <div className="grid lg:grid-cols-12 lg:gap-5">
           <div className="lg:col-span-4 flex flex-col gap-4 lg:pr-20 mb-10 lg:mb-0 max-w-sm lg:max-w-none">
