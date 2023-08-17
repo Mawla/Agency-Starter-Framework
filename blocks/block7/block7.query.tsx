@@ -1,4 +1,7 @@
-import { buttonQuery } from "../../components/buttons/button.query";
+import {
+  buttonQuery,
+  buttonHrefQuery,
+} from "../../components/buttons/button.query";
 import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
@@ -13,6 +16,7 @@ export const getBlock7Query = (language: LanguageType) => groq`
       buttons[] ${buttonQuery},
       items[] {
         _key,
-        "image": ${imageQuery}
+        "image": ${imageQuery},
+        "link": ${buttonHrefQuery},
       },
     }`;
