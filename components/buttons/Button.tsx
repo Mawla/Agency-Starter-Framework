@@ -59,6 +59,7 @@ export type ButtonProps = {
     mobile?: ButtonThemeType;
     tablet?: ButtonThemeType;
     desktop?: ButtonThemeType;
+    hover?: ButtonThemeHoverType;
   };
   theme?: {
     icon?: {
@@ -68,6 +69,7 @@ export type ButtonProps = {
     mobile?: ButtonThemeType;
     tablet?: ButtonThemeType;
     desktop?: ButtonThemeType;
+    hover?: ButtonThemeHoverType;
   };
 };
 
@@ -89,6 +91,13 @@ type ButtonThemeType = {
     radius?: BorderRadiusType;
     width?: BorderWidthType;
   };
+};
+
+type ButtonThemeHoverType = {
+  underline?: boolean;
+  label?: ColorType;
+  background?: ColorType;
+  border?: ColorType;
 };
 
 export const Button = (props: ButtonProps) => {
@@ -134,6 +143,10 @@ const ButtonInner = ({
     name: presetTheme?.name || "custom",
     icon: theme?.icon || presetTheme?.icon,
   };
+
+  let hover: ButtonThemeHoverType = {};
+  if (presetTheme?.hover) hover = { ...presetTheme.hover };
+  if (theme?.hover) hover = { ...theme.hover };
 
   if (!themeObj?.icon) themeObj.icon = {};
 
@@ -219,12 +232,16 @@ const ButtonInner = ({
               ...getClasses("border.color", borderClasses),
               ...getClasses("border.radius", borderRadiusClasses),
               ...getClasses("border.width", borderWidthClasses),
+              hover?.label && `hover:${textClasses[hover.label]}`,
+              hover?.background &&
+                `hover:${backgroundClasses[hover.background]}`,
+              hover?.border && `hover:${borderClasses[hover.border]}`,
               {
                 ["group"]: true,
                 ["cursor-pointer"]: true,
                 ["transition-colors duration-200"]: true,
                 ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
-                  href?.trim()?.length,
+                  hover?.underline,
                 ["pointer-events-none opacity-75"]: disabled,
                 ["w-full block"]: stretch,
                 ["inline-block"]: !stretch,

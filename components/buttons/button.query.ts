@@ -46,6 +46,7 @@ icon,
 mobile,
 tablet,
 desktop,
+hover,
 `;
 
 export const buttonFieldsQuery = groq`
