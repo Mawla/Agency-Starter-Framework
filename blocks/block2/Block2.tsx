@@ -104,6 +104,7 @@ export const Block2 = ({
               align={theme?.block?.align || "center"}
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
+              weight={theme?.intro?.weight}
             >
               <PortableText content={intro as any} />
             </Text>
@@ -180,7 +181,11 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
           </div>
         )}
         {intro && (
-          <Text size={theme?.intro?.size || "md"} color={theme?.intro?.color}>
+          <Text
+            size={theme?.intro?.size || "md"}
+            color={theme?.intro?.color}
+            weight={theme?.intro?.weight}
+          >
             <PortableText content={intro as any} />
           </Text>
         )}

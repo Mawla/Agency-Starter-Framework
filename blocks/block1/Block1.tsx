@@ -149,13 +149,18 @@ export const Block1 = ({
               <Text
                 size={theme?.intro?.size || "lg"}
                 color={theme?.intro?.color}
+                weight={theme?.intro?.weight}
               >
                 <PortableText content={intro as any} />
               </Text>
             )}
 
             {body && (
-              <Text size={theme?.body?.size || "lg"} color={theme?.body?.color}>
+              <Text
+                size={theme?.body?.size || "lg"}
+                color={theme?.body?.color}
+                weight={theme?.body?.weight}
+              >
                 <PortableText content={body as any} />
               </Text>
             )}

@@ -130,6 +130,7 @@ export const Block11 = ({
             <Text
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
+              weight={theme?.intro?.weight}
               align={theme?.block?.align || "center"}
             >
               <PortableText content={intro as any} />

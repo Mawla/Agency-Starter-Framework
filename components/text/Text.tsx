@@ -1,4 +1,4 @@
-import { proseClasses, textClasses } from "../../theme";
+import { proseClasses, textClasses, weightClasses } from "../../theme";
 import { TextElement } from "../../types";
 import { ColorType } from "../../types";
 import {
@@ -8,6 +8,7 @@ import {
   TextFontType,
   textSizeClasses,
   TextSizeType,
+  TextWeightType,
 } from "./text.options";
 import cx from "classnames";
 import React from "react";
@@ -21,6 +22,7 @@ export type TextProps = {
   background?: ColorType;
   className?: string;
   font?: TextFontType | null;
+  weight?: TextWeightType | null;
 };
 
 export const Text = ({
@@ -32,6 +34,7 @@ export const Text = ({
   size = "lg",
   className,
   font = "sans",
+  weight,
 }: TextProps) => {
   const Element = as;
 
@@ -46,6 +49,7 @@ export const Text = ({
           align && textAlignClasses[align],
           size && textSizeClasses[size],
           font && textFontClasses[font],
+          weight && weightClasses[weight],
           color
             ? textClasses[color]
             : background

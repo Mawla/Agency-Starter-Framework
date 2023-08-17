@@ -8,6 +8,8 @@ import {
   TEXT_ALIGN_OPTIONS,
   TEXT_FONT_OPTIONS,
   TEXT_SIZE_OPTIONS,
+  TEXT_WEIGHT_OPTIONS,
+  TextWeightType,
 } from "./text.options";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -53,6 +55,16 @@ export const Text = () => (
         </TextComponent>
       </div>
     ))}
+
+    {(Object.keys(TEXT_WEIGHT_OPTIONS) as TextWeightType[]).map(
+      (weight: TextWeightType) => (
+        <div key={weight} className="p-4">
+          <TextComponent weight={weight}>
+            <div className="p-1">weight {weight}</div>
+          </TextComponent>
+        </div>
+      ),
+    )}
 
     {(Object.keys(COLORS) as ColorType[]).map((color: ColorType) => (
       <TextComponent color={color} background={color} key={color}>

@@ -77,6 +77,7 @@ export const Block15 = ({
               <Text
                 size={theme?.intro?.size || "xl"}
                 color={theme?.intro?.color}
+                weight={theme?.intro?.weight}
               >
                 <PortableText content={intro as any} />
               </Text>
@@ -84,7 +85,11 @@ export const Block15 = ({
           )}
           {body && (
             <div className="lg:col-span-6">
-              <Text size={theme?.body?.size || "xl"} color={theme?.body?.color}>
+              <Text
+                size={theme?.body?.size || "xl"}
+                color={theme?.body?.color}
+                weight={theme?.body?.weight}
+              >
                 <PortableText content={body as any} />
               </Text>
             </div>
