@@ -50,6 +50,7 @@ export type DecorationWrapperType = {
 
 export type DecorationProps = {
   _key?: string;
+  title?: string;
   theme?: {
     rounded?: BlockRoundedType;
   };
@@ -104,6 +105,7 @@ const createStyleObject = (obj: Record<string, unknown>): CSSProperties => {
 
 export const Decoration = ({
   _key,
+  title,
   breakout,
   theme,
   mobile = {},
