@@ -71,7 +71,7 @@ export type Block7Props = {
   intro?: React.ReactNode;
 
   buttons?: ButtonProps[];
-  items?: { _key?: string; image?: ImageType }[];
+  items?: { _key?: string; image?: ImageType; link?: LinkProps }[];
 };
 
 export const Block7 = ({
@@ -122,13 +122,27 @@ export const Block7 = ({
           <div className="lg:w-9/12">
             {items && Boolean(items?.filter(Boolean).length) && (
               <MobileScroller className="flex lg:grid lg:grid-cols-5 gap-2">
-                {items?.map(({ image, _key }) => (
-                  <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-                      {image && <ResponsiveImage key={_key} {...image} fill />}
+                {items?.map(({ image, _key, link }) =>
+                  link ? (
+                    <Link {...link}>
+                      <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
+                        <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+                          {image && (
+                            <ResponsiveImage key={_key} {...image} fill />
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
+                      <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+                        {image && (
+                          <ResponsiveImage key={_key} {...image} fill />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </MobileScroller>
             )}
           </div>
