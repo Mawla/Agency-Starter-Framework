@@ -2,6 +2,7 @@ import {
   defaultBlockTheme,
   defaultBlockGroups,
 } from "../../components/block/block.schema";
+import Link from "../../components/buttons/link.schema";
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
@@ -40,7 +41,6 @@ const schema = defineType({
       type: "portabletext.simple",
       group: "content",
     }),
-
     defineField({
       name: "buttons",
       title: "Buttons",
@@ -68,6 +68,11 @@ const schema = defineType({
               name: "image",
               title: "Image",
               type: "image",
+            }),
+            defineField({
+              name: "link",
+              title: "Link",
+              type: "link",
             }),
           ],
         }),
