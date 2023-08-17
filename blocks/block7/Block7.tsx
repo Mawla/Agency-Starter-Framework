@@ -3,6 +3,7 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { LinkProps } from "../../components/buttons/Link";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { MobileScrollerProps } from "../../components/slider/MobileScroller";
@@ -53,6 +54,10 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     import(
       /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
     )
+);
+
+const Link = lazy<ComponentType<LinkProps>>(
+  () => import(/* webpackChunkName: "Link" */ "../../components/buttons/Link")
 );
 
 export type Block7Props = {
