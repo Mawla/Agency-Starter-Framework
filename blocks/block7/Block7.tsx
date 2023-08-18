@@ -154,7 +154,7 @@ const Item = ({ _key, image }: Omit<ItemProps, "link">) => {
   return (
     <div className="lg:max-w-none shrink-0 snap-center">
       <div className="min-h-[200px] relative aspect-[3/4] overflow-hidden rounded-lg">
-        {image && <ResponsiveImage className="" key={_key} {...image} fill />}
+        {image && <ResponsiveImage key={_key} {...image} fill />}
       </div>
     </div>
   );
