@@ -149,10 +149,8 @@ export const Block7 = ({
 const Item = ({ _key, image }: Omit<ItemProps, "link">) => {
   return (
     <div className="border lg:max-w-none shrink-0 snap-center">
-      <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-        {image && (
-          <ResponsiveImage className="opacity-0" key={_key} {...image} fill />
-        )}
+      <div className="min-h-[200px] relative aspect-[3/4] overflow-hidden rounded-lg">
+        {image && <ResponsiveImage className="" key={_key} {...image} fill />}
       </div>
     </div>
   );
