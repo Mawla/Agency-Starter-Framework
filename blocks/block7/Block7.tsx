@@ -127,7 +127,7 @@ export const Block7 = ({
 
           <div className="lg:w-9/12">
             {items && Boolean(items?.filter(Boolean).length) && (
-              <MobileScroller className="flex lg:grid lg:grid-cols-5 gap-2">
+              <MobileScroller className="border border-gray-700 flex lg:grid lg:grid-cols-auto lg:grid-flow-col gap-2">
                 {items?.map(({ image, _key, link }) =>
                   link ? (
                     <Link {...link}>
@@ -148,9 +148,11 @@ export const Block7 = ({
 
 const Item = ({ _key, image }: Omit<ItemProps, "link">) => {
   return (
-    <div className="w-[200px] lg:max-w-none shrink-0 lg:w-auto snap-center">
+    <div className="border lg:max-w-none shrink-0 snap-center">
       <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-        {image && <ResponsiveImage key={_key} {...image} fill />}
+        {image && (
+          <ResponsiveImage className="opacity-0" key={_key} {...image} fill />
+        )}
       </div>
     </div>
   );
