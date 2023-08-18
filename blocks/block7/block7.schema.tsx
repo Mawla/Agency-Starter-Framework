@@ -77,7 +77,6 @@ const schema = defineType({
           ],
         }),
       ],
-      validation: (Rule) => Rule.max(5),
     }),
     defineField({
       name: "theme",
