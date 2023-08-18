@@ -22,6 +22,33 @@ export default {
   title: "Blocks/Block7",
 } as Meta;
 
+const items = [
+  { items: [{ image: demoImage }], key: "a" },
+  { items: [{ image: demoImage }, { image: demoImage }], key: "b" },
+  {
+    items: [{ image: demoImage }, { image: demoImage }, { image: demoImage }],
+    key: "c",
+  },
+  {
+    items: [
+      { image: demoImage },
+      { image: demoImage },
+      { image: demoImage },
+      { image: demoImage },
+    ],
+    key: "d",
+  },
+  {
+    items: [
+      { image: demoImage },
+      { image: demoImage },
+      { image: demoImage },
+      { image: demoImage },
+    ],
+    key: "e",
+  },
+];
+
 const DEMO_CONTENT: Block7Props = {
   title: "Diam",
   intro: (
@@ -33,13 +60,7 @@ const DEMO_CONTENT: Block7Props = {
   ),
 
   buttons: [{ label: "Button" }],
-  items: [
-    { image: demoImage },
-    { image: demoImage },
-    { image: demoImage },
-    { image: demoImage },
-    { image: demoImage },
-  ],
+  items: [{ image: demoImage }, { image: demoImage }, { image: demoImage }],
 };
 
 export const Default = () => <Block7 {...DEMO_CONTENT} />;
@@ -130,6 +151,20 @@ export const IntroSizes = () => (
           theme={{
             intro: { size },
           }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const Items = () => (
+  <>
+    {items.reverse().map((item) => (
+      <div key={item.key}>
+        <Block7
+          intro={DEMO_CONTENT.intro}
+          title={DEMO_CONTENT.title}
+          items={item.items}
         />
       </div>
     ))}
