@@ -104,7 +104,11 @@ export const Block7 = ({
         <div className="flex flex-col lg:space-x-16 lg:flex-row">
           <div className="lg:w-3/12 lg:order-first order-last">
             {title && (
-              <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
+              <Title
+                className="mt-6 lg:mt-0"
+                {...theme?.title}
+                size={theme?.title?.size || "4xl"}
+              >
                 {title}
               </Title>
             )}
