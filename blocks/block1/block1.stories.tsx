@@ -768,20 +768,14 @@ export const ExtendMediaWidth = () => {
       <Block1
         title="SVG"
         theme={extendMediaWidthThemeInner}
-        image={{
-          src: "https://cdn.sanity.io/images/lra7ykt5/development/87600698dfb4875988f7380216781a88e4f3f4ef-774x790.svg",
-          width: 774,
-          height: 790,
-          alt: "alt",
+        script={{
+          title: "embed",
+          items: [
+            {
+              html: `<svg viewBox="0 0 784 784" fill="none" preserveAspectRatio="xMidYMid meet"><rect width="784" height="784" fill="#f00"/></svg>`,
+            },
+          ],
         }}
-        // script={{
-        //   title: "embed",
-        //   items: [
-        //     {
-        //       html: `<svg viewBox="0 0 784 784" fill="none" preserveAspectRatio="xMidYMid meet"><rect width="784" height="784" fill="#F8F6F2"/></svg>`,
-        //     },
-        //   ],
-        // }}
       />
     </div>
   );
