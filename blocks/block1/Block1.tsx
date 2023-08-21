@@ -10,7 +10,10 @@ import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { ScriptsType } from "../../components/script/Script";
 import { TextProps } from "../../components/text/Text";
-import { TextThemeType } from "../../components/text/text.options";
+import {
+  TextThemeType,
+  textAlignClasses,
+} from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
@@ -20,20 +23,14 @@ import { useSize } from "../../hooks/useSize";
 import { borderRadiusClasses } from "../../theme";
 import {
   BorderRadiusType,
+  HorizontalAlignType,
   ImageType,
   VerticalAlignType,
   VideoType,
 } from "../../types";
 import { mediaPositionType } from "./block1.options";
 import cx from "classnames";
-import React, {
-  CSSProperties,
-  ComponentType,
-  lazy,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { CSSProperties, ComponentType, lazy, useRef } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -121,6 +118,12 @@ export const verticalAlignClasses: Record<VerticalAlignType, string> = {
   bottom: "lg:items-end",
 };
 
+export const horizontalAlignClasses: Record<HorizontalAlignType, string> = {
+  left: "",
+  center: "mx-auto",
+  right: "ml-auto",
+};
+
 export const Block1 = ({
   theme,
   decorations,
@@ -177,9 +180,11 @@ export const Block1 = ({
         <Spacing
           padding={theme?.content?.verticalSpace}
           className={cx(
-            "order-2 flex pt-0 sm:pt-0 md:pt-0 pb-0 sm:pb-0 md:pb-0",
+            "order-2 flex pt-0 sm:pt-0 md:pt-0 pb-0 sm:pb-0 md:pb-0 relative z-20",
             theme?.layout?.verticalAlign &&
               verticalAlignClasses[theme.layout.verticalAlign],
+            theme?.block?.align &&
+              textAlignClasses[theme?.block?.align || "left"],
           )}
         >
           <div className="flex flex-col gap-8">
@@ -194,6 +199,7 @@ export const Block1 = ({
                 size={theme?.intro?.size || "lg"}
                 color={theme?.intro?.color}
                 weight={theme?.intro?.weight}
+                align={theme?.block?.align || "left"}
               >
                 <PortableText content={intro as any} />
               </Text>
@@ -204,13 +210,21 @@ export const Block1 = ({
                 size={theme?.body?.size || "lg"}
                 color={theme?.body?.color}
                 weight={theme?.body?.weight}
+                align={theme?.block?.align || "left"}
               >
                 <PortableText content={body as any} />
               </Text>
             )}
 
             {buttons && Boolean(buttons?.filter(Boolean).length) && (
-              <ButtonGroup items={buttons} />
+              <div
+                className={cx(
+                  theme?.block?.align &&
+                    textAlignClasses[theme?.block?.align || "left"],
+                )}
+              >
+                <ButtonGroup items={buttons} />
+              </div>
             )}
           </div>
         </Spacing>
@@ -218,9 +232,11 @@ export const Block1 = ({
         {(image || video) && (
           <div
             className={cx(
-              "mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-none",
+              "w-full z-10 mt-10 lg:mt-0 lg:flex relative lg:h-full max-w-[650px] lg:max-w-none",
               theme?.layout?.verticalAlign &&
                 verticalAlignClasses[theme.layout.verticalAlign],
+              theme?.block?.align &&
+                horizontalAlignClasses[theme?.block?.align],
               {
                 ["order-3"]: theme?.layout?.mediaPosition !== "left",
                 ["order-1"]: theme?.layout?.mediaPosition === "left",
@@ -242,6 +258,8 @@ export const Block1 = ({
                       ["lg:h-full"]: theme?.image?.fullHeight,
                     })}
                     style={{
+                      maxWidth:
+                        getOriginalImageDimensions(image?.src).width || "auto",
                       aspectRatio: !theme?.image?.fullHeight
                         ? getOriginalImageDimensions(image?.src).aspectRatio ||
                           "auto"
@@ -258,7 +276,6 @@ export const Block1 = ({
                       )}
                       roundSize={25}
                     />
-
                     <Decorations decorations={decorations} location="image" />
                   </div>
                 </div>
