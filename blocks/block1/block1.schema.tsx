@@ -24,10 +24,10 @@ const schema = defineType({
       title: "title",
       image: "image",
     },
-    prepare({ title = "Block 1", image }: any) {
+    prepare({ title = "Block 1", image, mobileImage }: any) {
       return {
         title: title,
-        media: image || <Image weight="thin" />,
+        media: image || mobileImage || <Image weight="thin" />,
       };
     },
   },
@@ -62,6 +62,19 @@ const schema = defineType({
     defineField({
       name: "image",
       title: "Image",
+      type: "image",
+      group: "content",
+      options: {
+        hotspot: true,
+      },
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.video || parent?.script),
+    }),
+    defineField({
+      name: "mobileImage",
+      title: "Mobile image",
+      description:
+        'Image used on screens smaller than 768px wide. If not set, "Image" will be used.',
       type: "image",
       group: "content",
       options: {
@@ -136,6 +149,19 @@ const schema = defineType({
                   list: optionsToList(VERTICAL_ALIGN_OPTIONS),
                 },
               }),
+              defineField({
+                name: "extendMediaWidth",
+                type: "boolean",
+              }),
+            ],
+          },
+        }),
+        defineField({
+          name: "content",
+          title: "Content",
+          type: "styles",
+          options: {
+            fields: [
               defineField({
                 name: "verticalSpace",
                 title: "Content space",
