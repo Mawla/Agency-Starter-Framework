@@ -218,12 +218,12 @@ export const Block1 = ({
         {(image || video) && (
           <div
             className={cx(
-              "order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full",
+              "mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-none",
               theme?.layout?.verticalAlign &&
                 verticalAlignClasses[theme.layout.verticalAlign],
               {
-                ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
-                ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
+                ["order-3"]: theme?.layout?.mediaPosition !== "left",
+                ["order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
             style={mediaPositionStyle}
@@ -293,13 +293,13 @@ export const Block1 = ({
         {script && (
           <div
             className={cx(
-              "w-full flex relative order-3",
+              "w-full flex relative",
               "[&>div]:w-full [&>div>div]:w-full",
               theme?.layout?.verticalAlign &&
                 verticalAlignClasses[theme.layout.verticalAlign],
               {
-                ["lg:order-3"]: theme?.layout?.mediaPosition !== "left",
-                ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
+                ["order-3"]: theme?.layout?.mediaPosition !== "left",
+                ["order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
             style={mediaPositionStyle}
