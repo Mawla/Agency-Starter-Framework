@@ -1,5 +1,6 @@
 import Spacing from "../../components/block/Spacing";
 import { WrapperProps } from "../../components/block/Wrapper";
+import { BlockThemeType } from "../../components/block/block.options";
 import { SpaceType } from "../../components/block/spacing.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
@@ -14,17 +15,25 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
+import { useSize } from "../../hooks/useSize";
 import { borderRadiusClasses } from "../../theme";
 import {
   BorderRadiusType,
-  ColorType,
   ImageType,
   VerticalAlignType,
   VideoType,
 } from "../../types";
 import { mediaPositionType } from "./block1.options";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, {
+  CSSProperties,
+  ComponentType,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -78,18 +87,18 @@ const Scripts = lazy<ComponentType<ScriptsType>>(
 
 export type Block1Props = {
   theme?: {
-    block?: {
-      background?: ColorType;
-      space?: SpaceType;
-    };
+    block?: BlockThemeType;
     layout?: {
       mediaPosition?: mediaPositionType;
       verticalAlign?: VerticalAlignType;
-      verticalSpace?: SpaceType;
+      extendMediaWidth?: boolean;
     };
     image?: {
       fullHeight?: boolean;
       rounded?: BorderRadiusType;
+    };
+    content?: {
+      verticalSpace?: SpaceType;
     };
     title?: TitleThemeType;
     intro?: TextThemeType;
@@ -100,6 +109,7 @@ export type Block1Props = {
   intro?: React.ReactNode;
   body?: React.ReactNode;
   image?: ImageType;
+  mobileImage?: ImageType;
   video?: VideoType;
   script?: ScriptsType;
   buttons?: ButtonProps[];
@@ -118,20 +128,54 @@ export const Block1 = ({
   intro,
   body,
   image,
+  mobileImage,
   video,
   buttons,
   script,
 }: Block1Props) => {
+  const { screenWidth } = useBreakpoint();
+
+  const containerWidthRef = useRef(null);
+  const contentWidthRef = useRef(null);
+  const { width: containerWidth } = useSize(containerWidthRef);
+  const { width: contentWidth } = useSize(contentWidthRef);
+
+  let mediaPositionStyle: CSSProperties = { width: "100%" };
+
+  if (screenWidth > BREAKPOINTS.lg) {
+    if (
+      theme?.layout?.extendMediaWidth === true &&
+      contentWidth &&
+      containerWidth
+    ) {
+      const columnWidth = contentWidth / 2 - (30 * 4) / 2;
+      const gapWidth = (containerWidth - contentWidth) / 2;
+      mediaPositionStyle.width = columnWidth + gapWidth;
+
+      if (theme?.layout?.mediaPosition === "left") {
+        mediaPositionStyle.marginLeft = -gapWidth;
+      }
+    }
+  }
+
+  if (screenWidth < BREAKPOINTS.lg) {
+    image = mobileImage || image;
+  }
+
   return (
     <Wrapper
       theme={{
         ...theme?.block,
       }}
       decorations={decorations}
+      slots={{
+        insideSpacing: <div ref={containerWidthRef}></div>,
+        insideWidth: <div ref={contentWidthRef}></div>,
+      }}
     >
-      <div className="gap-8 grid lg:grid-cols-2 xl:gap-16">
+      <div className="gap-8 grid lg:grid-cols-2 lg:gap-30">
         <Spacing
-          padding={theme?.layout?.verticalSpace}
+          padding={theme?.content?.verticalSpace}
           className={cx(
             "order-2 flex pt-0 sm:pt-0 md:pt-0 pb-0 sm:pb-0 md:pb-0",
             theme?.layout?.verticalAlign &&
@@ -174,7 +218,7 @@ export const Block1 = ({
         {(image || video) && (
           <div
             className={cx(
-              "order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full max-w-[650px] lg:max-w-full",
+              "order-1 mb-4 w-full lg:mb-0 lg:flex relative md:h-full",
               theme?.layout?.verticalAlign &&
                 verticalAlignClasses[theme.layout.verticalAlign],
               {
@@ -182,12 +226,13 @@ export const Block1 = ({
                 ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
+            style={mediaPositionStyle}
           >
             {image && (
               <div className="relative h-full w-full">
                 <div
                   className={cx(
-                    "relative aspect-video lg:aspect-auto flex w-full h-full",
+                    "relative flex w-full h-full",
                     theme?.layout?.verticalAlign &&
                       verticalAlignClasses[theme.layout.verticalAlign],
                   )}
@@ -257,6 +302,7 @@ export const Block1 = ({
                 ["lg:order-1"]: theme?.layout?.mediaPosition === "left",
               },
             )}
+            style={mediaPositionStyle}
           >
             <Scripts
               key={script.title}

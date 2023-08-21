@@ -1,3 +1,7 @@
+import {
+  SPACE_OPTIONS,
+  SpaceType,
+} from "../../components/block/spacing.options";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import {
   TextSizeType,
@@ -7,7 +11,7 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
-import { demoImage, demoImage3 } from "../../stories/content";
+import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   BORDER_RADIUS_OPTIONS,
@@ -16,7 +20,7 @@ import {
   VERTICAL_ALIGN_OPTIONS,
   VerticalAlignType,
 } from "../../types";
-import { Block1 } from "./Block1";
+import { Block1, Block1Props } from "./Block1";
 import { Meta } from "@storybook/react";
 import React, { ComponentType, lazy } from "react";
 
@@ -68,6 +72,9 @@ const DEMO_CONTENT = {
 };
 
 export const Default = () => <Block1 {...DEMO_CONTENT} />;
+export const MobileImage = () => (
+  <Block1 {...DEMO_CONTENT} mobileImage={demoImage2} />
+);
 
 export const BlockBackgrounds = () => (
   <>
@@ -188,6 +195,33 @@ export const verticalAlignContent = () => (
     )}
   </>
 );
+
+export const verticalSpaceContent = () => (
+  <>
+    {(
+      Object.entries(SPACE_OPTIONS) as [
+        key: keyof typeof SPACE_OPTIONS,
+        label: string,
+      ][]
+    ).map(([size, label]) => (
+      <div key={label}>
+        <Block1
+          title={`verticalSpace: ${label}`}
+          image={demoImage}
+          theme={{
+            content: {
+              verticalSpace: {
+                top: size,
+                bottom: size,
+              },
+            },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
 export const verticalAlignMedia = () => (
   <>
     {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
@@ -640,3 +674,115 @@ export const Scripts = () => (
     />
   </>
 );
+
+export const ExtendMediaWidth = () => {
+  const extendMediaWidthThemeBase = {
+    block: {
+      background: "white",
+      width: "full",
+      margin: {
+        top: "sm",
+        bottom: "sm",
+      },
+      padding: {
+        top: "sm",
+        bottom: "sm",
+      },
+      outerBackground: "black",
+    },
+    content: {
+      verticalSpace: {
+        top: "sm",
+        bottom: "sm",
+      },
+    },
+    layout: {
+      extendMediaWidth: true,
+    },
+  };
+
+  const extendMediaWidthThemeFull = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeFull.block.width = "full";
+  extendMediaWidthThemeFull.block.background = "white";
+  extendMediaWidthThemeFull.block.outerBackground = "black";
+
+  const extendMediaWidthThemeOuter = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeOuter.block.width = "outer";
+
+  const extendMediaWidthThemeInner = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeInner.block.width = "inner";
+
+  const extendMediaWidthThemeBaseLeft = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeBaseLeft.layout.mediaPosition = "left";
+
+  const extendMediaWidthThemeOuterLeft = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeOuter),
+  );
+  extendMediaWidthThemeOuterLeft.layout.mediaPosition = "left";
+
+  const extendMediaWidthThemeInnerLeft = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeInner),
+  );
+  extendMediaWidthThemeInnerLeft.layout.mediaPosition = "left";
+
+  return (
+    <div>
+      <Block1
+        title="ExtendMediaWidth full left"
+        image={demoImage}
+        theme={extendMediaWidthThemeBaseLeft as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth outer left"
+        image={demoImage}
+        theme={extendMediaWidthThemeOuterLeft as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth inner left"
+        image={demoImage}
+        theme={extendMediaWidthThemeInnerLeft as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth outer"
+        image={demoImage}
+        theme={extendMediaWidthThemeOuter as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth full"
+        image={demoImage}
+        theme={extendMediaWidthThemeFull as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth inner"
+        image={demoImage}
+        theme={extendMediaWidthThemeInner as Block1Props["theme"]}
+      />
+      <Block1
+        title="SVG"
+        theme={extendMediaWidthThemeInner}
+        image={{
+          src: "https://cdn.sanity.io/images/lra7ykt5/development/87600698dfb4875988f7380216781a88e4f3f4ef-774x790.svg",
+          width: 774,
+          height: 790,
+          alt: "alt",
+        }}
+        // script={{
+        //   title: "embed",
+        //   items: [
+        //     {
+        //       html: `<svg viewBox="0 0 784 784" fill="none" preserveAspectRatio="xMidYMid meet"><rect width="784" height="784" fill="#F8F6F2"/></svg>`,
+        //     },
+        //   ],
+        // }}
+      />
+    </div>
+  );
+};
