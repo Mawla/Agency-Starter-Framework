@@ -3,7 +3,7 @@ import { MessagingLines, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-const testimonialItemObject = defineField({
+export const testimonialItemObject = defineField({
   name: "item",
   title: "Single use testimonial item",
   type: "object",

@@ -6,6 +6,9 @@ import {
   ComposableCard,
   ComposableCardProps,
 } from "../../components/cards/ComposableCard";
+import TestimonialCard, {
+  TestimonialCardProps,
+} from "../../components/cards/TestimonialCard";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SliderProps } from "../../components/slider/Slider";
@@ -86,7 +89,7 @@ export type Block18Props = {
   title?: string;
   intro?: React.ReactNode;
   buttons?: ButtonProps[];
-  items?: ComposableCardProps[];
+  items?: (ComposableCardProps | TestimonialCardProps)[];
 };
 
 export const Block18 = ({
@@ -190,17 +193,17 @@ export const Block18 = ({
             <Slider
               gap={sliderGapSize}
               columns={slideColumns}
-              slides={filteredItems?.map((item) => (
-                <div key={item._key} className="h-full text-left">
-                  <CardWrapper>
-                    <ComposableCard
-                      {...item}
-                      key={item._key}
-                      blockTitleLevel={theme?.title?.as || "h2"}
-                    />
-                  </CardWrapper>
-                </div>
-              ))}
+              slides={filteredItems?.map(
+                (item: ComposableCardProps | TestimonialCardProps) => {
+                  return (
+                    <div key={item._key} className="h-full text-left">
+                      <CardWrapper>
+                        <Card {...item} />
+                      </CardWrapper>
+                    </div>
+                  );
+                },
+              )}
               controlsColor={theme?.slider?.color}
             />
           ) : (
@@ -217,18 +220,20 @@ export const Block18 = ({
                   gridCenterClasses[theme?.grid?.columns],
               )}
             >
-              {filteredItems?.map((item, i) => {
-                return (
-                  <div key={item._key} className="h-full text-left">
-                    <CardWrapper>
-                      <ComposableCard
-                        {...item}
-                        blockTitleLevel={theme?.title?.as || "h2"}
-                      />
-                    </CardWrapper>
-                  </div>
-                );
-              })}
+              {filteredItems?.map(
+                (
+                  item: ComposableCardProps | TestimonialCardProps,
+                  _: number,
+                ) => {
+                  return (
+                    <div key={item._key} className="h-full text-left">
+                      <CardWrapper>
+                        <Card {...item} />
+                      </CardWrapper>
+                    </div>
+                  );
+                },
+              )}
             </div>
           )}
         </div>
@@ -254,6 +259,17 @@ export const Block18 = ({
 };
 
 export default React.memo(Block18);
+
+const Card = (item: ComposableCardProps | TestimonialCardProps) => {
+  switch (item.type) {
+    case "card.composable":
+      return <ComposableCard {...item} key={item._key} />;
+    case "card.testimonial":
+      return <TestimonialCard {...item} key={item._key} />;
+    // default:
+    // return <ImageCard {...item} key={item._key} />;
+  }
+};
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => (
   <React.Suspense>

@@ -3,8 +3,8 @@ import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
+import { TestimonialType } from "../testimonials/Testimonials";
 import { TitleColorType } from "../title/title.options";
-import { TestimonialType } from "./Testimonials";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -27,6 +27,7 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
 );
 
 export type TestimonialCardProps = {
+  type: "card.testimonial";
   theme?: {
     background?: ColorType;
     title?: TitleColorType;

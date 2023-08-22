@@ -19,6 +19,7 @@ import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
 import composableCard from "../../components/cards/composablecard.schema";
+import testimonialCard from "../../components/cards/testimonialcard.schema";
 import presetDecoration from "../../components/decorations/decoration.preset";
 import {
   decoration,
@@ -151,6 +152,8 @@ export const schemaTypes = [
     studioDivider,
     styles,
     swapSchema,
+    testimonialCard,
+    testimonialItem,
     testimonials,
     video,
   ],
@@ -160,7 +163,6 @@ export const schemaTypes = [
     configSeo,
     configTranslations,
     person,
-    testimonialItem,
     faqItem,
   ]),
 ];

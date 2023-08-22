@@ -70,6 +70,7 @@ const Link = lazy<ComponentType<LinkProps>>(
 );
 
 export type ComposableCardProps = {
+  type: "card.composable";
   _key?: string;
   image?: ImageType;
   title?: string;

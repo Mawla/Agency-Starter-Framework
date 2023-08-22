@@ -14,6 +14,7 @@ export const getBlock18Query = (language: LanguageType) => groq`
     buttons[] ${buttonQuery},
     items[] { 
       _key,
+      "type": _type,
       theme,
       ${decorationsQuery},
       "image": ${imageQuery},
