@@ -1,5 +1,3 @@
-import { COLORS } from "../../theme";
-import { ColorType } from "../../types";
 import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import { defineField } from "sanity";
 

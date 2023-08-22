@@ -1,8 +1,10 @@
+import { baseLanguage } from "../../languages";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import { DIRECTION_OPTIONS } from "../buttons/buttongroup.options";
 import { SCRIPT_REFERENCE_FIELD } from "../script/script.schema";
 import richTextBasicSchema from "./portabletextbasic.schema";
-import { Chain, Tables } from "@vectopus/atlas-icons-react";
+import { Chain, MessagingLines, Tables } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField } from "sanity";
 
@@ -17,7 +19,6 @@ export default defineField({
       styles: [
         ...(richTextBasicSchema.of[0] as any).styles,
         { title: "H1", value: "h1" },
-        { title: "H2", value: "h2" },
         { title: "H5", value: "h5" },
       ].sort((a, b) => a.title.localeCompare(b.title)),
       lists: [...(richTextBasicSchema.of[0] as any).lists],
@@ -95,5 +96,66 @@ export default defineField({
       ],
     },
     SCRIPT_REFERENCE_FIELD,
+    {
+      name: "testimonials",
+      title: "Testimonials",
+      type: "object",
+      icon: () => <MessagingLines weight="thin" />,
+      preview: {
+        select: {
+          items0Name: "items.0.name",
+          items0Content: "items.0.content",
+          items0RefContent: `items.0.content.${baseLanguage}`,
+          items1Name: "items.1.name",
+          items1Content: "items.1.content",
+          items1RefContent: `items.1.content.${baseLanguage}`,
+          items2Name: "items.2.name",
+          items2Content: "items.2.content",
+          items2efContent: `items.2.content.${baseLanguage}`,
+        },
+        prepare({
+          items0Name,
+          items0Content,
+          items0RefContent,
+          items1Name,
+          items1Content,
+          items1RefContent,
+          items2Name,
+          items2Content,
+          items2efContent,
+        }) {
+          const items = [];
+          items[0] = [
+            items0Name,
+            blocksToText(items0Content),
+            blocksToText(items0RefContent),
+          ];
+          items[1] = [
+            items1Name,
+            blocksToText(items1Content),
+            blocksToText(items1RefContent),
+          ];
+          items[2] = [
+            items2Name,
+            blocksToText(items2Content),
+            blocksToText(items2efContent),
+          ];
+
+          return {
+            title: "Testimonials",
+            subtitle: items
+              .map((item) => item.filter((i) => i).join(" - "))
+              .join(", "),
+          };
+        },
+      },
+      fields: [
+        defineField({
+          name: "items",
+          title: "Items",
+          type: "testimonials.list",
+        }),
+      ],
+    },
   ],
 });
