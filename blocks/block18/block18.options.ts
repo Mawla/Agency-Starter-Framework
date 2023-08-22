@@ -9,7 +9,17 @@ export const COLUMN_OPTIONS = {
 };
 export type ColumnType = keyof typeof COLUMN_OPTIONS;
 
-export const GAP_OPTIONS = pick(SIZES, "none", "xs", "sm", "md", "lg", "xl");
+export const GAP_OPTIONS = pick(
+  SIZES,
+  "none",
+  "2xs",
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+  "2xl",
+);
 export type GapType = keyof typeof GAP_OPTIONS;
 
 export const BUTTON_POSITION_OPTIONS = {

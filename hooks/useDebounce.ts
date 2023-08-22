@@ -3,7 +3,7 @@
  * const [searchTerm, setSearchTerm] = useState("");
  * const debouncedSearchTerm = useDebounce(searchTerm, 500);
  */
-import { EffectCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useDebounce(value: any, delay: number, fn?: any) {
   const [debouncedValue, setDebouncedValue] = useState(value);
