@@ -14,13 +14,7 @@ import {
   HORIZONTAL_ALIGN_OPTIONS,
 } from "../../types";
 import { Block18, Block18Props } from "./Block18";
-import {
-  BUTTON_POSITION_OPTIONS,
-  ButtonPositionType,
-  COLUMN_OPTIONS,
-  GAP_OPTIONS,
-  GapType,
-} from "./block18.options";
+import { COLUMN_OPTIONS, GAP_OPTIONS, GapType } from "./block18.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -32,6 +26,7 @@ export default {
 const DEMO_CONTENT: Block18Props = {
   title: "title",
   intro: <p>intro</p>,
+  footer: <p>footer</p>,
   buttons: [{ label: "Block button" }, { label: "Block button" }],
   items: [
     {
@@ -189,14 +184,16 @@ export const TitleSizes = () => (
   </>
 );
 
-export const IntroColors = () => (
+export const TextColors = () => (
   <>
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block18
           intro={DEMO_CONTENT.intro}
+          footer={DEMO_CONTENT.footer}
           theme={{
             intro: { color },
+            footer: { color },
           }}
         />
       </div>
@@ -204,14 +201,16 @@ export const IntroColors = () => (
   </>
 );
 
-export const IntroSizes = () => (
+export const TextSizes = () => (
   <>
     {(Object.keys(TEXT_SIZE_OPTIONS) as TextSizeType[]).map((size) => (
       <div key={size}>
         <Block18
           intro={DEMO_CONTENT.intro}
+          footer={DEMO_CONTENT.footer}
           theme={{
             intro: { size },
+            footer: { size },
           }}
         />
       </div>
@@ -253,26 +252,6 @@ export const GridColumns = () => (
       ),
     )}
   </div>
-);
-
-export const ButtonPosition = () => (
-  <>
-    {(Object.keys(BUTTON_POSITION_OPTIONS) as ButtonPositionType[]).map(
-      (position: ButtonPositionType) =>
-        (Object.keys(HORIZONTAL_ALIGN_OPTIONS) as HorizontalAlignType[]).map(
-          (align: HorizontalAlignType) => (
-            <div key={position + align} className="border">
-              <Block18
-                title={position + " " + align}
-                buttons={DEMO_CONTENT["buttons"]}
-                items={DEMO_CONTENT["items"]}
-                theme={{ buttons: { position }, block: { align } }}
-              />
-            </div>
-          ),
-        ),
-    )}
-  </>
 );
 
 export const Slider = () => (

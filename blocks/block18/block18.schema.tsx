@@ -6,11 +6,7 @@ import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import {
-  BUTTON_POSITION_OPTIONS,
-  COLUMN_OPTIONS,
-  GAP_OPTIONS,
-} from "./block18.options";
+import { COLUMN_OPTIONS, GAP_OPTIONS } from "./block18.options";
 import { Grid } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -43,7 +39,7 @@ const schema = defineType({
     defineField({
       name: "intro",
       title: "Intro",
-      type: "portabletext.simple",
+      type: "portabletext.full",
       group: "content",
     }),
 
@@ -60,6 +56,12 @@ const schema = defineType({
       description: "One or more cards",
       group: ["content"],
       of: [{ type: "card.composable" }],
+    }),
+    defineField({
+      name: "footer",
+      title: "Footer",
+      type: "portabletext.full",
+      group: "content",
     }),
     defineField({
       name: "theme",
@@ -117,22 +119,6 @@ const schema = defineType({
               defineField({
                 name: "color",
                 type: "color",
-              }),
-            ],
-          },
-        }),
-        defineField({
-          name: "buttons",
-          type: "styles",
-          title: "Buttons",
-          options: {
-            fields: [
-              defineField({
-                name: "position",
-                type: "select",
-                options: {
-                  list: optionsToList(BUTTON_POSITION_OPTIONS),
-                },
               }),
             ],
           },
