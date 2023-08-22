@@ -94,11 +94,13 @@ export type Block1Props = {
     title?: TitleThemeType;
     intro?: TextThemeType;
     body?: TextThemeType;
+    footer?: TextThemeType;
   };
   decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   body?: React.ReactNode;
+  footer?: React.ReactNode;
   image?: ImageType;
   video?: VideoType;
   script?: ScriptsType;
@@ -117,6 +119,7 @@ export const Block1 = ({
   title,
   intro,
   body,
+  footer,
   image,
   video,
   buttons,
@@ -167,6 +170,17 @@ export const Block1 = ({
 
             {buttons && Boolean(buttons?.filter(Boolean).length) && (
               <ButtonGroup items={buttons} />
+            )}
+
+            {footer && (
+              <Text
+                size={theme?.footer?.size || "lg"}
+                color={theme?.footer?.color}
+                weight={theme?.footer?.weight}
+                className="mt-10"
+              >
+                <PortableText content={footer as any} />
+              </Text>
             )}
           </div>
         </Spacing>

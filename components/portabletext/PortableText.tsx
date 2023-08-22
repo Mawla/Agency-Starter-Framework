@@ -1,4 +1,4 @@
-import { ColorType, VideoType } from "../../types";
+import { VideoType } from "../../types";
 import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import { HighlightProps } from "../highlight/Highlight";
@@ -151,13 +151,18 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
 
             return value.items.map(
               ({ _key, name, content }: TestimonialType) => (
-                <blockquote
-                  key={_key}
-                  className="[&_p]:my-0 border-l-2 py-1 not-italic text-current border-l-[currentColor/.2]"
-                >
-                  {content && <PortableText content={content} />}
-                  {name && <span>{name}</span>}
-                </blockquote>
+                <div className="not-prose not-format">
+                  <blockquote
+                    key={_key}
+                    className="py-2 px-6 leading-normal relative my-8"
+                  >
+                    <span className="absolute left-0 inset-y-0 w-0.5 bg-current opacity-20" />
+                    {content && <PortableText content={content} />}
+                    {name && (
+                      <figcaption className="block mt-2">{name}</figcaption>
+                    )}
+                  </blockquote>
+                </div>
               ),
             );
           },

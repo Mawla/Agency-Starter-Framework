@@ -105,41 +105,23 @@ export default defineField({
         select: {
           items0Name: "items.0.name",
           items0Content: "items.0.content",
-          items0RefContent: `items.0.content.${baseLanguage}`,
           items1Name: "items.1.name",
           items1Content: "items.1.content",
-          items1RefContent: `items.1.content.${baseLanguage}`,
           items2Name: "items.2.name",
           items2Content: "items.2.content",
-          items2efContent: `items.2.content.${baseLanguage}`,
         },
         prepare({
           items0Name,
           items0Content,
-          items0RefContent,
           items1Name,
           items1Content,
-          items1RefContent,
           items2Name,
           items2Content,
-          items2efContent,
         }) {
           const items = [];
-          items[0] = [
-            items0Name,
-            blocksToText(items0Content),
-            blocksToText(items0RefContent),
-          ];
-          items[1] = [
-            items1Name,
-            blocksToText(items1Content),
-            blocksToText(items1RefContent),
-          ];
-          items[2] = [
-            items2Name,
-            blocksToText(items2Content),
-            blocksToText(items2efContent),
-          ];
+          items[0] = [items0Name, blocksToText(items0Content)];
+          items[1] = [items1Name, blocksToText(items1Content)];
+          items[2] = [items2Name, blocksToText(items2Content)];
 
           return {
             title: "Testimonials",
