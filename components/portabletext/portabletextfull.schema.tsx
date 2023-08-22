@@ -127,7 +127,7 @@ export default defineField({
             title: "Testimonials",
             subtitle: items
               .map((item) => item.filter((i) => i).join(" - "))
-              .join(", "),
+              .join(" "),
           };
         },
       },
