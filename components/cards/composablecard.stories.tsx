@@ -99,6 +99,7 @@ export const BackgroundColors = () => (
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <ComposableCard
+          type="card.composable"
           title="title"
           content={<p>content</p>}
           theme={{
@@ -115,6 +116,7 @@ export const BorderColors = () => (
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <ComposableCard
+          type="card.composable"
           title="title"
           content={<p>content</p>}
           theme={{
@@ -131,6 +133,7 @@ export const TitleColors = () => (
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <ComposableCard
+          type="card.composable"
           title="Title"
           theme={{
             title: { color },
@@ -146,6 +149,7 @@ export const TitleSizes = () => (
     {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
       <div key={size}>
         <ComposableCard
+          type="card.composable"
           title="Title"
           theme={{
             title: { size },
@@ -161,6 +165,7 @@ export const ContentColors = () => (
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <ComposableCard
+          type="card.composable"
           content={<p>content</p>}
           theme={{
             content: { color },
@@ -176,6 +181,7 @@ export const ContentSizes = () => (
     {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
       <div key={size}>
         <ComposableCard
+          type="card.composable"
           content={<p>content</p>}
           theme={{
             content: { size },
@@ -208,6 +214,7 @@ export const ImageSizes = () => (
     {(Object.keys(IMAGE_HEIGHT_OPTIONS) as ImageHeightType[]).map((height) => (
       <div key={height}>
         <ComposableCard
+          type="card.composable"
           image={demoImage}
           theme={{
             image: { height },
@@ -224,6 +231,7 @@ export const ImageRounded = () => (
       (rounded) => (
         <div key={rounded}>
           <ComposableCard
+            type="card.composable"
             image={demoImage}
             theme={{
               image: { rounded, height: "xl" },
@@ -240,6 +248,7 @@ export const ImageRatios = () => (
     {(Object.keys(IMAGE_RATIO_OPTIONS) as ImageRatioType[]).map((ratio) => (
       <div key={ratio}>
         <ComposableCard
+          type="card.composable"
           image={demoImage}
           theme={{
             image: { ratio },
@@ -253,6 +262,7 @@ export const ImageRatios = () => (
 export const Clickable = () => (
   <div className="grid grid-cols-4 gap-20">
     <ComposableCard
+      type="card.composable"
       title="Card clickable if single button"
       buttons={[{ label: "click me", href: "/" }]}
       theme={{
@@ -263,6 +273,7 @@ export const Clickable = () => (
       }}
     />
     <ComposableCard
+      type="card.composable"
       title="Card clickable, buttons hidden"
       buttons={[{ label: "click me", href: "/" }]}
       theme={{
@@ -274,6 +285,7 @@ export const Clickable = () => (
       }}
     />
     <ComposableCard
+      type="card.composable"
       title="Card not clickable"
       subtitle="when there is more than 1 button"
       buttons={[
@@ -288,6 +300,7 @@ export const Clickable = () => (
       }}
     />
     <ComposableCard
+      type="card.composable"
       title="Card not clickable (multiple buttons), buttons hidden"
       buttons={[
         { label: "click me", href: "/" },

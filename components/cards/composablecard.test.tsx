@@ -4,6 +4,7 @@ import { ComposableCard, ComposableCardProps } from "./ComposableCard";
 import "@testing-library/jest-dom";
 
 const DEMO_CONTENT: ComposableCardProps = {
+  type: "card.composable",
   title: "title",
   subtitle: "subtitle",
   content: <p>text</p>,

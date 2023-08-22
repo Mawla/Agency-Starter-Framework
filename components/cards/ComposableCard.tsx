@@ -187,7 +187,6 @@ export const ComposableCard = ({
             </div>
           </div>
         )}
-        {blockTitleLevel}
         {title && (
           <Title
             {...theme?.title}

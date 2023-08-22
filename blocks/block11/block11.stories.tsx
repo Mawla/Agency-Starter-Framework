@@ -42,11 +42,11 @@ export const CardTheme = () => (
     testimonials={demoTestimonialsList}
     theme={{
       testimonials: {
-        background: "black",
-        title: "white",
-        content: "white",
-        name: "white",
-        jobTitle: "white",
+        card: { background: "black" },
+        title: { color: "white" },
+        content: { color: "white" },
+        name: { color: "white" },
+        jobTitle: { color: "white" },
       },
     }}
   />

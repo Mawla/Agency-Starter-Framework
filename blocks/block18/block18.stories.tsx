@@ -30,6 +30,7 @@ const DEMO_CONTENT: Block18Props = {
   buttons: [{ label: "Block button" }, { label: "Block button" }],
   items: [
     {
+      type: "card.composable",
       _key: "1",
       title: "Title",
       subtitle: "subtitle",
@@ -52,6 +53,7 @@ const DEMO_CONTENT: Block18Props = {
       },
     },
     {
+      type: "card.composable",
       _key: "2",
       title: "Title",
       subtitle: "subtitle",
@@ -74,6 +76,7 @@ const DEMO_CONTENT: Block18Props = {
       },
     },
     {
+      type: "card.composable",
       _key: "3",
       title: "Title",
       subtitle: "subtitle",
@@ -96,6 +99,7 @@ const DEMO_CONTENT: Block18Props = {
       },
     },
     {
+      type: "card.composable",
       _key: "4",
       title: "Title",
       subtitle: "subtitle",
