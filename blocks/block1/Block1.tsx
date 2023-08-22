@@ -28,9 +28,21 @@ import {
   VerticalAlignType,
   VideoType,
 } from "../../types";
-import { mediaPositionType } from "./block1.options";
+import {
+  GapType,
+  gapClasses,
+  layoutColumnType,
+  mediaPositionType,
+} from "./block1.options";
 import cx from "classnames";
-import React, { CSSProperties, ComponentType, lazy, useRef } from "react";
+import React, {
+  CSSProperties,
+  ComponentType,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -86,6 +98,8 @@ export type Block1Props = {
   theme?: {
     block?: BlockThemeType;
     layout?: {
+      columns?: layoutColumnType;
+      gap?: GapType;
       mediaPosition?: mediaPositionType;
       verticalAlign?: VerticalAlignType;
       extendMediaWidth?: boolean;
@@ -124,6 +138,18 @@ export const horizontalAlignClasses: Record<HorizontalAlignType, string> = {
   right: "ml-auto",
 };
 
+export const gridColClasses: Record<layoutColumnType, string> = {
+  "1/2": "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]",
+  "1/4": "lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]",
+  "3/4": "lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]",
+  "1/3": "lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]",
+  "2/3": "lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]",
+  "5/7": "lg:grid-cols-[minmax(0,5fr)_minmax(0,2fr)]",
+  "2/7": "lg:grid-cols-[minmax(0,2fr)_minmax(0,5fr)]",
+  "5/8": "lg:grid-cols-[minmax(0,5fr)_minmax(0,3fr)]",
+  "3/8": "lg:grid-cols-[minmax(0,3fr)_minmax(0,5fr)]",
+};
+
 export const Block1 = ({
   theme,
   decorations,
@@ -138,10 +164,12 @@ export const Block1 = ({
 }: Block1Props) => {
   const { screenWidth } = useBreakpoint();
 
+  const gridRef = useRef(null);
   const containerWidthRef = useRef(null);
   const contentWidthRef = useRef(null);
   const { width: containerWidth } = useSize(containerWidthRef);
   const { width: contentWidth } = useSize(contentWidthRef);
+  const [gapSize, setGapSize] = useState<number>(120);
 
   let mediaPositionStyle: CSSProperties = { width: "100%" };
 
@@ -151,12 +179,24 @@ export const Block1 = ({
       contentWidth &&
       containerWidth
     ) {
-      const columnWidth = contentWidth / 2 - (30 * 4) / 2;
-      const gapWidth = (containerWidth - contentWidth) / 2;
-      mediaPositionStyle.width = columnWidth + gapWidth;
+      // Calculate the width of the media column
+      const columns = theme?.layout?.columns?.split("/") || "1/2";
+      const leftColumn = +columns[0];
+      const totalColumns = +columns[1];
+      const rightColumn = +columns[1] - leftColumn;
+      const mediaColumn =
+        theme?.layout?.mediaPosition === "left" ? leftColumn : rightColumn;
 
+      const columnWidth =
+        ((contentWidth - gapSize) / totalColumns) * mediaColumn;
+
+      // Calculate the width of to be filled
+      const fillWidth = (containerWidth - contentWidth) / 2;
+      mediaPositionStyle.width = columnWidth + fillWidth;
+
+      // pull left
       if (theme?.layout?.mediaPosition === "left") {
-        mediaPositionStyle.marginLeft = -gapWidth;
+        mediaPositionStyle.marginLeft = -fillWidth;
       }
     }
   }
@@ -165,6 +205,17 @@ export const Block1 = ({
     image = mobileImage || image;
   }
 
+  // find gap size
+  useEffect(() => {
+    if (!gridRef.current) return;
+    let gapSize = window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("gap")
+      .split(" ")[1]
+      ?.replace("px", "");
+    setGapSize(+gapSize);
+  }, []);
+
   return (
     <Wrapper
       theme={{
@@ -172,11 +223,18 @@ export const Block1 = ({
       }}
       decorations={decorations}
       slots={{
-        insideSpacing: <div ref={containerWidthRef}></div>,
-        insideWidth: <div ref={contentWidthRef}></div>,
+        insideSpacing: <div ref={containerWidthRef} />,
+        insideWidth: <div ref={contentWidthRef} />,
       }}
     >
-      <div className="gap-8 grid lg:grid-cols-2 lg:gap-30">
+      <div
+        ref={gridRef}
+        className={cx(
+          "gap-8 grid lg:grid-cols-12",
+          gridColClasses[theme?.layout?.columns || "1/2"],
+          gapClasses[theme?.layout?.gap || "lg"],
+        )}
+      >
         <Spacing
           padding={theme?.content?.verticalSpace}
           className={cx(
@@ -228,6 +286,8 @@ export const Block1 = ({
             )}
           </div>
         </Spacing>
+
+        {!image && !video && !script && <div />}
 
         {(image || video) && (
           <div

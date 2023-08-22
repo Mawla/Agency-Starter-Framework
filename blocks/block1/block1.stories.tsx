@@ -1,7 +1,4 @@
-import {
-  SPACE_OPTIONS,
-  SpaceType,
-} from "../../components/block/spacing.options";
+import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import {
   TextSizeType,
@@ -21,6 +18,12 @@ import {
   VerticalAlignType,
 } from "../../types";
 import { Block1, Block1Props } from "./Block1";
+import {
+  GAP_OPTIONS,
+  GapType,
+  LAYOUT_COLUMN_OPTIONS,
+  layoutColumnType,
+} from "./block1.options";
 import { Meta } from "@storybook/react";
 import React, { ComponentType, lazy } from "react";
 
@@ -193,6 +196,138 @@ export const verticalAlignContent = () => (
         </div>
       ),
     )}
+  </>
+);
+
+export const columns = () => (
+  <>
+    {(Object.keys(LAYOUT_COLUMN_OPTIONS) as layoutColumnType[]).map(
+      (columns) => (
+        <div
+          key={columns}
+          className="[&>div>div>div>div>div>div>div>div>div>div]:border"
+        >
+          <Block1
+            title={`columns: ${columns}`}
+            theme={{
+              block: {
+                outerBackground: "black",
+                padding: { top: "none", bottom: "xs" },
+              },
+              layout: {
+                columns,
+              },
+            }}
+          />
+        </div>
+      ),
+    )}
+
+    {(Object.keys(LAYOUT_COLUMN_OPTIONS) as layoutColumnType[]).map(
+      (columns) => (
+        <div key={columns} className="border-b border-white pb-10 mb-10">
+          <Block1
+            title={`columns: ${columns}`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "sm", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: false,
+                mediaPosition: "right",
+              },
+            }}
+          />
+          <Block1
+            title={`columns: ${columns}`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: false,
+                mediaPosition: "left",
+              },
+            }}
+          />
+          <Block1
+            title={`columns: ${columns}, extendMediaWidth`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: true,
+                mediaPosition: "right",
+              },
+            }}
+          />
+          <Block1
+            title={`columns: ${columns}, extendMediaWidth`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: true,
+                mediaPosition: "left",
+              },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+
+export const GridGaps = () => (
+  <>
+    {(Object.keys(GAP_OPTIONS) as GapType[]).map((gap: GapType) => (
+      <div
+        key={gap}
+        className="[&>div>div>div>div>div>div>div>div>div>div]:border"
+      >
+        <Block1
+          title={gap}
+          theme={{
+            block: {
+              width: "outer",
+              padding: { top: "none", bottom: "none" },
+              margin: { top: "none", bottom: "2xs" },
+            },
+            layout: { gap },
+          }}
+        />
+      </div>
+    ))}
   </>
 );
 
