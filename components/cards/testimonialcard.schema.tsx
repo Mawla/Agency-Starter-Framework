@@ -41,13 +41,13 @@ const schema = defineType({
       title: "Reusable testimonial",
       type: "reference",
       to: [{ type: "testimonials.item" }],
-      hidden: ({ parent, value }) => !value && Boolean(parent?.custom),
+      hidden: ({ parent, value }) => !value && Boolean(parent?.testimonial),
       group: "content",
     }),
     defineField({
       ...testimonialItemObject,
       name: "testimonial",
-      hidden: ({ parent, value }) => !value && Boolean(parent?.ref),
+      hidden: ({ parent, value }) => !value && Boolean(parent?.testimonialRef),
       group: "content",
     }),
 
