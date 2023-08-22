@@ -211,8 +211,9 @@ export const columns = () => (
             title={`columns: ${columns}`}
             theme={{
               block: {
-                outerBackground: "black",
-                padding: { top: "none", bottom: "xs" },
+                width: "outer",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "2xs" },
               },
               layout: {
                 columns,
