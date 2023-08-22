@@ -269,3 +269,29 @@ export const Decorations = () => (
     </WrapperComponent>
   </div>
 );
+
+export const Slots = () => (
+  <WrapperComponent
+    theme={{
+      margin: {
+        top: "xl",
+        bottom: "xl",
+      },
+      padding: {
+        top: "xl",
+        bottom: "xl",
+      },
+      width: "outer",
+    }}
+    slots={{
+      inside: <div className="border-2">inside</div>,
+      insideBleed: <div className="border-2">insideBleed</div>,
+      insideSpacing: <div className="border-2">insideSpacing</div>,
+      insideWidth: <div className="border-2">insideWidth</div>,
+      outside: <div className="border-2">outside</div>,
+      outsideSpacing: <div className="border-2">outsideSpacing</div>,
+    }}
+  >
+    children
+  </WrapperComponent>
+);

@@ -2,9 +2,9 @@ import { backgroundClasses } from "../../theme";
 import { DecorationProps } from "../decorations/Decoration";
 import { DecorationsProps } from "../decorations/Decorations";
 import { Background } from "./Background";
-import { Bleed } from "./Bleed";
-import { Spacing, SpacingProps } from "./Spacing";
-import { Width } from "./Width";
+import { Bleed, BleedProps } from "./Bleed";
+import { Spacing } from "./Spacing";
+import { Width, WidthProps } from "./Width";
 import { BlockThemeType } from "./block.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -20,21 +20,28 @@ const Decorations = lazy<ComponentType<DecorationsProps>>(
 );
 
 export type WrapperProps = {
-  id?: string;
   children?: React.ReactElement | React.ReactNode;
+  theme?: BlockThemeType;
   className?: string;
   innerClassName?: string;
-  theme?: BlockThemeType;
   decorations?: DecorationProps[];
-} & Partial<SpacingProps>;
+  slots?: {
+    outside?: React.ReactNode;
+    outsideSpacing?: React.ReactNode;
+    inside?: React.ReactNode;
+    insideSpacing?: React.ReactNode;
+    insideBleed?: React.ReactNode;
+    insideWidth?: React.ReactNode;
+  };
+};
 
 export const Wrapper = ({
   children,
   theme,
   decorations,
-  id,
   className,
   innerClassName,
+  slots,
 }: WrapperProps) => {
   /**
    * [small bleed]
@@ -63,6 +70,7 @@ export const Wrapper = ({
         theme?.outerBackground && backgroundClasses[theme?.outerBackground],
       )}
     >
+      {slots?.outside}
       <Decorations decorations={decorations} location="outside" />
       <Spacing
         padding={{
@@ -70,6 +78,7 @@ export const Wrapper = ({
           bottom: theme?.margin?.bottom || "none",
         }}
       >
+        {slots?.outsideSpacing}
         <Width width={theme?.width || "full"}>
           <Background
             theme={{
@@ -94,14 +103,18 @@ export const Wrapper = ({
                 }}
               />
             ))}
+            {slots?.inside}
             <Spacing
               padding={{
                 top: theme?.padding?.top || "md",
                 bottom: theme?.padding?.bottom || "md",
               }}
             >
+              {slots?.insideSpacing}
               <Bleed bleed="lg">
+                {slots?.insideBleed}
                 <Width width="inner" className="relative z-10">
+                  {slots?.insideWidth}
                   {children}
                 </Width>
               </Bleed>

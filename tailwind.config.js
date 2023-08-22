@@ -50,6 +50,9 @@ module.exports = {
       spacing: {
         30: "120px",
       },
+      gap: {
+        30: "120px",
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {

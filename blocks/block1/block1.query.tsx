@@ -1,5 +1,5 @@
 import { buttonQuery } from "../../components/buttons/button.query";
-import { imageQuery } from "../../components/images/image.query";
+import { getImageQuery, imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { videoQuery } from "../../components/video/video.query";
 import { LanguageType } from "../../languages";
@@ -14,6 +14,7 @@ export const getBlock1Query = (language: LanguageType) => groq`
     body[] ${richTextQuery},
     footer[] ${richTextQuery},
     "image": ${imageQuery},
+    "mobileImage": ${getImageQuery("mobileImage")},
     "video": ${videoQuery},
     script -> {
       title,

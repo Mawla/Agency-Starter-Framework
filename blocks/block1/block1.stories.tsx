@@ -1,3 +1,4 @@
+import { SPACE_OPTIONS } from "../../components/block/spacing.options";
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import {
   TextSizeType,
@@ -7,7 +8,7 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
-import { demoImage, demoImage3 } from "../../stories/content";
+import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   BORDER_RADIUS_OPTIONS,
@@ -16,7 +17,13 @@ import {
   VERTICAL_ALIGN_OPTIONS,
   VerticalAlignType,
 } from "../../types";
-import { Block1 } from "./Block1";
+import { Block1, Block1Props } from "./Block1";
+import {
+  GAP_OPTIONS,
+  GapType,
+  LAYOUT_COLUMN_OPTIONS,
+  layoutColumnType,
+} from "./block1.options";
 import { Meta } from "@storybook/react";
 import React, { ComponentType, lazy } from "react";
 
@@ -69,6 +76,9 @@ const DEMO_CONTENT = {
 };
 
 export const Default = () => <Block1 {...DEMO_CONTENT} />;
+export const MobileImage = () => (
+  <Block1 {...DEMO_CONTENT} mobileImage={demoImage2} />
+);
 
 export const BlockBackgrounds = () => (
   <>
@@ -195,6 +205,166 @@ export const verticalAlignContent = () => (
     )}
   </>
 );
+
+export const columns = () => (
+  <>
+    {(Object.keys(LAYOUT_COLUMN_OPTIONS) as layoutColumnType[]).map(
+      (columns) => (
+        <div
+          key={columns}
+          className="[&>div>div>div>div>div>div>div>div>div>div]:border"
+        >
+          <Block1
+            title={`columns: ${columns}`}
+            theme={{
+              block: {
+                width: "outer",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "2xs" },
+              },
+              layout: {
+                columns,
+              },
+            }}
+          />
+        </div>
+      ),
+    )}
+
+    {(Object.keys(LAYOUT_COLUMN_OPTIONS) as layoutColumnType[]).map(
+      (columns) => (
+        <div key={columns} className="border-b border-white pb-10 mb-10">
+          <Block1
+            title={`columns: ${columns}`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "sm", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: false,
+                mediaPosition: "right",
+              },
+            }}
+          />
+          <Block1
+            title={`columns: ${columns}`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: false,
+                mediaPosition: "left",
+              },
+            }}
+          />
+          <Block1
+            title={`columns: ${columns}, extendMediaWidth`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: true,
+                mediaPosition: "right",
+              },
+            }}
+          />
+          <Block1
+            title={`columns: ${columns}, extendMediaWidth`}
+            image={demoImage2}
+            theme={{
+              block: {
+                outerBackground: "black",
+                width: "outer",
+                background: "white",
+                padding: { top: "none", bottom: "none" },
+                margin: { top: "none", bottom: "sm" },
+              },
+              layout: {
+                columns,
+                gap: "2xl",
+                extendMediaWidth: true,
+                mediaPosition: "left",
+              },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+
+export const GridGaps = () => (
+  <>
+    {(Object.keys(GAP_OPTIONS) as GapType[]).map((gap: GapType) => (
+      <div
+        key={gap}
+        className="[&>div>div>div>div>div>div>div>div>div>div]:border"
+      >
+        <Block1
+          title={gap}
+          theme={{
+            block: {
+              width: "outer",
+              padding: { top: "none", bottom: "none" },
+              margin: { top: "none", bottom: "2xs" },
+            },
+            layout: { gap },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const verticalSpaceContent = () => (
+  <>
+    {(
+      Object.entries(SPACE_OPTIONS) as [
+        key: keyof typeof SPACE_OPTIONS,
+        label: string,
+      ][]
+    ).map(([size, label]) => (
+      <div key={label}>
+        <Block1
+          title={`verticalSpace: ${label}`}
+          image={demoImage}
+          theme={{
+            content: {
+              verticalSpace: {
+                top: size,
+                bottom: size,
+              },
+            },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
 export const verticalAlignMedia = () => (
   <>
     {(Object.keys(VERTICAL_ALIGN_OPTIONS) as VerticalAlignType[]).map(
@@ -647,3 +817,109 @@ export const Scripts = () => (
     />
   </>
 );
+
+export const ExtendMediaWidth = () => {
+  const extendMediaWidthThemeBase = {
+    block: {
+      background: "white",
+      width: "full",
+      margin: {
+        top: "sm",
+        bottom: "sm",
+      },
+      padding: {
+        top: "sm",
+        bottom: "sm",
+      },
+      outerBackground: "black",
+    },
+    content: {
+      verticalSpace: {
+        top: "sm",
+        bottom: "sm",
+      },
+    },
+    layout: {
+      extendMediaWidth: true,
+    },
+  };
+
+  const extendMediaWidthThemeFull = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeFull.block.width = "full";
+  extendMediaWidthThemeFull.block.background = "white";
+  extendMediaWidthThemeFull.block.outerBackground = "black";
+
+  const extendMediaWidthThemeOuter = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeOuter.block.width = "outer";
+
+  const extendMediaWidthThemeInner = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeInner.block.width = "inner";
+
+  const extendMediaWidthThemeBaseLeft = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeBase),
+  );
+  extendMediaWidthThemeBaseLeft.layout.mediaPosition = "left";
+
+  const extendMediaWidthThemeOuterLeft = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeOuter),
+  );
+  extendMediaWidthThemeOuterLeft.layout.mediaPosition = "left";
+
+  const extendMediaWidthThemeInnerLeft = JSON.parse(
+    JSON.stringify(extendMediaWidthThemeInner),
+  );
+  extendMediaWidthThemeInnerLeft.layout.mediaPosition = "left";
+
+  return (
+    <div>
+      <Block1
+        title="ExtendMediaWidth full left"
+        image={demoImage}
+        theme={extendMediaWidthThemeBaseLeft as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth outer left"
+        image={demoImage}
+        theme={extendMediaWidthThemeOuterLeft as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth inner left"
+        image={demoImage}
+        theme={extendMediaWidthThemeInnerLeft as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth outer"
+        image={demoImage}
+        theme={extendMediaWidthThemeOuter as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth full"
+        image={demoImage}
+        theme={extendMediaWidthThemeFull as Block1Props["theme"]}
+      />
+      <Block1
+        title="ExtendMediaWidth inner"
+        image={demoImage}
+        theme={extendMediaWidthThemeInner as Block1Props["theme"]}
+      />
+      <Block1
+        title="SVG"
+        theme={extendMediaWidthThemeInner}
+        script={{
+          title: "embed",
+          items: [
+            {
+              html: `<svg viewBox="0 0 784 784" fill="none" preserveAspectRatio="xMidYMid meet"><rect width="784" height="784" fill="#f00"/></svg>`,
+            },
+          ],
+        }}
+      />
+    </div>
+  );
+};
