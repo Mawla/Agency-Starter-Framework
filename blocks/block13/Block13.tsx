@@ -14,6 +14,7 @@ import { truncate } from "../../helpers/utils/string";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -105,7 +106,7 @@ export const Block13 = ({
             weight={theme?.intro?.weight}
             align={theme?.block?.align || "center"}
           >
-            <PortableText content={intro as any} />
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
       </div>

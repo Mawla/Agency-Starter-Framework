@@ -27,9 +27,10 @@ import {
   gridCenterClasses,
   gridClasses,
 } from "./block18.classes";
-import { ButtonPositionType, ColumnType, GapType } from "./block18.options";
+import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Slider = lazy<ComponentType<SliderProps>>(
   () =>
@@ -68,6 +69,7 @@ export type Block18Props = {
     block?: BlockThemeType;
     title?: TitleThemeType;
     intro?: TextThemeType;
+    footer?: TextThemeType;
     grid?: {
       columns?: ColumnType;
       gapHorizontal?: GapType;
@@ -78,13 +80,11 @@ export type Block18Props = {
       desktop?: boolean;
       color?: SliderColorType;
     };
-    buttons?: {
-      position?: ButtonPositionType;
-    };
   };
   decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
+  footer?: React.ReactNode;
   buttons?: ButtonProps[];
   items?: ComposableCardProps[];
 };
@@ -94,6 +94,7 @@ export const Block18 = ({
   decorations,
   title,
   intro,
+  footer,
   buttons,
   items,
 }: Block18Props) => {
@@ -129,10 +130,7 @@ export const Block18 = ({
     theme?.grid?.gapHorizontal || "xs",
   );
 
-  const hasContentBeforeGrid =
-    title ||
-    intro ||
-    (Boolean(buttons?.length) && theme?.buttons?.position !== "after");
+  const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
 
   return (
     <Wrapper
@@ -161,18 +159,36 @@ export const Block18 = ({
             weight={theme?.intro?.weight}
             align={theme?.block?.align}
           >
-            <PortableText content={intro as any} />
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
 
         {/* buttons before */}
-        {buttons &&
-          theme?.buttons?.position !== "after" &&
-          Boolean(buttons?.filter(Boolean).length) && (
-            <div className="mt-6">
-              <Block18Buttons buttons={buttons} theme={theme} />
+        {buttons && Boolean(buttons?.filter(Boolean).length) && (
+          <div className="mt-6">
+            <div
+              className={cx("flex", {
+                ["justify-start"]: theme?.block?.align === "left",
+                ["justify-center"]: theme?.block?.align === "center",
+                ["justify-end"]: theme?.block?.align === "right",
+              })}
+            >
+              <ButtonGroup
+                items={buttons}
+                stretch={false}
+                direction="horizontal"
+                align={
+                  // this is needed to control the wrapping of multiple buttons
+                  theme?.block?.align === "center"
+                    ? "center"
+                    : theme?.block?.align === "right"
+                    ? "right"
+                    : "left"
+                }
+              />
             </div>
-          )}
+          </div>
+        )}
       </div>
 
       {Boolean(filteredItems?.length) && (
@@ -234,21 +250,25 @@ export const Block18 = ({
         </div>
       )}
 
-      {/* buttons after */}
-      <div
-        className={cx(
-          "flex flex-col gap-6 max-w-3xl",
-          textAlignClasses[theme?.block?.align || "center"],
-        )}
-      >
-        {buttons &&
-          theme?.buttons?.position === "after" &&
-          Boolean(buttons?.filter(Boolean).length) && (
-            <div className="mt-6">
-              <Block18Buttons buttons={buttons} theme={theme} />
-            </div>
+      {footer && (
+        <div
+          className={cx(
+            "flex flex-col gap-6 max-w-3xl mt-10",
+            theme?.block?.align && textAlignClasses[theme?.block?.align],
           )}
-      </div>
+        >
+          {footer && (
+            <Text
+              size={theme?.footer?.size || "xl"}
+              color={theme?.footer?.color}
+              weight={theme?.footer?.weight}
+              align={theme?.block?.align}
+            >
+              <PortableText content={footer as PortableTextBlock[]} />
+            </Text>
+          )}
+        </div>
+      )}
     </Wrapper>
   );
 };
@@ -275,37 +295,4 @@ const getSliderGapSize = (
       return { ...acc, [breakpoint]: gap };
     }, {} as Record<BreakpointType, number>);
   return sliderGapSizes[breakpoint];
-};
-
-type Block18ButtonsProps = {
-  buttons?: Block18Props["buttons"];
-  theme?: Block18Props["theme"];
-};
-
-const Block18Buttons = ({ buttons, theme }: Block18ButtonsProps) => {
-  if (!buttons) return null;
-
-  return (
-    <div
-      className={cx("flex", {
-        ["justify-start"]: theme?.block?.align === "left",
-        ["justify-center"]: theme?.block?.align === "center",
-        ["justify-end"]: theme?.block?.align === "right",
-      })}
-    >
-      <ButtonGroup
-        items={buttons}
-        stretch={false}
-        direction="horizontal"
-        align={
-          // this is needed to control the wrapping of multiple buttons
-          theme?.block?.align === "center"
-            ? "center"
-            : theme?.block?.align === "right"
-            ? "right"
-            : "left"
-        }
-      />
-    </div>
-  );
 };

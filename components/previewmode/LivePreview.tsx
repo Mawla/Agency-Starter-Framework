@@ -1,4 +1,5 @@
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
+import { LanguageType } from "../../languages";
 import { MiniMap, MiniMapProps } from "./MiniMap";
 import { ScreenCapture } from "./ScreenCapture";
 import { ClientConfig, createClient, SanityClient } from "@sanity/client";
@@ -33,6 +34,7 @@ export type LivePreviewProps = {
   config: ClientConfig;
   position: "top" | "bottom";
   showMiniMap?: boolean;
+  language?: LanguageType;
 };
 
 export const LivePreview = ({
@@ -43,6 +45,7 @@ export const LivePreview = ({
   config,
   position,
   showMiniMap = true,
+  language,
 }: LivePreviewProps) => {
   const router = useRouter();
   const previewTools = useRef<HTMLDivElement>(null);
@@ -96,6 +99,7 @@ export const LivePreview = ({
     setPreviewLoading(true);
     const newData = await frontendClient.current.fetch(getQuery(), {
       _id: id.replace("drafts.", ""),
+      language,
     });
     if (!newData) {
       setPreviewLoading(false);

@@ -12,6 +12,7 @@ import { useTranslation } from "../../hooks/useTranslation";
 import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
@@ -151,7 +152,7 @@ export const Block14 = ({
 
             {body && (
               <div className="format format-sm sm:format-base lg:format-lg">
-                <PortableText content={body as any} />
+                <PortableText content={body as PortableTextBlock[]} />
               </div>
             )}
 

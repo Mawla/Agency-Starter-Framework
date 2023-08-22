@@ -14,6 +14,7 @@ import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy, useContext } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -129,7 +130,7 @@ export const Block12 = ({
             weight={theme?.intro?.weight}
             align={theme?.block?.align || "center"}
           >
-            <PortableText content={intro as any} />
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
       </div>

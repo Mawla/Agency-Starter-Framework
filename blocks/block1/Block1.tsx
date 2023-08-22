@@ -43,6 +43,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -114,11 +115,13 @@ export type Block1Props = {
     title?: TitleThemeType;
     intro?: TextThemeType;
     body?: TextThemeType;
+    footer?: TextThemeType;
   };
   decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
   body?: React.ReactNode;
+  footer?: React.ReactNode;
   image?: ImageType;
   mobileImage?: ImageType;
   video?: VideoType;
@@ -156,6 +159,7 @@ export const Block1 = ({
   title,
   intro,
   body,
+  footer,
   image,
   mobileImage,
   video,
@@ -259,7 +263,7 @@ export const Block1 = ({
                 weight={theme?.intro?.weight}
                 align={theme?.block?.align || "left"}
               >
-                <PortableText content={intro as any} />
+                <PortableText content={intro as PortableTextBlock[]} />
               </Text>
             )}
 
@@ -270,7 +274,7 @@ export const Block1 = ({
                 weight={theme?.body?.weight}
                 align={theme?.block?.align || "left"}
               >
-                <PortableText content={body as any} />
+                <PortableText content={body as PortableTextBlock[]} />
               </Text>
             )}
 
@@ -283,6 +287,17 @@ export const Block1 = ({
               >
                 <ButtonGroup items={buttons} />
               </div>
+            )}
+
+            {footer && (
+              <Text
+                size={theme?.footer?.size || "lg"}
+                color={theme?.footer?.color}
+                weight={theme?.footer?.weight}
+                className="mt-10"
+              >
+                <PortableText content={footer as PortableTextBlock[]} />
+              </Text>
             )}
           </div>
         </Spacing>

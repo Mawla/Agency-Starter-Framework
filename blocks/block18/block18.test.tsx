@@ -24,6 +24,15 @@ describe("Block18", () => {
 });
 
 describe("Block18", () => {
+  it("renders footer", async () => {
+    await act(() => {
+      render(<Block18 footer={<p>Hello</p>} />);
+    });
+    expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
+  });
+});
+
+describe("Block18", () => {
   it("renders items", async () => {
     await act(() => {
       render(<Block18 items={[{ title: "Hello", _key: "" }]} />);

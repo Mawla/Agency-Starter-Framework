@@ -1,4 +1,4 @@
-import { ColorType, VideoType } from "../../types";
+import { VideoType } from "../../types";
 import { ButtonGroupProps } from "../buttons/ButtonGroup";
 import { LinkProps } from "../buttons/Link";
 import { HighlightProps } from "../highlight/Highlight";
@@ -7,6 +7,7 @@ import { IconLoaderProps } from "../images/IconLoader";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { ScriptsType } from "../script/Script";
 import { Table } from "../table/Table";
+import { TestimonialType } from "../testimonials/Testimonials";
 import {
   PortableTextBlockComponent,
   PortableText as PortableTextReact,
@@ -83,7 +84,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
          * For instance if you want to use portable text inside an <h1> tag
          * you don't want to paragraphs inside it, so you can do the following:
          *
-         * <PortableText content={title as any} block={{
+         * <PortableText content={title as PortableTextBlock[]} block={{
          *    normal: ({ children }: PortableTextComponentProps<any>) => (
          *      <span>{children}</span>
          *    ),
@@ -144,6 +145,23 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
           },
           scriptRef({ value }) {
             return <Scripts {...value} />;
+          },
+          testimonials({ value }) {
+            if (!value?.items?.filter(Boolean).length) return null;
+
+            return value.items.map(
+              ({ _key, name, content }: TestimonialType) => (
+                <div className="not-prose not-format" key={_key}>
+                  <blockquote className="py-2 px-6 leading-normal relative my-8">
+                    <span className="absolute left-0 inset-y-0 w-0.5 bg-current opacity-20" />
+                    {content && <PortableText content={content} />}
+                    {name && (
+                      <figcaption className="block mt-2">{name}</figcaption>
+                    )}
+                  </blockquote>
+                </div>
+              ),
+            );
           },
         },
       }}

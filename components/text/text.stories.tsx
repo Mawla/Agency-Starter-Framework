@@ -1,6 +1,8 @@
+import { demoPortableTextArticle } from "../../stories/content";
 import { COLORS } from "../../theme";
 import { ColorType } from "../../types";
 import { Background } from "../block/Background";
+import PortableText from "../portabletext/PortableText";
 import { Text as TextComponent } from "./Text";
 import {
   TextFontType,
@@ -79,4 +81,10 @@ export const Text = () => (
       </Background>
     ))}
   </div>
+);
+
+export const PortableTextWrapper = () => (
+  <TextComponent>
+    <PortableText content={demoPortableTextArticle} />
+  </TextComponent>
 );

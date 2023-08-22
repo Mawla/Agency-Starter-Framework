@@ -55,7 +55,7 @@ const schema = defineType({
     defineField({
       name: "body",
       title: "Body",
-      type: "portabletext.basic",
+      type: "portabletext.full",
       group: "content",
     }),
     defineField({
@@ -74,6 +74,12 @@ const schema = defineType({
       },
       hidden: ({ parent, value }) =>
         !value && Boolean(parent?.video || parent?.script),
+    }),
+    defineField({
+      name: "footer",
+      title: "Footer",
+      type: "portabletext.full",
+      group: "content",
     }),
     defineField({
       name: "mobileImage",
@@ -196,6 +202,7 @@ const schema = defineType({
         defaultTitleTheme,
         defaultTextTheme,
         { ...defaultTextTheme, name: "body", title: "Body" },
+        { ...defaultTextTheme, name: "footer", title: "Footer" },
       ],
     }),
     defineField({

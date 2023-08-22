@@ -7,6 +7,7 @@ import { TitleColorType } from "../title/title.options";
 import { TestimonialType } from "./Testimonials";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Title = lazy<ComponentType<TitleProps>>(
   () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
@@ -69,7 +70,7 @@ export const TestimonialCard = ({
           )}
           {content && (
             <div className="mb-6 text-lg">
-              <PortableText content={content as any} />
+              <PortableText content={content as PortableTextBlock[]} />
             </div>
           )}
         </blockquote>
