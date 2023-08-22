@@ -7,6 +7,7 @@ import { TitleColorType } from "../title/title.options";
 import * as RadixAccordion from "@radix-ui/react-accordion";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 export type AccordionItemType = {
   _key?: string;
@@ -75,7 +76,7 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
                 size="md"
                 background={theme?.background}
               >
-                <PortableText content={content as any} />
+                <PortableText content={content as PortableTextBlock[]} />
               </Text>
             </RadixAccordion.Content>
           </RadixAccordion.Item>

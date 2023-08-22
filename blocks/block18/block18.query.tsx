@@ -11,6 +11,7 @@ export const getBlock18Query = (language: LanguageType) => groq`
     _type,
     title,
     intro[] ${richTextQuery},
+    footer[] ${richTextQuery},
     buttons[] ${buttonQuery},
     items[] { 
       _key,

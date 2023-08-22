@@ -1,5 +1,6 @@
 import { buttonHrefQuery, buttonQuery } from "../buttons/button.query";
 import { imageSourceQuery } from "../images/image.query";
+import { getTestimonialQuery } from "../testimonials/testimonials.query";
 import { videoSourceQuery } from "../video/video.query";
 import groq from "groq";
 
@@ -43,6 +44,18 @@ markDefs[]{
   }
 }`;
 
+export const richTextPlainQuery = groq`
+{
+  ...,
+  ${richTextMarkDefs}
+}
+`;
+
+export const richtextTestimonials = `
+_type == "testimonials" => {
+  items[] ${getTestimonialQuery()}
+}`;
+
 export const richTextQueryFields = groq`
   ...,
   ${richTextImage},
@@ -50,7 +63,8 @@ export const richTextQueryFields = groq`
   ${richTextButtons},
   ${richTextCSV},
   ${richTextMarkDefs},
-  ${richtextScript}
+  ${richtextScript},
+  ${richtextTestimonials},
  `;
 
 export const richTextQuery = groq`

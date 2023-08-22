@@ -9,6 +9,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -79,7 +80,7 @@ export const Block15 = ({
                 color={theme?.intro?.color}
                 weight={theme?.intro?.weight}
               >
-                <PortableText content={intro as any} />
+                <PortableText content={intro as PortableTextBlock[]} />
               </Text>
             </div>
           )}
@@ -90,7 +91,7 @@ export const Block15 = ({
                 color={theme?.body?.color}
                 weight={theme?.body?.weight}
               >
-                <PortableText content={body as any} />
+                <PortableText content={body as PortableTextBlock[]} />
               </Text>
             </div>
           )}

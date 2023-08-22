@@ -11,5 +11,5 @@ export const getBlock11Query = (language: LanguageType) => groq`
     title,
     intro[] ${richTextQuery},
     buttons[] ${buttonQuery},
-    testimonials[] ${getTestimonialQuery(language)}
+    testimonials[] ${getTestimonialQuery()}
   }`;

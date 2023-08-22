@@ -31,6 +31,7 @@ import { textAlignClasses } from "../text/text.options";
 import { ImageHeightType, ImageRatioType } from "./composablecard.options";
 import cx from "classnames";
 import { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 import { twMerge } from "tailwind-merge";
 
 const Title = lazy<ComponentType<TitleProps>>(
@@ -215,7 +216,7 @@ export const ComposableCard = ({
         )}
         {content && (
           <Title as="div" {...theme?.content}>
-            <PortableText content={content as any} />
+            <PortableText content={content as PortableTextBlock[]} />
           </Title>
         )}
         {buttons && Boolean(buttons?.filter(Boolean).length) && (

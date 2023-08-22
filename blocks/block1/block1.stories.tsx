@@ -49,6 +49,7 @@ const DEMO_CONTENT = {
       toil, and deploy changes with ease.
     </p>
   ),
+  footer: <p>this is a footer</p>,
   body: (
     <>
       <ul className="list-none relative">
@@ -124,16 +125,18 @@ export const TitleSizes = () => (
   </>
 );
 
-export const IntroSizes = () => (
+export const TextSizes = () => (
   <>
     {(Object.keys(TEXT_SIZE_OPTIONS) as TextSizeType[]).map((size) => (
       <div key={size}>
         <Block1
           intro={DEMO_CONTENT.intro}
           body={DEMO_CONTENT.body}
+          footer={DEMO_CONTENT.footer}
           theme={{
             intro: { size },
             body: { size },
+            footer: { size },
           }}
         />
       </div>
@@ -141,14 +144,18 @@ export const IntroSizes = () => (
   </>
 );
 
-export const IntroColors = () => (
+export const TextColors = () => (
   <>
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
       <div key={color}>
         <Block1
           intro={DEMO_CONTENT.intro}
+          body={DEMO_CONTENT.body}
+          footer={DEMO_CONTENT.footer}
           theme={{
             intro: { color },
+            body: { color },
+            footer: { color },
           }}
         />
       </div>

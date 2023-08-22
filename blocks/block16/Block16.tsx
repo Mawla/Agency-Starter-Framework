@@ -14,6 +14,7 @@ import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -102,7 +103,7 @@ export const Block16 = ({
             weight={theme?.intro?.weight}
             align={theme?.block?.align || "center"}
           >
-            <PortableText content={intro as any} />
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
       </div>

@@ -32,6 +32,15 @@ describe("Block1", () => {
 });
 
 describe("Block1", () => {
+  it("renders footer", async () => {
+    await act(() => {
+      render(<Block1 footer={<p>Hello</p>} />);
+    });
+    expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
+  });
+});
+
+describe("Block1", () => {
   it("renders image", async () => {
     await act(() => {
       render(
