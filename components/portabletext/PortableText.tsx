@@ -7,6 +7,7 @@ import { IconLoaderProps } from "../images/IconLoader";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { ScriptsType } from "../script/Script";
 import { Table } from "../table/Table";
+import { TestimonialType } from "../testimonials/Testimonials";
 import {
   PortableTextBlockComponent,
   PortableText as PortableTextReact,
@@ -144,6 +145,21 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
           },
           scriptRef({ value }) {
             return <Scripts {...value} />;
+          },
+          testimonials({ value }) {
+            if (!value?.items?.filter(Boolean).length) return null;
+
+            return value.items.map(
+              ({ _key, name, content }: TestimonialType) => (
+                <blockquote
+                  key={_key}
+                  className="[&_p]:my-0 border-l-2 py-1 not-italic text-current border-l-[currentColor/.2]"
+                >
+                  {content && <PortableText content={content} />}
+                  {name && <span>{name}</span>}
+                </blockquote>
+              ),
+            );
           },
         },
       }}
