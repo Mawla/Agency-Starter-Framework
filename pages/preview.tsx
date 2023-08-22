@@ -119,6 +119,7 @@ export default function PreviewPage({
               : "top"
           }
           showMiniMap={previewType === "page"}
+          language={language}
         />
       )}
 
