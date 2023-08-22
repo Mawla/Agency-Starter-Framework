@@ -2,13 +2,8 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
-import {
-  ComposableCard,
-  ComposableCardProps,
-} from "../../components/cards/ComposableCard";
-import TestimonialCard, {
-  TestimonialCardProps,
-} from "../../components/cards/TestimonialCard";
+import { ComposableCardProps } from "../../components/cards/ComposableCard";
+import { TestimonialCardProps } from "../../components/cards/TestimonialCard";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SliderProps } from "../../components/slider/Slider";
@@ -65,6 +60,20 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
+    ),
+);
+
+const ComposableCard = lazy<ComponentType<ComposableCardProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ComposableCard" */ "../../components/cards/ComposableCard"
+    ),
+);
+
+const TestimonialCard = lazy<ComponentType<TestimonialCardProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "TestimonialCard" */ "../../components/cards/TestimonialCard"
     ),
 );
 

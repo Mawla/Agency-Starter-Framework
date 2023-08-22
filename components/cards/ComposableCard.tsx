@@ -31,6 +31,7 @@ import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
 import { ImageHeightType, ImageRatioType } from "./composablecard.options";
 import cx from "classnames";
+import React from "react";
 import { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 import { twMerge } from "tailwind-merge";
@@ -228,3 +229,5 @@ export const ComposableCard = ({
     </div>
   );
 };
+
+export default React.memo(ComposableCard);
