@@ -126,6 +126,28 @@ const DEMO_CONTENT: Block18Props = {
 
 export const Default = () => <Block18 {...DEMO_CONTENT} />;
 
+export const Cards = () => (
+  <Block18
+    theme={{
+      grid: {
+        columns: 2,
+      },
+    }}
+    items={[
+      {
+        type: "card.composable",
+        title: "Composable card",
+        theme: { border: { width: 1, color: "black" } },
+      },
+      {
+        type: "card.testimonial",
+        title: "Testimonial card",
+        theme: { border: { width: 1, color: "black" } },
+      },
+    ]}
+  />
+);
+
 export const BlockBackgrounds = () => (
   <>
     {(Object.keys(COLORS) as ColorType[]).map((color) => (
