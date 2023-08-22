@@ -191,6 +191,18 @@ const schema = defineType({
             ],
           },
         }),
+        defineField({
+          name: "buttons",
+          type: "styles",
+          options: {
+            fields: [
+              defineField({
+                name: "hidden",
+                type: "boolean",
+              }),
+            ],
+          },
+        }),
       ],
     }),
     defineField({
