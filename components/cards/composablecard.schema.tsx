@@ -1,6 +1,5 @@
 import { defaultBlockGroups } from "../../components/block/block.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
-import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
@@ -39,7 +38,6 @@ const schema = defineType({
   },
   groups: defaultBlockGroups,
   fields: [
-    ...defaultBlockTools,
     defineField({
       name: "image",
       title: "Image",
@@ -91,23 +89,10 @@ const schema = defineType({
                 type: "color",
               }),
               defineField({
-                name: "align",
-                type: "select",
-                options: {
-                  list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
-                },
-              }),
-              defineField({
                 name: "background",
                 type: "color",
               }),
-              defineField({
-                name: "align",
-                type: "select",
-                options: {
-                  list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
-                },
-              }),
+
               defineField({
                 name: "align",
                 type: "select",

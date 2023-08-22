@@ -8,6 +8,7 @@ import { TitleThemeType } from "../../components/title/title.options";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { bumpHeadingLevel } from "../../helpers/utils/string";
 import {
+  alignItemsClasses,
   backgroundClasses,
   borderClasses,
   borderRadiusClasses,
@@ -158,11 +159,10 @@ export const ComposableCard = ({
 
       <Decorations decorations={decorations} />
       <div
-        className={cx("relative z-10 flex flex-col gap-4", {
-          ["items-center"]: theme?.card?.align === "center",
-          ["items-start"]: theme?.card?.align === "left",
-          ["items-end"]: theme?.card?.align === "right",
-        })}
+        className={cx(
+          "relative z-10 flex flex-col gap-4",
+          theme?.card?.align && alignItemsClasses[theme?.card?.align],
+        )}
       >
         {image && (
           <div className="block w-full">

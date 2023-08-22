@@ -24,6 +24,7 @@ import {
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
+import { justifyClasses } from "../../theme";
 import {
   gapHorizontalClasses,
   gapVerticalClasses,
@@ -170,11 +171,10 @@ export const Block18 = ({
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
           <div className="mt-6">
             <div
-              className={cx("flex", {
-                ["justify-start"]: theme?.block?.align === "left",
-                ["justify-center"]: theme?.block?.align === "center",
-                ["justify-end"]: theme?.block?.align === "right",
-              })}
+              className={cx(
+                "flex",
+                theme?.block?.align && justifyClasses[theme?.block?.align],
+              )}
             >
               <ButtonGroup
                 items={buttons}

@@ -2,6 +2,7 @@ import { buttonQuery } from "../../components/buttons/button.query";
 import { decorationsQuery } from "../../components/decorations/decoration.query";
 import { imageQuery } from "../../components/images/image.query";
 import { richTextQuery } from "../../components/portabletext/portabletext.query";
+import { getTestimonialFields } from "../../components/testimonials/testimonials.query";
 import { LanguageType } from "../../languages";
 import groq from "groq";
 
@@ -18,10 +19,19 @@ export const getBlock18Query = (language: LanguageType) => groq`
       "type": _type,
       theme,
       ${decorationsQuery},
-      "image": ${imageQuery},
-      title,
-      subtitle,
-      content[] ${richTextQuery},
-      buttons[] ${buttonQuery},
+
+      _type == "card.testimonial" => {
+        ...coalesce(testimonialRef ->, testimonial) {
+          ${getTestimonialFields()}
+        }
+      },
+      
+      _type == "card.composable" => {
+        "image": ${imageQuery},
+        title,
+        subtitle,
+        content[] ${richTextQuery},
+        buttons[] ${buttonQuery},
+      },
     },
   }`;

@@ -2,9 +2,9 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { TestimonialCardProps } from "../../components/cards/TestimonialCard";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
-import { TestimonialCardProps } from "../../components/testimonials/TestimonialCard";
 import {
   TestimonialsProps,
   TestimonialType,
@@ -57,7 +57,7 @@ const Testimonials = lazy<ComponentType<TestimonialsProps>>(
 const TestimonialCard = lazy<ComponentType<TestimonialCardProps>>(
   () =>
     import(
-      /* webpackChunkName: "TestimonialCard" */ "../../components/testimonials/TestimonialCard"
+      /* webpackChunkName: "TestimonialCard" */ "../../components/cards/TestimonialCard"
     ),
 );
 

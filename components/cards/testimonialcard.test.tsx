@@ -1,7 +1,7 @@
 import { act, render, screen } from "../../jest.utils";
 import { demoImage } from "../../stories/content";
+import Testimonials from "../testimonials/Testimonials";
 import TestimonialCard from "./TestimonialCard";
-import Testimonials from "./Testimonials";
 import "@testing-library/jest-dom";
 import { TextEncoder, TextDecoder } from "util";
 
@@ -23,7 +23,7 @@ describe("Testimonials", () => {
               image: demoImage,
             },
           ]}
-          RenderElement={(props) => <TestimonialCard {...props} />}
+          RenderElement={(props: any) => <TestimonialCard {...props} />}
         />,
       );
     });

@@ -1,10 +1,28 @@
+import { DecorationsProps } from "../../components/decorations/Decorations";
 import { TitleProps } from "../../components/title/Title";
-import { backgroundClasses, textClasses } from "../../theme";
-import { ColorType } from "../../types";
+import {
+  backgroundClasses,
+  borderClasses,
+  borderRadiusClasses,
+  borderWidthClasses,
+  justifyClasses,
+  paddingXClasses,
+  paddingYClasses,
+  textClasses,
+} from "../../theme";
+import {
+  BorderRadiusType,
+  BorderWidthType,
+  ColorType,
+  HorizontalAlignType,
+  PaddingType,
+} from "../../types";
+import { DecorationProps } from "../decorations/Decoration";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
 import { TestimonialType } from "../testimonials/Testimonials";
-import { TitleColorType } from "../title/title.options";
+import { textAlignClasses } from "../text/text.options";
+import { TitleThemeType } from "../title/title.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
@@ -27,14 +45,33 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     ),
 );
 
+const Decorations = lazy<ComponentType<DecorationsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Decorations" */ "../../components/decorations/Decorations"
+    ),
+);
+
 export type TestimonialCardProps = {
   type: "card.testimonial";
+  decorations?: DecorationProps[];
   theme?: {
-    background?: ColorType;
-    title?: TitleColorType;
-    content?: ColorType;
-    name?: ColorType;
-    jobTitle?: ColorType;
+    card?: {
+      color?: ColorType;
+      align?: HorizontalAlignType;
+      background?: ColorType;
+      paddingX?: PaddingType;
+      paddingY?: PaddingType;
+    };
+    title?: TitleThemeType;
+    name?: TitleThemeType;
+    content?: TitleThemeType;
+    jobTitle?: TitleThemeType;
+    border?: {
+      color?: ColorType;
+      radius?: BorderRadiusType;
+      width?: BorderWidthType;
+    };
   };
 } & TestimonialType;
 
@@ -45,67 +82,68 @@ export const TestimonialCard = ({
   jobTitle,
   content,
   theme,
+  decorations,
 }: TestimonialCardProps) => {
   return (
     <figure
       className={cx(
-        "p-6 rounded-sm text-left",
-        theme?.background && backgroundClasses[theme?.background],
-        theme?.content && textClasses[theme?.content],
-        {
-          ["bg-[rgba(0,0,0,.03)]"]: !theme?.background,
-        },
+        "h-full relative overflow-hidden group",
+        theme?.card?.color && textClasses[theme?.card?.color],
+        theme?.card?.align && textAlignClasses[theme?.card?.align],
+        theme?.border?.color && borderClasses[theme?.border?.color],
+        theme?.border?.width && borderWidthClasses[theme?.border?.width],
+        theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
+        theme?.card?.background && backgroundClasses[theme?.card?.background],
+        theme?.card?.paddingY && paddingYClasses[theme?.card?.paddingY],
+        theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
       )}
     >
-      {(title || content) && (
-        <blockquote className="text-sm">
-          {title && (
-            <Title
-              size={"xl"}
-              as="span"
-              className="text-current mb-6"
-              color={theme?.title}
-            >
-              {title}
-            </Title>
+      <Decorations decorations={decorations} />
+      <div className="flex flex-col gap-6 h-full relative z-10">
+        {title && (
+          <Title {...theme?.title} as="span">
+            {title}
+          </Title>
+        )}
+
+        {content && (
+          <blockquote>
+            {content && (
+              <Title as="div" {...theme?.content}>
+                <PortableText content={content as PortableTextBlock[]} />
+              </Title>
+            )}
+          </blockquote>
+        )}
+
+        <figcaption
+          className={cx(
+            "inline-flex items-center space-x-3 text-left",
+            theme?.card?.align && justifyClasses[theme?.card?.align],
           )}
-          {content && (
-            <div className="mb-6 text-lg">
-              <PortableText content={content as PortableTextBlock[]} />
+        >
+          {image && (
+            <div className="w-9 h-9 rounded-full overflow-hidden">
+              <ResponsiveImage {...image} />
             </div>
           )}
-        </blockquote>
-      )}
 
-      <figcaption className="flex items-center space-x-3">
-        {image && (
-          <div className="w-9 h-9 rounded-full overflow-hidden">
-            <ResponsiveImage {...image} />
-          </div>
-        )}
-
-        {(name || jobTitle) && (
-          <div className="space-y-0.5 font-medium">
-            {name && (
-              <span
-                className={cx("block", theme?.name && textClasses[theme?.name])}
-              >
-                {name}
-              </span>
-            )}
-            {jobTitle && (
-              <span
-                className={cx(
-                  "block text-sm",
-                  theme?.jobTitle && textClasses[theme?.jobTitle],
-                )}
-              >
-                {jobTitle}
-              </span>
-            )}
-          </div>
-        )}
-      </figcaption>
+          {(name || jobTitle) && (
+            <div className="space-y-0.5 font-medium">
+              {name && (
+                <Title {...theme?.name} as="span">
+                  {name}
+                </Title>
+              )}
+              {jobTitle && (
+                <Title {...theme?.jobTitle} as="span">
+                  {jobTitle}
+                </Title>
+              )}
+            </div>
+          )}
+        </figcaption>
+      </div>
     </figure>
   );
 };

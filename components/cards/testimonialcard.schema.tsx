@@ -1,4 +1,3 @@
-import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
@@ -21,28 +20,36 @@ const schema = defineType({
   icon: () => <MessagingLines weight="thin" />,
   preview: {
     select: {
-      title: "title",
-      name: "name",
-      content: "content",
+      refTitle: "testimonialRef.title",
+      refName: "testimonialRef.name",
+      refContent: "testimonialRef.content",
+      title: "testimonial.title",
+      name: "testimonial.name",
+      content: "testimonial.content",
     },
-    prepare({ title = "", name = "", content }) {
+    prepare({ refTitle, refName, refContent, title = "", name = "", content }) {
       return {
-        title: `${title} ${name}`,
-        subtitle: blocksToText(content),
+        title: `${title || refTitle} ${name || refName}`,
+        subtitle: blocksToText(content || refContent),
       };
     },
   },
   groups: defaultBlockGroups,
   fields: [
-    ...defaultBlockTools,
-
     defineField({
-      name: "testimonials.reference",
+      name: "testimonialRef",
       title: "Reusable testimonial",
       type: "reference",
       to: [{ type: "testimonials.item" }],
+      hidden: ({ parent, value }) => !value && Boolean(parent?.custom),
+      group: "content",
     }),
-    defineField(testimonialItemObject),
+    defineField({
+      ...testimonialItemObject,
+      name: "testimonial",
+      hidden: ({ parent, value }) => !value && Boolean(parent?.ref),
+      group: "content",
+    }),
 
     defineField({
       name: "theme",
@@ -61,22 +68,8 @@ const schema = defineType({
                 type: "color",
               }),
               defineField({
-                name: "align",
-                type: "select",
-                options: {
-                  list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
-                },
-              }),
-              defineField({
                 name: "background",
                 type: "color",
-              }),
-              defineField({
-                name: "align",
-                type: "select",
-                options: {
-                  list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
-                },
               }),
               defineField({
                 name: "align",
@@ -129,9 +122,9 @@ const schema = defineType({
             ],
           },
         }),
+        { ...defaultTitleTheme, name: "title" },
         { ...defaultTitleTheme, name: "content" },
         { ...defaultTitleTheme, name: "name" },
-        { ...defaultTitleTheme, name: "title" },
         { ...defaultTitleTheme, name: "jobTitle" },
       ],
     }),
