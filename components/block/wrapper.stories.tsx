@@ -281,7 +281,7 @@ export const Slots = () => (
         top: "xl",
         bottom: "xl",
       },
-      width: "inner",
+      width: "outer",
     }}
     slots={{
       inside: <div className="border-2">inside</div>,
