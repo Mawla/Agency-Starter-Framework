@@ -59,6 +59,24 @@ describe("Block1", () => {
 });
 
 describe("Block1", () => {
+  it("renders mobile image", async () => {
+    await act(() => {
+      render(
+        <Block1
+          mobileImage={{
+            width: 100,
+            height: 100,
+            src: "https://picsum.photos/50/50",
+            alt: "hello",
+          }}
+        />,
+      );
+    });
+    expect(screen.getAllByAltText("hello"));
+  });
+});
+
+describe("Block1", () => {
   it("renders buttons", async () => {
     await act(() => {
       render(<Block1 buttons={[{ label: "hello" }]} />);

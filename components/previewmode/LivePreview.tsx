@@ -4,6 +4,7 @@ import { MiniMap, MiniMapProps } from "./MiniMap";
 import { ScreenCapture } from "./ScreenCapture";
 import { ClientConfig, createClient, SanityClient } from "@sanity/client";
 import cx from "classnames";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 /**
@@ -46,6 +47,7 @@ export const LivePreview = ({
   showMiniMap = true,
   language,
 }: LivePreviewProps) => {
+  const router = useRouter();
   const previewTools = useRef<HTMLDivElement>(null);
 
   const [previewLoading, setPreviewLoading] = useState<boolean>(false);
@@ -69,6 +71,10 @@ export const LivePreview = ({
   /**
    * Reload data
    */
+
+  const hardRefresh = () => {
+    router.reload();
+  };
 
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
@@ -350,6 +356,7 @@ export const LivePreview = ({
         <button
           className="shadow-lg block p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222]"
           onClick={reloadPreview}
+          onDoubleClick={hardRefresh}
         >
           {previewLoading ? (
             <svg

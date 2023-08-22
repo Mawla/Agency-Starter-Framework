@@ -29,7 +29,7 @@ export const titleSizeClasses: Record<TitleSizeType, string> = Object.keys(
   const md = FONT_SIZE_NAMES[i - 1] || FONT_SIZE_NAMES[i];
   const lg = FONT_SIZE_NAMES[i];
 
-  acc[cur] = `text-${sm} md:text-${md} lg:text-${lg}`;
+  acc[cur] = `text-${sm} md:text-${md} xl:text-${lg}`;
   return acc;
 }, {} as Record<TitleSizeType, string>);
 

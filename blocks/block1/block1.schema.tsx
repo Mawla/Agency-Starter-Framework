@@ -8,7 +8,11 @@ import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { BORDER_RADIUS_OPTIONS, VERTICAL_ALIGN_OPTIONS } from "../../types";
-import { IMAGE_POSITION_OPTIONS } from "./block1.options";
+import {
+  GAP_OPTIONS,
+  LAYOUT_COLUMN_OPTIONS,
+  MEDIA_POSITION_OPTIONS,
+} from "./block1.options";
 import { Image } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -24,10 +28,10 @@ const schema = defineType({
       title: "title",
       image: "image",
     },
-    prepare({ title = "Block 1", image }: any) {
+    prepare({ title = "Block 1", image, mobileImage }: any) {
       return {
         title: title,
-        media: image || <Image weight="thin" />,
+        media: image || mobileImage || <Image weight="thin" />,
       };
     },
   },
@@ -38,7 +42,8 @@ const schema = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "text",
+      rows: 2,
       group: "content",
     }),
     defineField({
@@ -75,6 +80,19 @@ const schema = defineType({
       title: "Footer",
       type: "portabletext.full",
       group: "content",
+    }),
+    defineField({
+      name: "mobileImage",
+      title: "Mobile image",
+      description:
+        'Image used on screens smaller than 768px wide. If not set, "Image" will be used.',
+      type: "image",
+      group: "content",
+      options: {
+        hotspot: true,
+      },
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.video || parent?.script),
     }),
     defineField({
       name: "video",
@@ -127,11 +145,26 @@ const schema = defineType({
           options: {
             fields: [
               defineField({
+                name: "columns",
+                title: "Grid columns",
+                type: "select",
+                options: {
+                  list: optionsToList(LAYOUT_COLUMN_OPTIONS),
+                },
+              }),
+              defineField({
+                name: "gap",
+                type: "select",
+                options: {
+                  list: optionsToList(GAP_OPTIONS),
+                },
+              }),
+              defineField({
                 name: "mediaPosition",
                 title: "Image position",
                 type: "select",
                 options: {
-                  list: optionsToList(IMAGE_POSITION_OPTIONS),
+                  list: optionsToList(MEDIA_POSITION_OPTIONS),
                 },
               }),
               defineField({
@@ -142,6 +175,19 @@ const schema = defineType({
                   list: optionsToList(VERTICAL_ALIGN_OPTIONS),
                 },
               }),
+              defineField({
+                name: "extendMediaWidth",
+                type: "boolean",
+              }),
+            ],
+          },
+        }),
+        defineField({
+          name: "content",
+          title: "Content",
+          type: "styles",
+          options: {
+            fields: [
               defineField({
                 name: "verticalSpace",
                 title: "Content space",
