@@ -43,6 +43,7 @@ export const getReactComponentSnippet = ({
       fields,
       "intro",
       `
+    import { PortableTextBlock } from "sanity";
     import { TextProps } from "../../components/text/Text";
     import { TextThemeType } from "../../components/text/text.options";
     const Text = lazy<ComponentType<TextProps>>(
@@ -136,7 +137,7 @@ export const getReactComponentSnippet = ({
                 weight={theme?.intro?.weight}
                 align={theme?.block?.align || "center"}
               >
-                <PortableText content={intro as any} />
+                <PortableText content={intro as PortableTextBlock[]} />
               </Text>
           )}`,
           )}

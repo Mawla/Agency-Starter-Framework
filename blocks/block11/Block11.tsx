@@ -18,6 +18,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -133,7 +134,7 @@ export const Block11 = ({
               weight={theme?.intro?.weight}
               align={theme?.block?.align || "center"}
             >
-              <PortableText content={intro as any} />
+              <PortableText content={intro as PortableTextBlock[]} />
             </Text>
           </div>
         )}

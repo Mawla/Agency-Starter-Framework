@@ -25,6 +25,7 @@ import {
 import { mediaPositionType } from "./block1.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -154,7 +155,7 @@ export const Block1 = ({
                 color={theme?.intro?.color}
                 weight={theme?.intro?.weight}
               >
-                <PortableText content={intro as any} />
+                <PortableText content={intro as PortableTextBlock[]} />
               </Text>
             )}
 
@@ -164,7 +165,7 @@ export const Block1 = ({
                 color={theme?.body?.color}
                 weight={theme?.body?.weight}
               >
-                <PortableText content={body as any} />
+                <PortableText content={body as PortableTextBlock[]} />
               </Text>
             )}
 
@@ -179,7 +180,7 @@ export const Block1 = ({
                 weight={theme?.footer?.weight}
                 className="mt-10"
               >
-                <PortableText content={footer as any} />
+                <PortableText content={footer as PortableTextBlock[]} />
               </Text>
             )}
           </div>

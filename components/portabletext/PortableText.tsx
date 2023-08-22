@@ -84,7 +84,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
          * For instance if you want to use portable text inside an <h1> tag
          * you don't want to paragraphs inside it, so you can do the following:
          *
-         * <PortableText content={title as any} block={{
+         * <PortableText content={title as PortableTextBlock[]} block={{
          *    normal: ({ children }: PortableTextComponentProps<any>) => (
          *      <span>{children}</span>
          *    ),

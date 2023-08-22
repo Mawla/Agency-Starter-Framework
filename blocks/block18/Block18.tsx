@@ -30,6 +30,7 @@ import {
 import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Slider = lazy<ComponentType<SliderProps>>(
   () =>
@@ -158,7 +159,7 @@ export const Block18 = ({
             weight={theme?.intro?.weight}
             align={theme?.block?.align}
           >
-            <PortableText content={intro as any} />
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
 
@@ -263,7 +264,7 @@ export const Block18 = ({
               weight={theme?.footer?.weight}
               align={theme?.block?.align}
             >
-              <PortableText content={footer as any} />
+              <PortableText content={footer as PortableTextBlock[]} />
             </Text>
           )}
         </div>
