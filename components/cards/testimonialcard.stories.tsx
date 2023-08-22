@@ -17,11 +17,13 @@ export const Theme = () => (
     type="card.testimonial"
     {...demoTestimonialsList[0]}
     theme={{
-      background: "black",
-      title: "white",
-      content: "white",
-      name: "white",
-      jobTitle: "white",
+      card: { background: "black", color: "white" },
+      title: {
+        size: "4xl",
+      },
+      content: { size: "4xl" },
+      name: { size: "4xl" },
+      jobTitle: { size: "4xl" },
     }}
   />
 );

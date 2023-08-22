@@ -211,6 +211,9 @@ export const Block18 = ({
               columns={slideColumns}
               slides={filteredItems?.map(
                 (item: ComposableCardProps | TestimonialCardProps) => {
+                  if (item.type === "card.composable") {
+                    item.blockTitleLevel = theme?.title?.as || "h2";
+                  }
                   return (
                     <div key={item._key} className="h-full text-left">
                       <CardWrapper>
@@ -237,10 +240,11 @@ export const Block18 = ({
               )}
             >
               {filteredItems?.map(
-                (
-                  item: ComposableCardProps | TestimonialCardProps,
-                  _: number,
-                ) => {
+                (item: ComposableCardProps | TestimonialCardProps) => {
+                  if (item.type === "card.composable") {
+                    item.blockTitleLevel = theme?.title?.as || "h2";
+                  }
+
                   return (
                     <div key={item._key} className="h-full text-left">
                       <CardWrapper>

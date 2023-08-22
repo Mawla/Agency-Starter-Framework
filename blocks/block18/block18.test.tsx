@@ -35,7 +35,11 @@ describe("Block18", () => {
 describe("Block18", () => {
   it("renders items", async () => {
     await act(() => {
-      render(<Block18 items={[{ title: "Hello", _key: "" }]} />);
+      render(
+        <Block18
+          items={[{ title: "Hello", _key: "", type: "card.composable" }]}
+        />,
+      );
     });
     expect(screen.getByText("Hello", { selector: "h3" })).toBeInTheDocument();
   });
@@ -73,6 +77,7 @@ describe("Composable card", () => {
             [
               {
                 _key: "card",
+                type: "card.composable",
                 title: "card title",
                 subtitle: "card subtitle",
                 content: <p>card text</p>,
