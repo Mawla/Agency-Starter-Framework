@@ -8,7 +8,7 @@ import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { BORDER_RADIUS_OPTIONS, VERTICAL_ALIGN_OPTIONS } from "../../types";
-import { IMAGE_POSITION_OPTIONS } from "./block1.options";
+import { MEDIA_POSITION_OPTIONS } from "./block1.options";
 import { Image } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -139,7 +139,7 @@ const schema = defineType({
                 title: "Image position",
                 type: "select",
                 options: {
-                  list: optionsToList(IMAGE_POSITION_OPTIONS),
+                  list: optionsToList(MEDIA_POSITION_OPTIONS),
                 },
               }),
               defineField({
