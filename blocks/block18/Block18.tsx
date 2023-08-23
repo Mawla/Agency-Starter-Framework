@@ -26,7 +26,7 @@ import {
   colSpanClasses,
   gapHorizontalClasses,
   gapVerticalClasses,
-  gridColClasses,
+  gridClasses,
 } from "./block18.classes";
 import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
@@ -313,8 +313,8 @@ export const Block18 = ({
           ) : (
             <div
               className={cx(
-                "grid grid-cols-12",
-                theme?.grid?.columns && gridColClasses[numColumns],
+                "grid",
+                theme?.grid?.columns && gridClasses[numColumns],
                 theme?.grid?.gapHorizontal &&
                   gapHorizontalClasses[theme?.grid?.gapHorizontal],
                 theme?.grid?.gapVertical &&
