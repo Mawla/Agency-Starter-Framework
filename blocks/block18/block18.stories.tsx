@@ -428,7 +428,7 @@ export const GridCenterCards = () => {
       </div>
       {new Array(currentTab * currentTab + 1).fill("").map((x, i) => (
         <div
-          key={i + 1}
+          key={i}
           className="mb-10 border p-10 [&>div>div>div>div>div>div>div>div>div>div>div]:border-2"
         >
           <Block18

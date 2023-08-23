@@ -18,6 +18,8 @@ import {
   BreakpointType,
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useSize } from "../../hooks/useSize";
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
 import { justifyClasses } from "../../theme";
 import {
@@ -28,7 +30,14 @@ import {
 } from "./block18.classes";
 import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, {
+  CSSProperties,
+  ComponentType,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { PortableTextBlock } from "sanity";
 
 const Slider = lazy<ComponentType<SliderProps>>(
@@ -112,6 +121,10 @@ export const Block18 = ({
   items,
 }: Block18Props) => {
   const { screenWidth, breakpoint } = useBreakpoint();
+  const debouncedScreenWidth = useDebounce(screenWidth, 500);
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [gridStyle, setGridStyle] = useState<CSSProperties>();
 
   const filteredItems = items?.filter(Boolean);
   const numItems = filteredItems?.length || 0;
@@ -147,16 +160,55 @@ export const Block18 = ({
   const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
 
   let numColumns = theme?.grid?.columns || 2;
-  // if (filteredItems) {
-  //   if (numItems === 1) {
-  //     numColumns = 2;
-  //   } else if (numItems < numColumns) {
-  //     numColumns = filteredItems.length as ColumnType;
-  //   }
-  // }
 
-  if (screenWidth > BREAKPOINTS.lg) {
-  }
+  useEffect(() => {
+    if (!gridRef.current) return;
+    if (debouncedScreenWidth < BREAKPOINTS.sm) return;
+    if (theme?.block?.align !== "center") return;
+
+    const gapSize = +window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("gap")
+      .split(" ")[1]
+      ?.replace("px", "");
+
+    // const numChildren = gridRef.current.childElementCount;
+
+    // const numColumns = window
+    //   .getComputedStyle(gridRef.current, null)
+    //   .getPropertyValue("grid-template-columns")
+    //   .split(" ").length;
+
+    const gridRect = gridRef.current.getBoundingClientRect();
+    const gridWidth = gridRect.width;
+    const gridY = gridRect.top;
+
+    const children = gridRef.current.children;
+    const accumulatedChildrenWidth = Array.from(children).reduce(
+      (prev, curr) => {
+        const childRect = curr.getBoundingClientRect();
+        const childWidth = childRect.width;
+        const childY = childRect.top;
+        if (childY !== gridY) {
+          return prev;
+        }
+        return prev + childWidth + gapSize;
+      },
+      -gapSize,
+    );
+
+    if (accumulatedChildrenWidth < gridWidth) {
+      setGridStyle({
+        transform: `translateX(${
+          (gridWidth - accumulatedChildrenWidth) / 2
+        }px)`,
+      });
+    } else {
+      setGridStyle({
+        transform: undefined,
+      });
+    }
+  }, [debouncedScreenWidth, items, theme?.block?.align]);
 
   return (
     <Wrapper
@@ -257,6 +309,8 @@ export const Block18 = ({
                 theme?.grid?.gapVertical &&
                   gapVerticalClasses[theme?.grid?.gapVertical],
               )}
+              ref={gridRef}
+              style={gridStyle}
             >
               {filteredItems?.map(
                 (item: ComposableCardProps | TestimonialCardProps, i) => {
@@ -266,9 +320,12 @@ export const Block18 = ({
 
                   return (
                     <div
-                      key={item._key}
+                      key={item._key || i}
                       className={cx(
                         "h-full text-left",
+                        // i == 1
+                        //   ? colSpanClasses[2]
+                        //   :
                         item?.theme?.card?.columns &&
                           colSpanClasses[item?.theme?.card?.columns],
                       )}
