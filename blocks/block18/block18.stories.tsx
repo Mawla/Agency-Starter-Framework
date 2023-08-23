@@ -270,7 +270,7 @@ export const GridColumns = () => {
 
   return (
     <div style={{ zoom: 1 }} className="relative">
-      <span className="absolute inset-y-0 left-1/2 w-px bg-[#ccc] opacity-50" />
+      <span className="absolute inset-y-0 left-1/2 w-px bg-[hotpink] opacity-50" />
       <div className="flex gap-2 mb-4">
         {Object.keys(COLUMN_OPTIONS).map((columns) => (
           <button
@@ -408,12 +408,25 @@ export const ColSpan = () => (
 // );
 
 export const GridCenterCards = () => {
-  const [currentTab, setCurrentTab] = useState<number>(2);
+  const [currentTab, setCurrentTab] = useState<number>(5);
+  const [currentAlign, setCurrentAlign] =
+    useState<HorizontalAlignType>("center");
 
   return (
     <div style={{ zoom: 1 }} className="relative">
-      <span className="absolute inset-y-0 left-1/2 w-px bg-[#ccc] opacity-50" />
+      <span className="absolute inset-y-0 left-1/2 w-px bg-[hotpink] opacity-50" />
       <div className="flex gap-2 mb-4">
+        {Object.keys(HORIZONTAL_ALIGN_OPTIONS).map((align) => (
+          <button
+            key={align}
+            className={`py-2 px-5 rounded-full border ${
+              align === currentAlign && "bg-[#eee]"
+            }`}
+            onClick={() => setCurrentAlign(align as HorizontalAlignType)}
+          >
+            {align}
+          </button>
+        ))}
         {Object.keys(COLUMN_OPTIONS).map((columns) => (
           <button
             key={columns}
@@ -441,7 +454,7 @@ export const GridCenterCards = () => {
             })}
             theme={{
               block: {
-                align: "center",
+                align: currentAlign,
                 padding: { top: "none", bottom: "none" },
               },
               slider: {

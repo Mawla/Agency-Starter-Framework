@@ -121,13 +121,14 @@ export const Block18 = ({
   items,
 }: Block18Props) => {
   const { screenWidth, breakpoint } = useBreakpoint();
-  const debouncedScreenWidth = useDebounce(screenWidth, 500);
+  const debouncedScreenWidth = useDebounce(screenWidth, 250);
 
   const gridRef = useRef<HTMLDivElement>(null);
   const [gridStyle, setGridStyle] = useState<CSSProperties>();
 
   const filteredItems = items?.filter(Boolean);
   const numItems = filteredItems?.length || 0;
+  let numColumns = theme?.grid?.columns || 2;
 
   let slideColumns = 1;
   if (screenWidth > BREAKPOINTS.xs) slideColumns = 1;
@@ -159,12 +160,13 @@ export const Block18 = ({
 
   const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
 
-  let numColumns = theme?.grid?.columns || 2;
+  /**
+   * Calculate centering of grid items
+   */
 
   useEffect(() => {
     if (!gridRef.current) return;
     if (debouncedScreenWidth < BREAKPOINTS.sm) return;
-    if (theme?.block?.align !== "center") return;
 
     const gapSize = +window
       .getComputedStyle(gridRef.current, null)
@@ -172,42 +174,52 @@ export const Block18 = ({
       .split(" ")[1]
       ?.replace("px", "");
 
-    // const numChildren = gridRef.current.childElementCount;
-
-    // const numColumns = window
-    //   .getComputedStyle(gridRef.current, null)
-    //   .getPropertyValue("grid-template-columns")
-    //   .split(" ").length;
+    const numColumns = window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("grid-template-columns")
+      .split(" ").length;
 
     const gridRect = gridRef.current.getBoundingClientRect();
     const gridWidth = gridRect.width;
-    const gridY = gridRect.top;
 
+    // group items by row
     const children = gridRef.current.children;
-    const accumulatedChildrenWidth = Array.from(children).reduce(
-      (prev, curr) => {
-        const childRect = curr.getBoundingClientRect();
-        const childWidth = childRect.width;
-        const childY = childRect.top;
-        if (childY !== gridY) {
-          return prev;
-        }
-        return prev + childWidth + gapSize;
-      },
-      -gapSize,
-    );
+    const rows = Array.from(children).reduce((prev, curr) => {
+      const top = curr.getBoundingClientRect().top;
+      if (!prev[top]) prev[top] = [];
+      prev[top].push(curr as HTMLDivElement);
+      return prev;
+    }, {} as Record<number, HTMLDivElement[]>);
 
-    if (accumulatedChildrenWidth < gridWidth) {
-      setGridStyle({
-        transform: `translateX(${
-          (gridWidth - accumulatedChildrenWidth) / 2
-        }px)`,
+    // find orphans and push if needed
+    Object.entries(rows).forEach(([y, items]) => {
+      let shiftX = 0;
+
+      // only move items in rows that aren't full
+      if (items.length < numColumns) {
+        if (
+          theme?.block?.align == "center" ||
+          theme?.block?.align === "right"
+        ) {
+          const accumulatedChildrenWidth = items.reduce((prev, curr) => {
+            const childRect = curr.getBoundingClientRect();
+            const childWidth = childRect.width;
+            return prev + childWidth + gapSize;
+          }, -gapSize);
+
+          shiftX = gridWidth - accumulatedChildrenWidth;
+          if (theme?.block?.align === "center") shiftX /= 2;
+        }
+      }
+
+      items.forEach((item) => {
+        if (shiftX) {
+          item.style.transform = `translateX(${shiftX}px)`;
+        } else {
+          item.style.removeProperty("transform");
+        }
       });
-    } else {
-      setGridStyle({
-        transform: undefined,
-      });
-    }
+    });
   }, [debouncedScreenWidth, items, theme?.block?.align]);
 
   return (
@@ -323,9 +335,6 @@ export const Block18 = ({
                       key={item._key || i}
                       className={cx(
                         "h-full text-left",
-                        // i == 1
-                        //   ? colSpanClasses[2]
-                        //   :
                         item?.theme?.card?.columns &&
                           colSpanClasses[item?.theme?.card?.columns],
                       )}
