@@ -1,3 +1,4 @@
+import { ColumnType } from "../../blocks/block18/block18.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { DecorationProps } from "../../components/decorations/Decoration";
@@ -8,6 +9,7 @@ import { TitleThemeType } from "../../components/title/title.options";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { bumpHeadingLevel } from "../../helpers/utils/string";
 import {
+  alignItemsClasses,
   backgroundClasses,
   borderClasses,
   borderRadiusClasses,
@@ -30,6 +32,7 @@ import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
 import { ImageHeightType, ImageRatioType } from "./composablecard.options";
 import cx from "classnames";
+import React from "react";
 import { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 import { twMerge } from "tailwind-merge";
@@ -71,6 +74,7 @@ const Link = lazy<ComponentType<LinkProps>>(
 );
 
 export type ComposableCardProps = {
+  type: "card.composable";
   _key?: string;
   image?: ImageType;
   title?: string;
@@ -86,6 +90,7 @@ export type ComposableCardProps = {
       background?: ColorType;
       paddingX?: PaddingType;
       paddingY?: PaddingType;
+      columns?: ColumnType;
     };
     title?: TitleThemeType;
     subtitle?: TitleThemeType;
@@ -157,11 +162,10 @@ export const ComposableCard = ({
 
       <Decorations decorations={decorations} />
       <div
-        className={cx("relative z-10 flex flex-col gap-4", {
-          ["items-center"]: theme?.card?.align === "center",
-          ["items-start"]: theme?.card?.align === "left",
-          ["items-end"]: theme?.card?.align === "right",
-        })}
+        className={cx(
+          "relative z-10 flex flex-col gap-4",
+          theme?.card?.align && alignItemsClasses[theme?.card?.align],
+        )}
       >
         {image && (
           <div className="block w-full">
@@ -227,3 +231,5 @@ export const ComposableCard = ({
     </div>
   );
 };
+
+export default React.memo(ComposableCard);

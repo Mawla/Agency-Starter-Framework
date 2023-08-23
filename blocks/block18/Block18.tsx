@@ -2,10 +2,8 @@ import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
-import {
-  ComposableCard,
-  ComposableCardProps,
-} from "../../components/cards/ComposableCard";
+import { ComposableCardProps } from "../../components/cards/ComposableCard";
+import { TestimonialCardProps } from "../../components/cards/TestimonialCard";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SliderProps } from "../../components/slider/Slider";
@@ -20,16 +18,26 @@ import {
   BreakpointType,
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useSize } from "../../hooks/useSize";
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
+import { justifyClasses } from "../../theme";
 import {
+  colSpanClasses,
   gapHorizontalClasses,
   gapVerticalClasses,
-  gridCenterClasses,
   gridClasses,
 } from "./block18.classes";
 import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, {
+  CSSProperties,
+  ComponentType,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { PortableTextBlock } from "sanity";
 
 const Slider = lazy<ComponentType<SliderProps>>(
@@ -64,6 +72,20 @@ const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
     ),
 );
 
+const ComposableCard = lazy<ComponentType<ComposableCardProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ComposableCard" */ "../../components/cards/ComposableCard"
+    ),
+);
+
+const TestimonialCard = lazy<ComponentType<TestimonialCardProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "TestimonialCard" */ "../../components/cards/TestimonialCard"
+    ),
+);
+
 export type Block18Props = {
   theme?: {
     block?: BlockThemeType;
@@ -86,7 +108,7 @@ export type Block18Props = {
   intro?: React.ReactNode;
   footer?: React.ReactNode;
   buttons?: ButtonProps[];
-  items?: ComposableCardProps[];
+  items?: (ComposableCardProps | TestimonialCardProps)[];
 };
 
 export const Block18 = ({
@@ -99,8 +121,14 @@ export const Block18 = ({
   items,
 }: Block18Props) => {
   const { screenWidth, breakpoint } = useBreakpoint();
+  const debouncedScreenWidth = useDebounce(screenWidth, 250);
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [gridStyle, setGridStyle] = useState<CSSProperties>();
 
   const filteredItems = items?.filter(Boolean);
+  const numItems = filteredItems?.length || 0;
+  let numColumns = theme?.grid?.columns || 2;
 
   let slideColumns = 1;
   if (screenWidth > BREAKPOINTS.xs) slideColumns = 1;
@@ -131,6 +159,67 @@ export const Block18 = ({
   );
 
   const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
+
+  /**
+   * Calculate centering of grid items
+   */
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const gapSize = +window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("gap")
+      .split(" ")[1]
+      ?.replace("px", "");
+
+    const numColumns = window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("grid-template-columns")
+      .split(" ").length;
+
+    const gridRect = gridRef.current.getBoundingClientRect();
+    const gridWidth = gridRect.width;
+
+    // group items by row
+    const children = gridRef.current.children;
+    const rows = Array.from(children).reduce((prev, curr) => {
+      const top = curr.getBoundingClientRect().top;
+      if (!prev[top]) prev[top] = [];
+      prev[top].push(curr as HTMLDivElement);
+      return prev;
+    }, {} as Record<number, HTMLDivElement[]>);
+
+    // find orphans and push if needed
+    Object.entries(rows).forEach(([y, items]) => {
+      let shiftX = 0;
+
+      // only move items in rows that aren't full
+      if (items.length < numColumns) {
+        if (
+          theme?.block?.align == "center" ||
+          theme?.block?.align === "right"
+        ) {
+          const accumulatedChildrenWidth = items.reduce((prev, curr) => {
+            const childRect = curr.getBoundingClientRect();
+            const childWidth = childRect.width;
+            return prev + childWidth + gapSize;
+          }, -gapSize);
+
+          shiftX = gridWidth - accumulatedChildrenWidth;
+          if (theme?.block?.align === "center") shiftX /= 2;
+        }
+      }
+
+      items.forEach((item) => {
+        if (shiftX) {
+          item.style.transform = `translateX(${shiftX}px)`;
+        } else {
+          item.style.removeProperty("transform");
+        }
+      });
+    });
+  }, [debouncedScreenWidth, items, theme?.block?.align]);
 
   return (
     <Wrapper
@@ -167,11 +256,10 @@ export const Block18 = ({
         {buttons && Boolean(buttons?.filter(Boolean).length) && (
           <div className="mt-6">
             <div
-              className={cx("flex", {
-                ["justify-start"]: theme?.block?.align === "left",
-                ["justify-center"]: theme?.block?.align === "center",
-                ["justify-end"]: theme?.block?.align === "right",
-              })}
+              className={cx(
+                "flex",
+                theme?.block?.align && justifyClasses[theme?.block?.align],
+              )}
             >
               <ButtonGroup
                 items={buttons}
@@ -206,45 +294,57 @@ export const Block18 = ({
             <Slider
               gap={sliderGapSize}
               columns={slideColumns}
-              slides={filteredItems?.map((item) => (
-                <div key={item._key} className="h-full text-left">
-                  <CardWrapper>
-                    <ComposableCard
-                      {...item}
-                      key={item._key}
-                      blockTitleLevel={theme?.title?.as || "h2"}
-                    />
-                  </CardWrapper>
-                </div>
-              ))}
+              slides={filteredItems?.map(
+                (item: ComposableCardProps | TestimonialCardProps) => {
+                  if (item.type === "card.composable") {
+                    item.blockTitleLevel = theme?.title?.as || "h2";
+                  }
+                  return (
+                    <div key={item._key} className="h-full text-left">
+                      <CardWrapper>
+                        <Card {...item} />
+                      </CardWrapper>
+                    </div>
+                  );
+                },
+              )}
               controlsColor={theme?.slider?.color}
             />
           ) : (
             <div
               className={cx(
                 "grid",
-                theme?.grid?.columns && gridClasses[theme?.grid?.columns],
+                theme?.grid?.columns && gridClasses[numColumns],
                 theme?.grid?.gapHorizontal &&
                   gapHorizontalClasses[theme?.grid?.gapHorizontal],
                 theme?.grid?.gapVertical &&
                   gapVerticalClasses[theme?.grid?.gapVertical],
-                theme?.grid?.columns &&
-                  theme?.block?.align === "center" &&
-                  gridCenterClasses[theme?.grid?.columns],
               )}
+              ref={gridRef}
+              style={gridStyle}
             >
-              {filteredItems?.map((item, i) => {
-                return (
-                  <div key={item._key} className="h-full text-left">
-                    <CardWrapper>
-                      <ComposableCard
-                        {...item}
-                        blockTitleLevel={theme?.title?.as || "h2"}
-                      />
-                    </CardWrapper>
-                  </div>
-                );
-              })}
+              {filteredItems?.map(
+                (item: ComposableCardProps | TestimonialCardProps, i) => {
+                  if (item.type === "card.composable") {
+                    item.blockTitleLevel = theme?.title?.as || "h2";
+                  }
+
+                  return (
+                    <div
+                      key={item._key || i}
+                      className={cx(
+                        "h-full text-left",
+                        item?.theme?.card?.columns &&
+                          colSpanClasses[item?.theme?.card?.columns],
+                      )}
+                    >
+                      <CardWrapper>
+                        <Card {...item} />
+                      </CardWrapper>
+                    </div>
+                  );
+                },
+              )}
             </div>
           )}
         </div>
@@ -274,6 +374,17 @@ export const Block18 = ({
 };
 
 export default React.memo(Block18);
+
+const Card = (item: ComposableCardProps | TestimonialCardProps) => {
+  switch (item.type) {
+    case "card.composable":
+      return <ComposableCard {...item} key={item._key} />;
+    case "card.testimonial":
+      return <TestimonialCard {...item} key={item._key} />;
+    // default:
+    // return <ImageCard {...item} key={item._key} />;
+  }
+};
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => (
   <React.Suspense>

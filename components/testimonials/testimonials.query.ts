@@ -10,16 +10,20 @@ import { richTextPlainQuery } from "../portabletext/portabletext.query";
  * }
  */
 
+export const getTestimonialFields = () => `
+_key,
+name,
+"jobTitle": jobTitle,
+"title": title,
+"content": content[] ${richTextPlainQuery},
+"image": ${imageQuery},
+`;
+
 export const getTestimonialQuery = () => `
 {
   _type == 'testimonials.reference' => @-> ,
   _type != 'reference' => @ 
 } {
-  _key,
-  name,
-  "jobTitle": jobTitle,
-  "title": title,
-  "content": content[] ${richTextPlainQuery},
-  "image": ${imageQuery},
+  ${getTestimonialFields()}
 }
 `;

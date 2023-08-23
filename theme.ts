@@ -7,6 +7,7 @@ import {
   FontSizeType,
   FontType,
   FontWeightType,
+  HorizontalAlignType,
   PaddingType,
   TextTransformType,
 } from "./types";
@@ -171,4 +172,16 @@ export const paddingYClasses: Record<PaddingType, string> = {
   12: "py-12",
   14: "py-14",
   16: "py-16",
+};
+
+export const justifyClasses: Record<HorizontalAlignType, string> = {
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
+};
+
+export const alignItemsClasses: Record<HorizontalAlignType, string> = {
+  left: "items-start",
+  center: "items-center",
+  right: "items-end",
 };

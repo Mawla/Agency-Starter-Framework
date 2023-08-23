@@ -1,6 +1,4 @@
 import { COLUMN_OPTIONS } from "../../blocks/block18/block18.options";
-import { defaultBlockGroups } from "../../components/block/block.schema";
-import { defaultTitleTheme } from "../../components/title/title.schema";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
@@ -9,70 +7,51 @@ import {
   HORIZONTAL_ALIGN_OPTIONS,
   PADDING_OPTIONS,
 } from "../../types";
-import {
-  IMAGE_HEIGHT_OPTIONS,
-  IMAGE_RATIO_OPTIONS,
-} from "./composablecard.options";
-import { Postcard } from "@vectopus/atlas-icons-react";
+import { defaultBlockGroups } from "../block/block.schema";
+import { testimonialItemObject } from "../testimonials/testimonials.schema";
+import { defaultTitleTheme } from "../title/title.schema";
+import { MessagingLines } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "card.composable",
-  title: "Composable card",
+  name: "card.testimonial",
+  title: "Testimonial card",
   type: "object",
-  icon: () => <Postcard weight="thin" />,
+  icon: () => <MessagingLines weight="thin" />,
   preview: {
     select: {
-      title: "title",
-      subtitle: "subtitle",
-      content: "content",
-      image: "image",
+      refTitle: "testimonialRef.title",
+      refName: "testimonialRef.name",
+      refContent: "testimonialRef.content",
+      title: "testimonial.title",
+      name: "testimonial.name",
+      content: "testimonial.content",
     },
-    prepare({ title = "", subtitle = "", content, image }) {
+    prepare({ refTitle, refName, refContent, title = "", name = "", content }) {
       return {
-        title: `${title} ${subtitle}`,
-        subtitle: blocksToText(content),
-        media: image,
+        title: `${title || refTitle} ${name || refName}`,
+        subtitle: blocksToText(content || refContent),
       };
     },
   },
   groups: defaultBlockGroups,
   fields: [
     defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-      description: "Image that can be sized, rounded and positioned.",
-      group: "content",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
+      name: "testimonialRef",
+      title: "Reusable testimonial",
+      type: "reference",
+      to: [{ type: "testimonials.item" }],
+      hidden: ({ parent, value }) => !value && Boolean(parent?.testimonial),
       group: "content",
     }),
     defineField({
-      name: "subtitle",
-      title: "Subtitle",
-      type: "string",
+      ...testimonialItemObject,
+      name: "testimonial",
+      hidden: ({ parent, value }) => !value && Boolean(parent?.testimonialRef),
       group: "content",
     }),
-    defineField({
-      name: "content",
-      title: "Content",
-      type: "portabletext.simple",
-      group: "content",
-    }),
-    defineField({
-      name: "buttons",
-      title: "Buttons",
-      type: "buttongroup",
-      group: "content",
-    }),
+
     defineField({
       name: "theme",
       title: "Theme",
@@ -93,7 +72,6 @@ const schema = defineType({
                 name: "background",
                 type: "color",
               }),
-
               defineField({
                 name: "align",
                 type: "select",
@@ -152,50 +130,10 @@ const schema = defineType({
             ],
           },
         }),
-        defaultTitleTheme,
-        { ...defaultTitleTheme, name: "subtitle" },
+        { ...defaultTitleTheme, name: "title" },
         { ...defaultTitleTheme, name: "content" },
-        defineField({
-          name: "image",
-          type: "styles",
-          options: {
-            fields: [
-              defineField({
-                name: "ratio",
-                type: "select",
-                options: {
-                  list: optionsToList(IMAGE_RATIO_OPTIONS),
-                },
-              }),
-              defineField({
-                name: "height",
-                type: "select",
-                options: {
-                  list: optionsToList(IMAGE_HEIGHT_OPTIONS),
-                },
-              }),
-              defineField({
-                name: "rounded",
-                type: "select",
-                options: {
-                  list: optionsToList(BORDER_RADIUS_OPTIONS),
-                },
-              }),
-            ],
-          },
-        }),
-        defineField({
-          name: "buttons",
-          type: "styles",
-          options: {
-            fields: [
-              defineField({
-                name: "hidden",
-                type: "boolean",
-              }),
-            ],
-          },
-        }),
+        { ...defaultTitleTheme, name: "name" },
+        { ...defaultTitleTheme, name: "jobTitle" },
       ],
     }),
     defineField({

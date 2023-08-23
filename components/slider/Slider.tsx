@@ -80,8 +80,7 @@ export const Slider = ({
             key={direction}
             type="button"
             className={cx(
-              "border-2 rounded-full flex items-center justify-center w-10 h-10 transition-colors disabled:opacity-20",
-              controlsColor && borderClasses[controlsColor],
+              "relative flex items-center justify-center transition-opacity disabled:opacity-20",
               controlsColor && textClasses[controlsColor as SliderColorType],
             )}
             ref={(node) =>
@@ -95,7 +94,7 @@ export const Slider = ({
             </span>
             <IconLoader
               icon="chevrondown"
-              className={cx("w-5 h-5", {
+              className={cx("w-6 h-6", {
                 ["rotate-90"]: direction === "prev",
                 ["-rotate-90"]: direction === "next",
               })}

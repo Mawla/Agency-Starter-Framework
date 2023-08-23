@@ -1,9 +1,10 @@
 import { render, screen, act } from "../../jest.utils";
-import { demoImage, demoImage2 } from "../../stories/content";
+import { demoImage2 } from "../../stories/content";
 import { ComposableCard, ComposableCardProps } from "./ComposableCard";
 import "@testing-library/jest-dom";
 
 const DEMO_CONTENT: ComposableCardProps = {
+  type: "card.composable",
   title: "title",
   subtitle: "subtitle",
   content: <p>text</p>,

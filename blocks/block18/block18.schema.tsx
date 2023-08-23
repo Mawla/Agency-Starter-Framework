@@ -55,7 +55,7 @@ const schema = defineType({
       type: "array",
       description: "One or more cards",
       group: ["content"],
-      of: [{ type: "card.composable" }],
+      of: [{ type: "card.composable" }, { type: "card.testimonial" }],
     }),
     defineField({
       name: "footer",
