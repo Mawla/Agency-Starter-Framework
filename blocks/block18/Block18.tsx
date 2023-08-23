@@ -121,7 +121,7 @@ export const Block18 = ({
   items,
 }: Block18Props) => {
   const { screenWidth, breakpoint } = useBreakpoint();
-  const debouncedScreenWidth = useDebounce(screenWidth, 500);
+  const debouncedScreenWidth = useDebounce(screenWidth, 250);
 
   const gridRef = useRef<HTMLDivElement>(null);
   const [gridStyle, setGridStyle] = useState<CSSProperties>();
@@ -166,7 +166,6 @@ export const Block18 = ({
 
   useEffect(() => {
     if (!gridRef.current) return;
-    if (debouncedScreenWidth < BREAKPOINTS.sm) return;
 
     const gapSize = +window
       .getComputedStyle(gridRef.current, null)
