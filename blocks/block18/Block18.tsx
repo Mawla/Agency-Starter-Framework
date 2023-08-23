@@ -121,7 +121,7 @@ export const Block18 = ({
   items,
 }: Block18Props) => {
   const { screenWidth, breakpoint } = useBreakpoint();
-  const debouncedScreenWidth = useDebounce(screenWidth, 250);
+  const debouncedScreenWidth = useDebounce(screenWidth, 500);
 
   const gridRef = useRef<HTMLDivElement>(null);
   const [gridStyle, setGridStyle] = useState<CSSProperties>();
