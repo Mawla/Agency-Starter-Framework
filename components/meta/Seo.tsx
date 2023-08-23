@@ -44,7 +44,7 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
     page.description || page.seo?.description || config?.seo?.description;
   const seoCanonical = getURLForPath(config?.general?.domain, pagePath);
 
-  const dynamicOGImageURL = `${baseUrl}/api/opengraph-image?id=${page._id}`;
+  const dynamicOGImageURL = `${baseUrl}/api/opengraph-image?id=${page._id}&language=${language}`;
   const seoImage = {
     url: dynamicOGImageURL,
     width: 1200,

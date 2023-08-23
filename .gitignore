@@ -43,8 +43,6 @@ build-storybook.log
 public/cms
 *.tar.gz
 !development-demo.tar.gz
-# Sentry
-.sentryclirc
 
 tmp/
 
@@ -57,3 +55,5 @@ development-*
 engine.config.js
 public/engine.styles.css
 locales.js
+public/downloads/*
+!public/downloads/.gitkeep

@@ -1,45 +1,47 @@
-import { slugify } from "../../helpers/utils/string";
 import { backgroundClasses } from "../../theme";
-import { ColorType } from "../../types";
+import { DecorationProps } from "../decorations/Decoration";
+import { DecorationsProps } from "../decorations/Decorations";
 import { Background } from "./Background";
-import { Bleed } from "./Bleed";
-import { DecorationProps } from "./Decoration";
-import { Spacing, SpacingProps } from "./Spacing";
-import { Width } from "./Width";
-import { BlockRoundedType } from "./background.options";
-import { SpaceType } from "./spacing.options";
-import { WidthType } from "./width.options";
+import { Bleed, BleedProps } from "./Bleed";
+import { Spacing } from "./Spacing";
+import { Width, WidthProps } from "./Width";
+import { BlockThemeType } from "./block.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
 const Decoration = lazy<ComponentType<DecorationProps>>(
-  () => import(/* webpackChunkName: "Decoration" */ "./Decoration"),
+  () =>
+    import(/* webpackChunkName: "Decoration" */ "../decorations/Decoration"),
+);
+
+const Decorations = lazy<ComponentType<DecorationsProps>>(
+  () =>
+    import(/* webpackChunkName: "Decorations" */ "../decorations/Decorations"),
 );
 
 export type WrapperProps = {
-  id?: string;
   children?: React.ReactElement | React.ReactNode;
+  theme?: BlockThemeType;
   className?: string;
   innerClassName?: string;
-  theme?: {
-    padding?: SpaceType;
-    margin?: SpaceType;
-    background?: ColorType;
-    outerBackground?: ColorType;
-    text?: ColorType;
-    rounded?: BlockRoundedType;
-    width?: WidthType;
-  };
   decorations?: DecorationProps[];
-} & Partial<SpacingProps>;
+  slots?: {
+    outside?: React.ReactNode;
+    outsideSpacing?: React.ReactNode;
+    inside?: React.ReactNode;
+    insideSpacing?: React.ReactNode;
+    insideBleed?: React.ReactNode;
+    insideWidth?: React.ReactNode;
+  };
+};
 
 export const Wrapper = ({
   children,
   theme,
   decorations,
-  id,
   className,
   innerClassName,
+  slots,
 }: WrapperProps) => {
   /**
    * [small bleed]
@@ -55,37 +57,28 @@ export const Wrapper = ({
   if (!theme) theme = {};
   if (!theme?.width) theme.width = "full";
 
-  const innerDecorations = decorations?.filter(
-    ({ location }) => location === "inside",
-  );
-
-  const outerDecorations = decorations?.filter(
-    ({ location }) => location === "outside" || !location,
-  );
+  const innerDecorations = decorations
+    ?.filter(Boolean)
+    .filter(({ location }) => location === "inside" || !location);
 
   return (
     <Bleed
       bleed={theme?.width === "full" ? "none" : "sm"}
-      id={id ? slugify(id) : ""}
       className={cx(
         "relative",
         className,
         theme?.outerBackground && backgroundClasses[theme?.outerBackground],
       )}
     >
-      {outerDecorations?.map((decoration) => (
-        <Decoration
-          {...decoration}
-          key={decoration._key}
-          _key={decoration._key}
-        />
-      ))}
+      {slots?.outside}
+      <Decorations decorations={decorations} location="outside" />
       <Spacing
         padding={{
           top: theme?.margin?.top || "none",
           bottom: theme?.margin?.bottom || "none",
         }}
       >
+        {slots?.outsideSpacing}
         <Width width={theme?.width || "full"}>
           <Background
             theme={{
@@ -110,14 +103,18 @@ export const Wrapper = ({
                 }}
               />
             ))}
+            {slots?.inside}
             <Spacing
               padding={{
                 top: theme?.padding?.top || "md",
                 bottom: theme?.padding?.bottom || "md",
               }}
             >
+              {slots?.insideSpacing}
               <Bleed bleed="lg">
+                {slots?.insideBleed}
                 <Width width="inner" className="relative z-10">
+                  {slots?.insideWidth}
                   {children}
                 </Width>
               </Bleed>

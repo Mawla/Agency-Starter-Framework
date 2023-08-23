@@ -8,10 +8,13 @@ import {
   formatSafelist,
 } from "./format-theme";
 
+const cp = require("child_process");
+
 const DO_NOT_EDIT_FLAG = `// NOTE: This file is auto generated and should not be edited!`;
 
 const PicoSanity = require("picosanity");
 const fs = require("fs").promises;
+const https = require("https");
 
 const client = new PicoSanity({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "development",
@@ -189,8 +192,57 @@ module.exports = ${JSON.stringify(
     `${__dirname}/../../public/robots.txt`,
     robotsTxtLines.join("\n"),
   );
+
+  // download opengraph fonts
+  const fonts: {
+    titleFont: { filename: string; font: string };
+    metaFont: { filename: string; font: string };
+  } = await client.fetch(`
+  *[_id == "config_seo"][0] { 
+    opengraphimage {
+      titleFont {
+        "filename": asset->originalFilename,
+        "font": asset->url
+      },
+      metaFont {
+        "filename": asset->originalFilename,
+        "font": asset->url
+      }
+    }
+  }.opengraphimage`);
+
+  if (fonts?.titleFont) {
+    await download(
+      fonts.titleFont.font,
+      `${__dirname}/../../public/downloads/ogTitleFont.ttf`,
+    );
+  } else {
+    await copy(
+      `${__dirname}/../../public/fonts/Inter-Bold.ttf`,
+      `${__dirname}/../../public/downloads/ogTitleFont.ttf`,
+    );
+  }
+  if (fonts?.metaFont) {
+    await download(
+      fonts.metaFont.font,
+      `${__dirname}/../../public/downloads/ogMetaFont.ttf`,
+    );
+  } else {
+    await copy(
+      `${__dirname}/../../public/fonts/Inter-Medium.ttf`,
+      `${__dirname}/../../public/downloads/ogMetaFont.ttf`,
+    );
+  }
 }
 
 if (write) buildConfig();
 
-// https://google.com
+let download = async function (url: string, filename: string) {
+  let command = `curl -o ${filename}  '${url}'`;
+  cp.execSync(command);
+};
+
+let copy = async function (from: string, to: string) {
+  let command = `cp '${from}' '${to}'`;
+  cp.execSync(command);
+};

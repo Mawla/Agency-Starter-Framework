@@ -1,13 +1,4 @@
 import { Button } from "./Button";
-import {
-  BackgroundColorType,
-  ButtonBorderColorType,
-  ButtonTextColorType,
-  BUTTON_BACKGROUND_COLOR_OPTIONS,
-  BUTTON_BORDER_COLOR_OPTIONS,
-  BUTTON_SIZE_OPTIONS,
-  BUTTON_TEXT_COLOR_OPTIONS,
-} from "./button.options";
 import { Meta } from "@storybook/react";
 import React from "react";
 
@@ -16,90 +7,60 @@ export default {
   title: "Components/Button",
 } as Meta;
 
-export const Sizes = () => (
-  <div className="flex flex-col gap-2 flex-wrap">
-    {(
-      Object.entries(BUTTON_SIZE_OPTIONS) as [
-        key: keyof typeof BUTTON_SIZE_OPTIONS,
-        label: string,
-      ][]
-    ).map(([size, label]) => (
-      <div key={label} className="flex gap-2 mr-2 mb-2">
-        <Button label={label} size={size} />
-        <Button label={label} size={size} loading />
-        <Button label={label} size={size} disabled />
-        <Button
-          label="This is a very very very very looooooong button label"
-          size={size}
-        />
-      </div>
-    ))}
-  </div>
-);
-
 export const AsButton = () => <Button label="Button text" as="button" />;
 
 export const AsLink = () => (
   <Button label="Button text" as="a" href="https://www.google.com" />
 );
 
-export const AsDiv = () => <Button label="Button text" as="div" icon="arrow" />;
-
-export const IconAfter = () => (
-  <Button label="Read more" icon="arrow" iconPosition="after" />
+export const AsDiv = () => (
+  <Button
+    label="Button text"
+    as="div"
+    presetTheme={{ icon: { name: "arrow" } }}
+  />
 );
 
-export const IconBefore = () => (
-  <Button label="Button text" icon="arrow" iconPosition="before" />
+export const IconPosition = () => (
+  <div style={{ maxWidth: 200 }} className="grid gap-4 border p-0.5">
+    <Button label="Default" presetTheme={{ icon: { name: "arrow" } }} />
+    <Button
+      label="After"
+      presetTheme={{ icon: { name: "arrow", position: "after" } }}
+    />
+    <Button
+      label="Before"
+      presetTheme={{ icon: { name: "arrow", position: "before" } }}
+    />
+    <Button
+      label="Before Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+      presetTheme={{ icon: { name: "arrow", position: "before" } }}
+    />
+    <Button
+      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt after"
+      presetTheme={{ icon: { name: "arrow", position: "after" } }}
+    />
+    <Button
+      label="Lorem"
+      presetTheme={{
+        icon: { name: "arrow", position: "after" },
+        mobile: { label: { size: "3xl" } },
+      }}
+    />
+  </div>
 );
 
 export const IconOnly = () => (
   <>
-    {(
-      Object.entries(BUTTON_SIZE_OPTIONS) as [
-        key: keyof typeof BUTTON_SIZE_OPTIONS,
-        label: string,
-      ][]
-    ).map(([size, label]) => (
-      <div key={label} className="flex gap-2 mr-2 mb-2">
-        <Button
-          size={size}
-          ariaLabel="Button text"
-          icon="arrow"
-          iconPosition="before"
-        />
-        <Button
-          size={size}
-          ariaLabel="Button text"
-          icon="arrow"
-          iconPosition="before"
-          compact
-        />
-      </div>
-    ))}
+    <Button
+      ariaLabel="Button text"
+      presetTheme={{ icon: { name: "arrow", position: "after" } }}
+    />
+    <Button
+      ariaLabel="Button text"
+      presetTheme={{ icon: { name: "arrow", position: "before" } }}
+    />
   </>
-);
-
-export const OrphanIcons = () => (
-  <div style={{ maxWidth: 200 }} className="grid gap-4 border p-0.5">
-    <Button label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " />
-
-    <Button
-      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      icon="arrow"
-      iconPosition="before"
-    />
-    <Button
-      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      icon="arrow"
-      iconPosition="after"
-    />
-    <Button
-      label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-      icon="arrow"
-      iconPosition="after"
-    />
-  </div>
 );
 
 export const Target = () => (
@@ -109,60 +70,129 @@ export const Target = () => (
     <Button
       label="External with icon"
       href="https://www.google.com"
-      icon="close"
+      presetTheme={{ icon: { name: "close" } }}
       target="_blank"
     />
     <Button
       label="External with icon"
       href="https://www.google.com"
-      icon="close"
-      iconPosition="before"
+      presetTheme={{ icon: { name: "close", position: "before" } }}
       target="_blank"
     />
     <Button
       label="External with icon"
       href="https://www.google.com"
-      icon="close"
-      iconPosition="after"
+      presetTheme={{ icon: { name: "close" } }}
       target="_blank"
     />
-    <Button href="https://www.google.com" icon="close" target="_blank" />
+    <Button
+      href="https://www.google.com"
+      presetTheme={{ icon: { name: "close" } }}
+      target="_blank"
+    />
   </div>
 );
 
 export const Theme = () => (
   <>
-    {(Object.keys(BUTTON_BORDER_COLOR_OPTIONS) as ButtonBorderColorType[]).map(
-      (border: ButtonBorderColorType) => (
-        <div className="mb-10 flex gap-4 flex-wrap" key={border}>
-          {(
-            Object.keys(
-              BUTTON_BACKGROUND_COLOR_OPTIONS,
-            ) as BackgroundColorType[]
-          ).map((background: BackgroundColorType) =>
-            (
-              Object.keys(BUTTON_TEXT_COLOR_OPTIONS) as ButtonTextColorType[]
-            ).map((text: ButtonTextColorType) => (
-              <Button
-                key={border + background + text}
-                theme={{
-                  background: {
-                    color: background,
-                  },
-                  text: {
-                    color: text,
-                  },
-                  border: {
-                    color: border,
-                  },
-                }}
-                label={`bg ${background}, text ${text}, border ${border}`}
-                size="sm"
-              />
-            )),
-          )}
-        </div>
-      ),
-    )}
+    <Button
+      label="This is a button"
+      presetTheme={{
+        mobile: {
+          background: {
+            color: "black",
+            paddingX: "8",
+            paddingY: "4",
+          },
+          border: {
+            radius: "xl",
+            width: 4,
+            color: "black",
+          },
+          label: {
+            color: "white",
+            font: "serif",
+            size: "lg",
+            transform: "lowercase",
+            weight: "bold",
+          },
+        },
+        tablet: {
+          background: {
+            color: "white",
+            paddingX: "12",
+            paddingY: "14",
+          },
+          border: {
+            radius: "lg",
+            width: 2,
+            color: "black",
+          },
+          label: {
+            color: "black",
+            font: "mono",
+            size: "4xl",
+            transform: "capitalize",
+            weight: "bold",
+          },
+        },
+        desktop: {
+          background: {
+            color: "black",
+            paddingX: "0",
+            paddingY: "0",
+          },
+          border: {
+            radius: "none",
+            width: 4,
+            color: "black",
+          },
+          label: {
+            color: "white",
+            font: "sans",
+            size: "xl",
+            transform: "uppercase",
+            weight: "thin",
+          },
+        },
+      }}
+    />
+  </>
+);
+
+export const CustomTheme = () => (
+  <>
+    <Button
+      label="This is a button"
+      theme={{
+        mobile: {
+          background: {
+            color: "black",
+            paddingX: "8",
+            paddingY: "4",
+          },
+        },
+      }}
+    />
+  </>
+);
+
+export const CssClass = () => (
+  <>
+    <style
+      dangerouslySetInnerHTML={{
+        __html: `
+        .btn-primary {
+          border: 10px solid red;
+        }`,
+      }}
+    ></style>
+
+    <Button
+      label="This is a button"
+      presetTheme={{
+        name: "primary",
+      }}
+    />
   </>
 );

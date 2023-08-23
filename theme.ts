@@ -1,10 +1,15 @@
 import engineConfig from "./engine.config";
 import { isDarkColor } from "./helpers/utils/color";
 import {
+  BorderRadiusType,
+  BorderWidthType,
   ColorType,
+  FontSizeType,
   FontType,
   FontWeightType,
   HorizontalAlignType,
+  PaddingType,
+  TextTransformType,
 } from "./types";
 
 export const COLORS = {
@@ -81,18 +86,102 @@ export const fontClasses: Record<FontType, string> = Object.entries(
   FONTS,
 ).reduce<Record<FontWeightType, string>>(
   (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
-  {} as Record<ColorType, string>,
+  {},
+);
+
+export const fontSizeClasses: Record<FontSizeType, string> = Object.entries(
+  FONT_SIZES,
+).reduce<Record<FontSizeType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `text-${key}` }),
+  {},
 );
 
 export const weightClasses: Record<FontWeightType, string> = Object.entries(
   FONT_WEIGHTS,
 ).reduce<Record<FontWeightType, string>>(
   (acc, [key, value]) => ({ ...acc, [key]: `font-${key}` }),
-  {} as Record<ColorType, string>,
+  {},
 );
 
-export const textAlignClasses: Record<HorizontalAlignType, string> = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
+export const textTransformClasses: Record<TextTransformType, string> = {
+  uppercase: "uppercase",
+  lowercase: "lowercase",
+  capitalize: "capitalize",
+};
+
+export const borderRadiusClasses: Record<BorderRadiusType, string> = {
+  none: "rounded-none",
+  sm: "rounded-sm",
+  md: "rounded-md",
+  lg: "rounded-lg",
+  xl: "rounded-xl",
+  "2xl": "rounded-2xl",
+  "3xl": "rounded-3xl",
+  full: "rounded-full",
+};
+
+export const borderWidthClasses: Record<BorderWidthType, string> = {
+  0: "border-0",
+  1: "border",
+  2: "border-2",
+  4: "border-4",
+  8: "border-8",
+};
+
+export const paddingXClasses: Record<PaddingType, string> = {
+  0: "px-0",
+  px: "px-px",
+  0.5: "px-0.5",
+  1: "px-1",
+  1.5: "px-1.5",
+  2: "px-2",
+  2.5: "px-2.5",
+  3: "px-3",
+  3.5: "px-3.5",
+  4: "px-4",
+  5: "px-5",
+  6: "px-6",
+  7: "px-7",
+  8: "px-8",
+  9: "px-9",
+  10: "px-10",
+  11: "px-11",
+  12: "px-12",
+  14: "px-14",
+  16: "px-16",
+};
+
+export const paddingYClasses: Record<PaddingType, string> = {
+  0: "py-0",
+  px: "py-px",
+  0.5: "py-0.5",
+  1: "py-1",
+  1.5: "py-1.5",
+  2: "py-2",
+  2.5: "py-2.5",
+  3: "py-3",
+  3.5: "py-3.5",
+  4: "py-4",
+  5: "py-5",
+  6: "py-6",
+  7: "py-7",
+  8: "py-8",
+  9: "py-9",
+  10: "py-10",
+  11: "py-11",
+  12: "py-12",
+  14: "py-14",
+  16: "py-16",
+};
+
+export const justifyClasses: Record<HorizontalAlignType, string> = {
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
+};
+
+export const alignItemsClasses: Record<HorizontalAlignType, string> = {
+  left: "items-start",
+  center: "items-center",
+  right: "items-end",
 };

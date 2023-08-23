@@ -47,7 +47,6 @@ export const defaultBlockTheme = defineField({
         },
         group: "Inner block",
       },
-
       {
         name: "align",
         type: "select",

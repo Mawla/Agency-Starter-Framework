@@ -6,12 +6,14 @@ import {
   TitleSizeType,
   TITLE_SIZE_OPTIONS,
 } from "../../components/title/title.options";
-import { demoImage2, demoImage3 } from "../../stories/content";
+import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import {
   ColorType,
   HorizontalAlignType,
   HORIZONTAL_ALIGN_OPTIONS,
+  BORDER_RADIUS_OPTIONS,
+  BorderRadiusType,
 } from "../../types";
 import { Block4 } from "./Block4";
 import { Meta } from "@storybook/react";
@@ -24,6 +26,7 @@ export default {
 
 const DEMO_CONTENT = {
   title: "We didn't reinvent the wheel ",
+  subtitle: "We just made it better.",
   intro: (
     <p>
       We are strategists, designers and developers. Innovators and problem
@@ -31,11 +34,21 @@ const DEMO_CONTENT = {
       the scope you want at the pace you need.
     </p>
   ),
-  buttons: [{ label: "Free trail", href: "/" }],
+  buttons: [{ label: "Free trial", href: "/" }],
   image: demoImage2,
 };
 
 export const Default = () => <Block4 {...DEMO_CONTENT} />;
+export const Video = () => (
+  <Block4
+    {...DEMO_CONTENT}
+    image={undefined}
+    video={{
+      provider: "youtube",
+      videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    }}
+  />
+);
 
 export const BlockBackgrounds = () => (
   <>
@@ -75,6 +88,21 @@ export const TitleSizes = () => (
           {...DEMO_CONTENT}
           theme={{
             title: { size },
+          }}
+        />
+      </div>
+    ))}
+  </>
+);
+
+export const SubtitleSizes = () => (
+  <>
+    {(Object.keys(TITLE_SIZE_OPTIONS) as TitleSizeType[]).map((size) => (
+      <div key={size}>
+        <Block4
+          {...DEMO_CONTENT}
+          theme={{
+            subtitle: { size },
           }}
         />
       </div>
@@ -122,6 +150,121 @@ export const Alignments = () => (
             image={demoImage3}
             theme={{
               block: { align },
+            }}
+          />
+        </div>
+      ),
+    )}
+  </>
+);
+
+export const Decorations = () => (
+  <>
+    <Block4
+      {...DEMO_CONTENT}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
+    <Block4
+      {...DEMO_CONTENT}
+      video={{
+        provider: "youtube",
+        videoId: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+      }}
+      decorations={[
+        {
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            bottom: 0,
+            right: 0,
+            width: 50,
+            height: 50,
+            top: 20,
+            left: 20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            top: -20,
+            left: -20,
+          },
+        },
+        {
+          location: "image",
+          breakout: true,
+          mobile: {
+            background: "blue",
+            opacity: 0.5,
+            width: 50,
+            height: 50,
+            bottom: -20,
+            right: -20,
+          },
+        },
+      ]}
+    />
+  </>
+);
+export const ImageRadius = () => (
+  <>
+    {(Object.keys(BORDER_RADIUS_OPTIONS) as BorderRadiusType[]).map(
+      (rounded) => (
+        <div key={rounded}>
+          <Block4
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded },
+            }}
+          />
+          <Block4
+            title={rounded}
+            image={demoImage}
+            theme={{
+              image: { rounded },
             }}
           />
         </div>

@@ -21,7 +21,6 @@ export type BackgroundProps = {
 export const Background = ({ children, theme, className }: BackgroundProps) => {
   return (
     <div
-      data-background
       className={cx(
         "relative",
         {

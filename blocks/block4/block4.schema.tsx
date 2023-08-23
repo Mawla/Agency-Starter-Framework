@@ -5,6 +5,8 @@ import {
 import { defaultTextTheme } from "../../components/text/text.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { defaultBlockTools } from "../../studio/schemas/objects/tools";
+import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { BORDER_RADIUS_OPTIONS } from "../../types";
 import { AlignCenter } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -14,7 +16,7 @@ const schema = defineType({
   title: "Default content",
   type: "object",
   icon: () => <AlignCenter weight="thin" />,
-  description: "Basic title, intro, buttons and image block",
+  description: "Basic title, intro, buttons and image or video block",
   preview: {
     select: {
       title: "title",
@@ -39,6 +41,12 @@ const schema = defineType({
       group: "content",
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+      group: "content",
+    }),
+    defineField({
       name: "intro",
       title: "Intro",
       type: "portabletext.simple",
@@ -59,13 +67,39 @@ const schema = defineType({
       type: "buttongroup",
       group: "content",
     }),
-
+    defineField({
+      name: "video",
+      title: "Video",
+      type: "video",
+      group: "content",
+    }),
     defineField({
       name: "theme",
       title: "Theme",
       type: "object",
       group: "theme",
-      fields: [defaultBlockTheme, defaultTitleTheme, defaultTextTheme],
+      fields: [
+        defaultBlockTheme,
+        defaultTitleTheme,
+        { ...defaultTitleTheme, name: "subtitle" },
+        defaultTextTheme,
+        defineField({
+          name: "image",
+          title: "Image",
+          type: "styles",
+          options: {
+            fields: [
+              {
+                name: "rounded",
+                type: "select",
+                options: {
+                  list: optionsToList(BORDER_RADIUS_OPTIONS),
+                },
+              },
+            ],
+          },
+        }),
+      ],
     }),
     defineField({
       name: "decorations",

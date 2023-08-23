@@ -94,7 +94,7 @@ export const BLOCKS_FIELD = defineField({
     { type: "studio.divider" },
   ],
   options: {
-    filterType: /block|studio\./,
+    filterType: /block\.|studio\./,
     updateField: "blocks",
     placeholder: "Add a block…",
   } as any,
@@ -131,28 +131,6 @@ export const ORDER_PUBLISHED_DESC: SortOrdering = {
   title: "Created ↑",
   name: "publishedAtDesc",
   by: [{ field: "publishedAt", direction: "desc" }],
-};
-
-export const EMPTY_RICHTEXT_BLOCK = {
-  _type: "block.richtext",
-  _key: nanoid(),
-  background: "white",
-  content: [
-    {
-      _type: "block",
-      _key: nanoid(),
-      style: "normal",
-      markDefs: [],
-      children: [
-        {
-          _type: "span",
-          _key: nanoid(),
-          text: "",
-          marks: [],
-        },
-      ],
-    },
-  ],
 };
 
 export const PASSWORD = defineField({
@@ -314,6 +292,16 @@ export const HIDE_FOOTER_FIELD = defineField({
   group: ["meta"],
 });
 
+export const HIDE_BREADCRUMB_FIELD = defineField({
+  name: "hideBreadcrumb",
+  title: "Hide breadcrumb",
+  type: "boolean",
+  description:
+    "Option to hide the breadcrumb (if enabled in navigation theme settings)",
+  initialValue: false,
+  group: ["meta"],
+});
+
 export const SCRIPTS_FIELD = defineField({
   name: "scripts",
   title: "Scripts",
@@ -348,6 +336,7 @@ export const pageBase = {
     { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
+    HIDE_BREADCRUMB_FIELD,
     LANGUAGE_FIELD,
     I18N_BASE_FIELD,
     SCRIPTS_FIELD,

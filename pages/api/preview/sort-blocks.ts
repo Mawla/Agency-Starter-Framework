@@ -1,4 +1,3 @@
-import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import { sanityClient } from "../sanity-client";
 import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -9,7 +8,7 @@ type Data = {
 };
 
 export type ApiBody = {
-  pageId: string;
+  id: string;
   blocks: any;
   changedBlockKey: string;
   replacesBlockKey: string;
@@ -26,15 +25,17 @@ const handler = async (
 ) => {
   if (req.method !== "POST") return res.status(405).end();
 
-  const { pageId, changedBlockKey, replacesBlockKey, newBlocksOrder }: ApiBody =
+  const { id, changedBlockKey, replacesBlockKey, newBlocksOrder }: ApiBody =
     JSON.parse(JSON.stringify(req.body));
+
+  console.log(JSON.parse(JSON.stringify(req.body)));
 
   // https://nextjs.org/docs/advanced-features/preview-mode#works-with-api-routes
   if (!req.preview) {
     return res.status(400).json({ message: `Not in preview mode` });
   }
 
-  if (!pageId) {
+  if (!id) {
     return res.status(400).json({ message: `No page id` });
   }
 
@@ -43,7 +44,7 @@ const handler = async (
   }
 
   const blockData = await sanityClient.fetch(`
-  *[_id == "${pageId}"] { 
+  *[_id == "${id}"] { 
     "block": blocks[_key == "${changedBlockKey}"][0] 
   }[0].block`);
 
@@ -62,7 +63,7 @@ const handler = async (
   blockData._key = nanoid();
 
   await sanityClient
-    .patch(pageId)
+    .patch(id)
     .unset([`blocks[_key=="${changedBlockKey}"]`])
     .insert(position, `blocks[_key=="${replacesBlockKey}"]`, [blockData])
     .commit({
@@ -70,9 +71,7 @@ const handler = async (
     });
 
   return res.status(200).json({
-    message: `Successfully patched blocks for ${pageId}`,
+    message: `Successfully patched blocks for ${id}`,
     changedBlockKey: blockData._key,
   });
 };
-
-export default withSentryOptional(handler);

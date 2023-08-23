@@ -3,59 +3,101 @@ import { LanguageType } from "../../languages";
 import {
   backgroundClasses,
   borderClasses,
+  borderRadiusClasses,
+  borderWidthClasses,
+  fontClasses,
+  fontSizeClasses,
+  paddingXClasses,
+  paddingYClasses,
   textClasses,
+  textTransformClasses,
   weightClasses,
 } from "../../theme";
+import {
+  BorderRadiusType,
+  BorderWidthType,
+  ColorType,
+  FontSizeType,
+  FontType,
+  FontWeightType,
+  PaddingType,
+  TextTransformType,
+} from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
-import {
-  ButtonAlignType,
-  ButtonSizeType,
-  ButtonIconPositionType,
-  ButtonWeightType,
-  ButtonTextColorType,
-  BackgroundColorType,
-  ButtonBorderColorType,
-  buttonSizeClasses,
-  buttonAlignClasses,
-  buttonSpaceClasses,
-  buttonIconOnlySizeClasses,
-  buttonIconSizeClasses,
-} from "./button.options";
+import { ButtonIconPositionType } from "./button.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { twMerge } from "tailwind-merge";
 
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
 );
 
 export type ButtonProps = {
-  align?: ButtonAlignType;
   ariaLabel?: string;
   as?: "button" | "a" | "div" | "span" | "submit";
-  compact?: boolean;
-  href?: string;
-  icon?: string;
-  iconPosition?: ButtonIconPositionType;
-  label?: string;
-  onClick?: (e: React.MouseEvent) => void;
-  plain?: boolean;
-  round?: boolean;
-  size?: ButtonSizeType;
-  stretch?: boolean;
-  target?: "_blank";
-  theme?: {
-    text?: { color?: ButtonTextColorType };
-    background?: { color?: BackgroundColorType };
-    border?: { color?: ButtonBorderColorType };
-  };
+  className?: string;
+  children?: React.ReactNode;
   disabled?: boolean;
-  loading?: boolean;
-  weight?: ButtonWeightType;
   download?: boolean;
   hideLabel?: boolean;
+  href?: string;
+  label?: string;
   language?: LanguageType;
+  loading?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
+  stretch?: boolean;
+  target?: "_blank";
+  presetTheme?: {
+    name?: string;
+    icon?: {
+      name?: string;
+      position?: ButtonIconPositionType;
+    };
+    mobile?: ButtonThemeType;
+    tablet?: ButtonThemeType;
+    desktop?: ButtonThemeType;
+    hover?: ButtonThemeHoverType;
+  };
+  theme?: {
+    icon?: {
+      name?: string;
+      position?: ButtonIconPositionType;
+    };
+    mobile?: ButtonThemeType;
+    tablet?: ButtonThemeType;
+    desktop?: ButtonThemeType;
+    hover?: ButtonThemeHoverType;
+  };
+};
+
+type ButtonThemeType = {
+  label?: {
+    color?: ColorType;
+    font?: FontType;
+    size?: FontSizeType;
+    transform?: TextTransformType;
+    weight?: FontWeightType;
+  };
+  background?: {
+    color?: ColorType;
+    paddingX?: PaddingType;
+    paddingY?: PaddingType;
+  };
+  border?: {
+    color?: ColorType;
+    radius?: BorderRadiusType;
+    width?: BorderWidthType;
+  };
+};
+
+type ButtonThemeHoverType = {
+  underline?: boolean;
+  label?: ColorType;
+  background?: ColorType;
+  border?: ColorType;
 };
 
 export const Button = (props: ButtonProps) => {
@@ -71,26 +113,21 @@ export const Button = (props: ButtonProps) => {
 };
 
 const ButtonInner = ({
-  align = "center",
   ariaLabel,
   as = "a",
-  compact = false,
+  children,
   disabled = false,
   download = false,
   hideLabel = false,
   href,
-  icon,
-  iconPosition = "after",
   label = "",
   loading = false,
   onClick,
-  plain = false,
-  round = true,
-  size = "md",
   stretch = false,
   target,
+  presetTheme,
   theme,
-  weight = "medium",
+  className,
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
   const props: {
@@ -102,9 +139,20 @@ const ButtonInner = ({
     disabled?: boolean;
   } = {};
 
+  const themeObj: ButtonProps["presetTheme"] = {
+    name: presetTheme?.name || "custom",
+    icon: theme?.icon || presetTheme?.icon,
+  };
+
+  let hover: ButtonThemeHoverType = {};
+  if (presetTheme?.hover) hover = { ...presetTheme.hover };
+  if (theme?.hover) hover = { ...theme.hover };
+
+  if (!themeObj?.icon) themeObj.icon = {};
+
   if (target === "_blank") {
-    icon = "externallink";
-    iconPosition = "after";
+    themeObj.icon.name = "externallink";
+    themeObj.icon.position = "after";
   }
 
   if (hideLabel) {
@@ -114,10 +162,7 @@ const ButtonInner = ({
   }
 
   label = label || "";
-  iconPosition = iconPosition || "after";
-
-  // prevent orphan icon by adding first / last word to icon
-  const labelWords = label?.split(" ");
+  themeObj.icon.position = themeObj.icon.position || "after";
 
   if (as === "button") {
     props.type = "button";
@@ -141,114 +186,96 @@ const ButtonInner = ({
   const handleClick = (e: React.MouseEvent) =>
     disabled ? () => {} : onClick ? onClick(e) : () => {};
 
-  const ButtonIcon = icon
-    ? ({
-        wordBefore,
-        wordAfter,
-      }: {
-        wordBefore?: string;
-        wordAfter?: string;
-      }) => (
-        <span className=" whitespace-nowrap break-all">
-          {wordBefore && ` ${wordBefore} `}
-          <IconLoader
-            icon={icon}
-            className={cx(
-              "inline-block translate-y-1",
-              buttonIconSizeClasses[size],
-            )}
-          />
-          {wordAfter && ` ${wordAfter}`}
-        </span>
-      )
-    : null;
+  function getClasses(scope: string, classes: Record<string, string>) {
+    const [group, prop] = scope.split(".");
 
-  const sharedClasses = {
-    ["cursor-pointer"]: true,
-    ["border"]: true,
-    ["transition-colors duration-200"]: true,
-    ["rounded-full"]: round,
-    [backgroundClasses[theme?.background?.color || "white"]]: true,
-    [borderClasses[
-      theme?.border?.color || theme?.background?.color || "white"
-    ]]: true,
-    [textClasses[theme?.text?.color || "black"]]: true,
-    ["inline-flex items-center justify-center"]: !stretch,
-    ["bg-opacity-0 border-opacity-0"]: plain,
-    ["hover:bg-opacity-0 focus:bg-opacity-0"]: plain,
-    ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
-      true,
-    ["pointer-events-none opacity-75"]: disabled,
-    [weightClasses[weight]]: true,
-  };
+    const arr: string[] = [];
 
-  // icon only button
-  if (!label?.trim().length) {
-    return (
-      <Element
-        {...props}
-        aria-label={ariaLabel || label}
-        onClick={handleClick}
-        className="btn"
-      >
-        <span
-          className={cx(sharedClasses, {
-            [buttonIconOnlySizeClasses[size]]: !compact,
-          })}
-        >
-          {ButtonIcon && <ButtonIcon />}
-          {loading && <ButtonLoader />}
-        </span>
-      </Element>
-    );
+    const newPresetTheme = { ...(presetTheme as any) };
+    const newtheme = { ...(theme as any) };
+
+    if (newPresetTheme?.mobile?.[group]?.[prop])
+      arr.push(classes[newPresetTheme.mobile[group][prop]]);
+
+    if (newPresetTheme?.tablet?.[group]?.[prop])
+      arr.push(`md:${classes[newPresetTheme.tablet[group][prop]]}`);
+
+    if (newPresetTheme?.desktop?.[group]?.[prop])
+      arr.push(`lg:${classes[newPresetTheme.desktop[group][prop]]}`);
+
+    if (newtheme?.mobile?.[group]?.[prop])
+      arr.push(classes[newtheme.mobile[group][prop]]);
+
+    if (newtheme?.tablet?.[group]?.[prop])
+      arr.push(`md:${classes[newtheme.tablet[group][prop]]}`);
+
+    if (newtheme?.desktop?.[group]?.[prop])
+      arr.push(`lg:${classes[newtheme.desktop[group][prop]]}`);
+
+    return arr;
   }
 
-  // icon + text button
   return (
-    <Element
-      {...props}
-      aria-label={ariaLabel || label}
-      onClick={handleClick}
-      className="btn"
-    >
+    <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
       <span
         className={cx(
-          sharedClasses,
-          buttonSizeClasses[size],
-          buttonAlignClasses[align],
-          { ["w-full flex"]: stretch },
-          { ["rounded-full"]: round },
-          { [buttonSpaceClasses[size]]: !compact },
+          twMerge(
+            cx(
+              ...getClasses("label.color", textClasses),
+              ...getClasses("label.font", fontClasses),
+              ...getClasses("label.size", fontSizeClasses),
+              ...getClasses("label.weight", weightClasses),
+              ...getClasses("label.transform", textTransformClasses),
+              ...getClasses("background.color", backgroundClasses),
+              ...getClasses("background.paddingX", paddingXClasses),
+              ...getClasses("background.paddingY", paddingYClasses),
+              ...getClasses("border.color", borderClasses),
+              ...getClasses("border.radius", borderRadiusClasses),
+              ...getClasses("border.width", borderWidthClasses),
+              hover?.label && `hover:${textClasses[hover.label]}`,
+              hover?.background &&
+                `hover:${backgroundClasses[hover.background]}`,
+              hover?.border && `hover:${borderClasses[hover.border]}`,
+              {
+                ["group"]: true,
+                ["cursor-pointer"]: true,
+                ["transition-colors duration-200"]: true,
+                ["hover:underline focus:underline underline-offset-4 decoration-from-font"]:
+                  hover?.underline,
+                ["pointer-events-none opacity-75"]: disabled,
+                ["w-full block"]: stretch,
+                ["inline-block"]: !stretch,
+                ["no-underline text-left break-words whitespace-nowrap"]: true,
+              },
+            ),
+          ),
+          className,
+          ` btn btn-${themeObj?.name}`,
         )}
       >
-        <span className="no-underline text-left break-words">
-          {ButtonIcon ? (
-            <>
-              {ButtonIcon && iconPosition === "before" && (
-                <ButtonIcon wordAfter={labelWords[0]} />
-              )}
-              {iconPosition === "before"
-                ? labelWords.slice(1).join(" ")
-                : labelWords.slice(0, -1).join(" ")}
-              {ButtonIcon && iconPosition === "after" && (
-                <ButtonIcon wordBefore={labelWords[labelWords.length - 1]} />
-              )}
-              {loading && <ButtonLoader />}
-            </>
-          ) : (
-            <span className="flex">
-              {label}
-              {loading && <ButtonLoader />}
-            </span>
-          )}
-        </span>
+        {label && themeObj.icon.position === "after" && label}
+        {themeObj.icon.name && (
+          <IconLoader
+            icon={themeObj.icon.name}
+            className={cx(
+              "inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5",
+              {
+                ["mr-1.5"]: label && themeObj.icon.position === "before",
+                ["ml-1.5"]: label && themeObj.icon.position !== "before",
+              },
+            )}
+          />
+        )}
+        {children}
+        {label && themeObj.icon.position === "before" && label}
+        {loading && <ButtonLoader />}
       </span>
     </Element>
   );
 };
 
 const ButtonLoader = () => (
-  <span className="h-5 w-5 inline-flex self-center align-middle ml-2 -mb-1">
+  <span className="h-[2em] w-[2em] inline-flex self-center align-middle ml-2 -mb-1">
     <Spinner />
   </span>
 );

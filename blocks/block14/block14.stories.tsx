@@ -1,3 +1,4 @@
+import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
 import { COLORS } from "../../theme";
 import { ColorType } from "../../types";
 import { Block14, Block14Props } from "./Block14";
@@ -66,15 +67,7 @@ const DEMO_CONTENT = {
     },
     {
       _type: "image.simple",
-      image: {
-        height: 528,
-        alt: "",
-        hotspot: null,
-        crop: null,
-        caption: null,
-        src: "https://cdn.sanity.io/images/vs4fnw8m/development/8176ab31464cc5bc14927e66e0f52433da2a51ea-880x528.jpg",
-        width: 880,
-      },
+      image: demoImage,
       markDefs: null,
       alt: "alt",
       caption: "captiojn",
@@ -708,14 +701,7 @@ const DEMO_CONTENT = {
   relatedArticles: [
     {
       href: "/resources/blog/maximizing-productivity-with-company-name-s-saas-solution-a-comprehensive-guide",
-      image: {
-        height: 528,
-        alt: "chair",
-        hotspot: null,
-        crop: null,
-        src: "https://cdn.sanity.io/images/vs4fnw8m/development/8176ab31464cc5bc14927e66e0f52433da2a51ea-880x528.jpg",
-        width: 880,
-      },
+      image: demoImage2,
 
       title:
         "Maximizing Productivity with [Company Name]'s SaaS Solution: A Comprehensive Guide",
@@ -746,25 +732,11 @@ const DEMO_CONTENT = {
   authors: [
     {
       name: "Dan Malone",
-      image: {
-        height: 3456,
-        alt: "",
-        hotspot: null,
-        crop: null,
-        src: "https://cdn.sanity.io/images/vs4fnw8m/development/41c317c22bc54fca0532381cb4070690f8f3d0e0-5184x3456.jpg",
-        width: 5184,
-      },
+      image: demoImage3,
     },
     {
       name: "Arjen Scherff-de Water",
-      image: {
-        hotspot: null,
-        crop: null,
-        src: "https://cdn.sanity.io/images/vs4fnw8m/development/91077ecc556ad9ff49921a000f2c10951d2dfd58-5184x3456.jpg",
-        width: 5184,
-        height: 3456,
-        alt: "",
-      },
+      image: demoImage2,
     },
   ],
   _key: "Og9e6vYeUmiIxp2_g76BQ",

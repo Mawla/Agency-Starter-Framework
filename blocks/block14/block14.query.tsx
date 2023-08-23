@@ -24,7 +24,6 @@ export const getBlock14Query = (language: LanguageType) => groq`
       "relatedArticles": *[
         _id != ^.^._id 
         && _type == ^.^._type
-        && count(tags[@._ref in ^.^.^.tags[]._ref]) > 0
         && !(_id in path("drafts.*"))
         && language == "${language}"
       ] {
@@ -40,6 +39,8 @@ export const getBlock14Query = (language: LanguageType) => groq`
           }.image,
         ),
         startDate,
-        endDate
-      } | order(startDate desc, publishedAt desc, _createdAt desc) [0...5]
+        endDate,
+        "matchedTags": coalesce(count(tags[@._ref in ^.^.^.tags[]._ref]), 0)
+      }
+      | order(matchedTags desc, startDate desc, publishedAt desc, _createdAt desc) [0...5]
     }`;

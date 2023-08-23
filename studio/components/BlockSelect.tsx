@@ -33,7 +33,7 @@ export function useDebounce(value: any, delay: number) {
 }
 
 type OptionType = {
-  _type: BlockSchemaName | "page.preset";
+  _type: BlockSchemaName | "preset.blocks";
   schemaTitle: string;
   value: BlockSchemaName | string;
   icon: React.ReactElement;
@@ -99,6 +99,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
         .filter((type) =>
           typeFilter ? new RegExp(typeFilter).test(type) : true,
         )
+        .filter((type) => !type.startsWith("preset."))
         .filter((type) => !type.startsWith("studio."))
         .filter((type) => type !== "block")
         .map((type) => allSchemas[type].get(type))
@@ -119,14 +120,14 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
       let presets: {
         title?: string;
         _id?: string;
-        _type?: "page.preset";
+        _type?: "preset.blocks";
         name?: string;
         description?: string;
         blocks?: any[];
         usedBy?: number;
         image?: string;
       }[] = await client.fetch(`
-        *[_type == 'page.preset' && defined(blocks) && !(_id in path("drafts.*"))] {
+        *[_type == 'preset.blocks' && defined(blocks) && !(_id in path("drafts.*"))] {
           title,
           _id,
           _type,
@@ -173,7 +174,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
           blocks,
         }) => {
           // for the current page type (unless we're looking at presets) call the hide function on the option schema
-          if (document._type !== "page.preset" && hidden?.(document._type)) {
+          if (document._type !== "preset.blocks" && hidden?.(document._type)) {
             return null;
           }
 
@@ -205,7 +206,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
         _type.startsWith("studio."),
       );
       const firstPresetIndex = filteredOptions.findIndex(({ _type }) =>
-        Boolean(_type !== "page.preset"),
+        Boolean(_type !== "preset.blocks"),
       );
 
       if (firstStudioBlockIndex > -1) {
@@ -241,10 +242,10 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
     const selectedOption = options.find(({ value }) => value === selectedValue);
     if (!selectedOption) return;
 
-    const selectedType: BlockSchemaName | "page.preset" | undefined =
+    const selectedType: BlockSchemaName | "preset.blocks" | undefined =
       selectedOption?._type;
     const presetId =
-      selectedOption._type == "page.preset" ? selectedValue : null;
+      selectedOption._type == "preset.blocks" ? selectedValue : null;
 
     if (!selectedType) return;
 
@@ -255,10 +256,16 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
     }[] = [];
 
     if (presetId) {
-      newBlocks = [...(selectedOption?.blocks || [])].map((block) => ({
-        _type: selectedType as BlockSchemaName,
-        ...block,
-      }));
+      newBlocks = [...(selectedOption?.blocks || [])].map((block) => {
+        const data = { ...block };
+        delete data.hidden;
+        delete data.icon;
+
+        return {
+          _type: selectedType as BlockSchemaName,
+          ...data,
+        };
+      });
     } else {
       newBlocks = [
         {
@@ -395,7 +402,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
                 </Stack>
               </Box>
 
-              {option._type == "page.preset" && (
+              {option._type == "preset.blocks" && (
                 <Badge mode="outline">preset</Badge>
               )}
             </Flex>

@@ -81,7 +81,7 @@ const Preset: ComponentType<any> = (props) => {
     setState("loading");
     async function getPresets() {
       const compatiblePresets: OptionType[] = await client.fetch(
-        `*[_type == 'page.preset' && defined(${containerName}) && !(_id in path("drafts.*")) && ${containerName}[0]._type == '${parent?._type}'] { 
+        `*[_type == 'preset.blocks' && defined(${containerName}) && !(_id in path("drafts.*")) && ${containerName}[0]._type == '${parent?._type}'] { 
           _id, 
           _type, 
           _updatedAt,
@@ -116,7 +116,7 @@ const Preset: ComponentType<any> = (props) => {
   useEffect(() => {
     async function getOriginalPresetTitle() {
       const originalPreset = await client.fetch(
-        `*[_type == 'page.preset' && _id == "${value?._ref}"] { title }.title`,
+        `*[_type == 'preset.blocks' && _id == "${value?._ref}"] { title }.title`,
       );
       setOriginalPresetTitle(originalPreset);
     }
@@ -232,7 +232,7 @@ const Preset: ComponentType<any> = (props) => {
 
     await client.create({
       _id: exportPresetId,
-      _type: "page.preset",
+      _type: "preset.blocks",
       [containerName]: [obj],
     });
 
@@ -331,7 +331,7 @@ const Preset: ComponentType<any> = (props) => {
               <IntentLink
                 style={{ display: "none" }}
                 intent="edit"
-                params={{ id: exportPresetId, type: "page.preset" }}
+                params={{ id: exportPresetId, type: "preset.blocks" }}
                 target="_blank"
                 rel="noopener noreferrer"
                 ref={exportPresetLink}
@@ -371,7 +371,7 @@ const Preset: ComponentType<any> = (props) => {
             Based on:{" "}
             <IntentLink
               intent="edit"
-              params={{ id: value._ref, type: "page.preset" }}
+              params={{ id: value._ref, type: "preset.blocks" }}
             >
               {originalPresetTitle}
             </IntentLink>

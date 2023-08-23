@@ -1,3 +1,4 @@
+import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
 import { ComponentType, useEffect } from "react";
 
@@ -79,52 +80,54 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
   }, [props.value?._key]);
 
   return (
-    <div
-      style={{
-        borderBottom: "1px solid rgba(0,0,0,.1)",
-        position: "relative",
-      }}
-      data-type="block"
-      data-key={props.value?._key}
-    >
+    <ArrayItemPreviewHighlight {...props} renderChildren>
       <div
         style={{
-          marginLeft: 2,
-          marginTop: -4,
-          marginBottom: -2,
-          opacity: 0.65,
+          borderBottom: "1px solid rgba(0,0,0,.1)",
+          position: "relative",
         }}
+        data-type="block"
+        data-key={props.value?._key}
       >
-        <span
+        <div
           style={{
-            fontSize: 9,
-            fontWeight: 500,
-            textTransform: "uppercase",
-            display: "inline-block",
-            padding: 2,
-            textDecoration: Boolean(props.value?.disabled)
-              ? "line-through"
-              : "",
+            marginLeft: 2,
+            marginTop: -4,
+            marginBottom: -2,
+            opacity: 0.65,
           }}
         >
-          {props.schemaType?.title}
-        </span>
-        {Boolean(props.value?.disabled) && (
           <span
             style={{
-              fontSize: 7,
+              fontSize: 9,
               fontWeight: 500,
               textTransform: "uppercase",
               display: "inline-block",
               padding: 2,
+              textDecoration: Boolean(props.value?.disabled)
+                ? "line-through"
+                : "",
             }}
           >
-            disabled
+            {props.schemaType?.title}
           </span>
-        )}
+          {Boolean(props.value?.disabled) && (
+            <span
+              style={{
+                fontSize: 7,
+                fontWeight: 500,
+                textTransform: "uppercase",
+                display: "inline-block",
+                padding: 2,
+              }}
+            >
+              disabled
+            </span>
+          )}
+        </div>
+        {props.renderDefault(props)}
       </div>
-      {props.renderDefault(props)}
-    </div>
+    </ArrayItemPreviewHighlight>
   );
 };
 

@@ -1,7 +1,7 @@
 import { Seo } from "../../components/meta/Seo";
 import { PageLock } from "../../components/pagelock/PageLock";
 import { PreviewButton } from "../../components/previewmode/PreviewButton";
-import { Scripts } from "../../components/script/Script";
+import { ScriptsType } from "../../components/script/Script";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { LanguageType } from "../../languages";
@@ -15,10 +15,16 @@ import { Footer } from "../footer/Footer";
 import { FooterType } from "../footer/footer.query";
 import { Navigation } from "../navigation/Navigation";
 import { NavigationProps } from "../navigation/Navigation";
+import ErrorBoundary from "../pagebuilder/ErrorBoundary";
 import { PageBody } from "./PageBody";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { ComponentType, lazy } from "react";
+
+const Scripts = lazy<ComponentType<ScriptsType>>(
+  () =>
+    import(/* webpackChunkName: "Scripts" */ "../../components/script/Script"),
+);
 
 export type PageProps = {
   isPreviewMode: boolean;
@@ -49,8 +55,10 @@ export const Page = ({
     ...item,
     current:
       pagePath === "/"
-        ? item.href === "/"
-        : pagePath.startsWith(item.href || "") && item.href !== "/",
+        ? item?.button?.href === "/"
+        : pagePath.startsWith(item?.button?.href || "") &&
+          Boolean(item?.button?.href) &&
+          item?.button?.href !== "/",
     children: item.children?.map((subitem) => ({
       ...subitem,
       current: pagePath === subitem.href,
@@ -75,12 +83,24 @@ export const Page = ({
       >
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
         {page && navigation && !isPreviewMode && (
-          <Navigation
-            items={page.hideNav === true ? [] : navItems}
-            buttons={page.hideNav === true ? [] : navigation.buttons}
-            logo={navigation.logo}
-            theme={navigation.theme}
-          />
+          <ErrorBoundary>
+            <Navigation
+              items={page.hideNav === true ? [] : navItems}
+              buttons={page.hideNav === true ? [] : navigation.buttons}
+              logo={navigation.logo}
+              banner={navigation.banner}
+              theme={{
+                ...(navigation.theme || {}),
+                breadcrumb: {
+                  ...(navigation.theme?.breadcrumb || {}),
+                  hidden:
+                    page.breadcrumb === null ||
+                    page.hideBreadcrumb ||
+                    navigation.theme?.breadcrumb?.hidden,
+                },
+              }}
+            />
+          </ErrorBoundary>
         )}
 
         <PageBody {...page} />
@@ -92,16 +112,19 @@ export const Page = ({
         )}
         {locked && !isPreviewMode && <PageLock />}
         {page && footer && !isPreviewMode && (
-          <Footer
-            links={page.hideFooter === true ? [] : footer.links}
-            socials={page.hideFooter === true ? [] : footer.socials}
-            copyright={footer.copyright}
-            legal={footer.legal}
-            legalLinks={footer.legalLinks}
-            logo={footer.logo}
-            info={footer.info}
-            theme={footer.theme}
-          />
+          <ErrorBoundary>
+            <Footer
+              links={page.hideFooter === true ? [] : footer.links}
+              socials={page.hideFooter === true ? [] : footer.socials}
+              copyright={footer.copyright}
+              legal={footer.legal}
+              legalLinks={footer.legalLinks}
+              logo={footer.logo}
+              info={footer.info}
+              theme={footer.theme}
+              hideBreadcrumb={page.hideBreadcrumb}
+            />
+          </ErrorBoundary>
         )}
 
         {[

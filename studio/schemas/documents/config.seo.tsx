@@ -1,5 +1,6 @@
 import { SchemaName } from "../../../types.sanity";
 import CharacterCounter from "../../components/CharacterCounter";
+import { ColorInput } from "../../components/ColorInput";
 import Warning from "../../components/Warning";
 import { MagnifyingGlass } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -42,11 +43,67 @@ const SEO_IMAGE_FIELD = defineField({
   name: "image",
   title: "Image",
   type: "image",
-  description: "Preferred size: 1200x630",
+  description:
+    "Used as fallback image if no page seo data is found. Size: 1200x630",
   validation: (Rule: any) =>
     Rule.required().warning(
       "It's good practice adding an image for SEO and social sharing.",
     ),
+});
+
+const OPEN_GRAPH_IMAGE_CONFIG_FIELD = defineField({
+  name: "opengraphimage",
+  title: "Social sharing card (Open Graph image)",
+  type: "object",
+  fields: [
+    defineField({
+      name: "background",
+      title: "Background image",
+      type: "image",
+      description:
+        "Used as background on all auto generated SEO images. The website logo and page title will be placed over it. Size: 1200x630",
+    }),
+    defineField({
+      name: "color",
+      title: "Text color",
+      type: "string",
+      description: "Hex color code, e.g #ff0000",
+      components: {
+        input: ColorInput,
+      },
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (typeof value === "undefined") return true;
+          if (!value.startsWith("#")) {
+            return "value must start with #";
+          }
+          if (value.length !== 7) {
+            return "value must be 7 characters long";
+          }
+          return true;
+        }).required(),
+    }),
+    defineField({
+      type: "file",
+      title: "Title font",
+      name: "titleFont",
+      options: {
+        accept: "font/ttf",
+      },
+      description:
+        "Font used for the title in the open graph image. Default is Inter Bold. File must be .ttf under 200kb.",
+    }),
+    defineField({
+      type: "file",
+      title: "Meta data font",
+      name: "metaFont",
+      options: {
+        accept: "font/ttf",
+      },
+      description:
+        "Font used for the data and authors in the open graph image. Default is Inter Medium. File must be .ttf under 200kb.",
+    }),
+  ],
 });
 
 const SEO_EXCLUDE_FROM_SITEMAP_FIELD = defineField({
@@ -99,7 +156,7 @@ export default defineType({
       ...SEO_DESCRIPTION_FIELD,
       options: { localize: true, ...SEO_DESCRIPTION_FIELD.options } as any,
     },
-    { ...SEO_IMAGE_FIELD, options: { localize: true } as any },
+    OPEN_GRAPH_IMAGE_CONFIG_FIELD,
     defineField({
       name: "googleSiteVerification",
       title: "Google site verification",

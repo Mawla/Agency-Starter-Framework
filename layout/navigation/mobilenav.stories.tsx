@@ -11,7 +11,7 @@ export default {
 
 const items: NavItem[] = [
   {
-    label: "Product",
+    button: { label: "Product" },
     children: [
       {
         label: "Product 1",
@@ -24,11 +24,10 @@ const items: NavItem[] = [
     ],
   },
   {
-    label: "Pricing",
-    href: "/",
+    button: { label: "Solutions", href: "/" },
   },
   {
-    label: "Solutions",
+    button: { label: "Pricing" },
     children: [
       {
         label: "Business cases",
@@ -42,12 +41,13 @@ const items: NavItem[] = [
     ],
   },
   {
-    label: "Resources",
-    href: "/",
+    button: { label: "Resources", href: "/" },
   },
   {
-    label: "Support",
-    href: "/",
+    button: {
+      label: "Support",
+      href: "/",
+    },
   },
 ];
 

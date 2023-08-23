@@ -33,26 +33,57 @@ export const buttonHrefQuery = groq`
     params
   )`;
 
+export const buttonFieldsWithoutThemeQuery = groq`
+_key,
+language,
+"href": ${buttonHrefQuery},
+label,
+download,
+`;
+
+export const buttonThemeFieldsQuery = groq`
+icon,
+mobile,
+tablet,
+desktop,
+hover,
+`;
+
 export const buttonFieldsQuery = groq`
   _key,
   language,
   "href": ${buttonHrefQuery},
   label,
-  icon,
-  iconPosition,
   download,
-  theme,
+  "theme": customTheme { 
+    ${buttonThemeFieldsQuery}
+  },
+  "presetTheme": select(
+    defined(presetTheme) => presetTheme -> {...}, 
+    !defined(customTheme.mobile) => *[_type == 'preset.button' && default][0]
+  ) { 
+    "name": slug.current,
+    ${buttonThemeFieldsQuery}
+  },
   "target": select(newWindow => '_blank') 
 `;
 
+export const buttonFieldsWithoutDefaultThemeQuery = groq`
+  ${buttonFieldsQuery
+    .replace(
+      "defined(presetTheme) => presetTheme -> {...},",
+      "defined(presetTheme) => presetTheme -> {...},",
+    )
+    .replace(
+      "!defined(customTheme.mobile) => *[_type == 'preset.button' && default][0]",
+      "",
+    )}
+`;
+
+export const linkQuery = groq` { ${buttonFieldsWithoutDefaultThemeQuery} }`;
+
 export const buttonQuery = groq`{
   ${buttonFieldsQuery}
-}`;
-
-export const buttonWithChildrenQuery = groq`
-{
-  ${buttonFieldsQuery},
-  children[] ${buttonQuery}
 }`;
 
 export const hrefFieldQuery = groq`

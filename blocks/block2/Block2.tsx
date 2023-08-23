@@ -1,8 +1,8 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
@@ -13,6 +13,7 @@ import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -104,8 +105,9 @@ export const Block2 = ({
               align={theme?.block?.align || "center"}
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
+              weight={theme?.intro?.weight}
             >
-              <PortableText content={intro as any} />
+              <PortableText content={intro as PortableTextBlock[]} />
             </Text>
           </div>
         )}
@@ -180,8 +182,12 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
           </div>
         )}
         {intro && (
-          <Text size={theme?.intro?.size || "md"} color={theme?.intro?.color}>
-            <PortableText content={intro as any} />
+          <Text
+            size={theme?.intro?.size || "md"}
+            color={theme?.intro?.color}
+            weight={theme?.intro?.weight}
+          >
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
       </div>

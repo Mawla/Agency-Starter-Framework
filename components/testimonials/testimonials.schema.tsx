@@ -3,7 +3,7 @@ import { MessagingLines, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-const testimonialItemObject = defineField({
+export const testimonialItemObject = defineField({
   name: "item",
   title: "Single use testimonial item",
   type: "object",
@@ -11,14 +11,13 @@ const testimonialItemObject = defineField({
   preview: {
     select: {
       title: "title",
-      titleEn: `title.${baseLanguage}`,
       name: "name",
       subtitle: "name",
       image: "image",
     },
-    prepare({ title, titleEn, name, image }) {
+    prepare({ title, name, image }) {
       return {
-        title: titleEn || title,
+        title: title,
         subtitle: name,
         media: image || MessagingLines,
       };
@@ -36,21 +35,18 @@ const testimonialItemObject = defineField({
       title: "Person job title",
       type: "string",
       description: "What does this person do?",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       description: "Describing title of the testimonial.",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "content",
       title: "Content",
-      type: "portabletext.simple",
+      type: "portabletext.plain",
       description: "The testimonial itself.",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "image",

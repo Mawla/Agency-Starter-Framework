@@ -1,8 +1,10 @@
 import { getFlatBreadcrumb } from "../../helpers/sitemap/getFlatBreadcrumb";
+import { LanguageType } from "../../languages";
 import { MiniMap, MiniMapProps } from "./MiniMap";
 import { ScreenCapture } from "./ScreenCapture";
 import { ClientConfig, createClient, SanityClient } from "@sanity/client";
 import cx from "classnames";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 /**
@@ -25,20 +27,27 @@ const createLivePreviewFrontendClient = (
 };
 
 export type LivePreviewProps = {
-  setPageData: (page: any) => void;
+  setData: (data: any) => void;
   getQuery: () => string;
-  pageId: string;
+  id: string;
   updatedAt?: string;
   config: ClientConfig;
+  position: "top" | "bottom";
+  showMiniMap?: boolean;
+  language?: LanguageType;
 };
 
 export const LivePreview = ({
-  setPageData,
+  setData,
   getQuery,
-  pageId,
+  id,
   updatedAt,
   config,
+  position,
+  showMiniMap = true,
+  language,
 }: LivePreviewProps) => {
+  const router = useRouter();
   const previewTools = useRef<HTMLDivElement>(null);
 
   const [previewLoading, setPreviewLoading] = useState<boolean>(false);
@@ -60,12 +69,16 @@ export const LivePreview = ({
   }, []);
 
   /**
-   * Reload page data
+   * Reload data
    */
+
+  const hardRefresh = () => {
+    router.reload();
+  };
 
   const reloadPreview = useCallback(async () => {
     if (!frontendClient.current) return;
-    if (!pageId) return;
+    if (!id) return;
 
     // clear timeout
     if (reloadTimeout.current) clearTimeout(reloadTimeout.current);
@@ -82,21 +95,22 @@ export const LivePreview = ({
     // stop after 15 tries
     if (reloadAttempts.current > 15) return;
 
-    // fetch the new page
+    // fetch the new data
     setPreviewLoading(true);
-    const newPage = await frontendClient.current.fetch(getQuery(), {
-      _id: pageId.replace("drafts.", ""),
+    const newData = await frontendClient.current.fetch(getQuery(), {
+      _id: id.replace("drafts.", ""),
+      language,
     });
-    if (!newPage) {
+    if (!newData) {
       setPreviewLoading(false);
       return;
     }
 
     // revision mismatch
-    if (mutationRevision.current && newPage._rev !== mutationRevision.current) {
+    if (mutationRevision.current && newData._rev !== mutationRevision.current) {
       console.log(`Revisions don't match`);
       console.log(
-        `- Expecting ${mutationRevision.current} got ${newPage._rev}`,
+        `- Expecting ${mutationRevision.current} got ${newData._rev}`,
       );
       console.log(`- Reloading`);
 
@@ -106,21 +120,21 @@ export const LivePreview = ({
       return;
     }
 
-    timeLog(newPage._updatedAt, "got new page data");
-    currentRevision.current = newPage._rev;
+    timeLog(newData._updatedAt, "got new data");
+    currentRevision.current = newData._rev;
 
-    if (newPage?.breadcrumb) {
-      newPage.breadcrumb = [
-        ...getFlatBreadcrumb(newPage?.breadcrumb),
-        newPage?.homepage,
+    if (newData?.breadcrumb) {
+      newData.breadcrumb = [
+        ...getFlatBreadcrumb(newData?.breadcrumb),
+        newData?.homepage,
       ]
         .filter(Boolean)
         .reverse();
     }
 
-    setPageData(newPage);
+    setData(newData);
 
-    const newMiniBlocks = newPage?.blocks?.map(
+    const newMiniBlocks = newData?.blocks?.map(
       ({
         _key,
         _type,
@@ -140,10 +154,10 @@ export const LivePreview = ({
 
     setPreviewLoading(false);
     reloadAttempts.current = 0;
-  }, [frontendClient, pageId, updatedAt]);
+  }, [frontendClient, id, updatedAt]);
 
   useEffect(() => {
-    if (!pageId) return;
+    if (!id) return;
     let listener: any;
 
     /**
@@ -184,7 +198,7 @@ export const LivePreview = ({
       );
 
       listener = frontendClient?.current
-        ?.listen(`*[_id == "${pageId}"][0] { _rev }`, {
+        ?.listen(`*[_id == "${id}"][0] { _rev }`, {
           includeResult: false,
         })
         .subscribe((mutation: any) => {
@@ -213,10 +227,10 @@ export const LivePreview = ({
     return () => {
       if (listener?.unsubscribe) listener.unsubscribe();
     };
-  }, [pageId, config]);
+  }, [id, config]);
 
   /**
-   * Always keep a draft of the page in preview mode
+   * Always keep a draft of the document in preview mode
    */
 
   useEffect(() => {
@@ -232,14 +246,14 @@ export const LivePreview = ({
 
       // fetch minimal document
       const doc = await frontendClient.current.fetch(
-        `*[_originalId == "${pageId}"] { _rev }`,
+        `*[_originalId == "${id}"] { _rev }`,
       );
       initialRevision.current = doc?._rev;
 
       reloadPreview();
     }
     reload();
-  }, [pageId, frontendClient, reloadPreview]);
+  }, [id, frontendClient, reloadPreview]);
 
   /**
    * Allow reordering of blocks
@@ -261,14 +275,14 @@ export const LivePreview = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          pageId,
+          id,
           changedBlockKey,
           replacesBlockKey,
           newBlocksOrder: items,
         }),
       });
     },
-    [pageId],
+    [id],
   );
 
   /**
@@ -278,10 +292,11 @@ export const LivePreview = ({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
+      console.log(e);
       // scroll to block
       if (e.data.type == "preview-view-scroll-to-block" && e.data.blockKey) {
         const element = document.querySelector(
-          `[data-id="${e.data.blockKey}"]`,
+          `[data-key="${e.data.blockKey}"]`,
         );
 
         if (element) {
@@ -327,7 +342,10 @@ export const LivePreview = ({
   return (
     <div>
       <div
-        className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white"
+        className={cx("text-md fixed right-4 z-50 flex gap-1 text-white", {
+          ["top-4"]: position !== "bottom",
+          ["bottom-4"]: position === "bottom",
+        })}
         ref={previewTools}
       >
         <div className="bg-black text-white">
@@ -338,6 +356,7 @@ export const LivePreview = ({
         <button
           className="shadow-lg block p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222]"
           onClick={reloadPreview}
+          onDoubleClick={hardRefresh}
         >
           {previewLoading ? (
             <svg
@@ -383,24 +402,26 @@ export const LivePreview = ({
         </button>
 
         {/* minimap */}
-        <button
-          className="shadow-lg block p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222]"
-          onClick={() => setIsMiniMapVisible((yesno) => !yesno)}
-        >
-          <svg
-            className="block"
-            width="22"
-            height="22"
-            viewBox="0 0 15 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {showMiniMap && (
+          <button
+            className="shadow-lg block p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222]"
+            onClick={() => setIsMiniMapVisible((yesno) => !yesno)}
           >
-            <path
-              d="M7.75432 0.819537C7.59742 0.726821 7.4025 0.726821 7.24559 0.819537L1.74559 4.06954C1.59336 4.15949 1.49996 4.32317 1.49996 4.5C1.49996 4.67683 1.59336 4.84051 1.74559 4.93046L7.24559 8.18046C7.4025 8.27318 7.59742 8.27318 7.75432 8.18046L13.2543 4.93046C13.4066 4.84051 13.5 4.67683 13.5 4.5C13.5 4.32317 13.4066 4.15949 13.2543 4.06954L7.75432 0.819537ZM7.49996 7.16923L2.9828 4.5L7.49996 1.83077L12.0171 4.5L7.49996 7.16923ZM1.5695 7.49564C1.70998 7.2579 2.01659 7.17906 2.25432 7.31954L7.49996 10.4192L12.7456 7.31954C12.9833 7.17906 13.2899 7.2579 13.4304 7.49564C13.5709 7.73337 13.4921 8.03998 13.2543 8.18046L7.75432 11.4305C7.59742 11.5232 7.4025 11.5232 7.24559 11.4305L1.74559 8.18046C1.50786 8.03998 1.42901 7.73337 1.5695 7.49564ZM1.56949 10.4956C1.70998 10.2579 2.01658 10.1791 2.25432 10.3195L7.49996 13.4192L12.7456 10.3195C12.9833 10.1791 13.2899 10.2579 13.4304 10.4956C13.5709 10.7334 13.4921 11.04 13.2543 11.1805L7.75432 14.4305C7.59742 14.5232 7.4025 14.5232 7.24559 14.4305L1.74559 11.1805C1.50785 11.04 1.42901 10.7334 1.56949 10.4956Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </button>
+            <svg
+              className="block"
+              width="22"
+              height="22"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.75432 0.819537C7.59742 0.726821 7.4025 0.726821 7.24559 0.819537L1.74559 4.06954C1.59336 4.15949 1.49996 4.32317 1.49996 4.5C1.49996 4.67683 1.59336 4.84051 1.74559 4.93046L7.24559 8.18046C7.4025 8.27318 7.59742 8.27318 7.75432 8.18046L13.2543 4.93046C13.4066 4.84051 13.5 4.67683 13.5 4.5C13.5 4.32317 13.4066 4.15949 13.2543 4.06954L7.75432 0.819537ZM7.49996 7.16923L2.9828 4.5L7.49996 1.83077L12.0171 4.5L7.49996 7.16923ZM1.5695 7.49564C1.70998 7.2579 2.01659 7.17906 2.25432 7.31954L7.49996 10.4192L12.7456 7.31954C12.9833 7.17906 13.2899 7.2579 13.4304 7.49564C13.5709 7.73337 13.4921 8.03998 13.2543 8.18046L7.75432 11.4305C7.59742 11.5232 7.4025 11.5232 7.24559 11.4305L1.74559 8.18046C1.50786 8.03998 1.42901 7.73337 1.5695 7.49564ZM1.56949 10.4956C1.70998 10.2579 2.01658 10.1791 2.25432 10.3195L7.49996 13.4192L12.7456 10.3195C12.9833 10.1791 13.2899 10.2579 13.4304 10.4956C13.5709 10.7334 13.4921 11.04 13.2543 11.1805L7.75432 14.4305C7.59742 14.5232 7.4025 14.5232 7.24559 14.4305L1.74559 11.1805C1.50785 11.04 1.42901 10.7334 1.56949 10.4956Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </button>
+        )}
       </div>
 
       {Boolean(miniBlocks?.length) && isMiniMapVisible && (

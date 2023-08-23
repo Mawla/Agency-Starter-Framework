@@ -114,6 +114,7 @@ export default defineType({
               title: "Script attributes",
               description: "Attributes to be placed on the script tag",
               type: "array",
+              group: "script",
               of: [
                 defineArrayMember({
                   name: "attribute",

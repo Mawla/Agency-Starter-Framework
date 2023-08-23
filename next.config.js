@@ -1,15 +1,6 @@
 /** @type {import('next').NextConfig} */
 const locales = require("./locales.js");
 
-// This file sets a custom webpack configuration to use your Next.js app
-// with Sentry.
-// https://nextjs.org/docs/api-reference/next.config.js/introduction
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
-
-const {
-  withSentryConfigOptional,
-} = require("./helpers/sentry/with-sentry-optional");
-
 const PicoSanity = require("picosanity");
 
 const client = new PicoSanity({
@@ -19,14 +10,9 @@ const client = new PicoSanity({
   useCdn: process.env.NODE_ENV === "production",
 });
 
-const moduleExports = {
+module.exports = {
   swcMinify: true,
   reactStrictMode: true,
-  outputFileTracing: false, // https://github.com/getsentry/sentry-javascript/issues/4103
-  sentry: {
-    autoInstrumentServerFunctions: false, // https://github.com/getsentry/sentry-javascript/issues/5964#issuecomment-1313367269
-    excludeServerRoutes: ["/api/opengraph-image"],
-  },
   i18n: {
     locales,
     defaultLocale: "en",
@@ -91,12 +77,6 @@ const moduleExports = {
     if (!isServer) {
       config.optimization.splitChunks.cacheGroups = {
         ...config.optimization.splitChunks.cacheGroups,
-        "@sentry": {
-          test: /[\\/]node_modules[\\/](@sentry)[\\/]/,
-          name: "@sentry",
-          priority: 10,
-          reuseExistingChunk: false,
-        },
         swiper: {
           test: /[\\/]node_modules[\\/](swiper)[\\/]/,
           name: "swiper",
@@ -109,22 +89,3 @@ const moduleExports = {
     return config;
   },
 };
-
-const sentryWebpackPluginOptions = {
-  // Additional config options for the Sentry Webpack plugin. Keep in mind that
-  // the following options are set automatically, and overriding them is not
-  // recommended:
-  //   release, url, org, project, authToken, configFile, stripPrefix,
-  //   urlPrefix, include, ignore
-
-  silent: true, // Suppresses all logs
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options.
-};
-
-// Make sure adding Sentry options is the last code to run before exporting, to
-// ensure that your source maps include changes from all other Webpack plugins
-module.exports = withSentryConfigOptional(
-  moduleExports,
-  sentryWebpackPluginOptions,
-);

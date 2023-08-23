@@ -3,18 +3,8 @@ import { SiteContext } from "../context/SiteContext";
 import "../public/engine.styles.css";
 import "../styles/styles.css";
 import { RouterContext } from "next/dist/shared/lib/router-context";
-import * as NextImage from "next/image";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { WithNextRouter } from "storybook-addon-next-router/dist/decorators";
-
-const OriginalNextImage = NextImage.default;
-Object.defineProperty(NextImage, "default", {
-  configurable: true,
-  value: (props) => (
-    <OriginalNextImage {...props} unoptimized loader={({ src }) => src} />
-  ),
-});
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -54,14 +44,7 @@ export const decorators = [
                 title: "Page 1",
               },
               breadcrumb: [],
-              languageAlternates: [
-                {
-                  title: "Page1",
-                  path: "/es",
-                  language: "es",
-                  excludeFromSitemap: false,
-                },
-              ],
+              languageAlternates: [],
             }}
           >
             <div className={`font-sans`}>
@@ -72,5 +55,4 @@ export const decorators = [
       </QueryClientProvider>
     );
   },
-  WithNextRouter,
 ];

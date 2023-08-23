@@ -10,7 +10,6 @@ import { defineField } from "sanity";
 
 export const defaultTitleTheme = defineField({
   name: "title",
-  title: "Title",
   type: "styles",
   options: {
     fields: [

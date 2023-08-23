@@ -15,7 +15,7 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
-    import { DecorationProps } from "../../components/block/Decoration";
+    import { DecorationProps } from "../../components/decorations/Decoration";
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
     import cx from "classnames";
@@ -43,6 +43,7 @@ export const getReactComponentSnippet = ({
       fields,
       "intro",
       `
+    import { PortableTextBlock } from "sanity";
     import { TextProps } from "../../components/text/Text";
     import { TextThemeType } from "../../components/text/text.options";
     const Text = lazy<ComponentType<TextProps>>(
@@ -133,9 +134,10 @@ export const getReactComponentSnippet = ({
               <Text 
                 size={theme?.intro?.size || 'xl'} 
                 color={theme?.intro?.color}
+                weight={theme?.intro?.weight}
                 align={theme?.block?.align || "center"}
               >
-                <PortableText content={intro as any} />
+                <PortableText content={intro as PortableTextBlock[]} />
               </Text>
           )}`,
           )}

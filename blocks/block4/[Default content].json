@@ -1,13 +1,8 @@
 {
   "title": "Default content",
-  "description": "Basic title, intro, buttons and image block",
+  "description": "Basic title, intro, buttons and image or video block",
   "name": "Block 4",
   "schemaName": "block.block4",
   "date": "2023-06-29T07:26:29.125Z",
-  "fields": [
-    "title",
-    "intro",
-    "image",
-    "buttons"
-  ]
+  "fields": ["title", "intro", "image", "buttons"]
 }

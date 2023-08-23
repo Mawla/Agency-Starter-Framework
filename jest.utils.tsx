@@ -66,5 +66,6 @@ export { customRender as render };
 
 jest.mock("swiper/css", jest.fn());
 jest.mock("swiper/css/navigation", jest.fn());
+jest.mock("swiper/css/effect-fade", jest.fn());
 
 export {};

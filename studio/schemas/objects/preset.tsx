@@ -6,7 +6,7 @@ export const schema = defineField({
   title: "Preset",
   type: "reference",
   weak: true,
-  to: [{ type: "page.preset" }],
+  to: [{ type: "preset.blocks" }],
   components: {
     field: PresetWrapper,
     input: Preset,

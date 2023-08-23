@@ -1,16 +1,19 @@
+import { PageContext } from "../../context/PageContext";
+import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { DialogSchemaName, BlockSchemaName } from "../../types.sanity";
 import cx from "classnames";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 type LazyLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
   enabled?: boolean;
   background?: ColorType | "transparent";
   block?: BlockSchemaName | DialogSchemaName;
-  id?: string;
+  slug?: string;
+  _key?: string;
   networkIdle?: boolean;
 };
 
@@ -19,9 +22,11 @@ export const LazyLoadInView = ({
   enabled = true,
   background = "transparent",
   block,
-  id,
+  slug,
+  _key,
   networkIdle,
 }: LazyLoadInViewProps) => {
+  const { isPreviewMode } = useContext(PageContext);
   const wrapperRef = useRef(null);
   const doLoad = useInView({
     elementRef: wrapperRef,
@@ -49,12 +54,17 @@ export const LazyLoadInView = ({
   }, [forceLoad, networkIdle]);
 
   return (
-    <section ref={wrapperRef} data-block={block} data-id={id}>
+    <section
+      ref={wrapperRef}
+      data-block={isPreviewMode ? block : undefined}
+      data-key={isPreviewMode ? _key : undefined}
+      id={slugify(slug)}
+    >
       {doLoad || forceLoad ? (
         children
       ) : (
         <div
-          data-id="block-placeholder"
+          data-key="block-placeholder"
           className={cx(
             "animate-[block-placeholder-fade_2s_linear_infinite] h-[450px] opacity-100 relative overflow-hidden",
             background !== "transparent" && backgroundClasses[background],

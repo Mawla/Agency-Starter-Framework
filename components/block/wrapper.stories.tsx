@@ -217,3 +217,81 @@ export const OutsideBackground = () => (
     </WrapperComponent>
   </div>
 );
+
+const SQUARE = {
+  background: "blue",
+  opacity: 0.5,
+  bottom: 0,
+  left: 0,
+  width: 50,
+  height: 50,
+};
+
+export const Decorations = () => (
+  <div>
+    <WrapperComponent
+      theme={{
+        background: "white",
+        outerBackground: "black",
+        text: "black",
+        width: "inner",
+        padding: { top: "xl", bottom: "xl" },
+        margin: { top: "xl", bottom: "xl" },
+      }}
+      decorations={[
+        { mobile: SQUARE },
+        { mobile: SQUARE, location: "outside" },
+        {
+          mobile: {
+            ...SQUARE,
+            translateY: "-50%",
+            translateX: "-50%",
+            top: 0,
+            bottom: "auto",
+          },
+          location: "inside",
+          breakout: true,
+        },
+        {
+          mobile: {
+            ...SQUARE,
+            translateY: "-50%",
+            translateX: "-50%",
+            top: 0,
+            bottom: "auto",
+          },
+          location: "outside",
+          breakout: true,
+        },
+      ]}
+    >
+      <div style={{ height: 100 }} />
+    </WrapperComponent>
+  </div>
+);
+
+export const Slots = () => (
+  <WrapperComponent
+    theme={{
+      margin: {
+        top: "xl",
+        bottom: "xl",
+      },
+      padding: {
+        top: "xl",
+        bottom: "xl",
+      },
+      width: "outer",
+    }}
+    slots={{
+      inside: <div className="border-2">inside</div>,
+      insideBleed: <div className="border-2">insideBleed</div>,
+      insideSpacing: <div className="border-2">insideSpacing</div>,
+      insideWidth: <div className="border-2">insideWidth</div>,
+      outside: <div className="border-2">outside</div>,
+      outsideSpacing: <div className="border-2">outsideSpacing</div>,
+    }}
+  >
+    children
+  </WrapperComponent>
+);

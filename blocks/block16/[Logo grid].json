@@ -1,0 +1,13 @@
+{
+  "title": "Logo grid",
+  "description": "Displays a list of logos",
+  "name": "Block 16",
+  "schemaName": "block.block16",
+  "date": "2023-08-09T11:59:46.526Z",
+  "fields": [
+    "title",
+    "intro",
+    "buttons",
+    "items"
+  ]
+}

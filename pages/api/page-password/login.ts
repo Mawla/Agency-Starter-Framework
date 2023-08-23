@@ -1,5 +1,4 @@
 import { config } from "../../../helpers/sanity/config";
-import { withSentryOptional } from "../../../helpers/sentry/with-sentry-optional";
 import { createClient } from "@sanity/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -26,4 +25,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<boolean>) => {
     : res.status(401).json(false);
 };
 
-export default withSentryOptional(handler);
+export default handler;

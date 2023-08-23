@@ -1,8 +1,0 @@
-{
-  "title": "Heading with CTA button",
-  "description": "Use this CTA section with a heading, short paragraph, and a button to encourage users to do something.",
-  "name": "Block 3",
-  "schemaName": "block.block3",
-  "date": "2023-06-29T06:21:43.234Z",
-  "fields": ["title", "intro", "image", "buttons"]
-}

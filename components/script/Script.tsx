@@ -5,17 +5,19 @@ import React, { useContext } from "react";
 
 export type ScriptsType = {
   title?: string;
-  items?: {
-    _key?: string;
-    title?: string;
-    code?: "string";
-    html?: "string";
-    src?: "string";
-    onload?: "string";
-    onready?: "string";
-    onerror?: "string";
-    attributes: { name?: string; value?: string }[];
-  }[];
+  items?: ScriptType[];
+};
+
+export type ScriptType = {
+  _key?: string;
+  title?: string;
+  code?: string;
+  html?: string;
+  src?: string;
+  onload?: string;
+  onready?: string;
+  onerror?: string;
+  attributes?: { name?: string; value?: string }[];
 };
 
 export const Scripts = ({ items }: ScriptsType) => {
@@ -26,6 +28,15 @@ export const Scripts = ({ items }: ScriptsType) => {
   return (
     <React.Fragment>
       {items.filter(Boolean).map((script) => {
+        if (script.code) {
+          script.code = `
+          try {
+            ${script.code}
+          } catch (error) {
+            console.error(error);
+          }`;
+        }
+
         const nextScriptProps = {
           ...script.attributes?.reduce((acc, { name, value }) => {
             if (name && value) {

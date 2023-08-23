@@ -37,6 +37,8 @@ export const getFooterQuery = (language: LanguageType) => groq`
 } {
   sitemap,
   "footer": *[_id == "footer__i18n_${language}"][0] {
+    _rev,
+    _updatedAt,
     logo {
       "mobile": ${getImageQuery("mobile")},
       "desktop": ${getImageQuery("desktop")},
@@ -45,12 +47,17 @@ export const getFooterQuery = (language: LanguageType) => groq`
     legal,
     info,
     "links": links[] { 
+      _key,
       title, 
       "href": link ${buttonQuery}.href,
       items[] ${buttonQuery} 
     },
-    "legalLinks": legalLinks[] ${buttonQuery},
+    "legalLinks": legalLinks[] {
+      _key,
+      ${buttonFieldsQuery},
+    },
     "socials": socials[] {
+      _key,
       icon,
       ${buttonFieldsQuery},
     },

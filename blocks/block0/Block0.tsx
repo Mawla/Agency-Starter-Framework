@@ -4,9 +4,9 @@ import {
   formatFontSize,
   formatFontWeight,
 } from "../../cli/config/format-theme";
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { getClient } from "../../helpers/sanity/server";
 import IframeResizer from "iframe-resizer-react";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
@@ -43,6 +43,7 @@ export const Block0 = ({
   tailwindConfig = "",
 }: Block0Props) => {
   const [websiteHTML, setWebsiteHTML] = useState<string>("");
+  const [srcDoc, setSrcDoc] = useState<string>("");
 
   // remove <head>
   headHTML = (headHTML || "")?.replace("<head>", "").replace("</head>", "");
@@ -114,13 +115,19 @@ export const Block0 = ({
     getTheme();
   }, [theme?.code]);
 
+  useEffect(() => {
+    setSrcDoc(
+      `<html><head>${headHTML}</head><body>${tailwindCompilerHTML}<script>${tailwindConfig}</script>${websiteHTML}${bodyHTML}<script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script></body></html>`,
+    );
+  }, [websiteHTML]);
+
   if (!headHTML && !bodyHTML) return null;
 
   const iframeProps = {
     checkOrigin: false,
     className: "w-full",
     id: _key,
-    srcDoc: `<html><head>${headHTML}</head><body>${tailwindCompilerHTML}<script>${tailwindConfig}</script>${websiteHTML}${bodyHTML}<script src='https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js'></script></body></html>`,
+    srcDoc,
   };
 
   if (theme?.code?.removeWrapper) return <IframeResizer {...iframeProps} />;
