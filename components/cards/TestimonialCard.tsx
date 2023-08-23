@@ -1,3 +1,4 @@
+import { ColumnType } from "../../blocks/block18/block18.options";
 import { DecorationsProps } from "../../components/decorations/Decorations";
 import { TitleProps } from "../../components/title/Title";
 import {
@@ -62,6 +63,7 @@ export type TestimonialCardProps = {
       background?: ColorType;
       paddingX?: PaddingType;
       paddingY?: PaddingType;
+      columns?: ColumnType;
     };
     title?: TitleThemeType;
     name?: TitleThemeType;

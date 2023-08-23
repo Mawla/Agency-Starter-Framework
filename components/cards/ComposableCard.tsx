@@ -1,3 +1,4 @@
+import { ColumnType } from "../../blocks/block18/block18.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { DecorationProps } from "../../components/decorations/Decoration";
@@ -89,6 +90,7 @@ export type ComposableCardProps = {
       background?: ColorType;
       paddingX?: PaddingType;
       paddingY?: PaddingType;
+      columns?: ColumnType;
     };
     title?: TitleThemeType;
     subtitle?: TitleThemeType;

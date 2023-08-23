@@ -6,6 +6,8 @@ export const COLUMN_OPTIONS = {
   2: "Two columns",
   3: "Three columns",
   4: "Four columns",
+  5: "Five columns",
+  6: "Six columns",
 };
 export type ColumnType = keyof typeof COLUMN_OPTIONS;
 

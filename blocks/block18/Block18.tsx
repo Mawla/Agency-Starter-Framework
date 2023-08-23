@@ -21,10 +21,10 @@ import {
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
 import { justifyClasses } from "../../theme";
 import {
+  colSpanClasses,
   gapHorizontalClasses,
   gapVerticalClasses,
-  gridCenterClasses,
-  gridClasses,
+  gridColClasses,
 } from "./block18.classes";
 import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
@@ -114,6 +114,7 @@ export const Block18 = ({
   const { screenWidth, breakpoint } = useBreakpoint();
 
   const filteredItems = items?.filter(Boolean);
+  const numItems = filteredItems?.length || 0;
 
   let slideColumns = 1;
   if (screenWidth > BREAKPOINTS.xs) slideColumns = 1;
@@ -144,6 +145,18 @@ export const Block18 = ({
   );
 
   const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
+
+  let numColumns = theme?.grid?.columns || 2;
+  // if (filteredItems) {
+  //   if (numItems === 1) {
+  //     numColumns = 2;
+  //   } else if (numItems < numColumns) {
+  //     numColumns = filteredItems.length as ColumnType;
+  //   }
+  // }
+
+  if (screenWidth > BREAKPOINTS.lg) {
+  }
 
   return (
     <Wrapper
@@ -237,25 +250,29 @@ export const Block18 = ({
           ) : (
             <div
               className={cx(
-                "grid",
-                theme?.grid?.columns && gridClasses[theme?.grid?.columns],
+                "grid grid-cols-12",
+                theme?.grid?.columns && gridColClasses[numColumns],
                 theme?.grid?.gapHorizontal &&
                   gapHorizontalClasses[theme?.grid?.gapHorizontal],
                 theme?.grid?.gapVertical &&
                   gapVerticalClasses[theme?.grid?.gapVertical],
-                theme?.grid?.columns &&
-                  theme?.block?.align === "center" &&
-                  gridCenterClasses[theme?.grid?.columns],
               )}
             >
               {filteredItems?.map(
-                (item: ComposableCardProps | TestimonialCardProps) => {
+                (item: ComposableCardProps | TestimonialCardProps, i) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
                   }
 
                   return (
-                    <div key={item._key} className="h-full text-left">
+                    <div
+                      key={item._key}
+                      className={cx(
+                        "h-full text-left",
+                        item?.theme?.card?.columns &&
+                          colSpanClasses[item?.theme?.card?.columns],
+                      )}
+                    >
                       <CardWrapper>
                         <Card {...item} />
                       </CardWrapper>
