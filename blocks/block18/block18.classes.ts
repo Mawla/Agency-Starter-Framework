@@ -5,35 +5,17 @@ export const gridClasses: Record<ColumnType, string> = {
   2: "sm:grid-cols-2",
   3: "sm:grid-cols-2 lg:grid-cols-3",
   4: "sm:grid-cols-2 lg:grid-cols-4",
+  5: "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5",
+  6: "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6",
 };
 
-// css grid doesn't have centering abilities for left over
-// child items. Using nth child selectors and translates combined
-// with col-start we can achieve that effect.
-//
-// created a tailwind pen https://play.tailwindcss.com/f9vDSGiuvA
-// see GridCenterCards in Storybook for a test case
-//
-// There's no need to center below medium breakpoint because the other
-// module items (title, intro etc) are left aligned on mobile.
-export const gridCenterClasses: Record<ColumnType, string> = {
+export const colSpanClasses: Record<ColumnType, string> = {
   1: "",
-  2: `md:[&>*:last-child:nth-child(2n-1)]:translate-x-1/2`,
-  3: `md:max-lg:[&>*:last-child:nth-child(2n-1)]:translate-x-1/2
-    lg:[&>*:last-child:nth-child(2n-1)]:translate-x-none
-    lg:[&>*:last-child:nth-child(3n-1)]:col-start-3
-    lg:[&>*:last-child:nth-child(3n-1)]:-translate-x-1/2
-    lg:[&>*:nth-last-child(2):nth-child(3n+1)]:col-start-2
-    lg:[&>*:nth-last-child(2):nth-child(3n+1)]:-translate-x-1/2
-    lg:[&>*:last-child:nth-child(3n-2)]:col-start-2`.replace(/\n/g, ""),
-  4: `md:max-lg:[&>*:last-child:nth-child(2n-1)]:translate-x-1/2
-    lg:[&>*:last-child:nth-child(4n-1)]:translate-x-1/2
-    lg:[&>*:nth-last-child(2):nth-child(4n+2)]:translate-x-1/2
-    lg:[&>*:nth-last-child(3):nth-child(4n+1)]:translate-x-1/2
-    lg:[&>*:nth-last-child(2):nth-child(4n+1)]:col-start-2
-    lg:[&>*:nth-last-child(1):nth-child(4n+1)]:col-start-3
-    lg:[&>*:nth-last-child(1):nth-child(4n+1)]:-translate-x-1/2
-  `.replace(/\n/g, ""),
+  2: "sm:col-span-2 lg:col-span-2",
+  3: "sm:col-span-2 lg:col-span-3",
+  4: "sm:col-span-2 md:col-span-3 lg:col-span-4",
+  5: "sm:col-span-2 md:col-span-3 lg:col-span-5",
+  6: "sm:col-span-2 md:col-span-3 lg:col-span-6",
 };
 
 // need all breakpoints defined in these classes to calculate the slider gap

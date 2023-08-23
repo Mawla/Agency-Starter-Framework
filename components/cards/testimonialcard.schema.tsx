@@ -1,3 +1,4 @@
+import { COLUMN_OPTIONS } from "../../blocks/block18/block18.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
@@ -90,6 +91,13 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(PADDING_OPTIONS, true),
+                },
+              },
+              {
+                name: "columns",
+                type: "select",
+                options: {
+                  list: optionsToList(COLUMN_OPTIONS),
                 },
               },
             ],

@@ -1,3 +1,4 @@
+import { COLUMN_OPTIONS } from "../../blocks/block18/block18.options";
 import { defaultBlockGroups } from "../../components/block/block.schema";
 import { defaultTitleTheme } from "../../components/title/title.schema";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
@@ -112,6 +113,13 @@ const schema = defineType({
                 type: "select",
                 options: {
                   list: optionsToList(PADDING_OPTIONS, true),
+                },
+              },
+              {
+                name: "columns",
+                type: "select",
+                options: {
+                  list: optionsToList(COLUMN_OPTIONS),
                 },
               },
             ],

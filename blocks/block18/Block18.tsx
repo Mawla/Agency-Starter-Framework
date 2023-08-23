@@ -18,17 +18,26 @@ import {
   BreakpointType,
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useSize } from "../../hooks/useSize";
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
 import { justifyClasses } from "../../theme";
 import {
+  colSpanClasses,
   gapHorizontalClasses,
   gapVerticalClasses,
-  gridCenterClasses,
   gridClasses,
 } from "./block18.classes";
 import { ColumnType, GapType } from "./block18.options";
 import cx from "classnames";
-import React, { ComponentType, lazy } from "react";
+import React, {
+  CSSProperties,
+  ComponentType,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { PortableTextBlock } from "sanity";
 
 const Slider = lazy<ComponentType<SliderProps>>(
@@ -112,8 +121,14 @@ export const Block18 = ({
   items,
 }: Block18Props) => {
   const { screenWidth, breakpoint } = useBreakpoint();
+  const debouncedScreenWidth = useDebounce(screenWidth, 250);
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [gridStyle, setGridStyle] = useState<CSSProperties>();
 
   const filteredItems = items?.filter(Boolean);
+  const numItems = filteredItems?.length || 0;
+  let numColumns = theme?.grid?.columns || 2;
 
   let slideColumns = 1;
   if (screenWidth > BREAKPOINTS.xs) slideColumns = 1;
@@ -144,6 +159,67 @@ export const Block18 = ({
   );
 
   const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
+
+  /**
+   * Calculate centering of grid items
+   */
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const gapSize = +window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("gap")
+      .split(" ")[1]
+      ?.replace("px", "");
+
+    const numColumns = window
+      .getComputedStyle(gridRef.current, null)
+      .getPropertyValue("grid-template-columns")
+      .split(" ").length;
+
+    const gridRect = gridRef.current.getBoundingClientRect();
+    const gridWidth = gridRect.width;
+
+    // group items by row
+    const children = gridRef.current.children;
+    const rows = Array.from(children).reduce((prev, curr) => {
+      const top = curr.getBoundingClientRect().top;
+      if (!prev[top]) prev[top] = [];
+      prev[top].push(curr as HTMLDivElement);
+      return prev;
+    }, {} as Record<number, HTMLDivElement[]>);
+
+    // find orphans and push if needed
+    Object.entries(rows).forEach(([y, items]) => {
+      let shiftX = 0;
+
+      // only move items in rows that aren't full
+      if (items.length < numColumns) {
+        if (
+          theme?.block?.align == "center" ||
+          theme?.block?.align === "right"
+        ) {
+          const accumulatedChildrenWidth = items.reduce((prev, curr) => {
+            const childRect = curr.getBoundingClientRect();
+            const childWidth = childRect.width;
+            return prev + childWidth + gapSize;
+          }, -gapSize);
+
+          shiftX = gridWidth - accumulatedChildrenWidth;
+          if (theme?.block?.align === "center") shiftX /= 2;
+        }
+      }
+
+      items.forEach((item) => {
+        if (shiftX) {
+          item.style.transform = `translateX(${shiftX}px)`;
+        } else {
+          item.style.removeProperty("transform");
+        }
+      });
+    });
+  }, [debouncedScreenWidth, items, theme?.block?.align]);
 
   return (
     <Wrapper
@@ -238,24 +314,30 @@ export const Block18 = ({
             <div
               className={cx(
                 "grid",
-                theme?.grid?.columns && gridClasses[theme?.grid?.columns],
+                theme?.grid?.columns && gridClasses[numColumns],
                 theme?.grid?.gapHorizontal &&
                   gapHorizontalClasses[theme?.grid?.gapHorizontal],
                 theme?.grid?.gapVertical &&
                   gapVerticalClasses[theme?.grid?.gapVertical],
-                theme?.grid?.columns &&
-                  theme?.block?.align === "center" &&
-                  gridCenterClasses[theme?.grid?.columns],
               )}
+              ref={gridRef}
+              style={gridStyle}
             >
               {filteredItems?.map(
-                (item: ComposableCardProps | TestimonialCardProps) => {
+                (item: ComposableCardProps | TestimonialCardProps, i) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
                   }
 
                   return (
-                    <div key={item._key} className="h-full text-left">
+                    <div
+                      key={item._key || i}
+                      className={cx(
+                        "h-full text-left",
+                        item?.theme?.card?.columns &&
+                          colSpanClasses[item?.theme?.card?.columns],
+                      )}
+                    >
                       <CardWrapper>
                         <Card {...item} />
                       </CardWrapper>
