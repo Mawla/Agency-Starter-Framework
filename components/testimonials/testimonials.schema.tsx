@@ -1,4 +1,3 @@
-import { baseLanguage } from "../../languages";
 import { MessagingLines, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
@@ -10,15 +9,15 @@ export const testimonialItemObject = defineField({
   icon: () => <MessagingLines weight="thin" size={20} />,
   preview: {
     select: {
-      title: "title",
       name: "name",
+      jobTitle: "jobTitle",
       subtitle: "name",
       image: "image",
     },
-    prepare({ title, name, image }) {
+    prepare({ jobTitle, name, image }) {
       return {
-        title: title,
-        subtitle: name,
+        title: name,
+        subtitle: jobTitle,
         media: image || MessagingLines,
       };
     },
