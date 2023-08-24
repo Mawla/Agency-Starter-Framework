@@ -73,7 +73,7 @@ export const Block15 = ({
       </div>
 
       {(intro || body) && (
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 xl:gap-24 mt-6">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 xl:gap-24 mt-6 md:mt-10 lg:mt-16">
           {shouldRenderPortableText(intro) && (
             <div className="lg:col-span-6">
               <Text
