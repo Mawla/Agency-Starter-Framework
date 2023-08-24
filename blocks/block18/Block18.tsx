@@ -167,11 +167,16 @@ export const Block18 = ({
   useEffect(() => {
     if (!gridRef.current) return;
 
-    const gapSize = +window
+    const gaps = window
       .getComputedStyle(gridRef.current, null)
-      .getPropertyValue("gap")
-      .split(" ")[1]
-      ?.replace("px", "");
+      .getPropertyValue("gap");
+
+    let gapSize: number;
+    if (gaps.indexOf(" ") > -1) {
+      gapSize = +gaps.split(" ")[1]?.replace("px", "");
+    } else {
+      gapSize = +gaps.replace("px", "");
+    }
 
     const numColumns = window
       .getComputedStyle(gridRef.current, null)
@@ -193,7 +198,6 @@ export const Block18 = ({
     // find orphans and push if needed
     Object.entries(rows).forEach(([y, items]) => {
       let shiftX = 0;
-
       // only move items in rows that aren't full
       if (items.length < numColumns) {
         if (
@@ -203,6 +207,7 @@ export const Block18 = ({
           const accumulatedChildrenWidth = items.reduce((prev, curr) => {
             const childRect = curr.getBoundingClientRect();
             const childWidth = childRect.width;
+            console.log(childWidth, prev, gapSize);
             return prev + childWidth + gapSize;
           }, -gapSize);
 
