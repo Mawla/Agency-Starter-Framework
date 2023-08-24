@@ -89,7 +89,7 @@ export const Block13 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >

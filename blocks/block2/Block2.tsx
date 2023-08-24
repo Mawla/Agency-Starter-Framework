@@ -88,7 +88,7 @@ export const Block2 = ({
     >
       <div
         className={cx(
-          "max-w-3xl",
+          "max-w-4xl",
           alignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -136,7 +136,7 @@ export const Block2 = ({
       {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div
           className={cx(
-            "max-w-3xl",
+            "max-w-4xl",
             alignClasses[theme?.block?.align || "center"],
             "mt-8 lg:mt-16",
           )}

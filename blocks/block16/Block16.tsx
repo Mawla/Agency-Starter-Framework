@@ -86,7 +86,7 @@ export const Block16 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -136,7 +136,7 @@ export const Block16 = ({
       {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div
           className={cx(
-            "flex flex-col gap-6 max-w-3xl mt-14",
+            "flex flex-col gap-6 max-w-4xl mt-14",
             textAlignClasses[theme?.block?.align || "center"],
           )}
         >

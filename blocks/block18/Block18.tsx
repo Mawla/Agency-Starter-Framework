@@ -236,7 +236,7 @@ export const Block18 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           theme?.block?.align && textAlignClasses[theme?.block?.align],
         )}
       >
@@ -358,7 +358,7 @@ export const Block18 = ({
       {footer && (
         <div
           className={cx(
-            "flex flex-col gap-6 max-w-3xl mt-10",
+            "flex flex-col gap-6 max-w-4xl mt-10",
             theme?.block?.align && textAlignClasses[theme?.block?.align],
           )}
         >

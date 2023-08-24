@@ -60,7 +60,7 @@ export const Block15 = ({
     >
       <div
         className={cx(
-          "flex flex-col max-w-3xl",
+          "flex flex-col max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >

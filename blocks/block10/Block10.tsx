@@ -79,7 +79,7 @@ export const Block10 = ({
     >
       <div
         className={cx(
-          "max-w-3xl",
+          "max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
