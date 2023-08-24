@@ -111,24 +111,22 @@ export function formatSafelist({
   fontWeight = {},
 }: ConfigType["theme"]) {
   function clean(str: string) {
-    return str.replace(/ /g, "-").toLowerCase();
+    const result = str.replace(/ /g, "-").toLowerCase();
+    return result;
   }
 
   const safelist = [
     ...Object.keys(colors).map((color) => `bg-${clean(color)}`),
     ...Object.keys(colors).map((color) => `text-${clean(color)}`),
     ...Object.keys(colors).map((color) => `border-${clean(color)}`),
-
     ...Object.keys(colors).map((color) => `hover:bg-${clean(color)}`),
     ...Object.keys(colors).map((color) => `hover:text-${clean(color)}`),
     ...Object.keys(colors).map((color) => `hover:border-${clean(color)}`),
-
     ...Object.keys(colors).map((color) => `divide-${clean(color)}`),
+
     ...Object.keys(fontFamily).map((font) => `font-${clean(font)}`),
     ...Object.keys(fontWeight).map((weight) => `font-${clean(weight)}`),
     ...Object.keys(fontSize).map((size) => `text-${clean(size)}`),
-    ...Object.keys(PADDING_OPTIONS).map((px) => `px-${clean(px)}`),
-    ...Object.keys(PADDING_OPTIONS).map((py) => `py-${clean(py)}`),
     ...Object.keys(TEXT_TRANSFORM_OPTIONS).map(
       (transform) => `${clean(transform)}`,
     ),
