@@ -37,7 +37,8 @@ const schema = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "text",
+      rows: 2,
       group: "content",
     }),
     defineField({
