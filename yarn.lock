@@ -2640,22 +2640,7 @@
     get-random-values-esm "^1.0.0"
     lodash "^4.17.21"
 
-"@sanity/cli@3.14.5":
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.14.5.tgz#e7ad81747b4195aca10d8d108eaca9ddfbf7b6cc"
-  integrity sha512-n1rCpi8Ed2uqCD96luxSowYPW7ODEVtzKdSCro6W4eOerh3t1e/Bu9bXMfZlQ4dlpsXIMzf7cIxzQx7XKGHiOw==
-  dependencies:
-    "@babel/traverse" "^7.19.0"
-    "@vercel/frameworks" "1.5.0"
-    "@vercel/fs-detectors" "4.1.1"
-    chalk "^4.1.2"
-    esbuild "^0.18.0"
-    esbuild-register "^3.4.1"
-    get-it "^8.0.9"
-    golden-fleece "^1.0.9"
-    pkg-dir "^5.0.0"
-
-"@sanity/cli@3.15.1":
+"@sanity/cli@3.15.1", "@sanity/cli@^3.1.4":
   version "3.15.1"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.15.1.tgz#818c1d923770e15a211027d9b739e4b10e4c5057"
   integrity sha512-I+XKDB+wG1S2iczRUQI2gCqLPmwtJnZoD8EPFufxLiDFad+ki61hGsjtCICkmiS+EYrv+tTH6krYflif3qds3g==
@@ -8183,7 +8168,7 @@ get-intrinsic@^1.0.2, get-intrinsic@^1.1.1, get-intrinsic@^1.1.3, get-intrinsic@
     has-proto "^1.0.1"
     has-symbols "^1.0.3"
 
-get-it@^8.0.9, get-it@^8.4.2, get-it@^8.4.3:
+get-it@^8.4.2, get-it@^8.4.3:
   version "8.4.3"
   resolved "https://registry.yarnpkg.com/get-it/-/get-it-8.4.3.tgz#f5d05fb95644c5414afa6f5dfd3a927820472f7f"
   integrity sha512-H9YbPCN3QCbxtojv42fvmrkIYe434qKg1nKpMMtBqwL8U3XprnHMgDbQwMJIxSIFOPpajQPf0BxhjsHoFI0cEQ==
