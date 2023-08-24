@@ -294,7 +294,6 @@ export const Block1 = ({
                 size={theme?.footer?.size || "lg"}
                 color={theme?.footer?.color}
                 weight={theme?.footer?.weight}
-                className="mt-10"
               >
                 <PortableText content={footer as PortableTextBlock[]} />
               </Text>
@@ -326,6 +325,7 @@ export const Block1 = ({
                     "relative flex w-full h-full",
                     theme?.layout?.verticalAlign &&
                       verticalAlignClasses[theme.layout.verticalAlign],
+                    theme?.layout?.mediaPosition !== "left" && "justify-end",
                   )}
                 >
                   <div
@@ -335,10 +335,12 @@ export const Block1 = ({
                     style={{
                       maxWidth:
                         getOriginalImageDimensions(image?.src).width || "auto",
-                      aspectRatio: !theme?.image?.fullHeight
-                        ? getOriginalImageDimensions(image?.src).aspectRatio ||
-                          "auto"
-                        : undefined,
+                      aspectRatio:
+                        !theme?.image?.fullHeight ||
+                        screenWidth < BREAKPOINTS.lg
+                          ? getOriginalImageDimensions(image?.src)
+                              .aspectRatio || "auto"
+                          : undefined,
                     }}
                   >
                     <ResponsiveImage
