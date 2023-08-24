@@ -72,6 +72,7 @@ export type Block4Props = {
     title?: TitleThemeType;
     subtitle?: TitleThemeType;
     intro?: TextThemeType;
+    body?: TextThemeType;
     image?: {
       rounded?: BorderRadiusType;
     };
@@ -80,6 +81,7 @@ export type Block4Props = {
   title?: string;
   subtitle?: string;
   intro?: React.ReactNode;
+  body?: React.ReactNode;
   image?: ImageType;
   video?: VideoType;
   buttons?: ButtonProps[];
@@ -91,6 +93,7 @@ export const Block4 = ({
   title,
   subtitle,
   intro,
+  body,
   image,
   video,
   buttons,
@@ -132,6 +135,17 @@ export const Block4 = ({
               align={theme?.block?.align || "center"}
             >
               <PortableText content={intro as PortableTextBlock[]} />
+            </Text>
+          )}
+
+          {body && (
+            <Text
+              size={theme?.body?.size || "xl"}
+              color={theme?.body?.color}
+              weight={theme?.body?.weight}
+              align={theme?.block?.align || "center"}
+            >
+              <PortableText content={body as PortableTextBlock[]} />
             </Text>
           )}
 
