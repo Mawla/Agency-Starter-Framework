@@ -153,7 +153,12 @@ const handler = async (req: NextRequest) => {
                   marginTop: logoHeight ? -logoHeight - 40 : 0,
                 }}
               >
-                <img src={data?.logoImage} />
+                <img
+                  src={data?.logoImage}
+                  style={{
+                    height: logoHeight,
+                  }}
+                />
               </div>
             )}
 
