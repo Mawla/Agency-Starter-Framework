@@ -109,7 +109,14 @@ const schema = defineType({
                 },
               },
               {
-                name: "paddingY",
+                name: "paddingTop",
+                type: "select",
+                options: {
+                  list: optionsToList(PADDING_OPTIONS, true),
+                },
+              },
+              {
+                name: "paddingBottom",
                 type: "select",
                 options: {
                   list: optionsToList(PADDING_OPTIONS, true),
