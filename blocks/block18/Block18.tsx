@@ -13,6 +13,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import {
   BREAKPOINTS,
   BreakpointType,
@@ -246,7 +247,7 @@ export const Block18 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
@@ -362,7 +363,7 @@ export const Block18 = ({
             theme?.block?.align && textAlignClasses[theme?.block?.align],
           )}
         >
-          {footer && (
+          {shouldRenderPortableText(footer) && (
             <Text
               size={theme?.footer?.size || "xl"}
               color={theme?.footer?.color}

@@ -9,6 +9,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { useTranslation } from "../../hooks/useTranslation";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
@@ -123,7 +124,7 @@ export const Block12 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}

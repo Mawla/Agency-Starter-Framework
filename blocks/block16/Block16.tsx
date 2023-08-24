@@ -11,6 +11,7 @@ import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -96,7 +97,7 @@ export const Block16 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}

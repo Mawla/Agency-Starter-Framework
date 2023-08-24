@@ -43,6 +43,7 @@ export const getReactComponentSnippet = ({
       fields,
       "intro",
       `
+    import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
     import { PortableTextBlock } from "sanity";
     import { TextProps } from "../../components/text/Text";
     import { TextThemeType } from "../../components/text/text.options";
@@ -130,7 +131,7 @@ export const getReactComponentSnippet = ({
             fields,
             "intro",
             `
-          {intro && (
+          {shouldRenderPortableText(intro) && (
               <Text 
                 size={theme?.intro?.size || 'xl'} 
                 color={theme?.intro?.color}

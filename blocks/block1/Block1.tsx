@@ -18,6 +18,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useSize } from "../../hooks/useSize";
 import { borderRadiusClasses } from "../../theme";
@@ -255,8 +256,7 @@ export const Block1 = ({
                 {title}
               </Title>
             )}
-
-            {intro && (
+            {shouldRenderPortableText(intro) && (
               <Text
                 size={theme?.intro?.size || "lg"}
                 color={theme?.intro?.color}
@@ -267,7 +267,7 @@ export const Block1 = ({
               </Text>
             )}
 
-            {body && (
+            {shouldRenderPortableText(body) && (
               <Text
                 size={theme?.body?.size || "lg"}
                 color={theme?.body?.color}
@@ -288,7 +288,6 @@ export const Block1 = ({
                 <ButtonGroup items={buttons} />
               </div>
             )}
-
             {footer && (
               <Text
                 size={theme?.footer?.size || "lg"}

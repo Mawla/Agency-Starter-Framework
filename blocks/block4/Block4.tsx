@@ -15,6 +15,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { borderRadiusClasses } from "../../theme";
 import { BorderRadiusType, ImageType, VideoType } from "../../types";
 import cx from "classnames";
@@ -126,8 +127,7 @@ export const Block4 = ({
               {subtitle}
             </Title>
           )}
-
-          {intro && (
+          {shouldRenderPortableText(intro) && (
             <Text
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
@@ -138,7 +138,7 @@ export const Block4 = ({
             </Text>
           )}
 
-          {body && (
+          {shouldRenderPortableText(body) && (
             <Text
               size={theme?.body?.size || "xl"}
               color={theme?.body?.color}
@@ -148,7 +148,6 @@ export const Block4 = ({
               <PortableText content={body as PortableTextBlock[]} />
             </Text>
           )}
-
           {buttons && Boolean(buttons?.filter(Boolean).length) && (
             <div className="mt-6">
               <ButtonGroup
