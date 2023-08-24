@@ -1,9 +1,11 @@
 import { PortableTextChild } from "sanity";
 
 export const shouldRenderPortableText = (body: any) => {
-  if (!Array.isArray(body)) return true;
+  const isStringOrArray = typeof body === "string" || Array.isArray(body);
 
-  if (body.length === 0) return false;
+  if (!isStringOrArray) return false;
+
+  if (typeof body === "string") return Boolean(body.trim().length);
 
   const str = body
     .map((block) => {

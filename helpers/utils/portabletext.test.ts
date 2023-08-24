@@ -1,7 +1,12 @@
 import { shouldRenderPortableText } from "./portabletext";
 
 test("check empty portable text", () => {
-  expect(shouldRenderPortableText("")).toEqual(true);
+  expect(shouldRenderPortableText("")).toEqual(false);
+  expect(shouldRenderPortableText("   ")).toEqual(false);
+  expect(shouldRenderPortableText(null)).toEqual(false);
+  expect(shouldRenderPortableText(undefined)).toEqual(false);
+  expect(shouldRenderPortableText(false)).toEqual(false);
+  expect(shouldRenderPortableText(true)).toEqual(false);
 
   const emptyBlock = [
     {
