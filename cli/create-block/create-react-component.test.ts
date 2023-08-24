@@ -35,7 +35,9 @@ test("create react component with intro field", () => {
   });
 
   expect(
-    result.replace(/\s/g, "").includes(`{intro &&`.replace(/\s/g, "")),
+    result
+      .replace(/\s/g, "")
+      .includes(`{shouldRenderPortableText(intro) &&`.replace(/\s/g, "")),
   ).toBeTruthy();
 });
 

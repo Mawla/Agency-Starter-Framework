@@ -1,11 +1,17 @@
+import React from "react";
 import { PortableTextChild } from "sanity";
 
 export const shouldRenderPortableText = (body: any) => {
-  const isStringOrArray = typeof body === "string" || Array.isArray(body);
+  const isStringOrArrayOrReactElement =
+    typeof body === "string" ||
+    Array.isArray(body) ||
+    React.isValidElement(body);
 
-  if (!isStringOrArray) return false;
+  if (!isStringOrArrayOrReactElement) return false;
 
   if (typeof body === "string") return Boolean(body.trim().length);
+
+  if (React.isValidElement(body)) return true;
 
   const str = body
     .map((block) => {
