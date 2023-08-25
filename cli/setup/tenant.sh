@@ -2,7 +2,7 @@ colorPrint() {
   echo "\033[0;36m$1\033[0m"
 }
 addVercelEnvVar() {
-  echo $1 | tr -d '\n' | vercel env add $2 --cwd "$projectName"
+  echo $1 | tr -d '\n' | vercel env add $2 production --cwd "$projectName"
 }
 current_dir=$(pwd)
 gitURL=https://github.com/Mawla/growth-websites
@@ -10,8 +10,9 @@ scope=mawla-team
 #TEAM_ID=team_A6BdRNwaMCRkxWfwew0CF4Dq
 
 colorPrint "What's the name of the project?"
-
-read projectName
+read -p "name:" name
+projectName=$(echo "$name" | tr '[:upper:]' '[:lower:]')
+colorPrint "Okay creating $projectName"
 
 rm -rf .env.development.local
 touch ".env.development.local"
@@ -90,12 +91,15 @@ sanity cors add "https://*$projectName.vercel.app" --credentials
 
 
 # init vercel
+colorPrint "- Initializing vercel"
 vercel project add "$projectName" -S "$scope" --cwd "$projectName"
 vercel git connect "$gitURL" -S "$scope" --yes --cwd "$projectName"
 vercel link -S "$scope" --yes --cwd "$projectName"
 
+colorPrint "- Adding Vercel Vars"
 # add vercel env variables
 addVercelEnvVar "$sanityProjectId" "NEXT_PUBLIC_SANITY_PROJECT_ID"
+echo "$sanityProjectId" | tr -d '\n' | vercel env add "NEXT_PUBLIC_SANITY_PROJECT_ID" development --cwd "$projectName"
 addVercelEnvVar "$sanityProjectId" "SANITY_STUDIO_API_PROJECT_ID"
 addVercelEnvVar "production" "NEXT_PUBLIC_SANITY_DATASET"
 addVercelEnvVar "production" "SANITY_STUDIO_API_DATASET"
@@ -105,14 +109,16 @@ addVercelEnvVar "/" "SANITY_STUDIO_PROJECT_PATH"
 addVercelEnvVar "$sanityReadToken" "SANITY_API_READ_TOKEN"
 addVercelEnvVar "$sanityWriteToken" "SANITY_API_WRITE_TOKEN"
 
+colorPrint "- Inviting Dinguses"
+
 sanity users invite dan@mawla.ie --role administrator
 sanity users invite arjen@mawla.ie --role administrator
 sanity users invite ben@mawla.ie --role administrator
 
 #sanity dataset export production-march.tar.gz development --replace
-sanity dataset import cli/setup/production.tar.gz production --replace --allow-failing-assets
+#sanity dataset import cli/setup/production.tar.gz production --replace --allow-failing-assets
 
-Remove tmp directory
+#Remove tmp directory
 rm -rf -R "$projectName"
 
 colorPrint "Done!"
