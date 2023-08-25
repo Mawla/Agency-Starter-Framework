@@ -2,10 +2,9 @@ colorPrint() {
   echo "\033[0;36m$1\033[0m"
 }
 addVercelEnvVar() {
-  echo $1 | tr -d '\n' | vercel env add $2 production --cwd "$projectName"
+  echo $1 | tr -d '\n' | vercel env add $2 --cwd "$projectName"
 }
-
-vercelToken=GlLw4VtYX4LrGkptwirwVvXu
+current_dir=$(pwd)
 gitURL=https://github.com/Mawla/growth-websites
 scope=mawla-team
 #TEAM_ID=team_A6BdRNwaMCRkxWfwew0CF4Dq
@@ -19,7 +18,7 @@ touch ".env.development.local"
 
 #Vercel CLI reads the directory name to decide what to link to, creating shallow clone of the repos .git folder
 mkdir "$projectName"
-cp -R .git "$projectName"
+ln -s "$current_dir/.git" "$current_dir/$projectName/.git"
 
 # get sanity auth token
 authToken=$(sanity debug --secrets | grep 'Auth token' | cut -d \' -f2)
@@ -91,20 +90,20 @@ sanity cors add "https://*$projectName.vercel.app" --credentials
 
 
 # init vercel
-vercel project add "$projectName" -S "$scope" -t "$vercelToken" --cwd "$projectName"
-vercel git connect "$gitURL" -S "$scope" -t "$vercelToken" --yes --cwd "$projectName"
-vercel link -S "$scope" -t "$vercelToken" --yes --cwd "$projectName"
+vercel project add "$projectName" -S "$scope" --cwd "$projectName"
+vercel git connect "$gitURL" -S "$scope" --yes --cwd "$projectName"
+vercel link -S "$scope" --yes --cwd "$projectName"
 
 # add vercel env variables
-addVercelEnvVar $sanityProjectId NEXT_PUBLIC_SANITY_PROJECT_ID
-addVercelEnvVar $sanityProjectId SANITY_STUDIO_API_PROJECT_ID
-addVercelEnvVar "production" NEXT_PUBLIC_SANITY_DATASET
-addVercelEnvVar "production" SANITY_STUDIO_API_DATASET
-addVercelEnvVar $previewSecret SANITY_PREVIEW_SECRET
-addVercelEnvVar $webhookSecret SANITY_WEBHOOK_SECRET
-addVercelEnvVar "/" SANITY_STUDIO_PROJECT_PATH
-addVercelEnvVar $sanityReadToken SANITY_API_READ_TOKEN
-addVercelEnvVar $sanityWriteToken SANITY_API_WRITE_TOKEN
+addVercelEnvVar "$sanityProjectId" "NEXT_PUBLIC_SANITY_PROJECT_ID"
+addVercelEnvVar "$sanityProjectId" "SANITY_STUDIO_API_PROJECT_ID"
+addVercelEnvVar "production" "NEXT_PUBLIC_SANITY_DATASET"
+addVercelEnvVar "production" "SANITY_STUDIO_API_DATASET"
+addVercelEnvVar "$previewSecret" "SANITY_PREVIEW_SECRET"
+addVercelEnvVar "$webhookSecret" "SANITY_WEBHOOK_SECRET"
+addVercelEnvVar "/" "SANITY_STUDIO_PROJECT_PATH"
+addVercelEnvVar "$sanityReadToken" "SANITY_API_READ_TOKEN"
+addVercelEnvVar "$sanityWriteToken" "SANITY_API_WRITE_TOKEN"
 
 sanity users invite dan@mawla.ie --role administrator
 sanity users invite arjen@mawla.ie --role administrator
