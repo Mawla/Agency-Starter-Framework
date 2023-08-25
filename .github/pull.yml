@@ -1,7 +1,0 @@
-#https://github.com/wei/pull#trigger-manually
-
-version: "1"
-rules:
-  - base: main
-    upstream: Mawla:main
-    mergeMethod: hardreset
