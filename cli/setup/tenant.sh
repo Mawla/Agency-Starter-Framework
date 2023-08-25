@@ -106,9 +106,9 @@ addVercelEnvVar "/" SANITY_STUDIO_PROJECT_PATH
 addVercelEnvVar $sanityReadToken SANITY_API_READ_TOKEN
 addVercelEnvVar $sanityWriteToken SANITY_API_WRITE_TOKEN
 
-#sanity users invite dan@mawla.ie --role administrator
-#sanity users invite arjen@mawla.ie --role administrator
-#sanity users invite ben@mawla.ie --role administrator
+sanity users invite dan@mawla.ie --role administrator
+sanity users invite arjen@mawla.ie --role administrator
+sanity users invite ben@mawla.ie --role administrator
 
 #sanity dataset export production-march.tar.gz development --replace
 sanity dataset import cli/setup/production.tar.gz production --replace --allow-failing-assets
