@@ -60,9 +60,15 @@ const schema = defineType({
           preview: {
             select: {
               media: "image",
+              title: "title",
             },
           },
           fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+            }),
             defineField({
               name: "image",
               title: "Image",

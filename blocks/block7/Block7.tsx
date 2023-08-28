@@ -64,6 +64,7 @@ type ItemProps = {
   _key?: string;
   image?: ImageType;
   link?: LinkProps;
+  title?: string;
 };
 
 export type Block7Props = {
@@ -75,7 +76,6 @@ export type Block7Props = {
   decorations?: DecorationProps[];
   title?: string;
   intro?: React.ReactNode;
-
   buttons?: ButtonProps[];
   items?: ItemProps[];
 };
@@ -132,10 +132,11 @@ export const Block7 = ({
           <div className="lg:w-9/12 lg:grow-0">
             {items && Boolean(items?.filter(Boolean).length) && (
               <MobileScroller className="flex lg:grid lg:grid-cols-auto lg:grid-flow-col gap-2">
-                {items?.map(({ image, _key, link }) => (
+                {items?.map(({ image, title, _key, link }) => (
                   <div key={_key}>
                     {link ? (
                       <Link {...link}>
+                        <span className="sr-only">{title}</span>
                         <Item {...{ image, _key }} />
                       </Link>
                     ) : (
