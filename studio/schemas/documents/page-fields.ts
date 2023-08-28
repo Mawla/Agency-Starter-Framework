@@ -23,6 +23,7 @@ import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import {
   DateRule,
+  defineArrayMember,
   defineField,
   PreviewConfig,
   SlugRule,
@@ -83,13 +84,14 @@ export const BLOCKS_FIELD = defineField({
   description: "Blocks are the building blocks of a page.",
   of: [
     ...(Object.keys(BLOCK_SCHEMAS) as BlockSchemaName[]).map(
-      (type: BlockSchemaName) => ({
-        type,
-        components: {
-          preview: PageBuilderItemPreview,
-          item: PageBuilderItem,
-        },
-      }),
+      (type: BlockSchemaName) =>
+        defineArrayMember({
+          type,
+          components: {
+            preview: PageBuilderItemPreview as any,
+            item: PageBuilderItem as any,
+          },
+        }),
     ),
     { type: "studio.divider" },
   ],
@@ -111,13 +113,14 @@ export const DIALOGS_FIELD = defineField({
   description:
     "Dialogs are modal windows, used for presenting extra information. A dialog must be created before it can be linked to from a button inside block.",
   of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
-    (type: DialogSchemaName) => ({
-      type,
-      components: {
-        preview: PageBuilderItemPreview,
-        item: PageBuilderItem,
-      },
-    }),
+    (type: DialogSchemaName) =>
+      defineArrayMember({
+        type,
+        components: {
+          preview: PageBuilderItemPreview as any,
+          item: PageBuilderItem as any,
+        },
+      }),
   ),
   options: {
     filterType: /dialog.*/,
@@ -131,28 +134,6 @@ export const ORDER_PUBLISHED_DESC: SortOrdering = {
   title: "Created ↑",
   name: "publishedAtDesc",
   by: [{ field: "publishedAt", direction: "desc" }],
-};
-
-export const EMPTY_RICHTEXT_BLOCK = {
-  _type: "block.richtext",
-  _key: nanoid(),
-  background: "white",
-  content: [
-    {
-      _type: "block",
-      _key: nanoid(),
-      style: "normal",
-      markDefs: [],
-      children: [
-        {
-          _type: "span",
-          _key: nanoid(),
-          text: "",
-          marks: [],
-        },
-      ],
-    },
-  ],
 };
 
 export const PASSWORD = defineField({
@@ -314,6 +295,16 @@ export const HIDE_FOOTER_FIELD = defineField({
   group: ["meta"],
 });
 
+export const HIDE_BREADCRUMB_FIELD = defineField({
+  name: "hideBreadcrumb",
+  title: "Hide breadcrumb",
+  type: "boolean",
+  description:
+    "Option to hide the breadcrumb (if enabled in navigation theme settings)",
+  initialValue: false,
+  group: ["meta"],
+});
+
 export const SCRIPTS_FIELD = defineField({
   name: "scripts",
   title: "Scripts",
@@ -348,6 +339,7 @@ export const pageBase = {
     { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,
+    HIDE_BREADCRUMB_FIELD,
     LANGUAGE_FIELD,
     I18N_BASE_FIELD,
     SCRIPTS_FIELD,

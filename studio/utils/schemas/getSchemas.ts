@@ -1,16 +1,9 @@
-import React from "react";
 import { StructureBuilder } from "sanity/desk";
 
-export const getSchemas = (
-  S: StructureBuilder
-): {
-  title?: string;
-  name?: string;
-  icon?: React.ComponentType<{}> | React.ReactNode;
-}[] => {
+export const getSchemas = (S: StructureBuilder) => {
   if (!S?.context?.schema?._original?.types) {
     console.warn(
-      "No schemas found in getSchemas(). Be sure to pass S as the first argument."
+      "No schemas found in getSchemas(). Be sure to pass S as the first argument.",
     );
     return [];
   }
@@ -18,9 +11,9 @@ export const getSchemas = (
 
   const schemaTypes = schemas
     .filter(
-      (type) => type.type === "document" && type.name.indexOf("sanity.") < 0
+      (type) => type.type === "document" && type.name.indexOf("sanity.") < 0,
     )
-    .map(({ title, name, icon, options }) => ({
+    .map(({ title, name, icon }) => ({
       title,
       name,
       icon,

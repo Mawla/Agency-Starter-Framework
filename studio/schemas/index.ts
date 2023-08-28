@@ -1,37 +1,37 @@
 import block0 from "../../blocks/block0/block0.schema";
 import block1 from "../../blocks/block1/block1.schema";
 import block2 from "../../blocks/block2/block2.schema";
-import block3 from "../../blocks/block3/block3.schema";
 import block4 from "../../blocks/block4/block4.schema";
-import block6 from "../../blocks/block6/block6.schema";
 import block7 from "../../blocks/block7/block7.schema";
-import block8 from "../../blocks/block8/block8.schema";
-import block9 from "../../blocks/block9/block9.schema";
 import block10 from "../../blocks/block10/block10.schema";
-import block11 from "../../blocks/block11/block11.schema";
 import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
 import block14 from "../../blocks/block14/block14.schema";
 import block15 from "../../blocks/block15/block15.schema";
 import block16 from "../../blocks/block16/block16.schema";
+import block17 from "../../blocks/block17/block17.schema";
+import block18 from "../../blocks/block18/block18.schema";
 import presetBlocks from "../../components/block/block.preset";
-import presetDecoration from "../../components/block/decoration.preset";
-import {
-  decoration,
-  decorations,
-  decorationWrapper,
-} from "../../components/block/decoration.schema";
 import presetButton, {
   buttonTheme,
 } from "../../components/buttons/button.preset";
 import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
+import composableCard from "../../components/cards/composablecard.schema";
+import testimonialCard from "../../components/cards/testimonialcard.schema";
+import presetDecoration from "../../components/decorations/decoration.preset";
+import {
+  decoration,
+  decorations,
+  decorationWrapper,
+} from "../../components/decorations/decoration.schema";
 import faq, { faqItem } from "../../components/faq/faq.schema";
 import highlight from "../../components/highlight/highlight.schema";
 import imageSimple from "../../components/images/image.schema";
 import portableTextBasic from "../../components/portabletext/portabletextbasic.schema";
 import portableTextFull from "../../components/portabletext/portabletextfull.schema";
+import portableTextPlain from "../../components/portabletext/portabletextplain.schema";
 import portableTextSimple from "../../components/portabletext/portabletextsimple.schema";
 import script from "../../components/script/script.schema";
 import testimonials, {
@@ -86,22 +86,20 @@ export const schemaTypes = [
     block0,
     block1,
     block10,
-    block11,
     block12,
     block13,
     block14,
     block15,
     block16,
+    block17,
+    block18,
     block2,
-    block3,
     block4,
-    block6,
     block7,
-    block8,
-    block9,
     button,
-    buttonTheme,
     buttongroup,
+    buttonTheme,
+    composableCard,
     configCMS,
     configIcons,
     configIntegrations,
@@ -109,8 +107,8 @@ export const schemaTypes = [
     configTheme,
     copypaste,
     decoration,
-    decorationWrapper,
     decorations,
+    decorationWrapper,
     dialogForm,
     dialogRichText,
     dialogVideo,
@@ -143,6 +141,7 @@ export const schemaTypes = [
     password,
     portableTextBasic,
     portableTextFull,
+    portableTextPlain,
     portableTextSimple,
     preset,
     presetBlocks,
@@ -153,6 +152,8 @@ export const schemaTypes = [
     studioDivider,
     styles,
     swapSchema,
+    testimonialCard,
+    testimonialItem,
     testimonials,
     video,
   ],
@@ -162,7 +163,6 @@ export const schemaTypes = [
     configSeo,
     configTranslations,
     person,
-    testimonialItem,
     faqItem,
   ]),
 ];

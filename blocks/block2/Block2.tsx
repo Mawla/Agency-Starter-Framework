@@ -1,18 +1,20 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -87,7 +89,7 @@ export const Block2 = ({
     >
       <div
         className={cx(
-          "max-w-3xl",
+          "max-w-4xl",
           alignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -98,14 +100,15 @@ export const Block2 = ({
             </Title>
           </div>
         )}
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <div className="mb-10 md:mb-14">
             <Text
               align={theme?.block?.align || "center"}
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
+              weight={theme?.intro?.weight}
             >
-              <PortableText content={intro as any} />
+              <PortableText content={intro as PortableTextBlock[]} />
             </Text>
           </div>
         )}
@@ -134,7 +137,7 @@ export const Block2 = ({
       {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div
           className={cx(
-            "max-w-3xl",
+            "max-w-4xl",
             alignClasses[theme?.block?.align || "center"],
             "mt-8 lg:mt-16",
           )}
@@ -179,9 +182,13 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
             </Title>
           </div>
         )}
-        {intro && (
-          <Text size={theme?.intro?.size || "md"} color={theme?.intro?.color}>
-            <PortableText content={intro as any} />
+        {shouldRenderPortableText(intro) && (
+          <Text
+            size={theme?.intro?.size || "md"}
+            color={theme?.intro?.color}
+            weight={theme?.intro?.weight}
+          >
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
       </div>

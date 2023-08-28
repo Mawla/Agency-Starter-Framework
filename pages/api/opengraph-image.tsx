@@ -83,6 +83,7 @@ const handler = async (req: NextRequest) => {
   let logoHeight;
   if (data?.logoImage) {
     logoHeight = getOriginalImageDimensions(data?.logoImage).height;
+    if (isNaN(logoHeight) || logoHeight > 75) logoHeight = 75;
   }
 
   let heroImage;
@@ -153,7 +154,12 @@ const handler = async (req: NextRequest) => {
                   marginTop: logoHeight ? -logoHeight - 40 : 0,
                 }}
               >
-                <img src={data?.logoImage} />
+                <img
+                  src={data?.logoImage}
+                  style={{
+                    height: logoHeight,
+                  }}
+                />
               </div>
             )}
 

@@ -1,25 +1,22 @@
 import { getBlock0Query } from "../blocks/block0/block0.query";
 import { getBlock1Query } from "../blocks/block1/block1.query";
 import { getBlock2Query } from "../blocks/block2/block2.query";
-import { getBlock3Query } from "../blocks/block3/block3.query";
 import { getBlock4Query } from "../blocks/block4/block4.query";
-import { getBlock6Query } from "../blocks/block6/block6.query";
 import { getBlock7Query } from "../blocks/block7/block7.query";
-import { getBlock8Query } from "../blocks/block8/block8.query";
-import { getBlock9Query } from "../blocks/block9/block9.query";
 import { getBlock10Query } from "../blocks/block10/block10.query";
-import { getBlock11Query } from "../blocks/block11/block11.query";
 import { getBlock12Query } from "../blocks/block12/block12.query";
 import { getBlock13Query } from "../blocks/block13/block13.query";
 import { getBlock14Query } from "../blocks/block14/block14.query";
 import { getBlock15Query } from "../blocks/block15/block15.query";
 import { getBlock16Query } from "../blocks/block16/block16.query";
-import { decorationsQuery } from "../components/block/decoration.query";
+import { getBlock17Query } from "../blocks/block17/block17.query";
+import { getBlock18Query } from "../blocks/block18/block18.query";
 import {
   FlatBreadcrumbItemType,
   FlatBreadcrumbType,
   getBreadcrumbQuery,
 } from "../components/breadcrumb/breadcrumb.query";
+import { decorationsQuery } from "../components/decorations/decoration.query";
 import {
   imageQuery,
   getImageQuery as getImageComponentQuery,
@@ -43,6 +40,7 @@ export type PageType = {
   title: string;
   hideNav?: boolean;
   hideFooter?: boolean;
+  hideBreadcrumb?: boolean;
   seo: SeoType;
   blocks: {}[];
   dialogs: {}[];
@@ -66,6 +64,7 @@ export const getPageQuery = (language: LanguageType) => groq`
     title,
     hideNav,
     hideFooter,
+    hideBreadcrumb,
     "locked": locked,
 
     // homepage for language
@@ -108,25 +107,23 @@ export const getPageQuery = (language: LanguageType) => groq`
     // blocks
     "blocks": blocks[!(_type in path('studio.*')) && disabled != true] {
       ${getBlock7Query(language)},
+      ${getBlock18Query(language)},
+      ${getBlock17Query(language)},
       ${getBlock16Query(language)},
       ${getBlock15Query(language)},
       ${getBlock14Query(language)},
       ${getBlock13Query(language)},
       ${getBlock12Query(language)},
       ${getBlock0Query(language)},
-      ${getBlock11Query(language)},
       ${getBlock10Query(language)},
       ${getBlock1Query(language)},
       ${getBlock2Query(language)},
-      ${getBlock3Query(language)},
       ${getBlock4Query(language)},
-      ${getBlock6Query(language)},
-      ${getBlock8Query(language)},
-      ${getBlock9Query(language)},
       _key,
       _type,
       decorations,
       theme,
+      "slug": coalesce(slug.current, title, _key),
       ${decorationsQuery}
     },
 

@@ -1,19 +1,16 @@
 import { Block0Props } from "../../blocks/block0/Block0";
 import { Block1Props } from "../../blocks/block1/Block1";
 import { Block2Props } from "../../blocks/block2/Block2";
-import { Block3Props } from "../../blocks/block3/Block3";
 import { Block4Props } from "../../blocks/block4/Block4";
-import { Block6Props } from "../../blocks/block6/Block6";
 import { Block7Props } from "../../blocks/block7/Block7";
-import { Block8Props } from "../../blocks/block8/Block8";
-import { Block9Props } from "../../blocks/block9/Block9";
 import { Block10Props } from "../../blocks/block10/Block10";
-import { Block11Props } from "../../blocks/block11/Block11";
 import { Block12Props } from "../../blocks/block12/Block12";
 import { Block13Props } from "../../blocks/block13/Block13";
 import { Block14Props } from "../../blocks/block14/Block14";
 import { Block15Props } from "../../blocks/block15/Block15";
 import { Block16Props } from "../../blocks/block16/Block16";
+import { Block17Props } from "../../blocks/block17/Block17";
+import { Block18Props } from "../../blocks/block18/Block18";
 import { GenericBlockProps } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import BlockErrorBoundary from "./BlockErrorBoundary";
@@ -23,6 +20,16 @@ import { Suspense, lazy } from "react";
 
 const Block7 = lazy<ComponentType<Block7Props>>(
   () => import(/* webpackChunkName: "Block7" */ "../../blocks/block7/Block7"),
+);
+
+const Block18 = lazy<ComponentType<Block18Props>>(
+  () =>
+    import(/* webpackChunkName: "Block18" */ "../../blocks/block18/Block18"),
+);
+
+const Block17 = lazy<ComponentType<Block17Props>>(
+  () =>
+    import(/* webpackChunkName: "Block17" */ "../../blocks/block17/Block17"),
 );
 
 const Block16 = lazy<ComponentType<Block16Props>>(
@@ -54,29 +61,13 @@ const Block0 = lazy<ComponentType<Block0Props>>(
   () => import(/* webpackChunkName: "Block0" */ "../../blocks/block0/Block0"),
 );
 
-const Block11 = lazy<ComponentType<Block11Props>>(
-  () =>
-    import(/* webpackChunkName: "Block11" */ "../../blocks/block11/Block11"),
-);
 const Block10 = lazy<ComponentType<Block10Props>>(
   () =>
     import(/* webpackChunkName: "Block10" */ "../../blocks/block10/Block10"),
 );
 
-const Block8 = lazy<ComponentType<Block8Props>>(
-  () => import(/* webpackChunkName: "Block8" */ "../../blocks/block8/Block8"),
-);
-const Block9 = lazy<ComponentType<Block9Props>>(
-  () => import(/* webpackChunkName: "Block9" */ "../../blocks/block9/Block9"),
-);
-const Block6 = lazy<ComponentType<Block6Props>>(
-  () => import(/* webpackChunkName: "Block6" */ "../../blocks/block6/Block6"),
-);
 const Block4 = lazy<ComponentType<Block4Props>>(
   () => import(/* webpackChunkName: "Block4" */ "../../blocks/block4/Block4"),
-);
-const Block3 = lazy<ComponentType<Block3Props>>(
-  () => import(/* webpackChunkName: "Block3" */ "../../blocks/block3/Block3"),
 );
 const Block2 = lazy<ComponentType<Block2Props>>(
   () => import(/* webpackChunkName: "Block2" */ "../../blocks/block2/Block2"),
@@ -114,14 +105,12 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               networkIdle={INVIEW_LOAD_ONLY_SECTIONS.indexOf(item._type) === -1}
               background={item.theme?.background}
               block={item._type}
-              id={item._key}
+              _key={item._key}
+              slug={item.slug}
             >
               {/* all blocks */}
               {item._type === "block.block4" && (
                 <Block4 {...(item as Block4Props)} />
-              )}
-              {item._type === "block.block3" && (
-                <Block3 {...(item as Block3Props)} />
               )}
               {item._type === "block.block2" && (
                 <Block2 {...(item as Block2Props)} />
@@ -129,23 +118,8 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               {item._type === "block.block1" && (
                 <Block1 {...(item as Block1Props)} />
               )}
-              {item._type === "block.block8" && (
-                <Block8 {...(item as Block8Props)} />
-              )}
-              {item._type === "block.block6" && (
-                <Block6 {...(item as Block6Props)} />
-              )}
-
               {item._type === "block.block10" && (
                 <Block10 {...(item as Block10Props)} />
-              )}
-
-              {item._type === "block.block9" && (
-                <Block9 {...(item as Block9Props)} />
-              )}
-
-              {item._type === "block.block11" && (
-                <Block11 {...(item as Block11Props)} />
               )}
 
               {item._type === "block.block0" && (
@@ -174,6 +148,14 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
 
               {item._type === "block.block7" && (
                 <Block7 {...(item as Block7Props)} />
+              )}
+
+              {item._type === "block.block17" && (
+                <Block17 {...(item as Block17Props)} />
+              )}
+
+              {item._type === "block.block18" && (
+                <Block18 {...(item as Block18Props)} />
               )}
             </LazyLoadInView>
           </BlockErrorBoundary>

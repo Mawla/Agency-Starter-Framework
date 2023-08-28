@@ -3,7 +3,7 @@ import { textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import * as DOMPurify from "dompurify";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 export type IconLoaderProps = {
@@ -17,6 +17,7 @@ export type IconLoaderProps = {
   domain?: string;
   path?: string;
   removeColors?: boolean;
+  removeDimensions?: boolean;
 };
 
 export const IconLoader = ({
@@ -28,8 +29,11 @@ export const IconLoader = ({
   description,
   style,
   removeColors = true,
+  removeDimensions = true,
 }: IconLoaderProps) => {
   const Element = as;
+
+  const [innerHTML, setInnerHTML] = useState<null | string>(null);
 
   const {
     data: svg,
@@ -46,20 +50,19 @@ export const IconLoader = ({
       ),
   });
 
-  let cleanSVG = "";
-  if (svg) {
-    if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return null;
+  useEffect(() => {
+    if (!svg) return;
+    if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
 
-    cleanSVG = DOMPurify?.sanitize?.(svg); //
-    cleanSVG = cleanUpAttributes(cleanSVG);
+    let cleanSVG = DOMPurify?.sanitize?.(svg); //
+    cleanSVG = cleanUpAttributes(cleanSVG, removeDimensions);
     if (removeColors) {
       cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
     }
-  }
+    setInnerHTML(cleanSVG);
+  }, [svg]);
 
-  if (!cleanSVG) return null;
-
-  if (isLoading || isError)
+  if (isLoading || isError || !innerHTML)
     return (
       <Element
         role="img"
@@ -76,7 +79,7 @@ export const IconLoader = ({
       aria-hidden="true"
       aria-label={[title, description, icon].filter(Boolean).join(", ")}
       className={cx(className, color && textClasses[color])}
-      dangerouslySetInnerHTML={{ __html: cleanSVG }}
+      dangerouslySetInnerHTML={{ __html: innerHTML }}
       style={style}
     />
   );
@@ -88,13 +91,15 @@ export default React.memo(IconLoader);
  * Remove width / height / style
  */
 
-const cleanUpAttributes = (str: string) => {
+const cleanUpAttributes = (str: string, removeDimensions = true) => {
   let parser = new DOMParser();
   let parsedResult = parser.parseFromString(str, "image/svg+xml");
 
   // remove width and height so we can style with css
-  parsedResult.documentElement.removeAttribute("width");
-  parsedResult.documentElement.removeAttribute("height");
+  if (removeDimensions) {
+    parsedResult.documentElement.removeAttribute("width");
+    parsedResult.documentElement.removeAttribute("height");
+  }
 
   // remove style attributes as they might overwrite styles on the site
   parsedResult.documentElement

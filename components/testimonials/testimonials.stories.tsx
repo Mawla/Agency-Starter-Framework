@@ -21,3 +21,14 @@ export const CustomElement = () => (
     RenderElement={(props) => <div className="border p-10">{props.title}</div>}
   />
 );
+
+export const Slider = () => (
+  <Testimonials
+    items={demoTestimonialsList}
+    RenderElement={(props) => (
+      <div className="border p-10 h-full bg-white">{props.title}</div>
+    )}
+    slider={true}
+    sliderControlsColor="black"
+  />
+);

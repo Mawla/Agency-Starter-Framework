@@ -10,11 +10,13 @@ import React from "react";
 
 export type FooterProps = {
   socials: {
+    _key?: string;
     label?: string;
     href?: string;
     icon?: string;
   }[];
   links: {
+    _key?: string;
     title?: string;
     href?: string;
     current?: boolean;
@@ -23,7 +25,11 @@ export type FooterProps = {
   copyright?: string;
   info?: string;
   legal?: string;
-  legalLinks?: { label?: string; href?: string }[];
+  legalLinks?: {
+    _key?: string;
+    label?: string;
+    href?: string;
+  }[];
   logo?: { mobile?: ImageType; desktop?: ImageType };
   theme?: {
     block?: {
@@ -32,6 +38,7 @@ export type FooterProps = {
       text?: ColorType;
     };
   };
+  hideBreadcrumb?: boolean;
 };
 
 export const Footer = ({
@@ -43,6 +50,7 @@ export const Footer = ({
   legalLinks,
   logo,
   theme,
+  hideBreadcrumb,
 }: FooterProps) => {
   return (
     <footer>
@@ -52,10 +60,10 @@ export const Footer = ({
         }}
         className="text-[14px]"
       >
-        <FooterBreadcrumb />
+        {hideBreadcrumb !== true && <FooterBreadcrumb />}
 
-        <div className="grid lg:grid-cols-12 lg:gap-10 lg:gap-5">
-          <div className="lg:col-span-12 lg:col-span-4 flex flex-col gap-4 pr-20">
+        <div className="grid lg:grid-cols-12 lg:gap-5">
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:pr-20 mb-10 lg:mb-0 max-w-sm lg:max-w-none">
             {logo && (
               <div>
                 <FooterLogo mobile={logo?.mobile} desktop={logo?.desktop} />
@@ -65,19 +73,23 @@ export const Footer = ({
             {info && <p>{info}</p>}
 
             {Boolean(socials?.length) && (
-              <ul className="flex gap-4 md:gap-6 items-center">
-                {socials?.map(({ label, href, icon }) => (
-                  <li key={label}>
+              <ul className="flex gap-4 items-center">
+                {socials?.map(({ _key, label, href, icon }) => (
+                  <li key={_key}>
                     {href && (
                       <Link
                         href={href}
-                        className="block w-7 h-7 overflow-hidden"
+                        className="block overflow-hidden"
                         rel="noopener noreferrer"
                         target="_blank"
                         showExternalIcon={false}
                       >
                         <span className="sr-only">{label}</span>
-                        <IconLoader icon={icon} />
+                        <IconLoader
+                          icon={icon}
+                          removeColors={false}
+                          removeDimensions={false}
+                        />
                       </Link>
                     )}
                   </li>
@@ -88,8 +100,8 @@ export const Footer = ({
 
           {/* links */}
           <div className="col-span-12 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-            {links?.map(({ title, ...rest }) => (
-              <FooterMenu key={title} title={title} {...rest} />
+            {links?.map(({ _key, title, ...rest }) => (
+              <FooterMenu key={_key} title={title} {...rest} />
             ))}
           </div>
         </div>
@@ -104,8 +116,8 @@ export const Footer = ({
 
           {Boolean(legalLinks?.length) && (
             <ul className="flex gap-5 items-center text-[12px] leading-relaxed">
-              {legalLinks?.map(({ label, href }) => (
-                <li key={label}>
+              {legalLinks?.map(({ _key, label, href }) => (
+                <li key={_key}>
                   {href && (
                     <Link href={href} className="hover:underline">
                       {label}

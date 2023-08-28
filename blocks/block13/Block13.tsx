@@ -1,7 +1,7 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import Link from "../../components/buttons/Link";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { MobileScrollerProps } from "../../components/slider/MobileScroller";
@@ -10,10 +10,12 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { truncate } from "../../helpers/utils/string";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -88,7 +90,7 @@ export const Block13 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -98,13 +100,14 @@ export const Block13 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
+            weight={theme?.intro?.weight}
             align={theme?.block?.align || "center"}
           >
-            <PortableText content={intro as any} />
+            <PortableText content={intro as PortableTextBlock[]} />
           </Text>
         )}
       </div>
@@ -149,7 +152,7 @@ export const Block13 = ({
                       </Title>
                     )}
 
-                    {intro && (
+                    {shouldRenderPortableText(intro) && (
                       <Text size="md" color={theme?.card?.text}>
                         {truncate(intro, 150)}
                       </Text>

@@ -22,8 +22,9 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 export const PageLock = () => {
   const { sitemapItem } = useContext(PageContext);
 
-  const [status, setStatus] =
-    useState<"loading" | "error" | "locked" | "unlocked">("locked");
+  const [status, setStatus] = useState<
+    "loading" | "error" | "locked" | "unlocked"
+  >("locked");
   const [page, setPage] = useState<PageType | null>(null);
 
   const router = useRouter();
@@ -51,6 +52,7 @@ export const PageLock = () => {
     async function getPage() {
       const pageData = await getClient(false)?.fetch(getPageQuery(language), {
         ...sitemapItem,
+        language,
       });
       setPage(pageData);
     }

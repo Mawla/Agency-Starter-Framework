@@ -1,6 +1,8 @@
+import { demoPortableTextArticle } from "../../stories/content";
 import { COLORS } from "../../theme";
 import { ColorType } from "../../types";
 import { Background } from "../block/Background";
+import PortableText from "../portabletext/PortableText";
 import { Text as TextComponent } from "./Text";
 import {
   TextFontType,
@@ -8,6 +10,8 @@ import {
   TEXT_ALIGN_OPTIONS,
   TEXT_FONT_OPTIONS,
   TEXT_SIZE_OPTIONS,
+  TEXT_WEIGHT_OPTIONS,
+  TextWeightType,
 } from "./text.options";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -54,6 +58,16 @@ export const Text = () => (
       </div>
     ))}
 
+    {(Object.keys(TEXT_WEIGHT_OPTIONS) as TextWeightType[]).map(
+      (weight: TextWeightType) => (
+        <div key={weight} className="p-4">
+          <TextComponent weight={weight}>
+            <div className="p-1">weight {weight}</div>
+          </TextComponent>
+        </div>
+      ),
+    )}
+
     {(Object.keys(COLORS) as ColorType[]).map((color: ColorType) => (
       <TextComponent color={color} background={color} key={color}>
         <div className="p-4">Text color {color}</div>
@@ -67,4 +81,10 @@ export const Text = () => (
       </Background>
     ))}
   </div>
+);
+
+export const PortableTextWrapper = () => (
+  <TextComponent>
+    <PortableText content={demoPortableTextArticle} />
+  </TextComponent>
 );

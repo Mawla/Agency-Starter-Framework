@@ -1,5 +1,5 @@
 import { pick } from "../../helpers/utils/object";
-import { FONTS } from "../../theme";
+import { FONTS, FONT_WEIGHTS } from "../../theme";
 import { ALIGNMENTS, ColorType, SIZES } from "../../types";
 
 export const TEXT_ALIGN_OPTIONS = pick(
@@ -10,6 +10,9 @@ export const TEXT_ALIGN_OPTIONS = pick(
   "auto",
 );
 export type TextAlignType = keyof typeof TEXT_ALIGN_OPTIONS;
+
+export const TEXT_WEIGHT_OPTIONS = pick(FONT_WEIGHTS);
+export type TextWeightType = keyof typeof TEXT_WEIGHT_OPTIONS;
 
 export const TEXT_SIZE_OPTIONS = pick(SIZES, "sm", "md", "lg", "xl", "2xl");
 export type TextSizeType = keyof typeof TEXT_SIZE_OPTIONS;
@@ -41,4 +44,5 @@ export const textFontClasses: Record<TextFontType, string> = {
 export type TextThemeType = {
   size?: TextSizeType;
   color?: ColorType;
+  weight?: TextWeightType;
 };

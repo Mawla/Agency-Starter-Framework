@@ -116,6 +116,7 @@ export const getStaticProps: GetStaticProps = async ({
   };
   const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
     ...sitemapItem,
+    language,
   });
 
   // fetch navigation

@@ -1,11 +1,7 @@
 import { VideoType } from "../../types";
-import { lazy } from "react";
+import ReactVimeo from "@u-wave/react-vimeo";
 import React from "react";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
-
-const ReactVimeo = lazy(
-  () => import(/* webpackChunkName: "ReactVimeo" */ "@u-wave/react-vimeo"),
-);
 
 export const VimeoPlayer = ({
   videoId,

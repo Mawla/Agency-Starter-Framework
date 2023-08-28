@@ -1,25 +1,23 @@
-import { baseLanguage } from "../../languages";
 import { MessagingLines, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-const testimonialItemObject = defineField({
+export const testimonialItemObject = defineField({
   name: "item",
   title: "Single use testimonial item",
   type: "object",
   icon: () => <MessagingLines weight="thin" size={20} />,
   preview: {
     select: {
-      title: "title",
-      titleEn: `title.${baseLanguage}`,
       name: "name",
+      jobTitle: "jobTitle",
       subtitle: "name",
       image: "image",
     },
-    prepare({ title, titleEn, name, image }) {
+    prepare({ jobTitle, name, image }) {
       return {
-        title: titleEn || title,
-        subtitle: name,
+        title: name,
+        subtitle: jobTitle,
         media: image || MessagingLines,
       };
     },
@@ -36,27 +34,27 @@ const testimonialItemObject = defineField({
       title: "Person job title",
       type: "string",
       description: "What does this person do?",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       description: "Describing title of the testimonial.",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "content",
       title: "Content",
-      type: "portabletext.simple",
+      type: "portabletext.plain",
       description: "The testimonial itself.",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "image",
       title: "Image",
       type: "image",
       description: "Image of the person giving the testimonial.",
+      options: {
+        hotspot: true
+      }
     }),
   ],
 });

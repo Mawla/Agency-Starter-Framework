@@ -2,7 +2,7 @@ import { Link } from "../../components/buttons/Link";
 import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PageContext } from "../../context/PageContext";
 import { ImageType } from "../../types";
-import { ComponentType, lazy, useContext } from "react";
+import { ComponentType, Suspense, lazy, useContext } from "react";
 
 type FooterLogoProps = {
   mobile?: ImageType;
@@ -22,16 +22,18 @@ export const FooterLogo = ({ mobile, desktop }: FooterLogoProps) => {
   return (
     <Link href={`/${language}`}>
       <span className="sr-only">Home</span>
-      {mobile && (
-        <div className="sm:hidden relative">
-          <SimpleImage {...mobile} />
-        </div>
-      )}
-      {desktop && (
-        <div className="hidden sm:block relative">
-          <SimpleImage {...desktop} />
-        </div>
-      )}
+      <Suspense>
+        {mobile && (
+          <div className="sm:hidden relative">
+            <SimpleImage {...mobile} />
+          </div>
+        )}
+        {desktop && (
+          <div className="hidden sm:block relative">
+            <SimpleImage {...desktop} />
+          </div>
+        )}
+      </Suspense>
     </Link>
   );
 };

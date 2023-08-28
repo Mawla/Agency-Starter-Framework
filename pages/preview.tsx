@@ -1,8 +1,9 @@
 import Wrapper from "../components/block/Wrapper";
-import { decorationFieldsQuery } from "../components/block/decoration.query";
 import Button from "../components/buttons/Button";
 import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
+import { decorationFieldsQuery } from "../components/decorations/decoration.query";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
+import { Scripts } from "../components/script/Script";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
@@ -79,6 +80,7 @@ export default function PreviewPage({
       }
       `;
     }
+
     if (documentType === "preset.decoration") {
       return `
       *[_id == $_id][0] {
@@ -88,6 +90,17 @@ export default function PreviewPage({
       }
       `;
     }
+
+    if (documentType === "script") {
+      return `
+      *[_id == $_id][0] {
+        _rev,
+        _updatedAt,
+        ...
+      }
+      `;
+    }
+
     return getPageQuery(language);
   };
 
@@ -106,6 +119,7 @@ export default function PreviewPage({
               : "top"
           }
           showMiniMap={previewType === "page"}
+          language={language}
         />
       )}
 
@@ -149,6 +163,8 @@ export default function PreviewPage({
           />
         </div>
       )}
+
+      {previewType === "script" && data && <Scripts items={data?.items} />}
     </div>
   );
 }

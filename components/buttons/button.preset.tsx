@@ -111,6 +111,32 @@ export default defineType({
       description:
         'Override the base theme for "desktop" breakpoints and higher.',
     }),
+    defineField({
+      name: "hover",
+      title: "Hover",
+      description: "Mouse over effect",
+      type: "styles",
+      options: {
+        fields: [
+          defineField({
+            name: "underline",
+            type: "boolean",
+          }),
+          defineField({
+            name: "label",
+            type: "color",
+          }),
+          defineField({
+            name: "background",
+            type: "color",
+          }),
+          defineField({
+            name: "border",
+            type: "color",
+          }),
+        ],
+      },
+    }),
   ],
 });
 

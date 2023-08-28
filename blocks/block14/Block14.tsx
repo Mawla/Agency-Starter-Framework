@@ -1,9 +1,8 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
-import { BreadcrumbProps } from "../../components/breadcrumb/Breadcrumb";
 import Link from "../../components/buttons/Link";
 import { DateDisplayProps } from "../../components/date/DateDisplay";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SocialShareProps } from "../../components/social/SocialShare";
@@ -13,6 +12,7 @@ import { useTranslation } from "../../hooks/useTranslation";
 import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
@@ -34,13 +34,6 @@ const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    ),
-);
-
-const Breadcrumb = lazy<ComponentType<BreadcrumbProps>>(
-  () =>
-    import(
-      /* webpackChunkName: "Breadcrumb" */ "../../components/breadcrumb/Breadcrumb"
     ),
 );
 
@@ -98,7 +91,7 @@ export const Block14 = ({
       decorations={decorations}
     >
       <main className="py-8 lg:py-16">
-        <div className="grid grid-cols-12 px-4 mx-auto max-w-full gap-12">
+        <div className="grid grid-cols-12 mx-auto gap-0 lg:gap-12">
           <aside
             className="hidden relative ml-auto lg:block col-span-1"
             aria-labelledby="sidebar-label"
@@ -110,10 +103,7 @@ export const Block14 = ({
 
           <article className="col-span-12 lg:col-span-11 xl:col-span-8">
             <header className="mb-4 lg:mb-6 not-format">
-              <nav className="flex" aria-label="Breadcrumb">
-                <Breadcrumb wrap />
-              </nav>
-              <div className="flex items-center my-4 md:my-6">
+              <div className="flex items-center mb-4 md:mb-6">
                 <div className="flex gap-1 flex-wrap">
                   {Boolean(tags?.length) &&
                     tags?.map((tag) => (
@@ -122,7 +112,7 @@ export const Block14 = ({
                 </div>
               </div>
 
-              <div className="py-4 border-t border-b border-black/10 text-sm text-black/90">
+              <div className="py-4 border-t border-b border-black/10 text-sm">
                 <address className="flex not-italic">
                   {authors && Boolean(authors?.length) && (
                     <div className="mr-3 inline-flex">
@@ -162,7 +152,7 @@ export const Block14 = ({
 
             {body && (
               <div className="format format-sm sm:format-base lg:format-lg">
-                <PortableText content={body as any} />
+                <PortableText content={body as PortableTextBlock[]} />
               </div>
             )}
 
@@ -174,7 +164,7 @@ export const Block14 = ({
           <aside className="hidden xl:block col-span-3 relative">
             <div className="sticky top-6">
               {relatedArticles && Boolean(relatedArticles?.length) && (
-                <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow text-black/90">
+                <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow">
                   <h4 className="mb-4 text-sm font-bold uppercase">
                     {useTranslation("related_resources", "Related resources")}
                   </h4>

@@ -1,29 +1,41 @@
+import { WidthType } from "../../components/block/width.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
+import {
+  NavigationBreadcrumb,
+  NavigationBreadcrumbProps,
+} from "./Navigation.Breadcrumb";
 import { TopNav } from "./TopNav";
+import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
 import router from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 export type NavItem = {
+  _key?: string;
   button?: ButtonProps & { current?: boolean };
   current?: boolean;
-  children?: (ButtonProps & { current?: boolean })[];
+  children?: (ButtonProps & { current?: boolean; _key?: string })[];
 };
 
 export type NavigationProps = {
   items: NavItem[];
-  buttons: ButtonProps[];
-  logo?: { mobile?: ImageType; desktop?: ImageType };
+  buttons: (ButtonProps & { _key?: string })[];
+  logo?: {
+    mobile?: ImageType;
+    desktop?: ImageType;
+  };
+  banner?: TopNavBannerProps;
   theme?: {
     block?: {
       background?: ColorType;
       text?: ColorType;
       border?: ColorType;
+      width?: WidthType;
     };
     menu?: {
       align?: AlignType;
@@ -31,6 +43,8 @@ export type NavigationProps = {
     submenu?: {
       background?: ColorType;
     };
+    breadcrumb?: NavigationBreadcrumbProps["theme"];
+    banner?: TopNavBannerProps["theme"];
   };
 };
 
@@ -38,6 +52,7 @@ export const Navigation = ({
   items,
   buttons,
   logo,
+  banner,
   theme,
 }: NavigationProps) => {
   const { screenWidth, breakpoint } = useBreakpoint();
@@ -83,9 +98,9 @@ export const Navigation = ({
         onHamburgerClick={onHamburgerClick}
         showNav={showNav}
         ref={navRef}
-        navHeight={spacerHeight}
         logo={logo}
         theme={theme}
+        banner={banner}
       />
 
       {screenWidth < BREAKPOINTS.lg && (
@@ -96,6 +111,12 @@ export const Navigation = ({
           onOpenChange={setMobileNavIsOpen}
           theme={theme}
         />
+      )}
+
+      {theme?.breadcrumb?.hidden !== true && (
+        <Suspense>
+          <NavigationBreadcrumb theme={theme?.breadcrumb} />
+        </Suspense>
       )}
     </div>
   );

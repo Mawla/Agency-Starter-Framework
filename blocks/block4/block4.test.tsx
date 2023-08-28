@@ -11,12 +11,26 @@ describe("Block4", () => {
     });
     expect(screen.getByText("Hello", { selector: "h2" })).toBeInTheDocument();
   });
+
+  it("renders subtitle", async () => {
+    await act(() => {
+      render(<Block4 subtitle="Hello" />);
+    });
+    expect(screen.getByText("Hello", { selector: "h3" })).toBeInTheDocument();
+  });
 });
 
 describe("Block4", () => {
   it("renders intro", async () => {
     await act(() => {
       render(<Block4 intro={<p>Hello</p>} />);
+    });
+    expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
+  });
+
+  it("renders body", async () => {
+    await act(() => {
+      render(<Block4 body={<p>Hello</p>} />);
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });

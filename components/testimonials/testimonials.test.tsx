@@ -1,5 +1,6 @@
 import { act, render, screen } from "../../jest.utils";
 import { demoImage } from "../../stories/content";
+import { TestimonialCardProps } from "../cards/TestimonialCard";
 import Testimonials from "./Testimonials";
 import "@testing-library/jest-dom";
 import { TextEncoder, TextDecoder } from "util";
@@ -22,7 +23,7 @@ describe("Testimonials", () => {
               image: demoImage,
             },
           ]}
-          RenderElement={(props) => (
+          RenderElement={(props: TestimonialCardProps) => (
             <pre data-testid="pre">{JSON.stringify(props, null, 2)}</pre>
           )}
         />,

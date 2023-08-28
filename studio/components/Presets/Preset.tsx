@@ -1,6 +1,6 @@
 import { LanguageType } from "../../../languages";
 import { BlockSchemaName } from "../../../types.sanity";
-import { SearchIcon, AddIcon } from "@sanity/icons";
+import { SyncIcon, SearchIcon, AddIcon } from "@sanity/icons";
 import {
   Autocomplete,
   Card,
@@ -61,8 +61,9 @@ const Preset: ComponentType<any> = (props) => {
   const [list, setList] = useState<OptionType[]>([]);
   const [state, setState] = useState<"default" | "loading">("default");
   const [selectedPresetId, setSelectedPresetId] = useState<string | null>(null);
-  const [originalPresetTitle, setOriginalPresetTitle] =
-    useState<string | null>(null);
+  const [originalPresetTitle, setOriginalPresetTitle] = useState<string | null>(
+    null,
+  );
 
   const exportPresetId = nanoid();
   const exportPresetLink = useRef<HTMLAnchorElement>(null);
@@ -239,6 +240,15 @@ const Preset: ComponentType<any> = (props) => {
     exportPresetLink?.current?.click();
   }, [parent, exportPresetId]);
 
+  /**
+   * Import again
+   */
+
+  const reImportPreset = useCallback(() => {
+    if (!value?._ref) return;
+    setSelectedPresetId(value._ref);
+  }, [value.ref]);
+
   return (
     <Card shadow={1} padding={3}>
       <Stack space={4}>
@@ -367,15 +377,30 @@ const Preset: ComponentType<any> = (props) => {
         )}
 
         {!selectedPresetId && value?._ref && originalPresetTitle && (
-          <Text muted size={1}>
-            Based on:{" "}
-            <IntentLink
-              intent="edit"
-              params={{ id: value._ref, type: "preset.blocks" }}
-            >
-              {originalPresetTitle}
-            </IntentLink>
-          </Text>
+          <Stack space={3}>
+            <Card>
+              <Text muted size={1}>
+                Based on:{" "}
+                <IntentLink
+                  intent="edit"
+                  params={{ id: value._ref, type: "preset.blocks" }}
+                >
+                  {originalPresetTitle}
+                </IntentLink>
+              </Text>
+            </Card>
+
+            <Card>
+              <Button
+                text="Import again"
+                mode="ghost"
+                onClick={reImportPreset}
+                icon={SyncIcon}
+                fontSize={1}
+                padding={3}
+              />
+            </Card>
+          </Stack>
         )}
       </Stack>
     </Card>

@@ -99,6 +99,7 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
         .filter((type) =>
           typeFilter ? new RegExp(typeFilter).test(type) : true,
         )
+        .filter((type) => !type.startsWith("preset."))
         .filter((type) => !type.startsWith("studio."))
         .filter((type) => type !== "block")
         .map((type) => allSchemas[type].get(type))
@@ -255,10 +256,16 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
     }[] = [];
 
     if (presetId) {
-      newBlocks = [...(selectedOption?.blocks || [])].map((block) => ({
-        _type: selectedType as BlockSchemaName,
-        ...block,
-      }));
+      newBlocks = [...(selectedOption?.blocks || [])].map((block) => {
+        const data = { ...block };
+        delete data.hidden;
+        delete data.icon;
+
+        return {
+          _type: selectedType as BlockSchemaName,
+          ...data,
+        };
+      });
     } else {
       newBlocks = [
         {

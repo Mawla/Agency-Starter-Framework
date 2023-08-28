@@ -1,18 +1,22 @@
 import { AccordionProps } from "../../components/accordion/Accordion";
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { FAQProps } from "../../components/faq/FAQ";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { TextProps } from "../../components/text/Text";
-import { TextThemeType } from "../../components/text/text.options";
+import {
+  TextThemeType,
+  textAlignClasses,
+} from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
-import { textAlignClasses } from "../../theme";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
+import { PortableTextBlock } from "sanity";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
@@ -76,7 +80,7 @@ export const Block10 = ({
     >
       <div
         className={cx(
-          "max-w-3xl",
+          "max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -88,14 +92,15 @@ export const Block10 = ({
           </div>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <div className="mb-6">
             <Text
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
+              weight={theme?.intro?.weight}
               align={theme?.block?.align || "center"}
             >
-              <PortableText content={intro as any} />
+              <PortableText content={intro as PortableTextBlock[]} />
             </Text>
           </div>
         )}

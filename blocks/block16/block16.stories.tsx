@@ -36,14 +36,7 @@ const DEMO_LOGOS: Block16Props["items"] = [
   {
     _key: "3b45427f5e66",
     title: "Item 3",
-    image: {
-      alt: "",
-      hotspot: null,
-      crop: null,
-      src: "https://cdn.sanity.io/images/vs4fnw8m/development/b9303d1213247db842b924981a8916b53cef7aa6-108x93.svg",
-      width: 108,
-      height: 93,
-    },
+    image: demoImage,
   },
   {
     _key: "3b45427f5e66",

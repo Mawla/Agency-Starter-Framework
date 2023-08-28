@@ -54,7 +54,7 @@ export const MobileNav = ({
                 {Boolean(items?.length) && (
                   <RadixNavigationMenu.List className="pt-20 px-2">
                     {items?.map((item) => (
-                      <RadixNavigationMenu.Item key={item.button?.label}>
+                      <RadixNavigationMenu.Item key={item._key}>
                         <details
                           open={item.current}
                           className="mt-0.5 py-3 px-4 group"
@@ -87,8 +87,8 @@ export const MobileNav = ({
                           {Boolean(item?.children?.length) && (
                             <ul className="flex flex-col gap-2 pt-6 pb-3">
                               {item?.children?.map(
-                                ({ label, current, href, language }) => (
-                                  <li key={label}>
+                                ({ label, current, href, language, _key }) => (
+                                  <li key={_key}>
                                     {href && (
                                       <Link
                                         href={href}
@@ -127,7 +127,7 @@ export const MobileNav = ({
                   />
                   {Boolean(buttons?.length) &&
                     buttons?.map((button) => (
-                      <RadixNavigationMenu.Item key={button.label}>
+                      <RadixNavigationMenu.Item key={button._key}>
                         <Button {...button} />
                       </RadixNavigationMenu.Item>
                     ))}

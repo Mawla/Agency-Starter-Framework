@@ -15,7 +15,7 @@ export const getReactComponentSnippet = ({
   return `
     import React, { ComponentType, lazy } from "react";
 
-    import { DecorationProps } from "../../components/block/Decoration";
+    import { DecorationProps } from "../../components/decorations/Decoration";
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
     import cx from "classnames";
@@ -43,6 +43,8 @@ export const getReactComponentSnippet = ({
       fields,
       "intro",
       `
+    import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
+    import { PortableTextBlock } from "sanity";
     import { TextProps } from "../../components/text/Text";
     import { TextThemeType } from "../../components/text/text.options";
     const Text = lazy<ComponentType<TextProps>>(
@@ -113,7 +115,7 @@ export const getReactComponentSnippet = ({
           }}
           decorations={decorations}
         >
-        <div className={cx('flex flex-col gap-6 max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
+        <div className={cx('flex flex-col gap-6 max-w-4xl', textAlignClasses[theme?.block?.align || "center"])}>
           
           ${render(
             fields,
@@ -129,13 +131,14 @@ export const getReactComponentSnippet = ({
             fields,
             "intro",
             `
-          {intro && (
+          {shouldRenderPortableText(intro) && (
               <Text 
                 size={theme?.intro?.size || 'xl'} 
                 color={theme?.intro?.color}
+                weight={theme?.intro?.weight}
                 align={theme?.block?.align || "center"}
               >
-                <PortableText content={intro as any} />
+                <PortableText content={intro as PortableTextBlock[]} />
               </Text>
           )}`,
           )}

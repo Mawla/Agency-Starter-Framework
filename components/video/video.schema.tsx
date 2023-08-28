@@ -1,3 +1,4 @@
+import { UnsetObjectButton } from "../../studio/components/UnsetObjectButton";
 import { VIDEO_PROVIDERS } from "../../types";
 import getYoutubeId from "get-youtube-id";
 import React from "react";
@@ -125,6 +126,7 @@ const schema = defineType({
   preview: getVideoPreview(),
   components: {
     preview: VideoPreview,
+    field: UnsetObjectButton,
   },
   options: {
     collapsed: false,

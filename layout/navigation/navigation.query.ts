@@ -1,6 +1,11 @@
 import { ButtonProps } from "../../components/buttons/Button";
-import { buttonFieldsWithoutDefaultThemeQuery } from "../../components/buttons/button.query";
+import {
+  buttonFieldsWithoutDefaultThemeQuery,
+  buttonQuery,
+  linkQuery,
+} from "../../components/buttons/button.query";
 import { getImageQuery } from "../../components/images/image.query";
+import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
 import { NavigationProps } from "./Navigation";
@@ -11,9 +16,11 @@ export type NavigationItemType = ButtonProps & {
 };
 
 export type NavigationType = {
-  title: string;
   items: NavigationItemType[];
   buttons: NavigationItemType[];
+  breadcrumb?: {
+    hidden?: boolean;
+  };
   theme?: NavigationProps["theme"];
 };
 
@@ -26,15 +33,28 @@ export const getNavigationQuery = (language: LanguageType) => groq`
     _updatedAt,
     _rev,
     "items": items[] {
-      button ${buttonFieldsWithoutDefaultThemeQuery},
-      children[] ${buttonFieldsWithoutDefaultThemeQuery}
+      _key,
+      button {
+        ${buttonFieldsWithoutDefaultThemeQuery}
+      },
+      children[] {
+        _key,
+        ${buttonFieldsWithoutDefaultThemeQuery}
+      }
     },
-    "buttons": buttons[] ${buttonFieldsWithoutDefaultThemeQuery},
+    "buttons": buttons[] {
+      _key,
+      ${buttonFieldsWithoutDefaultThemeQuery}
+    },
     logo {
       "mobile": ${getImageQuery("mobile")},
       "desktop": ${getImageQuery("desktop")},
     },
-    theme
-  }
+    banner {
+      content,
+      link ${linkQuery}
+    },
+    theme,
+  },
 }.navigation
 `;

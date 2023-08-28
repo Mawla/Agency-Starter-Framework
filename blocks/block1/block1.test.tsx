@@ -23,9 +23,18 @@ describe("Block1", () => {
 });
 
 describe("Block1", () => {
-  it("renders features", async () => {
+  it("renders body", async () => {
     await act(() => {
-      render(<Block1 features={<p>Hello</p>} />);
+      render(<Block1 body={<p>Hello</p>} />);
+    });
+    expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
+  });
+});
+
+describe("Block1", () => {
+  it("renders footer", async () => {
+    await act(() => {
+      render(<Block1 footer={<p>Hello</p>} />);
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });
@@ -46,5 +55,32 @@ describe("Block1", () => {
       );
     });
     expect(screen.getAllByAltText("hello"));
+  });
+});
+
+describe("Block1", () => {
+  it("renders mobile image", async () => {
+    await act(() => {
+      render(
+        <Block1
+          mobileImage={{
+            width: 100,
+            height: 100,
+            src: "https://picsum.photos/50/50",
+            alt: "hello",
+          }}
+        />,
+      );
+    });
+    expect(screen.getAllByAltText("hello"));
+  });
+});
+
+describe("Block1", () => {
+  it("renders buttons", async () => {
+    await act(() => {
+      render(<Block1 buttons={[{ label: "hello" }]} />);
+    });
+    expect(screen.getByText("hello")).toBeInTheDocument();
   });
 });

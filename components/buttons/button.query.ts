@@ -46,6 +46,7 @@ icon,
 mobile,
 tablet,
 desktop,
+hover,
 `;
 
 export const buttonFieldsQuery = groq`
@@ -67,17 +68,19 @@ export const buttonFieldsQuery = groq`
   "target": select(newWindow => '_blank') 
 `;
 
-export const buttonFieldsWithoutDefaultThemeQuery = groq`{
+export const buttonFieldsWithoutDefaultThemeQuery = groq`
   ${buttonFieldsQuery
     .replace(
       "defined(presetTheme) => presetTheme -> {...},",
       "defined(presetTheme) => presetTheme -> {...},",
     )
     .replace(
-      "!defined(customTheme) => *[_type == 'preset.button' && default][0]",
+      "!defined(customTheme.mobile) => *[_type == 'preset.button' && default][0]",
       "",
     )}
-}`;
+`;
+
+export const linkQuery = groq` { ${buttonFieldsWithoutDefaultThemeQuery} }`;
 
 export const buttonQuery = groq`{
   ${buttonFieldsQuery}

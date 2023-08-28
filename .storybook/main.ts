@@ -33,6 +33,7 @@ module.exports = {
         },
       },
     },
+    "@storybook/addon-mdx-gfm",
   ],
   webpackFinal: (config) => {
     // https://stackoverflow.com/questions/61498644/storybook-failed-to-execute-createelement-on-svg-files-using-svgr-webpack
@@ -48,10 +49,13 @@ module.exports = {
     });
     return config;
   },
-  core: {
-    builder: "@storybook/builder-webpack5",
-  },
   docs: {
-    autodocs: true,
+    //👇 See the table below for the list of supported options
+    autodocs: "tag",
+    defaultName: "Documentation",
+  },
+  framework: {
+    name: "@storybook/nextjs",
+    options: { nextConfigPath: "../next.config.js" },
   },
 };
