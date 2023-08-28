@@ -2,6 +2,7 @@ import block0 from "../../blocks/block0/block0.schema";
 import block1 from "../../blocks/block1/block1.schema";
 import block2 from "../../blocks/block2/block2.schema";
 import block4 from "../../blocks/block4/block4.schema";
+import block7 from "../../blocks/block7/block7.schema";
 import block10 from "../../blocks/block10/block10.schema";
 import block12 from "../../blocks/block12/block12.schema";
 import block13 from "../../blocks/block13/block13.schema";
@@ -94,6 +95,7 @@ export const schemaTypes = [
     block18,
     block2,
     block4,
+    block7,
     button,
     buttongroup,
     buttonTheme,
