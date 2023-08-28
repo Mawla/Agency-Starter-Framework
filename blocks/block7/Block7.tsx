@@ -1,9 +1,9 @@
-import { DecorationProps } from "../../components/block/Decoration";
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { LinkProps } from "../../components/buttons/Link";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { MobileScrollerProps } from "../../components/slider/MobileScroller";
@@ -18,46 +18,46 @@ import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(
   () =>
-    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper")
+    import(/* webpackChunkName: "Wrapper" */ "../../components/block/Wrapper"),
 );
 
 const Title = lazy<ComponentType<TitleProps>>(
-  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title")
+  () => import(/* webpackChunkName: "Title" */ "../../components/title/Title"),
 );
 
 const MobileScroller = lazy<ComponentType<MobileScrollerProps>>(
   () =>
     import(
       /* webpackChunkName: "MobileScroller" */ "../../components/slider/MobileScroller"
-    )
+    ),
 );
 
 const Text = lazy<ComponentType<TextProps>>(
-  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text")
+  () => import(/* webpackChunkName: "Text" */ "../../components/text/Text"),
 );
 
 const PortableText = lazy<ComponentType<PortableTextProps>>(
   () =>
     import(
       /* webpackChunkName: "PortableText" */ "../../components/portabletext/PortableText"
-    )
+    ),
 );
 
 const ButtonGroup = lazy<ComponentType<ButtonGroupProps>>(
   () =>
     import(
       /* webpackChunkName: "ButtonGroup" */ "../../components/buttons/ButtonGroup"
-    )
+    ),
 );
 const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
   () =>
     import(
       /* webpackChunkName: "ResponsiveImage" */ "../../components/images/ResponsiveImage"
-    )
+    ),
 );
 
 const Link = lazy<ComponentType<LinkProps>>(
-  () => import(/* webpackChunkName: "Link" */ "../../components/buttons/Link")
+  () => import(/* webpackChunkName: "Link" */ "../../components/buttons/Link"),
 );
 
 type ItemProps = {
@@ -97,12 +97,12 @@ export const Block7 = ({
     >
       <div
         className={cx(
-          "flex flex-col",
-          textAlignClasses[theme?.block?.align || "left"]
+          "flex flex-col overflow-hidden",
+          textAlignClasses[theme?.block?.align || "left"],
         )}
       >
-        <div className="flex flex-col lg:space-x-16 lg:flex-row">
-          <div className="lg:w-3/12 lg:order-first order-last">
+        <div className="flex flex-col lg:space-x-16 xl:space-x-24 2xl:space-x-30 lg:flex-row">
+          <div className="lg:w-3/12 lg:order-first order-last lg:shrink-0">
             {title && (
               <Title
                 className="mt-6 lg:mt-0"
@@ -129,7 +129,7 @@ export const Block7 = ({
             )}
           </div>
 
-          <div className="lg:w-9/12">
+          <div className="lg:w-9/12 lg:grow-0">
             {items && Boolean(items?.filter(Boolean).length) && (
               <MobileScroller className="flex lg:grid lg:grid-cols-auto lg:grid-flow-col gap-2">
                 {items?.map(({ image, _key, link }) =>
@@ -139,7 +139,7 @@ export const Block7 = ({
                     </Link>
                   ) : (
                     <Item {...{ image, _key }} />
-                  )
+                  ),
                 )}
               </MobileScroller>
             )}
