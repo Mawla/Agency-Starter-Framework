@@ -35,7 +35,13 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
           )}
           ref={navRef}
         >
-          <TopNavBanner theme={theme?.banner} {...banner} />
+          <TopNavBanner
+            theme={{
+              ...theme?.banner,
+              width: theme?.block?.width,
+            }}
+            {...banner}
+          />
 
           <nav
             aria-label="main"
@@ -47,7 +53,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               "py-2 md:py-3 lg:py-4",
               "mx-auto",
               "px-5 sm:px-8 lg:px-8 xl:px-8",
-              widthClasses.outer,
+              widthClasses[theme?.block?.width || "inner"],
               theme?.block?.border && borderClasses[theme?.block?.border],
               theme?.block?.border && "border-b",
             )}
@@ -62,7 +68,11 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
               <TopNavMenu items={items} theme={theme} />
             </div>
 
-            <div className="flex-0">
+            <div
+              className={cx("flex-0", {
+                ["lg:hidden"]: !Boolean(buttons?.length),
+              })}
+            >
               <TopNavButtons
                 buttons={buttons}
                 onHamburgerClick={onHamburgerClick}

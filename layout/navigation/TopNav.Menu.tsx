@@ -1,10 +1,13 @@
 import Button from "../../components/buttons/Button";
 import IconLoader from "../../components/images/IconLoader";
+import { PageContext } from "../../context/PageContext";
+import { SiteContext } from "../../context/SiteContext";
 import { backgroundClasses } from "../../theme";
 import { NavigationProps } from "./Navigation";
 import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
 import cx from "classnames";
+import { useContext } from "react";
 
 export type TopNavMenuProps = {
   items: NavigationProps["items"];
@@ -18,6 +21,11 @@ const alignClasses: Record<AlignType, string> = {
 };
 
 export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
+  const { config } = useContext(SiteContext);
+  const { language } = useContext(PageContext);
+
+  const translations = config.translations;
+
   if (!Boolean(items?.filter(Boolean).length)) return null;
 
   return (
@@ -44,7 +52,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                     {...item.button}
                     as={item?.button?.href ? "a" : "span"}
                     className={cx({
-                      ["!underline"]: item?.current,
+                      ["!underline current"]: item?.current,
                     })}
                   >
                     <RadixNavigationMenu.Trigger>
@@ -53,6 +61,9 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                         className="inline-block align-middle w-[1.25em] h-[1.25em] -translate-y-0.5 ml-1.5"
                       />
                       <span className="absolute inset-0" />
+                      <span className="sr-only">
+                        {translations?.open?.[language] || "open"}
+                      </span>
                     </RadixNavigationMenu.Trigger>
                   </Button>
                 </>
@@ -61,7 +72,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                   {...item.button}
                   as={item?.button?.href ? "a" : "span"}
                   className={cx({
-                    ["!underline"]: item?.current,
+                    ["!underline current"]: item?.current,
                   })}
                 />
               )}
@@ -101,7 +112,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                           <Button
                             {...item}
                             className={cx({
-                              ["!underline"]: item.current,
+                              ["!underline current"]: item.current,
                             })}
                           />
                         </span>

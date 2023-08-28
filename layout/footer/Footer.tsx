@@ -73,19 +73,23 @@ export const Footer = ({
             {info && <p>{info}</p>}
 
             {Boolean(socials?.length) && (
-              <ul className="flex gap-4 md:gap-6 items-center">
+              <ul className="flex gap-4 items-center">
                 {socials?.map(({ _key, label, href, icon }) => (
                   <li key={_key}>
                     {href && (
                       <Link
                         href={href}
-                        className="block w-7 h-7 overflow-hidden"
+                        className="block overflow-hidden"
                         rel="noopener noreferrer"
                         target="_blank"
                         showExternalIcon={false}
                       >
                         <span className="sr-only">{label}</span>
-                        <IconLoader icon={icon} />
+                        <IconLoader
+                          icon={icon}
+                          removeColors={false}
+                          removeDimensions={false}
+                        />
                       </Link>
                     )}
                   </li>

@@ -17,6 +17,7 @@ export type IconLoaderProps = {
   domain?: string;
   path?: string;
   removeColors?: boolean;
+  removeDimensions?: boolean;
 };
 
 export const IconLoader = ({
@@ -28,6 +29,7 @@ export const IconLoader = ({
   description,
   style,
   removeColors = true,
+  removeDimensions = true,
 }: IconLoaderProps) => {
   const Element = as;
 
@@ -53,7 +55,7 @@ export const IconLoader = ({
     if (!svg.startsWith("<svg") && !svg.startsWith("<?xml")) return;
 
     let cleanSVG = DOMPurify?.sanitize?.(svg); //
-    cleanSVG = cleanUpAttributes(cleanSVG);
+    cleanSVG = cleanUpAttributes(cleanSVG, removeDimensions);
     if (removeColors) {
       cleanSVG = replaceColorsWithCurrentColor(cleanSVG);
     }
@@ -89,13 +91,15 @@ export default React.memo(IconLoader);
  * Remove width / height / style
  */
 
-const cleanUpAttributes = (str: string) => {
+const cleanUpAttributes = (str: string, removeDimensions = true) => {
   let parser = new DOMParser();
   let parsedResult = parser.parseFromString(str, "image/svg+xml");
 
   // remove width and height so we can style with css
-  parsedResult.documentElement.removeAttribute("width");
-  parsedResult.documentElement.removeAttribute("height");
+  if (removeDimensions) {
+    parsedResult.documentElement.removeAttribute("width");
+    parsedResult.documentElement.removeAttribute("height");
+  }
 
   // remove style attributes as they might overwrite styles on the site
   parsedResult.documentElement

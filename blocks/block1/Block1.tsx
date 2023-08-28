@@ -18,6 +18,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useSize } from "../../hooks/useSize";
 import { borderRadiusClasses } from "../../theme";
@@ -255,8 +256,7 @@ export const Block1 = ({
                 {title}
               </Title>
             )}
-
-            {intro && (
+            {shouldRenderPortableText(intro) && (
               <Text
                 size={theme?.intro?.size || "lg"}
                 color={theme?.intro?.color}
@@ -267,7 +267,7 @@ export const Block1 = ({
               </Text>
             )}
 
-            {body && (
+            {shouldRenderPortableText(body) && (
               <Text
                 size={theme?.body?.size || "lg"}
                 color={theme?.body?.color}
@@ -288,13 +288,11 @@ export const Block1 = ({
                 <ButtonGroup items={buttons} />
               </div>
             )}
-
             {footer && (
               <Text
                 size={theme?.footer?.size || "lg"}
                 color={theme?.footer?.color}
                 weight={theme?.footer?.weight}
-                className="mt-10"
               >
                 <PortableText content={footer as PortableTextBlock[]} />
               </Text>
@@ -326,6 +324,7 @@ export const Block1 = ({
                     "relative flex w-full h-full",
                     theme?.layout?.verticalAlign &&
                       verticalAlignClasses[theme.layout.verticalAlign],
+                    theme?.layout?.mediaPosition !== "left" && "justify-end",
                   )}
                 >
                   <div
@@ -335,10 +334,12 @@ export const Block1 = ({
                     style={{
                       maxWidth:
                         getOriginalImageDimensions(image?.src).width || "auto",
-                      aspectRatio: !theme?.image?.fullHeight
-                        ? getOriginalImageDimensions(image?.src).aspectRatio ||
-                          "auto"
-                        : undefined,
+                      aspectRatio:
+                        !theme?.image?.fullHeight ||
+                        screenWidth < BREAKPOINTS.lg
+                          ? getOriginalImageDimensions(image?.src)
+                              .aspectRatio || "auto"
+                          : undefined,
                     }}
                   >
                     <ResponsiveImage

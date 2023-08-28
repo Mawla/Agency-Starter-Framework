@@ -1,14 +1,11 @@
-import { widthClasses } from "../../components/block/width.options";
+import { WidthType, widthClasses } from "../../components/block/width.options";
 import Link, { LinkProps } from "../../components/buttons/Link";
 import IconLoader from "../../components/images/IconLoader";
-import { PortableTextProps } from "../../components/portabletext/PortableText";
-import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { AlignType } from "./navigation.options";
 import cx from "classnames";
-import { ComponentType, lazy } from "react";
 
 export type TopNavBannerProps = {
   theme?: {
@@ -17,6 +14,7 @@ export type TopNavBannerProps = {
     text?: ColorType;
     border?: ColorType;
     align?: AlignType;
+    width?: WidthType;
   };
   link?: LinkProps;
   content?: React.ReactNode;
@@ -42,7 +40,7 @@ export const TopNavBanner = ({ theme, content, link }: TopNavBannerProps) => {
           "py-2 md:py-2.5",
           "mx-auto",
           "px-5 sm:px-8 lg:px-8 xl:px-8",
-          widthClasses.outer,
+          widthClasses[theme?.width || "inner"],
         )}
       >
         {link ? (

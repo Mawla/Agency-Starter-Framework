@@ -15,6 +15,21 @@ export const decorations = defineField({
   of: [{ type: "decorationWrapper" }],
 });
 
+function validateCSSUnit(Rule: StringRule) {
+  return Rule.custom((value: any) => {
+    if (typeof value === "undefined") return true;
+    if (value.trim().length === 0) return true;
+    const isPixel = !isNaN(+value) || value?.trim().endsWith("px");
+    const isValidUnit = value
+      .trim()
+      .match(/(em|ex|\%|px|cm|mm|in|pt|pc|ch|rem|vh|vw|vmin|vmax)$/);
+    const isAuto = value.trim() === "auto";
+    if (!isPixel && !isValidUnit && !isAuto)
+      return `This field must end with either a valid CSS unit (e.g 100px or 10%) or 'auto'.`;
+    return true;
+  });
+}
+
 export const decorationWrapper = defineField({
   name: "decorationWrapper",
   title: "Decoration wrapper",
@@ -162,19 +177,7 @@ export const decoration = defineField({
         type: "string",
         description: `Use % or px. Use 'auto' to unset.`,
         group: "position",
-        validation: (Rule: StringRule) =>
-          Rule.custom((value: any) => {
-            if (typeof value === "undefined") return true;
-            if (value.trim().length === 0) return true;
-            const isPixel = !isNaN(+value) || value?.trim().endsWith("px");
-            const isValidUnit = value
-              .trim()
-              .match(/(em|ex|\%|px|cm|mm|in|pt|pc|ch|rem|vh|vw|vmin|vmax)$/);
-            const isAuto = value.trim() === "auto";
-            if (!isPixel && !isValidUnit && !isAuto)
-              return `This field must end with either a valid CSS unit (e.g 100px or 10%) or 'auto'.`;
-            return true;
-          }),
+        validation: validateCSSUnit,
         components: {
           input: DecorationPositionInput,
           field: DecorationPositionInputWrapper,
@@ -240,11 +243,19 @@ export const decoration = defineField({
       validation: (Rule: NumberRule) => Rule.max(1).positive(),
     }),
     defineField({
+      name: "borderRadius",
+      type: "string",
+      description: `Use % or px. Use 'auto' to unset.`,
+      group: "style",
+      validation: validateCSSUnit,
+    }),
+    defineField({
       name: "image",
       type: "image",
       description: "Use an image as decoration",
       group: "content",
-      hidden: ({ parent, value }) => !value && Boolean(parent?.html),
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.html || parent?.video),
       options: {
         hotspot: true,
       },
@@ -257,13 +268,22 @@ export const decoration = defineField({
       hidden: ({ parent, value }) => !value && !Boolean(parent?.image),
     }),
     defineField({
+      name: "video",
+      type: "video",
+      description: "Use a video as decoration",
+      group: "content",
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.html || parent?.image),
+    }),
+    defineField({
       name: "html",
       type: "text",
       description:
         "Use raw HTML. All potentially dangerous tags will be stripped.",
       rows: 4,
       group: "content",
-      hidden: ({ parent, value }) => !value && Boolean(parent?.image),
+      hidden: ({ parent, value }) =>
+        !value && Boolean(parent?.image || parent?.video),
     }),
   ],
 });

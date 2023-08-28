@@ -13,6 +13,7 @@ import {
 } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
@@ -79,7 +80,7 @@ export const Block10 = ({
     >
       <div
         className={cx(
-          "max-w-3xl",
+          "max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -91,7 +92,7 @@ export const Block10 = ({
           </div>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <div className="mb-6">
             <Text
               size={theme?.intro?.size || "xl"}

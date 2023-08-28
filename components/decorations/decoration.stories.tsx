@@ -5,7 +5,7 @@ import React from "react";
 
 export default {
   component: Decoration,
-  title: "components/decorations/Decoration",
+  title: "components/Decorations",
 } as Meta;
 
 const SQUARE = {
@@ -229,4 +229,22 @@ export const Preset = () => (
       />
     </div>
   </>
+);
+
+export const Video = () => (
+  <div className="border relative aspect-video">
+    <Decoration
+      mobile={{
+        width: "100%",
+        bottom: 0,
+        left: 0,
+        video: {
+          provider: "mux",
+          videoId: "uNbxnGLKJ00yfbijDO8COxTOyVKT01xpxW",
+          frameless: true,
+          autoPlay: true,
+        },
+      }}
+    />
+  </div>
 );

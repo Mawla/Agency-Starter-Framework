@@ -27,6 +27,13 @@ describe("Block4", () => {
     });
     expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
   });
+
+  it("renders body", async () => {
+    await act(() => {
+      render(<Block4 body={<p>Hello</p>} />);
+    });
+    expect(screen.getByText("Hello", { selector: "p" })).toBeInTheDocument();
+  });
 });
 
 describe("Block4", () => {
