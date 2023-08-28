@@ -1,13 +1,14 @@
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { isEmptyObject, removeEmptyValues } from "../../helpers/utils/object";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
-import { ImageType } from "../../types";
+import { ImageType, VideoType } from "../../types";
 import {
   backgroundRoundedBottomClasses,
   backgroundRoundedTopClasses,
   BlockRoundedType,
 } from "../block/background.options";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
+import { VideoProps } from "../video/Video";
 import { DecorationLocationType } from "./decoration.options";
 import cx from "classnames";
 import DOMPurify from "dompurify";
@@ -19,6 +20,10 @@ const ResponsiveImage = lazy<ComponentType<ResponsiveImageProps>>(
     import(
       /* webpackChunkName: "ResponsiveImage" */ "../images/ResponsiveImage"
     ),
+);
+
+const Video = lazy<ComponentType<VideoProps>>(
+  () => import(/* webpackChunkName: "Video" */ "../video/Video"),
 );
 
 export type DecorationType = {
@@ -34,8 +39,10 @@ export type DecorationType = {
   scale?: number | string;
   background?: string;
   opacity?: number;
+  borderRadius?: number | string;
   hidden?: boolean;
   image?: ImageType;
+  video?: VideoType;
   html?: string;
   repeat?: boolean;
 };
@@ -80,6 +87,8 @@ const createStyleObject = (obj: Record<string, unknown>): CSSProperties => {
     background: obj.background,
     opacity: obj.opacity,
     transform: obj.transform,
+    borderRadius: addUnit(obj.borderRadius as string),
+    overflow: "hidden",
   } as CSSProperties;
 
   return newObj;
@@ -128,6 +137,7 @@ export const Decoration = ({
   let styleObj: CSSProperties = {};
   let hidden = Boolean(mobile?.hidden) || Boolean(preset?.mobile?.hidden);
   let image = mobile?.image || preset?.mobile?.image;
+  let video = mobile?.video || preset?.mobile?.video;
   let html = mobile?.html || preset?.mobile?.html;
   let repeat = mobile?.repeat || preset?.mobile?.repeat;
 
@@ -174,6 +184,7 @@ export const Decoration = ({
       }),
     });
     image = tablet.image || preset?.tablet?.image || image;
+    video = tablet.video || preset?.tablet?.video || video;
     html = tablet.html || preset?.tablet?.html || html;
     repeat = tablet?.repeat || preset?.tablet?.repeat || repeat;
 
@@ -199,6 +210,7 @@ export const Decoration = ({
     });
 
     image = desktop.image || preset?.desktop?.image || image;
+    video = desktop.video || preset?.desktop?.video || video;
     html = desktop.html || preset?.desktop?.html || html;
     repeat = desktop?.repeat || preset?.desktop?.repeat || repeat;
 
@@ -239,6 +251,7 @@ export const Decoration = ({
         }}
       >
         {image && !repeat && <ResponsiveImage {...image} fill roundSize={25} />}
+        {video && <Video {...video} />}
         {innerHTML && (
           <div
             dangerouslySetInnerHTML={

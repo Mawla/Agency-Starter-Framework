@@ -1,4 +1,5 @@
 import { imageQuery } from "../images/image.query";
+import { videoQuery } from "../video/video.query";
 import groq from "groq";
 
 export const decorationFieldsQuery = groq`
@@ -8,14 +9,17 @@ breakout,
 mobile {
   ...,
   "image": ${imageQuery},
+  "video": ${videoQuery}
 },
 tablet {
   ...,
   "image": ${imageQuery},
+  "video": ${videoQuery}
 },
 desktop {
   ...,
   "image": ${imageQuery},
+  "video": ${videoQuery}
 }
 `;
 
