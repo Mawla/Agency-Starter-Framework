@@ -44,7 +44,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                     {...item.button}
                     as={item?.button?.href ? "a" : "span"}
                     className={cx({
-                      ["!underline"]: item?.current,
+                      ["!underline current"]: item?.current,
                     })}
                   >
                     <RadixNavigationMenu.Trigger>
@@ -61,7 +61,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                   {...item.button}
                   as={item?.button?.href ? "a" : "span"}
                   className={cx({
-                    ["!underline"]: item?.current,
+                    ["!underline current"]: item?.current,
                   })}
                 />
               )}
@@ -101,7 +101,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                           <Button
                             {...item}
                             className={cx({
-                              ["!underline"]: item.current,
+                              ["!underline current"]: item.current,
                             })}
                           />
                         </span>

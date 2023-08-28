@@ -33,7 +33,8 @@ const schema = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "text",
+      rows: 2,
       group: "content",
     }),
     defineField({
@@ -102,6 +103,7 @@ const schema = defineType({
         }),
         defaultTitleTheme,
         defaultTextTheme,
+        { ...defaultTextTheme, name: "footer", title: "Footer" },
         defineField({
           name: "slider",
           type: "styles",

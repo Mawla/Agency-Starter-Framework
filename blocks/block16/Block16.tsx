@@ -11,6 +11,7 @@ import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { ImageType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
@@ -86,7 +87,7 @@ export const Block16 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -96,7 +97,7 @@ export const Block16 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
@@ -136,7 +137,7 @@ export const Block16 = ({
       {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div
           className={cx(
-            "flex flex-col gap-6 max-w-3xl mt-14",
+            "flex flex-col gap-6 max-w-4xl mt-14",
             textAlignClasses[theme?.block?.align || "center"],
           )}
         >

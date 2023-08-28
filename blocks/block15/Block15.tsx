@@ -7,6 +7,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
@@ -60,7 +61,7 @@ export const Block15 = ({
     >
       <div
         className={cx(
-          "flex flex-col max-w-3xl",
+          "flex flex-col max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -72,8 +73,8 @@ export const Block15 = ({
       </div>
 
       {(intro || body) && (
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 xl:gap-24 mt-6">
-          {intro && (
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 xl:gap-24 mt-6 md:mt-10 lg:mt-16">
+          {shouldRenderPortableText(intro) && (
             <div className="lg:col-span-6">
               <Text
                 size={theme?.intro?.size || "xl"}
@@ -84,7 +85,7 @@ export const Block15 = ({
               </Text>
             </div>
           )}
-          {body && (
+          {shouldRenderPortableText(body) && (
             <div className="lg:col-span-6">
               <Text
                 size={theme?.body?.size || "xl"}

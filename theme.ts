@@ -8,6 +8,7 @@ import {
   FontType,
   FontWeightType,
   HorizontalAlignType,
+  PADDING_OPTIONS,
   PaddingType,
   TextTransformType,
 } from "./types";
@@ -128,51 +129,33 @@ export const borderWidthClasses: Record<BorderWidthType, string> = {
   8: "border-8",
 };
 
-export const paddingXClasses: Record<PaddingType, string> = {
-  0: "px-0",
-  px: "px-px",
-  0.5: "px-0.5",
-  1: "px-1",
-  1.5: "px-1.5",
-  2: "px-2",
-  2.5: "px-2.5",
-  3: "px-3",
-  3.5: "px-3.5",
-  4: "px-4",
-  5: "px-5",
-  6: "px-6",
-  7: "px-7",
-  8: "px-8",
-  9: "px-9",
-  10: "px-10",
-  11: "px-11",
-  12: "px-12",
-  14: "px-14",
-  16: "px-16",
-};
+export const paddingXClasses: Record<PaddingType, string> = Object.entries(
+  PADDING_OPTIONS,
+).reduce<Record<PaddingType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `px-${key}` }),
+  {} as Record<PaddingType, string>,
+);
 
-export const paddingYClasses: Record<PaddingType, string> = {
-  0: "py-0",
-  px: "py-px",
-  0.5: "py-0.5",
-  1: "py-1",
-  1.5: "py-1.5",
-  2: "py-2",
-  2.5: "py-2.5",
-  3: "py-3",
-  3.5: "py-3.5",
-  4: "py-4",
-  5: "py-5",
-  6: "py-6",
-  7: "py-7",
-  8: "py-8",
-  9: "py-9",
-  10: "py-10",
-  11: "py-11",
-  12: "py-12",
-  14: "py-14",
-  16: "py-16",
-};
+export const paddingYClasses: Record<PaddingType, string> = Object.entries(
+  PADDING_OPTIONS,
+).reduce<Record<PaddingType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `py-${key}` }),
+  {} as Record<PaddingType, string>,
+);
+
+export const paddingTopClasses: Record<PaddingType, string> = Object.entries(
+  PADDING_OPTIONS,
+).reduce<Record<PaddingType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `pt-${key}` }),
+  {} as Record<PaddingType, string>,
+);
+
+export const paddingBottomClasses: Record<PaddingType, string> = Object.entries(
+  PADDING_OPTIONS,
+).reduce<Record<PaddingType, string>>(
+  (acc, [key, value]) => ({ ...acc, [key]: `pb-${key}` }),
+  {} as Record<PaddingType, string>,
+);
 
 export const justifyClasses: Record<HorizontalAlignType, string> = {
   left: "justify-start",

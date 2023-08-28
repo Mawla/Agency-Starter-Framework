@@ -15,6 +15,7 @@ import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { VideoProps } from "../../components/video/Video";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { borderRadiusClasses } from "../../theme";
 import { BorderRadiusType, ImageType, VideoType } from "../../types";
 import cx from "classnames";
@@ -72,6 +73,7 @@ export type Block4Props = {
     title?: TitleThemeType;
     subtitle?: TitleThemeType;
     intro?: TextThemeType;
+    body?: TextThemeType;
     image?: {
       rounded?: BorderRadiusType;
     };
@@ -80,6 +82,7 @@ export type Block4Props = {
   title?: string;
   subtitle?: string;
   intro?: React.ReactNode;
+  body?: React.ReactNode;
   image?: ImageType;
   video?: VideoType;
   buttons?: ButtonProps[];
@@ -91,6 +94,7 @@ export const Block4 = ({
   title,
   subtitle,
   intro,
+  body,
   image,
   video,
   buttons,
@@ -105,7 +109,7 @@ export const Block4 = ({
       <div className="flex flex-col gap-6">
         <div
           className={cx(
-            "flex flex-col gap-6 max-w-3xl relative z-10",
+            "flex flex-col gap-6 max-w-4xl relative z-10",
             textAlignClasses[theme?.block?.align || "center"],
           )}
         >
@@ -123,8 +127,7 @@ export const Block4 = ({
               {subtitle}
             </Title>
           )}
-
-          {intro && (
+          {shouldRenderPortableText(intro) && (
             <Text
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
@@ -135,6 +138,16 @@ export const Block4 = ({
             </Text>
           )}
 
+          {shouldRenderPortableText(body) && (
+            <Text
+              size={theme?.body?.size || "xl"}
+              color={theme?.body?.color}
+              weight={theme?.body?.weight}
+              align={theme?.block?.align || "center"}
+            >
+              <PortableText content={body as PortableTextBlock[]} />
+            </Text>
+          )}
           {buttons && Boolean(buttons?.filter(Boolean).length) && (
             <div className="mt-6">
               <ButtonGroup

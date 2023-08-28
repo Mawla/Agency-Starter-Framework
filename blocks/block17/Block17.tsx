@@ -50,7 +50,7 @@ export const Block17 = ({ theme, decorations, testimonials }: Block17Props) => {
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >

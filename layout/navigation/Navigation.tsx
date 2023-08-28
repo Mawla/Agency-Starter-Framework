@@ -1,3 +1,4 @@
+import { WidthType } from "../../components/block/width.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
@@ -34,6 +35,7 @@ export type NavigationProps = {
       background?: ColorType;
       text?: ColorType;
       border?: ColorType;
+      width?: WidthType;
     };
     menu?: {
       align?: AlignType;

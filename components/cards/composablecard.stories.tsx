@@ -69,7 +69,8 @@ export const Default = () => (
       card: {
         background: "black",
         paddingX: "10",
-        paddingY: "10",
+        paddingTop: "10",
+        paddingBottom: "10",
       },
       title: {
         color: "white",

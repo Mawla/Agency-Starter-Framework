@@ -10,6 +10,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { truncate } from "../../helpers/utils/string";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
@@ -89,7 +90,7 @@ export const Block13 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -99,7 +100,7 @@ export const Block13 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
@@ -151,7 +152,7 @@ export const Block13 = ({
                       </Title>
                     )}
 
-                    {intro && (
+                    {shouldRenderPortableText(intro) && (
                       <Text size="md" color={theme?.card?.text}>
                         {truncate(intro, 150)}
                       </Text>

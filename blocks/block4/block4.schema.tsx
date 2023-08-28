@@ -37,19 +37,27 @@ const schema = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "text",
+      rows: 2,
       group: "content",
     }),
     defineField({
       name: "subtitle",
       title: "Subtitle",
-      type: "string",
+      type: "text",
+      rows: 2,
       group: "content",
     }),
     defineField({
       name: "intro",
       title: "Intro",
       type: "portabletext.simple",
+      group: "content",
+    }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "portabletext.full",
       group: "content",
     }),
     defineField({
@@ -83,6 +91,7 @@ const schema = defineType({
         defaultTitleTheme,
         { ...defaultTitleTheme, name: "subtitle" },
         defaultTextTheme,
+        { ...defaultTextTheme, name: "body" },
         defineField({
           name: "image",
           title: "Image",

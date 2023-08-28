@@ -21,16 +21,16 @@ const schema = defineType({
   icon: () => <MessagingLines weight="thin" />,
   preview: {
     select: {
-      refTitle: "testimonialRef.title",
+      refTitle: "testimonialRef.jobTitle",
       refName: "testimonialRef.name",
       refContent: "testimonialRef.content",
-      title: "testimonial.title",
+      title: "testimonial.jobTitle",
       name: "testimonial.name",
       content: "testimonial.content",
     },
     prepare({ refTitle, refName, refContent, title = "", name = "", content }) {
       return {
-        title: `${title || refTitle} ${name || refName}`,
+        title: `${name || refName} ${title || refTitle}`,
         subtitle: blocksToText(content || refContent),
       };
     },
@@ -87,7 +87,14 @@ const schema = defineType({
                 },
               },
               {
-                name: "paddingY",
+                name: "paddingTop",
+                type: "select",
+                options: {
+                  list: optionsToList(PADDING_OPTIONS, true),
+                },
+              },
+              {
+                name: "paddingBottom",
                 type: "select",
                 options: {
                   list: optionsToList(PADDING_OPTIONS, true),

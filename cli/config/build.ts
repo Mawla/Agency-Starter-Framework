@@ -14,7 +14,6 @@ const DO_NOT_EDIT_FLAG = `// NOTE: This file is auto generated and should not be
 
 const PicoSanity = require("picosanity");
 const fs = require("fs").promises;
-const https = require("https");
 
 const client = new PicoSanity({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "development",
