@@ -208,7 +208,6 @@ export const Block18 = ({
           const accumulatedChildrenWidth = items.reduce((prev, curr) => {
             const childRect = curr.getBoundingClientRect();
             const childWidth = childRect.width;
-            console.log(childWidth, prev, gapSize);
             return prev + childWidth + gapSize;
           }, -gapSize);
 
