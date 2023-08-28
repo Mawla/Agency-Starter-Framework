@@ -4,9 +4,15 @@ colorPrint() {
 
 scope=mawla-team
 colorPrint "This tool deletes the vercel & sanity projects."
+read -p "Are you sure you want to continue to delete a project? y/n" -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+fi
+
 colorPrint "Available projects:"
-projects=$(vercel project ls -S mawla-team)
-current_dir=$(pwd)
+vercel project ls -S mawla-team
 
 colorPrint "What's the name of the project you want to delete?"
 
@@ -14,18 +20,12 @@ read projectName
 
 rm -rf "$projectName"
 mkdir "$projectName"
-ln -s "$current_dir/.git" "$current_dir/$projectName/.git"
+ln -s "$(pwd)/.git" "$(pwd)/$projectName/.git"
 
-## Linking to vercel, getting sanity ID and deleting Vercel
+# Linking to vercel, getting sanity ID and deleting Vercel
 vercel link -S "$scope" --cwd "$projectName" -d --yes
 vercel env pull ".env.production.local" -S "$scope" --cwd "$projectName" -d --yes
-envFile=$(cat "$current_dir/$projectName/.env.production.local")
-read -p "Are you sure you want to delete $projectName y/n" -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
-fi
+envFile=$(cat "$(pwd)/$projectName/.env.production.local")
 
 vercel project rm "$projectName" -S "$scope" --cwd "$projectName"
 

@@ -4,22 +4,20 @@ colorPrint() {
 addVercelEnvVar() {
   echo $1 | tr -d '\n' | vercel env add $2 production --cwd "$projectName"
 }
-current_dir=$(pwd)
 gitURL=https://github.com/Mawla/growth-websites
 scope=mawla-team
-#TEAM_ID=team_A6BdRNwaMCRkxWfwew0CF4Dq
 
 colorPrint "What's the name of the project?"
 read -p "name:" name
 projectName=$(echo "$name" | tr '[:upper:]' '[:lower:]')
-colorPrint "Okay creating $projectName"
+colorPrint "Okay,updated naming to: $projectName - lower case for Vercel"
 
 rm -rf .env.development.local
 touch ".env.development.local"
 
 #Vercel CLI reads the directory name to decide what to link to, creating shallow clone of the repos .git folder
 mkdir "$projectName"
-ln -s "$current_dir/.git" "$current_dir/$projectName/.git"
+ln -s "$(pwd)/.git" "$(pwd)/$projectName/.git"
 
 # get sanity auth token
 authToken=$(sanity debug --secrets | grep 'Auth token' | cut -d \' -f2)
@@ -64,7 +62,7 @@ webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number
 echo "SANITY_WEBHOOK_SECRET=\"$webhookSecret\"" >> ".env.development.local"
 
 # Generate rest .env.development.local
-colorPrint "- Writing \".env.development.local\""
+colorPrint "- Writing project path"
 echo "SANITY_STUDIO_PROJECT_PATH=http://localhost:3000/" >> ".env.development.local"
 
 colorPrint "- Generating read api key"
@@ -89,7 +87,6 @@ sanity cors add http://localhost:6006 --credentials
 sanity cors add "https://$projectName.vercel.app" --credentials
 sanity cors add "https://*$projectName.vercel.app" --credentials
 
-
 # init vercel
 colorPrint "- Initializing vercel"
 vercel project add "$projectName" -S "$scope" --cwd "$projectName"
@@ -109,14 +106,11 @@ addVercelEnvVar "/" "SANITY_STUDIO_PROJECT_PATH"
 addVercelEnvVar "$sanityReadToken" "SANITY_API_READ_TOKEN"
 addVercelEnvVar "$sanityWriteToken" "SANITY_API_WRITE_TOKEN"
 
-colorPrint "- Inviting Dinguses"
+colorPrint "- Inviting Sanity users"
 
 sanity users invite dan@mawla.ie --role administrator
 sanity users invite arjen@mawla.ie --role administrator
 sanity users invite ben@mawla.ie --role administrator
-
-#sanity dataset export production-march.tar.gz development --replace
-#sanity dataset import cli/setup/production.tar.gz production --replace --allow-failing-assets
 
 #Remove tmp directory
 rm -rf -R "$projectName"
