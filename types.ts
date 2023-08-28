@@ -15,6 +15,7 @@ export const TRANSLATION_FIELDS = {
   tool: "Label for tool section.",
   video: "Label for video section.",
   related_resources: "Label for related article sidebar.",
+  open: "Label for opening a dropdown.",
 };
 
 export type TranslationFieldType = keyof typeof TRANSLATION_FIELDS;

@@ -89,8 +89,8 @@ export const Slider = ({
           >
             <span className="sr-only">
               {direction === "prev"
-                ? translations?.next_slide?.[language]
-                : translations?.previous_slide?.[language]}
+                ? translations?.next_slide?.[language] || "next"
+                : translations?.previous_slide?.[language] || "previous"}
             </span>
             <IconLoader
               icon="chevrondown"
