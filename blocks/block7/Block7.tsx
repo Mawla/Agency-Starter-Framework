@@ -97,7 +97,7 @@ export const Block7 = ({
     >
       <div
         className={cx(
-          "flex flex-col overflow-hidden",
+          "flex flex-col lg:overflow-hidden",
           textAlignClasses[theme?.block?.align || "left"],
         )}
       >
@@ -115,7 +115,7 @@ export const Block7 = ({
 
             {intro && (
               <Text
-                size={theme?.intro?.size || "xl"}
+                size={theme?.intro?.size || "lg"}
                 color={theme?.intro?.color}
                 align={theme?.block?.align || "left"}
                 className="mt-4"
@@ -125,22 +125,24 @@ export const Block7 = ({
             )}
 
             {buttons && Boolean(buttons?.filter(Boolean).length) && (
-              <ButtonGroup className="mt-4" items={buttons} />
+              <ButtonGroup className="mt-6 lg:mt-8 xl:mt-10" items={buttons} />
             )}
           </div>
 
           <div className="lg:w-9/12 lg:grow-0">
             {items && Boolean(items?.filter(Boolean).length) && (
               <MobileScroller className="flex lg:grid lg:grid-cols-auto lg:grid-flow-col gap-2">
-                {items?.map(({ image, _key, link }) =>
-                  link ? (
-                    <Link {...link}>
+                {items?.map(({ image, _key, link }) => (
+                  <div key={_key}>
+                    {link ? (
+                      <Link {...link}>
+                        <Item {...{ image, _key }} />
+                      </Link>
+                    ) : (
                       <Item {...{ image, _key }} />
-                    </Link>
-                  ) : (
-                    <Item {...{ image, _key }} />
-                  ),
-                )}
+                    )}
+                  </div>
+                ))}
               </MobileScroller>
             )}
           </div>
