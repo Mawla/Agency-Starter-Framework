@@ -43,6 +43,7 @@ export const getReactComponentSnippet = ({
       fields,
       "intro",
       `
+    import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
     import { PortableTextBlock } from "sanity";
     import { TextProps } from "../../components/text/Text";
     import { TextThemeType } from "../../components/text/text.options";
@@ -114,7 +115,7 @@ export const getReactComponentSnippet = ({
           }}
           decorations={decorations}
         >
-        <div className={cx('flex flex-col gap-6 max-w-3xl', textAlignClasses[theme?.block?.align || "center"])}>
+        <div className={cx('flex flex-col gap-6 max-w-4xl', textAlignClasses[theme?.block?.align || "center"])}>
           
           ${render(
             fields,
@@ -130,7 +131,7 @@ export const getReactComponentSnippet = ({
             fields,
             "intro",
             `
-          {intro && (
+          {shouldRenderPortableText(intro) && (
               <Text 
                 size={theme?.intro?.size || 'xl'} 
                 color={theme?.intro?.color}

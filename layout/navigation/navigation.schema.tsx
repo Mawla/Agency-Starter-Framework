@@ -1,3 +1,4 @@
+import { WIDTH_OPTIONS } from "../../components/block/width.options";
 import Warning from "../../studio/components/Warning";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { SchemaName } from "../../types.sanity";
@@ -154,6 +155,13 @@ export default defineType({
                 name: "border",
                 type: "color",
                 title: "Bottom border",
+              },
+              {
+                name: "width",
+                type: "select",
+                options: {
+                  list: optionsToList(WIDTH_OPTIONS),
+                },
               },
             ],
           },

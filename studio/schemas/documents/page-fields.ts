@@ -23,6 +23,7 @@ import { SEO_FIELD } from "./config.seo";
 import { nanoid } from "nanoid";
 import {
   DateRule,
+  defineArrayMember,
   defineField,
   PreviewConfig,
   SlugRule,
@@ -83,13 +84,14 @@ export const BLOCKS_FIELD = defineField({
   description: "Blocks are the building blocks of a page.",
   of: [
     ...(Object.keys(BLOCK_SCHEMAS) as BlockSchemaName[]).map(
-      (type: BlockSchemaName) => ({
-        type,
-        components: {
-          preview: PageBuilderItemPreview,
-          item: PageBuilderItem,
-        },
-      }),
+      (type: BlockSchemaName) =>
+        defineArrayMember({
+          type,
+          components: {
+            preview: PageBuilderItemPreview as any,
+            item: PageBuilderItem as any,
+          },
+        }),
     ),
     { type: "studio.divider" },
   ],
@@ -111,13 +113,14 @@ export const DIALOGS_FIELD = defineField({
   description:
     "Dialogs are modal windows, used for presenting extra information. A dialog must be created before it can be linked to from a button inside block.",
   of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
-    (type: DialogSchemaName) => ({
-      type,
-      components: {
-        preview: PageBuilderItemPreview,
-        item: PageBuilderItem,
-      },
-    }),
+    (type: DialogSchemaName) =>
+      defineArrayMember({
+        type,
+        components: {
+          preview: PageBuilderItemPreview as any,
+          item: PageBuilderItem as any,
+        },
+      }),
   ),
   options: {
     filterType: /dialog.*/,

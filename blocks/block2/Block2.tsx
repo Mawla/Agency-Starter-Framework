@@ -9,6 +9,7 @@ import { TextProps } from "../../components/text/Text";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
 import cx from "classnames";
@@ -88,7 +89,7 @@ export const Block2 = ({
     >
       <div
         className={cx(
-          "max-w-3xl",
+          "max-w-4xl",
           alignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -99,7 +100,7 @@ export const Block2 = ({
             </Title>
           </div>
         )}
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <div className="mb-10 md:mb-14">
             <Text
               align={theme?.block?.align || "center"}
@@ -136,7 +137,7 @@ export const Block2 = ({
       {buttons && Boolean(buttons?.filter(Boolean).length) && (
         <div
           className={cx(
-            "max-w-3xl",
+            "max-w-4xl",
             alignClasses[theme?.block?.align || "center"],
             "mt-8 lg:mt-16",
           )}
@@ -181,7 +182,7 @@ const Item = ({ title, intro, image, theme }: ItemProps) => {
             </Title>
           </div>
         )}
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "md"}
             color={theme?.intro?.color}

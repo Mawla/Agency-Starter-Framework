@@ -11,8 +11,11 @@ export const slugify = (str = "") => {
     .replace(/-+$/, ""); // Trim - from end of text
 };
 
-export const truncate = (str: string, maxLength: number) =>
+export const truncate = (str?: string, maxLength?: number) => {
+  if (!str) return;
+  if (!maxLength) return str;
   str.length <= maxLength ? str : `${str.slice(0, maxLength)}…`;
+};
 
 /**
  * Process string

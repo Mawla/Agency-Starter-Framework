@@ -13,6 +13,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
+import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import {
   BREAKPOINTS,
   BreakpointType,
@@ -167,11 +168,16 @@ export const Block18 = ({
   useEffect(() => {
     if (!gridRef.current) return;
 
-    const gapSize = +window
+    const gaps = window
       .getComputedStyle(gridRef.current, null)
-      .getPropertyValue("gap")
-      .split(" ")[1]
-      ?.replace("px", "");
+      .getPropertyValue("gap");
+
+    let gapSize: number;
+    if (gaps.indexOf(" ") > -1) {
+      gapSize = +gaps.split(" ")[1]?.replace("px", "");
+    } else {
+      gapSize = +gaps.replace("px", "");
+    }
 
     const numColumns = window
       .getComputedStyle(gridRef.current, null)
@@ -193,7 +199,6 @@ export const Block18 = ({
     // find orphans and push if needed
     Object.entries(rows).forEach(([y, items]) => {
       let shiftX = 0;
-
       // only move items in rows that aren't full
       if (items.length < numColumns) {
         if (
@@ -231,7 +236,7 @@ export const Block18 = ({
     >
       <div
         className={cx(
-          "flex flex-col gap-6 max-w-3xl",
+          "flex flex-col gap-6 max-w-4xl",
           theme?.block?.align && textAlignClasses[theme?.block?.align],
         )}
       >
@@ -241,7 +246,7 @@ export const Block18 = ({
           </Title>
         )}
 
-        {intro && (
+        {shouldRenderPortableText(intro) && (
           <Text
             size={theme?.intro?.size || "xl"}
             color={theme?.intro?.color}
@@ -353,11 +358,11 @@ export const Block18 = ({
       {footer && (
         <div
           className={cx(
-            "flex flex-col gap-6 max-w-3xl mt-10",
+            "flex flex-col gap-6 max-w-4xl mt-10",
             theme?.block?.align && textAlignClasses[theme?.block?.align],
           )}
         >
-          {footer && (
+          {shouldRenderPortableText(footer) && (
             <Text
               size={theme?.footer?.size || "xl"}
               color={theme?.footer?.color}

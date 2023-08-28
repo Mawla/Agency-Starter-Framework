@@ -161,7 +161,7 @@ const schema = defineType({
               }),
               defineField({
                 name: "mediaPosition",
-                title: "Image position",
+                title: "Media position",
                 type: "select",
                 options: {
                   list: optionsToList(MEDIA_POSITION_OPTIONS),
