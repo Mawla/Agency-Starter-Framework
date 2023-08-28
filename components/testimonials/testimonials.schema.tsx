@@ -53,6 +53,9 @@ export const testimonialItemObject = defineField({
       title: "Image",
       type: "image",
       description: "Image of the person giving the testimonial.",
+      options: {
+        hotspot: true
+      }
     }),
   ],
 });
