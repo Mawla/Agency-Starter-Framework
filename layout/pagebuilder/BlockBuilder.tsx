@@ -2,6 +2,7 @@ import { Block0Props } from "../../blocks/block0/Block0";
 import { Block1Props } from "../../blocks/block1/Block1";
 import { Block2Props } from "../../blocks/block2/Block2";
 import { Block4Props } from "../../blocks/block4/Block4";
+import { Block7Props } from "../../blocks/block7/Block7";
 import { Block10Props } from "../../blocks/block10/Block10";
 import { Block12Props } from "../../blocks/block12/Block12";
 import { Block13Props } from "../../blocks/block13/Block13";
@@ -16,6 +17,10 @@ import BlockErrorBoundary from "./BlockErrorBoundary";
 import { LazyLoadInView } from "./LazyLoadInView";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
+
+const Block7 = lazy<ComponentType<Block7Props>>(
+  () => import(/* webpackChunkName: "Block7" */ "../../blocks/block7/Block7"),
+);
 
 const Block18 = lazy<ComponentType<Block18Props>>(
   () =>
@@ -139,6 +144,10 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
 
               {item._type === "block.block16" && (
                 <Block16 {...(item as Block16Props)} />
+              )}
+
+              {item._type === "block.block7" && (
+                <Block7 {...(item as Block7Props)} />
               )}
 
               {item._type === "block.block17" && (

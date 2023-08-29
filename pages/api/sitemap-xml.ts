@@ -5,12 +5,12 @@ import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
-  res.setHeader("Cache-Control", "s-maxage=3600");
   res.setHeader("Content-Type", "application/xml");
+  res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
 
   const domain: ConfigType["general"]["domain"] =
     (await getClient(false)?.fetch(
-      '*[_type == "config.general"] { "domain": domain.en }[0].domain',
+      '*[_type == "config.general"] { domain }[0].domain',
     )) || "";
 
   const pages = (await getClient(false).fetch(

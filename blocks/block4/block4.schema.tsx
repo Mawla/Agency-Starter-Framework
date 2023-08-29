@@ -22,7 +22,7 @@ const schema = defineType({
       title: "title",
       image: "image",
     },
-    prepare({ title = "Block 4", image }: any) {
+    prepare({ title = "Default content", image }: any) {
       return {
         title: title,
         media: image || <AlignCenter weight="thin" />,

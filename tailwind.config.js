@@ -50,6 +50,9 @@ module.exports = {
       spacing: {
         30: "120px",
       },
+      aspectRatio: {
+        "3/4": "3 / 4",
+      },
       gap: {
         30: "120px",
       },

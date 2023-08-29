@@ -45,7 +45,7 @@ export const getConfigQuery = (language: LanguageType) => groq`
 {
   "general": *[_id == 'config_general'][0]{
     "name": name.${language},
-    "domain": domain.${language},
+    domain
   },
   "seo": *[_id == 'config_seo'][0] { 
     "title": title.${language},
