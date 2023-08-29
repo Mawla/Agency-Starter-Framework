@@ -3,6 +3,7 @@ import { ColorType } from "../../../types";
 import { ColorPicker } from "./ColorPicker";
 import { Select } from "./Select";
 import { Space } from "./Space";
+import { StyleImportSelect } from "./StyleImportSelect";
 import { TextInput } from "./TextInput";
 import { Toggle } from "./Toggle";
 import { toSentenceCase } from "./utils";
@@ -31,6 +32,21 @@ const StylesPanel = (props: ObjectInputProps) => {
         ...JSON.parse(JSON.stringify(value || {})),
         [name]: val,
       };
+      onChange(set(newValue));
+    },
+    [onChange, value],
+  );
+
+  const importPreset = useCallback(
+    (preset: {}) => {
+      const newValue = {
+        ...JSON.parse(JSON.stringify(value || {})),
+      };
+
+      Object.entries(preset).forEach(([key, value]) => {
+        newValue[key] = value;
+      });
+
       onChange(set(newValue));
     },
     [onChange, value],
@@ -219,9 +235,18 @@ const StylesPanel = (props: ObjectInputProps) => {
       </style>
 
       {Boolean(schemaType?.title?.trim().length) && (
-        <Text size={1} weight="semibold">
-          {schemaType?.title}
-        </Text>
+        <Flex align="baseline" gap={1} justify="space-between">
+          <Text size={1} weight="semibold">
+            {schemaType?.title}
+          </Text>
+
+          {schemaType?.options.importType && (
+            <StyleImportSelect
+              type={schemaType?.options.importType}
+              onChange={(theme) => importPreset(theme)}
+            />
+          )}
+        </Flex>
       )}
 
       {schemaType?.description && (

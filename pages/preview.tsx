@@ -2,8 +2,11 @@ import Wrapper from "../components/block/Wrapper";
 import Button from "../components/buttons/Button";
 import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
 import { decorationFieldsQuery } from "../components/decorations/decoration.query";
+import PortableText from "../components/portabletext/PortableText";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { Scripts } from "../components/script/Script";
+import Text from "../components/text/Text";
+import Title from "../components/title/Title";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
@@ -17,6 +20,9 @@ import {
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery } from "../queries/page.query";
+import { backgroundClasses } from "../theme";
+import { ColorType } from "../types";
+import cx from "classnames";
 import type { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
@@ -91,7 +97,14 @@ export default function PreviewPage({
       `;
     }
 
-    if (documentType === "script") {
+    if (
+      [
+        "script",
+        "preset.theme.title",
+        "preset.theme.text",
+        "preset.theme.block",
+      ].includes(documentType)
+    ) {
       return `
       *[_id == $_id][0] {
         _rev,
@@ -165,6 +178,50 @@ export default function PreviewPage({
       )}
 
       {previewType === "script" && data && <Scripts items={data?.items} />}
+
+      {previewType === "preset.theme.title" && data && (
+        <>
+          <span
+            className={cx(
+              "p-4 absolute inset-0 z-0",
+              backgroundClasses[data.preview?.styles?.background as ColorType],
+            )}
+          />
+          <div className="p-4 relative z-1">
+            <Title {...data.theme}>{data.preview?.text || data.title}</Title>
+          </div>
+        </>
+      )}
+
+      {previewType === "preset.theme.text" && data && (
+        <>
+          <span
+            className={cx(
+              "p-4 absolute inset-0 z-0",
+              backgroundClasses[data.preview?.styles?.background as ColorType],
+            )}
+          />
+          <div className="p-4 relative z-1">
+            <Text
+              size={data.theme?.size}
+              color={data.theme?.color}
+              weight={data.theme?.weight}
+            >
+              <PortableText content={data.preview?.text || data.title} />
+            </Text>
+          </div>
+        </>
+      )}
+
+      {previewType === "preset.theme.block" && data && (
+        <Wrapper
+          theme={{
+            ...data?.theme,
+          }}
+        >
+          {data.preview?.text || data.title}
+        </Wrapper>
+      )}
     </div>
   );
 }

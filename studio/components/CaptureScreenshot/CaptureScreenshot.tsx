@@ -1,8 +1,3 @@
-import {
-  baseLanguage,
-  getLanguageTitle,
-  LanguageType,
-} from "../../../languages";
 import { ClipboardImageIcon } from "@sanity/icons";
 import { Spinner, Button } from "@sanity/ui";
 import React, { ComponentType, useCallback, useEffect, useState } from "react";
@@ -14,14 +9,18 @@ function sleep(ms: number) {
 
 type StateType = "loading" | "default" | "complete" | "error";
 
-export const CaptureScreenshot: ComponentType<any> = () => {
+export const CaptureScreenshot: ComponentType<any> = (props) => {
   const document = useFormValue([]) as {
     _id: string;
     slug?: { current?: string };
     image?: { asset: { _ref: string } };
-    blocks?: { language: LanguageType }[];
   };
   const client = useClient({ apiVersion: "vX" });
+
+  const options = {
+    width: props.schemaType.options?.width || 1024,
+    height: props.schemaType.options?.height || 768,
+  };
 
   const [closePreviewAfterScreenshot, setClosePreviewAfterScreenshot] =
     useState<boolean>(false);
@@ -67,7 +66,11 @@ export const CaptureScreenshot: ComponentType<any> = () => {
     if (!previewIframe?.contentWindow) return;
 
     previewIframe.contentWindow.postMessage(
-      { type: "captureScreenshot", width: 1024, height: 768 },
+      {
+        type: "captureScreenshot",
+        width: options.width,
+        height: options.height,
+      },
       import.meta.env.SANITY_STUDIO_PROJECT_PATH,
     );
   }, [document]);

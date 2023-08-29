@@ -1,3 +1,4 @@
+import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
 import IconPicker from "../../studio/components/IconPicker";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
@@ -9,7 +10,7 @@ import {
 } from "../../types";
 import { BUTTON_ICON_POSITION_OPTIONS } from "./button.options";
 import { Text, Stack } from "@sanity/ui";
-import { StarBookmark } from "@vectopus/atlas-icons-react";
+import { ClickBait } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
@@ -17,17 +18,24 @@ export default defineType({
   name: "preset.button",
   title: "Button preset",
   type: "document",
-  icon: () => <StarBookmark weight="thin" size={20} />,
+  icon: () => <ClickBait weight="thin" size={20} />,
   preview: {
     select: {
       title: "title",
       description: "description",
       isDefault: "default",
+      screenshot: "image",
     },
-    prepare({ title = "Button preset", description = "", isDefault = false }) {
+    prepare({
+      title = "Button preset",
+      description = "",
+      isDefault = false,
+      screenshot,
+    }) {
       return {
         title: title,
         subtitle: `${isDefault ? "[default] " : ""}${description}`,
+        media: screenshot,
       };
     },
   },
@@ -137,6 +145,28 @@ export default defineType({
         ],
       },
     }),
+
+    defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+      description: "220x100 screenshot used for previews in the CMS.",
+    }),
+    defineField(
+      {
+        name: "screenshot",
+        title: "Screenshot",
+        type: "string",
+        components: {
+          field: CaptureScreenshot,
+        },
+        options: {
+          width: 220,
+          height: 100,
+        },
+      },
+      { strict: false },
+    ),
   ],
 });
 

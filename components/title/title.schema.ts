@@ -12,6 +12,7 @@ export const defaultTitleTheme = defineField({
   name: "title",
   type: "styles",
   options: {
+    importType: "preset.theme.title",
     fields: [
       {
         name: "size",

@@ -6,7 +6,7 @@ import {
   pageBase,
 } from "../../studio/schemas/documents/page-fields";
 import { BLOCK_SCHEMAS } from "../../types.sanity";
-import { StarBookmark } from "@vectopus/atlas-icons-react";
+import { Blueprint, BlueprintPaper } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
@@ -14,7 +14,7 @@ const schema = defineType({
   name: "preset.blocks",
   title: "Blocks preset",
   type: "document",
-  icon: () => <StarBookmark weight="thin" size={20} />,
+  icon: () => <Blueprint weight="thin" size={20} />,
   preview: {
     select: {
       title: "title",
