@@ -52,14 +52,16 @@ const schema = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "text",
       group: "content",
+      rows: 2,
     }),
     defineField({
       name: "subtitle",
       title: "Subtitle",
-      type: "string",
+      type: "text",
       group: "content",
+      rows: 2,
     }),
     defineField({
       name: "content",
