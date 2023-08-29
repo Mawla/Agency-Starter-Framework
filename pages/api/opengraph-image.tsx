@@ -6,7 +6,7 @@ import {
 import { baseLanguage } from "../../languages";
 import { ImageType } from "../../types";
 import { ImageResponse } from "@vercel/og";
-import { NextRequest } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   runtime: "edge",
@@ -19,15 +19,14 @@ const sanityClient = new PicoSanity({
   projectId: process.env.SANITY_STUDIO_API_PROJECT_ID || "",
   apiVersion: "2021-03-25",
   token: process.env.SANITY_API_READ_TOKEN,
-  useCdn: process.env.NODE_ENV === "production",
+  useCdn: false,
 });
 
-const handler = async (req: NextRequest) => {
-  const { searchParams } = new URL(req.url);
+const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
+  const { searchParams } = new URL(req.url || "");
 
-  let id = searchParams.get("id");
   let language = searchParams.get("language") || baseLanguage;
-  if (!id) id = `page_homepage__i18n_${language}`;
+  let id = searchParams.get("id") || `page_homepage__i18n_${language}`;
 
   type DataType = {
     logoImage?: string;
