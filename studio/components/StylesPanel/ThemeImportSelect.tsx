@@ -83,7 +83,6 @@ export const ThemePresetSelect = ({ type, onChange }: Props) => {
         option.title.toLowerCase().indexOf(query.toLowerCase()) > -1
       }
       fontSize={1}
-      icon={DownloadIcon}
       padding={3}
       openButton
       options={presets}
@@ -91,7 +90,14 @@ export const ThemePresetSelect = ({ type, onChange }: Props) => {
       renderOption={(option: any) => (
         <Flex gap={2} align="center">
           {option.image && (
-            <img src={option.image} style={{ width: 100, height: 100 }} />
+            <img
+              src={option.image}
+              style={{
+                width: 100,
+                height: 100,
+                border: "1px solid rgba(0,0,0,.1)",
+              }}
+            />
           )}
 
           <Stack space={2}>

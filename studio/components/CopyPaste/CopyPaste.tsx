@@ -61,7 +61,7 @@ export const CopyPaste: ComponentType<any> = (props) => {
 
     toast.push({
       status: "success",
-      title: `Copied ‹${parent.title}› to clipboard`,
+      title: `Copied to clipboard`,
     });
   }, [parent]);
 

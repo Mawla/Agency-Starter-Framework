@@ -68,6 +68,7 @@ const schema = defineType({
           name: "styles",
           title: "Styles",
           options: {
+            allowCopyPaste: false,
             fields: [
               {
                 name: "background",
