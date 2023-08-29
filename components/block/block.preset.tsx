@@ -6,7 +6,7 @@ import {
   pageBase,
 } from "../../studio/schemas/documents/page-fields";
 import { BLOCK_SCHEMAS } from "../../types.sanity";
-import { Blueprint, BlueprintPaper } from "@vectopus/atlas-icons-react";
+import { Blueprint } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 

@@ -5,10 +5,10 @@ import { useClient } from "sanity";
 
 type Props = {
   type: "preset.theme.text" | "preset.theme.title" | "preset.theme.block";
-  onChange: (value: any) => void;
+  onChange: (theme: any, presetId: string) => void;
 };
 
-type OptionType = {
+export type StyleImportSelectOptionType = {
   _id: string;
   _type: string;
   value: string;
@@ -22,7 +22,7 @@ export const StyleImportSelect = ({ type, onChange }: Props) => {
 
   const [state, setState] = useState<"default" | "loading">("default");
   const [show, setShow] = useState(false);
-  const [presets, setPresets] = useState<OptionType[]>([]);
+  const [presets, setPresets] = useState<StyleImportSelectOptionType[]>([]);
 
   useEffect(() => {
     async function getPresets() {
@@ -46,7 +46,10 @@ export const StyleImportSelect = ({ type, onChange }: Props) => {
   }, [type]);
 
   const onSelect = (presetId: string) => {
-    onChange(presets.find((option) => option._id === presetId)?.theme);
+    onChange(
+      presets.find((option) => option._id === presetId)?.theme,
+      presetId,
+    );
     setShow(false);
   };
 
