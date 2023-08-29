@@ -40,17 +40,19 @@ export const SeoPane: ComponentType<any> = ({
 
   return (
     <div style={{ padding: 40 }}>
-      <TabList space={2}>
-        {languages.map((language) => (
-          <Tab
-            aria-controls={`tab-${language.id}`}
-            id={`tab-${language.id}`}
-            label={language.title}
-            onClick={() => setCurrentLanguage(language.id)}
-            selected={currentLanguage === language.id}
-          />
-        ))}
-      </TabList>
+      {languages.length > 1 && (
+        <TabList space={2}>
+          {languages.map((language) => (
+            <Tab
+              aria-controls={`tab-${language.id}`}
+              id={`tab-${language.id}`}
+              label={language.title}
+              onClick={() => setCurrentLanguage(language.id)}
+              selected={currentLanguage === language.id}
+            />
+          ))}
+        </TabList>
+      )}
 
       {languages.map((language) => (
         <TabPanel
