@@ -62,6 +62,12 @@ export const PreviewIframeComponent = ({
       </Card>
     );
 
+  const src = `${
+    import.meta.env.SANITY_STUDIO_PROJECT_PATH
+  }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${
+    getStructurePath()?.language || baseLanguage
+  }`;
+
   return (
     <div className="previewView">
       <style>{`
@@ -76,13 +82,12 @@ export const PreviewIframeComponent = ({
           width: 100%;
         }
       `}</style>
-      <IframeResizer
-        src={`${
-          import.meta.env.SANITY_STUDIO_PROJECT_PATH
-        }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${
-          getStructurePath()?.language || baseLanguage
-        }`}
-      />
+
+      {_type.startsWith("page.") ? (
+        <iframe src={src} />
+      ) : (
+        <IframeResizer src={src} />
+      )}
     </div>
   );
 };
