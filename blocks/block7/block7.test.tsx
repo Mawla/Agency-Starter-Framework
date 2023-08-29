@@ -23,11 +23,24 @@ describe("Block7", () => {
 });
 
 describe("Block7", () => {
-  it("renders items", async () => {
+  it("renders item image", async () => {
     await act(() => {
-      render(<Block7 items={[{ title: "Hello", _key: "" }]} />);
+      render(
+        <Block7
+          items={[
+            {
+              image: {
+                width: 100,
+                height: 100,
+                src: "https://picsum.photos/100/100",
+                alt: "hello",
+              },
+            },
+          ]}
+        />,
+      );
     });
-    expect(screen.getByText("Hello", { selector: "li" })).toBeInTheDocument();
+    expect(screen.getAllByAltText("hello"));
   });
 });
 
