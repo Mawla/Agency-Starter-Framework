@@ -61,6 +61,7 @@ const PresetUsage = () => {
       <Stack space={3}>
         {usage.map((page) => (
           <IntentLink
+            key={page._id}
             intent="edit"
             params={{ id: page._id, type: page._type }}
             target="_blank"

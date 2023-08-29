@@ -1,8 +1,9 @@
 import { baseLanguage } from "../../languages";
 import { getStructurePath } from "../utils/desk/get-structure-path";
 import { Card, Text, Spinner } from "@sanity/ui";
+import IframeResizer from "iframe-resizer-react";
 import React, { ComponentType, useEffect, useState } from "react";
-import { useClient } from "sanity";
+import { useClient, useFormValue } from "sanity";
 
 export const PreviewIframe: ComponentType<any> = ({
   documentId,
@@ -75,7 +76,7 @@ export const PreviewIframeComponent = ({
           width: 100%;
         }
       `}</style>
-      <iframe
+      <IframeResizer
         src={`${
           import.meta.env.SANITY_STUDIO_PROJECT_PATH
         }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${
@@ -87,3 +88,21 @@ export const PreviewIframeComponent = ({
 };
 
 const PreviewIframeComponentMemo = React.memo(PreviewIframeComponent);
+
+export const PreviewIframeInline = () => {
+  const document = useFormValue([]) as {
+    _id?: string;
+    _type: string;
+    [key: string]: any;
+  };
+
+  if (!document?._id) return null;
+
+  return (
+    <div style={{ overflow: "scroll", resize: "vertical" }}>
+      <div style={{ width: 1200 }}>
+        <PreviewIframeComponentMemo _id={document._id} _type={document._type} />
+      </div>
+    </div>
+  );
+};

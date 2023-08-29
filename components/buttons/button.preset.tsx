@@ -2,6 +2,7 @@ import CaptureScreenshot from "../../studio/components/CaptureScreenshot/Capture
 import IconPicker from "../../studio/components/IconPicker";
 import PresetUsage from "../../studio/components/Presets/PresetUsage";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { PreviewIframeInline } from "../../studio/views/PreviewIframe";
 import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
 import {
   BORDER_RADIUS_OPTIONS,
@@ -146,7 +147,40 @@ export default defineType({
         ],
       },
     }),
-
+    defineField({
+      name: "preview",
+      title: "Preview",
+      type: "object",
+      fields: [
+        defineField({
+          type: "string",
+          name: "preview",
+          components: {
+            field: PreviewIframeInline,
+          },
+        }),
+        defineField({
+          name: "text",
+          title: "Text",
+          type: "text",
+          rows: 2,
+          description: "Change the text of the preview to see how it looks.",
+        }),
+        defineField({
+          type: "styles",
+          name: "styles",
+          title: "Styles",
+          options: {
+            fields: [
+              {
+                name: "background",
+                type: "color",
+              },
+            ],
+          },
+        }),
+      ],
+    }),
     defineField({
       name: "image",
       title: "Image",

@@ -24,7 +24,9 @@ import { backgroundClasses } from "../theme";
 import { ColorType } from "../types";
 import cx from "classnames";
 import type { GetStaticProps } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
 
 const LivePreview = lazy<ComponentType<LivePreviewProps>>(
@@ -83,6 +85,7 @@ export default function PreviewPage({
         _updatedAt,
         "name": slug.current,
         ${buttonThemeFieldsQuery}
+        ...,
       }
       `;
     }
@@ -118,7 +121,14 @@ export default function PreviewPage({
   };
 
   return (
-    <div>
+    <div
+      className={cx(
+        "min-h-full",
+        data?.preview?.styles?.background &&
+          backgroundClasses[data?.preview?.styles?.background as ColorType],
+        data?.preview?.styles?.background && "p-4",
+      )}
+    >
       {isPreviewMode && (
         <LivePreview
           setData={setData}
@@ -151,8 +161,12 @@ export default function PreviewPage({
       {previewType === "footer" && data && <Footer {...data} />}
 
       {previewType === "preset.button" && data && (
-        <div className="p-4 bg-[#fafafa]">
-          <Button presetTheme={data} label="This is a button" href="/" />
+        <div className="relative z-1">
+          <Button
+            presetTheme={data}
+            label={data.preview?.text || data.title || "Click here"}
+            href="/"
+          />
         </div>
       )}
 
@@ -180,37 +194,17 @@ export default function PreviewPage({
       {previewType === "script" && data && <Scripts items={data?.items} />}
 
       {previewType === "preset.theme.title" && data && (
-        <>
-          <span
-            className={cx(
-              "p-4 absolute inset-0 z-0",
-              backgroundClasses[data.preview?.styles?.background as ColorType],
-            )}
-          />
-          <div className="p-4 relative z-1">
-            <Title {...data.theme}>{data.preview?.text || data.title}</Title>
-          </div>
-        </>
+        <Title {...data.theme}>{data.preview?.text || data.title}</Title>
       )}
 
       {previewType === "preset.theme.text" && data && (
-        <>
-          <span
-            className={cx(
-              "p-4 absolute inset-0 z-0",
-              backgroundClasses[data.preview?.styles?.background as ColorType],
-            )}
-          />
-          <div className="p-4 relative z-1">
-            <Text
-              size={data.theme?.size}
-              color={data.theme?.color}
-              weight={data.theme?.weight}
-            >
-              <PortableText content={data.preview?.text || data.title} />
-            </Text>
-          </div>
-        </>
+        <Text
+          size={data.theme?.size}
+          color={data.theme?.color}
+          weight={data.theme?.weight}
+        >
+          <PortableText content={data.preview?.text || data.title} />
+        </Text>
       )}
 
       {previewType === "preset.theme.block" && data && (
@@ -222,6 +216,8 @@ export default function PreviewPage({
           {data.preview?.text || data.title}
         </Wrapper>
       )}
+
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js" />
     </div>
   );
 }
