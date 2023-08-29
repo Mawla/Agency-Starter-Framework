@@ -1,4 +1,5 @@
 import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
+import PresetUsage from "../../studio/components/Presets/PresetUsage";
 import { defaultTextTheme } from "./text.schema";
 import { TextSize } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -90,6 +91,12 @@ const schema = defineType({
       },
       { strict: false },
     ),
+    defineField({
+      name: "usage",
+      title: "Used on",
+      type: "string",
+      components: { field: PresetUsage },
+    }),
   ],
 });
 

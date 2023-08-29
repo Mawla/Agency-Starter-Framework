@@ -1,6 +1,6 @@
 import { DownloadIcon } from "@sanity/icons";
 import { Button, Flex, Stack, Text, Autocomplete } from "@sanity/ui";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useClient } from "sanity";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   onChange: (theme: any, presetId: string) => void;
 };
 
-export type StyleImportSelectOptionType = {
+export type ThemePresetSelectOptionType = {
   _id: string;
   _type: string;
   value: string;
@@ -17,12 +17,17 @@ export type StyleImportSelectOptionType = {
   theme?: any;
 };
 
-export const StyleImportSelect = ({ type, onChange }: Props) => {
+export const ThemePresetSelect = ({ type, onChange }: Props) => {
   const client = useClient({ apiVersion: "vX" });
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [state, setState] = useState<"default" | "loading">("default");
   const [show, setShow] = useState(false);
-  const [presets, setPresets] = useState<StyleImportSelectOptionType[]>([]);
+  const [presets, setPresets] = useState<ThemePresetSelectOptionType[]>([]);
+
+  useEffect(() => {
+    if (show && inputRef.current) inputRef.current.focus();
+  }, [show]);
 
   useEffect(() => {
     async function getPresets() {
@@ -71,6 +76,8 @@ export const StyleImportSelect = ({ type, onChange }: Props) => {
 
   return (
     <Autocomplete
+      ref={inputRef}
+      style={{ width: 400, maxWidth: "100%" }}
       id="preset-import"
       filterOption={(query, option: any) =>
         option.title.toLowerCase().indexOf(query.toLowerCase()) > -1
@@ -84,11 +91,13 @@ export const StyleImportSelect = ({ type, onChange }: Props) => {
       renderOption={(option: any) => (
         <Flex gap={2} align="center">
           {option.image && (
-            <img src={option.image} style={{ width: 50, height: 50 }} />
+            <img src={option.image} style={{ width: 100, height: 100 }} />
           )}
 
-          <Stack space={3}>
-            <Text weight="semibold">{option.title}</Text>
+          <Stack space={2}>
+            <Text weight="semibold" size={1}>
+              {option.title}
+            </Text>
             <Text muted size={1}>
               {option.theme?.size} {option.theme?.weight} {option.theme?.font}{" "}
               {option.theme?.color}
@@ -98,6 +107,7 @@ export const StyleImportSelect = ({ type, onChange }: Props) => {
       )}
       loading={state === "loading"}
       onSelect={onSelect}
+      onBlur={() => setShow(false)}
       renderValue={(value, option) => option.title}
     />
   );

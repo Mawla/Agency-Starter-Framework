@@ -17,7 +17,7 @@ const PresetUsage = () => {
 
     async function getUsage() {
       const usage = await client.fetch(
-        `*[_type match 'page.*' && defined(blocks) && ($id in blocks[].preset._ref)] {
+        `*[_type match 'page.*' && defined(blocks) && references($id)] {
           _id, 
           _type, 
           "title": title

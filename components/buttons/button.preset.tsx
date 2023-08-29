@@ -1,5 +1,6 @@
 import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
 import IconPicker from "../../studio/components/IconPicker";
+import PresetUsage from "../../studio/components/Presets/PresetUsage";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
 import {
@@ -167,6 +168,12 @@ export default defineType({
       },
       { strict: false },
     ),
+    defineField({
+      name: "usage",
+      title: "Used on",
+      type: "string",
+      components: { field: PresetUsage },
+    }),
   ],
 });
 

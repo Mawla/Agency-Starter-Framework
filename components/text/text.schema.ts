@@ -7,7 +7,7 @@ export const defaultTextTheme = defineField({
   title: "Intro",
   type: "styles",
   options: {
-    importType: "preset.text",
+    importType: "preset.theme.text",
     fields: [
       {
         name: "size",

@@ -3,11 +3,11 @@ import { ColorType } from "../../../types";
 import { ColorPicker } from "./ColorPicker";
 import { Select } from "./Select";
 import { Space } from "./Space";
-import {
-  StyleImportSelect,
-  StyleImportSelectOptionType,
-} from "./StyleImportSelect";
 import { TextInput } from "./TextInput";
+import {
+  ThemePresetSelect,
+  ThemePresetSelectOptionType,
+} from "./ThemeImportSelect";
 import { Toggle } from "./Toggle";
 import { toSentenceCase } from "./utils";
 import { Card, Flex, Grid, Stack, Text } from "@sanity/ui";
@@ -41,7 +41,7 @@ const StylesPanel = (props: ObjectInputProps) => {
   );
 
   const importPreset = useCallback(
-    (preset: StyleImportSelectOptionType, presetId: string) => {
+    (preset: ThemePresetSelectOptionType, presetId: string) => {
       const newValue = {
         ...preset,
         preset: {
@@ -237,16 +237,18 @@ const StylesPanel = (props: ObjectInputProps) => {
       </style>
 
       {Boolean(schemaType?.title?.trim().length) && (
-        <Flex align="baseline" gap={1} justify="space-between">
+        <Flex align="baseline" gap={1} justify="space-between" wrap="wrap">
           <Text size={1} weight="semibold">
             {schemaType?.title}
           </Text>
 
           {schemaType?.options.importType && (
-            <StyleImportSelect
-              type={schemaType?.options.importType}
-              onChange={importPreset}
-            />
+            <Card>
+              <ThemePresetSelect
+                type={schemaType?.options.importType}
+                onChange={importPreset}
+              />
+            </Card>
           )}
         </Flex>
       )}
