@@ -22,6 +22,7 @@ export function documentList(
     .icon(icon || (getDocumentIcon(S, type) as any))
     .child(() => {
       const list = S.documentList()
+        .apiVersion("vX")
         .title(title || getDocumentTitle(S, type))
         .filter(
           filter || language

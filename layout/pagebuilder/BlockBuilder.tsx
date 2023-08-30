@@ -94,7 +94,7 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
   if (firstBlock && firstBlock.image) firstBlock.image.priority = true;
   if (firstBlock && firstBlock.mobileImage) firstBlock.image.mobileImage = true;
 
-  firstBlock.decorations.map((decoration: DecorationProps) => {
+  firstBlock.decorations?.map((decoration: DecorationProps) => {
     const d = decoration;
     if (d?.mobile?.image) d.mobile.image.priority = true;
     if (d?.tablet?.image) d.tablet.image.priority = true;
