@@ -115,7 +115,12 @@ export const Navigation = ({
 
       {theme?.breadcrumb?.hidden !== true && (
         <Suspense>
-          <NavigationBreadcrumb theme={theme?.breadcrumb} />
+          <NavigationBreadcrumb
+            theme={{
+              ...theme?.breadcrumb,
+              width: theme?.block?.width,
+            }}
+          />
         </Suspense>
       )}
     </div>
