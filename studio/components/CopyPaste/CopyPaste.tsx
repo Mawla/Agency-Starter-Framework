@@ -124,7 +124,6 @@ export const CopyPaste: ComponentType<any> = (props) => {
     // check if obj.data partially matches the schema definition
     const errors = matchSchema(obj.schema, schemaDefinition);
     if (errors.length) {
-      console.log(errors);
       return false;
     }
 
