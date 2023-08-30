@@ -196,6 +196,7 @@ export type ImageType = {
     x: number;
     y: number;
   } | null;
+  priority?: boolean;
 };
 
 export const VIDEO_PROVIDERS = {
