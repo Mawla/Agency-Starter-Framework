@@ -61,7 +61,7 @@ export const CopyPaste: ComponentType<any> = (props) => {
 
     toast.push({
       status: "success",
-      title: `Copied ‹${parent.title}› to clipboard`,
+      title: `Copied to clipboard`,
     });
   }, [parent]);
 
@@ -124,7 +124,6 @@ export const CopyPaste: ComponentType<any> = (props) => {
     // check if obj.data partially matches the schema definition
     const errors = matchSchema(obj.schema, schemaDefinition);
     if (errors.length) {
-      console.log(errors);
       return false;
     }
 

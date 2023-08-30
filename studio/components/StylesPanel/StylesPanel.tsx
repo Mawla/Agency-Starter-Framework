@@ -1,14 +1,23 @@
 import { COLORS } from "../../../theme";
 import { ColorType } from "../../../types";
+import { getSchemaDefinition, matchSchema } from "../CopyPaste/match-schema";
 import { ColorPicker } from "./ColorPicker";
 import { Select } from "./Select";
 import { Space } from "./Space";
 import { TextInput } from "./TextInput";
+import {
+  ThemePresetSelect,
+  ThemePresetSelectOptionType,
+} from "./ThemeImportSelect";
 import { Toggle } from "./Toggle";
 import { toSentenceCase } from "./utils";
-import { Card, Flex, Grid, Stack, Text } from "@sanity/ui";
-import React, { useCallback } from "react";
+import { ArchiveIcon, CopyIcon } from "@sanity/icons";
+import { Button, Card, Flex, Grid, Stack, Text, useToast } from "@sanity/ui";
+import React, { useCallback, useEffect, useState } from "react";
 import { ObjectInputProps, set } from "sanity";
+
+const ACTION_ID = "sanityCopyPasteObject";
+const READ_PASTE_TIMEOUT = 1000;
 
 export type StyleItemProps = {
   value?: any;
@@ -24,6 +33,8 @@ export type StyleItemProps = {
 
 const StylesPanel = (props: ObjectInputProps) => {
   const { value, onChange, schemaType } = props;
+  const toast = useToast();
+  const [isCompatiblePasteData, setIsCompatiblePasteData] = useState(false);
 
   const handleChange = useCallback(
     (name: string, val: any) => {
@@ -35,6 +46,110 @@ const StylesPanel = (props: ObjectInputProps) => {
     },
     [onChange, value],
   );
+
+  const importPreset = useCallback(
+    (preset: ThemePresetSelectOptionType, presetId: string) => {
+      const newValue = {
+        ...preset,
+        preset: {
+          _ref: presetId,
+        },
+      };
+
+      onChange(set(newValue));
+    },
+    [onChange, value],
+  );
+
+  /**
+   * Copy to clipboard
+   */
+
+  const onCopy = useCallback(() => {
+    const schemaDefinition = getSchemaDefinition(
+      schemaType?.options?.fields,
+      null,
+    );
+
+    navigator.clipboard.writeText(
+      JSON.stringify({
+        date: new Date(),
+        action: ACTION_ID,
+        data: value,
+        schema: schemaDefinition,
+      }),
+    );
+
+    toast.push({
+      status: "success",
+      title: `Copied theme to clipboard`,
+    });
+  }, [value]);
+
+  /**
+   * Paste from clipboard
+   */
+
+  const onPaste = useCallback(async () => {
+    const obj = await getClipboardObj();
+    if (!obj?.data) return;
+    onChange(set(obj?.data));
+  }, [isCompatiblePasteData]);
+
+  /**
+   * Check if data on clipboard is a match with parent type
+   */
+
+  const getClipboardObj = async () => {
+    const data = await navigator.clipboard.readText();
+    if (!data) return null;
+
+    let obj;
+    try {
+      obj = JSON.parse(data);
+    } catch (err) {
+      return null;
+    }
+    return obj;
+  };
+
+  const checkCompatiblePasteData = async () => {
+    const obj = await getClipboardObj();
+
+    if (!obj) return false;
+
+    // no sanity copy paste action
+    if (obj.action !== ACTION_ID) return false;
+
+    const schemaDefinition = getSchemaDefinition(
+      schemaType?.options?.fields,
+      null,
+    );
+
+    // check if obj.data partially matches the schema definition
+    const errors = matchSchema(obj.schema, schemaDefinition);
+    if (errors.length) {
+      return false;
+    }
+
+    return true;
+  };
+
+  /**
+   * Read clipboard periodically to enable/disable paste
+   */
+
+  useEffect(() => {
+    if (schemaType?.options.allowCopyPaste === false) return;
+    async function readClipboard() {
+      if (!window?.document?.hasFocus()) return;
+      const isCompatible = await checkCompatiblePasteData();
+      setIsCompatiblePasteData(isCompatible);
+    }
+
+    let interval = setInterval(readClipboard, READ_PASTE_TIMEOUT);
+    return () => clearInterval(interval);
+  }, []);
 
   if (!schemaType?.options?.fields?.length)
     return (
@@ -219,9 +334,46 @@ const StylesPanel = (props: ObjectInputProps) => {
       </style>
 
       {Boolean(schemaType?.title?.trim().length) && (
-        <Text size={1} weight="semibold">
-          {schemaType?.title}
-        </Text>
+        <Flex align="baseline" gap={1} wrap="wrap">
+          <Text size={1} weight="semibold">
+            {schemaType?.title}
+          </Text>
+
+          <Flex style={{ marginLeft: "auto" }}>
+            {schemaType?.options.importType && (
+              <Card>
+                <ThemePresetSelect
+                  type={schemaType?.options.importType}
+                  onChange={importPreset}
+                />
+              </Card>
+            )}
+
+            {schemaType?.options.allowCopyPaste !== false && (
+              <>
+                <Button
+                  icon={CopyIcon}
+                  text=""
+                  fontSize={1}
+                  padding={2}
+                  mode="bleed"
+                  tone="primary"
+                  onClick={onCopy}
+                />
+                <Button
+                  icon={ArchiveIcon}
+                  text=""
+                  fontSize={1}
+                  padding={2}
+                  mode="bleed"
+                  tone="primary"
+                  disabled={!isCompatiblePasteData}
+                  onClick={onPaste}
+                />
+              </>
+            )}
+          </Flex>
+        </Flex>
       )}
 
       {schemaType?.description && (

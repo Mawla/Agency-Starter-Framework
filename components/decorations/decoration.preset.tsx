@@ -1,7 +1,5 @@
 import { DecorationLocationSelect } from "../../studio/components/Decorations/DecorationLocationSelect";
-import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { DECORATION_LOCATION_OPTIONS } from "./decoration.options";
-import { StarBookmark } from "@vectopus/atlas-icons-react";
+import { BlueprintPaper } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -9,7 +7,7 @@ const schema = defineType({
   name: "preset.decoration",
   title: "Decoration preset",
   type: "document",
-  icon: () => <StarBookmark weight="thin" size={20} />,
+  icon: () => <BlueprintPaper weight="thin" size={20} />,
   preview: {
     select: {
       title: "title",
