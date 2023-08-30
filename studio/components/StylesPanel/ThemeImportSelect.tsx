@@ -33,7 +33,7 @@ export const ThemePresetSelect = ({ type, onChange }: Props) => {
     async function getPresets() {
       setState("loading");
       const presets = await client.fetch(
-        `*[_type match '${type}'] {
+        `*[_type match '${type}' && !(_id match 'drafts.*')] {
           "value": _id,
           _id, 
           _type, 
