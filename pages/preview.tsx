@@ -2,8 +2,11 @@ import Wrapper from "../components/block/Wrapper";
 import Button from "../components/buttons/Button";
 import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
 import { decorationFieldsQuery } from "../components/decorations/decoration.query";
+import PortableText from "../components/portabletext/PortableText";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { Scripts } from "../components/script/Script";
+import Text from "../components/text/Text";
+import Title from "../components/title/Title";
 import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
@@ -17,8 +20,13 @@ import {
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery } from "../queries/page.query";
+import { backgroundClasses } from "../theme";
+import { ColorType } from "../types";
+import cx from "classnames";
 import type { GetStaticProps } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
 
 const LivePreview = lazy<ComponentType<LivePreviewProps>>(
@@ -77,6 +85,7 @@ export default function PreviewPage({
         _updatedAt,
         "name": slug.current,
         ${buttonThemeFieldsQuery}
+        ...,
       }
       `;
     }
@@ -91,7 +100,14 @@ export default function PreviewPage({
       `;
     }
 
-    if (documentType === "script") {
+    if (
+      [
+        "script",
+        "preset.theme.title",
+        "preset.theme.text",
+        "preset.theme.block",
+      ].includes(documentType)
+    ) {
       return `
       *[_id == $_id][0] {
         _rev,
@@ -105,7 +121,14 @@ export default function PreviewPage({
   };
 
   return (
-    <div>
+    <div
+      className={cx(
+        "min-h-full",
+        data?.preview?.styles?.background &&
+          backgroundClasses[data?.preview?.styles?.background as ColorType],
+        data?.preview?.styles?.background && "p-4",
+      )}
+    >
       {isPreviewMode && (
         <LivePreview
           setData={setData}
@@ -138,8 +161,12 @@ export default function PreviewPage({
       {previewType === "footer" && data && <Footer {...data} />}
 
       {previewType === "preset.button" && data && (
-        <div className="p-4 bg-[#fafafa]">
-          <Button presetTheme={data} label="This is a button" href="/" />
+        <div className="relative z-1">
+          <Button
+            presetTheme={data}
+            label={data.preview?.text || data.title || "Click here"}
+            href="/"
+          />
         </div>
       )}
 
@@ -165,6 +192,32 @@ export default function PreviewPage({
       )}
 
       {previewType === "script" && data && <Scripts items={data?.items} />}
+
+      {previewType === "preset.theme.title" && data && (
+        <Title {...data.theme}>{data.preview?.text || data.title}</Title>
+      )}
+
+      {previewType === "preset.theme.text" && data && (
+        <Text
+          size={data.theme?.size}
+          color={data.theme?.color}
+          weight={data.theme?.weight}
+        >
+          <PortableText content={data.preview?.text || data.title} />
+        </Text>
+      )}
+
+      {previewType === "preset.theme.block" && data && (
+        <Wrapper
+          theme={{
+            ...data?.theme,
+          }}
+        >
+          {data.preview?.text || data.title}
+        </Wrapper>
+      )}
+
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js" />
     </div>
   );
 }

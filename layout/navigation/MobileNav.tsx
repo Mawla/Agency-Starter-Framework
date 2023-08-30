@@ -1,5 +1,4 @@
 import { Button } from "../../components/buttons/Button";
-import { Link } from "../../components/buttons/Link";
 import { IconLoader } from "../../components/images/IconLoader";
 import { backgroundClasses, textClasses } from "../../theme";
 import { LanguageSwitch } from "./LanguageSwitch";
@@ -46,9 +45,9 @@ export const MobileNav = ({
               <RadixNavigationMenu.Root
                 className={cx(
                   "h-full overflow-y-auto overflow-scrolling-touch select-none shadow-2xl text-xl",
-                  theme?.block?.background
-                    ? backgroundClasses[theme?.block?.background]
-                    : "bg-white",
+                  theme?.block?.background &&
+                    backgroundClasses[theme?.block?.background],
+                  theme?.block?.text && textClasses[theme?.block?.text],
                 )}
               >
                 {Boolean(items?.length) && (
@@ -60,21 +59,13 @@ export const MobileNav = ({
                           className="mt-0.5 py-3 px-4 group"
                         >
                           <summary className="list-none relative">
-                            <span className="uppercase font-bold">
-                              {item.button?.href ? (
-                                <Link
-                                  href={item.button?.href}
-                                  locale={item.button?.language}
-                                  className="hover:underline"
-                                >
-                                  {item.button?.label}
-                                </Link>
-                              ) : (
-                                <span className="block">
-                                  {item.button?.label}
-                                </span>
-                              )}
-                            </span>
+                            <Button
+                              {...item.button}
+                              as={item?.button?.href ? "a" : "span"}
+                              className={cx("!p-0", {
+                                ["!underline current"]: item?.current,
+                              })}
+                            />
 
                             {Boolean(item.children?.length) && (
                               <IconLoader
@@ -85,30 +76,18 @@ export const MobileNav = ({
                           </summary>
 
                           {Boolean(item?.children?.length) && (
-                            <ul className="flex flex-col gap-2 pt-6 pb-3">
-                              {item?.children?.map(
-                                ({ label, current, href, language, _key }) => (
-                                  <li key={_key}>
-                                    {href && (
-                                      <Link
-                                        href={href}
-                                        locale={language}
-                                        className={cx(
-                                          "text-md hover:underline relative",
-                                          {
-                                            ["underline"]: current,
-                                          },
-                                        )}
-                                      >
-                                        {current && (
-                                          <span className="bg-action-500 w-0.5 h-5 absolute -left-2 -top-0.5" />
-                                        )}
-                                        {label}
-                                      </Link>
-                                    )}
-                                  </li>
-                                ),
-                              )}
+                            <ul className="flex flex-col gap-2 py-3">
+                              {item?.children?.map((item) => (
+                                <li key={item._key}>
+                                  <Button
+                                    {...item}
+                                    as={item?.href ? "a" : "span"}
+                                    className={cx("!p-0", {
+                                      ["!underline current"]: item?.current,
+                                    })}
+                                  />
+                                </li>
+                              ))}
                             </ul>
                           )}
                         </details>

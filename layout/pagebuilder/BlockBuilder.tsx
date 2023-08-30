@@ -11,6 +11,7 @@ import { Block15Props } from "../../blocks/block15/Block15";
 import { Block16Props } from "../../blocks/block16/Block16";
 import { Block17Props } from "../../blocks/block17/Block17";
 import { Block18Props } from "../../blocks/block18/Block18";
+import { DecorationProps } from "../../components/decorations/Decoration";
 import { GenericBlockProps } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import BlockErrorBoundary from "./BlockErrorBoundary";
@@ -88,7 +89,22 @@ const INVIEW_LOAD_ONLY_SECTIONS: BlockSchemaName[] = [];
 
 export const BlockBuilder = ({ items }: BlockBuilderProps) => {
   const firstBlock = items?.[0];
+
+  // add priority to first block images
   if (firstBlock && firstBlock.image) firstBlock.image.priority = true;
+  if (firstBlock && firstBlock.mobileImage) firstBlock.image.mobileImage = true;
+
+  firstBlock.decorations.map((decoration: DecorationProps) => {
+    const d = decoration;
+    if (d?.mobile?.image) d.mobile.image.priority = true;
+    if (d?.tablet?.image) d.tablet.image.priority = true;
+    if (d?.desktop?.image) d.desktop.image.priority = true;
+    if (d.preset?.mobile?.image) d.preset.mobile.image.priority = true;
+    if (d.preset?.tablet?.image) d.preset.tablet.image.priority = true;
+    if (d.preset?.desktop?.image) d.preset.desktop.image.priority = true;
+    return d;
+  });
+
   return (
     <main>
       {items?.map((item, i) => (

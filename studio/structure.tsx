@@ -293,6 +293,10 @@ export const structure = (
           S.documentTypeListItem("preset.blocks").title("Blocks"),
           S.documentTypeListItem("preset.button").title("Buttons"),
           S.documentTypeListItem("preset.decoration").title("Decorations"),
+          S.divider(),
+          S.documentTypeListItem("preset.theme.title").title("Heading styles"),
+          S.documentTypeListItem("preset.theme.text").title("Text styles"),
+          S.documentTypeListItem("preset.theme.block").title("Block styles"),
         ]),
       ),
 

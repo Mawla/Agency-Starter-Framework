@@ -247,7 +247,7 @@ const Preset: ComponentType<any> = (props) => {
   const reImportPreset = useCallback(() => {
     if (!value?._ref) return;
     setSelectedPresetId(value._ref);
-  }, [value.ref]);
+  }, [value?.ref]);
 
   return (
     <Card shadow={1} padding={3}>

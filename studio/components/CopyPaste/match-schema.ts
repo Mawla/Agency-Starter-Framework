@@ -5,7 +5,7 @@
 
 export const getSchemaDefinition = (
   schema: any,
-  parent: string | null
+  parent: string | null,
 ): string[] => {
   return schema.reduce(
     (
@@ -16,10 +16,10 @@ export const getSchemaDefinition = (
       }: {
         name: string;
         type: { jsonType: string; fields?: {}[]; options?: { fields: {}[] } };
-      }
+      },
     ) => {
       let path = [
-        `${[parent, name].filter(Boolean).join(".")}:${type.jsonType}`,
+        `${[parent, name].filter(Boolean).join(".")}:${type.jsonType || type}`,
       ];
       const parentPath = path[0].split(":")[0];
       if (type.fields)
@@ -31,7 +31,7 @@ export const getSchemaDefinition = (
         ];
       return [...acc, ...path];
     },
-    []
+    [],
   );
 };
 
@@ -45,7 +45,7 @@ export const matchSchema = (schema: any, definition: string[]) => {
     .map((schemaItem: string) => {
       const [path, type] = schemaItem.split(":");
       const definitionPath = definition.find(
-        (definitionPath: string) => definitionPath.split(":")[0] === path
+        (definitionPath: string) => definitionPath.split(":")[0] === path,
       );
       if (!definitionPath) {
         return `Path '${path}' not found`;

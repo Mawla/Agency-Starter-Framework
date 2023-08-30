@@ -17,7 +17,7 @@ const PresetUsage = () => {
 
     async function getUsage() {
       const usage = await client.fetch(
-        `*[_type match 'page.*' && defined(blocks) && ($id in blocks[].preset._ref)] {
+        `*[_type match 'page.*' && defined(blocks) && references($id)] {
           _id, 
           _type, 
           "title": title
@@ -61,6 +61,7 @@ const PresetUsage = () => {
       <Stack space={3}>
         {usage.map((page) => (
           <IntentLink
+            key={page._id}
             intent="edit"
             params={{ id: page._id, type: page._type }}
             target="_blank"
