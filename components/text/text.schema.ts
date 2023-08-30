@@ -7,11 +7,8 @@ export const defaultTextTheme = defineField({
   title: "Intro",
   type: "styles",
   options: {
+    importType: "preset.theme.text",
     fields: [
-      {
-        name: "color",
-        type: "color",
-      },
       {
         name: "size",
         type: "select",
@@ -25,6 +22,10 @@ export const defaultTextTheme = defineField({
         options: {
           list: optionsToList(TEXT_WEIGHT_OPTIONS),
         },
+      },
+      {
+        name: "color",
+        type: "color",
       },
     ],
   },

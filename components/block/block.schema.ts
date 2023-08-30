@@ -11,6 +11,7 @@ export const defaultBlockTheme = defineField({
   title: "Block",
   type: "styles",
   options: {
+    importType: "preset.theme.block",
     fields: [
       {
         name: "text",

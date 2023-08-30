@@ -12,6 +12,7 @@ import block16 from "../../blocks/block16/block16.schema";
 import block17 from "../../blocks/block17/block17.schema";
 import block18 from "../../blocks/block18/block18.schema";
 import presetBlocks from "../../components/block/block.preset";
+import presetBlockTheme from "../../components/block/block.preset.theme";
 import presetButton, {
   buttonTheme,
 } from "../../components/buttons/button.preset";
@@ -37,6 +38,8 @@ import script from "../../components/script/script.schema";
 import testimonials, {
   testimonialItem,
 } from "../../components/testimonials/testimonials.schema";
+import presetTextTheme from "../../components/text/text.preset.theme";
+import presetTitleTheme from "../../components/title/title.preset.theme";
 import video from "../../components/video/video.schema";
 import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
@@ -147,6 +150,9 @@ export const schemaTypes = [
     presetBlocks,
     presetButton,
     presetDecoration,
+    presetBlockTheme,
+    presetTitleTheme,
+    presetTextTheme,
     redirect,
     script,
     studioDivider,
