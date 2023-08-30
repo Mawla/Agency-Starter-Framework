@@ -24,7 +24,6 @@ import { backgroundClasses } from "../theme";
 import { ColorType } from "../types";
 import cx from "classnames";
 import type { GetStaticProps } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import React, { ComponentType, lazy, useEffect, useState } from "react";
@@ -145,7 +144,6 @@ export default function PreviewPage({
           language={language}
         />
       )}
-
       {previewType === "page" && data && (
         <Page
           navigation={null as unknown as NavigationType}
@@ -155,11 +153,8 @@ export default function PreviewPage({
           config={config}
         />
       )}
-
       {previewType === "navigation" && data && <Navigation {...data} />}
-
       {previewType === "footer" && data && <Footer {...data} />}
-
       {previewType === "preset.button" && data && (
         <div className="relative z-1">
           <Button
@@ -169,7 +164,6 @@ export default function PreviewPage({
           />
         </div>
       )}
-
       {previewType === "preset.decoration" && data && (
         <div className="bg-black/10">
           <Wrapper
@@ -190,13 +184,10 @@ export default function PreviewPage({
           />
         </div>
       )}
-
       {previewType === "script" && data && <Scripts items={data?.items} />}
-
       {previewType === "preset.theme.title" && data && (
         <Title {...data.theme}>{data.preview?.text || data.title}</Title>
       )}
-
       {previewType === "preset.theme.text" && data && (
         <Text
           size={data.theme?.size}
@@ -206,7 +197,6 @@ export default function PreviewPage({
           <PortableText content={data.preview?.text || data.title} />
         </Text>
       )}
-
       {previewType === "preset.theme.block" && data && (
         <Wrapper
           theme={{
@@ -216,7 +206,6 @@ export default function PreviewPage({
           {data.preview?.text || data.title}
         </Wrapper>
       )}
-
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js" />
     </div>
   );

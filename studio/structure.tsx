@@ -50,6 +50,7 @@ export const structure = (
                   .icon(() => <Diagram weight="thin" size={20} />)
                   .child(
                     S.documentList()
+                      .apiVersion("vX")
                       .title("Content pages")
                       .schemaType("page.content")
                       .filter(
@@ -386,6 +387,7 @@ async function nestedContentPageList(
 
   if (hasChildren) {
     return S.documentList()
+      .apiVersion("vX")
       .title(page?.title || "Pages")
       .schemaType(page?._type)
       .filter(
