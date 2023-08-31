@@ -160,7 +160,7 @@ export const Block4 = ({
         </div>
 
         <div
-          className={`flex flex-col gap-6 max-w-screen-lg relative z-10 ${
+          className={`flex flex-col gap-6 w-full max-w-screen-lg relative z-10 ${
             textAlignClasses[theme?.block?.align || "center"]
           }`}
         >
@@ -186,7 +186,7 @@ export const Block4 = ({
           )}
 
           {video && (
-            <div className="rounded-xs relative">
+            <div className="relative">
               <Video
                 {...video}
                 className={cx(
