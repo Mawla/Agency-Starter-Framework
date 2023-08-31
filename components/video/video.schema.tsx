@@ -119,10 +119,6 @@ const schema = defineType({
   name: "video",
   title: "Video",
   type: "object",
-  initialValue: {
-    loop: false,
-    autoPlay: false,
-  },
   preview: getVideoPreview(),
   components: {
     preview: VideoPreview,
