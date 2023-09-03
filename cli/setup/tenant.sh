@@ -1,3 +1,17 @@
+toSlug() {
+  # Forcing the POSIX local so alnum is only 0-9A-Za-z
+  export LANG=POSIX
+  export LC_ALL=POSIX
+  # Keep only alphanumeric value
+  sed -e 's/[^[:alnum:]]/-/g' |
+  # Keep only one dash if there is multiple one consecutively
+  tr -s '-'                   |
+  # Lowercase everything
+  tr A-Z a-z                  |
+  # Remove last dash if there is nothing after
+  sed -e 's/-$//'
+}
+
 colorPrint() {
   echo "\033[0;36m$1\033[0m"
 }
@@ -9,8 +23,9 @@ scope=mawla-team
 
 colorPrint "What's the name of the project?"
 read -p "name:" name
-projectName=$(echo "$name" | tr '[:upper:]' '[:lower:]')
-colorPrint "Okay,updated naming to: $projectName - lower case for Vercel"
+colorPrint "Okay, slugified naming for Vercel"
+projectName=$(echo "$name" | toSlug $name)
+echo $projectName
 
 rm -rf .env.development.local
 touch ".env.development.local"
@@ -29,7 +44,7 @@ result=$(curl --silent POST 'https://api.sanity.io/v2021-06-07/projects' \
 -H "Authorization: Bearer $authToken" \
 -H 'Content-Type:application/json' \
 -d "{
-    \"displayName\": \"$projectName\",
+    \"displayName\": \"$name\",
     \"organizationId\": \"off6YjRVq\"
 }")
 
@@ -92,6 +107,7 @@ colorPrint "- Initializing vercel"
 vercel project add "$projectName" -S "$scope" --cwd "$projectName"
 vercel git connect "$gitURL" -S "$scope" --yes --cwd "$projectName"
 vercel link -S "$scope" --yes --cwd "$projectName"
+vercel --prod
 
 colorPrint "- Adding Vercel Vars"
 # add vercel env variables

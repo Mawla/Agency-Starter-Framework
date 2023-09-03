@@ -1,4 +1,4 @@
-import { widthClasses } from "../../components/block/width.options";
+import { WidthType, widthClasses } from "../../components/block/width.options";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import { isLanguage } from "../../languages";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
@@ -14,6 +14,7 @@ export type NavigationBreadcrumbProps = {
     background?: ColorType;
     text?: ColorType;
     border?: ColorType;
+    width?: WidthType;
   };
 };
 
@@ -37,7 +38,7 @@ export const NavigationBreadcrumb = ({ theme }: NavigationBreadcrumbProps) => {
           "py-2 md:py-3 lg:py-5",
           "mx-auto",
           "px-5 sm:px-8 lg:px-8 xl:px-8",
-          widthClasses.outer,
+          widthClasses[theme?.width || "inner"],
         )}
       >
         <Suspense>

@@ -94,6 +94,7 @@ export const Block7 = ({
         ...theme?.block,
       }}
       decorations={decorations}
+      className="overflow-x-hidden"
     >
       <div
         className={cx(

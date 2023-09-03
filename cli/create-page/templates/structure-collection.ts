@@ -17,7 +17,7 @@ export const getStructureCollection = ({
     .title("${pageName}")
     .icon(getIconForSchema(S, "${schemaName}"))
     .child(
-      list(S, { title: "${schemaName}" }).items([
+      list(S, { title: "${pageName}" }).items([
         singleton(S, {
           id: \`${documentId}\`,
           type: "${schemaName}",
