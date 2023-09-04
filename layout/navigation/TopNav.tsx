@@ -59,7 +59,7 @@ export const TopNav = React.forwardRef<HTMLDivElement, TopNavProps>(
             )}
           >
             {logo && (
-              <div className="flex items-center flex-0">
+              <div className="flex items-center flex-0 shrink-0">
                 <TopNavLogo logo={logo} />
               </div>
             )}

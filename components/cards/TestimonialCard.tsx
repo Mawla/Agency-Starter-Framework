@@ -8,7 +8,8 @@ import {
   borderWidthClasses,
   justifyClasses,
   paddingXClasses,
-  paddingYClasses,
+  paddingTopClasses,
+  paddingBottomClasses,
   textClasses,
 } from "../../theme";
 import {
@@ -62,7 +63,8 @@ export type TestimonialCardProps = {
       align?: HorizontalAlignType;
       background?: ColorType;
       paddingX?: PaddingType;
-      paddingY?: PaddingType;
+      paddingTop?: PaddingType;
+      paddingBottom?: PaddingType;
       columns?: ColumnType;
     };
     title?: TitleThemeType;
@@ -96,7 +98,10 @@ export const TestimonialCard = ({
         theme?.border?.width && borderWidthClasses[theme?.border?.width],
         theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
         theme?.card?.background && backgroundClasses[theme?.card?.background],
-        theme?.card?.paddingY && paddingYClasses[theme?.card?.paddingY],
+        theme?.card?.paddingTop && paddingTopClasses[theme?.card?.paddingTop],
+        theme?.card?.paddingBottom &&
+          paddingBottomClasses[theme?.card?.paddingBottom],
+        theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
         theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
       )}
     >

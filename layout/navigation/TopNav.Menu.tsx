@@ -111,7 +111,7 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                         <span className="block p-3">
                           <Button
                             {...item}
-                            className={cx({
+                            className={cx("max-w-full whitespace-pre-wrap", {
                               ["!underline current"]: item.current,
                             })}
                           />
