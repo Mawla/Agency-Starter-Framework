@@ -16,7 +16,7 @@ export const LAYOUT_COLUMN_OPTIONS = {
   "5/7": "5/7",
   "2/7": "7/5",
   "5/8": "5/8",
-  "3/8": "8/5",
+  "3/8": "3/8",
 };
 export type layoutColumnType = keyof typeof LAYOUT_COLUMN_OPTIONS;
 
