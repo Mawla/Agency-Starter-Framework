@@ -88,7 +88,6 @@ export default defineConfig({
     },
     newDocumentOptions: (prev, context) => {
       prev = prev.filter((option: any) => {
-        if (option.templateId.startsWith("preset.")) return false;
         if (option.templateId.startsWith("config.")) return false;
         if (option.templateId.startsWith("media.")) return false;
         if (option.templateId.startsWith("card.")) return false;
