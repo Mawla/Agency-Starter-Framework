@@ -3,6 +3,7 @@ import { ButtonProps } from "../../components/buttons/Button";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
+import { useSize } from "../../hooks/useSize";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
 import {
@@ -55,25 +56,15 @@ export const Navigation = ({
   banner,
   theme,
 }: NavigationProps) => {
-  const { screenWidth, breakpoint } = useBreakpoint();
+  const { screenWidth } = useBreakpoint();
   const scrollDirection = useScrollDirection();
   const scrollPosition = useScrollPosition();
   const showNav = scrollDirection === "up" || scrollPosition !== "middle";
 
   const navRef = useRef<HTMLDivElement>(null);
-  const [spacerHeight, setSpacerHeight] = useState<number>(70);
+  const { height: spacerHeight } = useSize(navRef);
 
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false);
-
-  /**
-   * Measure nav and create a spacer of equal height
-   */
-
-  useEffect(() => {
-    if (!navRef.current) return;
-    const navHeight = navRef.current.getBoundingClientRect().height;
-    setSpacerHeight(navHeight);
-  }, [navRef.current, breakpoint]);
 
   const onHamburgerClick = () => {
     setMobileNavIsOpen(true);
@@ -85,7 +76,7 @@ export const Navigation = ({
     }
 
     router.events.on("routeChangeStart", onRouteChange);
-    () => router.events.off("routeChangeStart", onRouteChange);
+    return () => router.events.off("routeChangeStart", onRouteChange);
   }, []);
 
   return (
@@ -115,12 +106,7 @@ export const Navigation = ({
 
       {theme?.breadcrumb?.hidden !== true && (
         <Suspense>
-          <NavigationBreadcrumb
-            theme={{
-              ...theme?.breadcrumb,
-              width: theme?.block?.width,
-            }}
-          />
+          <NavigationBreadcrumb theme={theme?.breadcrumb} />
         </Suspense>
       )}
     </div>
