@@ -44,9 +44,7 @@ export const MobileNav = ({
 
               <RadixNavigationMenu.Root
                 className={cx(
-                  "h-full overflow-y-auto overflow-scrolling-touch select-none shadow-2xl text-xl",
-                  theme?.block?.background &&
-                    backgroundClasses[theme?.block?.background],
+                  backgroundClasses[theme?.block?.background || "white"],
                   theme?.block?.text && textClasses[theme?.block?.text],
                 )}
               >
