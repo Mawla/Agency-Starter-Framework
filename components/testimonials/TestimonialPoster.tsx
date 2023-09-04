@@ -3,6 +3,7 @@ import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
 import { TitleThemeType } from "../title/title.options";
 import { TestimonialType } from "./Testimonials";
+import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 
@@ -41,6 +42,12 @@ export const TestimonialPoster = ({
   content,
   theme,
 }: TestimonialPosterProps) => {
+  let numChars = 0;
+  if (name) numChars += name.length;
+  if (jobTitle) numChars += jobTitle.length;
+
+  const isLong = numChars > 65;
+
   return (
     <figure className="flex flex-col">
       {(title || content) && (
@@ -62,19 +69,26 @@ export const TestimonialPoster = ({
 
       <figcaption className="inline-block gap-3 mt-8">
         {(name || jobTitle || image) && (
-          <div className="inline-flex gap-[.25em] items-center">
+          <div
+            className={cx(
+              "inline-flex flex-col gap-[.25em] items-center max-w-xl",
+              {
+                ["lg:flex-row"]: !isLong,
+              },
+            )}
+          >
             {image && (
-              <div className="w-8 h-8 rounded-full overflow-hidden mr-1">
+              <div className="w-8 h-8 rounded-full overflow-hidden mr-3 shrink-0">
                 <ResponsiveImage {...image} />
               </div>
             )}
             {name && (
-              <Title as="span" {...theme?.name}>
+              <Title as="span" {...theme?.name} className="shrink-0">
                 {`${name}${jobTitle ? "," : ""}`}
               </Title>
             )}
             {jobTitle && (
-              <Title as="span" {...theme?.jobTitle} className="ml-1">
+              <Title as="span" {...theme?.jobTitle}>
                 {jobTitle}
               </Title>
             )}
