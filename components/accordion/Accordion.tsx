@@ -58,7 +58,7 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
               )}
             >
               <RadixAccordion.Trigger className="p-5 text-lg flex items-center w-full group">
-                <div className="pr-6 text-left font-bold">{title}</div>
+                <div className="pr-6 text-left font-semibold">{title}</div>
                 <span className="flex-shrink-0 ml-auto">
                   <IconLoader
                     icon="chevrondown"
@@ -72,9 +72,8 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
             </RadixAccordion.Header>
             <RadixAccordion.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
               <Text
-                className="h-full px-5 pb-5 pt-0 text-left"
+                className="h-full px-5 pb-5 pt-0 text-left text-current"
                 size="md"
-                background={theme?.background}
               >
                 <PortableText content={content as PortableTextBlock[]} />
               </Text>
