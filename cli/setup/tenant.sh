@@ -33,6 +33,7 @@ touch ".env.development.local"
 #Vercel CLI reads the directory name to decide what to link to, creating shallow clone of the repos .git folder
 mkdir "$projectName"
 ln -s "$(pwd)/.git" "$(pwd)/$projectName/.git"
+ln -s "$(pwd)/vercel.json" "$(pwd)/$projectName/vercel.json"
 
 # get sanity auth token
 authToken=$(sanity debug --secrets | grep 'Auth token' | cut -d \' -f2)
@@ -107,7 +108,7 @@ colorPrint "- Initializing vercel"
 vercel project add "$projectName" -S "$scope" --cwd "$projectName"
 vercel git connect "$gitURL" -S "$scope" --yes --cwd "$projectName"
 vercel link -S "$scope" --yes --cwd "$projectName"
-vercel --prod
+vercel --prod --cwd "$projectName"
 
 colorPrint "- Adding Vercel Vars"
 # add vercel env variables
