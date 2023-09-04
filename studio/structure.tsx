@@ -291,13 +291,13 @@ export const structure = (
         icon: () => <BlueprintPaper weight="thin" size={20} />,
       }).child(
         list(S, { title: "Presets" }).items([
-          S.documentTypeListItem("preset.blocks").title("Blocks"),
-          S.documentTypeListItem("preset.button").title("Buttons"),
-          S.documentTypeListItem("preset.decoration").title("Decorations"),
+          documentList(S, { type: "preset.blocks" }),
+          documentList(S, { type: "preset.button" }),
+          documentList(S, { type: "preset.decoration" }),
           S.divider(),
-          S.documentTypeListItem("preset.theme.title").title("Heading styles"),
-          S.documentTypeListItem("preset.theme.text").title("Text styles"),
-          S.documentTypeListItem("preset.theme.block").title("Block styles"),
+          documentList(S, { type: "preset.theme.title" }),
+          documentList(S, { type: "preset.theme.text" }),
+          documentList(S, { type: "preset.theme.block" }),
         ]),
       ),
 
