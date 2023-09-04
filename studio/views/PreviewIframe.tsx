@@ -105,7 +105,7 @@ export const PreviewIframeInline = () => {
 
   return (
     <div style={{ overflow: "scroll", resize: "vertical" }}>
-      <div style={{ width: 1200 }}>
+      <div style={{ width: 1280 }}>
         <PreviewIframeComponentMemo _id={document._id} _type={document._type} />
       </div>
     </div>
