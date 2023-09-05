@@ -6,14 +6,6 @@
 > yarn storybook
 ```
 
-Some useful links
-
-- https://github.com/xxx/xxx.com
-- https://xxx.vercel.app (prod)
-- https://xxx.vercel.app/cms (prod)
-- https://development-xxx.vercel.app (dev)
-- https://development-xxx.vercel.app/cms (dev)
-
 Get started
 
 - `yarn dev` runs next.js
