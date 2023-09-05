@@ -29,7 +29,8 @@ touch ".env.development.local"
 
 mkdir "$projectName"
 git clone "$gitURL" "$projectName"
-cd "$projectName"
+cd "./$projectName"
+rm -rf .git
 
 # get sanity auth token
 authToken=$(sanity debug --secrets | grep 'Auth token' | cut -d \' -f2)
@@ -95,22 +96,19 @@ sanity cors add http://localhost:3333 --credentials
 sanity cors add http://localhost:6006 --credentials
 
 sanity cors add "https://$projectName.vercel.app" --credentials
-sanity cors add "https://*$projectName.vercel.app" --credentials
 
 # init vercel
 colorPrint "- Initializing vercel"
-vercel project add "$projectName" -S "$scope" --yes
-vercel git connect "$gitURL" -S "$scope" --yes
+vercel project add "$projectName" -S "$scope"
 vercel link -S "$scope" --yes
-
+vercel git connect "$gitURL" -S "$scope" --yes
 
 colorPrint "- Adding Vercel Vars"
 while IFS= read -r line
 do
   key=$(echo "$line" | cut -d "=" -f 1)
   value=$(echo "$line" | cut -d "=" -f 2)
-  echo $key $value
-  vercel env add $key $value production
+  echo $value | vercel env add $key production
 done < "./.env.development.local"
 
 colorPrint "- Deploying to Vercel"
