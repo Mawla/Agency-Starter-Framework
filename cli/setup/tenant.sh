@@ -27,13 +27,11 @@ colorPrint "Okay, slugified naming for Vercel"
 projectName=$(echo "$name" | toSlug $name)
 echo $projectName
 
-rm -rf .env.development.local
 touch ".env.development.local"
 
-#Vercel CLI reads the directory name to decide what to link to, creating shallow clone of the repos .git folder
 mkdir "$projectName"
-ln -s "$(pwd)/.git" "$(pwd)/$projectName/.git"
-ln -s "$(pwd)/vercel.json" "$(pwd)/$projectName/vercel.json"
+git clone "$gitURL" "$projectName"
+cd "$projectName"
 
 # get sanity auth token
 authToken=$(sanity debug --secrets | grep 'Auth token' | cut -d \' -f2)
@@ -105,10 +103,10 @@ sanity cors add "https://*$projectName.vercel.app" --credentials
 
 # init vercel
 colorPrint "- Initializing vercel"
-vercel project add "$projectName" -S "$scope" --cwd "$projectName"
-vercel git connect "$gitURL" -S "$scope" --yes --cwd "$projectName"
-vercel link -S "$scope" --yes --cwd "$projectName"
-vercel --prod --cwd "$projectName"
+vercel project add "$projectName" -S "$scope"
+vercel git connect "$gitURL" -S "$scope" --yes
+vercel link -S "$scope" --yes
+vercel --prod
 
 colorPrint "- Adding Vercel Vars"
 # add vercel env variables
@@ -129,7 +127,8 @@ sanity users invite dan@mawla.ie --role administrator
 sanity users invite arjen@mawla.ie --role administrator
 sanity users invite ben@mawla.ie --role administrator
 
+
 #Remove tmp directory
-rm -rf -R "$projectName"
+rm -rf "../$projectName"
 
 colorPrint "Done!"
