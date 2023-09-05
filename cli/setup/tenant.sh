@@ -106,9 +106,11 @@ vercel git connect "$gitURL" -S "$scope" --yes
 colorPrint "- Adding Vercel Vars"
 while IFS= read -r line
 do
-  key=$(echo "$line" | cut -d "=" -f 1)
-  value=$(echo "$line" | cut -d "=" -f 2)
-  echo $value | vercel env add $key production
+  if [ -n "$line" ]; then
+    key=$(echo "$line" | cut -d "=" -f 1)
+    value=$(echo "$line" | cut -d "=" -f 2)
+  fi
+  echo $value | tr -d '\n' | vercel env add $key production
 done < "./.env.development.local"
 
 colorPrint "- Deploying to Vercel"
