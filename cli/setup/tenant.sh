@@ -15,9 +15,7 @@ toSlug() {
 colorPrint() {
   echo "\033[0;36m$1\033[0m"
 }
-addVercelEnvVar() {
-  echo $1 | tr -d '\n' | vercel env add $2 production --cwd "$projectName"
-}
+
 gitURL=https://github.com/Mawla/growth-websites
 scope=mawla-team
 
@@ -60,8 +58,6 @@ echo "SANITY_STUDIO_API_PROJECT_ID=$sanityProjectId" >> ".env.development.local"
 # Generate dataset
 colorPrint "- Generating new Sanity dataset 'production'"
 sanity dataset create production --visibility public
-colorPrint "- Generating new Sanity dataset 'development'"
-sanity dataset create development --visibility public
 
 echo "NEXT_PUBLIC_SANITY_DATASET=production" >> ".env.development.local"
 echo "SANITY_STUDIO_API_DATASET=production" >> ".env.development.local"
@@ -69,15 +65,15 @@ echo "SANITY_STUDIO_API_DATASET=production" >> ".env.development.local"
 # Generate preview secret
 colorPrint "- Generating preview secret"
 previewSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 |  npx --yes groq-cli "*[0]+' '+*[1]+' '+*[2]+' '+*[3]" | xargs)
-echo "SANITY_PREVIEW_SECRET=\"$previewSecret\"" >> ".env.development.local"
+echo "SANITY_PREVIEW_SECRET=$previewSecret" >> ".env.development.local"
 
 colorPrint "- Generating webhook secret"
 webhookSecret=$(curl --silent "https://random-word-api.herokuapp.com/word?number=4" \-H "Accept: application/json" 2>&1 |  npx --yes groq-cli "*[0]+''+*[1]+''+*[2]+''+*[3]" | xargs)
-echo "SANITY_WEBHOOK_SECRET=\"$webhookSecret\"" >> ".env.development.local"
+echo "SANITY_WEBHOOK_SECRET=$webhookSecret" >> ".env.development.local"
 
 # Generate rest .env.development.local
 colorPrint "- Writing project path"
-echo "SANITY_STUDIO_PROJECT_PATH=http://localhost:3000/" >> ".env.development.local"
+echo "SANITY_STUDIO_PROJECT_PATH=/" >> ".env.development.local"
 
 colorPrint "- Generating read api key"
 writeJson=$(curl POST "https://api.sanity.io/v2021-06-07/projects/$sanityProjectId/tokens" -H "Authorization: Bearer $authToken" -H "Content-Type: application/json" --data-raw '{"label":"preview-write","roleName":"editor"}')
@@ -103,32 +99,31 @@ sanity cors add "https://*$projectName.vercel.app" --credentials
 
 # init vercel
 colorPrint "- Initializing vercel"
-vercel project add "$projectName" -S "$scope"
+vercel project add "$projectName" -S "$scope" --yes
 vercel git connect "$gitURL" -S "$scope" --yes
 vercel link -S "$scope" --yes
-vercel --prod
+
 
 colorPrint "- Adding Vercel Vars"
-# add vercel env variables
-addVercelEnvVar "$sanityProjectId" "NEXT_PUBLIC_SANITY_PROJECT_ID"
-echo "$sanityProjectId" | tr -d '\n' | vercel env add "NEXT_PUBLIC_SANITY_PROJECT_ID" development --cwd "$projectName"
-addVercelEnvVar "$sanityProjectId" "SANITY_STUDIO_API_PROJECT_ID"
-addVercelEnvVar "production" "NEXT_PUBLIC_SANITY_DATASET"
-addVercelEnvVar "production" "SANITY_STUDIO_API_DATASET"
-addVercelEnvVar "$previewSecret" "SANITY_PREVIEW_SECRET"
-addVercelEnvVar "$webhookSecret" "SANITY_WEBHOOK_SECRET"
-addVercelEnvVar "/" "SANITY_STUDIO_PROJECT_PATH"
-addVercelEnvVar "$sanityReadToken" "SANITY_API_READ_TOKEN"
-addVercelEnvVar "$sanityWriteToken" "SANITY_API_WRITE_TOKEN"
+while IFS= read -r line
+do
+  key=$(echo "$line" | cut -d "=" -f 1)
+  value=$(echo "$line" | cut -d "=" -f 2)
+  echo $key $value
+  vercel env add $key $value production
+done < "./.env.development.local"
+
+colorPrint "- Deploying to Vercel"
+vercel --prod
 
 colorPrint "- Inviting Sanity users"
 
-sanity users invite dan@mawla.ie --role administrator
-sanity users invite arjen@mawla.ie --role administrator
-sanity users invite ben@mawla.ie --role administrator
+# sanity users invite dan@mawla.ie --role administrator
+# sanity users invite arjen@mawla.ie --role administrator
+# sanity users invite ben@mawla.ie --role administrator
 
 
-#Remove tmp directory
+# Remove tmp directory
 rm -rf "../$projectName"
 
 colorPrint "Done!"
