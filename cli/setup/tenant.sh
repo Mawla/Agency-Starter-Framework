@@ -114,7 +114,7 @@ do
 done < "./.env.development.local"
 
 colorPrint "- Deploying to Vercel"
-vercel --prod
+vercel --prod --no-wait
 
 colorPrint "- Inviting Sanity users"
 
