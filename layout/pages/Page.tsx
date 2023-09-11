@@ -50,6 +50,8 @@ export const Page = ({
   const router = useRouter();
   const pagePath = usePathname() || "";
 
+  let isLightbox = router.asPath.indexOf("lightbox=1") > -1;
+
   // set active state
   const navItems = navigation?.items?.map((item) => ({
     ...item,
@@ -82,7 +84,7 @@ export const Page = ({
         }}
       >
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
-        {page && navigation && !isPreviewMode && (
+        {page && navigation && !isPreviewMode && !isLightbox && (
           <ErrorBoundary>
             <Navigation
               items={page.hideNav === true ? [] : navItems}
@@ -103,17 +105,19 @@ export const Page = ({
           </ErrorBoundary>
         )}
 
-        <BlockBuilder items={page.blocks} />
+        <BlockBuilder items={page?.blocks} />
 
         {children}
 
-        {isPreviewMode && pagePath !== "/preview" && (
+        {isPreviewMode && !isLightbox && pagePath !== "/preview" && (
           <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
             <PreviewButton pagePath={pagePath} />
           </div>
         )}
-        {locked && !isPreviewMode && <PageLock />}
-        {page && footer && !isPreviewMode && (
+
+        {locked && !isPreviewMode && !isLightbox && <PageLock />}
+
+        {page && footer && !isPreviewMode && !isLightbox && (
           <ErrorBoundary>
             <Footer
               links={page.hideFooter === true ? [] : footer.links}

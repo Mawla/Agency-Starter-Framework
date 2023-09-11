@@ -88,6 +88,8 @@ const INITIAL_SECTIONS_TO_LOAD: number = 2;
 const INVIEW_LOAD_ONLY_SECTIONS: BlockSchemaName[] = [];
 
 export const BlockBuilder = ({ items }: BlockBuilderProps) => {
+  if (!items?.length) return null;
+
   const firstBlock = items?.[0];
 
   // add priority to first block images
