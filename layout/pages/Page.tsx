@@ -15,8 +15,8 @@ import { Footer } from "../footer/Footer";
 import { FooterType } from "../footer/footer.query";
 import { Navigation } from "../navigation/Navigation";
 import { NavigationProps } from "../navigation/Navigation";
+import { BlockBuilder } from "../pagebuilder/BlockBuilder";
 import ErrorBoundary from "../pagebuilder/ErrorBoundary";
-import { PageBody } from "./PageBody";
 import { useRouter } from "next/dist/client/router";
 import { usePathname } from "next/navigation";
 import React, { ComponentType, lazy } from "react";
@@ -103,8 +103,10 @@ export const Page = ({
           </ErrorBoundary>
         )}
 
-        <PageBody {...page} />
+        <BlockBuilder items={page.blocks} />
+
         {children}
+
         {isPreviewMode && pagePath !== "/preview" && (
           <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
             <PreviewButton pagePath={pagePath} />

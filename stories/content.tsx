@@ -361,7 +361,6 @@ export const demoPortableTextArticle = [
       {
         target: null,
         download: false,
-        newWindow: false,
         _type: "link",
         href: "https://www.example.com.",
         _key: "2dcbe4924286",

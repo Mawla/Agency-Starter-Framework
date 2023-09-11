@@ -105,23 +105,28 @@ const schema = defineType({
         )) as ConditionalPropertyCallback,
     }),
     defineField({
+      name: "target",
+      title: "Open in",
+      type: "string",
+      group: "link",
+      description:
+        "Choose between opening the link in a new window or lightbox",
+      options: {
+        list: [
+          { title: "New window", value: "_blank" },
+          { title: "Lightbox", value: "lightbox" },
+        ],
+      },
+    }),
+    defineField({
       name: "download",
       title: "Download",
       type: "boolean",
       group: "link",
-      initialValue: false,
       description: "Make the button download the file",
       hidden: (({ parent, value }) =>
         !value &&
         !Boolean(parent?.file || parent?.href)) as ConditionalPropertyCallback,
-    }),
-    defineField({
-      name: "newWindow",
-      title: "Open in new window",
-      type: "boolean",
-      group: "link",
-      initialValue: false,
-      description: "Make the button open in a new browser window",
     }),
     defineField({
       name: "presetTheme",

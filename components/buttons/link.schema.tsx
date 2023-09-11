@@ -21,8 +21,8 @@ const DOWNLOAD_FIELD = buttonSchema.fields.find(
 const PARAMS_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "params",
 ) as any;
-const NEW_WINDOW_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "newWindow",
+const TARGET_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "target",
 ) as any;
 
 export default defineType({
@@ -43,6 +43,6 @@ export default defineType({
     DIALOG_FIELD,
     FILE_FIELD,
     DOWNLOAD_FIELD,
-    NEW_WINDOW_FIELD,
+    TARGET_FIELD,
   ],
 });

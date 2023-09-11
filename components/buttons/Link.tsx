@@ -1,6 +1,7 @@
 import { isInternalLink } from "../../helpers/sitemap/isInternalLink";
 import { LanguageType } from "../../languages";
 import { IconLoaderProps } from "../images/IconLoader";
+import { FancyboxProps } from "../lightbox/Fancybox";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { ComponentType, lazy } from "react";
@@ -9,11 +10,15 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
 );
 
+const Fancybox = lazy<ComponentType<FancyboxProps>>(
+  () => import(/* webpackChunkName: "Fancybox" */ "../lightbox/Fancybox"),
+);
+
 export type LinkProps = {
   href: string;
   children?: React.ReactElement | React.ReactNode;
   className?: string;
-  target?: "_blank";
+  target?: "_blank" | "lightbox";
   rel?: string;
   locale?: LanguageType;
   showExternalIcon?: boolean;
@@ -29,6 +34,22 @@ export const Link = ({
   showExternalIcon = true,
 }: LinkProps) => {
   const router = useRouter();
+
+  if (target === "lightbox") {
+    return (
+      <Fancybox>
+        <a
+          href={href}
+          className={className}
+          target={target}
+          rel={rel}
+          data-fancybox
+        >
+          {children}
+        </a>
+      </Fancybox>
+    );
+  }
 
   if (!locale) locale = router?.locale as LanguageType;
 

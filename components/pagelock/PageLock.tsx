@@ -1,7 +1,7 @@
 import { PageContext } from "../../context/PageContext";
 import { getClient } from "../../helpers/sanity/server";
 import { LanguageType } from "../../languages";
-import { PageBody } from "../../layout/pages/PageBody";
+import { BlockBuilder } from "../../layout/pagebuilder/BlockBuilder";
 import { getPageQuery, PageType } from "../../queries/page.query";
 import { Background } from "../block/Background";
 import { IconLoaderProps } from "../images/IconLoader";
@@ -59,7 +59,8 @@ export const PageLock = () => {
     if (status === "unlocked") getPage();
   }, [status, sitemapItem, language]);
 
-  if (status === "unlocked" && page) return <PageBody {...page} />;
+  if (status === "unlocked" && page)
+    return <BlockBuilder items={page.blocks} />;
 
   return (
     <Background theme={{ background: "white", text: "black" }}>
