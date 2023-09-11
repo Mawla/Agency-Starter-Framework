@@ -43,20 +43,23 @@ const schema = defineType({
       type: "portabletext.full",
       group: "content",
     }),
-
-    defineField({
-      name: "buttons",
-      title: "Buttons",
-      type: "buttongroup",
-      group: "content",
-    }),
     defineField({
       name: "items",
       title: "Cards",
       type: "array",
       description: "One or more cards",
       group: ["content"],
-      of: [{ type: "card.composable" }, { type: "card.testimonial" }],
+      of: [
+        { type: "card.composable" },
+        { type: "card.image" },
+        { type: "card.testimonial" },
+      ],
+    }),
+    defineField({
+      name: "buttons",
+      title: "Buttons",
+      type: "buttongroup",
+      group: "content",
     }),
     defineField({
       name: "footer",

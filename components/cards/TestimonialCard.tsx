@@ -56,6 +56,7 @@ const Decorations = lazy<ComponentType<DecorationsProps>>(
 
 export type TestimonialCardProps = {
   type: "card.testimonial";
+  _key?: string;
   decorations?: DecorationProps[];
   theme?: {
     card?: {
@@ -101,7 +102,6 @@ export const TestimonialCard = ({
         theme?.card?.paddingTop && paddingTopClasses[theme?.card?.paddingTop],
         theme?.card?.paddingBottom &&
           paddingBottomClasses[theme?.card?.paddingBottom],
-        theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
         theme?.card?.paddingX && paddingXClasses[theme?.card?.paddingX],
       )}
     >
