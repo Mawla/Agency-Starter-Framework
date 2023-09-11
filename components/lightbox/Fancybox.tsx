@@ -52,12 +52,15 @@ export default function Fancybox(props: FancyboxProps) {
             /**
              * Close on key press
              */
-
-            iframeWindow?.addEventListener("keyup", onKeyUp);
+            try {
+              iframeWindow?.addEventListener("keyup", onKeyUp);
+            } catch (e) {}
           }
 
           return () => {
-            iframeWindow?.removeEventListener("keyup", onKeyUp);
+            try {
+              iframeWindow?.removeEventListener("keyup", onKeyUp);
+            } catch (e) {}
           };
         },
       },
