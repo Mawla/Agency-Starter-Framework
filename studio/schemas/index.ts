@@ -52,9 +52,6 @@ import configSeo from "./documents/config.seo";
 import configSocial from "./documents/config.social";
 import configTheme from "./documents/config.theme";
 import configTranslations from "./documents/config.translations";
-import dialogForm from "./documents/dialog.form";
-import dialogRichText from "./documents/dialog.richtext";
-import dialogVideo from "./documents/dialog.video";
 import pageBlog from "./documents/page.blog";
 import pageBlogs from "./documents/page.blogs";
 import pageCaseStudies from "./documents/page.casestudies";
@@ -112,9 +109,6 @@ export const schemaTypes = [
     decoration,
     decorations,
     decorationWrapper,
-    dialogForm,
-    dialogRichText,
-    dialogVideo,
     faq,
     footer,
     highlight,

@@ -15,7 +15,6 @@ Get started
 
 - `yarn create-page` runs the cli to add a page
 - `yarn create-block` runs the cli to create a block
-- `yarn create-dialog` runs the cli to create a dialog
 
 See /docs for some more information.
 
@@ -37,10 +36,8 @@ graph TD
     CATCH_ALL_RENDER-->PREVIEW_MODE
 
     RENDER -->RENDER_BLOCKS
-    RENDER -->RENDER_DIALOGS
 
     RENDER_BLOCKS[BlockBuilder.tsx]-->BLOCK
-    RENDER_DIALOGS[DialogBuilder.tsx]-->PAGE
 
     BLOCK[Block.tsx<br>block.schema.tsx<br>block.query.tsx<br>block.test.tsx<br>block.stories.tsx<br>block.options.ts]-->PAGE
 

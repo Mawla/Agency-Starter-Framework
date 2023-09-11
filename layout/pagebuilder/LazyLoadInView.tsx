@@ -3,7 +3,7 @@ import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
-import { DialogSchemaName, BlockSchemaName } from "../../types.sanity";
+import { BlockSchemaName } from "../../types.sanity";
 import cx from "classnames";
 import React, { useState, useEffect, useRef, useContext } from "react";
 
@@ -11,7 +11,7 @@ type LazyLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
   enabled?: boolean;
   background?: ColorType | "transparent";
-  block?: BlockSchemaName | DialogSchemaName;
+  block?: BlockSchemaName;
   slug?: string;
   _key?: string;
   networkIdle?: boolean;

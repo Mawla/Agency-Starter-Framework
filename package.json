@@ -11,7 +11,6 @@
     "build-cms": "sanity build public/cms -y",
     "storybook": "npm run build-config && storybook dev -p 6006 --no-open",
     "build-storybook": "npm run build-config && storybook build -o public/storybook --disable-telemetry",
-    "create-dialog": "sanity exec ./cli/create-dialog -- --write",
     "create-page": "sanity exec ./cli/create-page -- --write",
     "create-block": "sanity exec ./cli/create-block -- --write",
     "create-module": "echo \"Modules are now called blocks. Use yarn create-block instead.\"",

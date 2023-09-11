@@ -1,6 +1,5 @@
 import { SchemaName } from "../../../types.sanity";
 import {
-  DIALOGS_FIELD,
   LANGUAGE_FIELD,
   BLOCKS_FIELD,
   pageBase,
@@ -23,10 +22,5 @@ export default defineType({
     },
   },
   groups: [...pageBase.groups],
-  fields: [
-    TITLE_FIELD,
-    { ...LANGUAGE_FIELD, readOnly: true },
-    BLOCKS_FIELD,
-    DIALOGS_FIELD,
-  ],
+  fields: [TITLE_FIELD, { ...LANGUAGE_FIELD, readOnly: true }, BLOCKS_FIELD],
 });

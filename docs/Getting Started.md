@@ -109,4 +109,3 @@ Run `yarn dev`, `yarn cms` and `yarn storybook` in three terminal tabs and start
 - configure colors in cms
 - start creating blocks `yarn create-block`
 - start creating custom page types `yarn create-page`
-- start creating dialogs `yarn create-dialog`

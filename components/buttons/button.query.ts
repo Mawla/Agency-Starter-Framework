@@ -27,7 +27,6 @@ export const buttonHrefQuery = groq`
       coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0] { 
         "path": select(language == "${baseLanguage}" => '', '/'+ language) + path
       }.path,
-      '#'+ dialog, 
       file.asset->url
     ) + coalesce(params, ''), 
     params
