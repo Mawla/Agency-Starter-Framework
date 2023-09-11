@@ -157,10 +157,10 @@ export const ComposableCard = ({
       )}
     >
       {cardClickable && buttons?.[0]?.href && (
-        <Link href={buttons?.[0]?.href}>
-          <a className="absolute inset-0 z-20 opacity-0]">
+        <Link href={buttons?.[0]?.href} target={buttons?.[0]?.target}>
+          <span className="absolute inset-0 z-20 opacity-0">
             <span className="sr-only">{buttons?.[0].label}</span>
-          </a>
+          </span>
         </Link>
       )}
 
