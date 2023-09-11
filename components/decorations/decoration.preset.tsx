@@ -8,6 +8,7 @@ const schema = defineType({
   title: "Decoration preset",
   type: "document",
   icon: () => <BlueprintPaper weight="thin" size={20} />,
+  liveEdit: true,
   preview: {
     select: {
       title: "title",

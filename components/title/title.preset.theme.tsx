@@ -11,6 +11,7 @@ const schema = defineType({
   title: "Heading theme preset",
   type: "document",
   icon: () => <Text weight="thin" size={20} />,
+  liveEdit: true,
   preview: {
     select: {
       title: "title",

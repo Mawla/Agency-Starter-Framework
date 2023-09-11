@@ -11,6 +11,7 @@ const schema = defineType({
   title: "Block theme preset",
   type: "document",
   icon: () => <Tablet weight="thin" size={20} />,
+  liveEdit: true,
   preview: {
     select: {
       title: "title",
