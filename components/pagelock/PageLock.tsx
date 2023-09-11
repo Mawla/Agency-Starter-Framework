@@ -60,7 +60,7 @@ export const PageLock = () => {
   }, [status, sitemapItem, language]);
 
   if (status === "unlocked" && page)
-    return <BlockBuilder items={page?.blocks} />;
+    return <BlockBuilder items={page.blocks} />;
 
   return (
     <Background theme={{ background: "white", text: "black" }}>
