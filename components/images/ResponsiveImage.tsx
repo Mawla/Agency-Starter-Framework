@@ -33,8 +33,10 @@ export type ResponsiveImageProps = {
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
+  caption?: string;
   preserveAspectRatio?: boolean;
   zoom?: boolean;
+  gallery?: boolean;
 } & NextImageProps;
 
 const IMAGE_QUALITY = 85;
@@ -58,6 +60,7 @@ export const ResponsiveImage = ({
   crop,
   hotspot,
   alt = "",
+  caption,
   className,
   priority,
   ratio,
@@ -65,6 +68,7 @@ export const ResponsiveImage = ({
   fill = false,
   preserveAspectRatio,
   zoom = false,
+  gallery,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -77,6 +81,8 @@ export const ResponsiveImage = ({
   if (!width) width = originalDimensions?.width;
   if (!height) height = originalDimensions?.height;
   const aspectRatio = originalDimensions.aspectRatio;
+
+  const FancyboxElement = gallery ? React.Fragment : Fancybox;
 
   let placeHolderSrc: string | null = null;
 
@@ -212,19 +218,32 @@ export const ResponsiveImage = ({
       )}
 
       {zoom && typeof src === "string" && (
-        <Fancybox>
+        <FancyboxElement>
           <a
             href={src}
             data-fancybox
-            className="absolute h-full top-0 left-0 cursor-zoom-in"
-            style={{
-              aspectRatio,
-            }}
+            data-caption={caption}
+            className={cx(
+              "absolute h-full top-0 left-0 cursor-zoom-in bg-[red]/20",
+              {
+                ["w-full"]: fill,
+              },
+            )}
+            style={
+              fill
+                ? undefined
+                : {
+                    maxWidth: width,
+                    maxHeight: height,
+                    aspectRatio,
+                  }
+            }
           >
             <span className="sr-only">zoom</span>
           </a>
-        </Fancybox>
+        </FancyboxElement>
       )}
+
       <ScriptJsonLd data={imageJsonLd} />
     </div>
   );
