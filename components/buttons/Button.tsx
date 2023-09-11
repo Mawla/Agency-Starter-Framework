@@ -54,7 +54,7 @@ export type ButtonProps = {
   loading?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   stretch?: boolean;
-  target?: "_blank" | "lightbox" | undefined;
+  target?: "_blank" | "lightbox";
   presetTheme?: {
     name?: string;
     icon?: {
