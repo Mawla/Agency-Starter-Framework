@@ -218,17 +218,14 @@ export const ResponsiveImage = ({
       )}
 
       {zoom && typeof src === "string" && (
-        <FancyboxElement>
+        <FancyboxElement className="inline">
           <a
             href={src}
             data-fancybox
             data-caption={caption}
-            className={cx(
-              "absolute h-full top-0 left-0 cursor-zoom-in bg-[red]/20",
-              {
-                ["w-full"]: fill,
-              },
-            )}
+            className={cx("absolute h-full top-0 left-0 cursor-zoom-in", {
+              ["w-full"]: fill,
+            })}
             style={
               fill
                 ? undefined
