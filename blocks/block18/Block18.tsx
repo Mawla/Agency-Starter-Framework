@@ -359,7 +359,6 @@ export const Block18 = ({
                     | ComposableCardProps
                     | TestimonialCardProps
                     | ImageCardProps,
-                  i,
                 ) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
@@ -367,7 +366,7 @@ export const Block18 = ({
 
                   return (
                     <div
-                      key={item._key || i}
+                      key={item._key}
                       className={cx(
                         "h-full text-left",
                         item?.theme?.card?.columns &&
