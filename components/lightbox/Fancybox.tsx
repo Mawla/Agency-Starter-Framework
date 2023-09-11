@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 export type FancyboxProps = {
   delegate?: string;
   options?: OptionsType;
+  className?: string;
   children?: React.ReactNode;
 };
 
@@ -22,6 +23,9 @@ export default function Fancybox(props: FancyboxProps) {
       defaultType: "iframe",
       Html: {
         preload: true,
+      },
+      Carousel: {
+        infinite: false,
       },
       on: {
         reveal: (instance, slide) => {
@@ -66,5 +70,9 @@ export default function Fancybox(props: FancyboxProps) {
     };
   });
 
-  return <span ref={containerRef}>{props.children}</span>;
+  return (
+    <span ref={containerRef} className={props.className}>
+      {props.children}
+    </span>
+  );
 }
