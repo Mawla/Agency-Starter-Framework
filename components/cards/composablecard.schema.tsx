@@ -8,11 +8,9 @@ import {
   BORDER_WIDTH_OPTIONS,
   HORIZONTAL_ALIGN_OPTIONS,
   PADDING_OPTIONS,
+  RATIOS,
 } from "../../types";
-import {
-  IMAGE_HEIGHT_OPTIONS,
-  IMAGE_RATIO_OPTIONS,
-} from "./composablecard.options";
+import { IMAGE_HEIGHT_OPTIONS } from "./composablecard.options";
 import { Postcard } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -173,7 +171,7 @@ const schema = defineType({
                 name: "ratio",
                 type: "select",
                 options: {
-                  list: optionsToList(IMAGE_RATIO_OPTIONS),
+                  list: optionsToList(RATIOS),
                 },
               }),
               defineField({

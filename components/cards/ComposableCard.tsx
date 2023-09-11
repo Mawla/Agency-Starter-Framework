@@ -18,6 +18,7 @@ import {
   paddingTopClasses,
   paddingBottomClasses,
   textClasses,
+  ratioClasses,
 } from "../../theme";
 import {
   BorderRadiusType,
@@ -27,11 +28,12 @@ import {
   HtmlTextNodeType,
   ImageType,
   PaddingType,
+  RatioType,
 } from "../../types";
 import { LinkProps } from "../buttons/Link";
 import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
-import { ImageHeightType, ImageRatioType } from "./composablecard.options";
+import { ImageHeightType } from "./composablecard.options";
 import cx from "classnames";
 import React from "react";
 import { ComponentType, lazy } from "react";
@@ -103,7 +105,7 @@ export type ComposableCardProps = {
       width?: BorderWidthType;
     };
     image?: {
-      ratio?: ImageRatioType;
+      ratio?: RatioType;
       height?: ImageHeightType;
       rounded?: BorderRadiusType;
     };
@@ -119,13 +121,6 @@ const imageHeightClasses: Record<ImageHeightType, string> = {
   md: "h-24",
   lg: "h-[210px]",
   xl: "h-[230px]",
-};
-
-const ratioClasses: Record<ImageRatioType, string> = {
-  auto: "",
-  "16/9": "aspect-[16/9]",
-  "1/1": "aspect-[1/1]",
-  "3/2": "aspect-[3/2]",
 };
 
 export const ComposableCard = ({

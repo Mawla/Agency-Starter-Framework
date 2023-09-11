@@ -5,6 +5,7 @@ import {
   BORDER_RADIUS_OPTIONS,
   BORDER_WIDTH_OPTIONS,
   PADDING_OPTIONS,
+  RATIOS,
   TEXT_TRANSFORM_OPTIONS,
 } from "../../types";
 import { ConfigType, GroqThemeType } from "./build";
@@ -136,6 +137,7 @@ export function formatSafelist({
     ...Object.keys(PADDING_OPTIONS).map((p) => `pt-${clean(p)}`),
 
     ...Object.keys(BORDER_WIDTH_OPTIONS).map((size) => `border-${clean(size)}`),
+    ...Object.keys(RATIOS).map((ratio) => `aspect-[${clean(ratio)}]`),
     ...Object.keys(BORDER_RADIUS_OPTIONS).map(
       (size) => `rounded-${clean(size)}`,
     ),

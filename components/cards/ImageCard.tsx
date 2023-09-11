@@ -9,6 +9,7 @@ import {
   paddingBottomClasses,
   paddingTopClasses,
   paddingXClasses,
+  ratioClasses,
 } from "../../theme";
 import {
   BorderRadiusType,
@@ -16,9 +17,9 @@ import {
   ColorType,
   ImageType,
   PaddingType,
+  RatioType,
 } from "../../types";
 import { DecorationProps } from "../decorations/Decoration";
-import { ImageRatioType } from "./imagecard.options";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 
@@ -41,7 +42,7 @@ export type ImageCardProps = {
       width?: BorderWidthType;
     };
     image?: {
-      ratio?: ImageRatioType;
+      ratio?: RatioType;
       rounded?: BorderRadiusType;
     };
   };
@@ -60,14 +61,6 @@ const Decorations = lazy<ComponentType<DecorationsProps>>(
       /* webpackChunkName: "Decorations" */ "../../components/decorations/Decorations"
     ),
 );
-
-const ratioClasses: Record<ImageRatioType, string> = {
-  "19/27": "aspect-[19/27]",
-  "16/9": "aspect-[16/9]",
-  "1/1": "aspect-[1/1]",
-  "4/3": "aspect-[4/3]",
-  "3/2": "aspect-[3/2]",
-};
 
 export const ImageCard = ({ image, theme, decorations }: ImageCardProps) => {
   return (

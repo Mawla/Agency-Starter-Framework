@@ -6,8 +6,8 @@ import {
   BORDER_RADIUS_OPTIONS,
   BORDER_WIDTH_OPTIONS,
   PADDING_OPTIONS,
+  RATIOS,
 } from "../../types";
-import { IMAGE_RATIO_OPTIONS } from "./imagecard.options";
 import { FileImage } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -58,7 +58,7 @@ const schema = defineType({
                 name: "ratio",
                 type: "select",
                 options: {
-                  list: optionsToList(IMAGE_RATIO_OPTIONS),
+                  list: optionsToList(RATIOS),
                 },
               }),
             ],

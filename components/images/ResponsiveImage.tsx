@@ -5,6 +5,7 @@ import {
   getResponsiveImageUrl,
 } from "../../helpers/sanity/image-url";
 import { roundToNearest } from "../../helpers/utils/number";
+import { ratioClasses } from "../../theme";
 import { ImageType, RatioType } from "../../types";
 import { FancyboxProps } from "../lightbox/Fancybox";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
@@ -40,18 +41,6 @@ export type ResponsiveImageProps = {
 } & NextImageProps;
 
 const IMAGE_QUALITY = 85;
-
-const ratioClasses: Record<RatioType, string> = {
-  auto: "aspect-auto",
-  "1/1": "aspect-[1/1]",
-  "3/2": "aspect-[3/2]",
-  "16/9": "aspect-[16/9]",
-  "19/27": "aspect-[19/27]",
-  "2/1": "aspect-[2/1]",
-  "13/8": "aspect-[13/8]",
-  "4/3": "aspect-[4/3]",
-  "21/9": "aspect-[21/9]",
-};
 
 export const ResponsiveImage = ({
   src,
