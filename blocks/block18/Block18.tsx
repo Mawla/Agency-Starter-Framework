@@ -3,8 +3,10 @@ import { BlockThemeType } from "../../components/block/block.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { ButtonGroupProps } from "../../components/buttons/ButtonGroup";
 import { ComposableCardProps } from "../../components/cards/ComposableCard";
+import { ImageCardProps } from "../../components/cards/ImageCard";
 import { TestimonialCardProps } from "../../components/cards/TestimonialCard";
 import { DecorationProps } from "../../components/decorations/Decoration";
+import { FancyboxProps } from "../../components/lightbox/Fancybox";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { SliderProps } from "../../components/slider/Slider";
 import { SliderColorType } from "../../components/slider/slider.options";
@@ -20,7 +22,6 @@ import {
   useBreakpoint,
 } from "../../hooks/useBreakpoint";
 import { useDebounce } from "../../hooks/useDebounce";
-import { useSize } from "../../hooks/useSize";
 import ErrorBoundary from "../../layout/pagebuilder/ErrorBoundary";
 import { justifyClasses } from "../../theme";
 import {
@@ -87,6 +88,20 @@ const TestimonialCard = lazy<ComponentType<TestimonialCardProps>>(
     ),
 );
 
+const ImageCard = lazy<ComponentType<ImageCardProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "ImageCard" */ "../../components/cards/ImageCard"
+    ),
+);
+
+const Fancybox = lazy<ComponentType<FancyboxProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Fancybox" */ "../../components/lightbox/Fancybox"
+    ),
+);
+
 export type Block18Props = {
   theme?: {
     block?: BlockThemeType;
@@ -109,7 +124,7 @@ export type Block18Props = {
   intro?: React.ReactNode;
   footer?: React.ReactNode;
   buttons?: ButtonProps[];
-  items?: (ComposableCardProps | TestimonialCardProps)[];
+  items?: (ComposableCardProps | TestimonialCardProps | ImageCardProps)[];
 };
 
 export const Block18 = ({
@@ -160,6 +175,10 @@ export const Block18 = ({
   );
 
   const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
+
+  const GridWrapper = filteredItems?.find(({ type }) => type === "card.image")
+    ? Fancybox
+    : "div";
 
   /**
    * Calculate centering of grid items
@@ -285,8 +304,9 @@ export const Block18 = ({
       </div>
 
       {Boolean(filteredItems?.length) && (
-        <div
+        <GridWrapper
           className={cx(
+            "block",
             theme?.block?.align
               ? textAlignClasses[theme?.block?.align]
               : "text-left",
@@ -300,7 +320,12 @@ export const Block18 = ({
               gap={sliderGapSize}
               columns={slideColumns}
               slides={filteredItems?.map(
-                (item: ComposableCardProps | TestimonialCardProps) => {
+                (
+                  item:
+                    | ComposableCardProps
+                    | TestimonialCardProps
+                    | ImageCardProps,
+                ) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
                   }
@@ -329,7 +354,13 @@ export const Block18 = ({
               style={gridStyle}
             >
               {filteredItems?.map(
-                (item: ComposableCardProps | TestimonialCardProps, i) => {
+                (
+                  item:
+                    | ComposableCardProps
+                    | TestimonialCardProps
+                    | ImageCardProps,
+                  i,
+                ) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
                   }
@@ -352,7 +383,7 @@ export const Block18 = ({
               )}
             </div>
           )}
-        </div>
+        </GridWrapper>
       )}
 
       {footer && (
@@ -380,14 +411,18 @@ export const Block18 = ({
 
 export default React.memo(Block18);
 
-const Card = (item: ComposableCardProps | TestimonialCardProps) => {
+const Card = (
+  item: ComposableCardProps | TestimonialCardProps | ImageCardProps,
+) => {
+  if (!item.type) return null;
+
   switch (item.type) {
     case "card.composable":
       return <ComposableCard {...item} key={item._key} />;
     case "card.testimonial":
       return <TestimonialCard {...item} key={item._key} />;
-    // default:
-    // return <ImageCard {...item} key={item._key} />;
+    case "card.image":
+      return <ImageCard {...item} key={item._key} />;
   }
 };
 
