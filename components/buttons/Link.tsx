@@ -36,6 +36,7 @@ export const Link = ({
   const router = useRouter();
 
   if (target === "lightbox") {
+    // add lightbox query param to href to hide nav and footer in Page.tsx
     href = href.indexOf("?") > -1 ? `${href}&lightbox=1` : `${href}?lightbox=1`;
     return (
       <Fancybox>
