@@ -147,7 +147,7 @@ export const ComposableCard = ({
         theme?.card?.color && textClasses[theme?.card?.color],
         theme?.card?.align && textAlignClasses[theme?.card?.align],
         theme?.border?.color && borderClasses[theme?.border?.color],
-        theme?.border?.width && borderWidthClasses[theme?.border?.width],
+        theme?.border?.color && borderWidthClasses[theme?.border?.width || 1],
         theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
         theme?.card?.background && backgroundClasses[theme?.card?.background],
         theme?.card?.paddingTop && paddingTopClasses[theme?.card?.paddingTop],
