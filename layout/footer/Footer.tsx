@@ -6,6 +6,7 @@ import { ColorType, ImageType } from "../../types";
 import { FooterBreadcrumb } from "./Footer.Breadcrumb";
 import { FooterLogo } from "./Footer.Logo";
 import { FooterMenu } from "./Footer.Menu";
+import { useRouter } from "next/router";
 import React from "react";
 
 export type FooterProps = {
@@ -52,6 +53,11 @@ export const Footer = ({
   theme,
   hideBreadcrumb,
 }: FooterProps) => {
+  const { asPath } = useRouter();
+
+  // hide footer inside lightbox
+  if (asPath.indexOf("lightbox=1") > -1) return null;
+
   return (
     <footer>
       <Wrapper

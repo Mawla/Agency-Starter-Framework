@@ -13,7 +13,7 @@ import {
 import { TopNav } from "./TopNav";
 import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 
 export type NavItem = {
@@ -60,11 +60,15 @@ export const Navigation = ({
   const scrollDirection = useScrollDirection();
   const scrollPosition = useScrollPosition();
   const showNav = scrollDirection === "up" || scrollPosition !== "middle";
+  const { asPath } = useRouter();
 
   const navRef = useRef<HTMLDivElement>(null);
   const { height: spacerHeight } = useSize(navRef);
 
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false);
+
+  // hide nav inside lightbox
+  if (asPath.indexOf("lightbox=1") > -1) return null;
 
   const onHamburgerClick = () => {
     setMobileNavIsOpen(true);
