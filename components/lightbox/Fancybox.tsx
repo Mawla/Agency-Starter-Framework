@@ -24,7 +24,16 @@ export default function Fancybox(props: FancyboxProps) {
         preload: true,
       },
       on: {
-        reveal: (instance) => {
+        reveal: (instance, slide) => {
+          const iframeWindow =
+            instance.container.querySelector("iframe").contentWindow;
+
+          function onKeyUp(e: KeyboardEvent) {
+            if (e.key === "Escape") {
+              NativeFancybox.close();
+            }
+          }
+
           /**
            * Iframes with internal links are not resized automatically,
            * not sure why this is happening.
@@ -33,9 +42,19 @@ export default function Fancybox(props: FancyboxProps) {
            * so instead for iframes we add a class that sets the height
            */
 
-          if (instance.container.querySelector(".fancybox__iframe")) {
+          if (slide.type === "iframe") {
             instance.container.classList.add("fix-iframe-height");
+
+            /**
+             * Close on key press
+             */
+
+            iframeWindow.addEventListener("keyup", onKeyUp);
           }
+
+          return () => {
+            iframeWindow?.removeEventListener("keyup", onKeyUp);
+          };
         },
       },
       ...options,
