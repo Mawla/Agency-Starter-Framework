@@ -26,7 +26,7 @@ export default function Fancybox(props: FancyboxProps) {
       on: {
         reveal: (instance, slide) => {
           const iframeWindow =
-            instance.container.querySelector("iframe").contentWindow;
+            instance.container.querySelector("iframe")?.contentWindow;
 
           function onKeyUp(e: KeyboardEvent) {
             if (e.key === "Escape") {
@@ -49,7 +49,7 @@ export default function Fancybox(props: FancyboxProps) {
              * Close on key press
              */
 
-            iframeWindow.addEventListener("keyup", onKeyUp);
+            iframeWindow?.addEventListener("keyup", onKeyUp);
           }
 
           return () => {

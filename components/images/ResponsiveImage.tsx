@@ -1,14 +1,31 @@
+"use client";
+
 import {
   getOriginalImageDimensions,
   getResponsiveImageUrl,
 } from "../../helpers/sanity/image-url";
 import { roundToNearest } from "../../helpers/utils/number";
 import { ImageType, RatioType } from "../../types";
+import { FancyboxProps } from "../lightbox/Fancybox";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
 import cx from "classnames";
 import Head from "next/head";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ComponentType,
+  lazy,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+const Fancybox = lazy<ComponentType<FancyboxProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Fancybox" */ "../../components/lightbox/Fancybox"
+    ),
+);
 
 export type ResponsiveImageProps = {
   crop?: ImageType["crop"];
@@ -17,6 +34,7 @@ export type ResponsiveImageProps = {
   roundSize?: number;
   alt?: string;
   preserveAspectRatio?: boolean;
+  zoom?: boolean;
 } & NextImageProps;
 
 const IMAGE_QUALITY = 85;
@@ -46,6 +64,7 @@ export const ResponsiveImage = ({
   roundSize = 0,
   fill = false,
   preserveAspectRatio,
+  zoom = false,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -57,6 +76,7 @@ export const ResponsiveImage = ({
   const originalDimensions = getOriginalImageDimensions(src as string);
   if (!width) width = originalDimensions?.width;
   if (!height) height = originalDimensions?.height;
+  const aspectRatio = originalDimensions.aspectRatio;
 
   let placeHolderSrc: string | null = null;
 
@@ -163,6 +183,7 @@ export const ResponsiveImage = ({
       className={cx("text-0 h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
         ["absolute inset-0"]: fill,
+        ["relative"]: !fill,
       })}
       ref={wrapperRef}
     >
@@ -188,6 +209,21 @@ export const ResponsiveImage = ({
           quality={IMAGE_QUALITY}
           onLoadingComplete={onImageLoad}
         />
+      )}
+
+      {zoom && typeof src === "string" && (
+        <Fancybox>
+          <a
+            href={src}
+            data-fancybox
+            className="absolute h-full top-0 left-0 cursor-zoom-in"
+            style={{
+              aspectRatio,
+            }}
+          >
+            <span className="sr-only">zoom</span>
+          </a>
+        </Fancybox>
       )}
       <ScriptJsonLd data={imageJsonLd} />
     </div>

@@ -36,7 +36,7 @@ export const ImageCard = ({ image, theme }: ImageCardProps) => {
           ratioClasses[theme?.image?.ratio || "19/27"],
         )}
       >
-        {image && <ResponsiveImage {...image} fill />}
+        {image && <ResponsiveImage {...image} fill zoom />}
       </div>
     </div>
   );

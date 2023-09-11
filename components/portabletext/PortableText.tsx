@@ -114,7 +114,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
           "image.simple"({ value }) {
             return (
               <figure>
-                <ResponsiveImage {...value.image} preserveAspectRatio />
+                <ResponsiveImage {...value.image} preserveAspectRatio zoom />
 
                 <FigCaption
                   caption={value.caption}

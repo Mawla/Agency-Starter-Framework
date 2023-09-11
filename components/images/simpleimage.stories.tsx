@@ -17,3 +17,9 @@ export const Fill = () => (
     <SimpleImage {...demoImage2} priority loading="eager" fill />
   </div>
 );
+
+export const Zoom = () => (
+  <div className="relative aspect-video border">
+    <SimpleImage {...demoImage2} priority loading="eager" fill zoom />
+  </div>
+);

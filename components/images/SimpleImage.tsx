@@ -1,14 +1,24 @@
+import { FancyboxProps } from "../../components/lightbox/Fancybox";
 import { getResponsiveImageUrl } from "../../helpers/sanity/image-url";
 import { ImageType } from "../../types";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
+import { ComponentType, lazy } from "react";
 
 const IMAGE_QUALITY = 85;
+
+const Fancybox = lazy<ComponentType<FancyboxProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Fancybox" */ "../../components/lightbox/Fancybox"
+    ),
+);
 
 export type SimpleImageProps = {
   crop?: ImageType["crop"];
   hotspot?: ImageType["hotspot"];
   alt?: string;
   className?: string;
+  zoom?: boolean;
 } & NextImageProps;
 
 export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
@@ -21,13 +31,14 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
   priority,
   src,
   width,
+  zoom,
 }) => {
   const originalWidth = (width as number) || 1;
   const originalHeight = (height as number) || 1;
-  const originalRatio = originalWidth / originalHeight;
+  const aspectRatio = originalWidth / originalHeight;
 
   return (
-    <>
+    <div className="relative">
       <NextImage
         src={src}
         className={className}
@@ -40,7 +51,7 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
           const imageURL = getResponsiveImageUrl({
             src,
             width: Math.min(originalWidth, width),
-            height: Math.min(originalWidth, width) / originalRatio,
+            height: Math.min(originalWidth, width) / aspectRatio,
             crop,
             hotspot,
             quality,
@@ -51,7 +62,22 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
         }}
         quality={IMAGE_QUALITY}
       />
-    </>
+
+      {zoom && typeof src === "string" && (
+        <Fancybox>
+          <a
+            href={src}
+            data-fancybox
+            className="absolute h-full top-0 left-0 cursor-zoom-in"
+            style={{
+              aspectRatio,
+            }}
+          >
+            <span className="sr-only">zoom</span>
+          </a>
+        </Fancybox>
+      )}
+    </div>
   );
 };
 

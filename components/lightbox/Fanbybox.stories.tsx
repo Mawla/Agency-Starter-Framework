@@ -1,5 +1,7 @@
+import { demoImage } from "../../stories/content";
 import Button from "../buttons/Button";
 import Link from "../buttons/Link";
+import ResponsiveImage from "../images/ResponsiveImage";
 import PortableTextComponent from "../portabletext/PortableText";
 import Fancybox from "./Fancybox";
 import { Meta } from "@storybook/react";
@@ -235,6 +237,19 @@ const DEMO_CONTENT = [
     style: "normal",
     _key: "98bec1fd9bec",
   },
+  {
+    image: demoImage,
+    markDefs: null,
+    _type: "image.simple",
+    source: {
+      _type: "image",
+      asset: {
+        _type: "reference",
+        _ref: "image-22a209cca6c9eccce6c2619d2f6ecee93c419336-1296x893-jpg",
+      },
+    },
+    _key: "1683b74dc285",
+  },
 ];
 
 export default {
@@ -256,4 +271,10 @@ export const Default = () => (
 
 export const PortableText = () => (
   <PortableTextComponent content={DEMO_CONTENT} />
+);
+
+export const Image = () => (
+  <div>
+    <ResponsiveImage {...demoImage} zoom />
+  </div>
 );
