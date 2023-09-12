@@ -1,46 +1,45 @@
 import { SchemaName } from "../../../types.sanity";
 import {
+  AUTHOR_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
-  getI18nBaseFieldForSingleton,
   getParentDocumentInitialValue,
+  IMAGE_FIELD,
   ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
+  PUBLISHED_AT_FIELD,
+  TAGS_FIELD,
 } from "./page-fields";
-import { Textbook } from "@vectopus/atlas-icons-react";
+import { Newspaper } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
-export const SCHEMA_NAME: SchemaName = "page.guides";
+export const SCHEMA_NAME: SchemaName = "page.newsarticle";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Guides overview",
+  title: "News article",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
-  options: {
-    singleton: true,
-  },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
-  icon: () => <Textbook weight="thin" size={20} />,
+  icon: () => <Newspaper weight="thin" size={20} />,
   initialValue: async (props: any, context: any) => {
-    return await getParentDocumentInitialValue(context, "page_resources");
+    return await getParentDocumentInitialValue(context, "page_news");
   },
   groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,
-      to: [{ type: "page.resources" }, { type: "page.content" }],
+      to: [{ type: "page.news" }],
       options: {
         disableNew: true,
         ...PARENT_FIELD.options,
       },
     },
-    ...pageBase.fields.map((field) => {
-      if (field.name === "i18n_base") {
-        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
-      }
-      return { ...field };
-    }),
+    ...pageBase.fields,
+    TAGS_FIELD,
+    IMAGE_FIELD,
+    AUTHOR_FIELD,
+    PUBLISHED_AT_FIELD,
   ],
 });

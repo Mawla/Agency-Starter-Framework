@@ -64,9 +64,17 @@ import pageGuide from "./documents/page.guide";
 import pageGuides from "./documents/page.guides";
 import pageHome from "./documents/page.home";
 import pageLanding from "./documents/page.landing";
+import pageMediaCoverage from "./documents/page.mediacoverage";
+import pageMediaCoverageArticle from "./documents/page.mediacoveragearticle";
+import pageNews from "./documents/page.news";
+import pageNewsarticle from "./documents/page.newsarticle";
+import pageNewsroom from "./documents/page.newsroom";
 import pageNotFound from "./documents/page.notfound";
 import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
+import pagePressRelease from "./documents/page.pressrelease";
+import pagePressReleases from "./documents/page.pressreleases";
+import pageResources from "./documents/page.resources";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
 import pageTool from "./documents/page.tool";
@@ -98,10 +106,9 @@ export const schemaTypes = [
     block4,
     block7,
     button,
-    buttongroup,
     buttonTheme,
+    buttongroup,
     composableCard,
-    imageCard,
     configCMS,
     configIcons,
     configIntegrations,
@@ -109,11 +116,12 @@ export const schemaTypes = [
     configTheme,
     copypaste,
     decoration,
-    decorations,
     decorationWrapper,
+    decorations,
     faq,
     footer,
     highlight,
+    imageCard,
     imageSimple,
     link,
     navigation,
@@ -128,9 +136,17 @@ export const schemaTypes = [
     pageGuides,
     pageHome,
     pageLanding,
+    pageMediaCoverage,
+    pageMediaCoverageArticle,
+    pageNews,
+    pageNewsarticle,
+    pageNewsroom,
     pageNotFound,
     pagePodcast,
     pagePodcasts,
+    pagePressRelease,
+    pagePressReleases,
+    pageResources,
     pageSitemap,
     pageTag,
     pageTool,
@@ -143,12 +159,12 @@ export const schemaTypes = [
     portableTextPlain,
     portableTextSimple,
     preset,
+    presetBlockTheme,
     presetBlocks,
     presetButton,
     presetDecoration,
-    presetBlockTheme,
-    presetTitleTheme,
     presetTextTheme,
+    presetTitleTheme,
     redirect,
     script,
     studioDivider,

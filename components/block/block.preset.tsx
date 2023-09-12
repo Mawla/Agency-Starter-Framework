@@ -6,16 +6,16 @@ import {
   pageBase,
 } from "../../studio/schemas/documents/page-fields";
 import { BLOCK_SCHEMAS } from "../../types.sanity";
-import { Blueprint } from "@vectopus/atlas-icons-react";
+import { HomeLayout } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
 const schema = defineType({
   name: "preset.blocks",
-  title: "Blocks preset",
+  title: "Blocks",
   type: "document",
   liveEdit: true,
-  icon: () => <Blueprint weight="thin" size={20} />,
+  icon: () => <HomeLayout weight="thin" size={20} />,
   preview: {
     select: {
       title: "title",
