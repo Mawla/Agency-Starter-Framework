@@ -40,7 +40,7 @@ export const structure = (
       ...languages.map(
         (language): ListItemBuilder =>
           group(S, {
-            title: language.title,
+            title: languages.length <= 1 ? "Pages" : language.title,
             icon: () => <Layers weight="thin" size={24} />,
           })
             .id(`${language.id}`)
