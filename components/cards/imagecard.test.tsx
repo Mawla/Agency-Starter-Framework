@@ -1,6 +1,6 @@
 import { render, screen, act } from "../../jest.utils";
 import { demoImage, demoImage2, demoImage3 } from "../../stories/content";
-import ImageCard, { ImageCardProps } from "./ImageCard";
+import ImageCard from "./ImageCard";
 import "@testing-library/jest-dom";
 
 describe("Image card", () => {
