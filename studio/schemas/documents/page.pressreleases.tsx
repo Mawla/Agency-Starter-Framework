@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.pressreleases";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Press Releases",
+  title: "Press releases overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {

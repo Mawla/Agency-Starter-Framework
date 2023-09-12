@@ -18,7 +18,7 @@ export const SCHEMA_NAME: SchemaName = "page.newsarticle";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "News",
+  title: "News article",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,

@@ -121,6 +121,9 @@ export const RESOURCE_SCHEMAS = pick(
   "page.tool",
   "page.video",
   "page.guide",
+  "page.newsarticle",
+  "page.mediacoveragearticle",
+  "page.pressrelease",
 );
 export type ResourceType = keyof typeof RESOURCE_SCHEMAS;
 export const RESOURCE_SCHEMAS_LIST = Object.keys(

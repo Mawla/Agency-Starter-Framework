@@ -8,7 +8,7 @@ type DocumentListProps = {
   type: SchemaName;
   title?: string;
   filter?: string;
-  icon?: JSX.Element;
+  icon?: JSX.Element | any;
   createMenuTypes?: SchemaName[];
   language?: LanguageType;
 };

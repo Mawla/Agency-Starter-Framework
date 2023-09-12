@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.mediacoverage";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Media Coverage",
+  title: "Media Coverage overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {

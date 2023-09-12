@@ -16,7 +16,7 @@ import {
   Gear,
   Layers,
   MagnifyingGlass,
-  Newspaper,
+  MenuSquare,
   PapertrayLines,
   QuestionFile,
 } from "@vectopus/atlas-icons-react";
@@ -106,6 +106,7 @@ export const structure = (
                             id: `page_blogs`,
                             type: "page.blogs",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.blog",
@@ -124,6 +125,7 @@ export const structure = (
                             id: `page_events`,
                             type: "page.events",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.event",
@@ -142,6 +144,7 @@ export const structure = (
                             id: `page_casestudies`,
                             type: "page.casestudies",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.casestudy",
@@ -160,6 +163,7 @@ export const structure = (
                             id: `page_podcasts`,
                             type: "page.podcasts",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.podcast",
@@ -178,6 +182,7 @@ export const structure = (
                             id: `page_guides`,
                             type: "page.guides",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.guide",
@@ -196,6 +201,7 @@ export const structure = (
                             id: `page_tools`,
                             type: "page.tools",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.tool",
@@ -214,6 +220,7 @@ export const structure = (
                             id: `page_videos`,
                             type: "page.videos",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.video",
@@ -239,10 +246,11 @@ export const structure = (
                             id: `page_news`,
                             type: "page.news",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.newsarticle",
-                            title: "NewsArticle",
+                            title: "News articles",
                             language: language.id,
                           }),
                         ]),
@@ -256,10 +264,11 @@ export const structure = (
                             id: `page_pressreleases`,
                             type: "page.pressreleases",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.pressrelease",
-                            title: "Press Release",
+                            title: "Press releases",
                             language: language.id,
                           }),
                         ]),
@@ -273,10 +282,11 @@ export const structure = (
                             id: `page_mediacoverage`,
                             type: "page.mediacoverage",
                             language: language.id,
+                            icon: () => <MenuSquare weight="thin" size={20} />,
                           }),
                           documentList(S, {
                             type: "page.mediacoveragearticle",
-                            title: "Media Coverage Article",
+                            title: "Media Coverage articles",
                             language: language.id,
                           }),
                         ]),
