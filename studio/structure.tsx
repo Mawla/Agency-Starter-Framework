@@ -16,6 +16,7 @@ import {
   Gear,
   Layers,
   MagnifyingGlass,
+  Newspaper,
   PapertrayLines,
   QuestionFile,
 } from "@vectopus/atlas-icons-react";
@@ -91,133 +92,197 @@ export const structure = (
 
                 S.divider(),
 
-                S.listItem()
-                  .title("Blogs")
-                  .icon(getIconForSchema(S, "page.blogs"))
-                  .child(
-                    list(S, { title: "Blogs" }).items([
-                      singleton(S, {
-                        id: `page_blogs`,
-                        type: "page.blogs",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.blog",
-                        title: "Blog articles",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                group(S, {
+                  title: "Resources",
+                  icon: getIconForSchema(S, "page.blogs"),
+                }).child(
+                  list(S, { title: "Resources" }).items([
+                    S.listItem()
+                      .title("Blogs")
+                      .icon(getIconForSchema(S, "page.blogs"))
+                      .child(
+                        list(S, { title: "Blogs" }).items([
+                          singleton(S, {
+                            id: `page_blogs`,
+                            type: "page.blogs",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.blog",
+                            title: "Blog articles",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
 
-                S.listItem()
-                  .title("Events")
-                  .icon(getIconForSchema(S, "page.events"))
-                  .child(
-                    list(S, { title: "Events" }).items([
-                      singleton(S, {
-                        id: `page_events`,
-                        type: "page.events",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.event",
-                        title: "Events",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                    S.listItem()
+                      .title("Events")
+                      .icon(getIconForSchema(S, "page.events"))
+                      .child(
+                        list(S, { title: "Events" }).items([
+                          singleton(S, {
+                            id: `page_events`,
+                            type: "page.events",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.event",
+                            title: "Events",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
 
-                S.listItem()
-                  .title("Case studies")
-                  .icon(getIconForSchema(S, "page.casestudies"))
-                  .child(
-                    list(S, { title: "Case studies" }).items([
-                      singleton(S, {
-                        id: `page_casestudies`,
-                        type: "page.casestudies",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.casestudy",
-                        title: "Case studies",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                    S.listItem()
+                      .title("Case studies")
+                      .icon(getIconForSchema(S, "page.casestudies"))
+                      .child(
+                        list(S, { title: "Case studies" }).items([
+                          singleton(S, {
+                            id: `page_casestudies`,
+                            type: "page.casestudies",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.casestudy",
+                            title: "Case studies",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
 
-                S.listItem()
-                  .title("Podcasts")
-                  .icon(getIconForSchema(S, "page.podcasts"))
-                  .child(
-                    list(S, { title: "Podcasts" }).items([
-                      singleton(S, {
-                        id: `page_podcasts`,
-                        type: "page.podcasts",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.podcast",
-                        title: "Podcasts",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                    S.listItem()
+                      .title("Podcasts")
+                      .icon(getIconForSchema(S, "page.podcasts"))
+                      .child(
+                        list(S, { title: "Podcasts" }).items([
+                          singleton(S, {
+                            id: `page_podcasts`,
+                            type: "page.podcasts",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.podcast",
+                            title: "Podcasts",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
 
-                S.listItem()
-                  .title("Guides")
-                  .icon(getIconForSchema(S, "page.guides"))
-                  .child(
-                    list(S, { title: "Guides" }).items([
-                      singleton(S, {
-                        id: `page_guides`,
-                        type: "page.guides",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.guide",
-                        title: "Guides",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                    S.listItem()
+                      .title("Guides")
+                      .icon(getIconForSchema(S, "page.guides"))
+                      .child(
+                        list(S, { title: "Guides" }).items([
+                          singleton(S, {
+                            id: `page_guides`,
+                            type: "page.guides",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.guide",
+                            title: "Guides",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
 
-                S.listItem()
-                  .title("Tools")
-                  .icon(getIconForSchema(S, "page.tools"))
-                  .child(
-                    list(S, { title: "Tools" }).items([
-                      singleton(S, {
-                        id: `page_tools`,
-                        type: "page.tools",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.tool",
-                        title: "Tools",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                    S.listItem()
+                      .title("Tools")
+                      .icon(getIconForSchema(S, "page.tools"))
+                      .child(
+                        list(S, { title: "Tools" }).items([
+                          singleton(S, {
+                            id: `page_tools`,
+                            type: "page.tools",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.tool",
+                            title: "Tools",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
 
-                S.listItem()
-                  .title("Videos")
-                  .icon(getIconForSchema(S, "page.videos"))
-                  .child(
-                    list(S, { title: "Videos" }).items([
-                      singleton(S, {
-                        id: `page_videos`,
-                        type: "page.videos",
-                        language: language.id,
-                      }),
-                      documentList(S, {
-                        type: "page.video",
-                        title: "Videos",
-                        language: language.id,
-                      }),
-                    ]),
-                  ),
+                    S.listItem()
+                      .title("Videos")
+                      .icon(getIconForSchema(S, "page.videos"))
+                      .child(
+                        list(S, { title: "Videos" }).items([
+                          singleton(S, {
+                            id: `page_videos`,
+                            type: "page.videos",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.video",
+                            title: "Videos",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
+                  ]),
+                ),
 
-                S.divider(),
+                group(S, {
+                  title: "Newsroom",
+                  icon: getIconForSchema(S, "page.news"),
+                }).child(
+                  list(S, { title: "Newsroom" }).items([
+                    S.listItem()
+                      .title("News")
+                      .icon(getIconForSchema(S, "page.news"))
+                      .child(
+                        list(S, { title: "News" }).items([
+                          singleton(S, {
+                            id: `page_news`,
+                            type: "page.news",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.newsarticle",
+                            title: "NewsArticle",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
+                    S.listItem()
+                      .title("Press Releases")
+                      .icon(getIconForSchema(S, "page.pressreleases"))
+                      .child(
+                        list(S, { title: "Press Releases" }).items([
+                          singleton(S, {
+                            id: `page_pressreleases`,
+                            type: "page.pressreleases",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.pressrelease",
+                            title: "Press Release",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
+                    S.listItem()
+                      .title("Media Coverage")
+                      .icon(getIconForSchema(S, "page.mediacoverage"))
+                      .child(
+                        list(S, { title: "Media Coverage" }).items([
+                          singleton(S, {
+                            id: `page_mediacoverage`,
+                            type: "page.mediacoverage",
+                            language: language.id,
+                          }),
+                          documentList(S, {
+                            type: "page.mediacoveragearticle",
+                            title: "Media Coverage Article",
+                            language: language.id,
+                          }),
+                        ]),
+                      ),
+                  ]),
+                ),
                 documentList(S, {
                   type: "page.tag",
                   title: "Tags",
