@@ -68,11 +68,13 @@ import pageMediaCoverage from "./documents/page.mediacoverage";
 import pageMediaCoverageArticle from "./documents/page.mediacoveragearticle";
 import pageNews from "./documents/page.news";
 import pageNewsarticle from "./documents/page.newsarticle";
+import pageNewsroom from "./documents/page.newsroom";
 import pageNotFound from "./documents/page.notfound";
 import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
 import pagePressRelease from "./documents/page.pressrelease";
 import pagePressReleases from "./documents/page.pressreleases";
+import pageResources from "./documents/page.resources";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
 import pageTool from "./documents/page.tool";
@@ -138,11 +140,13 @@ export const schemaTypes = [
     pageMediaCoverageArticle,
     pageNews,
     pageNewsarticle,
+    pageNewsroom,
     pageNotFound,
     pagePodcast,
     pagePodcasts,
     pagePressRelease,
     pagePressReleases,
+    pageResources,
     pageSitemap,
     pageTag,
     pageTool,

@@ -97,6 +97,12 @@ export const structure = (
                   icon: getIconForSchema(S, "page.blogs"),
                 }).child(
                   list(S, { title: "Resources" }).items([
+                    singleton(S, {
+                      id: "page_resources",
+                      type: "page.resources",
+                      language: language.id,
+                    }),
+                    S.divider(),
                     S.listItem()
                       .title("Blogs")
                       .icon(getIconForSchema(S, "page.blogs"))
@@ -237,6 +243,12 @@ export const structure = (
                   icon: getIconForSchema(S, "page.news"),
                 }).child(
                   list(S, { title: "Newsroom" }).items([
+                    singleton(S, {
+                      id: "page_newsroom",
+                      type: "page.newsroom",
+                      language: language.id,
+                    }),
+                    S.divider(),
                     S.listItem()
                       .title("News")
                       .icon(getIconForSchema(S, "page.news"))
@@ -298,6 +310,7 @@ export const structure = (
                   title: "Tags",
                   language: language.id,
                 }),
+
                 S.divider(),
                 singleton(S, {
                   id: "navigation",
