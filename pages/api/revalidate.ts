@@ -1,5 +1,6 @@
 import { config as sanityConfig } from "../../helpers/sanity/config";
 import { getPathForId } from "../../helpers/sitemap/getPathForId";
+import { getLanguagePath } from "../../languages";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import { createClient } from "@sanity/client";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
@@ -57,8 +58,7 @@ export default async function handler(
 
   try {
     let messages = [];
-    const languagePrefix = language ? `/${language}` : "/";
-    const path = `${languagePrefix}${getPathForId(_id, sitemap)}`;
+    const path = `${getLanguagePath(language)}${getPathForId(_id, sitemap)}`;
     await res.revalidate(path);
     const message = `Revalidated "${_type}" with path ${path}`;
     messages.push(message);

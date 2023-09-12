@@ -1,6 +1,7 @@
 import Link from "../../components/buttons/Link";
 import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PageContext } from "../../context/PageContext";
+import { getLanguagePath } from "../../languages";
 import { NavigationProps } from "./Navigation";
 import { ComponentType, Suspense, lazy, useContext } from "react";
 
@@ -20,7 +21,7 @@ export const TopNavLogo = ({ logo }: TopNavLogoProps) => {
   if (!logo) return null;
 
   return (
-    <Link href={`/${language}`} className="inline-block relative">
+    <Link href={getLanguagePath(language)} className="inline-block relative">
       <span className="sr-only">Home</span>
       <Suspense>
         {logo?.mobile && (
