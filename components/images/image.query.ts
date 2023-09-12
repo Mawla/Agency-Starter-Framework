@@ -13,7 +13,7 @@ export const imageSimpleQuery = groq`
     "crop": ^.image.source.crop,
     ${imageQueryFields}
     "caption": ^.image.caption,
-    "alt": coalesce(^.image.alt, ^.image.altText),
+    "alt": coalesce(^.image.alt, ^.image.altText, ^.image.source.asset->altText),
   }
 `;
 

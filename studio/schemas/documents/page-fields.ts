@@ -1,8 +1,6 @@
 import { SCRIPT_REFERENCE_FIELD } from "../../../components/script/script.schema";
 import { baseLanguage, languages, LanguageType } from "../../../languages";
 import {
-  DialogSchemaName,
-  DIALOG_SCHEMAS,
   LINKABLE_SCHEMAS,
   BlockSchemaName,
   BLOCK_SCHEMAS,
@@ -20,7 +18,6 @@ import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { referenceFilterCurrentLanguage } from "../../utils/language/reference-filter-current-language";
 import { SEO_FIELD } from "./config.seo";
-import { nanoid } from "nanoid";
 import {
   DateRule,
   defineArrayMember,
@@ -99,33 +96,6 @@ export const BLOCKS_FIELD = defineField({
     filterType: /block\.|studio\./,
     updateField: "blocks",
     placeholder: "Add a block…",
-  } as any,
-  group: ["content"],
-});
-
-export const DIALOGS_FIELD = defineField({
-  name: "dialogs",
-  title: "Dialogs",
-  type: "array",
-  components: {
-    input: PageBuilder,
-  },
-  description:
-    "Dialogs are modal windows, used for presenting extra information. A dialog must be created before it can be linked to from a button inside block.",
-  of: (Object.keys(DIALOG_SCHEMAS) as DialogSchemaName[]).map(
-    (type: DialogSchemaName) =>
-      defineArrayMember({
-        type,
-        components: {
-          preview: PageBuilderItemPreview as any,
-          item: PageBuilderItem as any,
-        },
-      }),
-  ),
-  options: {
-    filterType: /dialog.*/,
-    updateField: "dialogs",
-    placeholder: "Add a dialog…",
   } as any,
   group: ["content"],
 });
@@ -335,7 +305,6 @@ export const pageBase = {
     TITLE_FIELD,
     SLUG_FIELD,
     BLOCKS_FIELD,
-    DIALOGS_FIELD,
     { ...SEO_FIELD, group: ["meta"] },
     HIDE_NAV_FIELD,
     HIDE_FOOTER_FIELD,

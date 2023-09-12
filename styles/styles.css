@@ -145,3 +145,12 @@ script[type='application/ld+json'] {
 .preview-highlight-open {
   position: relative;
 }
+
+/* Fancybox */
+.fancybox__content {
+  padding: 0 !important;
+}
+
+.fancybox__container.fix-iframe-height .fancybox__content {
+  height: 90% !important;
+}

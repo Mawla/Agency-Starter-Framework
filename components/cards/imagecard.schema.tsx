@@ -1,77 +1,47 @@
 import { COLUMN_OPTIONS } from "../../blocks/block18/block18.options";
 import { defaultBlockGroups } from "../../components/block/block.schema";
-import { defaultTitleTheme } from "../../components/title/title.schema";
+import { defaultBlockTools } from "../../studio/schemas/objects/tools";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
   BORDER_RADIUS_OPTIONS,
   BORDER_WIDTH_OPTIONS,
-  HORIZONTAL_ALIGN_OPTIONS,
   PADDING_OPTIONS,
   RATIOS,
 } from "../../types";
-import { IMAGE_HEIGHT_OPTIONS } from "./composablecard.options";
-import { Postcard } from "@vectopus/atlas-icons-react";
+import { FileImage } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
 const schema = defineType({
-  name: "card.composable",
-  title: "Composable card",
+  name: "card.image",
+  title: "Image card",
   type: "object",
-  icon: () => <Postcard weight="thin" />,
+  icon: () => <FileImage weight="thin" />,
   preview: {
     select: {
-      title: "title",
-      subtitle: "subtitle",
-      content: "content",
-      image: "image",
+      image: "image.source",
+      alt: "image.alt",
+      caption: "image.caption",
+      imageAlt: "image.source.asset.altText",
     },
-    prepare({ title = "", subtitle = "", content, image }) {
+    prepare({ image, alt, caption, imageAlt }: any) {
       return {
-        title: `${title} ${subtitle}`,
-        subtitle: blocksToText(content),
         media: image,
+        title: caption || alt || imageAlt,
       };
     },
   },
   groups: defaultBlockGroups,
   fields: [
+    ...defaultBlockTools,
     defineField({
       name: "image",
       title: "Image",
-      type: "image",
-      description: "Image that can be sized, rounded and positioned.",
+      type: "image.simple",
       group: "content",
       options: {
         hotspot: true,
       },
-    }),
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "text",
-      group: "content",
-      rows: 2,
-    }),
-    defineField({
-      name: "subtitle",
-      title: "Subtitle",
-      type: "text",
-      group: "content",
-      rows: 2,
-    }),
-    defineField({
-      name: "content",
-      title: "Content",
-      type: "portabletext.basic",
-      group: "content",
-    }),
-    defineField({
-      name: "buttons",
-      title: "Buttons",
-      type: "buttongroup",
-      group: "content",
     }),
     defineField({
       name: "theme",
@@ -80,26 +50,28 @@ const schema = defineType({
       group: "theme",
       fields: [
         defineField({
+          name: "image",
+          type: "styles",
+          options: {
+            fields: [
+              defineField({
+                name: "ratio",
+                type: "select",
+                options: {
+                  list: optionsToList(RATIOS),
+                },
+              }),
+            ],
+          },
+        }),
+        defineField({
           name: "card",
           type: "styles",
           options: {
             fields: [
               defineField({
-                name: "color",
-                title: "Text color",
-                type: "color",
-              }),
-              defineField({
                 name: "background",
                 type: "color",
-              }),
-
-              defineField({
-                name: "align",
-                type: "select",
-                options: {
-                  list: optionsToList(HORIZONTAL_ALIGN_OPTIONS),
-                },
               }),
               {
                 name: "paddingX",
@@ -156,50 +128,6 @@ const schema = defineType({
                   list: optionsToList(BORDER_RADIUS_OPTIONS),
                 },
               },
-            ],
-          },
-        }),
-        defaultTitleTheme,
-        { ...defaultTitleTheme, name: "subtitle" },
-        { ...defaultTitleTheme, name: "content" },
-        defineField({
-          name: "image",
-          type: "styles",
-          options: {
-            fields: [
-              defineField({
-                name: "ratio",
-                type: "select",
-                options: {
-                  list: optionsToList(RATIOS),
-                },
-              }),
-              defineField({
-                name: "height",
-                type: "select",
-                options: {
-                  list: optionsToList(IMAGE_HEIGHT_OPTIONS),
-                },
-              }),
-              defineField({
-                name: "rounded",
-                type: "select",
-                options: {
-                  list: optionsToList(BORDER_RADIUS_OPTIONS),
-                },
-              }),
-            ],
-          },
-        }),
-        defineField({
-          name: "buttons",
-          type: "styles",
-          options: {
-            fields: [
-              defineField({
-                name: "hidden",
-                type: "boolean",
-              }),
             ],
           },
         }),

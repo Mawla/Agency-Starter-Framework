@@ -37,7 +37,7 @@ describe("Block18", () => {
     await act(() => {
       render(
         <Block18
-          items={[{ title: "Hello", _key: "", type: "card.composable" }]}
+          items={[{ title: "Hello", _key: "a", type: "card.composable" }]}
         />,
       );
     });

@@ -175,6 +175,7 @@ export const Block4 = ({
               <ResponsiveImage
                 {...image}
                 preserveAspectRatio
+                zoom
                 className={cx(
                   "inline-block",
                   theme?.image?.rounded &&

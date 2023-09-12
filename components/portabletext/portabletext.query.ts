@@ -40,7 +40,7 @@ markDefs[]{
   ...,
   _type == "link" => {
     "href": ${buttonHrefQuery},
-    "target": select(newWindow => '_blank')
+    target
   }
 }`;
 

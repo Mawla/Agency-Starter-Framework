@@ -27,7 +27,6 @@ export const buttonHrefQuery = groq`
       coalesce(${findTopLevelSitemap})[_id == ^.internal._ref][0] { 
         "path": select(language == "${baseLanguage}" => '', '/'+ language) + path
       }.path,
-      '#'+ dialog, 
       file.asset->url
     ) + coalesce(params, ''), 
     params
@@ -65,7 +64,7 @@ export const buttonFieldsQuery = groq`
     "name": slug.current,
     ${buttonThemeFieldsQuery}
   },
-  "target": select(newWindow => '_blank') 
+  target
 `;
 
 export const buttonFieldsWithoutDefaultThemeQuery = groq`
@@ -88,7 +87,7 @@ export const buttonQuery = groq`{
 
 export const hrefFieldQuery = groq`
   "href": link ${buttonQuery}.href,
-  "target": select(newWindow => '_blank') 
+  target
 `;
 
 /**
