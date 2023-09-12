@@ -5,7 +5,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "preset.decoration",
-  title: "Decoration preset",
+  title: "Decorations",
   type: "document",
   icon: () => <BlueprintPaper weight="thin" size={20} />,
   liveEdit: true,

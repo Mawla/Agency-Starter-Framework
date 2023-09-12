@@ -8,7 +8,7 @@ import { DefaultDocumentNodeContext, StructureBuilder } from "sanity/desk";
 type SingletonProps = {
   id: string;
   type: SchemaName;
-  icon?: JSX.Element;
+  icon?: JSX.Element | any;
   title?: string;
   language?: LanguageType;
 };

@@ -1,6 +1,7 @@
 import { Link } from "../../components/buttons/Link";
 import { SimpleImageProps } from "../../components/images/SimpleImage";
 import { PageContext } from "../../context/PageContext";
+import { getLanguagePath } from "../../languages";
 import { ImageType } from "../../types";
 import { ComponentType, Suspense, lazy, useContext } from "react";
 
@@ -20,7 +21,7 @@ export const FooterLogo = ({ mobile, desktop }: FooterLogoProps) => {
   const { language } = useContext(PageContext);
 
   return (
-    <Link href={`/${language}`}>
+    <Link href={getLanguagePath(language)}>
       <span className="sr-only">Home</span>
       <Suspense>
         {mobile && (

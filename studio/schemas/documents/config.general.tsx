@@ -1,3 +1,4 @@
+import { baseLanguage } from "../../../languages";
 import { SchemaName } from "../../../types.sanity";
 import Warning from "../../components/Warning";
 import { Gear, Geography } from "@vectopus/atlas-icons-react";
@@ -79,7 +80,7 @@ export default defineType({
             prepare({ title, id }) {
               return {
                 title,
-                subtitle: `/${id}`,
+                subtitle: id === baseLanguage ? "/" : `/${id}`,
                 media: () => <Geography weight="thin" size={20} />,
               };
             },

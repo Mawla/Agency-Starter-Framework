@@ -7,30 +7,30 @@ import {
   pageBase,
   PARENT_FIELD,
 } from "./page-fields";
-import { Textbook } from "@vectopus/atlas-icons-react";
+import { AudioAlbum } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
-export const SCHEMA_NAME: SchemaName = "page.guides";
+export const SCHEMA_NAME: SchemaName = "page.mediacoverage";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Guides overview",
+  title: "Media Coverage overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {
     singleton: true,
   },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
-  icon: () => <Textbook weight="thin" size={20} />,
+  icon: () => <AudioAlbum weight="thin" size={20} />,
   initialValue: async (props: any, context: any) => {
-    return await getParentDocumentInitialValue(context, "page_resources");
+    return await getParentDocumentInitialValue(context, "page_newsroom");
   },
   groups: [...pageBase.groups],
   fields: [
     {
       ...PARENT_FIELD,
-      to: [{ type: "page.resources" }, { type: "page.content" }],
+      to: [{ type: "page.newsroom" }, { type: "page.content" }],
       options: {
         disableNew: true,
         ...PARENT_FIELD.options,

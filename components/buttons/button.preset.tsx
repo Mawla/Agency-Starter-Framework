@@ -18,7 +18,7 @@ import { defineField, defineType, StringRule, SlugRule } from "sanity";
 
 export default defineType({
   name: "preset.button",
-  title: "Button preset",
+  title: "Buttons",
   liveEdit: true,
   type: "document",
   icon: () => <ClickBait weight="thin" size={20} />,

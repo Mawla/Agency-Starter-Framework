@@ -8,7 +8,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "preset.theme.title",
-  title: "Heading theme preset",
+  title: "Heading styles",
   type: "document",
   icon: () => <Text weight="thin" size={20} />,
   liveEdit: true,

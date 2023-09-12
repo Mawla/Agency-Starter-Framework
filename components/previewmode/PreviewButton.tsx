@@ -1,10 +1,9 @@
 import { PageContext } from "../../context/PageContext";
-import { baseLanguage } from "../../languages";
+import { getLanguagePath } from "../../languages";
 import { useContext } from "react";
 
 export const PreviewButton = ({ pagePath }: { pagePath: string }) => {
   const { language } = useContext(PageContext);
-  const languagePrefix = language === baseLanguage ? "" : `/${language}`;
 
   return (
     <span className="shadow-lg flex gap-4 bg-[#1f2937] items-center">
@@ -12,7 +11,9 @@ export const PreviewButton = ({ pagePath }: { pagePath: string }) => {
 
       <a
         className="p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222] border-l border-l-black/80"
-        href={`/api/preview/exit-preview?redirect=${languagePrefix}${pagePath}`}
+        href={`/api/preview/exit-preview?redirect=${getLanguagePath(
+          language,
+        )}${pagePath}`}
       >
         <span className="w-5 h-5 block">
           <svg
