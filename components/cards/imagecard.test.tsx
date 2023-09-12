@@ -13,7 +13,7 @@ describe("Image card", () => {
         <ImageCard image={demoImage2} theme={{ image: { ratio: "1/1" } }} />,
       );
       render(
-        <ImageCard image={demoImage3} theme={{ image: { ratio: "19/27" } }} />,
+        <ImageCard image={demoImage3} theme={{ image: { ratio: "1/2" } }} />,
       );
     });
     expect(screen.getAllByAltText("demoimage"));
