@@ -1,6 +1,3 @@
-import DialogSelect, {
-  DialogSelectWrapper,
-} from "../../studio/components/DialogSelect";
 import { UnsetObjectButton } from "../../studio/components/UnsetObjectButton";
 import { getLinkableTypes } from "../../studio/utils/schemas/getLinkableTypes";
 import presetButtonSchema from "./button.preset";
@@ -44,7 +41,7 @@ const schema = defineType({
       hidden: (({ parent, value }) =>
         !value &&
         Boolean(
-          parent?.internal || parent?.dialog || parent?.file,
+          parent?.internal || parent?.file,
         )) as ConditionalPropertyCallback,
     }),
     defineField({
@@ -56,9 +53,7 @@ const schema = defineType({
       to: getLinkableTypes(),
       hidden: (({ parent, value }) =>
         !value &&
-        Boolean(
-          parent?.href || parent?.dialog || parent?.file,
-        )) as ConditionalPropertyCallback,
+        Boolean(parent?.href || parent?.file)) as ConditionalPropertyCallback,
     }),
     defineField({
       name: "params",
@@ -68,7 +63,7 @@ const schema = defineType({
       description:
         "Use this for a #hash or ?querystring. This field is not automatically updated when the destination changes.",
       hidden: ({ parent, value }) =>
-        !value && Boolean(parent?.href || parent?.dialog || parent?.file),
+        !value && Boolean(parent?.href || parent?.file),
       validation: (Rule: StringRule) =>
         Rule.custom((value: any) => {
           if (typeof value === "undefined") return true; // Allow undefined values
@@ -78,22 +73,6 @@ const schema = defineType({
         }),
     }),
     defineField({
-      name: "dialog",
-      title: "Dialog",
-      type: "string",
-      group: "link",
-      description: "Open a dialog on this page",
-      components: {
-        field: DialogSelectWrapper,
-        input: DialogSelect,
-      },
-      hidden: (({ parent, value }) =>
-        !value &&
-        Boolean(
-          parent?.internal || parent?.href || parent?.file,
-        )) as ConditionalPropertyCallback,
-    }),
-    defineField({
       name: "file",
       title: "File",
       type: "file",
@@ -101,27 +80,32 @@ const schema = defineType({
       hidden: (({ parent, value }) =>
         !value &&
         Boolean(
-          parent?.href || parent?.dialog || parent?.internal,
+          parent?.href || parent?.internal,
         )) as ConditionalPropertyCallback,
+    }),
+    defineField({
+      name: "target",
+      title: "Open in",
+      type: "string",
+      group: "link",
+      description:
+        "Choose between opening the link in a new window or lightbox",
+      options: {
+        list: [
+          { title: "New window", value: "_blank" },
+          { title: "Lightbox", value: "lightbox" },
+        ],
+      },
     }),
     defineField({
       name: "download",
       title: "Download",
       type: "boolean",
       group: "link",
-      initialValue: false,
       description: "Make the button download the file",
       hidden: (({ parent, value }) =>
         !value &&
         !Boolean(parent?.file || parent?.href)) as ConditionalPropertyCallback,
-    }),
-    defineField({
-      name: "newWindow",
-      title: "Open in new window",
-      type: "boolean",
-      group: "link",
-      initialValue: false,
-      description: "Make the button open in a new browser window",
     }),
     defineField({
       name: "presetTheme",

@@ -24,6 +24,7 @@ import {
   TextTransformType,
 } from "../../types";
 import { IconLoaderProps } from "../images/IconLoader";
+import { FancyboxProps } from "../lightbox/Fancybox";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
 import { ButtonIconPositionType } from "./button.options";
@@ -33,6 +34,10 @@ import { twMerge } from "tailwind-merge";
 
 const IconLoader = lazy<ComponentType<IconLoaderProps>>(
   () => import(/* webpackChunkName: "IconLoader" */ "../images/IconLoader"),
+);
+
+const Fancybox = lazy<ComponentType<FancyboxProps>>(
+  () => import(/* webpackChunkName: "Fancybox" */ "../lightbox/Fancybox"),
 );
 
 export type ButtonProps = {
@@ -49,7 +54,7 @@ export type ButtonProps = {
   loading?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   stretch?: boolean;
-  target?: "_blank";
+  target?: "_blank" | "lightbox";
   presetTheme?: {
     name?: string;
     icon?: {
@@ -101,6 +106,21 @@ type ButtonThemeHoverType = {
 };
 
 export const Button = (props: ButtonProps) => {
+  if (props.href && props.target === "lightbox") {
+    return (
+      <Fancybox>
+        <Link
+          href={props.href}
+          locale={props.language}
+          showExternalIcon={false}
+          target="lightbox"
+        >
+          <ButtonInner {...props} as="span" />
+        </Link>
+      </Fancybox>
+    );
+  }
+
   if (props.href && isInternalLink(props.href)) {
     return (
       <Link href={props.href} locale={props.language} showExternalIcon={false}>
@@ -133,10 +153,11 @@ const ButtonInner = ({
   const props: {
     type?: "button" | "reset" | "submit" | undefined;
     href?: string | undefined;
-    target?: string | undefined;
+    target?: "_blank" | "lightbox" | undefined;
     download?: boolean | null;
     title?: string | undefined;
     disabled?: boolean;
+    "data-fancybox"?: boolean;
   } = {};
 
   const themeObj: ButtonProps["presetTheme"] = {

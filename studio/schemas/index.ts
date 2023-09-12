@@ -20,6 +20,7 @@ import button from "../../components/buttons/button.schema";
 import buttongroup from "../../components/buttons/buttongroup.schema";
 import link from "../../components/buttons/link.schema";
 import composableCard from "../../components/cards/composablecard.schema";
+import imageCard from "../../components/cards/imagecard.schema";
 import testimonialCard from "../../components/cards/testimonialcard.schema";
 import presetDecoration from "../../components/decorations/decoration.preset";
 import {
@@ -52,9 +53,6 @@ import configSeo from "./documents/config.seo";
 import configSocial from "./documents/config.social";
 import configTheme from "./documents/config.theme";
 import configTranslations from "./documents/config.translations";
-import dialogForm from "./documents/dialog.form";
-import dialogRichText from "./documents/dialog.richtext";
-import dialogVideo from "./documents/dialog.video";
 import pageBlog from "./documents/page.blog";
 import pageBlogs from "./documents/page.blogs";
 import pageCaseStudies from "./documents/page.casestudies";
@@ -103,6 +101,7 @@ export const schemaTypes = [
     buttongroup,
     buttonTheme,
     composableCard,
+    imageCard,
     configCMS,
     configIcons,
     configIntegrations,
@@ -112,9 +111,6 @@ export const schemaTypes = [
     decoration,
     decorations,
     decorationWrapper,
-    dialogForm,
-    dialogRichText,
-    dialogVideo,
     faq,
     footer,
     highlight,

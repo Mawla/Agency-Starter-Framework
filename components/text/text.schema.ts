@@ -4,7 +4,6 @@ import { defineField } from "sanity";
 
 export const defaultTextTheme = defineField({
   name: "intro",
-  title: "Intro",
   type: "styles",
   options: {
     importType: "preset.theme.text",

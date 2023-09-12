@@ -22,9 +22,6 @@ export const SCHEMAS = {
   "config.social": "",
   "config.theme": "",
   "config.translations": "",
-  "dialog.form": "",
-  "dialog.richtext": "",
-  "dialog.video": "",
   "faq.item": "",
   "page.blog": "",
   "page.blogs": "",
@@ -136,10 +133,6 @@ export const BLOCK_SCHEMAS = pick(
 );
 
 export type BlockSchemaName = keyof typeof BLOCK_SCHEMAS;
-
-export const DIALOG_SCHEMAS = pick(SCHEMAS, "dialog.richtext", "dialog.video");
-
-export type DialogSchemaName = keyof typeof DIALOG_SCHEMAS;
 
 declare module "sanity" {
   // redeclare StringOptions; it will be merged with StringOptions in the sanity module

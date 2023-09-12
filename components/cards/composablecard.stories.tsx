@@ -10,13 +10,13 @@ import {
   ColorType,
   HORIZONTAL_ALIGN_OPTIONS,
   HorizontalAlignType,
+  RATIOS,
+  RatioType,
 } from "../../types";
 import { ComposableCard, ComposableCardProps } from "./ComposableCard";
 import {
   IMAGE_HEIGHT_OPTIONS,
-  IMAGE_RATIO_OPTIONS,
   ImageHeightType,
-  ImageRatioType,
 } from "./composablecard.options";
 import { Meta } from "@storybook/react";
 import React from "react";
@@ -246,7 +246,7 @@ export const ImageRounded = () => (
 
 export const ImageRatios = () => (
   <div className="grid grid-cols-5">
-    {(Object.keys(IMAGE_RATIO_OPTIONS) as ImageRatioType[]).map((ratio) => (
+    {(Object.keys(RATIOS) as RatioType[]).map((ratio) => (
       <div key={ratio}>
         <ComposableCard
           type="card.composable"

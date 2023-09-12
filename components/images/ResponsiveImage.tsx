@@ -1,14 +1,32 @@
+"use client";
+
 import {
   getOriginalImageDimensions,
   getResponsiveImageUrl,
 } from "../../helpers/sanity/image-url";
 import { roundToNearest } from "../../helpers/utils/number";
+import { ratioClasses } from "../../theme";
 import { ImageType, RatioType } from "../../types";
+import { FancyboxProps } from "../lightbox/Fancybox";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
 import cx from "classnames";
 import Head from "next/head";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ComponentType,
+  lazy,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+const Fancybox = lazy<ComponentType<FancyboxProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "Fancybox" */ "../../components/lightbox/Fancybox"
+    ),
+);
 
 export type ResponsiveImageProps = {
   crop?: ImageType["crop"];
@@ -16,22 +34,13 @@ export type ResponsiveImageProps = {
   ratio?: RatioType;
   roundSize?: number;
   alt?: string;
+  caption?: string;
   preserveAspectRatio?: boolean;
+  zoom?: boolean;
+  gallery?: boolean;
 } & NextImageProps;
 
 const IMAGE_QUALITY = 85;
-
-const ratioClasses: Record<RatioType, string> = {
-  auto: "aspect-auto",
-  "1/1": "aspect-[1/1]",
-  "3/2": "aspect-[3/2]",
-  "16/9": "aspect-[16/9]",
-  "19/27": "aspect-[19/27]",
-  "2/1": "aspect-[2/1]",
-  "13/8": "aspect-[13/8]",
-  "4/3": "aspect-[4/3]",
-  "21/9": "aspect-[21/9]",
-};
 
 export const ResponsiveImage = ({
   src,
@@ -40,12 +49,15 @@ export const ResponsiveImage = ({
   crop,
   hotspot,
   alt = "",
+  caption,
   className,
   priority,
   ratio,
   roundSize = 0,
   fill = false,
   preserveAspectRatio,
+  zoom = false,
+  gallery,
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -57,6 +69,9 @@ export const ResponsiveImage = ({
   const originalDimensions = getOriginalImageDimensions(src as string);
   if (!width) width = originalDimensions?.width;
   if (!height) height = originalDimensions?.height;
+  const aspectRatio = originalDimensions.aspectRatio;
+
+  const FancyboxElement = gallery ? React.Fragment : Fancybox;
 
   let placeHolderSrc: string | null = null;
 
@@ -163,6 +178,7 @@ export const ResponsiveImage = ({
       className={cx("text-0 h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
         ["absolute inset-0"]: fill,
+        ["relative"]: !fill,
       })}
       ref={wrapperRef}
     >
@@ -189,6 +205,31 @@ export const ResponsiveImage = ({
           onLoadingComplete={onImageLoad}
         />
       )}
+
+      {zoom && typeof src === "string" && (
+        <FancyboxElement className="inline">
+          <a
+            href={src}
+            data-fancybox
+            data-caption={caption}
+            className={cx("absolute h-full top-0 left-0 cursor-zoom-in", {
+              ["w-full"]: fill,
+            })}
+            style={
+              fill
+                ? undefined
+                : {
+                    maxWidth: width,
+                    maxHeight: height,
+                    aspectRatio,
+                  }
+            }
+          >
+            <span className="sr-only">zoom</span>
+          </a>
+        </FancyboxElement>
+      )}
+
       <ScriptJsonLd data={imageJsonLd} />
     </div>
   );

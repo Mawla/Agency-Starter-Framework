@@ -9,9 +9,6 @@ const INTERNAL_FIELD = buttonSchema.fields.find(
 const HREF_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "href",
 ) as any;
-const DIALOG_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "dialog",
-) as any;
 const FILE_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "file",
 ) as any;
@@ -21,8 +18,8 @@ const DOWNLOAD_FIELD = buttonSchema.fields.find(
 const PARAMS_FIELD = buttonSchema.fields.find(
   ({ name }) => name === "params",
 ) as any;
-const NEW_WINDOW_FIELD = buttonSchema.fields.find(
-  ({ name }) => name === "newWindow",
+const TARGET_FIELD = buttonSchema.fields.find(
+  ({ name }) => name === "target",
 ) as any;
 
 export default defineType({
@@ -40,9 +37,8 @@ export default defineType({
     INTERNAL_FIELD,
     HREF_FIELD,
     PARAMS_FIELD,
-    DIALOG_FIELD,
     FILE_FIELD,
     DOWNLOAD_FIELD,
-    NEW_WINDOW_FIELD,
+    TARGET_FIELD,
   ],
 });

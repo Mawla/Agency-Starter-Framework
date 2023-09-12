@@ -18,6 +18,7 @@ import {
   paddingTopClasses,
   paddingBottomClasses,
   textClasses,
+  ratioClasses,
 } from "../../theme";
 import {
   BorderRadiusType,
@@ -27,11 +28,12 @@ import {
   HtmlTextNodeType,
   ImageType,
   PaddingType,
+  RatioType,
 } from "../../types";
 import { LinkProps } from "../buttons/Link";
 import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
-import { ImageHeightType, ImageRatioType } from "./composablecard.options";
+import { ImageHeightType } from "./composablecard.options";
 import cx from "classnames";
 import React from "react";
 import { ComponentType, lazy } from "react";
@@ -103,7 +105,7 @@ export type ComposableCardProps = {
       width?: BorderWidthType;
     };
     image?: {
-      ratio?: ImageRatioType;
+      ratio?: RatioType;
       height?: ImageHeightType;
       rounded?: BorderRadiusType;
     };
@@ -119,13 +121,6 @@ const imageHeightClasses: Record<ImageHeightType, string> = {
   md: "h-24",
   lg: "h-[210px]",
   xl: "h-[230px]",
-};
-
-const ratioClasses: Record<ImageRatioType, string> = {
-  auto: "",
-  "16/9": "aspect-[16/9]",
-  "1/1": "aspect-[1/1]",
-  "3/2": "aspect-[3/2]",
 };
 
 export const ComposableCard = ({
@@ -147,7 +142,7 @@ export const ComposableCard = ({
         theme?.card?.color && textClasses[theme?.card?.color],
         theme?.card?.align && textAlignClasses[theme?.card?.align],
         theme?.border?.color && borderClasses[theme?.border?.color],
-        theme?.border?.width && borderWidthClasses[theme?.border?.width],
+        theme?.border?.color && borderWidthClasses[theme?.border?.width || 1],
         theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
         theme?.card?.background && backgroundClasses[theme?.card?.background],
         theme?.card?.paddingTop && paddingTopClasses[theme?.card?.paddingTop],
@@ -157,10 +152,10 @@ export const ComposableCard = ({
       )}
     >
       {cardClickable && buttons?.[0]?.href && (
-        <Link href={buttons?.[0]?.href}>
-          <a className="absolute inset-0 z-20 opacity-0]">
+        <Link href={buttons?.[0]?.href} target={buttons?.[0]?.target}>
+          <span className="absolute inset-0 z-20 opacity-0">
             <span className="sr-only">{buttons?.[0].label}</span>
-          </a>
+          </span>
         </Link>
       )}
 

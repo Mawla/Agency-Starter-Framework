@@ -10,6 +10,7 @@ import {
   HorizontalAlignType,
   PADDING_OPTIONS,
   PaddingType,
+  RatioType,
   TextTransformType,
 } from "./types";
 
@@ -127,6 +128,21 @@ export const borderWidthClasses: Record<BorderWidthType, string> = {
   2: "border-2",
   4: "border-4",
   8: "border-8",
+};
+
+export const ratioClasses: Record<RatioType, string> = {
+  auto: "aspect-auto",
+  "1/1": "aspect-square",
+  "16/9": "aspect-[16/9]",
+  "9/16": "aspect-[9/16]",
+  "3/2": "aspect-[3/2]",
+  "2/3": "aspect-[2/3]",
+  "2/1": "aspect-[2/1]",
+  "1/2": "aspect-[1/2]",
+  "4/3": "aspect-[4/3]",
+  "3/4": "aspect-[3/4]",
+  "21/9": "aspect-[21/9]",
+  "9/21": "aspect-[9/21]",
 };
 
 export const paddingXClasses: Record<PaddingType, string> = Object.entries(

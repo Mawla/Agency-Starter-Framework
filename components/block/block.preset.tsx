@@ -14,6 +14,7 @@ const schema = defineType({
   name: "preset.blocks",
   title: "Blocks preset",
   type: "document",
+  liveEdit: true,
   icon: () => <Blueprint weight="thin" size={20} />,
   preview: {
     select: {

@@ -43,7 +43,6 @@ export type PageType = {
   hideBreadcrumb?: boolean;
   seo: SeoType;
   blocks: {}[];
-  dialogs: {}[];
   locked?: boolean;
   homepage: FlatBreadcrumbItemType;
   breadcrumb: FlatBreadcrumbType;
@@ -125,25 +124,6 @@ export const getPageQuery = (language: LanguageType) => groq`
       theme,
       "slug": coalesce(slug.current, title, _key),
       ${decorationsQuery}
-    },
-
-    // dialogs
-    dialogs {
-      _type == "dialog.richtext" => {
-        content[] ${richTextQuery}
-      },
-
-      _type == "dialog.video" => {
-        ${videoQuery}
-      },
-
-      _type == "dialog.form" => {
-        script ->
-      },
-
-      _key,
-      _type,
-      "slug": slug.current,
-    },
+    }
   }
 }.page`;
