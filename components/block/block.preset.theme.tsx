@@ -8,7 +8,7 @@ import { defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "preset.theme.block",
-  title: "Block theme preset",
+  title: "Block styles",
   type: "document",
   icon: () => <Tablet weight="thin" size={20} />,
   liveEdit: true,
