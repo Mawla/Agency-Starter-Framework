@@ -108,9 +108,9 @@ export async function getConfig(): Promise<ConfigType> {
     };
   }
 
-  const colors = formatColors(theme.colors || {});
-  const fontFamily = formatFontFamily(theme.fontFamily || {});
-  const fontWeight = formatFontWeight(theme.fontWeight || {});
+  const colors = formatColors(theme.colors || []);
+  const fontFamily = formatFontFamily(theme.fontFamily || []);
+  const fontWeight = formatFontWeight(theme.fontWeight || []);
   const fontSize = formatFontSize(theme.fontSize || []);
   const safelist =
     formatSafelist({ colors, fontFamily, fontSize, fontWeight }) || [];
