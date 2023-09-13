@@ -14,7 +14,7 @@ export const SCHEMA_NAME: SchemaName = "page.tags";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Tags",
+  title: "Tags overview",
   type: "document",
   orderings: [ORDER_PUBLISHED_DESC],
   options: {
