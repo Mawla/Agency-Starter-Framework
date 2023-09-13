@@ -77,6 +77,7 @@ import pagePressReleases from "./documents/page.pressreleases";
 import pageResources from "./documents/page.resources";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
+import pageTags from "./documents/page.tags";
 import pageTool from "./documents/page.tool";
 import pageTools from "./documents/page.tools";
 import pageVideo from "./documents/page.video";
@@ -149,6 +150,7 @@ export const schemaTypes = [
     pageResources,
     pageSitemap,
     pageTag,
+    pageTags,
     pageTool,
     pageTools,
     pageVideo,

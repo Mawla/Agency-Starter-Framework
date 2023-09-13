@@ -305,12 +305,25 @@ export const structure = (
                       ),
                   ]),
                 ),
-                documentList(S, {
-                  type: "page.tag",
-                  title: "Tags",
-                  language: language.id,
-                }),
 
+                group(S, {
+                  title: "Tags",
+                  icon: getIconForSchema(S, "page.tag"),
+                }).child(
+                  list(S, { title: "Tags" }).items([
+                    singleton(S, {
+                      id: "page_tags",
+                      type: "page.tags",
+                      language: language.id,
+                      icon: () => <MenuSquare weight="thin" size={20} />,
+                    }),
+                    documentList(S, {
+                      type: "page.tag",
+                      title: "Tags",
+                      language: language.id,
+                    }),
+                  ]),
+                ),
                 S.divider(),
                 singleton(S, {
                   id: "navigation",
