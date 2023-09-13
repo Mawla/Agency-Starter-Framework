@@ -231,6 +231,7 @@ export const TAGS_FIELD = defineField({
     {
       type: "reference",
       to: [{ type: "page.tag" }],
+      weak: true,
       options: {
         filter: referenceFilterCurrentLanguage,
       },

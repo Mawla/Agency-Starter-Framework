@@ -56,8 +56,8 @@ export const PreviewIframeComponent = ({
       <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="caution">
         <Text align="center" size={1}>
           Create a preview secret in the{" "}
-          <a href="/desk/config;secret.config_cms">secret config</a> document to
-          enable previews.
+          <a href="/cms/desk/config;secret.config_cms">secret config</a>{" "}
+          document to enable previews.
         </Text>
       </Card>
     );

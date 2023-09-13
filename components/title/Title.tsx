@@ -36,7 +36,7 @@ export const Title = ({
   return (
     <Element
       className={cx(
-        "hyphens-auto",
+        "hyphens-auto text-balance",
         "break-words inline-block",
         "flex flex-col whitespace-pre-line",
         color ? textClasses[color] : "text-current",

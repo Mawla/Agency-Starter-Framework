@@ -1,5 +1,5 @@
 import { PageContext } from "../../context/PageContext";
-import { getLanguagePath } from "../../languages";
+import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
 import { useContext } from "react";
 
 export const PreviewButton = ({ pagePath }: { pagePath: string }) => {
@@ -11,9 +11,11 @@ export const PreviewButton = ({ pagePath }: { pagePath: string }) => {
 
       <a
         className="p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222] border-l border-l-black/80"
-        href={`/api/preview/exit-preview?redirect=${getLanguagePath(
+        href={`/api/preview/exit-preview?redirect=${getURLForPath(
+          null as any,
+          pagePath,
           language,
-        )}${pagePath}`}
+        )}`}
       >
         <span className="w-5 h-5 block">
           <svg

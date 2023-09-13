@@ -5,6 +5,7 @@ import {
   pageBase,
   PUBLISHED_AT_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
+  getParentDocumentInitialValue,
 } from "./page-fields";
 import { Tag } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -19,7 +20,20 @@ export default defineType({
   orderings: [ORDER_PUBLISHED_DESC],
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Tag weight="thin" size={20} />,
-  initialValue: {},
+  initialValue: async (props: any, context: any) => {
+    return await getParentDocumentInitialValue(context, "page_tags");
+  },
   groups: [...pageBase.groups],
-  fields: [PARENT_FIELD, ...pageBase.fields, PUBLISHED_AT_FIELD],
+  fields: [
+    {
+      ...PARENT_FIELD,
+      to: [{ type: "page.tags" }],
+      options: {
+        disableNew: true,
+        ...PARENT_FIELD.options,
+      },
+    },
+    ...pageBase.fields,
+    PUBLISHED_AT_FIELD,
+  ],
 });
