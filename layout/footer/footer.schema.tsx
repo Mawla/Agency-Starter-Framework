@@ -96,6 +96,7 @@ export default defineType({
                 {
                   name: "link",
                   title: "Link",
+                  default: true,
                 },
               ],
               options: {
