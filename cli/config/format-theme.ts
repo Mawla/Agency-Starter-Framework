@@ -13,8 +13,6 @@ import { ConfigType, GroqThemeType } from "./build";
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 export function formatColors(colors: { name: string; value: string }[]) {
-  if (!colors) return [];
-
   const formattedColors =
     colors?.filter(Boolean).reduce((acc, color) => {
       const { name, value } = color;
