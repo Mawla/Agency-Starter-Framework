@@ -35,12 +35,6 @@ export const textSizeClasses: Record<TextSizeType, string> = {
   "2xl": "prose-2xl xl:prose-3xl",
 };
 
-export const textFontClasses: Record<TextFontType, string> = {
-  sans: "font-sans",
-  mono: "font-mono",
-  heading: "font-sans",
-};
-
 export type TextThemeType = {
   size?: TextSizeType;
   color?: ColorType;

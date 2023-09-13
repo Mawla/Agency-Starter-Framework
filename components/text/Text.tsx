@@ -1,10 +1,14 @@
-import { proseClasses, textClasses, weightClasses } from "../../theme";
+import {
+  fontClasses,
+  proseClasses,
+  textClasses,
+  weightClasses,
+} from "../../theme";
 import { TextElement } from "../../types";
 import { ColorType } from "../../types";
 import {
   textAlignClasses,
   TextAlignType,
-  textFontClasses,
   TextFontType,
   textSizeClasses,
   TextSizeType,
@@ -48,7 +52,7 @@ export const Text = ({
           "[&>*:first-child_img]:mt-0",
           align && textAlignClasses[align],
           size && textSizeClasses[size],
-          font && textFontClasses[font],
+          font && fontClasses[font],
           weight && weightClasses[weight],
           color
             ? textClasses[color]

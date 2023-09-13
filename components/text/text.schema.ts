@@ -1,5 +1,9 @@
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { TEXT_SIZE_OPTIONS, TEXT_WEIGHT_OPTIONS } from "./text.options";
+import {
+  TEXT_FONT_OPTIONS,
+  TEXT_SIZE_OPTIONS,
+  TEXT_WEIGHT_OPTIONS,
+} from "./text.options";
 import { defineField } from "sanity";
 
 export const defaultTextTheme = defineField({
@@ -20,6 +24,13 @@ export const defaultTextTheme = defineField({
         type: "select",
         options: {
           list: optionsToList(TEXT_WEIGHT_OPTIONS),
+        },
+      },
+      {
+        name: "font",
+        type: "select",
+        options: {
+          list: optionsToList(TEXT_FONT_OPTIONS),
         },
       },
       {
