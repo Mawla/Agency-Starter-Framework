@@ -54,6 +54,7 @@ export default function PreviewPage({
   let documentType = Array.isArray(router.query.type)
     ? router.query.type[0]
     : router.query.type || "page";
+
   let previewType =
     documentType.startsWith("page.") || documentType === "preset.blocks"
       ? "page"
@@ -67,6 +68,7 @@ export default function PreviewPage({
 
   if (!id) return null;
   id = id.startsWith("drafts.") ? id : `drafts.${id}`;
+  if (previewType.startsWith("preset.")) id = id.replace("drafts.", "");
 
   const getQuery = () => {
     if (documentType === "navigation") {
