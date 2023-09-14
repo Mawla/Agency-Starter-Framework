@@ -211,8 +211,6 @@ const Preset: ComponentType<any> = (props) => {
       if (!checked.includes("theme")) delete presetObj.theme;
       if (!checked.includes("decorations")) delete presetObj.decorations;
 
-      // return;
-
       await client
         .patch(draftId)
         .insert("replace", `${containerName}[_key=="${parent?._key}"]`, [
