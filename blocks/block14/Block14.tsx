@@ -90,29 +90,30 @@ export const Block14 = ({
       }}
       decorations={decorations}
     >
-      <main className="py-8 lg:py-16">
+      <main>
         <div className="grid grid-cols-12 mx-auto gap-0 lg:gap-12">
           <aside
             className="hidden relative ml-auto lg:block col-span-1"
             aria-labelledby="sidebar-label"
           >
-            <div className="sticky top-6 bg-black/[2%] p-2 rounded-lg border border-black/[8%]">
+            <div className="sticky top-6 bg-black/[2%] p-2 rounded-lg border border-border-light">
               <SocialShare title={title} direction="vertical" />
             </div>
           </aside>
 
           <article className="col-span-12 lg:col-span-11 xl:col-span-8">
             <header className="mb-4 lg:mb-6 not-format">
-              <div className="flex items-center mb-4 md:mb-6">
-                <div className="flex gap-1 flex-wrap">
-                  {Boolean(tags?.length) &&
-                    tags?.map((tag) => (
+              {Boolean(tags?.length) && (
+                <div className="flex items-center mb-4 md:mb-6">
+                  <div className="flex gap-1 flex-wrap">
+                    {tags?.map((tag) => (
                       <Tag key={tag.title} label={tag.title} href={tag.href} />
                     ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              <div className="py-4 border-t border-b border-black/10 text-sm">
+              <div className="py-4 border-t border-b border-border-light text-sm">
                 <address className="flex not-italic">
                   {authors && Boolean(authors?.length) && (
                     <div className="mr-3 inline-flex">
@@ -121,7 +122,7 @@ export const Block14 = ({
                           image && (
                             <span
                               className={cx(
-                                "w-10 aspect-square relative rounded-full overflow-hidden border -mr-1",
+                                "w-10 aspect-square relative rounded-full overflow-hidden border border-border-light -mr-1",
                               )}
                               key={image.src}
                             >
@@ -164,7 +165,7 @@ export const Block14 = ({
           <aside className="hidden xl:block col-span-3 relative">
             <div className="sticky top-6">
               {relatedArticles && Boolean(relatedArticles?.length) && (
-                <div className="p-5 mb-6 font-medium rounded-lg border border-black/[5%] divide-y divide-gray-black/[5%] shadow">
+                <div className="p-5 mb-6 font-medium rounded-lg border border-border-light divide-y divide-border-light shadow">
                   <h4 className="mb-4 text-sm font-bold uppercase">
                     {useTranslation("related_resources", "Related resources")}
                   </h4>
