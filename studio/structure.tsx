@@ -13,10 +13,12 @@ import {
   BlueprintPaper,
   Diagram,
   Eye,
+  FolderQuestion,
   Gear,
   Layers,
   MagnifyingGlass,
   MenuSquare,
+  MessagingLines,
   PapertrayLines,
   QuestionFile,
 } from "@vectopus/atlas-icons-react";
@@ -359,8 +361,13 @@ export const structure = (
           documentList(S, {
             type: "faq.item",
             title: "Frequently Asked Questions",
+            icon: () => <FolderQuestion weight="thin" size={20} />,
           }),
-          documentList(S, { type: "testimonials.item", title: "Testimonials" }),
+          documentList(S, {
+            type: "testimonials.item",
+            title: "Testimonials",
+            icon: () => <MessagingLines weight="thin" size={20} />,
+          }),
         ]),
       ),
       S.divider(),
