@@ -130,7 +130,7 @@ export const TestimonialCard = ({
           )}
         >
           {image && (
-            <div className="w-9 h-9 rounded-full overflow-hidden">
+            <div className="w-9 h-9 rounded-full overflow-hidden shrink-0">
               <ResponsiveImage {...image} />
             </div>
           )}
