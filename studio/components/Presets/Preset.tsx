@@ -4,6 +4,7 @@ import { SyncIcon, SearchIcon, AddIcon } from "@sanity/icons";
 import {
   Autocomplete,
   Card,
+  Checkbox,
   Text,
   Flex,
   Stack,
@@ -33,6 +34,7 @@ type OptionType = {
     _type: BlockSchemaName;
     _id: string;
     language: LanguageType;
+    [key: string]: any;
   };
   usedBy?: number;
   icon?: React.ReactElement;
@@ -64,6 +66,16 @@ const Preset: ComponentType<any> = (props) => {
   const [originalPresetTitle, setOriginalPresetTitle] = useState<string | null>(
     null,
   );
+
+  const [checked, setChecked] = useState<string[]>([]);
+
+  const toggleCheckbox = (key: string) => {
+    if (checked.includes(key)) {
+      setChecked(checked.filter((item) => item !== key));
+    } else {
+      setChecked([...checked, key]);
+    }
+  };
 
   const exportPresetId = nanoid();
   const exportPresetLink = useRef<HTMLAnchorElement>(null);
@@ -185,11 +197,28 @@ const Preset: ComponentType<any> = (props) => {
         _id: draftId,
       });
 
+      let presetObj: any = { ...preset };
+      if (!checked.includes("content")) {
+        // remove all fields except theme, decorations
+        presetObj = Object.keys(presetObj).reduce((acc, key) => {
+          if (["theme", "decorations"].includes(key)) {
+            acc[key] = presetObj[key];
+          }
+          return acc;
+        }, {} as { [key: string]: any });
+      }
+
+      if (!checked.includes("theme")) delete presetObj.theme;
+      if (!checked.includes("decorations")) delete presetObj.decorations;
+
+      // return;
+
       await client
         .patch(draftId)
         .insert("replace", `${containerName}[_key=="${parent?._key}"]`, [
           {
-            ...preset,
+            ...parent,
+            ...presetObj,
             _key: parent?._key,
             preset: { _ref: selectedPresetId, _weak: true },
           },
@@ -222,7 +251,14 @@ const Preset: ComponentType<any> = (props) => {
       title: `Successfully imported preset`,
     });
     setSelectedPresetId(null);
-  }, [selectedPresetId, document._id, parent?._key, containerName, list]);
+  }, [
+    selectedPresetId,
+    document._id,
+    parent?._key,
+    containerName,
+    list,
+    checked,
+  ]);
 
   /**
    * Export preset
@@ -359,15 +395,54 @@ const Preset: ComponentType<any> = (props) => {
                     Are you sure you want to proceed? This will overwrite
                     existing content.
                   </Text>
+                  <Card padding={4} shadow={1} tone="default">
+                    <Stack space={2}>
+                      <Flex align="center">
+                        <Checkbox
+                          id="content"
+                          checked={checked.includes("content")}
+                          onChange={() => toggleCheckbox("content")}
+                        />
+                        <Box flex={1} paddingLeft={3}>
+                          <Text>
+                            <label htmlFor="content">Content</label>
+                          </Text>
+                        </Box>
+                      </Flex>
+                      <Flex align="center">
+                        <Checkbox
+                          id="theme"
+                          checked={checked.includes("theme")}
+                          onChange={() => toggleCheckbox("theme")}
+                        />
+                        <Box flex={1} paddingLeft={3}>
+                          <Text>
+                            <label htmlFor="theme">Theme</label>
+                          </Text>
+                        </Box>
+                      </Flex>
+                      <Flex align="center">
+                        <Checkbox
+                          id="decorations"
+                          checked={checked.includes("decorations")}
+                          onChange={() => toggleCheckbox("decorations")}
+                        />
+                        <Box flex={1} paddingLeft={3}>
+                          <Text>
+                            <label htmlFor="decorations">Decorations</label>
+                          </Text>
+                        </Box>
+                      </Flex>
+                    </Stack>
+                  </Card>
                 </Stack>
               </Box>
 
               <Stack>
                 <Flex gap={2}>
-                  <Button text="Import" mode="ghost" onClick={importPreset} />
+                  <Button text="Import" onClick={importPreset} />
                   <Button
                     text="Cancel"
-                    mode="ghost"
                     onClick={() => setSelectedPresetId(null)}
                   />
                 </Flex>
