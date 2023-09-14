@@ -124,7 +124,7 @@ export default function PreviewPage({
   return (
     <div
       className={cx(
-        "min-h-full",
+        "pb-20",
         data?.preview?.styles?.background &&
           backgroundClasses[data?.preview?.styles?.background as ColorType],
         data?.preview?.styles?.background && "p-4",

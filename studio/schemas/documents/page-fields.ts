@@ -33,6 +33,7 @@ export const TITLE_FIELD = defineField({
   name: "title",
   title: "Title",
   type: "string",
+  description: "Used for SEO and in the browser tab.",
   validation: (Rule: StringRule) => Rule.required(),
   group: ["content"],
 });
