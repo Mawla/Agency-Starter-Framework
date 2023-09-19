@@ -5,8 +5,13 @@ const Warning: ComponentType<any> = (props) => {
   const { schemaType } = props;
 
   return (
-    <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="caution">
-      <Text align="center" size={1}>
+    <Card
+      padding={[3, 3, 4]}
+      radius={2}
+      shadow={1}
+      tone={schemaType.options?.tone || "caution"}
+    >
+      <Text align="left" size={1}>
         {schemaType.description}
       </Text>
     </Card>
