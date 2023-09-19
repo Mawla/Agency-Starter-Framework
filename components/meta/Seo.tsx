@@ -97,10 +97,10 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
             href={config?.seo?.favicon?.favicon_16x16_png}
           />
         )}
-        {config?.seo?.googleSiteVerification && (
+        {config?.integrations?.googleSiteVerification && (
           <meta
             name="google-site-verification"
-            content={config?.seo?.googleSiteVerification}
+            content={config?.integrations?.googleSiteVerification}
           />
         )}
       </NextHead>

@@ -157,16 +157,13 @@ export default defineType({
       options: { localize: true, ...SEO_DESCRIPTION_FIELD.options } as any,
     },
     OPEN_GRAPH_IMAGE_CONFIG_FIELD,
-    defineField({
-      name: "googleSiteVerification",
-      title: "Google site verification",
-      type: "string",
-      description: "Google site verification code.",
-    }),
+
     defineField({
       name: "favicon",
       title: "Favicon",
       type: "object",
+      description:
+        "Use https://realfavicongenerator.net/ to generate the files.",
       validation: (Rule: any) =>
         Rule.required().warning(
           "It's good practice adding a favicon for SEO and social sharing. Use https://realfavicongenerator.net/ to generate the files.",

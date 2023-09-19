@@ -9,7 +9,6 @@ export type SeoType = {
   description?: string;
   image?: ImageType;
   excludeFromSitemap?: boolean;
-  googleSiteVerification?: string;
   favicon?: {
     favicon_ico?: string;
     favicon_16x16_png?: string;
@@ -36,6 +35,7 @@ export type ConfigType = {
   };
   integrations?: {
     gtmid?: string;
+    googleSiteVerification?: string;
     globalScripts?: ScriptsType[];
   };
   translations?: Record<TranslationFieldType, Record<LanguageType, string>>;
@@ -51,7 +51,6 @@ export const getConfigQuery = (language: LanguageType) => groq`
     "title": title.${language},
     "description": description.${language},
     "image": ${getImageQuery(`image.${language}`)},
-    googleSiteVerification,
     favicon {
       "favicon_ico": favicon_ico.asset -> url,
       "favicon_16x16_png": favicon_16x16_png.asset -> url,
@@ -63,6 +62,7 @@ export const getConfigQuery = (language: LanguageType) => groq`
   "social": *[_id == 'config_social'][0],
   "integrations": *[_id == 'config_integrations'][0] {
     gtmid,
+    googleSiteVerification,
     "globalScripts": globalScripts[].script -> {
       title,
       items[]
