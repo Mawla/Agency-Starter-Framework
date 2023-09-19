@@ -148,6 +148,28 @@ export default defineType({
       description:
         "Updates to configuration will trigger a new deployment on the build server and will take a few minutes to be in effect.",
     }),
+    defineField(
+      {
+        name: "warningIndexing",
+        title: "Warning",
+        type: "string",
+        components: { field: Warning },
+        options: {
+          tone: "critical",
+        },
+        hidden: ({ parent, value }) => !Boolean(parent.preventIndexing),
+        description:
+          "The site is not being indexed by search engines. Turn the below setting off to enable indexing.",
+      },
+      { strict: false },
+    ),
+    defineField({
+      name: "preventIndexing",
+      title: "Prevent Indexing",
+      type: "boolean",
+      description:
+        "Prevent search engines from indexing the site. This is useful when you are developing the site and don't want it to be indexed by search engines yet. Be careful not to forget to turn this off when you are ready to go live.",
+    }),
     {
       ...SEO_TITLE_FIELD,
       options: { localize: true, ...SEO_TITLE_FIELD.options } as any,
@@ -157,16 +179,13 @@ export default defineType({
       options: { localize: true, ...SEO_DESCRIPTION_FIELD.options } as any,
     },
     OPEN_GRAPH_IMAGE_CONFIG_FIELD,
-    defineField({
-      name: "googleSiteVerification",
-      title: "Google site verification",
-      type: "string",
-      description: "Google site verification code.",
-    }),
+
     defineField({
       name: "favicon",
       title: "Favicon",
       type: "object",
+      description:
+        "Use https://realfavicongenerator.net/ to generate the files.",
       validation: (Rule: any) =>
         Rule.required().warning(
           "It's good practice adding a favicon for SEO and social sharing. Use https://realfavicongenerator.net/ to generate the files.",

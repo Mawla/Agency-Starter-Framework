@@ -37,6 +37,12 @@ export default defineType({
       description: "Formatted as `GTM-XXXXXX`.",
     }),
     defineField({
+      name: "googleSiteVerification",
+      title: "Google site verification",
+      type: "string",
+      description: "Google site verification code.",
+    }),
+    defineField({
       name: "globalScripts",
       title: "Global scripts",
       type: "array",
