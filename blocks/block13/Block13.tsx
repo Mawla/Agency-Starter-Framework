@@ -81,6 +81,8 @@ export const Block13 = ({
   intro,
   items,
 }: Block13Props) => {
+  if (!items?.length) return null;
+
   return (
     <Wrapper
       theme={{
