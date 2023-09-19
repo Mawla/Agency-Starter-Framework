@@ -39,9 +39,9 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
       <RadixAccordion.Root
         type="multiple"
         className={cx(
-          "divide-y",
           theme?.background && backgroundClasses[theme?.background],
-          theme?.divider ? divideClasses[theme?.divider] : "divide-current",
+          theme?.divider && divideClasses[theme?.divider],
+          theme?.divider && "divide-y",
         )}
       >
         {items?.map(({ _key, title = "", content }) => (
