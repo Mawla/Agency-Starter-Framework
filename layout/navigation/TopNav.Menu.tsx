@@ -108,14 +108,12 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                   >
                     {item.children?.map((item) => (
                       <RadixNavigationMenu.Item key={item?._key}>
-                        <span className="block p-3">
-                          <Button
-                            {...item}
-                            className={cx("max-w-full whitespace-pre-wrap", {
-                              ["!underline current"]: item.current,
-                            })}
-                          />
-                        </span>
+                        <Button
+                          {...item}
+                          className={cx("max-w-full whitespace-pre-wrap", {
+                            ["!underline current"]: item.current,
+                          })}
+                        />
                       </RadixNavigationMenu.Item>
                     ))}
                   </RadixNavigationMenu.List>
