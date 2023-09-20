@@ -21,6 +21,7 @@ import {
   MessagingLines,
   PapertrayLines,
   QuestionFile,
+  TriangleExclamation,
 } from "@vectopus/atlas-icons-react";
 import {
   DefaultDocumentNodeContext,
@@ -348,6 +349,18 @@ export const structure = (
                   type: "page.sitemap",
                   language: language.id,
                 }),
+                S.divider(),
+
+                S.listItem()
+                  .title("Unpublished pages")
+                  .icon(() => <TriangleExclamation weight="thin" size={20} />)
+                  .child(
+                    S.documentList()
+                      .title("Unpublished pages")
+                      .filter(
+                        `_type match "page.*" && _id in path("drafts.*") && language == '${language.id}'`,
+                      ),
+                  ),
               ]),
             ),
       ),
