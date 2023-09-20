@@ -876,7 +876,7 @@ export const demoPortableTextArticle = [
             label: {
               size: "base",
               weight: "bold",
-              font: "sans",
+              font: "text",
               uppercase: true,
               color: "gray-100",
             },
@@ -941,7 +941,7 @@ export const demoPortableTextArticle = [
             },
             _type: "buttonTheme",
             label: {
-              font: "sans",
+              font: "text",
               uppercase: true,
               color: "gray-100",
               size: "base",
@@ -1017,7 +1017,7 @@ export const demoPortableTextArticle = [
             label: {
               size: "base",
               weight: "bold",
-              font: "sans",
+              font: "text",
               uppercase: true,
               color: "gray-100",
             },
@@ -1080,7 +1080,7 @@ export const demoPortableTextArticle = [
               color: "gray-100",
               size: "base",
               weight: "bold",
-              font: "sans",
+              font: "text",
               uppercase: true,
             },
           },

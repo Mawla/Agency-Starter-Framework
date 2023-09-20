@@ -37,7 +37,7 @@ export const Text = ({
   align = "left",
   size = "lg",
   className,
-  font = "sans",
+  font = "text",
   weight,
 }: TextProps) => {
   const Element = as;

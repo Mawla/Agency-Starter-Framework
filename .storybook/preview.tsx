@@ -47,7 +47,7 @@ export const decorators = [
               languageAlternates: [],
             }}
           >
-            <div className={`font-sans`}>
+            <div className={`font-text`}>
               <Story />
             </div>
           </PageContext.Provider>

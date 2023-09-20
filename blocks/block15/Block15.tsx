@@ -59,18 +59,18 @@ export const Block15 = ({
       }}
       decorations={decorations}
     >
-      <div
-        className={cx(
-          "flex flex-col max-w-4xl",
-          textAlignClasses[theme?.block?.align || "center"],
-        )}
-      >
-        {title && (
+      {title && (
+        <div
+          className={cx(
+            "flex flex-col max-w-4xl",
+            textAlignClasses[theme?.block?.align || "center"],
+          )}
+        >
           <Title {...theme?.title} size={theme?.title?.size || "4xl"}>
             {title}
           </Title>
-        )}
-      </div>
+        </div>
+      )}
 
       {(intro || body) && (
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 xl:gap-24 mt-6 md:mt-10 lg:mt-16">

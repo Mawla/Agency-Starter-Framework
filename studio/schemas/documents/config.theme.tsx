@@ -51,7 +51,7 @@ export default defineType({
       title: "Font families",
       type: "array",
       description:
-        "Fonts used in the theme. Be sure to include at least 'sans'",
+        "Fonts used in the theme. Be sure to include at least 'text' and 'heading'",
       components: {
         input: ThemeFontFamily,
       },
