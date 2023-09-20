@@ -149,7 +149,7 @@ export const Theme = () => (
           },
           label: {
             color: "white",
-            font: "sans",
+            font: "text",
             size: "xl",
             transform: "uppercase",
             weight: "thin",

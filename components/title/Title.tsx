@@ -27,7 +27,7 @@ export const Title = ({
   weight = "bold",
   className,
   color,
-  font = "sans",
+  font = "heading",
 }: TitleProps) => {
   if (!as) as = "h2";
   const Element = as;
@@ -42,7 +42,7 @@ export const Title = ({
         color ? textClasses[color] : "text-current",
         titleSizeClasses[size || "4xl"],
         weightClasses[weight || "bold"],
-        fontClasses[font || "sans"],
+        fontClasses[font || "heading"],
         className,
       )}
     >
