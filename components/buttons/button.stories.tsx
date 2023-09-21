@@ -106,13 +106,13 @@ export const Theme = () => (
         },
         tablet: {
           border: {
-            color: "gray-200",
+            color: "white",
             width: 0,
           },
         },
         desktop: {
           border: {
-            color: "gray-500",
+            color: "black",
             width: 1,
           },
         },
