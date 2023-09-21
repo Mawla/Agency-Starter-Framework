@@ -109,7 +109,7 @@ export const Block4 = ({
       <div className="flex flex-col gap-6">
         <div
           className={cx(
-            "flex flex-col gap-6 max-w-4xl relative z-10",
+            "flex flex-col gap-6 max-w-4xl relative z-10 w-full",
             textAlignClasses[theme?.block?.align || "center"],
           )}
         >

@@ -46,6 +46,7 @@ export const Text = ({
     <div className={className}>
       <Element
         className={cx(
+          "w-full",
           "break-words prose font-regular leading-relaxed",
           "prose-strong:font-bold prose-strong:text-current prose-headings:text-current",
           "prose-a:text-current prose-a:underline prose-a:underline-offset-4",
