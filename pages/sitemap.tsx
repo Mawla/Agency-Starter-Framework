@@ -48,8 +48,9 @@ export default function Sitemap({
       <ul className={cx("mx-auto py-20", widthClasses.inner)}>
         {sitemap
           .filter(({ title, path }) => title && path)
-          .map(({ title, path, _id }: SitemapItemType) => {
+          .map(({ title, path, _id, excludeFromSitemap }: SitemapItemType) => {
             const depth = path ? path.split("/").length - 2 : 0;
+            if (excludeFromSitemap) return null;
 
             return (
               <li
