@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="font-text">
+      <div className="font-text overflow-x-hidden">
         <Component {...pageProps} />
       </div>
     </QueryClientProvider>
