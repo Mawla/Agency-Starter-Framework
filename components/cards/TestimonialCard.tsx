@@ -11,6 +11,7 @@ import {
   paddingTopClasses,
   paddingBottomClasses,
   textClasses,
+  alignItemsClasses,
 } from "../../theme";
 import {
   BorderRadiusType,
@@ -107,7 +108,7 @@ export const TestimonialCard = ({
       )}
     >
       <Decorations decorations={decorations} />
-      <div className="flex flex-col gap-6 h-full relative z-10">
+      <div className="inline-flex flex-col gap-6 h-full relative z-10 max-w-5xl">
         {title && (
           <Title {...theme?.title} as="span">
             {title}
