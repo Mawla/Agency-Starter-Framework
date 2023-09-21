@@ -213,25 +213,36 @@ const ButtonInner = ({
     const arr: string[] = [];
 
     const newPresetTheme = { ...(presetTheme as any) };
-    const newtheme = { ...(theme as any) };
+    const newTheme = { ...(theme as any) };
 
-    if (newPresetTheme?.mobile?.[group]?.[prop])
+    const newPresetThemeMobile = newPresetTheme?.mobile?.[group]?.[prop];
+    if (typeof newPresetThemeMobile !== "undefined")
       arr.push(classes[newPresetTheme.mobile[group][prop]]);
 
-    if (newPresetTheme?.tablet?.[group]?.[prop])
+    const newPresetThemeTablet = newPresetTheme?.tablet?.[group]?.[prop];
+    if (typeof newPresetThemeTablet !== "undefined")
       arr.push(`md:${classes[newPresetTheme.tablet[group][prop]]}`);
 
-    if (newPresetTheme?.desktop?.[group]?.[prop])
+    const newPresetThemeDesktop = newPresetTheme?.desktop?.[group]?.[prop];
+    if (typeof newPresetThemeDesktop !== "undefined")
       arr.push(`lg:${classes[newPresetTheme.desktop[group][prop]]}`);
 
-    if (newtheme?.mobile?.[group]?.[prop])
-      arr.push(classes[newtheme.mobile[group][prop]]);
+    const newThemeMobile = newTheme?.mobile?.[group]?.[prop];
+    if (typeof newThemeMobile !== "undefined")
+      arr.push(classes[newTheme.mobile[group][prop]]);
 
-    if (newtheme?.tablet?.[group]?.[prop])
-      arr.push(`md:${classes[newtheme.tablet[group][prop]]}`);
+    const newThemeTablet = newTheme?.tablet?.[group]?.[prop];
+    if (typeof newThemeTablet !== "undefined")
+      arr.push(`md:${classes[newTheme.tablet[group][prop]]}`);
 
-    if (newtheme?.desktop?.[group]?.[prop])
-      arr.push(`lg:${classes[newtheme.desktop[group][prop]]}`);
+    const newThemeDesktop = newTheme?.desktop?.[group]?.[prop];
+    if (typeof newThemeDesktop !== "undefined")
+      arr.push(`lg:${classes[newTheme.desktop[group][prop]]}`);
+
+    // fix special case for 1px border classes, also needs additional border class
+    if (arr.includes("border-px")) arr.push("border");
+    if (arr.includes("md:border-px")) arr.push("md:border");
+    if (arr.includes("lg:border-px")) arr.push("lg:border");
 
     return arr;
   }
