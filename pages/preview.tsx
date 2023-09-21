@@ -68,7 +68,8 @@ export default function PreviewPage({
 
   if (!id) return null;
   id = id.startsWith("drafts.") ? id : `drafts.${id}`;
-  if (previewType.startsWith("preset.")) id = id.replace("drafts.", "");
+  if (previewType.startsWith("preset.") || documentType === "preset.blocks")
+    id = id.replace("drafts.", "");
 
   const getQuery = () => {
     if (documentType === "navigation") {
