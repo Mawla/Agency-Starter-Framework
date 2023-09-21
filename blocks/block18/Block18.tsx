@@ -174,7 +174,10 @@ export const Block18 = ({
     theme?.grid?.gapHorizontal || "xs",
   );
 
-  const hasContentBeforeGrid = title || intro || Boolean(buttons?.length);
+  const hasContentBeforeGrid =
+    title?.length ||
+    shouldRenderPortableText(intro) ||
+    Boolean(buttons?.length);
 
   const GridWrapper = filteredItems?.find(({ type }) => type === "card.image")
     ? Fancybox
