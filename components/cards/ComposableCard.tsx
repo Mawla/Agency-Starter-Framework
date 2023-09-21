@@ -116,6 +116,7 @@ export type ComposableCardProps = {
 };
 
 const imageHeightClasses: Record<ImageHeightType, string> = {
+  "2xs": "h-6",
   xs: "h-12",
   sm: "h-20",
   md: "h-24",
