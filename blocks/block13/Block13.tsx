@@ -149,6 +149,7 @@ export const Block13 = ({
                         size="2xl"
                         className="group-hover:underline"
                         color={theme?.card?.title}
+                        weight="semibold"
                       >
                         {title}
                       </Title>
