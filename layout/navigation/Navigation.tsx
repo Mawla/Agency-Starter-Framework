@@ -4,6 +4,7 @@ import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { useSize } from "../../hooks/useSize";
+import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
 import {
@@ -13,6 +14,7 @@ import {
 import { TopNav } from "./TopNav";
 import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
+import cx from "classnames";
 import router from "next/router";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 
@@ -63,7 +65,6 @@ export const Navigation = ({
 
   const navRef = useRef<HTMLDivElement>(null);
   const { height: spacerHeight } = useSize(navRef);
-
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false);
 
   const onHamburgerClick = () => {
@@ -81,7 +82,13 @@ export const Navigation = ({
 
   return (
     <div>
-      <div style={{ height: spacerHeight }} className="invisible" />
+      <div
+        style={{ height: spacerHeight }}
+        className={cx(
+          theme?.block?.background &&
+            backgroundClasses[theme?.block?.background],
+        )}
+      />
 
       <TopNav
         items={items}
