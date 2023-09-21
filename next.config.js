@@ -59,8 +59,6 @@ module.exports = {
       `*[_id == "config_seo"][0].preventIndexing`,
     );
 
-    console.log(preventIndexing);
-
     if (
       process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ||
       preventIndexing
