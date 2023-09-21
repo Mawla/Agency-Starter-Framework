@@ -68,6 +68,7 @@ export const ImageCard = ({ image, theme, decorations }: ImageCardProps) => {
       className={cx(
         "h-full relative overflow-hidden group",
         theme?.border?.color && borderClasses[theme?.border?.color],
+        theme?.border?.color && "border",
         theme?.border?.color && borderWidthClasses[theme?.border?.width || 1],
         theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],
         theme?.card?.background && backgroundClasses[theme?.card?.background],

@@ -121,7 +121,7 @@ export const BorderColors = () => (
           title="title"
           content={<p>content</p>}
           theme={{
-            border: { color, width: 2 },
+            border: { color },
           }}
         />
       </div>
