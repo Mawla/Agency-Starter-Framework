@@ -99,6 +99,30 @@ export const Theme = () => (
       label="This is a button"
       presetTheme={{
         mobile: {
+          border: {
+            color: "black",
+            width: 2,
+          },
+        },
+        tablet: {
+          border: {
+            color: "gray-200",
+            width: 0,
+          },
+        },
+        desktop: {
+          border: {
+            color: "gray-500",
+            width: 1,
+          },
+        },
+      }}
+    />
+
+    <Button
+      label="This is a button"
+      presetTheme={{
+        mobile: {
           background: {
             color: "black",
             paddingX: "8",
@@ -166,6 +190,9 @@ export const CustomTheme = () => (
       label="This is a button"
       theme={{
         mobile: {
+          label: {
+            color: "white",
+          },
           background: {
             color: "black",
             paddingX: "8",
