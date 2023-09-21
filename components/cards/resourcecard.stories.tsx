@@ -5,7 +5,7 @@ import React from "react";
 
 export default {
   component: ResourceCard,
-  title: "Components/ResourceCard",
+  title: "Blocks/Block18/ResourceCard",
 } as Meta;
 
 export const Default = () => (

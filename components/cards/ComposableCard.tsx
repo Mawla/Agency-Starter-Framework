@@ -141,6 +141,7 @@ export const ComposableCard = ({
         "h-full relative overflow-hidden group",
         theme?.card?.color && textClasses[theme?.card?.color],
         theme?.card?.align && textAlignClasses[theme?.card?.align],
+        theme?.border?.color && "border",
         theme?.border?.color && borderClasses[theme?.border?.color],
         theme?.border?.color && borderWidthClasses[theme?.border?.width || 1],
         theme?.border?.radius && borderRadiusClasses[theme?.border?.radius],

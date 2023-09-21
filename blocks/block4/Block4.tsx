@@ -178,7 +178,6 @@ export const Block4 = ({
                 zoom
                 className={cx(
                   "inline-block",
-                  theme?.image?.rounded && "overflow-hidden",
                   theme?.image?.rounded &&
                     borderRadiusClasses[theme?.image?.rounded],
                 )}
@@ -192,6 +191,7 @@ export const Block4 = ({
               <Video
                 {...video}
                 className={cx(
+                  theme?.image?.rounded && "overflow-hidden",
                   theme?.image?.rounded &&
                     borderRadiusClasses[theme?.image?.rounded],
                 )}
