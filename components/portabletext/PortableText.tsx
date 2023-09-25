@@ -100,6 +100,8 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
           ),
         },
         listItem: {
+          bullet: ({ children }) => <li>{children}</li>,
+          number: ({ children }) => <li>{children}</li>,
           check: ({ children }) => (
             <li className="!pl-0 !relative">
               <IconLoader
