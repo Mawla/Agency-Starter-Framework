@@ -38,6 +38,11 @@ export const getBlock12Query = (language: LanguageType) => groq`
         || count(^.filter.tags) == 0
         || count(tags[@._ref in ^.^.filter.tags[]._ref]) > 0 
       )
+      // automatically filter by relevant tag on page.tag
+      && select(
+        ^.^._type == "page.tag" && !defined(^.filter.tags) => ^.^._id in tags[]._ref, 
+        true
+      )
       && !(_id in path("drafts.*"))
       && language == "${language}"
     ] {

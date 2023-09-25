@@ -32,7 +32,13 @@ export const MobileNav = ({
         <RadixDialog.Overlay className="relative">
           <div className="fixed inset-0 bg-black/20 w-screen h-screen z-50" />
         </RadixDialog.Overlay>
-        <RadixDialog.Content className="z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen">
+        <RadixDialog.Content
+          className={cx(
+            "z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen",
+            backgroundClasses[theme?.block?.background || "white"],
+            theme?.block?.text && textClasses[theme?.block?.text],
+          )}
+        >
           <div className="h-full">
             <div className="h-full">
               <RadixDialog.Title className="sr-only">
@@ -42,12 +48,7 @@ export const MobileNav = ({
                 <IconLoader icon="close" className="w-6 h-6 block" />
               </RadixDialog.Close>
 
-              <RadixNavigationMenu.Root
-                className={cx(
-                  backgroundClasses[theme?.block?.background || "white"],
-                  theme?.block?.text && textClasses[theme?.block?.text],
-                )}
-              >
+              <RadixNavigationMenu.Root>
                 {Boolean(items?.length) && (
                   <RadixNavigationMenu.List className="pt-20 px-2">
                     {items?.map((item) => (

@@ -115,7 +115,7 @@ export const Footer = ({
           </div>
 
           {Boolean(legalLinks?.length) && (
-            <ul className="flex gap-5 items-center text-[12px] leading-relaxed">
+            <ul className="flex flex-wrap gap-x-5 gap-y-3 items-center text-[12px] leading-relaxed">
               {legalLinks?.map(({ _key, label, href }) => (
                 <li key={_key}>
                   {href && (

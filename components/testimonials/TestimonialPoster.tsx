@@ -82,15 +82,19 @@ export const TestimonialPoster = ({
                 <ResponsiveImage {...image} />
               </div>
             )}
-            {name && (
-              <Title as="span" {...theme?.name} className="shrink-0">
-                {`${name}${jobTitle ? "," : ""}`}
-              </Title>
-            )}
-            {jobTitle && (
-              <Title as="span" {...theme?.jobTitle}>
-                {jobTitle}
-              </Title>
+            {(name || jobTitle) && (
+              <div>
+                {name && (
+                  <Title as="span" {...theme?.name} className="shrink-0">
+                    {`${name}${jobTitle ? "," : ""}`}
+                  </Title>
+                )}
+                {jobTitle && (
+                  <Title as="span" {...theme?.jobTitle}>
+                    {jobTitle}
+                  </Title>
+                )}
+              </div>
             )}
           </div>
         )}
