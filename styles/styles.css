@@ -154,3 +154,15 @@ script[type='application/ld+json'] {
 .fancybox__container.fix-iframe-height .fancybox__content {
   height: 90% !important;
 }
+
+/* Custom PT styles not in prose */
+
+.title .list-disc,
+.title .list-decimal,
+.title .list-check {
+  @apply list-inside;
+}
+
+.title .list-check {
+  padding-left: 1.5em;
+}
