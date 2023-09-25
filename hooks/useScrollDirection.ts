@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import router from "next/router";
+import { useEffect, useState } from "react";
 
 const MINIMAL_SCROLL = 20;
 
 export function useScrollDirection() {
   const [lastScrollTop, setLastScrollTop] = useState<number>(0);
-  const [scrollDirection, setScrollDirection] = useState<'down' | 'up' | null>(null);
+  const [scrollDirection, setScrollDirection] = useState<"down" | "up" | null>(
+    null,
+  );
 
   useEffect(() => {
     function onScroll() {
@@ -18,7 +21,7 @@ export function useScrollDirection() {
 
       if (scrollDiff > MINIMAL_SCROLL || scrollDiff < -100) {
         setLastScrollTop(scroll);
-        const newScrollDirection = isScrollingDown ? 'down' : 'up';
+        const newScrollDirection = isScrollingDown ? "down" : "up";
 
         if (newScrollDirection !== scrollDirection) {
           setScrollDirection(newScrollDirection);
@@ -26,14 +29,28 @@ export function useScrollDirection() {
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, [lastScrollTop, scrollDirection]);
+
+  useEffect(() => {
+    function onRouteChange() {
+      setScrollDirection(null);
+    }
+
+    router.events.on("routeChangeStart", onRouteChange);
+    router.events.on("routeChangeComplete", onRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", onRouteChange);
+      router.events.off("routeChangeComplete", onRouteChange);
+    };
+  }, []);
 
   return scrollDirection;
 }

@@ -1,3 +1,4 @@
+import router from "next/router";
 import { useEffect, useState } from "react";
 
 type ScrollPositionType =
@@ -31,15 +32,30 @@ export function useScrollPosition() {
       }
 
       if (newScrollPosition === scrollPosition) return;
-      return setScrollPosition(newScrollPosition);
+      setScrollPosition(newScrollPosition);
     }
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    function onRouteChange() {
+      setScrollPosition("top");
+    }
+
+    router.events.on("routeChangeStart", onRouteChange);
+    router.events.on("routeChangeComplete", onRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", onRouteChange);
+      router.events.off("routeChangeComplete", onRouteChange);
     };
   }, []);
 
