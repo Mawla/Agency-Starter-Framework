@@ -1,11 +1,6 @@
 import { WidthType } from "../../components/block/width.options";
 import { ButtonProps } from "../../components/buttons/Button";
 import { BREAKPOINTS, useBreakpoint } from "../../hooks/useBreakpoint";
-import { useInView } from "../../hooks/useInView";
-import { useScrollDirection } from "../../hooks/useScrollDirection";
-import { useScrollPosition } from "../../hooks/useScrollPosition";
-import { useSize } from "../../hooks/useSize";
-import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
 import { MobileNav } from "./MobileNav";
 import {
@@ -15,9 +10,7 @@ import {
 import { TopNav } from "./TopNav";
 import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
-import cx from "classnames";
-import router from "next/router";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useState } from "react";
 
 export type NavItem = {
   _key?: string;
@@ -60,62 +53,18 @@ export const Navigation = ({
   theme,
 }: NavigationProps) => {
   const { screenWidth } = useBreakpoint();
-  const scrollDirection = useScrollDirection();
-  const scrollPosition = useScrollPosition();
-  const [showNav, setShowNav] = useState<boolean>(true);
-  const spacerRef = useRef<HTMLDivElement>(null);
-
-  const navRef = useRef<HTMLDivElement>(null);
-  const { height: spacerHeight } = useSize(navRef);
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false);
 
   const onHamburgerClick = () => {
     setMobileNavIsOpen(true);
   };
 
-  useEffect(() => {
-    function onRouteChange() {
-      setShowNav(true);
-      setMobileNavIsOpen(false);
-    }
-
-    router.events.on("routeChangeStart", onRouteChange);
-    router.events.on("routeChangeComplete", onRouteChange);
-    return () => {
-      router.events.off("routeChangeStart", onRouteChange);
-      router.events.off("routeChangeComplete", onRouteChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    let show = true;
-    if (scrollPosition === "middle" && scrollDirection !== "up") show = false;
-    setShowNav(show);
-  }, [scrollDirection, scrollPosition]);
-
-  // If the spacer is at the top of the screen, show the nav
-  // this fixes the issue where the nav is hidden when scrolling fast to top on macbook pro
-  const atTop = useInView({
-    elementRef: spacerRef,
-    threshold: 1,
-  });
-
   return (
     <div>
-      <div
-        ref={spacerRef}
-        style={{ height: spacerHeight }}
-        className={cx(
-          theme?.block?.background &&
-            backgroundClasses[theme?.block?.background],
-        )}
-      />
       <TopNav
         items={items}
         buttons={buttons}
         onHamburgerClick={onHamburgerClick}
-        showNav={atTop || showNav}
-        ref={navRef}
         logo={logo}
         theme={theme}
         banner={banner}

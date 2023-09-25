@@ -77,6 +77,4 @@ export const Default = () => <TopNav items={items} buttons={buttons} />;
 
 export const Landing = () => <TopNav items={[]} buttons={[]} />;
 
-export const NavOutOfView = () => (
-  <TopNav items={[]} buttons={[]} showNav={false} />
-);
+export const NavOutOfView = () => <TopNav items={[]} buttons={[]} />;
