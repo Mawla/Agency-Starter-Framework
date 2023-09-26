@@ -70,6 +70,7 @@ export const PUBLISHED_AT_FIELD = defineField({
   title: "Date",
   type: "date",
   validation: (Rule: DateRule) => Rule.required(),
+  group: ["meta"],
 });
 
 export const BLOCKS_FIELD = defineField({
@@ -343,15 +344,16 @@ export const getPreviewSlugPagePath = (
 export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   select: {
     title: `title`,
-    media: "blocks.0.image",
+    image: "image",
+    block1Image: "blocks.0.image",
     language: "language",
     ...SLUG_PREVIEW_SELECT_FIELDS,
   },
-  prepare({ title, media, language, ...paths }: any) {
+  prepare({ title, image, block1Image, language, ...paths }: any) {
     return {
       title: `${title}`,
       subtitle: getPreviewSlugPagePath(language, paths),
-      media,
+      media: image || block1Image || undefined,
     };
   },
 };
