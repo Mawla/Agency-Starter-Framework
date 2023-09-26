@@ -69,7 +69,7 @@ export type Block12Props = {
   items?: ResourceCardProps[];
 };
 
-const PAGE_SIZE = 5 * 3;
+const PAGE_SIZE = 5 * 4;
 
 export const Block12 = ({
   theme,
@@ -138,7 +138,7 @@ export const Block12 = ({
 
       <div
         className={cx(
-          "flex flex-col gap-6 pt-6",
+          "flex flex-col gap-6 pt-6 md:pt-8 lg:pt-10 xl:pt-12",
           textAlignClasses[theme?.block?.align || "center"],
         )}
       >
@@ -183,7 +183,7 @@ export const Block12 = ({
           )}
 
         {Boolean(paginatedItems?.length) && (
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {paginatedItems?.map((item) => (
               <li key={item._id}>
                 <ResourceCard {...item} theme={theme?.card} />
