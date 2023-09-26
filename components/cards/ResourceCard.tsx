@@ -86,7 +86,7 @@ export const ResourceCard = ({
   return (
     <div
       className={cx(
-        "text-left relative rounded p-4 shadow-md group h-full border grid",
+        "text-left relative rounded shadow-md group h-full border flex flex-col",
         theme?.border && borderClasses[theme?.border],
         theme?.background && backgroundClasses[theme?.background],
         {
@@ -99,7 +99,7 @@ export const ResourceCard = ({
       </Link>
 
       {image && (
-        <div className="relative aspect-video overflow-hidden -ml-3.5 -mt-3.5 -mr-3.5">
+        <div className="relative aspect-video overflow-hidden m-0.5 shrink-0">
           <ResponsiveImage
             {...image}
             fill
@@ -108,7 +108,7 @@ export const ResourceCard = ({
         </div>
       )}
 
-      <div className="mt-2 flex flex-col gap-6 p-3">
+      <div className="mt-2 flex flex-col gap-6 px-4 pt-4 pb-6 grow">
         {title && (
           <Title
             as="h3"
