@@ -43,7 +43,7 @@ export const Text = ({
   const Element = as;
 
   return (
-    <div className={className}>
+    <div className={cx("text", className)}>
       <Element
         className={cx(
           "w-full",

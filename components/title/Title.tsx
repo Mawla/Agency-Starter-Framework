@@ -36,6 +36,7 @@ export const Title = ({
   return (
     <Element
       className={cx(
+        "title",
         "w-full",
         "hyphens-auto text-balance",
         "break-words inline-block",

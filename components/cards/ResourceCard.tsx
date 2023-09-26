@@ -86,7 +86,7 @@ export const ResourceCard = ({
   return (
     <div
       className={cx(
-        "text-left relative rounded p-4 shadow-md group h-full border flex flex-col",
+        "text-left relative rounded p-4 shadow-md group h-full border grid",
         theme?.border && borderClasses[theme?.border],
         theme?.background && backgroundClasses[theme?.background],
         {
@@ -99,7 +99,7 @@ export const ResourceCard = ({
       </Link>
 
       {image && (
-        <div className="relative aspect-video overflow-hidden rounded-lg">
+        <div className="relative aspect-video overflow-hidden -ml-3.5 -mt-3.5 -mr-3.5">
           <ResponsiveImage
             {...image}
             fill
@@ -109,17 +109,6 @@ export const ResourceCard = ({
       )}
 
       <div className="mt-2 flex flex-col gap-6 p-3">
-        <div className="flex gap-1 flex-wrap">
-          {[
-            translations?.[type.replace("page.", "") as TranslationFieldType]?.[
-              language
-            ] || capitalize(type.replace("page.", "")),
-            ...(tags || []),
-          ].map((tag) => (
-            <Tag key={tag} label={tag} theme={{ color: theme?.tag }} />
-          ))}
-        </div>
-
         {title && (
           <Title
             as="h3"
@@ -157,7 +146,7 @@ export const ResourceCard = ({
 
               <span
                 className={cx(
-                  "text-sm ml-3 font-semibold",
+                  "text-sm font-semibold",
                   theme?.author && textClasses[theme?.author],
                 )}
               >
@@ -189,6 +178,17 @@ export const ResourceCard = ({
               <DateDisplay datetime={date} from={startDate} to={endDate} />
             </span>
           )}
+        </div>
+
+        <div className="flex gap-1 flex-wrap -mt-2">
+          {[
+            translations?.[type.replace("page.", "") as TranslationFieldType]?.[
+              language
+            ] || capitalize(type.replace("page.", "")),
+            ...(tags || []),
+          ].map((tag) => (
+            <Tag key={tag} label={tag} theme={{ color: theme?.tag }} />
+          ))}
         </div>
       </div>
     </div>

@@ -93,10 +93,12 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
 
         block: { ...block },
         list: {
-          bullet: ({ children }) => <ul>{children}</ul>,
-          number: ({ children }) => <ol>{children}</ol>,
+          bullet: ({ children }) => <ul className="list-disc">{children}</ul>,
+          number: ({ children }) => (
+            <ol className="list-decimal">{children}</ol>
+          ),
           check: ({ children }) => (
-            <ul className="list-none relative">{children}</ul>
+            <ul className="list-check list-none relative">{children}</ul>
           ),
         },
         listItem: {
