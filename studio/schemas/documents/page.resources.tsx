@@ -2,7 +2,6 @@ import { SchemaName } from "../../../types.sanity";
 import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
   getI18nBaseFieldForSingleton,
-  ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
 } from "./page-fields";
@@ -16,7 +15,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Resources",
   type: "document",
-  orderings: [ORDER_PUBLISHED_DESC],
   options: {
     singleton: true,
   },

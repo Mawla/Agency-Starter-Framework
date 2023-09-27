@@ -9,7 +9,6 @@ export const getSingletonPageSchema = ({ schemaName, pageName }: Props) => {
   import {
     DEFAULT_CONTENT_PAGE_PREVIEW,
     getI18nBaseFieldForSingleton,
-    ORDER_PUBLISHED_DESC,
     pageBase,
     PARENT_FIELD,
   } from "./page-fields";
@@ -23,7 +22,6 @@ export const getSingletonPageSchema = ({ schemaName, pageName }: Props) => {
     name: SCHEMA_NAME,
     title: "${pageName}",
     type: "document",
-    orderings: [ORDER_PUBLISHED_DESC],
     options: {
       singleton: true,
     },

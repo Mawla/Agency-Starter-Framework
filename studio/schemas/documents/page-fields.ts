@@ -102,12 +102,6 @@ export const BLOCKS_FIELD = defineField({
   group: ["content"],
 });
 
-export const ORDER_PUBLISHED_DESC: SortOrdering = {
-  title: "Created ↑",
-  name: "publishedAtDesc",
-  by: [{ field: "publishedAt", direction: "desc" }],
-};
-
 export const PASSWORD = defineField({
   name: "locked",
   title: "Locked",
@@ -246,7 +240,7 @@ export const AUTHOR_FIELD = defineField({
   name: "authors",
   title: "Authors",
   type: "array",
-  of: [{ type: "reference", to: [{ type: "person" }] }],
+  of: [{ type: "reference", weak: true, to: [{ type: "person" }] }],
   group: ["content"],
 });
 
@@ -358,6 +352,25 @@ export const DEFAULT_CONTENT_PAGE_PREVIEW: PreviewConfig = {
   },
 };
 
+export const DEFAULT_ARTICLE_PAGE_PREVIEW: PreviewConfig = {
+  select: {
+    title: `title`,
+    image: "image",
+    block1Image: "blocks.0.image",
+    language: "language",
+    date: "publishedAt",
+    author: "authors.0.name",
+    slug: `slug.current`,
+  },
+  prepare({ title, date, author, image, block1Image, language, slug }: any) {
+    return {
+      title: `${title}`,
+      subtitle: [date, author, slug].filter(Boolean).join(" - "),
+      media: image || block1Image || undefined,
+    };
+  },
+};
+
 export const DEFAULT_CONTENT_PAGE_ORDERINGS: SortOrdering[] = [
   {
     title: "Title",
@@ -392,5 +405,18 @@ export const DEFAULT_CONTENT_PAGE_ORDERINGS: SortOrdering[] = [
       { field: `parent.slug.current`, direction: "desc" },
       { field: `slug.current`, direction: "desc" },
     ],
+  },
+];
+
+export const DEFAULT_ARTICLE_PAGE_ORDERINGS: SortOrdering[] = [
+  {
+    title: "Title",
+    name: "Title",
+    by: [{ field: `title`, direction: "asc" }],
+  },
+  {
+    title: "Created ↑",
+    name: "publishedAtDesc",
+    by: [{ field: "publishedAt", direction: "desc" }],
   },
 ];
