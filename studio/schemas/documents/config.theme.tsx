@@ -28,7 +28,9 @@ export default defineType({
   title: "Theme",
   type: "document",
   icon: () => <PaintBrushTool weight="thin" size={20} />,
-  initialValue: {},
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {

@@ -131,7 +131,9 @@ export default defineType({
   title: "SEO",
   type: "document",
   icon: () => <MagnifyingGlass weight="thin" size={20} />,
-  initialValue: {},
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {

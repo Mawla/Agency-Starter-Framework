@@ -1,5 +1,6 @@
 import { languages, LanguageType } from "../languages";
 import { LINKABLE_SCHEMAS } from "../types.sanity";
+import { cleanDesk } from "./utils/desk/clean-desk";
 import { documentList } from "./utils/desk/documentList";
 import { getIconForSchema } from "./utils/desk/get-icon-for-schema";
 import { group } from "./utils/desk/group";
@@ -33,11 +34,11 @@ import {
   ListItemBuilder,
 } from "sanity/desk";
 
-export const structure = (
+export const structure = async (
   S: StructureBuilder,
   context: StructureResolverContext,
-) =>
-  S.list()
+) => {
+  let structure = S.list()
     .title("Website")
     .items([
       ...languages.map(
@@ -106,6 +107,7 @@ export const structure = (
                       language: language.id,
                     }),
                     S.divider(),
+
                     S.listItem()
                       .title("Blogs")
                       .icon(getIconForSchema(S, "page.blogs"))
@@ -292,7 +294,10 @@ export const structure = (
                       .title("Media Coverage")
                       .icon(getIconForSchema(S, "page.mediacoverage"))
                       .child(
-                        list(S, { title: "Media Coverage" }).items([
+                        list(S, {
+                          title: "Media Coverage",
+                          type: "page.mediacoverage",
+                        }).items([
                           singleton(S, {
                             id: `page_mediacoverage`,
                             type: "page.mediacoverage",
@@ -403,6 +408,10 @@ export const structure = (
           singleton(S, { id: "config_theme", type: "config.theme" }),
           singleton(S, { id: "config_icons", type: "config.icons" }),
           singleton(S, { id: "secret.config_cms", type: "config.cms" }),
+          singleton(S, {
+            id: "secret.config_deployment",
+            type: "config.deployment",
+          }),
         ]),
       ),
       documentList(S, { type: "redirect", title: "Redirects" }),
@@ -435,6 +444,10 @@ export const structure = (
             .id("guides"),
         ),
     ]);
+
+  const cleanedDesk = await cleanDesk(structure);
+  return cleanedDesk;
+};
 
 export const defaultDocumentNode = (
   S: StructureBuilder,

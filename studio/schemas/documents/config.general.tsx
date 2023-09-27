@@ -12,7 +12,9 @@ export default defineType({
   title: "General",
   type: "document",
   icon: () => <Gear weight="thin" size={20} />,
-  initialValue: {},
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {

@@ -194,7 +194,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     getSitemapQuery(),
   )) as SitemapType;
 
-  // don't build on previews
+  // don't build on preview environments
   if (
     !process.env.VERCEL_GIT_COMMIT_REF ||
     !["production", "staging"].includes(process.env.VERCEL_GIT_COMMIT_REF)
@@ -205,9 +205,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   }
 
+  // get static generation blacklist so we can exclude pages like page.blog or page.content
+  const staticGenerationBlacklist: string[] | null = await getClient(
+    true,
+  ).fetch(
+    `*[_id == "secret.config_deployment"][0] { staticGenerationBlacklist }.staticGenerationBlacklist`,
+  );
+
   const paths = sitemap
     .filter(Boolean)
     .filter((item) => !STATIC_LINKABLE_SCHEMAS.includes(item._type))
+    .filter((item) => !staticGenerationBlacklist?.includes(item._type))
     .map((item) => ({
       params: {
         slug: item?.path?.split("/").splice(1),

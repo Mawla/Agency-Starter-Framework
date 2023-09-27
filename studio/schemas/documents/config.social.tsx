@@ -11,7 +11,9 @@ export default defineType({
   title: "Social media",
   type: "document",
   icon: () => <Share weight="thin" size={20} />,
-  initialValue: {},
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {

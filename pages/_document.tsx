@@ -11,8 +11,6 @@ class MyDocument extends Document {
             href="https://cdn.sanity.io/"
             crossOrigin="crossOrigin"
           />
-
-          <link rel="stylesheet" href="/engine.styles.css" />
         </Head>
         <body className="overflow-x-hidden">
           <Main />
