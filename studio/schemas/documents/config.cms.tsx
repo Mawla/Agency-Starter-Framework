@@ -46,6 +46,8 @@ export default defineType({
               type: "string",
               options: {
                 list: [
+                  "All pages",
+                  "Homepage",
                   "Content pages",
                   "Landing pages",
                   "Resources",
@@ -60,6 +62,12 @@ export default defineType({
                   "News",
                   "Press Releases",
                   "Media Coverage",
+                  "Tags",
+                  "404 page",
+                  "Sitemap page",
+                  "Unpublished pages",
+                  "Navigation",
+                  "Footer",
                 ],
               },
             },
