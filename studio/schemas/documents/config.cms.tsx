@@ -10,7 +10,9 @@ export default defineType({
   title: "CMS",
   type: "document",
   icon: () => <WindowShield weight="thin" size={20} />,
-  initialValue: {},
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {

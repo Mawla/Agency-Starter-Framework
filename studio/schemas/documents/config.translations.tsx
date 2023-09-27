@@ -12,6 +12,9 @@ export default defineType({
   title: "Translations",
   type: "document",
   icon: () => <Geography weight="thin" size={20} />,
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {

@@ -15,7 +15,9 @@ export default defineType({
   title: "Icons",
   type: "document",
   icon: () => <TargetArrowBullseye weight="thin" size={20} />,
-  initialValue: {},
+  options: {
+    singleton: true,
+  },
   preview: {
     prepare() {
       return {
