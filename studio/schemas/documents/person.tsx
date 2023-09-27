@@ -1,7 +1,7 @@
 import { LANGUAGE_FIELD } from "./page-fields";
 import { Account } from "@vectopus/atlas-icons-react";
 import React from "react";
-import { defineField, defineType } from "sanity";
+import { StringRule, defineField, defineType } from "sanity";
 
 const schema = defineType({
   name: "person",
@@ -62,7 +62,10 @@ const schema = defineType({
       rows: 2,
       description: "Short bio.",
     }),
-    LANGUAGE_FIELD,
+    {
+      ...LANGUAGE_FIELD,
+      validation: (Rule) => Rule.required().warning(),
+    },
   ],
 });
 

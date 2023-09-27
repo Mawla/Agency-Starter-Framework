@@ -98,5 +98,11 @@ export const testimonialItem = defineType({
     },
   ],
   preview: testimonialItemObject.preview,
-  fields: [...testimonialItemObject.fields, LANGUAGE_FIELD],
+  fields: [
+    ...testimonialItemObject.fields,
+    {
+      ...LANGUAGE_FIELD,
+      validation: (Rule) => Rule.required().warning(),
+    },
+  ],
 });

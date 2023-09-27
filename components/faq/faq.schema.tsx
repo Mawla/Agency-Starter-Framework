@@ -75,5 +75,11 @@ export const faqItem = defineType({
     },
   ],
   preview: faqItemObject.preview,
-  fields: [...faqItemObject.fields, LANGUAGE_FIELD],
+  fields: [
+    ...faqItemObject.fields,
+    {
+      ...LANGUAGE_FIELD,
+      validation: (Rule) => Rule.required().warning(),
+    },
+  ],
 });
