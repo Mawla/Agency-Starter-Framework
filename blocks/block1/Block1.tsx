@@ -324,7 +324,7 @@ export const Block1 = ({
                     "relative flex w-full h-full",
                     theme?.layout?.verticalAlign &&
                       verticalAlignClasses[theme.layout.verticalAlign],
-                    theme?.layout?.mediaPosition !== "left" && "justify-end",
+                    theme?.layout?.mediaPosition !== "left" && "lg:justify-end",
                   )}
                 >
                   <div
