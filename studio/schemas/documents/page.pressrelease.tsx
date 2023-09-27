@@ -1,10 +1,10 @@
 import { SchemaName } from "../../../types.sanity";
 import {
   AUTHOR_FIELD,
-  DEFAULT_CONTENT_PAGE_PREVIEW,
+  DEFAULT_ARTICLE_PAGE_PREVIEW,
   getParentDocumentInitialValue,
   IMAGE_FIELD,
-  ORDER_PUBLISHED_DESC,
+  DEFAULT_ARTICLE_PAGE_ORDERINGS,
   pageBase,
   PARENT_FIELD,
   PUBLISHED_AT_FIELD,
@@ -20,8 +20,8 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Press Release",
   type: "document",
-  orderings: [ORDER_PUBLISHED_DESC],
-  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
+  orderings: DEFAULT_ARTICLE_PAGE_ORDERINGS,
+  preview: DEFAULT_ARTICLE_PAGE_PREVIEW,
   icon: () => <Megaphone weight="thin" size={20} />,
   initialValue: async (props: any, context: any) => {
     return await getParentDocumentInitialValue(context, "page_pressreleases");

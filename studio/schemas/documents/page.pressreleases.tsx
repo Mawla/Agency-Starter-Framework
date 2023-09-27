@@ -3,7 +3,6 @@ import {
   DEFAULT_CONTENT_PAGE_PREVIEW,
   getI18nBaseFieldForSingleton,
   getParentDocumentInitialValue,
-  ORDER_PUBLISHED_DESC,
   pageBase,
   PARENT_FIELD,
 } from "./page-fields";
@@ -17,7 +16,6 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Press releases overview",
   type: "document",
-  orderings: [ORDER_PUBLISHED_DESC],
   options: {
     singleton: true,
   },

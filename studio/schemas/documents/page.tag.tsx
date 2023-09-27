@@ -1,7 +1,7 @@
 import { SchemaName } from "../../../types.sanity";
 import {
   PARENT_FIELD,
-  ORDER_PUBLISHED_DESC,
+  DEFAULT_CONTENT_PAGE_ORDERINGS,
   pageBase,
   PUBLISHED_AT_FIELD,
   DEFAULT_CONTENT_PAGE_PREVIEW,
@@ -17,7 +17,7 @@ export default defineType({
   name: SCHEMA_NAME,
   title: "Tag",
   type: "document",
-  orderings: [ORDER_PUBLISHED_DESC],
+  orderings: DEFAULT_CONTENT_PAGE_ORDERINGS,
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <Tag weight="thin" size={20} />,
   initialValue: async (props: any, context: any) => {

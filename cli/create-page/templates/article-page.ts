@@ -32,7 +32,7 @@ export const getArticlePageSchema = ({
   import {
     DEFAULT_CONTENT_PAGE_PREVIEW,
     getParentDocumentInitialValue,
-    ORDER_PUBLISHED_DESC,
+    DEFAULT_ARTICLE_PAGE_ORDERINGS,
     pageBase,
     PARENT_FIELD,
     PUBLISHED_AT_FIELD,
@@ -48,7 +48,7 @@ export const getArticlePageSchema = ({
     name: SCHEMA_NAME,
     title: "${pageName}",
     type: "document",
-    orderings: [ORDER_PUBLISHED_DESC],
+    orderings: DEFAULT_ARTICLE_PAGE_ORDERINGS,
     preview: DEFAULT_CONTENT_PAGE_PREVIEW,
     icon: () => <Pages weight="thin" size={20} />,
     ${parentId && getParentInitialValue(parentId)},
