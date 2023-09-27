@@ -1,4 +1,6 @@
 import { baseLanguage } from "../../languages";
+import { LANGUAGE_FIELD } from "../../studio/schemas/documents/page-fields";
+import { referenceFilterCurrentLanguage } from "../../studio/utils/language/reference-filter-current-language";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import { FolderQuestion, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -12,14 +14,12 @@ const faqItemObject = defineField({
   preview: {
     select: {
       title: "title",
-      titleEn: `title.${baseLanguage}`,
       content: "content",
-      contentEn: `content.${baseLanguage}`,
     },
-    prepare({ title, titleEn, contentEn, content = [] }) {
+    prepare({ title, content = [] }) {
       return {
-        title: titleEn || title,
-        subtitle: blocksToText(contentEn || content),
+        title: title,
+        subtitle: blocksToText(content),
         media: FolderQuestion,
       };
     },
@@ -29,13 +29,11 @@ const faqItemObject = defineField({
       name: "title",
       title: "Title",
       type: "string",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "content",
       title: "Content",
       type: "portabletext.simple",
-      options: { localize: true } as any,
     }),
   ],
 });
@@ -50,6 +48,9 @@ export const schema = defineType({
       title: "Reusable FAQ item",
       type: "reference",
       to: [{ type: "faq.item" }],
+      options: {
+        filter: referenceFilterCurrentLanguage,
+      },
     }),
     defineArrayMember(faqItemObject),
   ],
@@ -58,9 +59,21 @@ export const schema = defineType({
 export default schema;
 
 export const faqItem = defineType({
-  ...faqItemObject,
   name: "faq.item",
   title: "FAQ item",
   type: "document",
   icon: () => <ImportArrowDown weight="thin" size={20} />,
+  groups: [
+    {
+      title: "Content",
+      name: "content",
+      default: true,
+    },
+    {
+      title: "Language",
+      name: "language",
+    },
+  ],
+  preview: faqItemObject.preview,
+  fields: [...faqItemObject.fields, LANGUAGE_FIELD],
 });
