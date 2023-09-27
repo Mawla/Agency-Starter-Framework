@@ -246,7 +246,7 @@ export const AUTHOR_FIELD = defineField({
   name: "authors",
   title: "Authors",
   type: "array",
-  of: [{ type: "reference", to: [{ type: "person" }] }],
+  of: [{ type: "reference", weak: true, to: [{ type: "person" }] }],
   group: ["content"],
 });
 
