@@ -46,7 +46,6 @@ import footer from "../../layout/footer/footer.schema";
 import navigation from "../../layout/navigation/navigation.schema";
 import { translateFields } from "../utils/language/field-translation";
 import configCMS from "./documents/config.cms";
-import configDesk from "./documents/config.desk";
 import configGeneral from "./documents/config.general";
 import configIcons from "./documents/config.icons";
 import configIntegrations from "./documents/config.integrations";
@@ -112,7 +111,6 @@ export const schemaTypes = [
     buttongroup,
     composableCard,
     configCMS,
-    configDesk,
     configIcons,
     configIntegrations,
     configSocial,

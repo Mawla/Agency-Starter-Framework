@@ -441,25 +441,6 @@ export const structure = async (
         ),
     ]);
 
-  // ADMINISTRATOR ONLY
-  if (
-    /**
-     * can't use administrator as everybody is an administrator
-     * at least for now, as Sanity gives unlimited administrator roles, other roles you have to pay for
-     *
-     * if that changes we can use:
-     * context.currentUser?.roles?.some((role) => role.name === "administrator")
-     */
-
-    context?.currentUser?.email &&
-    ["aratramba@gmail.com", "dan@mawla.ie"].includes(context.currentUser.email)
-  ) {
-    (structure as any).spec.items.push(S.divider());
-    (structure as any).spec.items.push(
-      singleton(S, { id: "secret.config_desk", type: "config.desk" }),
-    );
-  }
-
   const cleanedDesk = await cleanDesk(structure);
   return cleanedDesk;
 };

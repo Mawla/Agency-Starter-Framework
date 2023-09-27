@@ -29,5 +29,43 @@ export default defineType({
         "Secret used to authenticate preview requests. This is used to prevent unauthorized access to the preview mode. This must match the secret Vercel environment variable SANITY_PREVIEW_SECRET.",
       validation: (Rule: StringRule) => Rule.required(),
     }),
+    defineField({
+      name: "desk",
+      title: "CMS desk",
+      type: "object",
+      fields: [
+        defineField({
+          name: "blacklist",
+          title: "Hide page types",
+          type: "array",
+          description:
+            "Hides page types that are not enabled in the CMS desk structure.",
+          of: [
+            {
+              name: "Type",
+              type: "string",
+              options: {
+                list: [
+                  "Content pages",
+                  "Landing pages",
+                  "Resources",
+                  "Blogs",
+                  "Events",
+                  "Case Studies",
+                  "Podcasts",
+                  "Guides",
+                  "Tools",
+                  "Videos",
+                  "Newsroom",
+                  "News",
+                  "Press Releases",
+                  "Media Coverage",
+                ],
+              },
+            },
+          ],
+        }),
+      ],
+    }),
   ],
 });

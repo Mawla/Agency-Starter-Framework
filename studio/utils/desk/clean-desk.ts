@@ -5,7 +5,7 @@ export const cleanDesk = async (structure: ListBuilder) => {
   const client = useClient({ apiVersion: "vX" });
 
   const deskConfig = await client.fetch(
-    '*[_id == "secret.config_desk"][0] { blacklist }',
+    '*[_id == "secret.config_cms"][0] { desk }.desk',
   );
 
   if (!deskConfig?.blacklist) return structure;
