@@ -1,4 +1,4 @@
-import { baseLanguage } from "../../../languages";
+import { LANGUAGE_FIELD } from "./page-fields";
 import { Account } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -8,10 +8,21 @@ const schema = defineType({
   title: "Person",
   type: "document",
   icon: () => <Account weight="thin" size={20} />,
+  groups: [
+    {
+      title: "Content",
+      name: "content",
+      default: true,
+    },
+    {
+      title: "Language",
+      name: "language",
+    },
+  ],
   preview: {
     select: {
       title: `name`,
-      subtitle: `position.${baseLanguage}`,
+      subtitle: `position`,
       media: "image",
     },
     prepare({ title = "", subtitle = "", media }: any) {
@@ -43,7 +54,6 @@ const schema = defineType({
       title: "Position",
       type: "string",
       description: "Job title.",
-      options: { localize: true } as any,
     }),
     defineField({
       name: "description",
@@ -51,8 +61,8 @@ const schema = defineType({
       type: "text",
       rows: 2,
       description: "Short bio.",
-      options: { localize: true } as any,
     }),
+    LANGUAGE_FIELD,
   ],
 });
 
