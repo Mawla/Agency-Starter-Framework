@@ -199,6 +199,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     !process.env.VERCEL_GIT_COMMIT_REF ||
     !["production", "staging"].includes(process.env.VERCEL_GIT_COMMIT_REF)
   ) {
+    console.log("not building on preview environment");
     return {
       paths: [],
       fallback: "blocking",
@@ -211,6 +212,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   ).fetch(
     `*[_id == "secret.config_deployment"][0] { staticGenerationBlacklist }.staticGenerationBlacklist`,
   );
+
+  if (staticGenerationBlacklist?.length) {
+    console.log(
+      `static generation blacklist: ${staticGenerationBlacklist.join(", ")}`,
+    );
+  }
 
   const paths = sitemap
     .filter(Boolean)
