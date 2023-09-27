@@ -15,7 +15,7 @@ export const SCHEMAS = {
   "block.block4": "",
   "block.block7": "",
   "config.cms": "",
-  "config.desk": "",
+  "config.deployment": "",
   "config.general": "",
   "config.icons": "",
   "config.integrations": "",

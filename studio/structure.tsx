@@ -408,6 +408,10 @@ export const structure = async (
           singleton(S, { id: "config_theme", type: "config.theme" }),
           singleton(S, { id: "config_icons", type: "config.icons" }),
           singleton(S, { id: "secret.config_cms", type: "config.cms" }),
+          singleton(S, {
+            id: "secret.config_deployment",
+            type: "config.deployment",
+          }),
         ]),
       ),
       documentList(S, { type: "redirect", title: "Redirects" }),
