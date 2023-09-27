@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "npm run build-config && next dev",
     "lint": "next lint && tsc --noEmit",
-    "build": "npm run build-config && npm test && next build && npm run build-cms",
+    "build": "npm run build-config && if test \"$VERCEL_GIT_REPO_SLUG\" = \"mawla-engine-v2\" ; then npm run build-and-test ; else npm run build-only; fi",
+    "build-only": "npm run build-config && next build && npm run build-cms",
+    "build-and-test": "npm run build-config && npm test && next build && npm run build-cms",
     "start": "npm run build-config && next start",
     "cms": "sanity dev",
     "build-cms": "sanity build public/cms -y",
