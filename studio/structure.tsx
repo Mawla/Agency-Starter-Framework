@@ -366,6 +366,31 @@ export const structure = async (
                         `_type match "page.*" && _id in path("drafts.*") && language == '${language.id}'`,
                       ),
                   ),
+
+                group(S, {
+                  title: "Collections",
+                  icon: () => <PapertrayLines weight="thin" size={20} />,
+                }).child(
+                  list(S, { title: "Collections" }).items([
+                    documentList(S, {
+                      type: "person",
+                      title: "People",
+                      language: language.id,
+                    }),
+                    documentList(S, {
+                      type: "faq.item",
+                      title: "Frequently Asked Questions",
+                      icon: () => <FolderQuestion weight="thin" size={20} />,
+                      language: language.id,
+                    }),
+                    documentList(S, {
+                      type: "testimonials.item",
+                      title: "Testimonials",
+                      icon: () => <MessagingLines weight="thin" size={20} />,
+                      language: language.id,
+                    }),
+                  ]),
+                ),
               ]),
             ),
       ),
