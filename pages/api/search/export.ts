@@ -16,7 +16,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>,
 ) {
-  const { id } = req.query;
+  const { id, type } = req.query;
+
+  res.setHeader("Content-Type", "application/xml");
+  res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
 
   const allPages = await sanityClient.fetch(
     groq`
@@ -34,8 +37,10 @@ export default async function handler(
           && locked != true 
           && seo.excludeFromSitemap != true
           ${id ? `&& _id == '${id}'` : ""}
+          ${type ? `&& _type == '${type}'` : ""}
         ]{
         _updatedAt,
+        _id,
         title,
         "url": ^.sitemap[_id == ^._id][0] {
           "path": 'https://' + ^.^.domain + '' + path
