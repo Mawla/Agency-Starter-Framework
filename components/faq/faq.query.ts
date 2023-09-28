@@ -14,7 +14,7 @@ export const getFaqQuery = (language: LanguageType) => `
   _type == 'faq.reference' => @-> ,
   _type != 'reference' => @,
 } {
-  "title": coalesce(title.${language}, title),
-  "content": coalesce(content.${language}, content)[] ${richTextQuery},
+  title,
+  content[] ${richTextQuery},
 }
 `;

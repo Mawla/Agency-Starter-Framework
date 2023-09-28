@@ -1,5 +1,6 @@
 import { COLUMN_OPTIONS } from "../../blocks/block18/block18.options";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
+import { referenceFilterCurrentLanguage } from "../../studio/utils/language/reference-filter-current-language";
 import { blocksToText } from "../../studio/utils/portableText/portableTextToText";
 import {
   BORDER_RADIUS_OPTIONS,
@@ -42,6 +43,9 @@ const schema = defineType({
       title: "Reusable testimonial",
       type: "reference",
       to: [{ type: "testimonials.item" }],
+      options: {
+        filter: referenceFilterCurrentLanguage,
+      },
       hidden: ({ parent, value }) => !value && Boolean(parent?.testimonial),
       group: "content",
     }),

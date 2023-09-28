@@ -1,3 +1,5 @@
+import { LANGUAGE_FIELD } from "../../studio/schemas/documents/page-fields";
+import { referenceFilterCurrentLanguage } from "../../studio/utils/language/reference-filter-current-language";
 import { MessagingLines, ImportArrowDown } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
@@ -53,8 +55,8 @@ export const testimonialItemObject = defineField({
       type: "image",
       description: "Image of the person giving the testimonial.",
       options: {
-        hotspot: true
-      }
+        hotspot: true,
+      },
     }),
   ],
 });
@@ -69,6 +71,9 @@ export const schema = defineType({
       title: "Reusable testimonial",
       type: "reference",
       to: [{ type: "testimonials.item" }],
+      options: {
+        filter: referenceFilterCurrentLanguage,
+      },
     }),
     defineArrayMember(testimonialItemObject),
   ],
@@ -77,9 +82,27 @@ export const schema = defineType({
 export default schema;
 
 export const testimonialItem = defineType({
-  ...testimonialItemObject,
   name: "testimonials.item",
   title: "Testimonial",
   type: "document",
   icon: () => <ImportArrowDown weight="thin" size={20} />,
+  groups: [
+    {
+      title: "Content",
+      name: "content",
+      default: true,
+    },
+    {
+      title: "Language",
+      name: "language",
+    },
+  ],
+  preview: testimonialItemObject.preview,
+  fields: [
+    ...testimonialItemObject.fields,
+    {
+      ...LANGUAGE_FIELD,
+      validation: (Rule) => Rule.required().warning(),
+    },
+  ],
 });
