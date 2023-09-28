@@ -36,6 +36,8 @@ export default async function handler(
             .join(", ")}]
           && locked != true 
           && seo.excludeFromSitemap != true
+          && defined(blocks)
+          && count(blocks) > 0
           ${id ? `&& _id == '${id}'` : ""}
           ${type ? `&& _type == '${type}'` : ""}
         ]{
@@ -53,6 +55,7 @@ export default async function handler(
             ^.description,
             ^.seo.title,
             ^.seo.description,
+            array::join(array::compact(^.tags[]->title), ' '),
             title,
             pt::text(title), 
             pt::text(intro), 
