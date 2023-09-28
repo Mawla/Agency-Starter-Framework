@@ -54,6 +54,7 @@ export const getExportQuery = ({
             blocks[
               !(_type in path('studio.*')) 
               && disabled != true
+              && excludeFromSearchIndex != true
               && !(_type in ['block.block0', 'block.block12', 'block.block13'])
             ] {
             "text": array::join(array::compact([

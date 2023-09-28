@@ -554,6 +554,22 @@ let dataset = [
     title: "reusable use faq title",
   },
   {
+    _id: "testid2",
+    _type: "page.content",
+    blocks: [
+      {
+        title: "disabled block",
+        _type: "block.block1",
+        disabled: true,
+      },
+      {
+        title: "excludeFromSearchIndex block",
+        _type: "block.block1",
+        excludeFromSearchIndex: true,
+      },
+    ],
+  },
+  {
     _id: "no-blocks",
     _type: "page.content",
     seo: {
@@ -690,5 +706,16 @@ describe("search export test", () => {
     expect(body).toContain("text and media intro");
     expect(body).toContain("text and media body");
     expect(body).toContain("text and media footer");
+  });
+
+  it("does not contain excluded block text", async () => {
+    let tree = parse(getExportQuery({ id: "testid2" }));
+    let value = await evaluate(tree, { dataset });
+    let result = await value.get();
+    // console.log(result);
+    const body = result[0].body.split("\n").map((x: string) => x.trim());
+
+    expect(body).not.toContain("disabled block");
+    expect(body).not.toContain("excludeFromSearchIndex block");
   });
 });
