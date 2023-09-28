@@ -2,10 +2,12 @@ import { sanityClient } from "../sanity-client";
 import { getExportQuery } from "./export.query";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type ResponseData = {
-  message?: string;
-  data?: string;
-};
+type ResponseData =
+  | {
+      message?: string;
+      data?: string;
+    }
+  | string;
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,7 +15,7 @@ export default async function handler(
 ) {
   const { id, type } = req.query;
 
-  res.setHeader("Content-Type", "application/xml");
+  res.setHeader("Content-Type", "text/plain");
   res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
 
   const allPages = await sanityClient.fetch(
@@ -24,5 +26,5 @@ export default async function handler(
     return res.status(400).json({ message: `Failed to fetch page data` });
   }
 
-  res.status(200).json({ data: JSON.stringify(allPages) });
+  res.status(200).send(JSON.stringify(allPages));
 }
