@@ -4,10 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
   message?: string;
-  data?: {
-    _id: string;
-    title?: string;
-  };
+  data?: string;
 };
 
 export default async function handler(
@@ -27,5 +24,5 @@ export default async function handler(
     return res.status(400).json({ message: `Failed to fetch page data` });
   }
 
-  res.status(200).json({ data: allPages });
+  res.status(200).json({ data: JSON.stringify(allPages) });
 }
