@@ -1,12 +1,8 @@
 import { SchemaName } from "../../../types.sanity";
 import {
-  BLOCKS_FIELD,
+  DEFAULT_CONTENT_PAGE_PREVIEW,
   getI18nBaseFieldForSingleton,
-  getPreviewSlugPagePath,
-  LANGUAGE_FIELD,
   pageBase,
-  SLUG_FIELD,
-  TITLE_FIELD,
 } from "./page-fields";
 import { MagnifyingGlass } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -16,32 +12,20 @@ export const SCHEMA_NAME: SchemaName = "page.search";
 
 export default defineType({
   name: SCHEMA_NAME,
-  title: "Search page",
+  title: "Search",
   type: "document",
   options: {
     singleton: true,
   },
+  preview: DEFAULT_CONTENT_PAGE_PREVIEW,
   icon: () => <MagnifyingGlass weight="thin" size={20} />,
-  preview: {
-    select: {
-      title: `title`,
-      slug: "slug.current",
-      language: "language",
-    },
-    prepare({ title, slug, language }) {
-      return {
-        title: title,
-        subtitle: getPreviewSlugPagePath(language, [slug]),
-      };
-    },
-  },
   groups: [...pageBase.groups],
   fields: [
-    TITLE_FIELD,
-    {
-      ...LANGUAGE_FIELD,
-      readOnly: true,
-    },
-    BLOCKS_FIELD,
+    ...pageBase.fields.map((field) => {
+      if (field.name === "i18n_base") {
+        return getI18nBaseFieldForSingleton(SCHEMA_NAME);
+      }
+      return { ...field };
+    }),
   ],
 });
