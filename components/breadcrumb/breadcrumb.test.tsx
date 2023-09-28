@@ -1,6 +1,5 @@
 import { render, fireEvent, screen } from "../../jest.utils";
 import { DEMO_FLAT_BREADCRUMB } from "../../test/fixtures/breadcrumb";
-import { DEMO_SITEMAP } from "../../test/fixtures/sitemap";
 import { Breadcrumb } from "./Breadcrumb";
 import "@testing-library/jest-dom";
 import singletonRouter from "next/router";
