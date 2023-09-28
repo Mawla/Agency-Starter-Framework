@@ -43,6 +43,7 @@ export default defineType({
       description:
         "This must match the slug of the Next.js pages/sitemap.tsx file.",
       readOnly: true,
+      hidden: true,
     },
     { ...LANGUAGE_FIELD, readOnly: true },
     getI18nBaseFieldForSingleton(SCHEMA_NAME),
