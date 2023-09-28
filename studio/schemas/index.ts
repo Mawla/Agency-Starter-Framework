@@ -76,6 +76,7 @@ import pagePodcasts from "./documents/page.podcasts";
 import pagePressRelease from "./documents/page.pressrelease";
 import pagePressReleases from "./documents/page.pressreleases";
 import pageResources from "./documents/page.resources";
+import pageSearch from "./documents/page.search";
 import pageSitemap from "./documents/page.sitemap";
 import pageTag from "./documents/page.tag";
 import pageTags from "./documents/page.tags";
@@ -151,6 +152,7 @@ export const schemaTypes = [
     pagePressReleases,
     pageResources,
     pageSitemap,
+    pageSearch,
     pageTag,
     pageTags,
     pageTool,
