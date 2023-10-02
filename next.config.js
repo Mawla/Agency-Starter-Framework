@@ -46,6 +46,7 @@ module.exports = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: true,
   },
   async headers() {
     const headers = [

@@ -10,6 +10,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   runtime: "edge",
+  maxDuration: 60,
 };
 
 const PicoSanity = require("picosanity");

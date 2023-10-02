@@ -4,6 +4,10 @@ import { ConfigType } from "../../queries/config.query";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+export const config = {
+  maxDuration: 60,
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
   res.setHeader("Content-Type", "application/xml");
   res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");

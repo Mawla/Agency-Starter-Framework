@@ -13,6 +13,10 @@ export type ApiBody = {
   };
 };
 
+export const config = {
+  maxDuration: 30,
+};
+
 interface ExtendedNextApiRequest extends NextApiRequest {
   body: string;
 }

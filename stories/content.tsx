@@ -203,6 +203,12 @@ export const demoResourceCards: ResourceCardProps[] = [
     title:
       "Part 2 Revolutionizing Business Efficiency with our Cutting-Edge SaaS Solution",
     image: demoImage,
+    authors: [
+      {
+        name: "Arjen Scherff-de Water",
+        image: demoImage4,
+      },
+    ],
   },
   {
     type: "page.blog",

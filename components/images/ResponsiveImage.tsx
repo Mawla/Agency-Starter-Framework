@@ -203,6 +203,7 @@ export const ResponsiveImage = ({
           priority={priority}
           quality={IMAGE_QUALITY}
           onLoadingComplete={onImageLoad}
+          unoptimized
         />
       )}
 
