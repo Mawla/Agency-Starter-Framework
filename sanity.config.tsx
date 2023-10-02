@@ -61,7 +61,7 @@ export default defineConfig({
       }
 
       if (path) {
-        return `${import.meta.env.SANITY_STUDIO_PROJECT_PATH.replace(
+        return `${import.meta.env.SANITY_STUDIO_PROJECT_PATH?.replace(
           /\/+$/,
           "",
         )}${path}`;

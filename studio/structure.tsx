@@ -93,6 +93,11 @@ export const structure = async (
                   title: "Landing pages",
                   language: language.id,
                 }),
+                singleton(S, {
+                  id: "page_pricing",
+                  type: "page.pricing",
+                  language: language.id,
+                }),
 
                 S.divider(),
 
@@ -361,17 +366,6 @@ export const structure = async (
                 }),
                 S.divider(),
 
-                S.listItem()
-                  .title("Unpublished pages")
-                  .icon(() => <TriangleExclamation weight="thin" size={20} />)
-                  .child(
-                    S.documentList()
-                      .title("Unpublished pages")
-                      .filter(
-                        `_type match "page.*" && _id in path("drafts.*") && language == '${language.id}'`,
-                      ),
-                  ),
-
                 group(S, {
                   title: "Collections",
                   icon: () => <PapertrayLines weight="thin" size={20} />,
@@ -396,6 +390,17 @@ export const structure = async (
                     }),
                   ]),
                 ),
+
+                S.listItem()
+                  .title("Unpublished pages")
+                  .icon(() => <TriangleExclamation weight="thin" size={20} />)
+                  .child(
+                    S.documentList()
+                      .title("Unpublished pages")
+                      .filter(
+                        `_type match "page.*" && _id in path("drafts.*") && language == '${language.id}'`,
+                      ),
+                  ),
               ]),
             ),
       ),
