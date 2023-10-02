@@ -15,6 +15,10 @@ export type ApiBody = {
   newBlocksOrder: string[];
 };
 
+export const config = {
+  maxDuration: 30,
+};
+
 interface ExtendedNextApiRequest extends NextApiRequest {
   body: string;
 }

@@ -12,6 +12,10 @@ function warning(msg: string) {
   border: 1px solid rgba(0,0,0,.1);">${msg}</p>`;
 }
 
+export const config = {
+  maxDuration: 30,
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { secret, _id, _type, language } = req.query;
 

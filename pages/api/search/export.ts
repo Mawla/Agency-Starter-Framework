@@ -9,6 +9,10 @@ type ResponseData =
     }
   | string;
 
+export const config = {
+  maxDuration: 300,
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>,
