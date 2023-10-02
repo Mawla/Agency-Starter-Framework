@@ -28,6 +28,8 @@ export const Scripts = ({ items }: ScriptsType) => {
     setMounted(true);
   }, []);
 
+  if (!mounted) return null;
+
   if (!items?.filter(Boolean).length) return null;
 
   return (
