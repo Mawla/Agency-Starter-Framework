@@ -42,4 +42,12 @@ export const defaultBlockTools = [
     type: "copyPaste",
     group: "tools",
   }),
+  defineField({
+    name: "excludeFromSearchIndex",
+    title: "Exclude from search index",
+    description:
+      "Exclude this block from the site search index. The code block, resources feed and related articles are always excluded. Warning: this isn't for search engines like Google.",
+    type: "boolean",
+    group: "tools",
+  }),
 ];
