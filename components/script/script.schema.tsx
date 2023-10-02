@@ -49,12 +49,11 @@ export default defineType({
           preview: {
             select: {
               title: "title",
-              code: "code.code",
-              html: "html.code",
+              code: "code",
+              html: "html",
               src: "src",
             },
             prepare: ({ title, code, html, src }) => {
-              console.log(html);
               return {
                 title: title || code || html || src,
                 subtitle: code || html || src,
@@ -86,24 +85,20 @@ export default defineType({
               title: "Javascript code",
               description:
                 "The script to be added inside script tags, e.g `console.log('hello world')`. Any <script /> tags will not be executed.",
-              type: "code",
+              type: "text",
+              rows: 10,
               hidden: (({ parent, value }) =>
                 Boolean(!value && parent?.src)) as ConditionalPropertyCallback,
               group: "script",
-              options: {
-                language: "javascript",
-              },
             }),
             defineField({
               name: "html",
               title: "HTML code",
               description:
                 "Any HTML code to be added to the page, like a <div />. Any <script /> tags will not be executed.",
-              type: "code",
+              type: "text",
+              rows: 10,
               group: "script",
-              options: {
-                language: "html",
-              },
             }),
             defineField({
               name: "src",

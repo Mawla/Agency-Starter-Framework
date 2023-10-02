@@ -4,7 +4,7 @@ import { BLOCK_RADIUS_OPTIONS } from "./background.options";
 import { SPACE_OPTIONS } from "./spacing.options";
 import { WIDTH_OPTIONS } from "./width.options";
 import { EllipsisVerticalIcon } from "@sanity/icons";
-import { defineField } from "sanity";
+import { FieldGroupDefinition, defineField } from "sanity";
 
 export const defaultBlockTheme = defineField({
   name: "block",
@@ -75,7 +75,7 @@ export const defaultBlockTheme = defineField({
   },
 });
 
-export const defaultBlockGroups = [
+export const defaultBlockGroups: FieldGroupDefinition[] = [
   {
     name: "content",
     title: "Content",
@@ -92,6 +92,6 @@ export const defaultBlockGroups = [
   {
     name: "tools",
     title: " ",
-    icon: EllipsisVerticalIcon,
+    icon: EllipsisVerticalIcon as any,
   },
 ];

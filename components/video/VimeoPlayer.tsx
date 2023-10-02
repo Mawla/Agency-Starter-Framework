@@ -1,7 +1,6 @@
 import { VideoType } from "../../types";
-import ReactVimeo from "@u-wave/react-vimeo";
+import Vimeo from "@u-wave/react-vimeo";
 import React from "react";
-import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 export const VimeoPlayer = ({
   videoId,
@@ -10,6 +9,11 @@ export const VimeoPlayer = ({
   frameless,
 }: VideoType) => {
   if (!videoId) return null;
+
+  // hack to get around typescript error
+  // Its type 'typeof Vimeo' is not a valid JSX element type.
+  // Property 'children' is missing in type 'ReactElement<any, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+  const ReactVimeo = Vimeo as any;
 
   return (
     <ReactVimeo
