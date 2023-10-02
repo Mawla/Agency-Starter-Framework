@@ -5,7 +5,7 @@ import {
   pageBase,
   PARENT_FIELD,
 } from "./page-fields";
-import { MoneyMobileShield } from "@vectopus/atlas-icons-react";
+import { MobileMoney } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineType } from "sanity";
 
@@ -19,7 +19,7 @@ export default defineType({
     singleton: true,
   },
   preview: DEFAULT_CONTENT_PAGE_PREVIEW,
-  icon: () => <MoneyMobileShield weight="thin" size={20} />,
+  icon: () => <MobileMoney weight="thin" size={20} />,
   groups: [...pageBase.groups],
   fields: [
     PARENT_FIELD,

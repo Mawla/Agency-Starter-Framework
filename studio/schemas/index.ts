@@ -87,6 +87,8 @@ import pageVideo from "./documents/page.video";
 import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
+import pricingFeature from "./documents/pricing.feature";
+import pricingPlan from "./documents/pricing.plan";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
 import copypaste from "./objects/copypaste";
@@ -167,12 +169,14 @@ export const schemaTypes = [
     portableTextPlain,
     portableTextSimple,
     preset,
-    presetBlockTheme,
     presetBlocks,
+    presetBlockTheme,
     presetButton,
     presetDecoration,
     presetTextTheme,
     presetTitleTheme,
+    pricingFeature,
+    pricingPlan,
     redirect,
     script,
     studioDivider,

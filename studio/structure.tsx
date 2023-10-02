@@ -388,6 +388,23 @@ export const structure = async (
                       icon: () => <MessagingLines weight="thin" size={20} />,
                       language: language.id,
                     }),
+                    group(S, {
+                      title: "Pricing",
+                      icon: getIconForSchema(S, "page.pricing"),
+                    }).child(
+                      list(S, { title: "Pricing" }).items([
+                        documentList(S, {
+                          type: "pricing.plan",
+                          title: "Plans",
+                          language: language.id,
+                        }),
+                        documentList(S, {
+                          type: "pricing.feature",
+                          title: "Features",
+                          language: language.id,
+                        }),
+                      ]),
+                    ),
                   ]),
                 ),
 
