@@ -5,6 +5,7 @@ import { Logo } from "./studio/components/Logo";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import { LINKABLE_SCHEMAS, TRANSLATABLE_SCHEMAS } from "./types.sanity";
+import { codeInput } from "@sanity/code-input";
 import { languageFilter } from "@sanity/language-filter";
 import { visionTool } from "@sanity/vision";
 import { defineConfig, Template } from "sanity";
@@ -38,6 +39,7 @@ export default defineConfig({
       defaultApiVersion: "vX",
     }),
     muxInput(),
+    codeInput(),
   ],
 
   document: {
