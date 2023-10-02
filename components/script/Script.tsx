@@ -1,7 +1,7 @@
 import { PageContext } from "../../context/PageContext";
 import cx from "classnames";
 import NextScript from "next/script";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export type ScriptsType = {
   title?: string;
@@ -22,6 +22,11 @@ export type ScriptType = {
 
 export const Scripts = ({ items }: ScriptsType) => {
   const { isPreviewMode } = useContext(PageContext);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!items?.filter(Boolean).length) return null;
 
@@ -80,7 +85,7 @@ export const Scripts = ({ items }: ScriptsType) => {
               </span>
             )}
 
-            {script.html && (
+            {script.html && mounted && (
               <div dangerouslySetInnerHTML={{ __html: script.html }} />
             )}
 
