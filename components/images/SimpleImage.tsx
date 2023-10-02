@@ -61,6 +61,7 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
           return imageURL;
         }}
         quality={IMAGE_QUALITY}
+        unoptimized
       />
 
       {zoom && typeof src === "string" && (
