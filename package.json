@@ -48,7 +48,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/dompurify": "^3.0.2",
     "@types/node": "18.11.15",
-    "@types/react": "18.0.26",
+    "@types/react": "^18.2.24",
     "@types/react-dom": "18.0.9",
     "@types/tinycolor2": "^1.4.3",
     "@u-wave/react-vimeo": "^0.9.10",
@@ -115,8 +115,5 @@
     "next-router-mock": "^0.8.0",
     "postcss-loader": "^7.2.4",
     "storybook": "^7.2.2"
-  },
-  "resolutions": {
-    "jackspeak": "2.1.1"
   }
 }

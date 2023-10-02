@@ -9,7 +9,7 @@ class MyDocument extends Document {
           <link
             rel="preconnect"
             href="https://cdn.sanity.io/"
-            crossOrigin="crossOrigin"
+            crossOrigin="anonymous"
           />
         </Head>
         <body className="overflow-x-hidden">
