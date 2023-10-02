@@ -345,6 +345,11 @@ export const structure = async (
                 }),
                 S.divider(),
                 singleton(S, {
+                  id: `page_search`,
+                  type: "page.search",
+                  language: language.id,
+                }),
+                singleton(S, {
                   id: `page_notfound`,
                   type: "page.notfound",
                   language: language.id,
@@ -493,7 +498,12 @@ export const defaultDocumentNode = (
 
     if (
       schemaType.startsWith("page.") &&
-      !["preset.blocks", "page.notfound", "page.sitemap"].includes(schemaType)
+      ![
+        "preset.blocks",
+        "page.notfound",
+        "page.sitemap",
+        "page.search",
+      ].includes(schemaType)
     ) {
       views.push(SeoView(S));
     }

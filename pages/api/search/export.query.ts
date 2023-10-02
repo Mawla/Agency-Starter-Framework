@@ -33,6 +33,7 @@ export const getExportQuery = ({
     "url": ^.sitemap[_id == ^._id][0] {
       "path": 'https://' + ^.^.domain + '' + path
     }.path,
+    "description": coalesce(description, seo.description),
     "body": array::join(
       array::compact(
         [

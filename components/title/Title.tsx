@@ -38,7 +38,7 @@ export const Title = ({
       className={cx(
         "title",
         "w-full",
-        "hyphens-auto text-balance",
+        "text-balance",
         "break-words inline-block",
         "flex flex-col whitespace-pre-line",
         color ? textClasses[color] : "text-current",
