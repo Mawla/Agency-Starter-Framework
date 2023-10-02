@@ -134,7 +134,7 @@ export const ResourceCard = ({
                   image && (
                     <span
                       className={cx(
-                        "w-10 aspect-square relative rounded-full overflow-hidden border -mr-1",
+                        "w-10 aspect-square relative rounded-full overflow-hidden border -mr-3",
                         borderClasses[theme?.background || "white"],
                       )}
                       key={image.src}
@@ -146,7 +146,7 @@ export const ResourceCard = ({
 
               <span
                 className={cx(
-                  "text-sm font-semibold",
+                  "ml-5 text-sm font-semibold",
                   theme?.author && textClasses[theme?.author],
                 )}
               >

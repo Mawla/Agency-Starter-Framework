@@ -9,13 +9,21 @@ export default {
 } as Meta;
 
 export const Default = () => (
-  <div className="w-[400px]">
-    <ResourceCard {...demoResourceCards[3]} />
+  <div className="flex flex-wrap gap-10">
+    <div className="w-[300px]">
+      <ResourceCard {...demoResourceCards[0]} />
+    </div>
+    <div className="w-[300px]">
+      <ResourceCard {...demoResourceCards[2]} />
+    </div>
+    <div className="w-[300px]">
+      <ResourceCard {...demoResourceCards[3]} />
+    </div>
   </div>
 );
 
 export const Theme = () => (
-  <div className="w-[400px]">
+  <div className="w-[300px]">
     <ResourceCard
       {...demoResourceCards[3]}
       theme={{
