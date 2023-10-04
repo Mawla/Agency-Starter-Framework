@@ -26,6 +26,12 @@ const schema = defineType({
   },
   fields: [
     defineField({
+      name: "orderRank",
+      title: "Order rank",
+      type: "string",
+      hidden: true,
+    }),
+    defineField({
       name: "name",
       title: "Name",
       type: "string",

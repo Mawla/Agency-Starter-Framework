@@ -10,6 +10,7 @@ import { EmbedIframe } from "./views/EmbedIframe";
 import { PreviewIframe } from "./views/PreviewIframe";
 import { SeoPane } from "./views/SeoPane";
 import { Sitemap } from "./views/Sitemap";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import {
   BlueprintPaper,
   Diagram,
@@ -376,15 +377,28 @@ export const structure = async (
                       icon: getIconForSchema(S, "page.pricing"),
                     }).child(
                       list(S, { title: "Pricing" }).items([
-                        documentList(S, {
+                        orderableDocumentListDeskItem({
                           type: "pricing.plan",
                           title: "Plans",
-                          language: language.id,
+                          icon: getIconForSchema(S, "pricing.plan"),
+                          filter: `language == $language`,
+                          params: {
+                            language: language.id,
+                          },
+                          S,
+                          context,
                         }),
-                        documentList(S, {
+
+                        orderableDocumentListDeskItem({
                           type: "pricing.feature",
                           title: "Features",
-                          language: language.id,
+                          icon: getIconForSchema(S, "pricing.feature"),
+                          filter: `language == $language`,
+                          params: {
+                            language: language.id,
+                          },
+                          S,
+                          context,
                         }),
                       ]),
                     ),
@@ -432,13 +446,19 @@ export const structure = async (
             icon: getIconForSchema(S, "page.pricing"),
           }).child(
             list(S, { title: "Pricing" }).items([
-              documentList(S, {
+              orderableDocumentListDeskItem({
                 type: "pricing.plan",
                 title: "Plans",
+                icon: getIconForSchema(S, "pricing.plan"),
+                S,
+                context,
               }),
-              documentList(S, {
+              orderableDocumentListDeskItem({
                 type: "pricing.feature",
                 title: "Features",
+                icon: getIconForSchema(S, "pricing.feature"),
+                S,
+                context,
               }),
             ]),
           ),
