@@ -76,6 +76,14 @@ export const PREDEFINED_ICONS = {
     title: "Clipboard",
     description: "Shown on the article page share buttons",
   },
+  yes: {
+    title: "Yes",
+    description: "Icon to show in the pricing comparison table for yes values",
+  },
+  no: {
+    title: "No",
+    description: "Icon to show in the pricing comparison table for no values",
+  },
 };
 
 export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;

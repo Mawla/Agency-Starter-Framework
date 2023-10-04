@@ -37,6 +37,7 @@
     "@sanity/client": "^6.1.6",
     "@sanity/image-url": "^1.0.2",
     "@sanity/language-filter": "^3.2.1",
+    "@sanity/orderable-document-list": "^1.1.0",
     "@sanity/vision": "^3.16.7",
     "@sanity/webhook": "^2.0.0",
     "@storybook/addon-viewport": "^7.2.2",

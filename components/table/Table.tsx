@@ -1,10 +1,11 @@
-import { Linkify } from "../buttons/Linkify";
+import { TextTransformerType, TextTransform } from "../buttons/TextTransform";
 import { Spinner } from "../loaders/Spinner";
 import React, { useEffect, useState } from "react";
 
 export type TableProps = {
   file?: string;
   fileName?: string;
+  textTransformers?: TextTransformerType[];
 };
 
 export type TableType = {
@@ -19,10 +20,11 @@ export type TableType = {
   data: { [key: string]: string }[];
 };
 
-export const Table = ({ file, fileName }: TableProps) => {
+export const Table = ({ file, fileName, textTransformers }: TableProps) => {
   const [data, setData] = useState<TableType | null>(null);
-  const [state, setState] =
-    useState<"loading" | "complete" | "error">("loading");
+  const [state, setState] = useState<"loading" | "complete" | "error">(
+    "loading",
+  );
 
   useEffect(() => {
     if (!file) return;
@@ -95,7 +97,9 @@ export const Table = ({ file, fileName }: TableProps) => {
                   >
                     {Object.keys(row).map((key) => (
                       <td className="align-top p-4 text-left" key={key}>
-                        <Linkify>{row[key] as any}</Linkify>
+                        <TextTransform transformers={textTransformers || []}>
+                          {row[key] as any}
+                        </TextTransform>
                       </td>
                     ))}
                   </tr>
@@ -108,3 +112,5 @@ export const Table = ({ file, fileName }: TableProps) => {
     </div>
   );
 };
+
+export default Table;
