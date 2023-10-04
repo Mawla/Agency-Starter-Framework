@@ -22,7 +22,6 @@ const schema = defineType({
   preview: {
     select: {
       title: `name`,
-      subtitle: `description`,
     },
   },
   fields: [
@@ -32,15 +31,6 @@ const schema = defineType({
       type: "string",
       group: "content",
       description: "Name of the feature, shown above the table of features.",
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
-      rows: 2,
-      group: "content",
-      description:
-        "Description of the feature, shown above the table of features.",
     }),
     defineField({
       name: "file",
