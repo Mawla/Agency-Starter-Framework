@@ -76,14 +76,6 @@ const schema = defineType({
       title: "Features",
       type: "portabletext.basic",
     }),
-    defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
     {
       ...LANGUAGE_FIELD,
       validation: (Rule) => Rule.required().warning(),

@@ -1,3 +1,4 @@
+import { PreviewIframeInline } from "../../views/PreviewIframe";
 import { LANGUAGE_FIELD } from "./page-fields";
 import {
   orderRankField,
@@ -26,17 +27,34 @@ const schema = defineType({
   ],
   preview: {
     select: {
-      title: `name`,
+      title: `title`,
     },
   },
   fields: [
     orderRankField({ type: "pricing.feature" }),
     defineField({
-      name: "name",
-      title: "Name",
+      name: "title",
+      title: "Title",
       type: "string",
       group: "content",
       description: "Name of the feature, shown above the table of features.",
+    }),
+    defineField({
+      name: "sample",
+      title: "Sample CSV",
+      type: "string",
+      group: "content",
+      components: {
+        input: () => {
+          return (
+            <>
+              <pre>Usage;Starter;Growth;Business;Enterprise</pre>
+              <pre>Editors and admins;yes;no;Custom;Contact us</pre>
+              <pre>Viewers;10;x;v;Unlimited</pre>
+            </>
+          );
+        },
+      },
     }),
     defineField({
       name: "file",
@@ -45,12 +63,27 @@ const schema = defineType({
       options: { accept: "text/csv" },
       group: "content",
       description:
-        "Upload a CSV file with the following columns: name, plan 1 feature, plan 2 feature etc.",
+        "Upload a CSV file. Values for 'y', 'yes' or 'v' will be replaced with a positive icon and 'n', 'no' or 'x' will be replaced with a negative icon.",
     }),
     {
       ...LANGUAGE_FIELD,
       validation: (Rule) => Rule.required().warning(),
     },
+    defineField({
+      name: "preview",
+      title: "Preview",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({
+          type: "string",
+          name: "preview",
+          components: {
+            field: PreviewIframeInline,
+          },
+        }),
+      ],
+    }),
   ],
 });
 

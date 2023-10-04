@@ -1,0 +1,12 @@
+Usage;Starter;Growth;Business;Enterprise
+Editors and admins;1;2;Custom;Contact us
+Viewers;10;Unlimited;Unlimited;Unlimited
+Integrations;2;3;4;Contact us
+Data assets;Unlimited;Unlimited;Unlimited;Unlimited
+Refresh frequency;Daily;Daily;Daily;Custom
+Guests;-;-;-;Unlimited
+Data lineage;no;YES;No;
+Data dictionary;NO;yes;YES;x
+Positive;YES;yes;y;v
+Negative;NO;no;n;x
+Link;https://www.google.com;https://google.com;;
