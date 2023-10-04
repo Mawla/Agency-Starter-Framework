@@ -5,6 +5,7 @@ import { decorationFieldsQuery } from "../components/decorations/decoration.quer
 import PortableText from "../components/portabletext/PortableText";
 import { LivePreviewProps } from "../components/previewmode/LivePreview";
 import { Scripts } from "../components/script/Script";
+import PricingTable from "../components/table/PricingTable";
 import Text from "../components/text/Text";
 import Title from "../components/title/Title";
 import { config as sanityConfig } from "../helpers/sanity/config";
@@ -119,6 +120,22 @@ export default function PreviewPage({
       `;
     }
 
+    if (["pricing.feature"].includes(documentType)) {
+      return `
+      *[_id == $_id][0] {
+        _rev,
+        _updatedAt,
+        "features": [
+          {
+            _id,
+            title,
+            "csv": file.asset->url
+          }
+        ]
+      }
+      `;
+    }
+
     return getPageQuery(language);
   };
 
@@ -147,6 +164,7 @@ export default function PreviewPage({
           language={language}
         />
       )}
+
       {previewType === "page" && data && (
         <Page
           navigation={null as unknown as NavigationType}
@@ -156,8 +174,11 @@ export default function PreviewPage({
           config={config}
         />
       )}
+
       {previewType === "navigation" && data && <Navigation {...data} />}
+
       {previewType === "footer" && data && <Footer {...data} />}
+
       {previewType === "preset.button" && data && (
         <div className="relative z-1">
           <Button
@@ -167,6 +188,7 @@ export default function PreviewPage({
           />
         </div>
       )}
+
       {previewType === "preset.decoration" && data && (
         <div className="bg-black/10">
           <Wrapper
@@ -187,10 +209,13 @@ export default function PreviewPage({
           />
         </div>
       )}
+
       {previewType === "script" && data && <Scripts items={data?.items} />}
+
       {previewType === "preset.theme.title" && data && (
         <Title {...data.theme}>{data.preview?.text || data.title}</Title>
       )}
+
       {previewType === "preset.theme.text" && data && (
         <Text
           size={data.theme?.size}
@@ -200,6 +225,7 @@ export default function PreviewPage({
           <PortableText content={data.preview?.text || data.title} />
         </Text>
       )}
+
       {previewType === "preset.theme.block" && data && (
         <Wrapper
           theme={{
@@ -209,6 +235,9 @@ export default function PreviewPage({
           {data.preview?.text || data.title}
         </Wrapper>
       )}
+
+      {previewType === "pricing.feature" && data && <PricingTable {...data} />}
+
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.js" />
     </div>
   );

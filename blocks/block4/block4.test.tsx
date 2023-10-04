@@ -44,7 +44,7 @@ describe("Block4", () => {
           image={{
             width: 100,
             height: 100,
-            src: "https://picsum.photos/100/100",
+            src: "https://picsum.photos/100/100?-100x100",
             alt: "hello",
           }}
         />,

@@ -10,6 +10,7 @@ import { EmbedIframe } from "./views/EmbedIframe";
 import { PreviewIframe } from "./views/PreviewIframe";
 import { SeoPane } from "./views/SeoPane";
 import { Sitemap } from "./views/Sitemap";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import {
   BlueprintPaper,
   Diagram,
@@ -91,6 +92,11 @@ export const structure = async (
                 documentList(S, {
                   type: "page.landing",
                   title: "Landing pages",
+                  language: language.id,
+                }),
+                singleton(S, {
+                  id: "page_pricing",
+                  type: "page.pricing",
                   language: language.id,
                 }),
 
@@ -361,22 +367,41 @@ export const structure = async (
                 }),
                 S.divider(),
 
-                S.listItem()
-                  .title("Unpublished pages")
-                  .icon(() => <TriangleExclamation weight="thin" size={20} />)
-                  .child(
-                    S.documentList()
-                      .title("Unpublished pages")
-                      .filter(
-                        `_type match "page.*" && _id in path("drafts.*") && language == '${language.id}'`,
-                      ),
-                  ),
-
                 group(S, {
                   title: "Collections",
                   icon: () => <PapertrayLines weight="thin" size={20} />,
                 }).child(
                   list(S, { title: "Collections" }).items([
+                    group(S, {
+                      title: "Pricing",
+                      icon: getIconForSchema(S, "page.pricing"),
+                    }).child(
+                      list(S, { title: "Pricing" }).items([
+                        orderableDocumentListDeskItem({
+                          type: "pricing.plan",
+                          title: "Plans",
+                          icon: getIconForSchema(S, "pricing.plan"),
+                          filter: `language == $language`,
+                          params: {
+                            language: language.id,
+                          },
+                          S,
+                          context,
+                        }),
+
+                        orderableDocumentListDeskItem({
+                          type: "pricing.feature",
+                          title: "Features",
+                          icon: getIconForSchema(S, "pricing.feature"),
+                          filter: `language == $language`,
+                          params: {
+                            language: language.id,
+                          },
+                          S,
+                          context,
+                        }),
+                      ]),
+                    ),
                     documentList(S, {
                       type: "person",
                       title: "People",
@@ -396,6 +421,17 @@ export const structure = async (
                     }),
                   ]),
                 ),
+
+                S.listItem()
+                  .title("Unpublished pages")
+                  .icon(() => <TriangleExclamation weight="thin" size={20} />)
+                  .child(
+                    S.documentList()
+                      .title("Unpublished pages")
+                      .filter(
+                        `_type match "page.*" && _id in path("drafts.*") && language == '${language.id}'`,
+                      ),
+                  ),
               ]),
             ),
       ),
@@ -405,6 +441,27 @@ export const structure = async (
         icon: () => <PapertrayLines weight="thin" size={20} />,
       }).child(
         list(S, { title: "Collections" }).items([
+          group(S, {
+            title: "Pricing",
+            icon: getIconForSchema(S, "page.pricing"),
+          }).child(
+            list(S, { title: "Pricing" }).items([
+              orderableDocumentListDeskItem({
+                type: "pricing.plan",
+                title: "Plans",
+                icon: getIconForSchema(S, "pricing.plan"),
+                S,
+                context,
+              }),
+              orderableDocumentListDeskItem({
+                type: "pricing.feature",
+                title: "Features",
+                icon: getIconForSchema(S, "pricing.feature"),
+                S,
+                context,
+              }),
+            ]),
+          ),
           documentList(S, { type: "person", title: "People" }),
           documentList(S, {
             type: "faq.item",

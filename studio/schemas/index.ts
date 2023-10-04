@@ -1,7 +1,9 @@
 import block0 from "../../blocks/block0/block0.schema";
 import block1 from "../../blocks/block1/block1.schema";
 import block2 from "../../blocks/block2/block2.schema";
+import block3 from "../../blocks/block3/block3.schema";
 import block4 from "../../blocks/block4/block4.schema";
+import block5 from "../../blocks/block5/block5.schema";
 import block7 from "../../blocks/block7/block7.schema";
 import block10 from "../../blocks/block10/block10.schema";
 import block12 from "../../blocks/block12/block12.schema";
@@ -75,6 +77,7 @@ import pagePodcast from "./documents/page.podcast";
 import pagePodcasts from "./documents/page.podcasts";
 import pagePressRelease from "./documents/page.pressrelease";
 import pagePressReleases from "./documents/page.pressreleases";
+import pagePricing from "./documents/page.pricing";
 import pageResources from "./documents/page.resources";
 import pageSearch from "./documents/page.search";
 import pageSitemap from "./documents/page.sitemap";
@@ -86,6 +89,8 @@ import pageVideo from "./documents/page.video";
 import pageVideos from "./documents/page.videos";
 import password from "./documents/password";
 import person from "./documents/person";
+import pricingFeature from "./documents/pricing.feature";
+import pricingPlan from "./documents/pricing.plan";
 import redirect from "./documents/redirect";
 import studioDivider from "./documents/studio.divider";
 import copypaste from "./objects/copypaste";
@@ -106,7 +111,9 @@ export const schemaTypes = [
     block17,
     block18,
     block2,
+    block3,
     block4,
+    block5,
     block7,
     button,
     buttonTheme,
@@ -150,9 +157,10 @@ export const schemaTypes = [
     pagePodcasts,
     pagePressRelease,
     pagePressReleases,
+    pagePricing,
     pageResources,
-    pageSitemap,
     pageSearch,
+    pageSitemap,
     pageTag,
     pageTags,
     pageTool,
@@ -171,6 +179,8 @@ export const schemaTypes = [
     presetDecoration,
     presetTextTheme,
     presetTitleTheme,
+    pricingFeature,
+    pricingPlan,
     redirect,
     script,
     studioDivider,
