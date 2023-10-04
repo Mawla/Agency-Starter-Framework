@@ -72,6 +72,8 @@ export const ResponsiveImage = ({
   const aspectRatio = originalDimensions.aspectRatio;
 
   const FancyboxElement = gallery ? React.Fragment : Fancybox;
+  let fancyboxAttrs = {};
+  if (!gallery) fancyboxAttrs = { className: "inline" };
 
   let placeHolderSrc: string | null = null;
 
@@ -207,7 +209,7 @@ export const ResponsiveImage = ({
       )}
 
       {zoom && typeof src === "string" && (
-        <FancyboxElement className="inline">
+        <FancyboxElement {...fancyboxAttrs}>
           <a
             href={src}
             data-fancybox

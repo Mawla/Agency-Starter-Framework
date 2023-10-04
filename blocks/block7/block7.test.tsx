@@ -29,6 +29,7 @@ describe("Block7", () => {
         <Block7
           items={[
             {
+              _key: "a",
               image: {
                 width: 100,
                 height: 100,

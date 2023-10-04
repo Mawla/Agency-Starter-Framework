@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "../../jest.utils";
+import { render, fireEvent, screen, act } from "../../jest.utils";
 import { DEMO_FLAT_BREADCRUMB } from "../../test/fixtures/breadcrumb";
 import { Breadcrumb } from "./Breadcrumb";
 import "@testing-library/jest-dom";
@@ -15,15 +15,19 @@ jest.mock("next/dist/shared/lib/router-context", () => {
 });
 
 describe("Breadcrumb", () => {
-  it("renders", () => {
-    render(<Breadcrumb path={DEMO_FLAT_BREADCRUMB} />);
+  it("renders", async () => {
+    await act(() => {
+      render(<Breadcrumb path={DEMO_FLAT_BREADCRUMB} />);
+    });
     expect(screen.getByText(DEMO_FLAT_BREADCRUMB[0].title)).toBeInTheDocument();
     expect(screen.getByText(DEMO_FLAT_BREADCRUMB[1].title)).toBeInTheDocument();
     expect(screen.getByText(DEMO_FLAT_BREADCRUMB[2].title)).toBeInTheDocument();
   });
 
-  it("allows navigation of nested routes", () => {
-    render(<Breadcrumb path={DEMO_FLAT_BREADCRUMB} />);
+  it("allows navigation of nested routes", async () => {
+    await act(() => {
+      render(<Breadcrumb path={DEMO_FLAT_BREADCRUMB} />);
+    });
 
     fireEvent.click(screen.getByText(DEMO_FLAT_BREADCRUMB[2].title));
     expect(singletonRouter).toMatchObject({
