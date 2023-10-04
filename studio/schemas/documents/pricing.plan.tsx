@@ -1,4 +1,8 @@
 import { LANGUAGE_FIELD } from "./page-fields";
+import {
+  orderRankField,
+  orderRankOrdering,
+} from "@sanity/orderable-document-list";
 import { MoneyPinLocation } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -8,6 +12,7 @@ const schema = defineType({
   title: "Pricing plan",
   type: "document",
   icon: () => <MoneyPinLocation weight="thin" size={20} />,
+  orderings: [orderRankOrdering],
   groups: [
     {
       title: "Content",
@@ -21,20 +26,15 @@ const schema = defineType({
   ],
   preview: {
     select: {
-      title: `name`,
+      title: `title`,
       subtitle: `description`,
     },
   },
   fields: [
+    orderRankField({ type: "pricing.plan" }),
     defineField({
-      name: "orderRank",
-      title: "Order rank",
-      type: "string",
-      hidden: true,
-    }),
-    defineField({
-      name: "name",
-      title: "Name",
+      name: "title",
+      title: "Title",
       type: "string",
       description: "e.g. Free, Basic, Premium, etc.",
     }),
@@ -52,8 +52,8 @@ const schema = defineType({
       type: "object",
       fields: [
         defineField({
-          name: "price",
-          title: "Price",
+          name: "amount",
+          title: "Amount",
           type: "string",
           description: "e.g. 10.00 or 'custom'",
         }),
@@ -74,22 +74,7 @@ const schema = defineType({
     defineField({
       name: "features",
       title: "Features",
-      type: "object",
-      description: "Short list of of features",
-      fields: [
-        defineField({
-          name: "title",
-          title: "Title",
-          type: "string",
-          description: "e.g. Features, What's included, etc.",
-        }),
-        defineField({
-          name: "items",
-          title: "Items",
-          type: "array",
-          of: [{ type: "string" }],
-        }),
-      ],
+      type: "portabletext.basic",
     }),
     defineField({
       name: "image",

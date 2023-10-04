@@ -1,0 +1,8 @@
+{
+  "title": "Pricing plans",
+  "description": "Grid with pricing plans and call to actions",
+  "name": "Block 3",
+  "schemaName": "block.block3",
+  "date": "2023-10-04T06:05:32.137Z",
+  "fields": ["title", "intro"]
+}

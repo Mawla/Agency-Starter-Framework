@@ -1,5 +1,9 @@
 import { LANGUAGE_FIELD } from "./page-fields";
-import { CheckListFile, Tables } from "@vectopus/atlas-icons-react";
+import {
+  orderRankField,
+  orderRankOrdering,
+} from "@sanity/orderable-document-list";
+import { CheckListFile } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
 
@@ -8,6 +12,7 @@ const schema = defineType({
   title: "Pricing feature",
   type: "document",
   icon: () => <CheckListFile weight="thin" size={20} />,
+  orderings: [orderRankOrdering],
   groups: [
     {
       title: "Content",
@@ -25,12 +30,7 @@ const schema = defineType({
     },
   },
   fields: [
-    defineField({
-      name: "orderRank",
-      title: "Order rank",
-      type: "string",
-      hidden: true,
-    }),
+    orderRankField({ type: "pricing.feature" }),
     defineField({
       name: "name",
       title: "Name",
