@@ -20,6 +20,7 @@ export const getBlock3Query = (language: LanguageType) => groq`
         },
         features[] ${richTextQuery},
         buttons[] ${buttonQuery},
-        "image": ${imageQuery}
-      }
+        "image": ${imageQuery},
+        orderRank
+      } | order(orderRank asc)
     }`;
