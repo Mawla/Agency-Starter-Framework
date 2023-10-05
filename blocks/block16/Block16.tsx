@@ -111,7 +111,8 @@ export const Block16 = ({
 
       {items && Boolean(items?.filter(Boolean).length) && (
         <div
-          className={cx("flex flex-wrap items-center gap-6 lg:gap-14 mt-10", {
+          className={cx("flex flex-wrap items-center gap-6 lg:gap-14", {
+            ["mt-10"]: title || shouldRenderPortableText(intro),
             ["justify-center"]:
               theme?.block?.align !== "left" && theme?.block?.align !== "right",
             ["justify-start"]: theme?.block?.align === "left",
