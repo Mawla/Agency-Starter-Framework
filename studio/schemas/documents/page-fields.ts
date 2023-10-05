@@ -18,6 +18,7 @@ import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
 import { referenceFilterCurrentLanguage } from "../../utils/language/reference-filter-current-language";
 import { SEO_FIELD } from "./config.seo";
+import { EllipsisVerticalIcon } from "@sanity/icons";
 import {
   DateRule,
   defineArrayMember,
@@ -290,6 +291,15 @@ export const SCRIPTS_FIELD = defineField({
   of: [SCRIPT_REFERENCE_FIELD],
 });
 
+export const PREVENT_PUBLISH_FIELD = defineField({
+  name: "preventPublish",
+  title: "Prevent publish",
+  type: "boolean",
+  description:
+    "Toggle this if you don't want to allow publishing of this document.",
+  group: ["tools"],
+});
+
 export const pageBase = {
   groups: [
     {
@@ -305,9 +315,15 @@ export const pageBase = {
       title: "Language",
       name: "language",
     },
+    {
+      name: "tools",
+      title: " ",
+      icon: EllipsisVerticalIcon as any,
+    },
   ],
   fields: [
     PASSWORD,
+    PREVENT_PUBLISH_FIELD,
     TITLE_FIELD,
     SLUG_FIELD,
     BLOCKS_FIELD,

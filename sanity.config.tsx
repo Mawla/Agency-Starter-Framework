@@ -2,6 +2,7 @@ import { getPathForId } from "./helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { Logo } from "./studio/components/Logo";
+import { createPublishAction } from "./studio/components/PublishAction";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import { LINKABLE_SCHEMAS, TRANSLATABLE_SCHEMAS } from "./types.sanity";
@@ -76,15 +77,25 @@ export default defineConfig({
 
       if (schema.options?.singleton) {
         return [
-          ...prev.filter(
-            ({ action }) =>
-              action == "publish" ||
-              action == "unpublish" ||
-              action == "delete",
-          ),
+          ...prev
+            .filter(
+              ({ action }) =>
+                action == "publish" ||
+                action == "unpublish" ||
+                action == "delete",
+            )
+            .map((originalAction) =>
+              originalAction.action === "publish"
+                ? createPublishAction(originalAction)
+                : originalAction,
+            ),
         ];
       }
-      return prev;
+      return prev.map((originalAction) =>
+        originalAction.action === "publish"
+          ? createPublishAction(originalAction)
+          : originalAction,
+      );
     },
     newDocumentOptions: (prev, context) => {
       prev = prev.filter((option: any) => {
