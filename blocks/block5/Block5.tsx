@@ -95,7 +95,7 @@ export const Block5 = ({
       </div>
 
       <div className="mt-10">
-        <PricingTable features={features} />
+        <PricingTable features={features} theme={{ title: theme?.title }} />
       </div>
     </Wrapper>
   );

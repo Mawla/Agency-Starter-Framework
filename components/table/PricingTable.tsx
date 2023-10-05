@@ -1,6 +1,8 @@
 import { IconLoaderProps } from "../../components/images/IconLoader";
 import { TableProps } from "../../components/table/Table";
 import { TitleProps } from "../../components/title/Title";
+import MobileScroller from "../slider/MobileScroller";
+import { TitleThemeType } from "../title/title.options";
 import { ComponentType, lazy } from "react";
 
 const Table = lazy<ComponentType<TableProps>>(
@@ -71,24 +73,31 @@ export type PricingTableProps = {
     title?: string;
     csv?: string;
   }[];
+  theme?: {
+    title?: TitleThemeType;
+  };
 };
 
-export const PricingTable = ({ features }: PricingTableProps) => {
+export const PricingTable = ({ theme, features }: PricingTableProps) => {
   if (!features || !Boolean(features?.filter(Boolean).length)) return null;
 
   return (
     <div className="grid gap-20">
       {features.map(({ _id, title, csv }) => (
-        <div key={_id} className="grid gap-6">
-          <Title as="h3">{title}</Title>
+        <div key={_id} className="grid">
+          <Title as="h3" {...theme?.title}>
+            {title}
+          </Title>
 
-          <div className="w-full overflow-x-scroll overflow-scrolling-touch [&_table]:text-lg [&_tr]:even:bg-transparent [&_td]:border-b [&_td]:pl-0 [&_th]:pl-0">
-            <Table
-              file={csv}
-              fileName={title}
-              textTransformers={textTransformers}
-            />
-          </div>
+          <MobileScroller>
+            <div className="[&_table]:text-sm sm:[&_table]:text-base md:[&_table]:text-lg [&_tr]:even:bg-transparent [&_th]:border-b [&_td]:border-b lg:[&_td]:pl-0 [&_th]:pl-0 [&_td:first-of-type]:w-[240px] sm:[&_td:first-of-type]:w-[360px]">
+              <Table
+                file={csv}
+                fileName={title}
+                textTransformers={textTransformers}
+              />
+            </div>
+          </MobileScroller>
         </div>
       ))}
     </div>

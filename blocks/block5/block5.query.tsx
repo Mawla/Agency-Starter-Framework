@@ -11,6 +11,7 @@ export const getBlock5Query = (language: LanguageType) => groq`
       "features": *[_type == "pricing.feature" && language == "${language}"] {
         _id,
         title,
-        "csv": file.asset->url
-      }
+        "csv": file.asset->url,
+        orderRank
+      } | order(orderRank asc)
     }`;
