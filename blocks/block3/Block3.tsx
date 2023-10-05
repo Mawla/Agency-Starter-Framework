@@ -153,7 +153,7 @@ export const Block3 = ({
               <div
                 key={_id}
                 className={cx(
-                  "flex flex-col gap-4 border border-current text-left",
+                  "flex flex-col gap-4 text-left",
                   theme?.plans?.card?.background &&
                     backgroundClasses[theme?.plans?.card?.background],
                   theme?.plans?.card?.color &&
@@ -164,9 +164,9 @@ export const Block3 = ({
                   theme?.plans?.card?.padding
                     ? paddingYClasses[theme?.plans?.card?.padding]
                     : "py-8",
+                  theme?.plans?.border?.color && "border",
                   theme?.plans?.border?.color &&
                     borderClasses[theme?.plans?.border?.color],
-                  theme?.plans?.border?.color && "border",
                   theme?.plans?.border?.color &&
                     borderWidthClasses[theme?.plans?.border?.width || 1],
                   theme?.plans?.border?.radius &&
