@@ -132,6 +132,7 @@ export const Block4 = ({
               size={theme?.intro?.size || "xl"}
               color={theme?.intro?.color}
               weight={theme?.intro?.weight}
+              font={theme?.intro?.font}
               align={theme?.block?.align || "center"}
             >
               <PortableText content={intro as PortableTextBlock[]} />
@@ -143,6 +144,7 @@ export const Block4 = ({
               size={theme?.body?.size || "xl"}
               color={theme?.body?.color}
               weight={theme?.body?.weight}
+              font={theme?.body?.font}
               align={theme?.block?.align || "center"}
             >
               <PortableText content={body as PortableTextBlock[]} />
