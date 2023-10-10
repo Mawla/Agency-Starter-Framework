@@ -219,7 +219,7 @@ export const ComposableCard = ({
           </Title>
         )}
         {content && (
-          <Title as="div" {...theme?.content}>
+          <Title as="div" {...theme?.content} className="format [&_p+ul]:mt-0">
             <PortableText content={content as PortableTextBlock[]} />
           </Title>
         )}
