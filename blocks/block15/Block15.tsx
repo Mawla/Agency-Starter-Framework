@@ -79,6 +79,7 @@ export const Block15 = ({
               <Text
                 size={theme?.intro?.size || "xl"}
                 color={theme?.intro?.color}
+                font={theme?.intro?.font}
                 weight={theme?.intro?.weight}
               >
                 <PortableText content={intro as PortableTextBlock[]} />
@@ -90,6 +91,7 @@ export const Block15 = ({
               <Text
                 size={theme?.body?.size || "xl"}
                 color={theme?.body?.color}
+                font={theme?.body?.font}
                 weight={theme?.body?.weight}
               >
                 <PortableText content={body as PortableTextBlock[]} />

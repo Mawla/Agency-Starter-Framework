@@ -1,6 +1,6 @@
 import { pick } from "../../helpers/utils/object";
 import { FONTS, FONT_WEIGHTS } from "../../theme";
-import { ALIGNMENTS, ColorType, SIZES } from "../../types";
+import { ALIGNMENTS, ColorType, FontType, SIZES } from "../../types";
 
 export const TEXT_ALIGN_OPTIONS = pick(
   ALIGNMENTS,
@@ -39,4 +39,5 @@ export type TextThemeType = {
   size?: TextSizeType;
   color?: ColorType;
   weight?: TextWeightType;
+  font?: FontType;
 };

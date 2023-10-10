@@ -148,19 +148,19 @@ export default defineType({
               group: "advanced",
             }),
             defineField({
-              name: "onload",
-              title: "On load script",
+              name: "onready",
+              title: "On ready script",
               description:
-                "Code to execute after the script has finished loading",
+                "Code to execute after the script has finished loading and every time the component is mounted.",
               type: "text",
               rows: 10,
               group: "advanced",
             }),
             defineField({
-              name: "onready",
-              title: "On ready script",
+              name: "onload",
+              title: "On load script",
               description:
-                "Code to execute after the script has finished loading and every time the component is mounted.",
+                "Code to execute after the script has finished loading",
               type: "text",
               rows: 10,
               group: "advanced",
