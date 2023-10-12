@@ -292,7 +292,6 @@ export const LivePreview = ({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
-      console.log(e);
       // scroll to block
       if (e.data.type == "preview-view-scroll-to-block" && e.data.blockKey) {
         const element = document.querySelector(
