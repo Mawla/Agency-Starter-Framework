@@ -97,7 +97,7 @@ export default function PreviewPage({
       <Page
         navigation={null as unknown as NavigationType}
         page={previewDocument}
-        isPreviewMode={isPreviewMode}
+        isPreviewMode={false}
         footer={null as unknown as FooterType}
         config={config}
       />
