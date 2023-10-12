@@ -2,6 +2,7 @@ import { getPathForId } from "./helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "./languages";
 import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
 import { Logo } from "./studio/components/Logo";
+import previewPane from "./studio/components/Preview/PreviewPane";
 import { createPublishAction } from "./studio/components/PublishAction";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
@@ -39,6 +40,7 @@ export default defineConfig({
       defaultApiVersion: "vX",
     }),
     muxInput(),
+    previewPane,
   ],
 
   document: {
