@@ -13,6 +13,7 @@ import {
 import PagePasswordComponent, {
   PagePasswordWrapper,
 } from "../../components/PagePasswordComponent";
+import DocumentPreview from "../../components/Preview/DocumentPreview";
 import { getISODateString } from "../../utils/datetime";
 import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
@@ -72,6 +73,16 @@ export const PUBLISHED_AT_FIELD = defineField({
   type: "date",
   validation: (Rule: DateRule) => Rule.required(),
   group: ["meta"],
+});
+
+export const PREVIEW_FIELD = defineField({
+  name: "preview_sync",
+  title: "Preview",
+  type: "string",
+  components: {
+    field: DocumentPreview,
+  },
+  group: ["meta", "content", "language", "tools"],
 });
 
 export const BLOCKS_FIELD = defineField({
@@ -325,6 +336,7 @@ export const pageBase = {
     },
   ],
   fields: [
+    PREVIEW_FIELD,
     PASSWORD,
     PREVENT_PUBLISH_FIELD,
     TITLE_FIELD,

@@ -1,13 +1,10 @@
 import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
-import DocumentPreview from "./Preview/DocumentPreview";
 import { ComponentType, useEffect } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
   return (
     <div>
-      <DocumentPreview />
-
       {props.renderDefault(props)}
 
       <div

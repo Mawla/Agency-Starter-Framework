@@ -1,4 +1,4 @@
-import { PreviewIframeInline } from "../../views/PreviewIframe";
+import DocumentPreview from "../../components/Preview/DocumentPreview";
 import { LANGUAGE_FIELD } from "./page-fields";
 import {
   orderRankField,
@@ -31,6 +31,15 @@ const schema = defineType({
     },
   },
   fields: [
+    defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+      group: ["content", "language"],
+    }),
     orderRankField({ type: "pricing.feature" }),
     defineField({
       name: "title",
@@ -69,21 +78,6 @@ const schema = defineType({
       ...LANGUAGE_FIELD,
       validation: (Rule) => Rule.required().warning(),
     },
-    defineField({
-      name: "preview",
-      title: "Preview",
-      type: "object",
-      group: "content",
-      fields: [
-        defineField({
-          type: "string",
-          name: "preview",
-          components: {
-            field: PreviewIframeInline,
-          },
-        }),
-      ],
-    }),
   ],
 });
 

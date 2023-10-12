@@ -549,7 +549,8 @@ export const defaultDocumentNode = (
     schemaType.startsWith("preset.") ||
     schemaType === "script" ||
     schemaType === "navigation" ||
-    schemaType === "footer"
+    schemaType === "footer" ||
+    schemaType === "pricing.feature"
   ) {
     views.push(PreviewView(S));
 

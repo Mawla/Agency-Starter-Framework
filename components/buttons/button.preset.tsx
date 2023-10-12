@@ -1,8 +1,8 @@
 import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
 import IconPicker from "../../studio/components/IconPicker";
 import PresetUsage from "../../studio/components/Presets/PresetUsage";
+import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
-import { PreviewIframeInline } from "../../studio/views/PreviewIframe";
 import { FONTS, FONT_SIZES, FONT_WEIGHTS } from "../../theme";
 import {
   BORDER_RADIUS_OPTIONS,
@@ -43,6 +43,14 @@ export default defineType({
     },
   },
   fields: [
+    defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+    }),
     defineField({
       name: "title",
       title: "Title",
@@ -153,13 +161,6 @@ export default defineType({
       title: "Preview",
       type: "object",
       fields: [
-        defineField({
-          type: "string",
-          name: "preview",
-          components: {
-            field: PreviewIframeInline,
-          },
-        }),
         defineField({
           name: "text",
           title: "Text",
