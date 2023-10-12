@@ -24,6 +24,7 @@ import { getPageQuery } from "../queries/page.query";
 import { backgroundClasses } from "../theme";
 import { ColorType } from "../types";
 import cx from "classnames";
+import { parse, evaluate } from "groq-js";
 import type { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import Script from "next/script";
@@ -39,7 +40,9 @@ export default function PreviewPage({
   const isPreviewMode = preview;
   const router = useRouter();
 
-  const [data, setData] = useState<any>(null);
+  const [dataset, setDataset] = useState<any>(null);
+  const [document, setDocument] = useState<any>(null);
+  const [previewDocument, setPreviewDocument] = useState<any>(null);
 
   let id = Array.isArray(router.query.id)
     ? router.query.id[0]
@@ -78,14 +81,40 @@ export default function PreviewPage({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
-      if (e.data.type == "document-preview-update") {
-        setData(e.data.document);
+      if (e.data.type == "document-preview-document") {
+        setDocument(e.data.document);
+      } else if (e.data.type == "document-preview-dataset") {
+        setDataset(e.data.dataset);
       }
     }
 
     window.addEventListener("message", onMessage, false);
     () => window.removeEventListener("message", onMessage);
   }, []);
+
+  /**
+   * Update
+   */
+
+  useEffect(() => {
+    if (!document) return;
+    if (!dataset) return;
+
+    async function update() {
+      if (!id) return;
+
+      // let tree = parse(getPageQuery(language));
+      let tree = parse(getPageQuery(language));
+      let value = await evaluate(tree, {
+        dataset: [document, ...dataset],
+        params: { _id: id },
+      });
+      let result = await value.get();
+      setPreviewDocument(result);
+    }
+
+    update();
+  }, [dataset, document, id]);
 
   if (!id) return null;
   id = id.startsWith("drafts.") ? id : `drafts.${id}`;
@@ -96,14 +125,15 @@ export default function PreviewPage({
     <div
       className={cx(
         "pb-20",
-        data?.preview?.styles?.background &&
-          backgroundClasses[data?.preview?.styles?.background as ColorType],
-        data?.preview?.styles?.background && "p-4",
+        // data?.preview?.styles?.background &&
+        //   backgroundClasses[data?.preview?.styles?.background as ColorType],
+        // data?.preview?.styles?.background && "p-4",
       )}
     >
+      {/* <pre>{JSON.stringify(dataset, null, 2)}</pre> */}
       <Page
         navigation={null as unknown as NavigationType}
-        page={data}
+        page={previewDocument}
         isPreviewMode={isPreviewMode}
         footer={null as unknown as FooterType}
         config={config}

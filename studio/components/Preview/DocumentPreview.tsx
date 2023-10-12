@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useFormValue } from "sanity";
+import { useClient, useFormValue } from "sanity";
 import { useDocumentPane } from "sanity/desk";
 
 function sleep(ms: number) {
@@ -10,6 +10,7 @@ export const DocumentPreview = () => {
   const document = useFormValue([]);
   const [state, setState] = React.useState<"loading" | "ready">("loading");
   const { openInspector } = useDocumentPane();
+  const client = useClient({ apiVersion: "vX" });
 
   /**
    * Send the document to the preview pane
@@ -26,10 +27,35 @@ export const DocumentPreview = () => {
     if (!previewIframe) return;
 
     previewIframe.contentWindow.postMessage(
-      { type: "document-preview-update", document },
+      { type: "document-preview-document", document },
       import.meta.env.SANITY_STUDIO_PROJECT_PATH,
     );
   }, [document, state]);
+
+  /**
+   * Get entire dataset
+   */
+
+  useEffect(() => {
+    if (!document) return;
+    if (state !== "ready") return;
+
+    async function getDataset() {
+      const previewIframe = window.document.querySelector(
+        ".previewView iframe",
+      ) as HTMLIFrameElement;
+      if (!previewIframe?.contentWindow) return;
+
+      const dataset = await client.fetch(`*`);
+
+      previewIframe.contentWindow.postMessage(
+        { type: "document-preview-dataset", dataset },
+        import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+      );
+    }
+
+    getDataset();
+  }, [state]);
 
   /**
    * Listen for the iframe to be ready
