@@ -80,6 +80,7 @@ export const PreviewIframeComponent = ({
           border: 0;
           height: 100%;
           width: 100%;
+          margin-left: 20px;
         }
       `}</style>
 
