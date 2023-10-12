@@ -76,13 +76,6 @@ export const DocumentPreview = () => {
     window.addEventListener("message", onMessage, false);
     () => window.removeEventListener("message", onMessage);
   }, []);
-  /**
-   * Automatically open the preview pane
-   */
-
-  useEffect(() => {
-    openInspector("preview-pane");
-  }, []);
 
   // useEffect(() => {
   //   async function openPreview() {
