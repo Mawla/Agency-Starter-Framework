@@ -46,7 +46,12 @@ export const DocumentPreview = () => {
       ) as HTMLIFrameElement;
       if (!previewIframe?.contentWindow) return;
 
-      const dataset = await client.fetch(`*`);
+      const dataset = await client.fetch(
+        `* {
+          ...,
+          "hasReferences": count(*[references(^._id)]) > 0
+        }[hasReferences]`,
+      );
 
       previewIframe.contentWindow.postMessage(
         { type: "document-preview-dataset", dataset },

@@ -1,28 +1,10 @@
-import Wrapper from "../components/block/Wrapper";
-import Button from "../components/buttons/Button";
-import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
-import { decorationFieldsQuery } from "../components/decorations/decoration.query";
-import PortableText from "../components/portabletext/PortableText";
-import { LivePreviewProps } from "../components/previewmode/LivePreview";
-import { Scripts } from "../components/script/Script";
-import PricingTable from "../components/table/PricingTable";
-import Text from "../components/text/Text";
-import Title from "../components/title/Title";
-import { config as sanityConfig } from "../helpers/sanity/config";
 import { getClient } from "../helpers/sanity/server";
 import { baseLanguage, LanguageType } from "../languages";
-import { Footer } from "../layout/footer/Footer";
-import { FooterType, getFooterQuery } from "../layout/footer/footer.query";
-import { Navigation } from "../layout/navigation/Navigation";
-import {
-  getNavigationQuery,
-  NavigationType,
-} from "../layout/navigation/navigation.query";
+import { FooterType } from "../layout/footer/footer.query";
+import { NavigationType } from "../layout/navigation/navigation.query";
 import { Page } from "../layout/pages/Page";
 import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery } from "../queries/page.query";
-import { backgroundClasses } from "../theme";
-import { ColorType } from "../types";
 import cx from "classnames";
 import { parse, evaluate } from "groq-js";
 import type { GetStaticProps } from "next";
@@ -43,19 +25,6 @@ export default function PreviewPage({
   const [dataset, setDataset] = useState<any>(null);
   const [document, setDocument] = useState<any>(null);
   const [previewDocument, setPreviewDocument] = useState<any>(null);
-
-  let id = Array.isArray(router.query.id)
-    ? router.query.id[0]
-    : router.query.id;
-
-  let documentType = Array.isArray(router.query.type)
-    ? router.query.type[0]
-    : router.query.type || "page";
-
-  let previewType =
-    documentType.startsWith("page.") || documentType === "preset.blocks"
-      ? "page"
-      : documentType;
 
   const language = router.query.language as LanguageType;
 
@@ -101,25 +70,20 @@ export default function PreviewPage({
     if (!dataset) return;
 
     async function update() {
-      if (!id) return;
-
-      // let tree = parse(getPageQuery(language));
+      if (!document._id) return;
       let tree = parse(getPageQuery(language));
       let value = await evaluate(tree, {
         dataset: [document, ...dataset],
-        params: { _id: id },
+        params: { _id: document._id },
       });
       let result = await value.get();
       setPreviewDocument(result);
     }
 
     update();
-  }, [dataset, document, id]);
+  }, [dataset, document]);
 
-  if (!id) return null;
-  id = id.startsWith("drafts.") ? id : `drafts.${id}`;
-  if (previewType.startsWith("preset.") || documentType === "preset.blocks")
-    id = id.replace("drafts.", "");
+  if (!document) return null;
 
   return (
     <div
@@ -130,7 +94,6 @@ export default function PreviewPage({
         // data?.preview?.styles?.background && "p-4",
       )}
     >
-      {/* <pre>{JSON.stringify(dataset, null, 2)}</pre> */}
       <Page
         navigation={null as unknown as NavigationType}
         page={previewDocument}
