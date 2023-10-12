@@ -219,8 +219,8 @@ export const IMAGE_FIELD = defineField({
   description: "Image used in article grids. Preferred aspect ratio 16/9.",
   group: ["content"],
   options: {
-    hotspot: true
-  }
+    hotspot: true,
+  },
 });
 
 export const TAGS_FIELD = defineField({
