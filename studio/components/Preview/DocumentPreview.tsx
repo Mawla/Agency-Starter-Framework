@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import { SCHEMAS } from "../../../types.sanity";
+import { useEffect } from "react";
 import { useClient, useFormValue } from "sanity";
 
 export const DocumentPreview = () => {
   const document = useFormValue([]);
-  const [state, setState] = React.useState<"loading" | "ready">("loading");
   const client = useClient({ apiVersion: "vX" });
+
+  function getIframe() {
+    return window.document.querySelector(
+      ".previewView iframe",
+    ) as HTMLIFrameElement;
+  }
 
   /**
    * Send the document to the preview pane
@@ -13,18 +19,23 @@ export const DocumentPreview = () => {
   useEffect(() => {
     if (!document) return;
 
-    const previewIframe = window.document.querySelector(
-      ".previewView iframe",
-    ) as HTMLIFrameElement;
-    if (!previewIframe?.contentWindow) return;
+    function onMessage(e: MessageEvent) {
+      const previewIframe = getIframe();
+      if (!previewIframe?.contentWindow) return;
 
-    if (!previewIframe) return;
+      if (e.data.type == "document-preview-iframe-ready") {
+        previewIframe.contentWindow.postMessage(
+          { type: "document-preview-document", document },
+          import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+        );
+      }
+    }
 
-    previewIframe.contentWindow.postMessage(
-      { type: "document-preview-document", document },
-      import.meta.env.SANITY_STUDIO_PROJECT_PATH,
-    );
-  }, [document, state]);
+    onMessage({ data: { type: "document-preview-iframe-ready" } } as any);
+
+    window.addEventListener("message", onMessage);
+    () => window.removeEventListener("message", onMessage);
+  }, [document]);
 
   /**
    * Get entire dataset
@@ -32,20 +43,20 @@ export const DocumentPreview = () => {
 
   useEffect(() => {
     if (!document) return;
-    if (state !== "ready") return;
 
     async function getDataset() {
-      const previewIframe = window.document.querySelector(
-        ".previewView iframe",
-      ) as HTMLIFrameElement;
+      const previewIframe = getIframe();
       if (!previewIframe?.contentWindow) return;
 
       const dataset = await client.fetch(
-        `* {
-          ...,
-          "hasReferences": count(*[references(^._id)]) > 0
-        }[hasReferences]`,
+        `*[_type in ['${Object.keys(SCHEMAS).join(
+          "', '",
+        )}', 'sanity.imageAsset', 'sanity.fileAsset']
+        ]`,
       );
+
+      console.log(dataset);
+      if (!dataset?.length) return;
 
       previewIframe.contentWindow.postMessage(
         { type: "document-preview-dataset", dataset },
@@ -53,23 +64,19 @@ export const DocumentPreview = () => {
       );
     }
 
-    getDataset();
-  }, [state]);
+    function onMessage(e: MessageEvent) {
+      if (e.data.type == "document-preview-iframe-ready") {
+        getDataset();
+      }
+    }
+
+    window.addEventListener("message", onMessage);
+    () => window.removeEventListener("message", onMessage);
+  }, [document]);
 
   /**
    * Listen for the iframe to be ready
    */
-
-  useEffect(() => {
-    function onMessage(e: MessageEvent) {
-      if (e.data.type == "document-preview-iframe-ready") {
-        setState("ready");
-      }
-    }
-
-    window.addEventListener("message", onMessage, false);
-    () => window.removeEventListener("message", onMessage);
-  }, []);
 
   return null;
 };
