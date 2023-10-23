@@ -36,7 +36,7 @@ const IconLoader = lazy<ComponentType<IconLoaderProps>>(
 
 export default {
   component: Block1,
-  title: "Blocks/Block1",
+  title: "Blocks/1. Text and Media",
 } as Meta;
 
 const DEMO_CONTENT = {

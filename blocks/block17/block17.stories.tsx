@@ -11,7 +11,7 @@ import React from "react";
 
 export default {
   component: Block17,
-  title: "Blocks/Block17",
+  title: "Blocks/17. Testimonial Poster",
 } as Meta;
 
 const DEMO_CONTENT: Block17Props = {

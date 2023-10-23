@@ -19,7 +19,7 @@ import React from "react";
 
 export default {
   component: Block2,
-  title: "Blocks/Block2",
+  title: "Blocks/2. Feature Section with Icons",
 } as Meta;
 
 const DEMO_CONTENT = {

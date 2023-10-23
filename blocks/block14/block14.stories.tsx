@@ -7,7 +7,7 @@ import React from "react";
 
 export default {
   component: Block14,
-  title: "Blocks/Block14",
+  title: "Blocks/14. Article",
 } as Meta;
 
 const DEMO_CONTENT = {

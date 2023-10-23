@@ -25,7 +25,7 @@ import React, { useState } from "react";
 
 export default {
   component: Block18,
-  title: "Blocks/Block18",
+  title: "Blocks/18. Card Grid",
 } as Meta;
 
 const DEMO_CONTENT: Block18Props = {

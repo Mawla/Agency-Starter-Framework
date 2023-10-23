@@ -18,7 +18,7 @@ import React from "react";
 
 export default {
   component: Block5,
-  title: "Blocks/Block5",
+  title: "Blocks/5. Pricing Comparison Tables",
 } as Meta;
 
 const DEMO_CONTENT: Block5Props = {

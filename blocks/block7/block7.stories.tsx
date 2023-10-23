@@ -19,7 +19,7 @@ import React from "react";
 
 export default {
   component: Block7,
-  title: "Blocks/Block7",
+  title: "Blocks/7. Item Shelf",
 } as Meta;
 
 const items = [
