@@ -82,6 +82,37 @@ const DEMO_CONTENT: Block17Props = {
       image: demoImage2,
       name: "Arjen",
     },
+    {
+      jobTitle: "job title 2",
+      title: "This is very cool!",
+      content: [
+        {
+          _type: "block",
+          style: "normal",
+          _key: "3b7352913da1",
+          markDefs: [
+            {
+              color: {
+                background: "gray-950",
+                text: "white",
+              },
+              _type: "color",
+              _key: "b03490dc486e",
+            },
+          ],
+          children: [
+            {
+              _type: "span",
+              marks: [],
+              text: "This is a somewhat longer quote. This software will change the way you work it’s professional and saves time, giving you back lost hours spent on paperwork.",
+              _key: "e142140e67870",
+            },
+          ],
+        },
+      ],
+      image: demoImage2,
+      name: "Arjen",
+    },
   ],
 };
 
@@ -97,8 +128,8 @@ export const Multiple = () => (
           top: "xl",
           bottom: "xl",
         },
-        outerBackground: "black",
-        background: "white",
+        // outerBackground: "black",
+        // background: "white",
         width: "inner",
         rounded: {
           top: "lg",
@@ -125,7 +156,7 @@ export const Multiple = () => (
     }}
     testimonials={[
       (DEMO_CONTENT.testimonials || [])[0],
-      (DEMO_CONTENT.testimonials || [])[0],
+      (DEMO_CONTENT.testimonials || [])[1],
       (DEMO_CONTENT.testimonials || [])[0],
     ]}
   />

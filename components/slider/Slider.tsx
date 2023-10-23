@@ -56,6 +56,7 @@ export const Slider = ({
         keyboard={{
           enabled: true,
         }}
+        fadeEffect={{ crossFade: true }}
       >
         {slides?.filter(Boolean).map((slide, n) => (
           <SwiperSlide
