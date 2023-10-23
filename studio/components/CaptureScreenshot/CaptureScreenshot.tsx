@@ -45,7 +45,7 @@ export const CaptureScreenshot: ComponentType<any> = (props) => {
 
       // click split
       const splitButton = window.document.querySelector(
-        '[title="Split pane right"]',
+        '[aria-label="Split pane right"]',
       ) as HTMLButtonElement;
       splitButton?.click();
 

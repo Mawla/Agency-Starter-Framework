@@ -199,7 +199,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     !process.env.VERCEL_GIT_COMMIT_REF ||
     !["production", "staging"].includes(process.env.VERCEL_GIT_COMMIT_REF)
   ) {
-    console.log("not building on preview environment");
     return {
       paths: [],
       fallback: "blocking",

@@ -3,6 +3,7 @@ import Button from "../components/buttons/Button";
 import { buttonThemeFieldsQuery } from "../components/buttons/button.query";
 import { decorationFieldsQuery } from "../components/decorations/decoration.query";
 import PortableText from "../components/portabletext/PortableText";
+import { ScreenCapture } from "../components/previewmode/ScreenCapture";
 import { Scripts } from "../components/script/Script";
 import PricingTable from "../components/table/PricingTable";
 import Text from "../components/text/Text";
@@ -232,6 +233,7 @@ export default function PreviewPage({
         previewDocument?.preview?.styles?.background && "p-4",
       )}
     >
+      <ScreenCapture />
       {previewType === "page" && previewDocument && (
         <Page
           navigation={null as unknown as NavigationType}

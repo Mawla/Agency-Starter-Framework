@@ -55,7 +55,6 @@ export const DocumentPreview = () => {
         ]`,
       );
 
-      console.log(dataset);
       if (!dataset?.length) return;
 
       previewIframe.contentWindow.postMessage(
