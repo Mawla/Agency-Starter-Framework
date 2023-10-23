@@ -42,7 +42,7 @@ export const PagePasswordComponent: ComponentType<any> = (props) => {
         _type: "password",
         _id: `password.${pageId}`,
         password,
-        page: { _ref: pageId },
+        page: { _ref: pageId, _weak: true },
       });
 
       // delete unused passwords
@@ -140,11 +140,10 @@ const PasswordDialog = ({
   const [state, setState] = useState<"loading" | "ready">(
     mode === "edit" ? "loading" : "ready",
   );
-  const [passwordDoc, setPasswordDoc] =
-    useState<{
-      _id: string;
-      password: string;
-    } | null>(null);
+  const [passwordDoc, setPasswordDoc] = useState<{
+    _id: string;
+    password: string;
+  } | null>(null);
 
   const [password, setPassword] = useState<string | null>(null);
 
@@ -154,6 +153,11 @@ const PasswordDialog = ({
     const query = `*[_type == 'password' && references("${pageId}")][0] { password, _id }`;
     async function getPassword() {
       const result = await client.fetch(query);
+      if (!result) {
+        onDelete({ _id: pageId });
+        return setState("ready");
+      }
+
       setPasswordDoc(result);
       setPassword(result.password);
       setState("ready");
