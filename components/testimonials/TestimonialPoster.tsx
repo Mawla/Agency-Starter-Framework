@@ -1,4 +1,6 @@
 import { TitleProps } from "../../components/title/Title";
+import { alignItemsClasses } from "../../theme";
+import { HorizontalAlignType } from "../../types";
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
 import { TitleThemeType } from "../title/title.options";
@@ -32,6 +34,7 @@ export type TestimonialPosterProps = {
     name?: TitleThemeType;
     jobTitle?: TitleThemeType;
   };
+  align?: HorizontalAlignType;
 } & TestimonialType;
 
 export const TestimonialPoster = ({
@@ -41,6 +44,7 @@ export const TestimonialPoster = ({
   jobTitle,
   content,
   theme,
+  align,
 }: TestimonialPosterProps) => {
   let numChars = 0;
   if (name) numChars += name.length;
@@ -53,13 +57,23 @@ export const TestimonialPoster = ({
       {(title || content) && (
         <blockquote>
           {title && (
-            <Title as="span" {...theme?.title}>
+            <Title
+              as="span"
+              {...theme?.title}
+              size={theme?.name?.size || "xl"}
+              weight={theme?.name?.weight || "normal"}
+            >
               {title}
             </Title>
           )}
           {content && (
             <div className="mt-6">
-              <Title as="div" {...theme?.content}>
+              <Title
+                as="div"
+                {...theme?.content}
+                size={theme?.name?.size || "4xl"}
+                weight={theme?.name?.weight || "medium"}
+              >
                 <PortableText content={content as PortableTextBlock[]} />
               </Title>
             </div>
@@ -71,26 +85,39 @@ export const TestimonialPoster = ({
         {(name || jobTitle || image) && (
           <div
             className={cx(
-              "inline-flex flex-col gap-[.25em] items-center max-w-xl",
+              "inline-flex flex-col gap-[.25em] max-w-xl",
+              align && alignItemsClasses[align],
               {
-                ["lg:flex-row"]: !isLong,
+                ["lg:flex-row lg:text-left lg:gap-3"]: !isLong,
               },
             )}
           >
             {image && (
-              <div className="w-8 h-8 rounded-full overflow-hidden mr-3 shrink-0">
+              <div className="w-8 h-8 rounded-full overflow-hidden shrink-0">
                 <ResponsiveImage {...image} />
               </div>
             )}
             {(name || jobTitle) && (
               <div>
                 {name && (
-                  <Title as="span" {...theme?.name} className="shrink-0">
-                    {`${name}${jobTitle ? "," : ""}`}
+                  <Title
+                    as="span"
+                    {...theme?.name}
+                    size={theme?.name?.size || "lg"}
+                    weight={theme?.name?.weight || "medium"}
+                    className="shrink-0"
+                  >
+                    {name}
                   </Title>
                 )}
                 {jobTitle && (
-                  <Title as="span" {...theme?.jobTitle}>
+                  <Title
+                    as="span"
+                    {...theme?.jobTitle}
+                    {...theme?.name}
+                    size={theme?.name?.size || "lg"}
+                    weight={theme?.name?.weight || "normal"}
+                  >
                     {jobTitle}
                   </Title>
                 )}

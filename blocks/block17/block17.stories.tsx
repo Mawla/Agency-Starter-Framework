@@ -83,7 +83,6 @@ const DEMO_CONTENT: Block17Props = {
       name: "Arjen",
     },
     {
-      jobTitle: "job title 2",
       title: "This is very cool!",
       content: [
         {
@@ -111,7 +110,8 @@ const DEMO_CONTENT: Block17Props = {
         },
       ],
       image: demoImage2,
-      name: "Arjen",
+      name: "Bonnie Bonnie Bonnie Green Blue Red",
+      jobTitle: "CTO at Open AI CTO at Open AI CTO at Open AI",
     },
   ],
 };
@@ -155,8 +155,8 @@ export const Multiple = () => (
       },
     }}
     testimonials={[
-      (DEMO_CONTENT.testimonials || [])[0],
       (DEMO_CONTENT.testimonials || [])[1],
+      (DEMO_CONTENT.testimonials || [])[0],
       (DEMO_CONTENT.testimonials || [])[0],
     ]}
   />
