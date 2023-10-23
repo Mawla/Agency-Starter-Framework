@@ -193,6 +193,7 @@ export const Block4 = ({
               <Video
                 {...video}
                 className={cx(
+                  "relative aspect-video",
                   theme?.image?.rounded && "overflow-hidden",
                   theme?.image?.rounded &&
                     borderRadiusClasses[theme?.image?.rounded],
