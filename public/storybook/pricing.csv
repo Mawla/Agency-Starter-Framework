@@ -10,3 +10,4 @@ Data dictionary;NO;yes;YES;x
 Positive;YES;yes;y;v
 Negative;NO;no;n;x
 Link;https://www.google.com;https://google.com;;
+Tooltip tooltip (i=Hello this is a tooltip) tooltip; hello (i=Hello this is a tooltip);(i=Hello this is a tooltip);;
