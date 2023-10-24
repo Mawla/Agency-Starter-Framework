@@ -87,31 +87,21 @@ export const DocumentPreview = () => {
     async function openPreview() {
       if (!document) return;
 
-      const id = (document as any)?._id.replace("drafts.", "");
-      if (!location.href.endsWith(id)) return;
+      const panes = router.state.panes as {
+        id: "string";
+        params: { view?: string };
+      }[][];
+      if (!panes) return;
 
-      // router.navigateUrl({path: '/desk/products'})
+      const finalPane = panes[panes.length - 1];
+      if (!finalPane || finalPane.length > 1) return;
 
-      // console.log(router);
-      // console.log(router.state);
-      // console.log(router.resolvePathFromState(router.state));
-
-      // const panes = router.state.panes as {
-      //   id: "string";
-      //   params: { view?: string };
-      // }[][];
-      // if (!panes) return;
-
-      // const finalPane = panes[panes.length - 1];
-      // if (!finalPane) return;
-
-      // const previewPane = finalPane.find((pane) =>
-      //   pane.id?.startsWith("preview"),
-      // );
-      // if (previewPane) return;
+      const previewPane = finalPane.find(
+        (pane) => pane.params.view === "preview",
+      );
+      if (previewPane) return;
 
       const path = router.resolvePathFromState(router.state);
-      console.log(path);
       router.navigateUrl({ path: `${path}%7C%2Cview%3Dpreview` });
     }
 
