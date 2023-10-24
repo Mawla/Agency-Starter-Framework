@@ -6,18 +6,18 @@ export const PreviewButton = ({ pagePath }: { pagePath: string }) => {
   const { language } = useContext(PageContext);
 
   return (
-    <span className="shadow-lg flex gap-4 bg-[#1f2937] items-center">
-      <span className="pl-3 font-['Helvetica_Neue']">preview mode</span>
+    <span className="shadow-lg flex gap-2 text-xs bg-[#1f2937] items-center">
+      <span className="pl-2 font-['Helvetica_Neue']">draft mode</span>
 
       <a
-        className="p-3 bg-[#1f2937] transition-color hover:underline hover:bg-[#222] border-l border-l-black/80"
+        className="p-2 bg-[#1f2937] transition-color hover:underline hover:bg-[#222] border-l border-l-black/80"
         href={`/api/preview/exit-preview?redirect=${getURLForPath(
           null as any,
           pagePath,
           language,
         )}`}
       >
-        <span className="w-5 h-5 block">
+        <span className="w-3 h-3 block">
           <svg
             viewBox="0 0 24 24"
             fill="none"

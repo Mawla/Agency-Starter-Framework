@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "../../../types.sanity";
 import { getSchemaDefinition, matchSchema } from "./match-schema";
 import { CopyIcon, ArchiveIcon } from "@sanity/icons";
 import {
@@ -17,7 +18,7 @@ const ACTION_ID = "sanityCopyPaste";
 const READ_PASTE_TIMEOUT = 1000;
 
 export const CopyPaste: ComponentType<any> = (props) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const allSchemas = useSchema()._registry;
 
   const toast = useToast();

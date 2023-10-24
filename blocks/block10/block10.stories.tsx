@@ -19,7 +19,7 @@ import React from "react";
 
 export default {
   component: Block10,
-  title: "Blocks/Block10",
+  title: "Blocks/10. FAQ Accordions",
 } as Meta;
 
 const DEMO_CONTENT: Block10Props = {

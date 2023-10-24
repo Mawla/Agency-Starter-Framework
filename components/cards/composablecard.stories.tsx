@@ -23,7 +23,7 @@ import React from "react";
 
 export default {
   component: ComposableCard,
-  title: "Blocks/Block18/ComposableCard",
+  title: "Blocks/18. Card Grid/ComposableCard",
 } as Meta;
 
 const SQUARE = {

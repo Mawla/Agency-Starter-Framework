@@ -1,5 +1,7 @@
 import { pick } from "./helpers/utils/object";
 
+export const SANITY_API_VERSION = "2023-10-24";
+
 export const SCHEMAS = {
   "block.block0": "",
   "block.block1": "",

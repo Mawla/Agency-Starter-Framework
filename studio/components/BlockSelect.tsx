@@ -1,4 +1,4 @@
-import { BlockSchemaName } from "../../types.sanity";
+import { BlockSchemaName, SANITY_API_VERSION } from "../../types.sanity";
 import { SearchIcon } from "@sanity/icons";
 import {
   Badge,
@@ -69,12 +69,8 @@ const BlockSelect: ComponentType<any> = (props: BlockSelectProps) => {
 
   const allSchemas = useSchema()._registry;
 
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const toast = useToast();
-
-  const draftId = document._id?.startsWith("drafts.")
-    ? document._id
-    : `drafts.${document._id}`;
 
   const [options, setOptions] = useState<OptionType[]>([]);
   const [state, setState] = useState<"default" | "loading">("default");

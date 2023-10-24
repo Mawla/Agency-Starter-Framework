@@ -1,7 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { CSSProperties, useEffect, useRef } from "react";
 
 export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * When the form is opened: scroll preview iframe to element
+   */
 
   useEffect(() => {
     if (!props?.value?._key) return;
@@ -32,6 +36,10 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
       );
     }
   }, [props.open]);
+
+  /**
+   * When mouse enters/leaves: highlight block in preview
+   */
 
   useEffect(() => {
     if (!props?.value?._key) return;
@@ -76,8 +84,22 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
     };
   }, [props.value?._key]);
 
+  const highlightStyle: CSSProperties = {
+    background: "var(--card-focus-ring-color)",
+    position: "absolute",
+    left: -4,
+    top: 0,
+    bottom: 0,
+    zIndex: 1,
+    width: 2,
+    pointerEvents: "none",
+    opacity: props.highlight ? 1 : 0,
+    transition: "opacity 0.1s",
+  };
+
   return (
-    <div ref={elementRef}>
+    <div ref={elementRef} style={{ position: "relative" }}>
+      <div style={highlightStyle} />
       {props.renderChildren ? props.children : props.renderDefault(props)}
     </div>
   );

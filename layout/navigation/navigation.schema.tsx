@@ -1,4 +1,5 @@
 import { WIDTH_OPTIONS } from "../../components/block/width.options";
+import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import Warning from "../../studio/components/Warning";
 import { optionsToList } from "../../studio/utils/fields/optionsToList";
 import { SchemaName } from "../../types.sanity";
@@ -32,6 +33,15 @@ export default defineType({
     },
   },
   fields: [
+    defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+      group: ["content", "theme"],
+    }),
     defineField({
       name: "warning",
       title: "Warning",

@@ -1,4 +1,5 @@
 import { baseLanguage } from "../../languages";
+import { SANITY_API_VERSION } from "../../types.sanity";
 import { getStructurePath } from "../utils/desk/get-structure-path";
 import { Card, Text, Spinner } from "@sanity/ui";
 import IframeResizer from "iframe-resizer-react";
@@ -21,7 +22,7 @@ export const PreviewIframeComponent = ({
   _id: string;
   _type: string;
 }) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const [secret, setSecret] = useState<string | null>();
   const [state, setState] = useState<"loading" | "complete">("loading");
 

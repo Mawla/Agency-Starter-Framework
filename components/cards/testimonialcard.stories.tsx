@@ -5,7 +5,7 @@ import React from "react";
 
 export default {
   component: TestimonialCard,
-  title: "Blocks/Block18/TestimonialCard",
+  title: "Blocks/18. Card Grid/TestimonialCard",
 } as Meta;
 
 export const Card = () => (

@@ -4,6 +4,7 @@ import {
   LINKABLE_SCHEMAS,
   BlockSchemaName,
   BLOCK_SCHEMAS,
+  SANITY_API_VERSION,
 } from "../../../types.sanity";
 import {
   PageBuilder,
@@ -13,6 +14,7 @@ import {
 import PagePasswordComponent, {
   PagePasswordWrapper,
 } from "../../components/PagePasswordComponent";
+import DocumentPreview from "../../components/Preview/DocumentPreview";
 import { getISODateString } from "../../utils/datetime";
 import { getStructurePath } from "../../utils/desk/get-structure-path";
 import { isPathUnique } from "../../utils/desk/isPathUnique";
@@ -74,6 +76,16 @@ export const PUBLISHED_AT_FIELD = defineField({
   group: ["meta"],
 });
 
+export const PREVIEW_FIELD = defineField({
+  name: "preview_sync",
+  title: "Preview",
+  type: "string",
+  components: {
+    field: DocumentPreview,
+  },
+  group: ["meta", "content", "language", "tools"],
+});
+
 export const BLOCKS_FIELD = defineField({
   name: "blocks",
   title: "Blocks",
@@ -129,7 +141,7 @@ export async function getParentDocumentInitialValue(
   context: any,
   parentId: string,
 ) {
-  const client = context.getClient({ apiVersion: "vX" });
+  const client = context.getClient({ apiVersion: SANITY_API_VERSION });
   const { language = baseLanguage } = getStructurePath();
 
   const parentDocumentId = await client.fetch(
@@ -219,8 +231,8 @@ export const IMAGE_FIELD = defineField({
   description: "Image used in article grids. Preferred aspect ratio 16/9.",
   group: ["content"],
   options: {
-    hotspot: true
-  }
+    hotspot: true,
+  },
 });
 
 export const TAGS_FIELD = defineField({
@@ -325,6 +337,7 @@ export const pageBase = {
     },
   ],
   fields: [
+    PREVIEW_FIELD,
     PASSWORD,
     PREVENT_PUBLISH_FIELD,
     TITLE_FIELD,

@@ -1,10 +1,8 @@
 import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../studio/components/Presets/PresetUsage";
+import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import Warning from "../../studio/components/Warning";
-import {
-  BLOCKS_FIELD,
-  pageBase,
-} from "../../studio/schemas/documents/page-fields";
+import { BLOCKS_FIELD } from "../../studio/schemas/documents/page-fields";
 import { BLOCK_SCHEMAS } from "../../types.sanity";
 import { HomeLayout } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -30,15 +28,21 @@ const schema = defineType({
       };
     },
   },
-  groups: [...pageBase.groups],
   fields: [
+    defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+    }),
     defineField({
       name: "warning",
       title: "Warning",
       type: "string",
       options: { localize: false } as any,
       components: { field: Warning },
-      group: ["content"],
       description:
         "Block presets do not synchronize with instances. Updating a block preset will not automatically update to blocks already used on the website.",
     }),
@@ -47,14 +51,12 @@ const schema = defineType({
       title: "Title",
       type: "string",
       validation: (Rule: StringRule) => Rule.required(),
-      group: ["content"],
     }),
     defineField({
       name: "slug",
       title: "Identifier",
       type: "slug",
       validation: (Rule: SlugRule) => Rule.required(),
-      group: ["content"],
       options: {
         source: (doc, options) => (options.parent as any).title,
       },
@@ -64,10 +66,10 @@ const schema = defineType({
       title: "Description",
       type: "text",
       rows: 2,
-      group: ["content"],
     }),
     defineField({
       ...BLOCKS_FIELD,
+      group: null as any,
       title: "Block",
       description: null as any,
       of: Object.keys(BLOCK_SCHEMAS).map((type: any) => ({ type })),
@@ -82,7 +84,6 @@ const schema = defineType({
       title: "Image",
       type: "image",
       description: "1024x768 screenshot used for previews in the CMS.",
-      group: ["content"],
     }),
     defineField({
       name: "screenshot",
@@ -91,14 +92,12 @@ const schema = defineType({
       components: {
         field: CaptureScreenshot,
       },
-      group: ["content"],
     }),
     defineField({
       name: "usage",
       title: "Used on",
       type: "string",
       components: { field: PresetUsage },
-      group: ["content"],
     }),
   ],
 });

@@ -4,6 +4,7 @@ import {
   BLOCKS_FIELD,
   pageBase,
   TITLE_FIELD,
+  PREVIEW_FIELD,
 } from "./page-fields";
 import { BlockProhibited } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -22,5 +23,10 @@ export default defineType({
     },
   },
   groups: [...pageBase.groups],
-  fields: [TITLE_FIELD, { ...LANGUAGE_FIELD, readOnly: true }, BLOCKS_FIELD],
+  fields: [
+    PREVIEW_FIELD,
+    TITLE_FIELD,
+    { ...LANGUAGE_FIELD, readOnly: true },
+    BLOCKS_FIELD,
+  ],
 });

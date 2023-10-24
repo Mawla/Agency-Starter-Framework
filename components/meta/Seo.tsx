@@ -37,7 +37,7 @@ export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
   const language = router.locale as LanguageType;
 
   const baseUrl = `https://${config?.general?.domain}`;
-  const seoTitle = `${isPreviewMode ? "Preview mode 👀 - " : ""}${
+  const seoTitle = `${isPreviewMode ? "Draft 👀 - " : ""}${
     page.seo?.title || page.title
   }`;
   const seoDescription =

@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "../../../types.sanity";
 import { ClipboardImageIcon } from "@sanity/icons";
 import { Spinner, Button } from "@sanity/ui";
 import React, { ComponentType, useCallback, useEffect, useState } from "react";
@@ -15,7 +16,7 @@ export const CaptureScreenshot: ComponentType<any> = (props) => {
     slug?: { current?: string };
     image?: { asset: { _ref: string } };
   };
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   const options = {
     width: props.schemaType.options?.width || 1024,
@@ -45,7 +46,7 @@ export const CaptureScreenshot: ComponentType<any> = (props) => {
 
       // click split
       const splitButton = window.document.querySelector(
-        '[title="Split pane right"]',
+        '[aria-label="Split pane right"]',
       ) as HTMLButtonElement;
       splitButton?.click();
 

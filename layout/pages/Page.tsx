@@ -84,7 +84,7 @@ export const Page = ({
         }}
       >
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
-        {page && navigation && !isPreviewMode && !isLightbox && (
+        {page && navigation && !isLightbox && (
           <ErrorBoundary>
             <Navigation
               items={page.hideNav === true ? [] : navItems}
@@ -109,15 +109,18 @@ export const Page = ({
 
         {children}
 
-        {isPreviewMode && !isLightbox && pagePath !== "/preview" && (
-          <div className="text-md fixed top-4 right-4 z-50 flex gap-1 text-white">
-            <PreviewButton pagePath={pagePath} />
-          </div>
-        )}
+        {isPreviewMode &&
+          !isLightbox &&
+          pagePath !== "/preview" &&
+          pagePath !== "/turbopreview" && (
+            <div className="text-md fixed top-1 right-1 z-50 flex gap-1 text-white">
+              <PreviewButton pagePath={pagePath} />
+            </div>
+          )}
 
         {locked && !isPreviewMode && !isLightbox && <PageLock />}
 
-        {page && footer && !isPreviewMode && !isLightbox && (
+        {page && footer && !isLightbox && (
           <ErrorBoundary>
             <Footer
               links={page.hideFooter === true ? [] : footer.links}

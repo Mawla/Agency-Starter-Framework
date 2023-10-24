@@ -10,20 +10,24 @@ export const defaultBlockTools = [
       "Disable a block if you want to temporarily remove it from the website. Disabled blocks will still be visible in the CMS.",
     group: "tools",
   }),
-  defineField({
-    name: "slug",
-    title: "Identifier",
-    type: "slug",
-    group: "tools",
-    description:
-      "A unique identifier for this block, used for anchor links. If left empty, the title will be used.",
-    components: {
-      input: BlockSlugField,
+  defineField(
+    {
+      name: "slug",
+      title: "Identifier",
+      type: "slug",
+      group: "tools",
+      description:
+        "A unique identifier for this block, used for anchor links. If left empty, the title will be used.",
+      components: {
+        input: BlockSlugField,
+      },
+      options: {
+        disableArrayWarning: true,
+        source: (doc, options) => (options.parent as any).title,
+      },
     },
-    options: {
-      source: (doc, options) => (options.parent as any).title,
-    },
-  }),
+    { strict: false },
+  ),
   defineField({
     name: "swapSchema",
     title: "Swap schema",

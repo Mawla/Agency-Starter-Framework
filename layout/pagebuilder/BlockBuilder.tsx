@@ -17,7 +17,7 @@ import { DecorationProps } from "../../components/decorations/Decoration";
 import { GenericBlockProps } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import BlockErrorBoundary from "./BlockErrorBoundary";
-import { LazyLoadInView } from "./LazyLoadInView";
+import { BlockLoadInView } from "./BlockLoadInView";
 import React, { ComponentType } from "react";
 import { Suspense, lazy } from "react";
 
@@ -123,7 +123,7 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
       {items?.map((item, i) => (
         <Suspense fallback={``} key={item._key}>
           <BlockErrorBoundary>
-            <LazyLoadInView
+            <BlockLoadInView
               // show essential sections immediately
               enabled={
                 i > INITIAL_SECTIONS_TO_LOAD &&
@@ -194,7 +194,7 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               {item._type === "block.block5" && (
                 <Block5 {...(item as Block5Props)} />
               )}
-            </LazyLoadInView>
+            </BlockLoadInView>
           </BlockErrorBoundary>
         </Suspense>
       ))}

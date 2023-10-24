@@ -18,7 +18,7 @@ import React from "react";
 
 export default {
   component: Block15,
-  title: "Blocks/Block15",
+  title: "Blocks/15. Split Text",
 } as Meta;
 
 const DEMO_CONTENT: Block15Props = {
