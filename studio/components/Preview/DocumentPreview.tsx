@@ -1,5 +1,5 @@
 import { SANITY_API_VERSION, SCHEMAS } from "../../../types.sanity";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useClient, useFormValue } from "sanity";
 import { useRouter } from "sanity/router";
 
@@ -8,36 +8,8 @@ export const DocumentPreview = () => {
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const router = useRouter();
 
-  function getIframe() {
-    return window.document.querySelector(
-      ".previewView iframe",
-    ) as HTMLIFrameElement;
-  }
-
-  /**
-   * Send the document to the preview pane
-   */
-
-  useEffect(() => {
-    if (!document) return;
-
-    function onMessage(e: MessageEvent) {
-      const previewIframe = getIframe();
-      if (!previewIframe?.contentWindow) return;
-
-      if (e.data.type == "document-preview-iframe-ready") {
-        previewIframe.contentWindow.postMessage(
-          { type: "document-preview-document", document },
-          import.meta.env.SANITY_STUDIO_PROJECT_PATH,
-        );
-      }
-    }
-
-    onMessage({ data: { type: "document-preview-iframe-ready" } } as any);
-
-    window.addEventListener("message", onMessage);
-    () => window.removeEventListener("message", onMessage);
-  }, [document]);
+  const documentId = (document as any)?._id.replace("drafts.", "");
+  const [log, setLog] = useState<string[]>([]);
 
   /**
    * Get entire dataset
@@ -47,10 +19,11 @@ export const DocumentPreview = () => {
     if (!document) return;
 
     async function getDataset() {
-      const previewIframe = getIframe();
+      const previewIframe = window.document.querySelector(
+        ".previewView iframe",
+      ) as HTMLIFrameElement;
       if (!previewIframe?.contentWindow) return;
-
-      console.count("getDataset");
+      setLog((prev) => [...prev, "get dataset"]);
 
       const dataset = await client.fetch(
         `*[_type in ['${Object.keys(SCHEMAS).join(
@@ -61,21 +34,27 @@ export const DocumentPreview = () => {
 
       if (!dataset?.length) return;
 
+      setLog((prev) => [...prev, "send dataset"]);
       previewIframe.contentWindow.postMessage(
-        { type: "document-preview-dataset", dataset },
+        { type: "document-preview-data", dataset, document },
         import.meta.env.SANITY_STUDIO_PROJECT_PATH,
       );
     }
 
     function onMessage(e: MessageEvent) {
-      if (e.data.type == "document-preview-iframe-ready") {
+      if (!documentId) return;
+
+      if (
+        e.data.type == "document-preview-iframe-ready" &&
+        e.data.documentId === documentId
+      ) {
         getDataset();
       }
     }
 
     window.addEventListener("message", onMessage);
     () => window.removeEventListener("message", onMessage);
-  }, [document]);
+  }, [documentId]);
 
   /**
    * Check if the preview pane is open or not
@@ -98,6 +77,7 @@ export const DocumentPreview = () => {
         (pane) => pane.params.view === "preview",
       );
       if (previewPane) return;
+      setLog((prev) => [...prev, "open preview"]);
 
       const path = router.resolvePathFromState(router.state);
       router.navigateUrl({ path: `${path}%7C%2Cview%3Dpreview` });
@@ -106,7 +86,7 @@ export const DocumentPreview = () => {
     openPreview();
   }, [document]);
 
-  return null;
+  return <pre>{JSON.stringify(log, null, 2)}</pre>;
 };
 
 export default DocumentPreview;

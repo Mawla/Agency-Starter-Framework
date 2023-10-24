@@ -45,6 +45,7 @@ export default function PreviewPage({
   const [dataset, setDataset] = useState<any>(null);
   const [document, setDocument] = useState<any>(null);
   const [previewDocument, setPreviewDocument] = useState<any>(null);
+  const { id: documentId } = router.query;
 
   let previewType =
     document?._type.startsWith("page.") || document?._type === "preset.blocks"
@@ -66,8 +67,15 @@ export default function PreviewPage({
    */
 
   useEffect(() => {
-    window.parent.postMessage({ type: "document-preview-iframe-ready" }, "*");
-  }, [router.asPath]);
+    if (!documentId) return;
+    window.parent.postMessage(
+      {
+        type: "document-preview-iframe-ready",
+        documentId: (documentId as string).replace("drafts.", ""),
+      },
+      "*",
+    );
+  }, [documentId]);
 
   /**
    * Listen for updates
@@ -75,9 +83,8 @@ export default function PreviewPage({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
-      if (e.data.type == "document-preview-document") {
+      if (e.data.type == "document-preview-data") {
         setDocument(e.data.document);
-      } else if (e.data.type == "document-preview-dataset") {
         setDataset(e.data.dataset);
       }
 
@@ -212,6 +219,7 @@ export default function PreviewPage({
 
     async function update() {
       if (!document._id) return;
+      if (!dataset) return;
       let tree = parse(getQuery());
       let value = await evaluate(tree, {
         dataset: [document, ...dataset],
