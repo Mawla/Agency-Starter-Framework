@@ -232,6 +232,7 @@ export type VideoType = {
   videoId?: string;
   src?: string;
   frameless?: boolean;
+  priority?: boolean;
 };
 
 export const SIZES = {

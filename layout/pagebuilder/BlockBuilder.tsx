@@ -100,22 +100,23 @@ const INVIEW_LOAD_ONLY_SECTIONS: BlockSchemaName[] = [];
 export const BlockBuilder = ({ items }: BlockBuilderProps) => {
   if (!items?.length) return null;
 
-  const firstBlock = items?.[0];
+  const firstBlocks = [items?.[0], items?.[1]].filter(Boolean);
+  firstBlocks?.map((block) => {
+    const b = block;
+    if (b?.image) b.image.priority = true;
+    if (b?.mobileImage) b.mobileImage.priority = true;
+    if (b?.video) b.video.priority = true;
 
-  // add priority to first block images
-  if (firstBlock && firstBlock.image) firstBlock.image.priority = true;
-  if (firstBlock && firstBlock.mobileImage)
-    firstBlock.mobileImage.priority = true;
-
-  firstBlock.decorations?.map((decoration: DecorationProps) => {
-    const d = decoration;
-    if (d?.mobile?.image) d.mobile.image.priority = true;
-    if (d?.tablet?.image) d.tablet.image.priority = true;
-    if (d?.desktop?.image) d.desktop.image.priority = true;
-    if (d.preset?.mobile?.image) d.preset.mobile.image.priority = true;
-    if (d.preset?.tablet?.image) d.preset.tablet.image.priority = true;
-    if (d.preset?.desktop?.image) d.preset.desktop.image.priority = true;
-    return d;
+    b.decorations?.map((decoration: DecorationProps) => {
+      const d = decoration;
+      if (d?.mobile?.image) d.mobile.image.priority = true;
+      if (d?.tablet?.image) d.tablet.image.priority = true;
+      if (d?.desktop?.image) d.desktop.image.priority = true;
+      if (d.preset?.mobile?.image) d.preset.mobile.image.priority = true;
+      if (d.preset?.tablet?.image) d.preset.tablet.image.priority = true;
+      if (d.preset?.desktop?.image) d.preset.desktop.image.priority = true;
+      return d;
+    });
   });
 
   return (
