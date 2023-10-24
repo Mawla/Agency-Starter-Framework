@@ -7,7 +7,7 @@ import { BlockSchemaName } from "../../types.sanity";
 import cx from "classnames";
 import React, { useState, useEffect, useRef, useContext } from "react";
 
-type LazyLoadInViewProps = {
+type BlockLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
   enabled?: boolean;
   background?: ColorType | "transparent";
@@ -17,7 +17,7 @@ type LazyLoadInViewProps = {
   networkIdle?: boolean;
 };
 
-export const LazyLoadInView = ({
+export const BlockLoadInView = ({
   children,
   enabled = true,
   background = "transparent",
@@ -25,7 +25,7 @@ export const LazyLoadInView = ({
   slug,
   _key,
   networkIdle,
-}: LazyLoadInViewProps) => {
+}: BlockLoadInViewProps) => {
   const { isPreviewMode } = useContext(PageContext);
   const wrapperRef = useRef(null);
   const doLoad = useInView({
