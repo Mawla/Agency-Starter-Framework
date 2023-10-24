@@ -35,6 +35,13 @@ export const BlockLoadInView = ({
     rootMargin: "1200px",
   });
 
+  const inView = useInView({
+    elementRef: wrapperRef,
+    threshold: 0.01,
+    rootMargin: "1200px",
+    enabled: isPreviewMode,
+  });
+
   const [forceLoad, setForceLoad] = useState(!enabled);
 
   useEffect(() => {
@@ -52,6 +59,36 @@ export const BlockLoadInView = ({
 
     () => cancelIdleCallback(idleCallback);
   }, [forceLoad, networkIdle]);
+
+  useEffect(() => {
+    if (!isPreviewMode) return;
+    if (!doLoad) return;
+
+    function sendInview() {
+      window.parent.postMessage(
+        {
+          type: "preview-studio-highlight-block",
+          blockKey: _key,
+          enabled: inView,
+        },
+        "*",
+      );
+    }
+    sendInview();
+
+    // respond to check for inview from sanity studio when element (re)mounts
+    function onMessage(e: MessageEvent) {
+      if (
+        e.data.type == "preview-view-check-inview" &&
+        e.data.blockKey === _key
+      ) {
+        sendInview();
+      }
+    }
+
+    window.addEventListener("message", onMessage, false);
+    () => window.removeEventListener("message", onMessage);
+  }, [inView, _key, isPreviewMode, doLoad]);
 
   return (
     <section
