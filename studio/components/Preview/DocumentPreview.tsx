@@ -1,10 +1,16 @@
 import { SCHEMAS } from "../../../types.sanity";
 import { useEffect } from "react";
 import { useClient, useFormValue } from "sanity";
+import { useRouter } from "sanity/router";
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export const DocumentPreview = () => {
   const document = useFormValue([]);
   const client = useClient({ apiVersion: "vX" });
+  const router = useRouter();
 
   function getIframe() {
     return window.document.querySelector(
@@ -74,8 +80,43 @@ export const DocumentPreview = () => {
   }, [document]);
 
   /**
-   * Listen for the iframe to be ready
+   * Check if the preview pane is open or not
    */
+
+  useEffect(() => {
+    async function openPreview() {
+      if (!document) return;
+
+      const id = (document as any)?._id.replace("drafts.", "");
+      if (!location.href.endsWith(id)) return;
+
+      // router.navigateUrl({path: '/desk/products'})
+
+      // console.log(router);
+      // console.log(router.state);
+      // console.log(router.resolvePathFromState(router.state));
+
+      // const panes = router.state.panes as {
+      //   id: "string";
+      //   params: { view?: string };
+      // }[][];
+      // if (!panes) return;
+
+      // const finalPane = panes[panes.length - 1];
+      // if (!finalPane) return;
+
+      // const previewPane = finalPane.find((pane) =>
+      //   pane.id?.startsWith("preview"),
+      // );
+      // if (previewPane) return;
+
+      const path = router.resolvePathFromState(router.state);
+      console.log(path);
+      router.navigateUrl({ path: `${path}%7C%2Cview%3Dpreview` });
+    }
+
+    openPreview();
+  }, [document]);
 
   return null;
 };
