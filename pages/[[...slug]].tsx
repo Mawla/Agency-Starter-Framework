@@ -138,7 +138,7 @@ export const getStaticProps: GetStaticProps = async ({
     getNavigationQuery(language),
   )) as NavigationType;
 
-  // fetch navigation
+  // fetch footer
   const footer = (await getClient(preview).fetch(
     getFooterQuery(language),
   )) as FooterType;

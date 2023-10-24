@@ -31,9 +31,13 @@ import React, { useEffect, useState } from "react";
 export default function PreviewPage({
   preview,
   config,
+  navigation,
+  footer,
 }: {
   preview: boolean;
   config: ConfigType;
+  navigation: NavigationType;
+  footer: FooterType;
 }) {
   const isPreviewMode = preview;
   const router = useRouter();
@@ -236,10 +240,10 @@ export default function PreviewPage({
       <ScreenCapture />
       {previewType === "page" && previewDocument && (
         <Page
-          navigation={null as unknown as NavigationType}
+          navigation={navigation as NavigationType}
           page={previewDocument}
           isPreviewMode={true}
-          footer={null as unknown as FooterType}
+          footer={footer as FooterType}
           config={config}
         />
       )}
@@ -325,5 +329,15 @@ export const getStaticProps: GetStaticProps = async ({
     getConfigQuery((locale as LanguageType) || baseLanguage),
   )) as ConfigType;
 
-  return { props: { preview, config }, revalidate: 10 };
+  // fetch navigation
+  let navigation = (await getClient(preview).fetch(
+    getNavigationQuery(locale as LanguageType),
+  )) as NavigationType;
+
+  // fetch footer
+  const footer = (await getClient(preview).fetch(
+    getFooterQuery(locale as LanguageType),
+  )) as FooterType;
+
+  return { props: { preview, config, navigation, footer }, revalidate: 10 };
 };
