@@ -5,6 +5,7 @@ import {
   LanguageType,
 } from "../../languages";
 import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap.query";
+import { SANITY_API_VERSION } from "../../types.sanity";
 import { isPathUnique } from "../utils/desk/isPathUnique";
 import { WarningOutlineIcon } from "@sanity/icons";
 import {
@@ -23,13 +24,14 @@ import { StructureBuilder } from "sanity/desk";
 import { IntentLink } from "sanity/router";
 
 export const Sitemap: ComponentType<any> = ({ options }) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   const [tree, setTree] = useState<SitemapItemType[]>([]);
   const [state, setState] = useState<"loading" | "ready">("loading");
   const [result, setResult] = useState<SitemapItemType[]>([]);
-  const [currentTab, setCurrentTab] =
-    useState<"sitemap" | "query" | "result">("sitemap");
+  const [currentTab, setCurrentTab] = useState<"sitemap" | "query" | "result">(
+    "sitemap",
+  );
   const [currentLanguage, setCurrentLanguage] =
     useState<LanguageType>(baseLanguage);
 

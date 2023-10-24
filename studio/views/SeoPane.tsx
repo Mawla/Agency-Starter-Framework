@@ -2,6 +2,7 @@ import { getPathForId } from "../../helpers/sitemap/getPathForId";
 import { baseLanguage, languages, LanguageType } from "../../languages";
 import { getConfigQuery } from "../../queries/config.query";
 import { getSitemapQuery, SitemapItemType } from "../../queries/sitemap.query";
+import { SANITY_API_VERSION } from "../../types.sanity";
 import { getStructurePath } from "../utils/desk/get-structure-path";
 import { Card, Stack, Text, TabList, Tab, TabPanel } from "@sanity/ui";
 import React, { ComponentType, useEffect, useState } from "react";
@@ -13,7 +14,7 @@ export const SeoPane: ComponentType<any> = ({
   options,
   document,
 }) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const [config, setConfig] = useState<any>(null);
   const { language = baseLanguage } = getStructurePath();
   const [currentLanguage, setCurrentLanguage] = useState<LanguageType>(

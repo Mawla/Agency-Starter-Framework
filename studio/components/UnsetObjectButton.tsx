@@ -1,9 +1,10 @@
+import { SANITY_API_VERSION } from "../../types.sanity";
 import { Button } from "@sanity/ui";
 import React, { useCallback } from "react";
 import { useClient, useFormValue } from "sanity";
 
 export const UnsetObjectButton = (props: any) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const document = useFormValue([]) as {
     _id: string;
     _type: string;

@@ -1,6 +1,7 @@
 import { Autocomplete, Card, Text, Flex } from "@sanity/ui";
 import React, { ComponentType, useCallback, useEffect, useState } from "react";
 import { set, useClient } from "sanity";
+import { SANITY_API_VERSION } from "../../types.sanity";
 
 type OptionType = {
   value: string;
@@ -10,7 +11,7 @@ type OptionType = {
 
 const IconPicker: ComponentType<any> = (props) => {
   const { value, onChange, onFocus, onBlur }: any = props;
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION});
 
   const [state, setState] = useState<"default" | "loading">("default");
   const [items, setItems] = useState<OptionType[]>([]);

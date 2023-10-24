@@ -1,11 +1,11 @@
-import { SCHEMAS } from "../../../types.sanity";
+import { SANITY_API_VERSION, SCHEMAS } from "../../../types.sanity";
 import { useEffect } from "react";
 import { useClient, useFormValue } from "sanity";
 import { useRouter } from "sanity/router";
 
 export const DocumentPreview = () => {
   const document = useFormValue([]);
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const router = useRouter();
 
   function getIframe() {

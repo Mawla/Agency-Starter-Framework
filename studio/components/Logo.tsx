@@ -1,10 +1,11 @@
 import { baseLanguage } from "../../languages";
+import { SANITY_API_VERSION } from "../../types.sanity";
 import React, { useEffect, useState } from "react";
 import { useClient } from "sanity";
 
 export const Logo = () => {
   const [name, setName] = useState<string>("");
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   useEffect(() => {
     async function getConfig() {

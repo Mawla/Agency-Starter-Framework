@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "../../types.sanity";
 import { LockIcon, UnlockIcon, CheckmarkIcon, EditIcon } from "@sanity/icons";
 import {
   Stack,
@@ -27,7 +28,7 @@ export const PagePasswordComponent: ComponentType<any> = (props) => {
   if (!pageId) return null;
 
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   /**
    * Save the password information
@@ -136,15 +137,14 @@ const PasswordDialog = ({
   onDelete,
   value,
 }: PasswordDialogProps) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const [state, setState] = useState<"loading" | "ready">(
     mode === "edit" ? "loading" : "ready",
   );
-  const [passwordDoc, setPasswordDoc] =
-    useState<{
-      _id: string;
-      password: string;
-    } | null>(null);
+  const [passwordDoc, setPasswordDoc] = useState<{
+    _id: string;
+    password: string;
+  } | null>(null);
 
   const [password, setPassword] = useState<string | null>(null);
 

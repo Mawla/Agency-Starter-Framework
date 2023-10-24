@@ -4,6 +4,7 @@ import {
   LINKABLE_SCHEMAS,
   BlockSchemaName,
   BLOCK_SCHEMAS,
+  SANITY_API_VERSION,
 } from "../../../types.sanity";
 import {
   PageBuilder,
@@ -140,7 +141,7 @@ export async function getParentDocumentInitialValue(
   context: any,
   parentId: string,
 ) {
-  const client = context.getClient({ apiVersion: "vX" });
+  const client = context.getClient({ apiVersion: SANITY_API_VERSION });
   const { language = baseLanguage } = getStructurePath();
 
   const parentDocumentId = await client.fetch(

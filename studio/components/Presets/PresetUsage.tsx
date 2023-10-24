@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "../../../types.sanity";
 import { ArrowTopRightIcon } from "@sanity/icons";
 import { Text, Flex, Stack } from "@sanity/ui";
 import React, { useEffect, useState } from "react";
@@ -6,7 +7,7 @@ import { IntentLink } from "sanity/router";
 
 const PresetUsage = () => {
   const document = useFormValue([]) as { _id: string };
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   const [usage, setUsage] = useState<
     { _type: string; title: string; _id: string }[]

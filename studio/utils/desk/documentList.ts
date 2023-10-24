@@ -1,5 +1,5 @@
 import { LanguageType } from "../../../languages";
-import { SchemaName } from "../../../types.sanity";
+import { SANITY_API_VERSION, SchemaName } from "../../../types.sanity";
 import { getDocumentIcon } from "../document/getDocumentIcon";
 import { getDocumentTitle } from "../document/getDocumentTitle";
 import { StructureBuilder } from "sanity/desk";
@@ -22,7 +22,7 @@ export function documentList(
     .icon(icon || (getDocumentIcon(S, type) as any))
     .child(() => {
       const list = S.documentList()
-        .apiVersion("vX")
+        .apiVersion(SANITY_API_VERSION)
         .title(title || getDocumentTitle(S, type))
         .filter(
           filter || language
