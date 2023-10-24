@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "../../../types.sanity";
 import { DownloadIcon } from "@sanity/icons";
 import { Button, Flex, Stack, Text, Autocomplete } from "@sanity/ui";
 import React, { useEffect, useRef, useState } from "react";
@@ -18,7 +19,7 @@ export type ThemePresetSelectOptionType = {
 };
 
 export const ThemePresetSelect = ({ type, onChange }: Props) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [state, setState] = useState<"default" | "loading">("default");

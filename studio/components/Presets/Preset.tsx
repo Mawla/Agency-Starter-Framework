@@ -1,5 +1,5 @@
 import { LanguageType } from "../../../languages";
-import { BlockSchemaName } from "../../../types.sanity";
+import { BlockSchemaName, SANITY_API_VERSION } from "../../../types.sanity";
 import { SyncIcon, SearchIcon, AddIcon } from "@sanity/icons";
 import {
   Autocomplete,
@@ -42,7 +42,7 @@ type OptionType = {
 };
 
 const Preset: ComponentType<any> = (props) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const document = useFormValue([]) as {
     _id: string;
     _type: string;

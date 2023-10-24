@@ -1,6 +1,6 @@
 import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
 import PresetUsage from "../../studio/components/Presets/PresetUsage";
-import { PreviewIframeInline } from "../../studio/views/PreviewIframe";
+import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import { defaultTitleTheme } from "./title.schema";
 import { Text } from "@vectopus/atlas-icons-react";
 import React from "react";
@@ -38,6 +38,14 @@ const schema = defineType({
   },
   fields: [
     defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
@@ -50,13 +58,6 @@ const schema = defineType({
       title: "Preview",
       type: "object",
       fields: [
-        defineField({
-          type: "string",
-          name: "preview",
-          components: {
-            field: PreviewIframeInline,
-          },
-        }),
         defineField({
           name: "text",
           title: "Text",

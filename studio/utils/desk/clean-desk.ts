@@ -1,8 +1,9 @@
+import { SANITY_API_VERSION } from "../../../types.sanity";
 import { useClient } from "sanity";
 import { ListBuilder } from "sanity/desk";
 
 export const cleanDesk = async (structure: ListBuilder) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
   const deskConfig = await client.fetch(
     '*[_id == "secret.config_cms"][0] { desk }.desk',

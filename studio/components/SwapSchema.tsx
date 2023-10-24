@@ -1,3 +1,4 @@
+import { SANITY_API_VERSION } from "../../types.sanity";
 import { SearchIcon } from "@sanity/icons";
 import { Stack } from "@sanity/ui";
 import { Autocomplete, Card, Box, Flex, Text } from "@sanity/ui";
@@ -19,7 +20,7 @@ export type swapSchemaProps = {
 };
 
 export const swapSchema: ComponentType<any> = (props: swapSchemaProps) => {
-  const client = useClient({ apiVersion: "vX" });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const [state, setState] = useState<"loading" | "ready">("ready");
 
   const document = useFormValue([]) as {

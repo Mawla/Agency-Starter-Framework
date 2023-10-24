@@ -1,4 +1,4 @@
-import { useEffect, useState, RefObject } from 'react';
+import { useEffect, useState, RefObject } from "react";
 
 type Props = {
   elementRef: RefObject<HTMLElement>;
@@ -6,6 +6,7 @@ type Props = {
   threshold?: number;
   rootMargin?: string;
   root?: HTMLElement;
+  enabled?: boolean;
 };
 
 export const useInView = ({
@@ -13,11 +14,13 @@ export const useInView = ({
   threshold = 0,
   once = false,
   root,
-  rootMargin = '0px',
+  rootMargin = "0px",
+  enabled = true,
 }: Props) => {
   const [inView, setInView] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!enabled) return;
     if (!elementRef?.current) return;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,7 +40,7 @@ export const useInView = ({
       setInView(false);
       observer.disconnect();
     };
-  }, [elementRef, threshold, root, rootMargin, once]);
+  }, [elementRef, threshold, root, rootMargin, once, enabled]);
 
   return inView;
 };

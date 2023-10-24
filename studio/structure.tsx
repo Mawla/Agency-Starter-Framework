@@ -1,5 +1,5 @@
 import { languages, LanguageType } from "../languages";
-import { LINKABLE_SCHEMAS } from "../types.sanity";
+import { LINKABLE_SCHEMAS, SANITY_API_VERSION } from "../types.sanity";
 import { cleanDesk } from "./utils/desk/clean-desk";
 import { documentList } from "./utils/desk/documentList";
 import { getIconForSchema } from "./utils/desk/get-icon-for-schema";
@@ -56,7 +56,7 @@ export const structure = async (
                   .icon(() => <Diagram weight="thin" size={20} />)
                   .child(
                     S.documentList()
-                      .apiVersion("vX")
+                      .apiVersion(SANITY_API_VERSION)
                       .title("Content pages")
                       .schemaType("page.content")
                       .filter(
@@ -549,7 +549,8 @@ export const defaultDocumentNode = (
     schemaType.startsWith("preset.") ||
     schemaType === "script" ||
     schemaType === "navigation" ||
-    schemaType === "footer"
+    schemaType === "footer" ||
+    schemaType === "pricing.feature"
   ) {
     views.push(PreviewView(S));
 
@@ -596,7 +597,7 @@ async function nestedContentPageList(
   language: LanguageType,
 ): Promise<StructureBuilder | DocumentListBuilder | DocumentBuilder | Child> {
   const client = context.getClient({
-    apiVersion: "vX",
+    apiVersion: SANITY_API_VERSION,
   });
   const page = await client.fetch(
     `*[_id == $id || _id == "drafts.${id}"][0] { "title": title, _id, _type }`,
@@ -613,7 +614,7 @@ async function nestedContentPageList(
 
   if (hasChildren) {
     return S.documentList()
-      .apiVersion("vX")
+      .apiVersion(SANITY_API_VERSION)
       .title(page?.title || "Pages")
       .schemaType(page?._type)
       .filter(

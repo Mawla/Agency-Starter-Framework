@@ -4,6 +4,7 @@ import {
   getPreviewSlugPagePath,
   LANGUAGE_FIELD,
   pageBase,
+  PREVIEW_FIELD,
   SLUG_FIELD,
   TITLE_FIELD,
 } from "./page-fields";
@@ -36,6 +37,7 @@ export default defineType({
   },
   groups: [...pageBase.groups],
   fields: [
+    PREVIEW_FIELD,
     TITLE_FIELD,
     {
       ...SLUG_FIELD,

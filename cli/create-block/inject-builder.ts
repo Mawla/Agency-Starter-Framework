@@ -20,7 +20,7 @@ export function injectBuilder(answers: Pick<AnswersType, "blockName">) {
   let lines = fs.readFileSync(filePath).toString().split("\n");
 
   let imports = getBlockBuilderImport({ pascalName, lowerName, schemaName });
-  let needle = "</LazyLoadInView>";
+  let needle = "</BlockLoadInView>";
 
   lines = [imports, ...lines];
 

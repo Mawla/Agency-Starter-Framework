@@ -1,6 +1,7 @@
 import { defaultBlockTheme } from "../../components/block/block.schema";
 import buttonSchema from "../../components/buttons/button.schema";
 import IconPicker from "../../studio/components/IconPicker";
+import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import Warning from "../../studio/components/Warning";
 import { SchemaName } from "../../types.sanity";
 import { AlignDown, Chain } from "@vectopus/atlas-icons-react";
@@ -62,6 +63,15 @@ export default defineType({
     },
   },
   fields: [
+    defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+      group: ["content", "theme"],
+    }),
     defineField({
       name: "warning",
       title: "Warning",

@@ -1,8 +1,9 @@
 import { getSitemapQuery, SitemapType } from "../../../queries/sitemap.query";
+import { SANITY_API_VERSION } from "../../../types.sanity";
 
 export const isPathUnique = async (slug: string, context: any) => {
   const client = context.getClient({
-    apiVersion: "vX",
+    apiVersion: SANITY_API_VERSION,
   });
 
   const { document } = context;

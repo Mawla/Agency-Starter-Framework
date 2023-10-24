@@ -1,6 +1,6 @@
 import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
-import { ComponentType, useEffect } from "react";
+import { ComponentType, useEffect, useState } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
   return (
@@ -32,6 +32,15 @@ export const PageBuilder: ComponentType<any> = (props) => {
  */
 
 export const PageBuilderItem: React.ComponentType<any> = (props) => {
+  const [highlight, setHighlight] = useState(false);
+
+  function getIframe() {
+    const previewIframe = window.document.querySelector(
+      ".previewView iframe",
+    ) as HTMLIFrameElement;
+    return previewIframe;
+  }
+
   /**
    * When the form is opened: scroll preview iframe to element
    */
@@ -40,13 +49,10 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     if (!props.open) return;
     if (!props?.value?._key) return;
 
-    // find iframe
-    const previewIframe = window.document.querySelector(
-      ".previewView iframe",
-    ) as HTMLIFrameElement;
+    // post message to iframe to scroll to block
+    const previewIframe = getIframe();
     if (!previewIframe?.contentWindow) return;
 
-    // post message to iframe to scroll to block
     previewIframe.contentWindow.postMessage(
       { type: "preview-view-scroll-to-block", blockKey: props.value._key },
       import.meta.env.SANITY_STUDIO_PROJECT_PATH,
@@ -62,25 +68,37 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
 
     function onMessage(e: MessageEvent) {
       if (
-        e.data.type == "preview-studio-open-block-dialog" &&
+        e.data.type == "preview-studio-highlight-block" &&
         e.data.blockKey === props.value?._key
       ) {
-        const blockFormOpenButton = document.querySelector(
-          `[data-key="${e.data.blockKey}"] [data-type="block-preview"]`,
-        ) as HTMLButtonElement;
-
-        if (blockFormOpenButton) {
-          blockFormOpenButton.click();
-        }
+        setHighlight(e.data.enabled);
       }
     }
+
+    // post message to iframe to check inview
+    // because this React element gets (un/re)mounted by sanity on scroll
+
+    function requestInview() {
+      const previewIframe = getIframe();
+      if (!previewIframe?.contentWindow) {
+        requestAnimationFrame(requestInview);
+        return;
+      }
+
+      previewIframe.contentWindow.postMessage(
+        { type: "preview-view-check-inview", blockKey: props.value._key },
+        import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+      );
+    }
+
+    requestInview();
 
     window.addEventListener("message", onMessage, false);
     () => window.removeEventListener("message", onMessage);
   }, [props.value?._key]);
 
   return (
-    <ArrayItemPreviewHighlight {...props} renderChildren>
+    <ArrayItemPreviewHighlight {...props} highlight={highlight} renderChildren>
       <div
         style={{
           borderBottom: "1px solid rgba(0,0,0,.1)",

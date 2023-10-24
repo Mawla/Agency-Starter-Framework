@@ -1,4 +1,5 @@
 import { DecorationLocationSelect } from "../../studio/components/Decorations/DecorationLocationSelect";
+import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import { BlueprintPaper } from "@vectopus/atlas-icons-react";
 import React from "react";
 import { defineField, defineType } from "sanity";
@@ -54,6 +55,14 @@ const schema = defineType({
     },
   },
   fields: [
+    defineField({
+      name: "preview_sync",
+      title: "Preview",
+      type: "string",
+      components: {
+        field: DocumentPreview,
+      },
+    }),
     defineField({
       name: "title",
       title: "Title",
