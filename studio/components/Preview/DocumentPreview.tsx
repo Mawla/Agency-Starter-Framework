@@ -86,7 +86,7 @@ export const DocumentPreview = () => {
     openPreview();
   }, [document]);
 
-  return <pre>{JSON.stringify(log, null, 2)}</pre>;
+  return null;
 };
 
 export default DocumentPreview;
