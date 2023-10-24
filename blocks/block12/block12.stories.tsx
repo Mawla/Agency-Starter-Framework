@@ -19,7 +19,7 @@ import React from "react";
 
 export default {
   component: Block12,
-  title: "Blocks/Block12",
+  title: "Blocks/12. Resources Grid",
 } as Meta;
 
 const DEMO_CONTENT: Block12Props = {

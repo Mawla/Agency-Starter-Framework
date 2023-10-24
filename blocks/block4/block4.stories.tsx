@@ -21,7 +21,7 @@ import React from "react";
 
 export default {
   component: Block4,
-  title: "Blocks/Block4",
+  title: "Blocks/4. Default Content",
 } as Meta;
 
 const DEMO_CONTENT = {

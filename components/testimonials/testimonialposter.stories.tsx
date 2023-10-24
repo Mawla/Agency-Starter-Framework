@@ -9,21 +9,20 @@ export default {
 } as Meta;
 
 export const Poster = () => <TestimonialPoster {...demoTestimonialsList[0]} />;
-export const VerticalTitle = () => (
+
+export const ShortName = () => (
   <TestimonialPoster
     {...demoTestimonialsList[0]}
     name="Bonnie Green"
     jobTitle="CTO"
   />
 );
-export const HorizontalTitle = () => (
-  <div className="text-center">
-    <TestimonialPoster
-      {...demoTestimonialsList[0]}
-      name="Bonnie Bonnie Bonnie Green Blue Red"
-      jobTitle="CTO at Open AI CTO at Open AI CTO at Open AI"
-    />
-  </div>
+export const LongName = () => (
+  <TestimonialPoster
+    {...demoTestimonialsList[0]}
+    name="Bonnie Bonnie Bonnie Green Blue Red"
+    jobTitle="CTO at Open AI CTO at Open AI CTO at Open AI"
+  />
 );
 
 export const Theme = () => (

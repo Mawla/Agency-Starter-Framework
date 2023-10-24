@@ -1,6 +1,6 @@
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
-import { borderClasses, textClasses } from "../../theme";
+import { textClasses } from "../../theme";
 import { IconLoader } from "../images/IconLoader";
 import { SliderColorType } from "./slider.options";
 import cx from "classnames";
@@ -56,6 +56,7 @@ export const Slider = ({
         keyboard={{
           enabled: true,
         }}
+        fadeEffect={{ crossFade: true }}
       >
         {slides?.filter(Boolean).map((slide, n) => (
           <SwiperSlide

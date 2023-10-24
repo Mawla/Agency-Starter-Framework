@@ -34,7 +34,7 @@ export const MobileNav = ({
         </RadixDialog.Overlay>
         <RadixDialog.Content
           className={cx(
-            "z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen",
+            "z-[60] fixed top-0 right-0 w-screen max-w-xs h-screen overflow-scroll overflow-scrolling-touch",
             backgroundClasses[theme?.block?.background || "white"],
             theme?.block?.text && textClasses[theme?.block?.text],
           )}
@@ -95,7 +95,7 @@ export const MobileNav = ({
                   </RadixNavigationMenu.List>
                 )}
 
-                <RadixNavigationMenu.List className="mt-3 p-4 flex flex-row gap-3">
+                <RadixNavigationMenu.List className="mt-3 p-4 flex flex-col gap-3">
                   <LanguageSwitch
                     align="left"
                     position="above"

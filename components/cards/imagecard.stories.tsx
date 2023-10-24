@@ -6,7 +6,7 @@ import React from "react";
 
 export default {
   component: ImageCard,
-  title: "Blocks/Block18/ImageCard",
+  title: "Blocks/18. Card Grid/ImageCard",
 } as Meta;
 
 export const Ratios = () => (

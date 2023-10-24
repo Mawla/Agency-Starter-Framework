@@ -4,7 +4,7 @@ import React from "react";
 
 export default {
   component: Block0,
-  title: "Blocks/Block0",
+  title: "Blocks/0. Code",
 } as Meta;
 
 export const Default = () => (

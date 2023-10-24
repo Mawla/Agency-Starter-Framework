@@ -19,7 +19,7 @@ import React from "react";
 
 export default {
   component: Block16,
-  title: "Blocks/Block16",
+  title: "Blocks/16. Logo Grid",
 } as Meta;
 
 const DEMO_LOGOS: Block16Props["items"] = [

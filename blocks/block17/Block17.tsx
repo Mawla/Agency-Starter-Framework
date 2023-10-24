@@ -65,7 +65,11 @@ export const Block17 = ({ theme, decorations, testimonials }: Block17Props) => {
                     backgroundClasses[theme?.block?.background],
                 )}
               >
-                <TestimonialPoster {...props} theme={theme?.testimonial} />
+                <TestimonialPoster
+                  {...props}
+                  theme={theme?.testimonial}
+                  align={theme?.block?.align || "center"}
+                />
               </div>
             )}
             slider={testimonials?.length > 1}

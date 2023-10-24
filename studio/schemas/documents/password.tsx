@@ -24,6 +24,7 @@ export default defineType({
       type: "reference",
       to: getLinkableTypes(),
       validation: (Rule) => Rule.required(),
+      weak: true,
     }),
   ],
 });
