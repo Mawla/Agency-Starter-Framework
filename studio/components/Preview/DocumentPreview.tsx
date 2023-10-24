@@ -3,10 +3,6 @@ import { useEffect } from "react";
 import { useClient, useFormValue } from "sanity";
 import { useRouter } from "sanity/router";
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export const DocumentPreview = () => {
   const document = useFormValue([]);
   const client = useClient({ apiVersion: "vX" });
@@ -53,6 +49,8 @@ export const DocumentPreview = () => {
     async function getDataset() {
       const previewIframe = getIframe();
       if (!previewIframe?.contentWindow) return;
+
+      console.count("getDataset");
 
       const dataset = await client.fetch(
         `*[_type in ['${Object.keys(SCHEMAS).join(
