@@ -83,8 +83,9 @@ export default function PreviewPage({
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
-      if (e.data.type == "document-preview-data") {
+      if (e.data.type == "document-preview-document") {
         setDocument(e.data.document);
+      } else if (e.data.type == "document-preview-dataset") {
         setDataset(e.data.dataset);
       }
 

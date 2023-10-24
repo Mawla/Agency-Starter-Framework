@@ -11,6 +11,43 @@ export const DocumentPreview = () => {
   const documentId = (document as any)?._id.replace("drafts.", "");
   const [log, setLog] = useState<string[]>([]);
 
+  function getIframe() {
+    return window.document.querySelector(
+      ".previewView iframe",
+    ) as HTMLIFrameElement;
+  }
+
+  /**
+   * Send the document to the preview pane
+   */
+
+  useEffect(() => {
+    if (!document) return;
+
+    function onMessage(e: MessageEvent) {
+      const previewIframe = getIframe();
+      if (!previewIframe?.contentWindow) return;
+
+      if (
+        e.data.type == "document-preview-iframe-ready" &&
+        e.data.documentId === documentId
+      ) {
+        setLog((prev) => [...prev, "send document"]);
+        previewIframe.contentWindow.postMessage(
+          { type: "document-preview-document", document },
+          import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+        );
+      }
+    }
+
+    onMessage({
+      data: { type: "document-preview-iframe-ready", documentId },
+    } as any);
+
+    window.addEventListener("message", onMessage);
+    () => window.removeEventListener("message", onMessage);
+  }, [document, documentId]);
+
   /**
    * Get entire dataset
    */
@@ -19,9 +56,7 @@ export const DocumentPreview = () => {
     if (!document) return;
 
     async function getDataset() {
-      const previewIframe = window.document.querySelector(
-        ".previewView iframe",
-      ) as HTMLIFrameElement;
+      const previewIframe = getIframe();
       if (!previewIframe?.contentWindow) return;
       setLog((prev) => [...prev, "get dataset"]);
 
@@ -36,7 +71,7 @@ export const DocumentPreview = () => {
 
       setLog((prev) => [...prev, "send dataset"]);
       previewIframe.contentWindow.postMessage(
-        { type: "document-preview-data", dataset, document },
+        { type: "document-preview-dataset", dataset },
         import.meta.env.SANITY_STUDIO_PROJECT_PATH,
       );
     }
@@ -87,6 +122,7 @@ export const DocumentPreview = () => {
   }, [document]);
 
   return null;
+  return <pre>{JSON.stringify(log, null, 2)}</pre>;
 };
 
 export default DocumentPreview;
