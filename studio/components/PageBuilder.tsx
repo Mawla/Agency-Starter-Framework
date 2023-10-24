@@ -77,13 +77,21 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
 
     // post message to iframe to check inview
     // because this React element gets (un/re)mounted by sanity on scroll
-    const previewIframe = getIframe();
-    if (!previewIframe?.contentWindow) return;
 
-    previewIframe.contentWindow.postMessage(
-      { type: "preview-view-check-inview", blockKey: props.value._key },
-      import.meta.env.SANITY_STUDIO_PROJECT_PATH,
-    );
+    function requestInview() {
+      const previewIframe = getIframe();
+      if (!previewIframe?.contentWindow) {
+        requestAnimationFrame(requestInview);
+        return;
+      }
+
+      previewIframe.contentWindow.postMessage(
+        { type: "preview-view-check-inview", blockKey: props.value._key },
+        import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+      );
+    }
+
+    requestInview();
 
     window.addEventListener("message", onMessage, false);
     () => window.removeEventListener("message", onMessage);
