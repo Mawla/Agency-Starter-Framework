@@ -84,6 +84,10 @@ export const PREDEFINED_ICONS = {
     title: "No",
     description: "Icon to show in the pricing comparison table for no values",
   },
+  tooltip: {
+    title: "Tooltip",
+    description: "Icon to display a tooltip in the pricing comparison table",
+  },
 };
 
 export type PredefinedIconType = keyof typeof PREDEFINED_ICONS;

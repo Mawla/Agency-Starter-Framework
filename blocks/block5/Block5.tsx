@@ -1,18 +1,14 @@
 import { WrapperProps } from "../../components/block/Wrapper";
 import { BlockThemeType } from "../../components/block/block.options";
 import { DecorationProps } from "../../components/decorations/Decoration";
-import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PortableTextProps } from "../../components/portabletext/PortableText";
 import { PricingTableProps } from "../../components/table/PricingTable";
-import { TableProps } from "../../components/table/Table";
 import { TextProps } from "../../components/text/Text";
 import { textAlignClasses } from "../../components/text/text.options";
 import { TextThemeType } from "../../components/text/text.options";
 import { TitleProps } from "../../components/title/Title";
 import { TitleThemeType } from "../../components/title/title.options";
 import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
-import { bumpHeadingLevel } from "../../helpers/utils/string";
-import { HtmlTextNodeType } from "../../types";
 import cx from "classnames";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
