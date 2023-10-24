@@ -26,12 +26,12 @@ export const TopNavLogo = ({ logo }: TopNavLogoProps) => {
       <Suspense>
         {logo?.mobile && (
           <span className="block sm:hidden relative">
-            <SimpleImage {...logo?.mobile} />
+            <SimpleImage {...logo?.mobile} priority />
           </span>
         )}
         {logo?.desktop && (
           <span className="hidden sm:block relative">
-            <SimpleImage {...logo?.desktop} />
+            <SimpleImage {...logo?.desktop} priority />
           </span>
         )}
       </Suspense>
