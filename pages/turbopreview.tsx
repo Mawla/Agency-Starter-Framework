@@ -351,7 +351,9 @@ export default function PreviewPage({
         </Wrapper>
       )}
       {previewType === "pricing.feature" && previewDocument && (
-        <PricingTable {...previewDocument} />
+        <div className="p-10">
+          <PricingTable {...previewDocument} />
+        </div>
       )}
     </div>
   );

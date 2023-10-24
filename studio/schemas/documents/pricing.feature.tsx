@@ -59,7 +59,7 @@ const schema = defineType({
             <>
               <pre>Usage;Starter;Growth;Business;Enterprise</pre>
               <pre>Editors and admins;yes;no;Custom;Contact us</pre>
-              <pre>Viewers;10;x;v;Unlimited</pre>
+              <pre>Viewers (i=tooltip);10;x;v;Unlimited</pre>
             </>
           );
         },
@@ -72,7 +72,7 @@ const schema = defineType({
       options: { accept: "text/csv" },
       group: "content",
       description:
-        "Upload a CSV file. Values for 'y', 'yes' or 'v' will be replaced with a positive icon and 'n', 'no' or 'x' will be replaced with a negative icon.",
+        "Upload a CSV file. Values for 'y', 'yes' or 'v' will be replaced with a positive icon and 'n', 'no' or 'x' will be replaced with a negative icon. For tooltips you can use (i=tooltip text).",
     }),
     {
       ...LANGUAGE_FIELD,

@@ -3,7 +3,8 @@ import { TableProps } from "../../components/table/Table";
 import { TitleProps } from "../../components/title/Title";
 import MobileScroller from "../slider/MobileScroller";
 import { TitleThemeType } from "../title/title.options";
-import { ComponentType, lazy } from "react";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { ComponentType, lazy, useState } from "react";
 
 const Table = lazy<ComponentType<TableProps>>(
   () => import(/* webpackChunkName: "Table" */ "../../components/table/Table"),
@@ -65,7 +66,44 @@ const textTransformers = [
       />
     ),
   },
+  {
+    // regex for tooltips in the string
+    // text text text (i=tooltip) text text text
+    regex: /(\(i=)(.*?)(\))/gim,
+    fn: (key: number, result: RegExpExecArray) => {
+      if (!result?.[2]?.trim()?.length) return null;
+      return <PricingTooltip text={result[2].trim()} />;
+    },
+  },
 ];
+
+const PricingTooltip = ({ text }: { text: string }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Tooltip.Provider>
+      <Tooltip.Root delayDuration={0} open={open} onOpenChange={setOpen}>
+        <Tooltip.Trigger asChild>
+          <button onPointerDown={() => setOpen(true)}>
+            <IconLoader
+              icon="tooltip"
+              className="inline-block align-middle w-5 h-5"
+              removeColors={false}
+            />
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className="text-dark select-none rounded-sm bg-white p-3 text-base leading-none shadow-lg border"
+            sideOffset={5}
+          >
+            {text}
+            <Tooltip.Arrow className="fill-[white]" />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+  );
+};
 
 export type PricingTableProps = {
   features?: {
