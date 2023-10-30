@@ -84,26 +84,29 @@ export const Page = ({
         }}
       >
         <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
-        {page && navigation && !isLightbox && (
-          <ErrorBoundary>
-            <Navigation
-              items={page.hideNav === true ? [] : navItems}
-              buttons={page.hideNav === true ? [] : navigation.buttons}
-              logo={navigation.logo}
-              banner={navigation.banner}
-              theme={{
-                ...(navigation.theme || {}),
-                breadcrumb: {
-                  ...(navigation.theme?.breadcrumb || {}),
-                  hidden:
-                    page.breadcrumb === null ||
-                    page.hideBreadcrumb ||
-                    navigation.theme?.breadcrumb?.hidden,
-                },
-              }}
-            />
-          </ErrorBoundary>
-        )}
+        {page &&
+          navigation &&
+          !isLightbox &&
+          page?._type.startsWith("page.") && (
+            <ErrorBoundary>
+              <Navigation
+                items={page.hideNav === true ? [] : navItems}
+                buttons={page.hideNav === true ? [] : navigation.buttons}
+                logo={navigation.logo}
+                banner={navigation.banner}
+                theme={{
+                  ...(navigation.theme || {}),
+                  breadcrumb: {
+                    ...(navigation.theme?.breadcrumb || {}),
+                    hidden:
+                      page.breadcrumb === null ||
+                      page.hideBreadcrumb ||
+                      navigation.theme?.breadcrumb?.hidden,
+                  },
+                }}
+              />
+            </ErrorBoundary>
+          )}
 
         <BlockBuilder items={page?.blocks} />
 
@@ -120,7 +123,7 @@ export const Page = ({
 
         {locked && !isPreviewMode && !isLightbox && <PageLock />}
 
-        {page && footer && !isLightbox && (
+        {page && footer && !isLightbox && page?._type.startsWith("page.") && (
           <ErrorBoundary>
             <Footer
               links={page.hideFooter === true ? [] : footer.links}
