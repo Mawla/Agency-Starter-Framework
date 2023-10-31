@@ -1,5 +1,5 @@
 import { getClient } from "../helpers/sanity/server";
-import { languages, LanguageType } from "../languages";
+import { LanguageType } from "../languages";
 import { getFooterQuery, FooterType } from "../layout/footer/footer.query";
 import {
   getNavigationQuery,
@@ -16,7 +16,6 @@ export default function Custom404({
   config,
   navigation,
   footer,
-  isPreviewMode,
   page,
   sitemapItem,
 }: StaticProps) {
@@ -24,7 +23,6 @@ export default function Custom404({
     <Page
       navigation={navigation}
       page={page}
-      isPreviewMode={isPreviewMode}
       footer={footer}
       config={config}
       sitemapItem={sitemapItem}
@@ -37,25 +35,20 @@ type StaticProps = {
   footer: FooterType;
   navigation: NavigationType;
   page: PageType;
-  isPreviewMode: boolean;
   revalidate?: number;
   sitemapItem?: SitemapItemType;
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-  locale,
-}) => {
-  const isPreviewMode = preview;
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const language = locale as LanguageType;
 
   // fetch config
-  const config = (await getClient(isPreviewMode).fetch(
+  const config = (await getClient().fetch(
     getConfigQuery(language),
   )) as ConfigType;
 
   // fetch navigation
-  const navigation = (await getClient(isPreviewMode).fetch(
+  const navigation = (await getClient().fetch(
     getNavigationQuery(language),
   )) as NavigationType;
 
@@ -68,13 +61,13 @@ export const getStaticProps: GetStaticProps = async ({
     _updatedAt: "",
     excludeFromSitemap: true,
   };
-  const page = (await getClient(isPreviewMode).fetch(getPageQuery(language), {
+  const page = (await getClient().fetch(getPageQuery(language), {
     ...sitemapItem,
     language,
   })) as PageType;
 
   // fetch navigation
-  const footer = (await getClient(isPreviewMode).fetch(
+  const footer = (await getClient().fetch(
     getFooterQuery(language),
   )) as FooterType;
 
@@ -84,7 +77,6 @@ export const getStaticProps: GetStaticProps = async ({
     footer,
     navigation,
     page,
-    isPreviewMode,
     sitemapItem,
   };
 

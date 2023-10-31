@@ -9,26 +9,10 @@ const mockClient = {
   fetch: async (query: string) => null,
 };
 
-export const notPreviewClient =
-  config.projectId && config.dataset ? createClient(config) : mockClient;
-
-/**
- * Set up a preview client with serverless authentication for drafts
- */
-
-export const previewClient =
-  config.projectId && config.dataset
-    ? createClient({
-        ...config,
-        useCdn: false,
-        token: process.env.SANITY_API_READ_TOKEN,
-      })
-    : mockClient;
-
 /**
  * Helper function for easily switching between normal client and preview client
  */
 
-export const getClient = (usePreview: boolean) => {
-  return usePreview ? previewClient : notPreviewClient;
+export const getClient = () => {
+  return config.projectId && config.dataset ? createClient(config) : mockClient;
 };

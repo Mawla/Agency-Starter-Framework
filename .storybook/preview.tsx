@@ -46,7 +46,6 @@ export const decorators = [
         >
           <PageContext.Provider
             value={{
-              isPreviewMode: false,
               language: "en",
               sitemapItem: {
                 _id: "xx",

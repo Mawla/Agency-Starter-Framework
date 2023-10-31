@@ -39,8 +39,8 @@ export default function PreviewPage({
   navigation: NavigationType;
   footer: FooterType;
 }) {
-  const isPreviewMode = preview;
   const router = useRouter();
+  const isPreview = router.isPreview;
 
   const [dataset, setDataset] = useState<any>(null);
   const [document, setDocument] = useState<any>(null);
@@ -55,12 +55,12 @@ export default function PreviewPage({
   const language = router.query.language as LanguageType;
 
   /**
-   * Bail if not in preview mode
+   * Bail if not in preview mode or inside CMS iframe
    */
-
   useEffect(() => {
-    if (!isPreviewMode) router.push("/");
-  }, [isPreviewMode, router]);
+    if (!isPreview) router.push("/");
+    if (window.self === window.top) router.push("/");
+  }, [isPreview, router]);
 
   /**
    * Notify studio that iframe is ready to listen for updates
@@ -278,7 +278,6 @@ export default function PreviewPage({
         <Page
           navigation={navigation as NavigationType}
           page={previewDocument}
-          isPreviewMode={true}
           footer={footer as FooterType}
           config={config}
         />
@@ -363,17 +362,17 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
   locale,
 }) => {
-  const config = (await getClient(preview).fetch(
+  const config = (await getClient().fetch(
     getConfigQuery((locale as LanguageType) || baseLanguage),
   )) as ConfigType;
 
   // fetch navigation
-  let navigation = (await getClient(preview).fetch(
+  let navigation = (await getClient().fetch(
     getNavigationQuery(locale as LanguageType),
   )) as NavigationType;
 
   // fetch footer
-  const footer = (await getClient(preview).fetch(
+  const footer = (await getClient().fetch(
     getFooterQuery(locale as LanguageType),
   )) as FooterType;
 

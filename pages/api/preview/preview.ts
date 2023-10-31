@@ -37,10 +37,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   }
 
   const draftId = _id.startsWith("drafts.") ? _id : `drafts.${_id}`;
-  const Location = `/turbopreview?id=${draftId}&type=${_type}&language=${language}`;
-  res.setPreviewData({});
-  res.writeHead(307, { Location });
-  res.end();
+  res.redirect(
+    `/turbopreview?id=${draftId}&type=${_type}&language=${language}`,
+  );
+  // res.setPreviewData({});
+  // res.writeHead(307, { Location });
+  // res.end();
 };
 
 export default handler;

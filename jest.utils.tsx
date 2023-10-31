@@ -43,7 +43,6 @@ const Wrapper = ({ children }: { children: React.ReactElement }) => {
     >
       <PageContext.Provider
         value={{
-          isPreviewMode: false,
           language: "en",
           sitemapItem: DEMO_SITEMAP[0],
           breadcrumb: DEMO_FLAT_BREADCRUMB,

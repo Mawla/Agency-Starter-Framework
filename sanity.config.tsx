@@ -47,32 +47,20 @@ export default defineConfig({
 
   document: {
     productionUrl: async (prev: any, context: any) => {
-      const { getClient, document } = context;
+      const { document, getClient } = context;
 
-      const sitemap: SitemapItemType[] = await getClient({
+      const hasPublishedVersion = await getClient({
         apiVersion: SANITY_API_VERSION,
-      }).fetch(getSitemapQuery());
+      }).fetch(`count(*[_id == "${document._id.replace("drafts.", "")}"]) > 0`);
 
-      const languagePrefix =
-        document.language === baseLanguage ? "" : `/${document.language}`;
-      const path = `${languagePrefix}${getPathForId(document._id, sitemap)}`;
+      if (!hasPublishedVersion) return prev;
 
-      if (!document.language) {
-        return prev;
-      }
-
-      if (path === "/" && document._id.indexOf("page_homepage") === -1) {
-        return prev;
-      }
-
-      if (path) {
-        return `${import.meta.env.SANITY_STUDIO_PROJECT_PATH?.replace(
-          /\/+$/,
-          "",
-        )}${path}`;
-      }
-
-      return prev;
+      return `${
+        import.meta.env.SANITY_STUDIO_PROJECT_PATH
+      }api/preview/production-url?id=${document._id.replace(
+        /^drafts\./,
+        "",
+      )}&language=${document.language || baseLanguage}`;
     },
     actions: (prev, context) => {
       const schema = Object.entries(context.schema._registry)
