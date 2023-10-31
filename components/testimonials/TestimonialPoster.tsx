@@ -113,10 +113,10 @@ export const TestimonialPoster = ({
                 {jobTitle && (
                   <Title
                     as="span"
-                    {...theme?.jobTitle}
                     {...theme?.name}
                     size={theme?.name?.size || "lg"}
                     weight={theme?.name?.weight || "normal"}
+                    {...theme?.jobTitle}
                   >
                     {jobTitle}
                   </Title>
