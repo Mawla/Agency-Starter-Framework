@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run build-config && next dev --turbo",
+    "dev": "npm run build-config && next dev",
     "lint": "next lint && tsc --noEmit",
     "build": "npm run build-config && if test \"$VERCEL_GIT_REPO_SLUG\" = \"mawla-engine-v2\" ; then npm run build-and-test ; else npm run build-only; fi",
     "build-only": "npm run build-config && next build && npm run build-cms",

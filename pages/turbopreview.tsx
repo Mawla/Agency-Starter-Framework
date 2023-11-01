@@ -29,12 +29,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export default function PreviewPage({
-  preview,
   config,
   navigation,
   footer,
 }: {
-  preview: boolean;
   config: ConfigType;
   navigation: NavigationType;
   footer: FooterType;
@@ -358,10 +356,7 @@ export default function PreviewPage({
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-  locale,
-}) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const config = (await getClient().fetch(
     getConfigQuery((locale as LanguageType) || baseLanguage),
   )) as ConfigType;
@@ -376,5 +371,5 @@ export const getStaticProps: GetStaticProps = async ({
     getFooterQuery(locale as LanguageType),
   )) as FooterType;
 
-  return { props: { preview, config, navigation, footer }, revalidate: 10 };
+  return { props: { config, navigation, footer }, revalidate: 10 };
 };
