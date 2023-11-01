@@ -12,7 +12,8 @@ const SEO_TITLE_FIELD = defineField({
   name: "title",
   title: "Title",
   type: "string",
-  description: "Around 55-60 characters long.",
+  description:
+    "Global seo title. Will be added after page specific titles. E.g. <page title> - <global title>. Around 55-60 characters long.",
   validation: (Rule: any) =>
     Rule.required().warning("It's good practice adding a title for SEO."),
   components: {
@@ -26,7 +27,8 @@ const SEO_TITLE_FIELD = defineField({
 const SEO_DESCRIPTION_FIELD = defineField({
   name: "description",
   title: "Description",
-  description: "Around 150-160 characters long.",
+  description:
+    "Fallback seo description. Will be used when no page description is set. Around 150-160 characters long.",
   type: "text",
   rows: 3,
   validation: (Rule: any) =>

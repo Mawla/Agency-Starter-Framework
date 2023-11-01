@@ -1,6 +1,7 @@
 import { ColumnType } from "../../blocks/block18/block18.options";
 import { DecorationsProps } from "../../components/decorations/Decorations";
 import { ResponsiveImageProps } from "../../components/images/ResponsiveImage";
+import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import {
   backgroundClasses,
   borderClasses,
@@ -84,6 +85,12 @@ export const ImageCard = ({ image, theme, decorations }: ImageCardProps) => {
             "relative",
             ratioClasses[theme?.image?.ratio || "16/9"],
           )}
+          style={{
+            aspectRatio:
+              theme?.image?.ratio === "auto"
+                ? getOriginalImageDimensions(image.src).aspectRatio || "auto"
+                : undefined,
+          }}
         >
           <ResponsiveImage {...image} fill zoom gallery />
         </div>

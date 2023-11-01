@@ -125,7 +125,7 @@ script[type='application/ld+json'] {
 }
 */
 
-.preview-highlight-hover {
+.preview-highlight-hover:not(.absolute) {
   position: relative;
 }
 
@@ -142,7 +142,7 @@ script[type='application/ld+json'] {
   z-index: 999;
 }
 
-.preview-highlight-open {
+.preview-highlight-open:not(.absolute) {
   position: relative;
 }
 
