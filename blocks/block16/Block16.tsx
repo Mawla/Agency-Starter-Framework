@@ -13,7 +13,7 @@ import { TitleThemeType } from "../../components/title/title.options";
 import { getOriginalImageDimensions } from "../../helpers/sanity/image-url";
 import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { ImageType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 

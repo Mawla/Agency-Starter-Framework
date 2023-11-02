@@ -7,7 +7,7 @@ import {
   TitleSizeType,
   TitleWeightType,
 } from "./title.options";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 
 export type TitleProps = {

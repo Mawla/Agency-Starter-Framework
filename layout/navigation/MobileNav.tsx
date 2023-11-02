@@ -5,7 +5,7 @@ import { LanguageSwitch } from "./LanguageSwitch";
 import { NavigationProps } from "./Navigation";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 
 export type MobileNavProps = {

@@ -24,7 +24,7 @@ export type TwitterType = {
 };
 
 export type ConfigType = {
-  general: {
+  general?: {
     name?: string;
     domain?: string;
   };

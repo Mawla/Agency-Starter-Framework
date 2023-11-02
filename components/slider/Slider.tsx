@@ -3,7 +3,7 @@ import { SiteContext } from "../../context/SiteContext";
 import { textClasses } from "../../theme";
 import { IconLoader } from "../images/IconLoader";
 import { SliderColorType } from "./slider.options";
-import cx from "classnames";
+import cx from "clsx";
 import { CSSProperties, useContext, useState } from "react";
 import "swiper/css";
 import "swiper/css/effect-fade";

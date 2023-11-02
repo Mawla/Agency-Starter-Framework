@@ -30,7 +30,7 @@ import {
   PaddingType,
 } from "../../types";
 import { ColumnType, gridClasses } from "./block3.classes";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 

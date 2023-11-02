@@ -5,7 +5,7 @@ import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { PortableTextProps } from "../portabletext/PortableText";
 import { TitleThemeType } from "../title/title.options";
 import { TestimonialType } from "./Testimonials";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 

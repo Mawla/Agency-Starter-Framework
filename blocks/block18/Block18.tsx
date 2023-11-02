@@ -31,7 +31,7 @@ import {
   gridClasses,
 } from "./block18.classes";
 import { ColumnType, GapType } from "./block18.options";
-import cx from "classnames";
+import cx from "clsx";
 import React, {
   CSSProperties,
   ComponentType,

@@ -18,7 +18,7 @@ export const getReactComponentSnippet = ({
     import { DecorationProps } from "../../components/decorations/Decoration";
     import { WrapperProps } from "../../components/block/Wrapper";
     import { BlockThemeType } from "../../components/block/block.options";
-    import cx from "classnames";
+    import cx from "clsx";
     import { textAlignClasses } from "../../components/text/text.options";
 
     const Wrapper = lazy<ComponentType<WrapperProps>>(

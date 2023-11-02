@@ -1,7 +1,7 @@
 import { getClient } from "../../helpers/sanity/server";
 import { textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import * as DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -43,7 +43,7 @@ export const IconLoader = ({
     queryKey: icon || "",
     enabled: !!icon,
     queryFn: () =>
-      getClient(false).fetch(
+      getClient().fetch(
         `*[_id == 'config_icons'][0] {
         "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
       }.icon`,

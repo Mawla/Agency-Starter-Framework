@@ -1,6 +1,5 @@
 import { getClient } from "../../helpers/sanity/server";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
-import { ConfigType } from "../../queries/config.query";
 import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -12,12 +11,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
   res.setHeader("Content-Type", "application/xml");
   res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
 
-  const domain: ConfigType["general"]["domain"] =
-    (await getClient(false)?.fetch(
+  const domain: string =
+    (await getClient()?.fetch(
       '*[_type == "config.general"] { domain }[0].domain',
     )) || "";
 
-  const pages = (await getClient(false).fetch(
+  const pages = (await getClient().fetch(
     getSitemapQuery(),
   )) as SitemapItemType[];
 

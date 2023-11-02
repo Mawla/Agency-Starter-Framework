@@ -7,7 +7,7 @@ import singletonRouter from "next/router";
 // https://github.com/scottrippey/next-router-mock/issues/58
 jest.mock("next/dist/client/router", () => require("next-router-mock"));
 
-jest.mock("next/dist/shared/lib/router-context", () => {
+jest.mock("next/dist/shared/lib/router-context.shared-runtime", () => {
   const { createContext } = require("react");
   const router = require("next-router-mock").default;
   const RouterContext = createContext(router);

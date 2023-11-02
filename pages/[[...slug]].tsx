@@ -38,7 +38,6 @@ const SlugPage = ({
   navigation,
   footer,
   page,
-  preview,
   sitemapItem,
   locked,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -61,7 +60,6 @@ const SlugPage = ({
     <Page
       navigation={navigation}
       page={page}
-      isPreviewMode={preview}
       footer={footer}
       config={config}
       sitemapItem={sitemapItem}
@@ -78,7 +76,6 @@ type StaticProps = {
   navigation: NavigationType;
   notFound?: boolean;
   page: PageType;
-  preview?: boolean;
   revalidate?: number;
   sitemapItem?: SitemapItemType;
   breadcrumb?: FlatBreadcrumbType;
@@ -93,58 +90,47 @@ type StaticProps = {
  * - footer
  */
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  preview = false,
-  locale,
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug || "";
   const language = (locale as LanguageType) || baseLanguage;
 
   let path = Array.isArray(slug) ? `/${slug.join("/")}` : `/${slug}`;
-  const finalSlug = slug[slug.length - 1];
 
   // fetch sitemap
-  let sitemap = (await getClient(preview).fetch(
-    getSitemapQuery(),
-  )) as SitemapType;
+  let sitemap = (await getClient().fetch(getSitemapQuery())) as SitemapType;
   sitemap = sitemap.filter(Boolean);
 
   if (!sitemap.length) return { notFound: true };
 
-  // get draft page or published page in preview mode
-  const sitemapItem = preview
-    ? sitemap.find(
-        (item) =>
-          item.path === path &&
-          item._id.startsWith(`drafts.`) &&
-          item?.language == language,
-      ) ||
-      sitemap.find((item) => item.path === path && item?.language == language)
-    : // get published page in production mode
-      sitemap?.find(
-        (item) => item?.path === path && item?.language == language,
-      );
+  // get published page
+  const sitemapItem = sitemap?.find(
+    (item) => item?.path === path && item?.language == language,
+  );
 
   if (!sitemapItem) return { notFound: true };
 
   // fetch config
-  const config = (await getClient(preview).fetch(
+  const config = (await getClient().fetch(
     getConfigQuery(language),
   )) as ConfigType;
 
-  // fetch navigation
-  let navigation = (await getClient(preview).fetch(
-    getNavigationQuery(language),
-  )) as NavigationType;
+  let navigation: Awaited<NavigationType> = {} as NavigationType;
+  getClient()
+    .fetch(getNavigationQuery(language), {
+      language,
+    })
+    .then((res) => (navigation = res));
 
-  // fetch footer
-  const footer = (await getClient(preview).fetch(
-    getFooterQuery(language),
-  )) as FooterType;
+  // fetch navigation
+  let footer: Awaited<FooterType> = {} as FooterType;
+  getClient()
+    .fetch(getFooterQuery(language), {
+      language,
+    })
+    .then((res) => (footer = res));
 
   // fetch page
-  const page = await getClient(preview).fetch(getPageQuery(language), {
+  const page = await getClient().fetch(getPageQuery(language), {
     ...sitemapItem,
     language,
   });
@@ -162,7 +148,6 @@ export const getStaticProps: GetStaticProps = async ({
     footer,
     navigation,
     page,
-    preview,
     sitemapItem,
   };
 
@@ -190,9 +175,7 @@ export const getStaticProps: GetStaticProps = async ({
  */
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const sitemap = (await getClient(false).fetch(
-    getSitemapQuery(),
-  )) as SitemapType;
+  const sitemap = (await getClient().fetch(getSitemapQuery())) as SitemapType;
 
   // don't build on preview environments
   if (
@@ -206,9 +189,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 
   // get static generation blacklist so we can exclude pages like page.blog or page.content
-  const staticGenerationBlacklist: string[] | null = await getClient(
-    true,
-  ).fetch(
+  const staticGenerationBlacklist: string[] | null = await getClient().fetch(
     `*[_id == "secret.config_deployment"][0] { staticGenerationBlacklist }.staticGenerationBlacklist`,
   );
 

@@ -27,7 +27,7 @@ import { IconLoaderProps } from "../images/IconLoader";
 import { Spinner } from "../loaders/Spinner";
 import { Link } from "./Link";
 import { ButtonIconPositionType } from "./button.options";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { twMerge } from "tailwind-merge";
 

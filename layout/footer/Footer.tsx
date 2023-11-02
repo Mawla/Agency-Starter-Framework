@@ -9,13 +9,13 @@ import { FooterMenu } from "./Footer.Menu";
 import React from "react";
 
 export type FooterProps = {
-  socials: {
+  socials?: {
     _key?: string;
     label?: string;
     href?: string;
     icon?: string;
   }[];
-  links: {
+  links?: {
     _key?: string;
     title?: string;
     href?: string;

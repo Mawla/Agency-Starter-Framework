@@ -22,24 +22,21 @@ import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery } from "../queries/page.query";
 import { backgroundClasses } from "../theme";
 import { ColorType } from "../types";
-import cx from "classnames";
+import cx from "clsx";
 import { parse, evaluate } from "groq-js";
 import type { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export default function PreviewPage({
-  preview,
   config,
   navigation,
   footer,
 }: {
-  preview: boolean;
   config: ConfigType;
   navigation: NavigationType;
   footer: FooterType;
 }) {
-  const isPreviewMode = preview;
   const router = useRouter();
 
   const [dataset, setDataset] = useState<any>(null);
@@ -55,12 +52,11 @@ export default function PreviewPage({
   const language = router.query.language as LanguageType;
 
   /**
-   * Bail if not in preview mode
+   * Bail if not in preview mode or inside CMS iframe
    */
-
   useEffect(() => {
-    if (!isPreviewMode) router.push("/");
-  }, [isPreviewMode, router]);
+    if (window.self === window.top) router.push("/");
+  }, [router]);
 
   /**
    * Notify studio that iframe is ready to listen for updates
@@ -278,7 +274,6 @@ export default function PreviewPage({
         <Page
           navigation={navigation as NavigationType}
           page={previewDocument}
-          isPreviewMode={true}
           footer={footer as FooterType}
           config={config}
         />
@@ -359,23 +354,20 @@ export default function PreviewPage({
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-  locale,
-}) => {
-  const config = (await getClient(preview).fetch(
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const config = (await getClient().fetch(
     getConfigQuery((locale as LanguageType) || baseLanguage),
   )) as ConfigType;
 
   // fetch navigation
-  let navigation = (await getClient(preview).fetch(
+  let navigation = (await getClient().fetch(
     getNavigationQuery(locale as LanguageType),
   )) as NavigationType;
 
   // fetch footer
-  const footer = (await getClient(preview).fetch(
+  const footer = (await getClient().fetch(
     getFooterQuery(locale as LanguageType),
   )) as FooterType;
 
-  return { props: { preview, config, navigation, footer }, revalidate: 10 };
+  return { props: { config, navigation, footer }, revalidate: 10 };
 };

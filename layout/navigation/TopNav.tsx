@@ -5,7 +5,7 @@ import { TopNavBanner } from "./TopNav.Banner";
 import { TopNavButtons } from "./TopNav.Buttons";
 import { TopNavLogo } from "./TopNav.Logo";
 import { TopNavMenu } from "./TopNav.Menu";
-import cx from "classnames";
+import cx from "clsx";
 import React, { useRef } from "react";
 
 export type TopNavProps = {

@@ -2,7 +2,7 @@ import { IconLoaderProps } from "../../components/images/IconLoader";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
 import { getURLForPath } from "../../helpers/sitemap/getURLForPath";
-import cx from "classnames";
+import cx from "clsx";
 import { ComponentType, lazy, useContext, useEffect, useState } from "react";
 import {
   FacebookShareButton,

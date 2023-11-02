@@ -1,11 +1,9 @@
 import { ButtonProps } from "../../components/buttons/Button";
 import {
   buttonFieldsWithoutDefaultThemeQuery,
-  buttonQuery,
   linkQuery,
 } from "../../components/buttons/button.query";
 import { getImageQuery } from "../../components/images/image.query";
-import { richTextQuery } from "../../components/portabletext/portabletext.query";
 import { LanguageType } from "../../languages";
 import { getSitemapQuery } from "../../queries/sitemap.query";
 import { NavigationProps } from "./Navigation";
@@ -16,8 +14,8 @@ export type NavigationItemType = ButtonProps & {
 };
 
 export type NavigationType = {
-  items: NavigationItemType[];
-  buttons: NavigationItemType[];
+  items?: NavigationItemType[];
+  buttons?: NavigationItemType[];
   breadcrumb?: {
     hidden?: boolean;
   };

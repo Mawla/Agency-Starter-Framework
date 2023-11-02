@@ -1,5 +1,5 @@
 import { bleedClasses, BleedSpaceType } from "./bleed.options";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 
 export type BleedProps = {

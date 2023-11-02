@@ -6,7 +6,7 @@ import { TestimonialsProps } from "../../components/testimonials/Testimonials";
 import { textAlignClasses } from "../../components/text/text.options";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 
 const Wrapper = lazy<ComponentType<WrapperProps>>(

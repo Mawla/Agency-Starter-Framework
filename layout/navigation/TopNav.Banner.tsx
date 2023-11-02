@@ -5,7 +5,7 @@ import { textAlignClasses } from "../../components/text/text.options";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { AlignType } from "./navigation.options";
-import cx from "classnames";
+import cx from "clsx";
 
 export type TopNavBannerProps = {
   theme?: {

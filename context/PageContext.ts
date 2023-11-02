@@ -7,7 +7,6 @@ import {
 import React from "react";
 
 export const PageContext = React.createContext({
-  isPreviewMode: false,
   sitemapItem: {} as SitemapItemType,
   language: baseLanguage as LanguageType,
   breadcrumb: [] as FlatBreadcrumbType,

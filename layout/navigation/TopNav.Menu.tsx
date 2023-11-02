@@ -6,7 +6,7 @@ import { backgroundClasses } from "../../theme";
 import { NavigationProps } from "./Navigation";
 import { AlignType } from "./navigation.options";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
-import cx from "classnames";
+import cx from "clsx";
 import { Suspense, useContext } from "react";
 
 export type TopNavMenuProps = {

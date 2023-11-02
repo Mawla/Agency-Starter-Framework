@@ -1,7 +1,7 @@
 import { PageContext } from "../../context/PageContext";
 import IconLoader from "../images/IconLoader";
 import { FlatBreadcrumbType } from "./breadcrumb.query";
-import cx from "classnames";
+import cx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -12,7 +12,8 @@ export type BreadcrumbProps = {
 };
 
 export const Breadcrumb = ({ path, wrap }: BreadcrumbProps) => {
-  const { isPreview } = useRouter();
+  const router = useRouter();
+  const isPreview = router.pathname.startsWith("/turbopreview");
   const { breadcrumb } = React.useContext(PageContext);
   path = path || breadcrumb;
 

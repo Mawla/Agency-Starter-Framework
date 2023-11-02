@@ -21,9 +21,9 @@ export type FooterSocialsItemProps = {
 };
 
 export type FooterType = {
-  copyright: string;
-  links: FooterItemType[];
-  socials: FooterSocialsItemProps[];
+  copyright?: string;
+  links?: FooterItemType[];
+  socials?: FooterSocialsItemProps[];
   legal?: string;
   info?: string;
   legalLinks?: FooterItemType["items"];

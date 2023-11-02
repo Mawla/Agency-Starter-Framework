@@ -1,8 +1,7 @@
-import { getPathForId } from "./helpers/sitemap/getPathForId";
-import { baseLanguage, languages, LanguageType } from "./languages";
-import { getSitemapQuery, SitemapItemType } from "./queries/sitemap.query";
+import { languages, LanguageType } from "./languages";
 import { Logo } from "./studio/components/Logo";
 import { createPublishAction } from "./studio/components/PublishAction";
+import { productionURLPane } from "./studio/components/productionURLPane";
 import { schemaTypes } from "./studio/schemas";
 import { structure, defaultDocumentNode } from "./studio/structure";
 import {
@@ -43,37 +42,10 @@ export default defineConfig({
       defaultApiVersion: SANITY_API_VERSION,
     }),
     muxInput(),
+    productionURLPane,
   ],
 
   document: {
-    productionUrl: async (prev: any, context: any) => {
-      const { getClient, document } = context;
-
-      const sitemap: SitemapItemType[] = await getClient({
-        apiVersion: SANITY_API_VERSION,
-      }).fetch(getSitemapQuery());
-
-      const languagePrefix =
-        document.language === baseLanguage ? "" : `/${document.language}`;
-      const path = `${languagePrefix}${getPathForId(document._id, sitemap)}`;
-
-      if (!document.language) {
-        return prev;
-      }
-
-      if (path === "/" && document._id.indexOf("page_homepage") === -1) {
-        return prev;
-      }
-
-      if (path) {
-        return `${import.meta.env.SANITY_STUDIO_PROJECT_PATH?.replace(
-          /\/+$/,
-          "",
-        )}${path}`;
-      }
-
-      return prev;
-    },
     actions: (prev, context) => {
       const schema = Object.entries(context.schema._registry)
         .find(([key, value]) => key === context.schemaType)?.[1]

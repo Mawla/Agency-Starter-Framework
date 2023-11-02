@@ -1,7 +1,7 @@
-import { PageContext } from "../../context/PageContext";
-import cx from "classnames";
+import cx from "clsx";
+import { useRouter } from "next/router";
 import NextScript from "next/script";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export type ScriptsType = {
   title?: string;
@@ -21,7 +21,9 @@ export type ScriptType = {
 };
 
 export const Scripts = ({ items }: ScriptsType) => {
-  const { isPreviewMode } = useContext(PageContext);
+  const router = useRouter();
+  const isPreview = router.pathname.startsWith("/turbopreview");
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -78,10 +80,10 @@ export const Scripts = ({ items }: ScriptsType) => {
           <div
             key={script._key}
             className={cx("script", {
-              ["relative"]: isPreviewMode,
+              ["relative"]: isPreview,
             })}
           >
-            {isPreviewMode && (
+            {isPreview && (
               <span className="absolute right-0 top-0 text-[10px] p-1 bg-[#ddd]">
                 {script.title} script
               </span>

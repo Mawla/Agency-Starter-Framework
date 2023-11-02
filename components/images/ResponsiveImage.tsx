@@ -9,7 +9,7 @@ import { ratioClasses } from "../../theme";
 import { ImageType, RatioType } from "../../types";
 import { FancyboxProps } from "../lightbox/Fancybox";
 import { ScriptJsonLd } from "../meta/ScriptJsonLd";
-import cx from "classnames";
+import cx from "clsx";
 import Head from "next/head";
 import NextImage, { ImageProps as NextImageProps } from "next/image";
 import React, {
@@ -204,7 +204,7 @@ export const ResponsiveImage = ({
           height={fill ? undefined : height}
           priority={priority}
           quality={IMAGE_QUALITY}
-          onLoadingComplete={onImageLoad}
+          onLoad={onImageLoad}
           unoptimized
         />
       )}

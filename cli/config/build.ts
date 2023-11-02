@@ -60,6 +60,7 @@ export type ConfigType = {
   stylesheets: string;
   safelist: string[];
   icons: string[];
+  gtmid: string;
 };
 
 /**
@@ -73,11 +74,17 @@ export async function getConfig(): Promise<ConfigType> {
     languages[] { id, title }
   }.languages`);
 
-  // get robotx.txt
+  // get robots.txt
   const domain: string = await client.fetch(`
   *[_id == "config_general"][0] { 
     domain
   }.domain`);
+
+  // get gtmid
+  const gtmid: string = await client.fetch(`
+  *[_id == "config_integrations"][0] { 
+    gtmid
+  }.gtmid`);
 
   // get theme
   const theme: GroqThemeType = await client.fetch(`
@@ -105,6 +112,7 @@ export async function getConfig(): Promise<ConfigType> {
       safelist: [],
       stylesheets: "",
       icons: [],
+      gtmid,
     };
   }
 
@@ -139,6 +147,7 @@ export async function getConfig(): Promise<ConfigType> {
     safelist,
     stylesheets,
     icons,
+    gtmid,
   };
 }
 

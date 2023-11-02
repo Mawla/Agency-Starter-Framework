@@ -21,7 +21,7 @@ import {
   RatioType,
 } from "../../types";
 import { DecorationProps } from "../decorations/Decoration";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 
 export type ImageCardProps = {

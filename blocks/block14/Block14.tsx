@@ -10,7 +10,7 @@ import { TagProps } from "../../components/tags/Tag";
 import { joinList } from "../../helpers/utils/string";
 import { useTranslation } from "../../hooks/useTranslation";
 import { ImageType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 
