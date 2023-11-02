@@ -1,5 +1,4 @@
-// @ts-ignore
-import { gtmid } from "../engine.config";
+import config from "../engine.config";
 import "../public/engine.styles.css";
 import "../styles/styles.css";
 // @ts-ignore
@@ -19,8 +18,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <Component {...pageProps} />
-      {gtmid && process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
-        <GoogleTagManager gtmId={gtmid} />
+      {config?.gtmid && process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
+        <GoogleTagManager gtmId={config.gtmid} />
       )}
     </QueryClientProvider>
   );
