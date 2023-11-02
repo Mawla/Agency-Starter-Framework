@@ -92,7 +92,7 @@ export const DocumentPreview = () => {
   }, [documentId]);
 
   /**
-   * Check if the preview pane is open or not
+   * Auto open preview pane
    */
 
   useEffect(() => {
