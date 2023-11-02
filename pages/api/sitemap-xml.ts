@@ -13,11 +13,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
   res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
 
   const domain: ConfigType["general"]["domain"] =
-    (await getClient(false)?.fetch(
+    (await getClient()?.fetch(
       '*[_type == "config.general"] { domain }[0].domain',
     )) || "";
 
-  const pages = (await getClient(false).fetch(
+  const pages = (await getClient().fetch(
     getSitemapQuery(),
   )) as SitemapItemType[];
 

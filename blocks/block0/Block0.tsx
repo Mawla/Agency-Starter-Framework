@@ -76,7 +76,7 @@ export const Block0 = ({
     async function getTheme() {
       if (theme?.code?.removeWebsiteStyles) return setWebsiteHTML("");
 
-      const websiteTheme = await getClient(false)?.fetch(`
+      const websiteTheme = await getClient()?.fetch(`
       *[_id == "config_theme"][0] {
         colors[] { name, value },
         fontFamily[] { name, value },

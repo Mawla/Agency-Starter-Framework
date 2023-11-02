@@ -43,7 +43,7 @@ export const IconLoader = ({
     queryKey: icon || "",
     enabled: !!icon,
     queryFn: () =>
-      getClient(false).fetch(
+      getClient().fetch(
         `*[_id == 'config_icons'][0] {
         "icon": coalesce(predefined.${icon}, rest[slug.current == "${icon}"][0].icon)
       }.icon`,
