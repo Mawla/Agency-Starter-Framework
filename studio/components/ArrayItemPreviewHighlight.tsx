@@ -3,6 +3,13 @@ import React, { CSSProperties, useEffect, useRef } from "react";
 export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
+  function getPreviewIframe() {
+    const previewIframe = window.document.querySelector(
+      ".previewView iframe",
+    ) as HTMLIFrameElement;
+    return previewIframe;
+  }
+
   /**
    * When the form is opened: scroll preview iframe to element
    */
@@ -11,9 +18,7 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
     if (!props?.value?._key) return;
     if (!elementRef.current) return;
 
-    const previewIframe = window.document.querySelector(
-      ".previewView iframe",
-    ) as HTMLIFrameElement;
+    const previewIframe = getPreviewIframe();
     if (!previewIframe?.contentWindow) return;
 
     if (props.open) {
@@ -45,13 +50,10 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
     if (!props?.value?._key) return;
     if (!elementRef.current) return;
 
-    const previewIframe = window.document.querySelector(
-      ".previewView iframe",
-    ) as HTMLIFrameElement;
-    if (!previewIframe?.contentWindow) return;
-
     const handleMouseEnter = () => {
+      const previewIframe = getPreviewIframe();
       if (!previewIframe?.contentWindow) return;
+
       previewIframe.contentWindow.postMessage(
         {
           type: "preview-view-highlight-hover",
@@ -63,7 +65,9 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
     };
 
     const handleMouseLeave = () => {
+      const previewIframe = getPreviewIframe();
       if (!previewIframe?.contentWindow) return;
+
       if (props.open) return;
       previewIframe.contentWindow.postMessage(
         {

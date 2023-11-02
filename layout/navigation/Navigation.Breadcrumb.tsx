@@ -5,7 +5,6 @@ import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import cx from "classnames";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 export type NavigationBreadcrumbProps = {
@@ -19,10 +18,9 @@ export type NavigationBreadcrumbProps = {
 };
 
 export const NavigationBreadcrumb = ({ theme }: NavigationBreadcrumbProps) => {
-  const { isPreview } = useRouter();
   const pathname = usePathname() || "";
   const isHomepage = pathname === "/" || isLanguage(pathname?.replace("/", ""));
-  if (isHomepage && !isPreview) return null;
+  if (isHomepage) return null;
 
   return (
     <div

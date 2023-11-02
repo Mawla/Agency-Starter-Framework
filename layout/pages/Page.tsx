@@ -1,6 +1,5 @@
 import { Seo } from "../../components/meta/Seo";
 import { PageLock } from "../../components/pagelock/PageLock";
-import { PreviewButton } from "../../components/previewmode/PreviewButton";
 import { ScriptsType } from "../../components/script/Script";
 import { PageContext } from "../../context/PageContext";
 import { SiteContext } from "../../context/SiteContext";
@@ -27,7 +26,6 @@ const Scripts = lazy<ComponentType<ScriptsType>>(
 );
 
 export type PageProps = {
-  isPreviewMode: boolean;
   navigation: NavigationProps;
   page: PageType;
   footer: FooterType;
@@ -38,7 +36,6 @@ export type PageProps = {
 };
 
 export const Page = ({
-  isPreviewMode,
   navigation,
   page,
   footer,
@@ -75,7 +72,6 @@ export const Page = ({
     >
       <PageContext.Provider
         value={{
-          isPreviewMode,
           sitemapItem: (sitemapItem || {}) as SitemapItemType,
           language: (router.query.language || router.locale) as LanguageType,
           breadcrumb: page?.breadcrumb,
@@ -83,7 +79,7 @@ export const Page = ({
             page?.languageAlternates as LanguageAlternateType[],
         }}
       >
-        <Seo page={page} config={config} isPreviewMode={isPreviewMode} />
+        <Seo page={page} config={config} />
         {page &&
           navigation &&
           !isLightbox &&
@@ -112,16 +108,7 @@ export const Page = ({
 
         {children}
 
-        {isPreviewMode &&
-          !isLightbox &&
-          pagePath !== "/preview" &&
-          pagePath !== "/turbopreview" && (
-            <div className="text-md fixed top-1 right-1 z-50 flex gap-1 text-white">
-              <PreviewButton pagePath={pagePath} />
-            </div>
-          )}
-
-        {locked && !isPreviewMode && !isLightbox && <PageLock />}
+        {locked && !isLightbox && <PageLock />}
 
         {page && footer && !isLightbox && page?._type.startsWith("page.") && (
           <ErrorBoundary>

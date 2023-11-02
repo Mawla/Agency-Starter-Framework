@@ -65,7 +65,7 @@ export const PreviewIframeComponent = ({
 
   const src = `${
     import.meta.env.SANITY_STUDIO_PROJECT_PATH
-  }api/preview/preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${
+  }api/preview/open-preview?_id=${_id}&_type=${_type}&secret=${secret}&language=${
     getStructurePath()?.language || baseLanguage
   }`;
 

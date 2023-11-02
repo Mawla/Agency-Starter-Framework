@@ -1,5 +1,5 @@
 import { SANITY_API_VERSION, SCHEMAS } from "../../../types.sanity";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useClient, useFormValue } from "sanity";
 import { useRouter } from "sanity/router";
 
@@ -9,7 +9,6 @@ export const DocumentPreview = () => {
   const router = useRouter();
 
   const documentId = (document as any)?._id.replace("drafts.", "");
-  const [log, setLog] = useState<string[]>([]);
 
   function getIframe() {
     return window.document.querySelector(
@@ -32,7 +31,6 @@ export const DocumentPreview = () => {
         e.data.type == "document-preview-iframe-ready" &&
         e.data.documentId === documentId
       ) {
-        setLog((prev) => [...prev, "send document"]);
         previewIframe.contentWindow.postMessage(
           { type: "document-preview-document", document },
           import.meta.env.SANITY_STUDIO_PROJECT_PATH,
@@ -58,7 +56,6 @@ export const DocumentPreview = () => {
     async function getDataset() {
       const previewIframe = getIframe();
       if (!previewIframe?.contentWindow) return;
-      setLog((prev) => [...prev, "get dataset"]);
 
       const dataset = await client.fetch(
         `*[_type in ['${Object.keys(SCHEMAS).join(
@@ -69,7 +66,6 @@ export const DocumentPreview = () => {
 
       if (!dataset?.length) return;
 
-      setLog((prev) => [...prev, "send dataset"]);
       previewIframe.contentWindow.postMessage(
         { type: "document-preview-dataset", dataset },
         import.meta.env.SANITY_STUDIO_PROJECT_PATH,
@@ -92,7 +88,7 @@ export const DocumentPreview = () => {
   }, [documentId]);
 
   /**
-   * Check if the preview pane is open or not
+   * Auto open preview pane
    */
 
   useEffect(() => {
@@ -112,7 +108,6 @@ export const DocumentPreview = () => {
         (pane) => pane.params.view === "preview",
       );
       if (previewPane) return;
-      setLog((prev) => [...prev, "open preview"]);
 
       const path = router.resolvePathFromState(router.state);
       router.navigateUrl({ path: `${path}%7C%2Cview%3Dpreview` });

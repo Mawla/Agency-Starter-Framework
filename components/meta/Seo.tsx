@@ -15,29 +15,29 @@ const TagManager = require("react-gtm-module");
 export type SeoProps = {
   config?: ConfigType;
   page?: PageType;
-  isPreviewMode?: boolean;
 };
 
-export const Seo = ({ config, page, isPreviewMode }: SeoProps) => {
+export const Seo = ({ config, page }: SeoProps) => {
   const router = useRouter();
+  const isPreview = router.pathname.startsWith("/turbopreview");
   const { sitemapItem } = useContext(PageContext);
   const pagePath = usePathname() || "/";
 
   useEffect(() => {
-    if (isPreviewMode) return;
+    if (isPreview) return;
     if (
       config?.integrations?.gtmid &&
       process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
     )
       TagManager.initialize({ gtmId: config?.integrations?.gtmid });
-  }, [config?.integrations?.gtmid, isPreviewMode]);
+  }, [config?.integrations?.gtmid, isPreview]);
 
   if (!config?.seo || !page || !sitemapItem) return null;
 
   const language = router.locale as LanguageType;
 
   const baseUrl = `https://${config?.general?.domain}`;
-  const seoTitle = `${isPreviewMode ? "Draft 👀 - " : ""}${
+  const seoTitle = `${isPreview ? "Preview 👀 - " : ""}${
     page.seo?.title || page.title
   }`;
   const seoDescription =

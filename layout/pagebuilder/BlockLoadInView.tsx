@@ -1,10 +1,10 @@
-import { PageContext } from "../../context/PageContext";
 import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import cx from "classnames";
+import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef, useContext } from "react";
 
 type BlockLoadInViewProps = {
@@ -26,7 +26,9 @@ export const BlockLoadInView = ({
   _key,
   networkIdle,
 }: BlockLoadInViewProps) => {
-  const { isPreviewMode } = useContext(PageContext);
+  const router = useRouter();
+  const isPreview = router.pathname.startsWith("/turbopreview");
+
   const wrapperRef = useRef(null);
   const doLoad = useInView({
     elementRef: wrapperRef,
@@ -39,7 +41,7 @@ export const BlockLoadInView = ({
     elementRef: wrapperRef,
     threshold: 0.01,
     rootMargin: "1200px",
-    enabled: isPreviewMode,
+    enabled: isPreview,
   });
 
   const [forceLoad, setForceLoad] = useState(!enabled);
@@ -61,7 +63,7 @@ export const BlockLoadInView = ({
   }, [forceLoad, networkIdle]);
 
   useEffect(() => {
-    if (!isPreviewMode) return;
+    if (!isPreview) return;
     if (!doLoad) return;
 
     function sendInview() {
@@ -88,13 +90,13 @@ export const BlockLoadInView = ({
 
     window.addEventListener("message", onMessage, false);
     () => window.removeEventListener("message", onMessage);
-  }, [inView, _key, isPreviewMode, doLoad]);
+  }, [inView, _key, isPreview, doLoad]);
 
   return (
     <section
       ref={wrapperRef}
-      data-block={isPreviewMode ? block : undefined}
-      data-key={isPreviewMode ? _key : undefined}
+      data-block={isPreview ? block : undefined}
+      data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
     >
       {doLoad || forceLoad ? (

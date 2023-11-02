@@ -31,7 +31,6 @@ export default function Sitemap({
   config,
   navigation,
   footer,
-  isPreviewMode,
   page,
   sitemapItem,
   sitemap,
@@ -40,7 +39,6 @@ export default function Sitemap({
     <Page
       navigation={navigation}
       page={page}
-      isPreviewMode={isPreviewMode}
       footer={footer}
       config={config}
       sitemapItem={sitemapItem}
@@ -82,7 +80,6 @@ type StaticProps = {
   footer: FooterType;
   navigation: NavigationType;
   page: PageType;
-  isPreviewMode: boolean;
   revalidate?: number;
   sitemapItem?: SitemapItemType;
   sitemap: SitemapType;
@@ -93,16 +90,15 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
   locale,
 }) => {
-  const isPreviewMode = preview;
   const language = locale as LanguageType;
 
   // fetch config
-  const config = (await getClient(isPreviewMode).fetch(
+  const config = (await getClient().fetch(
     getConfigQuery(language),
   )) as ConfigType;
 
   // fetch navigation
-  const navigation = (await getClient(isPreviewMode).fetch(
+  const navigation = (await getClient().fetch(
     getNavigationQuery(language),
   )) as NavigationType;
 
@@ -115,20 +111,18 @@ export const getStaticProps: GetStaticProps = async ({
     _updatedAt: "",
     excludeFromSitemap: false,
   };
-  const page = await getClient(isPreviewMode).fetch(getPageQuery(language), {
+  const page = await getClient().fetch(getPageQuery(language), {
     ...sitemapItem,
     language,
   });
 
   // fetch navigation
-  const footer = (await getClient(isPreviewMode).fetch(
+  const footer = (await getClient().fetch(
     getFooterQuery(language),
   )) as FooterType;
 
   // fetch sitemap
-  let sitemap = (await getClient(isPreviewMode).fetch(
-    getSitemapQuery(),
-  )) as SitemapType;
+  let sitemap = (await getClient().fetch(getSitemapQuery())) as SitemapType;
   sitemap = sitemap
     ?.filter((item: any) => Boolean(item.path))
     ?.filter(
@@ -152,7 +146,6 @@ export const getStaticProps: GetStaticProps = async ({
     footer,
     navigation,
     page,
-    isPreviewMode,
     sitemapItem,
     sitemap,
     language,

@@ -12,7 +12,8 @@ export type BreadcrumbProps = {
 };
 
 export const Breadcrumb = ({ path, wrap }: BreadcrumbProps) => {
-  const { isPreview } = useRouter();
+  const router = useRouter();
+  const isPreview = router.pathname.startsWith("/turbopreview");
   const { breadcrumb } = React.useContext(PageContext);
   path = path || breadcrumb;
 
