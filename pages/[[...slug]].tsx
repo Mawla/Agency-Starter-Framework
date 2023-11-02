@@ -95,7 +95,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const language = (locale as LanguageType) || baseLanguage;
 
   let path = Array.isArray(slug) ? `/${slug.join("/")}` : `/${slug}`;
-  const finalSlug = slug[slug.length - 1];
 
   // fetch sitemap
   let sitemap = (await getClient().fetch(getSitemapQuery())) as SitemapType;
@@ -115,15 +114,20 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     getConfigQuery(language),
   )) as ConfigType;
 
-  // fetch navigation
-  let navigation = (await getClient().fetch(
-    getNavigationQuery(language),
-  )) as NavigationType;
+  let navigation: Awaited<NavigationType> = {} as NavigationType;
+  getClient()
+    .fetch(getNavigationQuery(language), {
+      language,
+    })
+    .then((res) => (navigation = res));
 
-  // fetch footer
-  const footer = (await getClient().fetch(
-    getFooterQuery(language),
-  )) as FooterType;
+  // fetch navigation
+  let footer: Awaited<FooterType> = {} as FooterType;
+  getClient()
+    .fetch(getFooterQuery(language), {
+      language,
+    })
+    .then((res) => (footer = res));
 
   // fetch page
   const page = await getClient().fetch(getPageQuery(language), {
