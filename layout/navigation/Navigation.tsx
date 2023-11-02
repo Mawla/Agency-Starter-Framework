@@ -20,8 +20,8 @@ export type NavItem = {
 };
 
 export type NavigationProps = {
-  items: NavItem[];
-  buttons: (ButtonProps & { _key?: string })[];
+  items?: NavItem[];
+  buttons?: (ButtonProps & { _key?: string })[];
   logo?: {
     mobile?: ImageType;
     desktop?: ImageType;
