@@ -1,6 +1,6 @@
 import { ButtonProps } from "./Button";
 import { AlignType, DIRECTION_OPTIONS } from "./buttongroup.options";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 
 export type DirectionType = keyof typeof DIRECTION_OPTIONS;

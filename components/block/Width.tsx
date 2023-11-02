@@ -1,5 +1,5 @@
 import { widthClasses, WidthType } from "./width.options";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 
 export type WidthProps = {

@@ -5,7 +5,7 @@ import { getLanguageTitle, languages } from "../../languages";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
-import cx from "classnames";
+import cx from "clsx";
 import { useContext } from "react";
 
 type LanguageSwitchProps = {

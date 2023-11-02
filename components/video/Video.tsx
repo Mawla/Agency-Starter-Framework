@@ -1,6 +1,6 @@
 import { useInView } from "../../hooks/useInView";
 import { VideoType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy, useRef } from "react";
 
 const MuxPlayer = lazy<ComponentType<VideoType>>(

@@ -26,7 +26,7 @@ import { PortableTextProps } from "../portabletext/PortableText";
 import { TestimonialType } from "../testimonials/Testimonials";
 import { textAlignClasses } from "../text/text.options";
 import { TitleThemeType } from "../title/title.options";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 

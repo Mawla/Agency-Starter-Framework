@@ -52,7 +52,7 @@
     "@vectopus/atlas-icons-react": "^0.0.7",
     "@vercel/og": "^0.0.21",
     "autoprefixer": "^10.4.13",
-    "classnames": "^2.3.2",
+    "clsx": "^2.0.0",
     "dompurify": "^2.4.3",
     "dotenv": "^16.0.3",
     "easy-css-transform-builder": "^0.1.0",

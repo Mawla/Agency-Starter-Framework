@@ -13,7 +13,7 @@ import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { useTranslation } from "../../hooks/useTranslation";
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy, useContext } from "react";
 import { PortableTextBlock } from "sanity";
 

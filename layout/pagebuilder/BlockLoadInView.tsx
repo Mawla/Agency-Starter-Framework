@@ -3,7 +3,7 @@ import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
-import cx from "classnames";
+import cx from "clsx";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef, useContext } from "react";
 

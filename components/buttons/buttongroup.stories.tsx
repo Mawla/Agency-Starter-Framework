@@ -2,7 +2,7 @@ import { ButtonProps } from "./Button";
 import { ButtonGroup } from "./ButtonGroup";
 import { ALIGN_OPTIONS, DIRECTION_OPTIONS } from "./buttongroup.options";
 import { Meta } from "@storybook/react";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 
 export default {

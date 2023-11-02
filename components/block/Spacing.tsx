@@ -5,7 +5,7 @@ import {
   marginTopClasses,
   marginBottomClasses,
 } from "./spacing.options";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 

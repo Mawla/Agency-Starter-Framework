@@ -34,7 +34,7 @@ import { LinkProps } from "../buttons/Link";
 import { DecorationsProps } from "../decorations/Decorations";
 import { textAlignClasses } from "../text/text.options";
 import { ImageHeightType } from "./composablecard.options";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 import { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";

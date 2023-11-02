@@ -1,5 +1,5 @@
 import { GradientOpacityType } from "./GradientOptions";
-import cx from "classnames";
+import cx from "clsx";
 
 export type GradientProps = {
   className?: string;

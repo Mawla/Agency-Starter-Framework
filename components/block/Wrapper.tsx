@@ -6,7 +6,7 @@ import { Bleed, BleedProps } from "./Bleed";
 import { Spacing } from "./Spacing";
 import { Width, WidthProps } from "./Width";
 import { BlockThemeType } from "./block.options";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 
 const Decoration = lazy<ComponentType<DecorationProps>>(

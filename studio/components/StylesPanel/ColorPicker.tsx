@@ -1,6 +1,6 @@
 import { optionsToList } from "../../utils/fields/optionsToList";
 import { Box, Flex, Stack, Text, Tooltip } from "@sanity/ui";
-import cx from "classnames";
+import cx from "clsx";
 import React from "react";
 import { usePopoverState, Popover, PopoverDisclosure } from "reakit/Popover";
 import tinycolor from "tinycolor2";

@@ -1,6 +1,6 @@
 import { backgroundClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 
 export type HighlightProps = {
   theme?: {

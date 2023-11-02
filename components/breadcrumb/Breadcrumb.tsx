@@ -1,7 +1,7 @@
 import { PageContext } from "../../context/PageContext";
 import IconLoader from "../images/IconLoader";
 import { FlatBreadcrumbType } from "./breadcrumb.query";
-import cx from "classnames";
+import cx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";

@@ -1,7 +1,7 @@
 import { getClient } from "../../helpers/sanity/server";
 import { textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import * as DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";

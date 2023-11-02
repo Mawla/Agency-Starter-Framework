@@ -10,7 +10,7 @@ import {
 import { ResponsiveImageProps } from "../images/ResponsiveImage";
 import { VideoProps } from "../video/Video";
 import { DecorationLocationType } from "./decoration.options";
-import cx from "classnames";
+import cx from "clsx";
 import DOMPurify from "dompurify";
 import { createCSSTransformBuilder } from "easy-css-transform-builder";
 import { ComponentType, CSSProperties, lazy, useEffect, useState } from "react";

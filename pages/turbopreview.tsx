@@ -22,7 +22,7 @@ import { ConfigType, getConfigQuery } from "../queries/config.query";
 import { getPageQuery } from "../queries/page.query";
 import { backgroundClasses } from "../theme";
 import { ColorType } from "../types";
-import cx from "classnames";
+import cx from "clsx";
 import { parse, evaluate } from "groq-js";
 import type { GetStaticProps } from "next";
 import { useRouter } from "next/router";

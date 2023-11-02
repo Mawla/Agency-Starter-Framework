@@ -5,7 +5,7 @@ import PortableText, { PortableTextProps } from "../portabletext/PortableText";
 import Text from "../text/Text";
 import { TitleColorType } from "../title/title.options";
 import * as RadixAccordion from "@radix-ui/react-accordion";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 

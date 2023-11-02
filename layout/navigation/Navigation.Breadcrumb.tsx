@@ -3,7 +3,7 @@ import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import { isLanguage } from "../../languages";
 import { backgroundClasses, borderClasses, textClasses } from "../../theme";
 import { ColorType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 

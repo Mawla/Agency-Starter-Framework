@@ -35,7 +35,7 @@ import {
   layoutColumnType,
   mediaPositionType,
 } from "./block1.options";
-import cx from "classnames";
+import cx from "clsx";
 import React, {
   CSSProperties,
   ComponentType,

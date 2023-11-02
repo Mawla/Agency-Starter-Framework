@@ -10,7 +10,7 @@ import { ResourceType } from "../../types.sanity";
 import { LinkProps } from "../buttons/Link";
 import { DateDisplayProps } from "../date/DateDisplay";
 import { TagProps } from "../tags/Tag";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy, useContext } from "react";
 
 const Tag = lazy<ComponentType<TagProps>>(

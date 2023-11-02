@@ -12,7 +12,7 @@ import { TitleThemeType } from "../../components/title/title.options";
 import { shouldRenderPortableText } from "../../helpers/utils/portabletext";
 import { backgroundClasses } from "../../theme";
 import { ColorType, ImageType } from "../../types";
-import cx from "classnames";
+import cx from "clsx";
 import React, { ComponentType, lazy } from "react";
 import { PortableTextBlock } from "sanity";
 

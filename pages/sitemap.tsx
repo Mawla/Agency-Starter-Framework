@@ -15,7 +15,7 @@ import {
   SitemapItemType,
   SitemapType,
 } from "../queries/sitemap.query";
-import cx from "classnames";
+import cx from "clsx";
 import type { GetStaticProps } from "next";
 import Link from "next/link";
 import React, { ComponentType, lazy } from "react";

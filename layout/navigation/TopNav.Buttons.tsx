@@ -3,7 +3,7 @@ import IconLoader from "../../components/images/IconLoader";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { NavigationProps } from "./Navigation";
 import * as RadixNavigationMenu from "@radix-ui/react-navigation-menu";
-import cx from "classnames";
+import cx from "clsx";
 import { Suspense } from "react";
 
 export type TopNavButtonsProps = {
