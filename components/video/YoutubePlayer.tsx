@@ -1,9 +1,13 @@
 import { VideoType } from "../../types";
-// @ts-ignore
-import { YouTubeEmbed } from "@next/third-parties/google";
 import getYouTubeID from "get-youtube-id";
-import { useEffect, useRef } from "react";
+import { lazy, useEffect, useRef } from "react";
 import React from "react";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
+
+const YoutubeLight = lazy(
+  () =>
+    import(/* webpackChunkName: "YoutubeLight" */ "react-lite-youtube-embed"),
+);
 
 export const YoutubePlayer = ({
   videoId,
@@ -26,18 +30,18 @@ export const YoutubePlayer = ({
   if (!youtubeId) return null;
 
   return (
-    <div
-      ref={wrapperRef}
-      className="[&>div>*]:max-w-none [&>div>*:before]:hidden"
-    >
-      <YouTubeEmbed
-        videoid={youtubeId}
+    <div ref={wrapperRef}>
+      <YoutubeLight
+        id={youtubeId}
+        title=""
+        poster="maxresdefault"
+        noCookie={true}
+        muted
         params={`?autoPlay=${autoPlay ? 1 : 0}&loop=${
           loop ? 1 : 0
-        }&rel=0&mute=${autoPlay ? 1 : 0}&controls=${
+        }&rel=0&mute=1&controls=${
           frameless ? 0 : 1
         }&modestbranding=1&playsinline=1`}
-        width="100%"
       />
     </div>
   );
