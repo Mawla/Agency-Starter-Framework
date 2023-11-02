@@ -11,7 +11,7 @@ export const productionURLPane: PluginOptions = {
   document: {
     inspectors: (prev, context) => {
       const docSchema = context.schema.get(context.documentType);
-      if (docSchema) {
+      if (docSchema && context.documentType.startsWith("page.")) {
         return [
           ...prev,
           {
