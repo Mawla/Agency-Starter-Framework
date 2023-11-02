@@ -76,8 +76,8 @@ export const SeoPane: ComponentType<any> = ({
                 />
                 <Text size={3} style={{ color: "#1a0dab" }}>
                   {document?.displayed?.seo?.title ||
-                    document?.displayed?.title}{" "}
-                  - {config?.seo?.title || config?.general?.name}
+                    document?.displayed?.title}
+                  {config?.seo?.title}
                 </Text>
                 <Text
                   size={2}
