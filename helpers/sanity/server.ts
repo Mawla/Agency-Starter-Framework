@@ -1,5 +1,5 @@
 import { config } from "./config";
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 
 export const getClient = () => {
   return config.projectId && config.dataset

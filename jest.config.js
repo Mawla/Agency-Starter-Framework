@@ -37,5 +37,7 @@ module.exports = async () => ({
    * @link https://github.com/vercel/next.js/issues/36077#issuecomment-1096698456
    * @link https://jestjs.io/docs/ecmascript-modules
    */
-  transformIgnorePatterns: ["node_modules/(?!(swiper|ssr-window|dom7)/)"],
+  transformIgnorePatterns: [
+    "node_modules/(?!(swiper|ssr-window|dom7|get-it)/)",
+  ],
 });

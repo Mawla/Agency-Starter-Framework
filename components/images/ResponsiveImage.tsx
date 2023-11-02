@@ -204,7 +204,7 @@ export const ResponsiveImage = ({
           height={fill ? undefined : height}
           priority={priority}
           quality={IMAGE_QUALITY}
-          onLoadingComplete={onImageLoad}
+          onLoad={onImageLoad}
           unoptimized
         />
       )}
