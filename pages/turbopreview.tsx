@@ -38,7 +38,6 @@ export default function PreviewPage({
   footer: FooterType;
 }) {
   const router = useRouter();
-  const isPreview = router.isPreview;
 
   const [dataset, setDataset] = useState<any>(null);
   const [document, setDocument] = useState<any>(null);
@@ -56,9 +55,8 @@ export default function PreviewPage({
    * Bail if not in preview mode or inside CMS iframe
    */
   useEffect(() => {
-    if (!isPreview) router.push("/");
     if (window.self === window.top) router.push("/");
-  }, [isPreview, router]);
+  }, [router]);
 
   /**
    * Notify studio that iframe is ready to listen for updates
