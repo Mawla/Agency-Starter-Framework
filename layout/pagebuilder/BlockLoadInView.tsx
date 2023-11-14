@@ -15,6 +15,7 @@ type BlockLoadInViewProps = {
   slug?: string;
   _key?: string;
   networkIdle?: boolean;
+  index?: number;
 };
 
 export const BlockLoadInView = ({
@@ -25,6 +26,7 @@ export const BlockLoadInView = ({
   slug,
   _key,
   networkIdle,
+  index,
 }: BlockLoadInViewProps) => {
   const router = useRouter();
   const isPreview = router.pathname.startsWith("/turbopreview");
@@ -89,8 +91,19 @@ export const BlockLoadInView = ({
     }
 
     window.addEventListener("message", onMessage, false);
-    () => window.removeEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, [inView, _key, isPreview, doLoad]);
+
+  function onEditClick() {
+    window.parent.postMessage(
+      {
+        type: "preview-studio-edit-block",
+        blockKey: _key,
+        index,
+      },
+      "*",
+    );
+  }
 
   return (
     <section
@@ -98,7 +111,29 @@ export const BlockLoadInView = ({
       data-block={isPreview ? block : undefined}
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
+      className="group hover:outline-offset-[-2px] hover:outline-[royalblue] hover:outline-dashed"
     >
+      {isPreview && (
+        <button
+          className="preview-edit-button p-1 rounded bg-[royalblue] text-white absolute m-1 z-50 hidden group-hover:block"
+          onClick={onEditClick}
+        >
+          <svg
+            fill="none"
+            height="25"
+            viewBox="0 0 25 25"
+            width="25"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m15 7 3 3m-12 9 1-4 10-10 3 3-10 10z"
+              stroke="#fff"
+              strokeWidth="1.2"
+            />
+          </svg>
+        </button>
+      )}
+
       {doLoad || forceLoad ? (
         children
       ) : (

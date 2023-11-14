@@ -1,10 +1,54 @@
 import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
-import { ComponentType, useEffect, useState } from "react";
+import { ComponentType, useEffect, useRef, useState } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
+  const elementRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onMessage(e: MessageEvent) {
+      if (!elementRef.current) return;
+
+      // scroll to block in preview if it's not visible
+      // sanity studio removes array elements that are not in view
+      // so we need to scroll to it, and trigger a click on the edit button
+      // to open the form
+      if (e.data.type == "preview-studio-edit-block") {
+        const blockElement = document.querySelectorAll(
+          `[data-key="${e.data.blockKey}"]`,
+        )[1] as HTMLDivElement;
+
+        if (typeof blockElement === "undefined") {
+          // find the scroll area
+          const scrollElement = elementRef.current.closest(
+            '[data-testid="document-panel-scroller"]',
+          );
+
+          if (scrollElement) {
+            scrollElement.scrollTo({
+              behavior: "instant",
+              top: e.data.index * 96 + 500,
+            });
+
+            setTimeout(() => {
+              const button = document.querySelectorAll(
+                `[data-key="${e.data.blockKey}"] button`,
+              )[1] as HTMLButtonElement;
+              if (button) {
+                button.click();
+              }
+            }, 100);
+          }
+        }
+      }
+    }
+
+    window.addEventListener("message", onMessage, false);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+
   return (
-    <div>
+    <div ref={elementRef}>
       {props.renderDefault(props)}
 
       <div
@@ -67,11 +111,28 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     if (!props.value?._key) return;
 
     function onMessage(e: MessageEvent) {
-      if (
-        e.data.type == "preview-studio-highlight-block" &&
-        e.data.blockKey === props.value?._key
-      ) {
+      if (e.data.blockKey !== props.value?._key) return;
+
+      // highlight block in preview
+      if (e.data.type == "preview-studio-highlight-block") {
         setHighlight(e.data.enabled);
+      }
+
+      // open cms form when clicking edit in preview
+      if (e.data.type == "preview-studio-edit-block") {
+        // ideally I'd call props.onOpen() here, but that sometimes
+        // results in a double open, so I'm calling the button click
+        // as this prevent duplicate opening here in preview view
+        if (!props.open) {
+          const button = document.querySelectorAll(
+            `[data-key="${e.data.blockKey}"] button`,
+          )[1] as HTMLButtonElement;
+          if (button) {
+            console.log(button.getBoundingClientRect().top);
+            button.scrollIntoView({ behavior: "smooth" });
+            button.click();
+          }
+        }
       }
     }
 
@@ -94,7 +155,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     requestInview();
 
     window.addEventListener("message", onMessage, false);
-    () => window.removeEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, [props.value?._key]);
 
   return (
