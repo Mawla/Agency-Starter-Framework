@@ -105,6 +105,10 @@ export const BlockLoadInView = ({
     );
   }
 
+  function onEditBlockClick(e: React.MouseEvent) {
+    console.log(e.target);
+  }
+
   return (
     <section
       ref={wrapperRef}
@@ -112,10 +116,11 @@ export const BlockLoadInView = ({
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
       className="group hover:outline-offset-[-2px] hover:outline-[royalblue] hover:outline-dashed"
+      onClick={isPreview ? onEditBlockClick : undefined}
     >
       {isPreview && (
         <button
-          className="preview-edit-button p-1 rounded bg-[royalblue] text-white absolute m-1 z-50 hidden group-hover:block"
+          className="preview-edit-button p-1 rounded bg-[royalblue] text-white absolute m-1 z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200"
           onClick={onEditClick}
         >
           <svg
