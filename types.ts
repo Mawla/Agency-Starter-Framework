@@ -313,3 +313,5 @@ export type GenericBlockProps = {
   _key?: string;
   [key: string]: any;
 };
+
+export type BlockPreviewToolAction = "edit" | "delete";

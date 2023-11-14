@@ -13,7 +13,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
       // sanity studio removes array elements that are not in view
       // so we need to scroll to it, and trigger a click on the edit button
       // to open the form
-      if (e.data.type == "preview-studio-edit-block") {
+      if (e.data.type == "preview-studio-action") {
         const blockElement = document.querySelectorAll(
           `[data-key="${e.data.blockKey}"]`,
         )[1] as HTMLDivElement;
@@ -27,17 +27,20 @@ export const PageBuilder: ComponentType<any> = (props) => {
           if (scrollElement) {
             scrollElement.scrollTo({
               behavior: "instant",
-              top: e.data.index * 96 + 500,
+              top: e.data.index * 96 + 450,
             });
 
-            setTimeout(() => {
-              const button = document.querySelectorAll(
-                `[data-key="${e.data.blockKey}"] button`,
-              )[1] as HTMLButtonElement;
-              if (button) {
-                button.click();
-              }
-            }, 100);
+            // edit
+            if (e.data.action === "edit") {
+              setTimeout(() => {
+                const button = document.querySelectorAll(
+                  `[data-key="${e.data.blockKey}"] button`,
+                )[1] as HTMLButtonElement;
+                if (button) {
+                  button.click();
+                }
+              }, 100);
+            }
           }
         }
       }
@@ -119,7 +122,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
       }
 
       // open cms form when clicking edit in preview
-      if (e.data.type == "preview-studio-edit-block") {
+      if (e.data.type == "preview-studio-action" && e.data.action === "edit") {
         // ideally I'd call props.onOpen() here, but that sometimes
         // results in a double open, so I'm calling the button click
         // as this prevent duplicate opening here in preview view
@@ -128,11 +131,19 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
             `[data-key="${e.data.blockKey}"] button`,
           )[1] as HTMLButtonElement;
           if (button) {
-            console.log(button.getBoundingClientRect().top);
             button.scrollIntoView({ behavior: "smooth" });
             button.click();
           }
         }
+      }
+
+      // delete item
+      if (
+        e.data.type == "preview-studio-action" &&
+        e.data.action === "delete" &&
+        confirm("Are you sure you want to delete this block?")
+      ) {
+        props.onRemove();
       }
     }
 

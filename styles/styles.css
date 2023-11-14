@@ -142,6 +142,10 @@ script[type='application/ld+json'] {
   z-index: 999;
 }
 
+.preview-highlight-open:after {
+  outline-style: solid;
+}
+
 .preview-highlight-open:not(.absolute) {
   position: relative;
 }

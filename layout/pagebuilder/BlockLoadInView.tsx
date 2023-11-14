@@ -1,11 +1,19 @@
+import { BlockPreviewToolsProps } from "../../components/previewmode/BlockPreviewTools";
 import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
-import { ColorType } from "../../types";
+import { BlockPreviewToolAction, ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import cx from "clsx";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  ComponentType,
+  lazy,
+} from "react";
 
 type BlockLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
@@ -15,8 +23,15 @@ type BlockLoadInViewProps = {
   slug?: string;
   _key?: string;
   networkIdle?: boolean;
-  index?: number;
+  index: number;
 };
+
+const BlockPreviewTools = lazy<ComponentType<BlockPreviewToolsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "BlockPreviewTools" */ "../../components/previewmode/BlockPreviewTools"
+    ),
+);
 
 export const BlockLoadInView = ({
   children,
@@ -48,6 +63,10 @@ export const BlockLoadInView = ({
 
   const [forceLoad, setForceLoad] = useState(!enabled);
 
+  /**
+   * Block Loading
+   */
+
   useEffect(() => {
     let idleCallback: number;
     if (forceLoad === true) return;
@@ -63,6 +82,10 @@ export const BlockLoadInView = ({
 
     () => cancelIdleCallback(idleCallback);
   }, [forceLoad, networkIdle]);
+
+  /**
+   * Preview highlight
+   */
 
   useEffect(() => {
     if (!isPreview) return;
@@ -94,19 +117,20 @@ export const BlockLoadInView = ({
     return () => window.removeEventListener("message", onMessage);
   }, [inView, _key, isPreview, doLoad]);
 
-  function onEditClick() {
+  /**
+   * Preview actions
+   */
+
+  function onActionClick(action: BlockPreviewToolAction) {
     window.parent.postMessage(
       {
-        type: "preview-studio-edit-block",
+        type: "preview-studio-action",
+        action,
         blockKey: _key,
         index,
       },
       "*",
     );
-  }
-
-  function onEditBlockClick(e: React.MouseEvent) {
-    console.log(e.target);
   }
 
   return (
@@ -116,28 +140,8 @@ export const BlockLoadInView = ({
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
       className="group hover:outline-offset-[-2px] hover:outline-[royalblue] hover:outline-dashed"
-      onClick={isPreview ? onEditBlockClick : undefined}
     >
-      {isPreview && (
-        <button
-          className="preview-edit-button p-1 rounded bg-[royalblue] text-white absolute m-1 z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200"
-          onClick={onEditClick}
-        >
-          <svg
-            fill="none"
-            height="25"
-            viewBox="0 0 25 25"
-            width="25"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="m15 7 3 3m-12 9 1-4 10-10 3 3-10 10z"
-              stroke="#fff"
-              strokeWidth="1.2"
-            />
-          </svg>
-        </button>
-      )}
+      {isPreview && <BlockPreviewTools onActionClick={onActionClick} />}
 
       {doLoad || forceLoad ? (
         children
