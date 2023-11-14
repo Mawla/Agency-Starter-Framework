@@ -36,6 +36,7 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
       Papa.parse(file, {
         download: true,
         header: true,
+        skipEmptyLines: true,
         error: (err) => {
           console.log(err);
           setState("error");
@@ -82,7 +83,7 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
                 <tr>
                   {data.meta?.fields?.map((field) => (
                     <th className="align-top p-4 text-left" key={field}>
-                      {field}
+                      {field.startsWith("_") ? "" : field}
                     </th>
                   ))}
                 </tr>

@@ -36,10 +36,10 @@ export const YoutubePlayer = ({
         title=""
         poster="maxresdefault"
         noCookie={true}
-        muted
+        muted={autoPlay ? true : false}
         params={`?autoPlay=${autoPlay ? 1 : 0}&loop=${
           loop ? 1 : 0
-        }&rel=0&mute=1&controls=${
+        }&rel=0&mute=${autoPlay ? 1 : 0}&controls=${
           frameless ? 0 : 1
         }&modestbranding=1&playsinline=1`}
       />

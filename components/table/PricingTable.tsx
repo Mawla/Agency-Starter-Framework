@@ -93,7 +93,7 @@ const PricingTooltip = ({ text }: { text: string }) => {
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="text-dark select-none rounded-sm bg-white p-3 text-base leading-none shadow-lg border"
+            className="text-dark select-none rounded-sm bg-white p-3 text-base leading-none shadow-lg border max-w-[300px]"
             sideOffset={5}
           >
             {text}
@@ -128,7 +128,7 @@ export const PricingTable = ({ theme, features }: PricingTableProps) => {
           </Title>
 
           <MobileScroller>
-            <div className="[&_table]:text-sm sm:[&_table]:text-base md:[&_table]:text-lg [&_tr]:even:bg-transparent [&_th]:border-b [&_td]:border-b lg:[&_td]:pl-0 [&_th]:pl-0 [&_td:first-of-type]:w-[240px] sm:[&_td:first-of-type]:w-[360px]">
+            <div className="[&_table]:text-sm sm:[&_table]:text-base md:[&_table]:text-lg [&_tr]:even:bg-transparent [&_th]:border-b [&_td]:border-b lg:[&_td]:pl-0 lg:[&_th]:pl-0 [&_td:first-of-type]:w-[240px] sm:[&_td:first-of-type]:w-[360px]">
               <Table
                 file={csv}
                 fileName={title}
