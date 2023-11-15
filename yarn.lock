@@ -6553,7 +6553,7 @@
     satori "0.0.44"
     yoga-wasm-web "0.1.2"
 
-"@vercel/stega@0.1.0":
+"@vercel/stega@0.1.0", "@vercel/stega@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@vercel/stega/-/stega-0.1.0.tgz#2eadbbc9eb0eaab26d28b0c443a922d78c23b6e3"
   integrity sha512-5b0PkOJsFBX5alChuIO3qpkt5vIZBevzLPhUQ1UP8UzVjL3F1VllnZxp/thfD8R5ol7D7WHkgZHIjdUBX4tDpQ==

@@ -22,8 +22,7 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
 
   return (
     <div className="absolute left-1 right-1 mt-1 z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 grid grid-cols-2">
-      {/* edit */}
-      <div className="flex gap-1">
+      <div className="flex gap-1 pointer">
         <button
           className="preview-edit-button p-1 rounded bg-[royalblue] text-white transition-colors"
           onClick={() => onActionClick("edit")}

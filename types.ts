@@ -310,7 +310,7 @@ export type PersonType = {
 };
 
 export type GenericBlockProps = {
-  _key?: string;
+  _key: string;
   [key: string]: any;
 };
 
