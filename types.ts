@@ -315,8 +315,10 @@ export type GenericBlockProps = {
 };
 
 export type BlockPreviewToolAction =
-  | "edit"
-  | "delete"
-  | "duplicate"
-  | "move-down"
-  | "move-up";
+  | "block-edit"
+  | "block-delete"
+  | "block-duplicate"
+  | "block-move-down"
+  | "block-move-up";
+
+export type ComponentPreviewToolAction = "component-edit" | "component-delete";

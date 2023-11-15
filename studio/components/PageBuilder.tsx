@@ -6,7 +6,7 @@ import { ComponentType, useEffect, useRef, useState } from "react";
 export const PageBuilder: ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement | null>(null);
 
-  const { value, onChange, onFocus, onBlur }: any = props;
+  const { value, onChange }: any = props;
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
@@ -16,7 +16,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
       if (elementRef.current.offsetParent === null) return;
 
       // delete
-      if (e.data.action === "delete") {
+      if (e.data.action === "block-delete") {
         return deleteBlock({
           blockKey: e.data.blockKey,
           value,
@@ -24,7 +24,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
         });
       }
 
-      if (e.data.action === "duplicate") {
+      if (e.data.action === "block-duplicate") {
         return duplicateBlock({
           blockKey: e.data.blockKey,
           value,
@@ -32,7 +32,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
         });
       }
 
-      if (e.data.action === "move-up") {
+      if (e.data.action === "block-move-up") {
         return moveBlock({
           blockKey: e.data.blockKey,
           value,
@@ -41,7 +41,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
         });
       }
 
-      if (e.data.action === "move-down") {
+      if (e.data.action === "block-move-down") {
         return moveBlock({
           blockKey: e.data.blockKey,
           value,
@@ -50,11 +50,15 @@ export const PageBuilder: ComponentType<any> = (props) => {
         });
       }
 
+      if (e.data.action === "component-edit") {
+        console.log("edit", e.data);
+      }
+
       // scroll to block in preview if it's not visible
       // sanity studio removes array elements that are not in view
       // so we need to scroll to it, and trigger a click on the edit button
       // to open the form
-      if (e.data.type == "preview-studio-action") {
+      if (e.data.type == "preview-studio-action" && e.data.blockKey) {
         const blockElement = document.querySelectorAll(
           `[data-key="${e.data.blockKey}"]`,
         )[1] as HTMLDivElement;
@@ -72,13 +76,41 @@ export const PageBuilder: ComponentType<any> = (props) => {
             });
 
             // edit
-            if (e.data.action === "edit") {
+            if (
+              e.data.action === "block-edit" ||
+              e.data.action === "component-edit"
+            ) {
               setTimeout(() => {
+                // open block item
                 const button = document.querySelectorAll(
                   `[data-key="${e.data.blockKey}"] button`,
                 )[1] as HTMLButtonElement;
                 if (button) {
                   button.click();
+                }
+
+                if (e.data.action === "component-edit") {
+                  setTimeout(() => {
+                    const field = document.querySelector(
+                      `[data-testid='field-${e.data.path}']`,
+                    ) as HTMLDivElement;
+                    if (!field) return;
+
+                    let element: HTMLElement | null =
+                      field.querySelector("label") ||
+                      // inactive Portable Text field
+                      field.querySelector('[data-testid="activate-overlay"]') ||
+                      // Portable Text field
+                      field.querySelector(".pt-editable");
+
+                    if (element) {
+                      element.click();
+                      element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    }
+                  }, 250);
                 }
               }, 100);
             }
@@ -152,6 +184,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
 
   useEffect(() => {
     if (!props.value?._key) return;
+    if (props.value?.disabled) return;
 
     function onMessage(e: MessageEvent) {
       if (e.data.blockKey !== props.value?._key) return;
@@ -159,22 +192,6 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
       // highlight block in preview
       if (e.data.type == "preview-studio-highlight-block") {
         setHighlight(e.data.enabled);
-      }
-
-      // open cms form when clicking edit in preview
-      if (e.data.type == "preview-studio-action" && e.data.action === "edit") {
-        // ideally I'd call props.onOpen() here, but that sometimes
-        // results in a double open, so I'm calling the button click
-        // as this prevent duplicate opening here in preview view
-        if (!props.open) {
-          const button = document.querySelectorAll(
-            `[data-key="${e.data.blockKey}"] button`,
-          )[1] as HTMLButtonElement;
-          if (button) {
-            button.scrollIntoView({ behavior: "smooth" });
-            button.click();
-          }
-        }
       }
     }
 

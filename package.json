@@ -53,6 +53,7 @@
     "@u-wave/react-vimeo": "^0.9.10",
     "@vectopus/atlas-icons-react": "^0.0.7",
     "@vercel/og": "^0.0.21",
+    "@vercel/stega": "^0.1.0",
     "autoprefixer": "^10.4.13",
     "clsx": "^2.0.0",
     "dompurify": "^2.4.3",

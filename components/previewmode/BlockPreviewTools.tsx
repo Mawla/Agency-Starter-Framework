@@ -8,7 +8,6 @@ export type BlockPreviewToolsProps = {
 
 const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
   function onActionClick(action: BlockPreviewToolAction) {
-    console.log("-----");
     window.parent.postMessage(
       {
         type: "preview-studio-action",
@@ -24,8 +23,8 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
     <div className="absolute left-1 right-1 mt-1 z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 grid grid-cols-2">
       <div className="flex gap-1 pointer">
         <button
-          className="preview-edit-button p-1 rounded bg-[royalblue] text-white transition-colors"
-          onClick={() => onActionClick("edit")}
+          className="preview-block-edit-button p-1 rounded bg-[royalblue] text-white transition-colors"
+          onClick={() => onActionClick("block-edit")}
         >
           <svg
             fill="none"
@@ -75,10 +74,10 @@ const ActionsDropdown = ({
         </button>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content className="min-w-[220px] bg-white rounded-md p-1 border shadow-xl ml-10 mt-1">
+      <DropdownMenu.Content className="min-w-[220px] bg-white rounded-md p-1 border shadow-xl ml-10 mt-1 text-[#222]">
         <DropdownMenu.Item
-          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-50"
-          onSelect={() => onActionClick("delete")}
+          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-100"
+          onSelect={() => onActionClick("block-delete")}
         >
           <svg
             width="15"
@@ -97,8 +96,8 @@ const ActionsDropdown = ({
           Delete block
         </DropdownMenu.Item>
         <DropdownMenu.Item
-          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-50"
-          onSelect={() => onActionClick("duplicate")}
+          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-100"
+          onSelect={() => onActionClick("block-duplicate")}
         >
           <svg
             width="15"
@@ -118,8 +117,8 @@ const ActionsDropdown = ({
         </DropdownMenu.Item>
 
         <DropdownMenu.Item
-          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-50"
-          onSelect={() => onActionClick("move-up")}
+          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-100"
+          onSelect={() => onActionClick("block-move-up")}
         >
           <svg
             width="15"
@@ -134,8 +133,8 @@ const ActionsDropdown = ({
         </DropdownMenu.Item>
 
         <DropdownMenu.Item
-          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-50"
-          onSelect={() => onActionClick("move-down")}
+          className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-100"
+          onSelect={() => onActionClick("block-move-down")}
         >
           <svg
             width="15"
