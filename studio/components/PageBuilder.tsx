@@ -50,10 +50,6 @@ export const PageBuilder: ComponentType<any> = (props) => {
         });
       }
 
-      if (e.data.action === "component-edit") {
-        console.log("edit", e.data);
-      }
-
       // scroll to block in preview if it's not visible
       // sanity studio removes array elements that are not in view
       // so we need to scroll to it, and trigger a click on the edit button
@@ -110,7 +106,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
                         block: "center",
                       });
                     }
-                  }, 250);
+                  }, 0);
                 }
               }, 100);
             }
