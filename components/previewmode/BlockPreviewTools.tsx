@@ -44,10 +44,6 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
         </button>
         <ActionsDropdown onActionClick={onActionClick} />
       </div>
-      {/* 
-      <div className="flex justify-end gap-1">
-        <ActionsDropdown onActionClick={onActionClick} />
-      </div> */}
     </div>
   );
 };
@@ -80,10 +76,7 @@ const ActionsDropdown = ({
         </button>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content
-        className="min-w-[220px] bg-white rounded-md p-1 border shadow-xl"
-        sideOffset={5}
-      >
+      <DropdownMenu.Content className="min-w-[220px] bg-white rounded-md p-1 border shadow-xl ml-10 mt-1">
         <DropdownMenu.Item
           className="flex items-center gap-2 text-sm p-2 leading-none relative select-none outline-none hover:bg-gray-50"
           onSelect={() => onActionClick("delete")}
