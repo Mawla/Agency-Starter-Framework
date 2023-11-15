@@ -314,4 +314,9 @@ export type GenericBlockProps = {
   [key: string]: any;
 };
 
-export type BlockPreviewToolAction = "edit" | "delete";
+export type BlockPreviewToolAction =
+  | "edit"
+  | "delete"
+  | "duplicate"
+  | "move-down"
+  | "move-up";

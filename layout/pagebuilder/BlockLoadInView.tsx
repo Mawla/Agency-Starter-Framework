@@ -2,18 +2,11 @@ import { BlockPreviewToolsProps } from "../../components/previewmode/BlockPrevie
 import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
-import { BlockPreviewToolAction, ColorType } from "../../types";
+import { ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import cx from "clsx";
 import { useRouter } from "next/router";
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  ComponentType,
-  lazy,
-} from "react";
+import React, { useState, useEffect, useRef, ComponentType, lazy } from "react";
 
 type BlockLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
@@ -21,7 +14,7 @@ type BlockLoadInViewProps = {
   background?: ColorType | "transparent";
   block?: BlockSchemaName;
   slug?: string;
-  _key?: string;
+  _key: string;
   networkIdle?: boolean;
   index: number;
 };
@@ -117,22 +110,6 @@ export const BlockLoadInView = ({
     return () => window.removeEventListener("message", onMessage);
   }, [inView, _key, isPreview, doLoad]);
 
-  /**
-   * Preview actions
-   */
-
-  function onActionClick(action: BlockPreviewToolAction) {
-    window.parent.postMessage(
-      {
-        type: "preview-studio-action",
-        action,
-        blockKey: _key,
-        index,
-      },
-      "*",
-    );
-  }
-
   return (
     <section
       ref={wrapperRef}
@@ -141,7 +118,7 @@ export const BlockLoadInView = ({
       id={slugify(slug)}
       className="group hover:outline-offset-[-2px] hover:outline-[royalblue] hover:outline-dashed"
     >
-      {isPreview && <BlockPreviewTools onActionClick={onActionClick} />}
+      {isPreview && <BlockPreviewTools _key={_key} index={index} />}
 
       {doLoad || forceLoad ? (
         children

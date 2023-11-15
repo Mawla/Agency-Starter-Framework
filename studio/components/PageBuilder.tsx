@@ -1,13 +1,54 @@
 import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
+import { deleteBlock, duplicateBlock, moveBlock } from "./Preview/actions";
 import { ComponentType, useEffect, useRef, useState } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement | null>(null);
 
+  const { value, onChange, onFocus, onBlur }: any = props;
+
   useEffect(() => {
     function onMessage(e: MessageEvent) {
       if (!elementRef.current) return;
+
+      // don't respond to messages if element isn't visible
+      if (elementRef.current.offsetParent === null) return;
+
+      // delete
+      if (e.data.action === "delete") {
+        return deleteBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+        });
+      }
+
+      if (e.data.action === "duplicate") {
+        return duplicateBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+        });
+      }
+
+      if (e.data.action === "move-up") {
+        return moveBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+          direction: "up",
+        });
+      }
+
+      if (e.data.action === "move-down") {
+        return moveBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+          direction: "down",
+        });
+      }
 
       // scroll to block in preview if it's not visible
       // sanity studio removes array elements that are not in view
@@ -48,12 +89,11 @@ export const PageBuilder: ComponentType<any> = (props) => {
 
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage);
-  }, []);
+  }, [value, onChange]);
 
   return (
     <div ref={elementRef}>
       {props.renderDefault(props)}
-
       <div
         style={{
           transform: "translateY(-100%)",
@@ -135,15 +175,6 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
             button.click();
           }
         }
-      }
-
-      // delete item
-      if (
-        e.data.type == "preview-studio-action" &&
-        e.data.action === "delete" &&
-        confirm("Are you sure you want to delete this block?")
-      ) {
-        props.onRemove();
       }
     }
 
