@@ -169,4 +169,20 @@ script[type='application/ld+json'] {
 
 [data-aos="fade-up-sm"] {
   transform: translate3d(0, 6px, 0);
+  opacity: 0;
+}
+
+[data-aos="zoom-in-sm"] {
+  transform: scale(0.98);
+  opacity: 0;
+}
+
+[data-aos="zoom-in-right-sm"] {
+  transform: translate3d(-6px, 6px, 0) scale(0.98);
+  opacity: 0;
+}
+
+[data-aos="zoom-in-left-sm"] {
+  transform: translate3d(6px, 6px, 0) scale(0.98);
+  opacity: 0;
 }

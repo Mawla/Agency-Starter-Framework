@@ -87,7 +87,11 @@ export const Block15 = ({
             </div>
           )}
           {shouldRenderPortableText(body) && (
-            <div className="lg:col-span-6">
+            <div
+              className="lg:col-span-6"
+              data-aos-delay="100"
+              data-aos="fade-in"
+            >
               <Text
                 size={theme?.body?.size || "xl"}
                 color={theme?.body?.color}
