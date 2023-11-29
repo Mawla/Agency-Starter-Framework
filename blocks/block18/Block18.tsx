@@ -333,7 +333,11 @@ export const Block18 = ({
                     item.blockTitleLevel = theme?.title?.as || "h2";
                   }
                   return (
-                    <div key={item._key} className="h-full text-left">
+                    <div 
+                      key={item._key} 
+                      className="h-full text-left" 
+                      data-aos="fade-up-sm"
+                    >
                       <CardWrapper>
                         <Card {...item} />
                       </CardWrapper>
@@ -362,6 +366,7 @@ export const Block18 = ({
                     | ComposableCardProps
                     | TestimonialCardProps
                     | ImageCardProps,
+                    i:number
                 ) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
@@ -375,6 +380,9 @@ export const Block18 = ({
                         item?.theme?.card?.columns &&
                           colSpanClasses[item?.theme?.card?.columns],
                       )}
+                      data-aos="zoom-in-sm"
+                      data-aos-delay={100 * (i % numColumns)}
+                      data-duration="500"
                     >
                       <CardWrapper>
                         <Card {...item} />

@@ -241,7 +241,7 @@ const ButtonInner = ({
   }
 
   return (
-    <Element {...props} aria-label={ariaLabel || label} onClick={handleClick}>
+    <Element {...props} aria-label={ariaLabel || label} onClick={handleClick} data-aos="fade-up-sm">
       <span
         className={cx(
           twMerge(

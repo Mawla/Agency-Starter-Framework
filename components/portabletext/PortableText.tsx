@@ -155,7 +155,7 @@ export const PortableText = ({ content = [], block }: PortableTextProps) => {
 
             return value.items.map(
               ({ _key, name, content }: TestimonialType) => (
-                <div className="not-prose not-format" key={_key}>
+                <div className="not-prose not-format" key={_key} data-aos="fade-up-sm">
                   <blockquote className="py-2 px-6 leading-normal relative my-8">
                     <span className="absolute left-0 inset-y-0 w-0.5 bg-current opacity-20" />
                     {content && <PortableText content={content} />}

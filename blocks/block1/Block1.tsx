@@ -318,6 +318,8 @@ export const Block1 = ({
               },
             )}
             style={mediaPositionStyle}
+            data-aos={theme?.layout?.mediaPosition === "left" ? 'zoom-in-right' : 'zoom-in-left'}
+            data-aos-anchor-placement={theme?.layout?.mediaPosition === "left" ? 'top-left' : 'top-right'}
           >
             {image && (
               <div className="relative h-full w-full">

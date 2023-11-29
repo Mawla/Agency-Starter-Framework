@@ -53,6 +53,7 @@ export const SocialShare = ({ title, direction }: SocialShareProps) => {
         ["flex-col"]: direction === "vertical",
         ["flex-row"]: direction !== "vertical",
       })}
+      data-aos="fade-up-sm"
     >
       <FacebookShareButton url={shareURL} quote={title}>
         <IconLoader

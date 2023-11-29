@@ -76,7 +76,7 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
     );
 
   return (
-    <div className="overflow-x-auto not-prose">
+    <div className="overflow-x-auto not-prose" data-aos="fade-up-sm">
       <div className="text-sm sm:text-md min-w-[500px]">
         {data && (
           <table className="border-collapse table-auto w-full">

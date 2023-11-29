@@ -47,6 +47,7 @@ export const Title = ({
         fontClasses[font || "heading"],
         className,
       )}
+      data-aos="fade-up-sm"
     >
       {typeof children === "string" ? titleWords?.join(" ") : children}
     </Element>

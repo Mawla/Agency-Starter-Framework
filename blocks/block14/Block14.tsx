@@ -126,7 +126,7 @@ export const Block14 = ({
                               )}
                               key={image.src}
                             >
-                              <ResponsiveImage {...image} fill />
+                              <ResponsiveImage {...image} fill animate={false}/>
                             </span>
                           ),
                       )}
@@ -175,7 +175,7 @@ export const Block14 = ({
                       <Link href={href} className="flex py-4 group" key={title}>
                         {image && (
                           <div className="relative overflow-hidden shrink-0 mr-4 w-12 max-w-full h-12 rounded-lg">
-                            <ResponsiveImage {...image} fill />
+                            <ResponsiveImage {...image} fill animate={false}/>
                           </div>
                         )}
                         <div>

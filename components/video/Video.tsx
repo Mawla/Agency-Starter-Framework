@@ -30,12 +30,6 @@ export const Video = (props: VideoProps) => {
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const lazyLoaded = useInView({
-    elementRef: wrapperRef,
-    threshold: 0.01,
-    once: true,
-  });
-
   const coverClassName = cover
     ? cx(
         `[&_div]:!h-full [&_div]:!static [&_div]:!p-0`,
@@ -46,16 +40,8 @@ export const Video = (props: VideoProps) => {
       )
     : null;
 
-  if (!lazyLoaded)
-    return (
-      <div
-        ref={wrapperRef}
-        className={cx("bg-black bg-opacity-5", className)}
-      />
-    );
-
   return (
-    <div ref={wrapperRef} className={cx(coverClassName, className)}>
+    <div ref={wrapperRef} className={cx(coverClassName, className)} data-aos="fade-in-sm">
       {provider === "youtube" && <YoutubePlayer {...props} />}
       {provider === "vimeo" && <VimeoPlayer {...props} />}
       {provider === "mux" && <MuxPlayer {...props} />}

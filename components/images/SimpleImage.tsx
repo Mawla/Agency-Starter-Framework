@@ -38,7 +38,7 @@ export const SimpleImage: React.ComponentType<SimpleImageProps> = ({
   const aspectRatio = originalWidth / originalHeight;
 
   return (
-    <div className="relative">
+    <div className="relative" data-aos="fade-up-sm">
       <NextImage
         src={src}
         className={className}

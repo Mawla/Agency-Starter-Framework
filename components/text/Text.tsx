@@ -61,6 +61,7 @@ export const Text = ({
             ? proseClasses[background]
             : "text-current",
         )}
+        data-aos="fade-up-sm"
       >
         {children}
       </Element>

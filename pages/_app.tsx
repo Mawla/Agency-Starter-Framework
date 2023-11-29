@@ -5,12 +5,22 @@ import "../styles/styles.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import AOS from "aos";
 
+import "aos/dist/aos.css";
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-out-cubic",
+      once: true,
+      offset: 50,
+    });
+  }, []);
+  
   return (
     <QueryClientProvider client={queryClient}>
       <Head>

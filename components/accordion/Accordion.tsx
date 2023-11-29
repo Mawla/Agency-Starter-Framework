@@ -50,6 +50,7 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
             key={_key || title}
             id={_key || title}
             className="radix-scroll-margin"
+            data-aos="fade-up-sm"
           >
             <RadixAccordion.Header
               className={cx(
