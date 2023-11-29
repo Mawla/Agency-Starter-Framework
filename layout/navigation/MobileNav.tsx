@@ -64,6 +64,7 @@ export const MobileNav = ({
                               className={cx("!p-0", {
                                 ["!underline current"]: item?.current,
                               })}
+                              animate={false}
                             />
 
                             {Boolean(item.children?.length) && (
@@ -84,6 +85,7 @@ export const MobileNav = ({
                                     className={cx("!p-0", {
                                       ["!underline current"]: item?.current,
                                     })}
+                                    animate={false}
                                   />
                                 </li>
                               ))}
@@ -106,7 +108,7 @@ export const MobileNav = ({
                   {Boolean(buttons?.length) &&
                     buttons?.map((button) => (
                       <RadixNavigationMenu.Item key={button._key}>
-                        <Button {...button} />
+                        <Button {...button} animate={false} />
                       </RadixNavigationMenu.Item>
                     ))}
                 </RadixNavigationMenu.List>

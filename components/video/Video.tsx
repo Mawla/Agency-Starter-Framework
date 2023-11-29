@@ -41,7 +41,11 @@ export const Video = (props: VideoProps) => {
     : null;
 
   return (
-    <div ref={wrapperRef} className={cx(coverClassName, className)} data-aos="fade-in-sm">
+    <div
+      ref={wrapperRef}
+      className={cx(coverClassName, className)}
+      data-aos="fade-in"
+    >
       {provider === "youtube" && <YoutubePlayer {...props} />}
       {provider === "vimeo" && <VimeoPlayer {...props} />}
       {provider === "mux" && <MuxPlayer {...props} />}

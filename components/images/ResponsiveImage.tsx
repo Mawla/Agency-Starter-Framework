@@ -38,7 +38,7 @@ export type ResponsiveImageProps = {
   preserveAspectRatio?: boolean;
   zoom?: boolean;
   gallery?: boolean;
-  animate?: boolean
+  animate?: boolean;
 } & NextImageProps;
 
 const IMAGE_QUALITY = 85;
@@ -59,7 +59,8 @@ export const ResponsiveImage = ({
   preserveAspectRatio,
   zoom = false,
   gallery,
-  animate
+  animate,
+  ...rest
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -185,7 +186,7 @@ export const ResponsiveImage = ({
         ["relative"]: !fill,
       })}
       ref={wrapperRef}
-      data-aos={animate ? "fade-in" : undefined}
+      data-aos={animate !== false ? "fade-in" : undefined}
     >
       {priority && responsiveSrc && (
         <Head>
@@ -209,6 +210,7 @@ export const ResponsiveImage = ({
           quality={IMAGE_QUALITY}
           onLoad={onImageLoad}
           unoptimized
+          {...rest}
         />
       )}
 

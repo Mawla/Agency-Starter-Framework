@@ -167,6 +167,73 @@ script[type='application/ld+json'] {
   padding-left: 1.5em;
 }
 
+/* Subset of AOS styles to keep it small https://unpkg.com/aos@2.3.1/dist/aos.css */
+/* if we ever want all styled, just add to app.tsx `import "aos/dist/aos.css";` */
+
+[data-aos] {
+  transition-duration: 400ms;
+}
+[data-aos][data-aos-delay="50"].aos-animate {
+  transition-delay: 50ms;
+}
+[data-aos][data-aos-delay="100"].aos-animate {
+  transition-delay: 100ms;
+}
+[data-aos][data-aos-delay="150"].aos-animate {
+  transition-delay: 150ms;
+}
+[data-aos][data-aos-delay="200"].aos-animate {
+  transition-delay: 200ms;
+}
+[data-aos][data-aos-delay="250"].aos-animate {
+  transition-delay: 250ms;
+}
+[data-aos][data-aos-delay="300"].aos-animate {
+  transition-delay: 300ms;
+}
+[data-aos][data-aos-delay="350"].aos-animate {
+  transition-delay: 350ms;
+}
+[data-aos][data-aos-delay="400"].aos-animate {
+  transition-delay: 400ms;
+}
+[data-aos][data-aos-delay="450"].aos-animate {
+  transition-delay: 450ms;
+}
+[data-aos][data-aos-delay="500"].aos-animate {
+  transition-delay: 500ms;
+}
+[data-aos][data-aos-delay="550"].aos-animate {
+  transition-delay: 550ms;
+}
+[data-aos][data-aos-delay="600"].aos-animate {
+  transition-delay: 600ms;
+}
+[data-aos][data-aos-delay="650"].aos-animate {
+  transition-delay: 650ms;
+}
+[data-aos][data-aos-delay="700"].aos-animate {
+  transition-delay: 700ms;
+}
+
+[data-aos] {
+  opacity: 0;
+  transition-property: opacity, transform;
+}
+[data-aos^="fade"][data-aos^="fade"].aos-animate {
+  opacity: 1;
+  transform: translateZ(0);
+}
+
+[data-aos^="zoom"][data-aos^="zoom"].aos-animate {
+  opacity: 1;
+  transform: translateZ(0) scale(1);
+}
+
+[data-aos="fade-in"] {
+  opacity: 0;
+}
+
 [data-aos="fade-up-sm"] {
   transform: translate3d(0, 6px, 0);
   opacity: 0;
