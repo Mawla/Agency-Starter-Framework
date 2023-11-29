@@ -105,7 +105,7 @@ const PricingTooltip = ({ text }: { text: string }) => {
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="text-dark select-none rounded-sm bg-white p-3 text-sm leading-tight shadow-lg border max-w-[300px]"
+            className="text-dark select-none rounded-sm bg-white p-3 text-sm leading-tight shadow-lg border max-w-[300px] relative z-10"
             sideOffset={5}
           >
             {text}
