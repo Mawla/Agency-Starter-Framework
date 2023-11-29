@@ -3,7 +3,7 @@ import { SiteContext } from "../context/SiteContext";
 import "../public/engine.styles.css";
 import "../styles/styles.css";
 import { Preview } from "@storybook/react";
-import { RouterContext } from "next/dist/shared/lib/router-context";
+import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
