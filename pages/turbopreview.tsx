@@ -203,7 +203,7 @@ export default function PreviewPage({
           {
             _id,
             title,
-            "csv": file.asset->url
+            "csv": coalesce(csv, file.asset->url),
           }
         ]
       }

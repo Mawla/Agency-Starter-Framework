@@ -34,7 +34,7 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
       if (!file) return;
       const Papa = (await import("papaparse")).default;
       Papa.parse(file, {
-        download: true,
+        download: Boolean(file.startsWith("http")) as any,
         header: true,
         skipEmptyLines: true,
         error: (err) => {
