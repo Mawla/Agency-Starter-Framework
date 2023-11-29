@@ -145,11 +145,14 @@ export default function PreviewPage({
 
   const getQuery = () => {
     if (document._type === "navigation") {
-      return getNavigationQuery(language);
+      return getNavigationQuery(language).replace(
+        '_id == "',
+        '_id == "drafts.',
+      );
     }
 
     if (document._type === "footer") {
-      return getFooterQuery(language);
+      return getFooterQuery(language).replace('_id == "', '_id == "drafts.');
     }
 
     if (document._type === "preset.button") {
@@ -200,7 +203,7 @@ export default function PreviewPage({
           {
             _id,
             title,
-            "csv": file.asset->url
+            "csv": coalesce(csv, file.asset->url),
           }
         ]
       }

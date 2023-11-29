@@ -111,5 +111,9 @@
     "next-router-mock": "^0.8.0",
     "postcss-loader": "^7.2.4",
     "storybook": "^7.2.2"
+  },
+  "resolutions": {
+    "wrap-ansi": "7.0.0",
+    "string-width": "4.1.0"
   }
 }

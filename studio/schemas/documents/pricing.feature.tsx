@@ -71,8 +71,19 @@ const schema = defineType({
       type: "file",
       options: { accept: "text/csv" },
       group: "content",
+      hidden: ({ parent, value }) => !value && Boolean(parent?.csv),
       description:
         "Upload a CSV file. Values for 'y', 'yes' or 'v' will be replaced with a positive icon and 'n', 'no' or 'x' will be replaced with a negative icon. For tooltips you can use (i=tooltip text).",
+    }),
+    defineField({
+      name: "csv",
+      title: "CSV",
+      type: "text",
+      group: "content",
+      hidden: ({ parent, value }) => !value && Boolean(parent?.file),
+      rows: 10,
+      description:
+        "Copy/paste a CSV. Values for 'y', 'yes' or 'v' will be replaced with a positive icon and 'n', 'no' or 'x' will be replaced with a negative icon. For tooltips you can use (i=tooltip text).",
     }),
     {
       ...LANGUAGE_FIELD,
