@@ -65,7 +65,6 @@ const textTransformers = [
     // regex for only no or NO character in the string
     regex: /(^\s*?)([nN][oO])(\s*?$)/gim,
     fn: (key: number, result: RegExpExecArray) => {
-      console.log(result);
       return (
         <IconLoader
           icon="no"
