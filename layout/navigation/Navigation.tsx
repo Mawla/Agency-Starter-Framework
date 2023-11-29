@@ -10,7 +10,8 @@ import {
 import { TopNav } from "./TopNav";
 import { TopNavBannerProps } from "./TopNav.Banner";
 import { AlignType } from "./navigation.options";
-import React, { Suspense, useState } from "react";
+import { useRouter } from "next/router";
+import React, { Suspense, useEffect, useState } from "react";
 
 export type NavItem = {
   _key?: string;
@@ -52,12 +53,22 @@ export const Navigation = ({
   banner,
   theme,
 }: NavigationProps) => {
+  const router = useRouter();
   const { screenWidth } = useBreakpoint();
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false);
 
   const onHamburgerClick = () => {
     setMobileNavIsOpen(true);
   };
+
+  useEffect(() => {
+    function onRouteChange() {
+      setMobileNavIsOpen(false);
+    }
+
+    router.events.on("routeChangeStart", onRouteChange);
+    () => router.events.off("routeChangeStart", onRouteChange);
+  }, []);
 
   return (
     <div>
