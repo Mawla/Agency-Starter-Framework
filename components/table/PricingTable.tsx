@@ -24,55 +24,68 @@ const Title = lazy<ComponentType<TitleProps>>(
 const textTransformers = [
   {
     // regex for only yes or YES character in the string
-    regex: /(^|\s)([yY][eE][sS])(\s|$)/gim,
-    fn: (key: number, result: RegExpExecArray) => (
-      <IconLoader
-        icon="yes"
-        className="inline-block align-middle w-5 h-5"
-        removeColors={false}
-      />
-    ),
+    regex: /(^\s*?)([yY][eE][sS])(\s*?$)/gim,
+    fn: (key: number, result: RegExpExecArray) => {
+      return (
+        <IconLoader
+          icon="yes"
+          className="inline-block align-middle w-5 h-5"
+          removeColors={false}
+        />
+      );
+    },
   },
   {
     // regex for only v or V or y or Y character in the string
-    regex: /(^|\s)([vV]|[yY])(\s|$)/gim,
-    fn: (key: number, result: RegExpExecArray) => (
-      <IconLoader
-        icon="yes"
-        className="inline-block align-middle w-5 h-5"
-        removeColors={false}
-      />
-    ),
+    regex: /(^\s*?)([vV]|[yY])(\s*?$)/gim,
+    fn: (key: number, result: RegExpExecArray) => {
+      return (
+        <IconLoader
+          icon="yes"
+          className="inline-block align-middle w-5 h-5"
+          removeColors={false}
+        />
+      );
+    },
   },
   {
     // regex for only x or X or n or N character in the string
-    regex: /(^|\s)([xX]|[nN])(\s|$)/gim,
-    fn: (key: number, result: RegExpExecArray) => (
-      <IconLoader
-        icon="no"
-        className="inline-block align-middle w-5 h-5"
-        removeColors={false}
-      />
-    ),
+    regex: /(^\s*?)([xX]|[nN])(\s*?$)/gim,
+    fn: (key: number, result: RegExpExecArray) => {
+      return (
+        <IconLoader
+          icon="no"
+          className="inline-block align-middle w-5 h-5"
+          removeColors={false}
+        />
+      );
+    },
   },
   {
     // regex for only no or NO character in the string
-    regex: /(^|\s)([nN][oO])(\s|$)/gim,
-    fn: (key: number, result: RegExpExecArray) => (
-      <IconLoader
-        icon="no"
-        className="inline-block align-middle w-5 h-5"
-        removeColors={false}
-      />
-    ),
+    regex: /(^\s*?)([nN][oO])(\s*?$)/gim,
+    fn: (key: number, result: RegExpExecArray) => {
+      console.log(result);
+      return (
+        <IconLoader
+          icon="no"
+          className="inline-block align-middle w-5 h-5"
+          removeColors={false}
+        />
+      );
+    },
   },
   {
     // regex for tooltips in the string
-    // text text text (i=tooltip) text text text
-    regex: /(\(i=)(.*?)(\))/gim,
+    // text text text (i=tooltip) text text text, also allow for brackets inside the tooltip, e.g (i=tooltip (hello))
+    regex: /\(([^()]*(?:\([^()]*\)[^()]*)*)\)/gim,
     fn: (key: number, result: RegExpExecArray) => {
-      if (!result?.[2]?.trim()?.length) return null;
-      return <PricingTooltip text={result[2].trim()} />;
+      // find the result that starts with i=
+      let tooltip = result.find((r) => r?.startsWith("i="));
+      // remove the i= part
+      if (tooltip) tooltip = tooltip.replace(/i=\s?/, "");
+      if (!tooltip?.trim()?.length) return result[0];
+      return <PricingTooltip text={tooltip.trim()} />;
     },
   },
 ];
@@ -93,7 +106,7 @@ const PricingTooltip = ({ text }: { text: string }) => {
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="text-dark select-none rounded-sm bg-white p-3 text-base leading-none shadow-lg border max-w-[300px]"
+            className="text-dark select-none rounded-sm bg-white p-3 text-sm leading-tight shadow-lg border max-w-[300px]"
             sideOffset={5}
           >
             {text}
