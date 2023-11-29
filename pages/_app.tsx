@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     AOS.init({
-      easing: "ease-out-cubic",
+      easing: "ease-in-out-quad",
       once: true,
       offset: 50,
     });
