@@ -185,7 +185,7 @@ export const ResponsiveImage = ({
         ["relative"]: !fill,
       })}
       ref={wrapperRef}
-      data-aos={animate ? "fade-up-sm" : undefined}
+      data-aos={animate ? "fade-in" : undefined}
     >
       {priority && responsiveSrc && (
         <Head>

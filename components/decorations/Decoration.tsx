@@ -240,7 +240,7 @@ export const Decoration = ({
         [backgroundRoundedTopClasses.lg]: theme?.rounded?.top === "lg",
         [backgroundRoundedBottomClasses.lg]: theme?.rounded?.bottom === "lg",
       })}
-      data-aos="fade-up-sm"
+      data-aos="fade-in"
     >
       <div
         key={_key}
