@@ -1,3 +1,4 @@
+import { useInviewAnimation } from "../../hooks/useInviewAnimation";
 import { backgroundClasses } from "../../theme";
 import { DecorationProps } from "../decorations/Decoration";
 import { DecorationsProps } from "../decorations/Decorations";
@@ -43,6 +44,9 @@ export const Wrapper = ({
   innerClassName,
   slots,
 }: WrapperProps) => {
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  useInviewAnimation(wrapperRef);
+
   /**
    * [small bleed]
    *   [margin top/bottom]
@@ -69,6 +73,7 @@ export const Wrapper = ({
         className,
         theme?.outerBackground && backgroundClasses[theme?.outerBackground],
       )}
+      ref={wrapperRef}
     >
       {slots?.outside}
       <Decorations decorations={decorations} location="outside" />

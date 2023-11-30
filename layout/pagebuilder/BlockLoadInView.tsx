@@ -1,6 +1,5 @@
 import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
-import { useInviewAnimation } from "../../hooks/useInviewAnimation";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
@@ -44,7 +43,6 @@ export const BlockLoadInView = ({
   });
 
   const [forceLoad, setForceLoad] = useState(!enabled);
-  useInviewAnimation(wrapperRef);
 
   useEffect(() => {
     let idleCallback: number;

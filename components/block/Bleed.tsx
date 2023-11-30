@@ -9,15 +9,18 @@ export type BleedProps = {
   id?: string;
 };
 
-export const Bleed = ({ children, bleed, className, id }: BleedProps) => {
-  return (
-    <div
-      className={cx("w-full bleed", bleed && bleedClasses[bleed], className)}
-      id={id}
-    >
-      {children}
-    </div>
-  );
-};
+export const Bleed = React.forwardRef<HTMLDivElement, BleedProps>(
+  ({ children, bleed, className, id }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cx("w-full bleed", bleed && bleedClasses[bleed], className)}
+        id={id}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 
 export default React.memo(Bleed);
