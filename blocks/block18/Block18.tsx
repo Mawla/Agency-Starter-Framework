@@ -238,14 +238,16 @@ export const Block18 = ({
         }
       }
 
-      items.forEach((item) => {
+      items.forEach((item, i) => {
         if (shiftX) {
           item.style.transform = `translateX(${shiftX}px)`;
         } else {
           item.style.removeProperty("transform");
         }
+        item.firstElementChild?.setAttribute("data-aos-delay", `${i * 100}`);
       });
     });
+    if ((window as any).AOS) window.Aos.refresh();
   }, [debouncedScreenWidth, items, theme?.block?.align]);
 
   return (
@@ -338,7 +340,6 @@ export const Block18 = ({
                       key={item._key}
                       className="h-full text-left"
                       data-aos="fade-up-sm"
-                      data-aos-delay={100 * (i % numColumns)}
                     >
                       <CardWrapper>
                         <Card {...item} />
@@ -385,7 +386,6 @@ export const Block18 = ({
                     >
                       <div
                         data-aos="zoom-in-sm"
-                        data-aos-delay={100 * (i % numColumns)}
                         data-duration="500"
                         className="h-full"
                       >
