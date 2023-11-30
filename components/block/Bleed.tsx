@@ -23,4 +23,6 @@ export const Bleed = React.forwardRef<HTMLDivElement, BleedProps>(
   },
 );
 
+Bleed.displayName = "Bleed";
+
 export default React.memo(Bleed);
