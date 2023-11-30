@@ -61,7 +61,6 @@ export const MobileNav = ({
                               className={cx("!p-0", {
                                 ["!underline current"]: item?.current,
                               })}
-                              animate={false}
                             />
 
                             {Boolean(item.children?.length) && (
@@ -82,7 +81,6 @@ export const MobileNav = ({
                                     className={cx("!p-0", {
                                       ["!underline current"]: item?.current,
                                     })}
-                                    animate={false}
                                   />
                                 </li>
                               ))}

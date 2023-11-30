@@ -71,7 +71,7 @@ export const Navigation = ({
   }, []);
 
   return (
-    <div>
+    <div data-no-animate>
       <TopNav
         items={items}
         buttons={buttons}

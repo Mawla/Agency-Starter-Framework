@@ -3,23 +3,14 @@ import "../public/engine.styles.css";
 import "../styles/styles.css";
 // @ts-ignore
 import { GoogleTagManager } from "@next/third-parties/google";
-import AOS from "aos";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    AOS.init({
-      easing: "ease-out-quad",
-      once: true,
-      offset: 100,
-    });
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <Head>

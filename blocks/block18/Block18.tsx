@@ -244,10 +244,11 @@ export const Block18 = ({
         } else {
           item.style.removeProperty("transform");
         }
-        item.firstElementChild?.setAttribute("data-aos-delay", `${i * 100}`);
+
+        // store column index on each item for animation delay
+        item.firstElementChild?.setAttribute("data-column", i.toString());
       });
     });
-    if ((window as any).AOS) window.Aos.refresh();
   }, [debouncedScreenWidth, items, theme?.block?.align]);
 
   return (
@@ -338,8 +339,8 @@ export const Block18 = ({
                   return (
                     <div
                       key={item._key}
-                      className="h-full text-left"
-                      data-aos="fade-up-sm"
+                      className="card h-full text-left"
+                      data-animate="zoom-in"
                     >
                       <CardWrapper>
                         <Card {...item} />
@@ -385,9 +386,10 @@ export const Block18 = ({
                       )}
                     >
                       <div
-                        data-aos="zoom-in-sm"
+                        className="card h-full"
+                        data-animate="zoom-in"
+                        data-animate-threshold=".25"
                         data-duration="500"
-                        className="h-full"
                       >
                         <CardWrapper>
                           <Card {...item} />

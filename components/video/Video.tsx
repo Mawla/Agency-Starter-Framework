@@ -1,4 +1,3 @@
-import { useInView } from "../../hooks/useInView";
 import { VideoType } from "../../types";
 import cx from "clsx";
 import React, { ComponentType, lazy, useRef } from "react";
@@ -22,6 +21,7 @@ const VideoPlayer = lazy<ComponentType<VideoType>>(
 export type VideoProps = {
   className?: string;
   cover?: boolean;
+  animate?: boolean;
 } & VideoType;
 
 export const Video = (props: VideoProps) => {
@@ -43,8 +43,8 @@ export const Video = (props: VideoProps) => {
   return (
     <div
       ref={wrapperRef}
-      className={cx(coverClassName, className)}
-      data-aos="fade-in"
+      className={cx("video", coverClassName, className)}
+      data-animate={props.animate !== false ? "fade-in" : undefined}
     >
       {provider === "youtube" && <YoutubePlayer {...props} />}
       {provider === "vimeo" && <VimeoPlayer {...props} />}

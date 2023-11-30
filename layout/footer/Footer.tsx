@@ -62,7 +62,7 @@ export const Footer = ({
       >
         {hideBreadcrumb !== true && <FooterBreadcrumb />}
 
-        <div className="grid lg:grid-cols-12 lg:gap-5">
+        <div className="grid lg:grid-cols-12 lg:gap-5" data-no-animate>
           <div className="lg:col-span-4 flex flex-col gap-4 lg:pr-20 mb-10 lg:mb-0 max-w-sm lg:max-w-none">
             {logo && (
               <div>

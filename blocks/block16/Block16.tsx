@@ -128,9 +128,8 @@ export const Block16 = ({
                   ? getOriginalImageDimensions(image.src).aspectRatio || "auto"
                   : undefined,
               }}
-              data-aos="zoom-in-sm"
-              data-aos-delay={50 * i}
-              data-duration="500"
+              data-animate="zoom-in"
+              data-animate-duration="500"
             >
               {image && <ResponsiveImage {...image} fill preserveAspectRatio />}
             </div>

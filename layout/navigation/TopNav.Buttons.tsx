@@ -38,7 +38,7 @@ export const TopNavButtons = ({
                 key={button._key}
                 className="hidden md:block"
               >
-                <Button {...button} animate={false} />
+                <Button {...button} />
               </RadixNavigationMenu.Item>
             ))}
 

@@ -183,7 +183,10 @@ export const Block12 = ({
           )}
 
         {Boolean(paginatedItems?.length) && (
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <ul
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            data-no-animate
+          >
             {paginatedItems?.map((item) => (
               <li key={item._id}>
                 <ResourceCard {...item} theme={theme?.card} />

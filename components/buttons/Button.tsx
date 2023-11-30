@@ -279,7 +279,7 @@ const ButtonInner = ({
           className,
           ` btn btn-${themeObj?.name}`,
         )}
-        data-aos={animate !== false ? "fade-up-sm" : undefined}
+        data-animate={animate !== false ? "fade-up" : undefined}
       >
         {label && themeObj.icon.position === "after" && label}
         {themeObj.icon.name && (

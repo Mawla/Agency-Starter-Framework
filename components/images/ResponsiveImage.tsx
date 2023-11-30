@@ -60,7 +60,6 @@ export const ResponsiveImage = ({
   zoom = false,
   gallery,
   animate,
-  ...rest
 }: ResponsiveImageProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -180,13 +179,13 @@ export const ResponsiveImage = ({
     // disable margin underneath next image until classes can be applied to next image directly
     // https://github.com/vercel/next.js/discussions/22861
     <div
-      className={cx("text-0 h-full w-full", {
+      className={cx("image text-0 h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
         ["absolute inset-0"]: fill,
         ["relative"]: !fill,
       })}
       ref={wrapperRef}
-      data-aos={animate !== false ? "fade-in" : undefined}
+      data-animate={animate !== false ? "fade-in" : undefined}
     >
       {priority && responsiveSrc && (
         <Head>
@@ -210,7 +209,6 @@ export const ResponsiveImage = ({
           quality={IMAGE_QUALITY}
           onLoad={onImageLoad}
           unoptimized
-          {...rest}
         />
       )}
 

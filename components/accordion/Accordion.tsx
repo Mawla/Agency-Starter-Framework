@@ -35,7 +35,7 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
   if (!Boolean(items.filter(Boolean)?.length)) return null;
 
   return (
-    <div className="radix-accordion">
+    <div className="accordion radix-accordion">
       <RadixAccordion.Root
         type="multiple"
         className={cx(
@@ -43,14 +43,14 @@ export const Accordion = ({ items, theme }: AccordionProps) => {
           theme?.divider && divideClasses[theme?.divider],
           theme?.divider && "divide-y",
         )}
+        data-no-animate
       >
         {items?.map(({ _key, title = "", content }) => (
           <RadixAccordion.Item
             value={_key || title}
             key={_key || title}
             id={_key || title}
-            className="radix-scroll-margin"
-            data-aos="fade-up-sm"
+            className="accordion-item radix-scroll-margin"
           >
             <RadixAccordion.Header
               className={cx(

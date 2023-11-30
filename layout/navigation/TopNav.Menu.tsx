@@ -55,7 +55,6 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                       className={cx({
                         ["!underline current"]: item?.current,
                       })}
-                      animate={false}
                     >
                       <RadixNavigationMenu.Trigger>
                         <IconLoader
@@ -76,7 +75,6 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                     className={cx({
                       ["!underline current"]: item?.current,
                     })}
-                    animate={false}
                   />
                 )}
 
@@ -116,7 +114,6 @@ export const TopNavMenu = ({ items, theme }: TopNavMenuProps) => {
                             className={cx("max-w-full whitespace-pre-wrap", {
                               ["!underline current"]: item.current,
                             })}
-                            animate={false}
                           />
                         </RadixNavigationMenu.Item>
                       ))}

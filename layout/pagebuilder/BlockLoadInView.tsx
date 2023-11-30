@@ -1,11 +1,12 @@
 import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
+import { useInviewAnimation } from "../../hooks/useInviewAnimation";
 import { backgroundClasses } from "../../theme";
 import { ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import cx from "clsx";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 type BlockLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
@@ -40,11 +41,10 @@ export const BlockLoadInView = ({
   const inView = useInView({
     elementRef: wrapperRef,
     threshold: 0.01,
-    rootMargin: "1200px",
-    enabled: isPreview,
   });
 
   const [forceLoad, setForceLoad] = useState(!enabled);
+  useInviewAnimation(wrapperRef);
 
   useEffect(() => {
     let idleCallback: number;
@@ -98,6 +98,7 @@ export const BlockLoadInView = ({
       data-block={isPreview ? block : undefined}
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
+      data-inview={inView}
     >
       {doLoad || forceLoad ? (
         children

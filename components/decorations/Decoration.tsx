@@ -233,14 +233,14 @@ export const Decoration = ({
 
   return (
     <div
-      className={cx("absolute inset-0 pointer-events-none", {
+      className={cx("decoration absolute inset-0 pointer-events-none", {
         ["overflow-hidden"]: breakout !== true,
         [backgroundRoundedTopClasses.md]: theme?.rounded?.top === "md",
         [backgroundRoundedBottomClasses.md]: theme?.rounded?.bottom === "md",
         [backgroundRoundedTopClasses.lg]: theme?.rounded?.top === "lg",
         [backgroundRoundedBottomClasses.lg]: theme?.rounded?.bottom === "lg",
       })}
-      data-aos="fade-in"
+      data-no-animate
     >
       <div
         key={_key}
@@ -251,8 +251,10 @@ export const Decoration = ({
           ...styleObj,
         }}
       >
-        {image && !repeat && <ResponsiveImage {...image} fill roundSize={25} />}
-        {video && <Video {...video} />}
+        {image && !repeat && (
+          <ResponsiveImage {...image} fill roundSize={25} animate={false} />
+        )}
+        {video && <Video {...video} animate={false} />}
         {innerHTML && (
           <div
             dangerouslySetInnerHTML={
