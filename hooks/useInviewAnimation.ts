@@ -15,6 +15,8 @@ export const useInviewAnimation = (
 
   useEffect(() => {
     if (!elementRef.current) return;
+    if (!window.IntersectionObserver) return;
+
     const observers: IntersectionObserver[] = [];
 
     // find children to animate
@@ -77,8 +79,6 @@ export const useInviewAnimation = (
       }
     });
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
+    return () => observers.forEach((observer) => observer.disconnect());
   }, [debouncedScreenWidth]);
 };
