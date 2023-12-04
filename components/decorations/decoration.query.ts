@@ -26,6 +26,7 @@ desktop {
 export const decorationsQuery = groq`
 decorations[] {
   _type,
+  html,
   "image": ${imageQuery},
   "video": ${videoQuery},
   imageRepeat,
