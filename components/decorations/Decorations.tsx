@@ -35,7 +35,10 @@ export const Decorations = ({ decorations, location }: DecorationsProps) => {
                 _key={decoration._key}
               />
             );
-          } else if (decoration._type === "decoration") {
+          } else if (
+            decoration._type === "decoration" ||
+            decoration._type == "decorationWrapper"
+          ) {
             return (
               <Decoration
                 {...decoration}
