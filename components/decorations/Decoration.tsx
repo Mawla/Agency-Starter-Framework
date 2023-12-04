@@ -57,6 +57,7 @@ export type DecorationWrapperType = {
 
 export type DecorationProps = {
   _key?: string;
+  _type?: "decoration";
   title?: string;
   theme?: {
     rounded?: BlockRoundedType;
