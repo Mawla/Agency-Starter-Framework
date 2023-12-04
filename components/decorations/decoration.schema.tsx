@@ -32,7 +32,7 @@ function validateCSSUnit(Rule: StringRule) {
 
 export const decorationWrapper = defineField({
   name: "decorationWrapper",
-  title: "Decoration wrapper",
+  title: "Decoration",
   type: "object",
   components: {
     item: ArrayItemPreviewHighlight,
