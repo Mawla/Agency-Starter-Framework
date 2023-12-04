@@ -47,6 +47,7 @@ export const Title = ({
         fontClasses[font || "heading"],
         className,
       )}
+      data-animate="fade-up"
     >
       {typeof children === "string" ? titleWords?.join(" ") : children}
     </Element>

@@ -25,6 +25,13 @@ desktop {
 
 export const decorationsQuery = groq`
 decorations[] {
+  _type,
+  html,
+  "image": ${imageQuery},
+  "video": ${videoQuery},
+  imageRepeat,
+  css,
+  "slug": slug.current,
   "location": coalesce(location, preset->location),
  ${decorationFieldsQuery},
  preset -> {

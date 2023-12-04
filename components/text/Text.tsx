@@ -46,7 +46,7 @@ export const Text = ({
     <div className={cx("text", className)}>
       <Element
         className={cx(
-          "w-full",
+          "text w-full",
           "break-words prose font-regular leading-relaxed",
           "prose-strong:font-bold prose-strong:text-current prose-headings:text-current",
           "prose-a:text-current prose-a:underline prose-a:underline-offset-4",
@@ -61,6 +61,7 @@ export const Text = ({
             ? proseClasses[background]
             : "text-current",
         )}
+        data-animate="fade-up"
       >
         {children}
       </Element>

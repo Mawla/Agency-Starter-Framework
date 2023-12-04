@@ -1,14 +1,19 @@
+import { CSSDecorationProps } from "./CSSDecoration";
 import { DecorationProps } from "./Decoration";
 import { DecorationLocationType } from "./decoration.options";
 import { ComponentType, lazy } from "react";
 
 export type DecorationsProps = {
   location?: DecorationLocationType;
-  decorations?: DecorationProps[];
+  decorations?: (DecorationProps | CSSDecorationProps)[];
 };
 
 const Decoration = lazy<ComponentType<DecorationProps>>(
   () => import(/* webpackChunkName: "Decoration" */ "./Decoration"),
+);
+
+const CSSDecoration = lazy<ComponentType<CSSDecorationProps>>(
+  () => import(/* webpackChunkName: "CSSDecoration" */ "./CSSDecoration"),
 );
 
 export const Decorations = ({ decorations, location }: DecorationsProps) => {
@@ -21,13 +26,26 @@ export const Decorations = ({ decorations, location }: DecorationsProps) => {
           if (!location) return true;
           return decoration.location === location;
         })
-        .map((decoration) => (
-          <Decoration
-            {...decoration}
-            key={decoration._key}
-            _key={decoration._key}
-          />
-        ))}
+        .map((decoration) => {
+          if (decoration._type === "cssdecoration") {
+            return (
+              <CSSDecoration
+                {...decoration}
+                key={decoration._key}
+                _key={decoration._key}
+              />
+            );
+          } else if (decoration._type === "decoration") {
+            return (
+              <Decoration
+                {...decoration}
+                key={decoration._key}
+                _key={decoration._key}
+              />
+            );
+          }
+          return null;
+        })}
     </>
   );
 };

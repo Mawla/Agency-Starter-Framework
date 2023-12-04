@@ -125,7 +125,7 @@ export const Block13 = ({
             {items?.map(({ _id, title, image, href, intro }) => (
               <div
                 key={_id}
-                className="w-[300px] max-w-[75%] md:max-w-none shrink-0 lg:w-auto snap-center"
+                className="card w-[300px] max-w-[75%] md:max-w-none shrink-0 lg:w-auto snap-center"
               >
                 <div className="text-left relative group h-full flex flex-col">
                   <Link href={href} className="absolute inset-0 z-10">

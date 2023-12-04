@@ -119,7 +119,7 @@ export const Block16 = ({
             ["justify-end"]: theme?.block?.align === "right",
           })}
         >
-          {items?.map(({ _key, image }) => (
+          {items?.map(({ _key, image }, i) => (
             <div
               key={_key}
               className="shrink-0 h-8 md:h-10 lg:h-12 relative snap-center"
@@ -128,6 +128,8 @@ export const Block16 = ({
                   ? getOriginalImageDimensions(image.src).aspectRatio || "auto"
                   : undefined,
               }}
+              data-animate="zoom-in"
+              data-animate-duration="500"
             >
               {image && <ResponsiveImage {...image} fill preserveAspectRatio />}
             </div>

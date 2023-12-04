@@ -24,6 +24,7 @@ import link from "../../components/buttons/link.schema";
 import composableCard from "../../components/cards/composablecard.schema";
 import imageCard from "../../components/cards/imagecard.schema";
 import testimonialCard from "../../components/cards/testimonialcard.schema";
+import { cssDecoration } from "../../components/decorations/cssdecoration.schema";
 import presetDecoration from "../../components/decorations/decoration.preset";
 import {
   decoration,
@@ -129,6 +130,7 @@ export const schemaTypes = [
     decoration,
     decorationWrapper,
     decorations,
+    cssDecoration,
     faq,
     footer,
     highlight,
