@@ -343,6 +343,11 @@ export const Block1 = ({
                               .aspectRatio || "auto"
                           : undefined,
                     }}
+                    data-animate={
+                      theme?.layout?.mediaPosition === "left"
+                        ? "zoom-in-right"
+                        : "zoom-in-left"
+                    }
                   >
                     <ResponsiveImage
                       {...image}

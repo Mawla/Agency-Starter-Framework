@@ -46,6 +46,8 @@ export default function Fancybox(props: FancyboxProps) {
            * so instead for iframes we add a class that sets the height
            */
 
+          instance.container.setAttribute("data-no-animate", true);
+
           if (slide.type === "iframe") {
             instance.container.classList.add("fix-iframe-height");
 

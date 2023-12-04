@@ -166,3 +166,122 @@ script[type='application/ld+json'] {
 .title .list-check {
   padding-left: 1.5em;
 }
+
+/* Subset of AOS styles to keep it small https://unpkg.com/aos@2.3.1/dist/aos.css */
+/* if we ever want all styled, just add to app.tsx `import "aos/dist/aos.css";` */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateZ(0);
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-property: opacity, transform;
+}
+[data-animate^="fade"].animate {
+  opacity: 1;
+  transform: translateZ(0);
+}
+
+[data-animate^="zoom"].animate {
+  opacity: 1;
+  transform: translateZ(0) scale(1);
+}
+
+/* transitions */
+[data-animate="fade-in"] {
+  opacity: 0;
+}
+
+[data-animate="fade-up"] {
+  transform: translate3d(0, 6px, 0);
+  opacity: 0;
+}
+
+[data-animate="zoom-in"] {
+  transform: scale(0.98);
+  opacity: 0;
+}
+
+[data-animate="zoom-in-right"] {
+  transform: translate3d(-16px, 16px, 0) scale(0.98);
+  opacity: 0;
+}
+
+[data-animate="zoom-in-left"] {
+  transform: translate3d(16px, 16px, 0) scale(0.98);
+  opacity: 0;
+}
+
+/* prevent animation */
+[data-no-animate] [data-animate],
+[data-no-animate="true"] [data-animate] {
+  opacity: 1;
+  transform: none;
+}
+
+/* delays */
+[data-animate-delay="50"].animate {
+  transition-delay: 50ms;
+}
+[data-animate-delay="100"].animate {
+  transition-delay: 100ms;
+}
+[data-animate-delay="150"].animate {
+  transition-delay: 150ms;
+}
+[data-animate-delay="200"].animate {
+  transition-delay: 200ms;
+}
+[data-animate-delay="250"].animate {
+  transition-delay: 250ms;
+}
+[data-animate-delay="300"].animate {
+  transition-delay: 300ms;
+}
+[data-animate-delay="350"].animate {
+  transition-delay: 350ms;
+}
+[data-animate-delay="400"].animate {
+  transition-delay: 400ms;
+}
+[data-animate-delay="450"].animate {
+  transition-delay: 450ms;
+}
+[data-animate-delay="500"].animate {
+  transition-delay: 500ms;
+}
+[data-animate-delay="550"].animate {
+  transition-delay: 550ms;
+}
+[data-animate-delay="600"].animate {
+  transition-delay: 600ms;
+}
+[data-animate-delay="650"].animate {
+  transition-delay: 650ms;
+}
+[data-animate-delay="700"].animate {
+  transition-delay: 700ms;
+}
+[data-animate-delay="750"].animate {
+  transition-delay: 750ms;
+}
+[data-animate-delay="800"].animate {
+  transition-delay: 800ms;
+}
+[data-animate-delay="850"].animate {
+  transition-delay: 850ms;
+}
+[data-animate-delay="900"].animate {
+  transition-delay: 900ms;
+}
+[data-animate-delay="950"].animate {
+  transition-delay: 950ms;
+}
+[data-animate-delay="1000"].animate {
+  transition-delay: 1000ms;
+}
+
+/* duration */
+[data-animate-duration="500"].animate {
+  transition-duration: 0.5s;
+}
