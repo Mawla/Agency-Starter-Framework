@@ -12,7 +12,7 @@ export const decorations = defineField({
   name: "decorations",
   title: "Decorations",
   type: "array",
-  of: [{ type: "decorationWrapper" }],
+  of: [{ type: "decorationWrapper" }, { type: "cssdecoration" }],
 });
 
 function validateCSSUnit(Rule: StringRule) {

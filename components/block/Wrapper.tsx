@@ -1,4 +1,5 @@
 import { backgroundClasses } from "../../theme";
+import { CSSDecorationProps } from "../decorations/CSSDecoration";
 import { DecorationProps } from "../decorations/Decoration";
 import { DecorationsProps } from "../decorations/Decorations";
 import { Background } from "./Background";
@@ -14,6 +15,13 @@ const Decoration = lazy<ComponentType<DecorationProps>>(
     import(/* webpackChunkName: "Decoration" */ "../decorations/Decoration"),
 );
 
+const CSSDecoration = lazy<ComponentType<CSSDecorationProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "CSSDecoration" */ "../decorations/CSSDecoration"
+    ),
+);
+
 const Decorations = lazy<ComponentType<DecorationsProps>>(
   () =>
     import(/* webpackChunkName: "Decorations" */ "../decorations/Decorations"),
@@ -24,7 +32,7 @@ export type WrapperProps = {
   theme?: BlockThemeType;
   className?: string;
   innerClassName?: string;
-  decorations?: DecorationProps[];
+  decorations?: (DecorationProps | CSSDecorationProps)[];
   slots?: {
     outside?: React.ReactNode;
     outsideSpacing?: React.ReactNode;
@@ -59,7 +67,11 @@ export const Wrapper = ({
 
   const innerDecorations = decorations
     ?.filter(Boolean)
-    .filter(({ location }) => location === "inside" || !location);
+    .filter(({ location }) => location === "inside" || !location)
+    .map((d) => ({
+      ...d,
+      location: "inside" as const,
+    }));
 
   return (
     <Bleed
@@ -90,19 +102,33 @@ export const Wrapper = ({
             }}
             className={innerClassName}
           >
-            {innerDecorations?.map((decoration) => (
-              <Decoration
-                {...decoration}
-                key={decoration._key}
-                _key={decoration._key}
-                theme={{
-                  rounded: {
-                    top: theme?.rounded?.top,
-                    bottom: theme?.rounded?.bottom,
-                  },
-                }}
-              />
-            ))}
+            {innerDecorations?.map((decoration) =>
+              decoration._type === "cssdecoration" ? (
+                <CSSDecoration
+                  {...(decoration as CSSDecorationProps)}
+                  key={decoration._key}
+                  _key={decoration._key}
+                  theme={{
+                    rounded: {
+                      top: theme?.rounded?.top,
+                      bottom: theme?.rounded?.bottom,
+                    },
+                  }}
+                />
+              ) : (
+                <Decoration
+                  {...(decoration as DecorationProps)}
+                  key={decoration._key}
+                  _key={decoration._key}
+                  theme={{
+                    rounded: {
+                      top: theme?.rounded?.top,
+                      bottom: theme?.rounded?.bottom,
+                    },
+                  }}
+                />
+              ),
+            )}
             {slots?.inside}
             <Spacing
               padding={{
