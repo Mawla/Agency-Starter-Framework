@@ -177,7 +177,7 @@ export const ResponsiveImage = ({
     // disable margin underneath next image until classes can be applied to next image directly
     // https://github.com/vercel/next.js/discussions/22861
     <div
-      className={cx("text-0 h-full w-full", {
+      className={cx("image text-0 h-full w-full", {
         [ratioClasses[ratio || "auto"]]: ratio,
         ["absolute inset-0"]: fill,
         ["relative"]: !fill,
