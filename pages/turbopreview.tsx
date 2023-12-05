@@ -146,13 +146,16 @@ export default function PreviewPage({
   const getQuery = () => {
     if (document._type === "navigation") {
       return getNavigationQuery(language).replace(
-        '_id == "',
-        '_id == "drafts.',
+        `_id == "navigation`,
+        `_id match "*navigation`,
       );
     }
 
     if (document._type === "footer") {
-      return getFooterQuery(language).replace('_id == "', '_id == "drafts.');
+      return getFooterQuery(language).replace(
+        `_id == "footer`,
+        `_id match "*footer`,
+      );
     }
 
     if (document._type === "preset.button") {
@@ -281,6 +284,7 @@ export default function PreviewPage({
           config={config}
         />
       )}
+
       {previewType === "navigation" && previewDocument && (
         <Navigation {...previewDocument} />
       )}
