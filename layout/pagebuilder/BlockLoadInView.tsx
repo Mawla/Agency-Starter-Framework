@@ -97,6 +97,7 @@ export const BlockLoadInView = ({
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
       data-inview={inView}
+      data-no-animate={isPreview ? true : undefined}
     >
       {doLoad || forceLoad ? (
         children
