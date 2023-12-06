@@ -20,7 +20,7 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
   }
 
   return (
-    <div className="absolute left-1 mt-0 z-50 opacity-0 pointer-events-none group-hover/block:opacity-100 group-hover/block:pointer-events-auto transition-opacity duration-200">
+    <div className="sticky top-0 p-1 mt-0 z-50 opacity-0 pointer-events-none group-hover/block:opacity-100 group-hover/block:pointer-events-auto transition-opacity duration-200">
       <div className="flex gap-1 pointer">
         <button
           className="preview-block-edit-button p-1 rounded bg-[var(--highlight-color)] text-white transition-colors"

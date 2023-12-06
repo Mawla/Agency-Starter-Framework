@@ -27,10 +27,11 @@ const schema = defineType({
     select: {
       title: "title",
       image: "image",
+      cmsTitle: "cmsTitle",
     },
-    prepare({ title = "Block 1", image, mobileImage }: any) {
+    prepare({ title, cmsTitle, image, mobileImage }: any) {
       return {
-        title: title,
+        title: title || cmsTitle || "Block 1",
         media: image || mobileImage || <Image weight="thin" />,
       };
     },

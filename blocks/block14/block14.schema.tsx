@@ -17,10 +17,11 @@ const schema = defineType({
   preview: {
     select: {
       body: "body",
+      cmsTitle: "cmsTitle",
     },
-    prepare({ body = "Article" }: any) {
+    prepare({ body = "Article", cmsTitle }: any) {
       return {
-        title: blocksToText(body),
+        title: blocksToText(body) || cmsTitle,
       };
     },
   },
