@@ -1,3 +1,4 @@
+import { useSize } from "../../hooks/useSize";
 import { BlockSchemaName, SANITY_API_VERSION } from "../../types.sanity";
 import { AddIcon } from "@sanity/icons";
 import {
@@ -384,6 +385,8 @@ const BlockDialog = ({
   onBlockSelect: (_type: BlockSchemaName) => void;
 }) => {
   const [id, setId] = useState<"preset" | "block">("preset");
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const { width } = useSize(dialogRef);
 
   return (
     <Dialog
@@ -392,6 +395,7 @@ const BlockDialog = ({
       onClose={onClose}
       zOffset={1000}
       width={1000}
+      ref={dialogRef}
     >
       <Box padding={4}>
         {presets?.length && (
@@ -426,6 +430,7 @@ const BlockDialog = ({
                   style={{
                     height: "100%",
                     borderRadius: 5,
+                    gridColumn: width && width < 600 ? "span 2" : undefined,
                   }}
                   key={image}
                   tone="primary"
