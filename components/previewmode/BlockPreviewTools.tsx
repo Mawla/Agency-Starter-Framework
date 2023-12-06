@@ -23,8 +23,8 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
     <div className="preview-tools absolute inset-0 pointer-events-none z-[999]">
       <div className="absolute inset-y-0">
         <div className="sticky top-0 pl-1 pt-0.5 pointer-events-auto">
-          <span className="absolute top-0 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
-          <span className="absolute top-0 left-0.5 w-px h-20 bg-gradient-to-b from-black/10 to-black/0"></span>
+          {/* <span className="absolute top-0 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span> */}
+          {/* <span className="absolute top-0 left-0.5 w-px h-20 bg-gradient-to-b from-black/10 to-black/0"></span> */}
           <div className="inline-flex flex-col pointer ">
             {/* move up */}
             {/* <button
@@ -85,12 +85,12 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
       </div>
 
       {/* add new block button */}
-      <span className="absolute bottom-0.5 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
-      <span className="absolute bottom-0.5 left-0.5 w-px h-20 bg-gradient-to-t from-black/10 to-black/0"></span>
+      <span className="absolute bottom-0 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
+      {/* <span className="absolute bottom-0.5 left-0.5 w-px h-20 bg-gradient-to-t from-black/10 to-black/0"></span> */}
       <button
         className="bg-white text-[#333] hover:text-[#111] hover:bg-[#eee] grid place-items-center w-5 h-5 absolute bottom-1 left-1 pointer-events-auto"
         onClick={() => onActionClick("block-add-after")}
-        title="Add block after"
+        title="Add block here"
       >
         <svg
           fill="none"
