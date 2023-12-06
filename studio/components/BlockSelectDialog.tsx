@@ -129,8 +129,6 @@ const BlockSelectDialog: ComponentType<any> = (
         .filter(({ blocks }) => Boolean(blocks?.length))
         .filter(({ hidden }) => !hidden?.(document._type));
 
-      console.log(presets);
-
       setPresets(presets);
 
       /**
@@ -204,14 +202,11 @@ const BlockSelectDialog: ComponentType<any> = (
    */
 
   async function patchBlocks(selectedValue: string) {
-    console.log(selectedValue);
     if (!onChange) return;
     if (!selectedValue) return setOpen(false);
 
     const selectedBlock = blocks.find(({ _type }) => selectedValue === _type);
     const selectedPreset = presets.find(({ _id }) => selectedValue === _id);
-    console.log(selectedBlock, blocks);
-    console.log(selectedPreset, presets);
 
     const selectedOption = selectedBlock || selectedPreset;
 
