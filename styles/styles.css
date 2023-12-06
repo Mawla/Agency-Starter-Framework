@@ -133,6 +133,10 @@ script[type='application/ld+json'] {
   position: relative;
 }
 
+[data-is-preview] {
+  position: relative;
+}
+
 [data-is-preview]:after {
   pointer-events: none;
   content: "";
@@ -155,10 +159,10 @@ script[type='application/ld+json'] {
 .preview-highlight-open:not(.absolute) {
   position: relative;
 }
-
+/* 
 .preview-highlight-open .preview-block-edit-button {
   display: none !important;
-}
+} */
 
 /* Fancybox */
 .fancybox__content {

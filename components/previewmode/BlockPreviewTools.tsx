@@ -20,26 +20,30 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
   }
 
   return (
-    <div className="sticky top-0 p-1 mt-0 z-50 opacity-0 pointer-events-none group-hover/block:opacity-100 group-hover/block:pointer-events-auto transition-opacity duration-200">
-      <div className="flex gap-1 pointer">
-        <button
-          className="preview-block-edit-button p-1 rounded bg-[var(--highlight-color)] text-white transition-colors"
-          onClick={() => onActionClick("block-edit")}
-        >
-          <svg
-            fill="none"
-            viewBox="0 0 25 25"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5"
+    <div className="absolute inset-y-0 z-50">
+      <div className="sticky top-0 p-1">
+        <span className="absolute top-0.5 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
+        <span className="absolute top-0.5 left-0.5 w-px h-20 bg-gradient-to-b from-black/10 to-black/0"></span>
+        <div className="inline-flex flex-col pointer ">
+          <button
+            className="preview-block-edit-button p-0.5 bg-white text-[#333] hover:text-[#111] hover:bg-[#eee]"
+            onClick={() => onActionClick("block-edit")}
           >
-            <path
-              stroke="currentColor"
-              d="m15 7 3 3m-12 9 1-4 10-10 3 3-10 10z"
-              strokeWidth="1.2"
-            />
-          </svg>
-        </button>
-        <ActionsDropdown onActionClick={onActionClick} />
+            <svg
+              fill="none"
+              viewBox="0 0 25 25"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4"
+            >
+              <path
+                stroke="currentColor"
+                d="m15 7 3 3m-12 9 1-4 10-10 3 3-10 10z"
+                strokeWidth="1"
+              />
+            </svg>
+          </button>
+          <ActionsDropdown onActionClick={onActionClick} />
+        </div>
       </div>
     </div>
   );
@@ -55,12 +59,12 @@ const ActionsDropdown = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="preview-theme-button p-1 rounded text-white bg-[var(--highlight-color)] transition-colors place-self-end">
+        <button className="preview-theme-button p-0.5 bg-white text-[#333] hover:text-[#111] hover:bg-[#eee]">
           <svg
             fill="none"
             viewBox="0 0 25 25"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5"
+            className="w-4 h-4"
           >
             <path
               clip-rule="evenodd"
