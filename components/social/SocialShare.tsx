@@ -49,10 +49,11 @@ export const SocialShare = ({ title, direction }: SocialShareProps) => {
 
   return (
     <div
-      className={cx("flex gap-4", {
+      className={cx("socialshare flex gap-4", {
         ["flex-col"]: direction === "vertical",
         ["flex-row"]: direction !== "vertical",
       })}
+      data-animate="fade-in"
     >
       <FacebookShareButton url={shareURL} quote={title}>
         <IconLoader

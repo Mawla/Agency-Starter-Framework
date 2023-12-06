@@ -7,7 +7,7 @@ import { PluginOptions, useClient } from "sanity";
 import { useRouterState } from "sanity/router";
 
 export const productionURLPane: PluginOptions = {
-  name: "Block Generator",
+  name: "Production URL pane",
   document: {
     inspectors: (prev, context) => {
       const docSchema = context.schema.get(context.documentType);
@@ -85,6 +85,8 @@ const PreviewPane = ({
 
   useEffect(() => {
     async function getPath() {
+      if (location.pathname.includes("open-production-url")) return onClose();
+
       const hasPublishedVersion = await client.fetch(
         `count(*[_id == "${documentId.replace("drafts.", "")}"]) > 0`,
       );

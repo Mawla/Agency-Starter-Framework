@@ -71,6 +71,7 @@ export type ButtonProps = {
     desktop?: ButtonThemeType;
     hover?: ButtonThemeHoverType;
   };
+  animate?: boolean;
 };
 
 type ButtonThemeType = {
@@ -141,6 +142,7 @@ const ButtonInner = ({
   presetTheme,
   theme,
   className,
+  animate,
 }: ButtonProps) => {
   const Element = as === "submit" ? "button" : as;
   const props: {
@@ -277,6 +279,7 @@ const ButtonInner = ({
           className,
           ` btn btn-${themeObj?.name}`,
         )}
+        data-animate={animate !== false ? "fade-up" : undefined}
       >
         {label && themeObj.icon.position === "after" && label}
         {themeObj.icon.name && (

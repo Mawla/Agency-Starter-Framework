@@ -50,8 +50,6 @@ export const BlockLoadInView = ({
   const inView = useInView({
     elementRef: wrapperRef,
     threshold: 0.01,
-    rootMargin: "1200px",
-    enabled: isPreview,
   });
 
   const [forceLoad, setForceLoad] = useState(!enabled);
@@ -117,6 +115,8 @@ export const BlockLoadInView = ({
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
       className="group/block"
+      data-inview={inView}
+      data-no-animate={isPreview ? true : undefined}
     >
       {isPreview && <BlockPreviewTools _key={_key} index={index} />}
 

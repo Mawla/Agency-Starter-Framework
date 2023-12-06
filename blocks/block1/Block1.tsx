@@ -343,6 +343,11 @@ export const Block1 = ({
                               .aspectRatio || "auto"
                           : undefined,
                     }}
+                    data-animate={
+                      theme?.layout?.mediaPosition === "left"
+                        ? "zoom-in-right"
+                        : "zoom-in-left"
+                    }
                   >
                     <ResponsiveImage
                       {...image}
@@ -368,7 +373,7 @@ export const Block1 = ({
                 )}
               >
                 <div className="w-full">
-                  <div className="relative w-full h-auto aspect-video">
+                  <div className="relative w-full h-auto">
                     <Video
                       {...video}
                       className={cx(

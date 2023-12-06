@@ -13,6 +13,7 @@ import { Block15Props } from "../../blocks/block15/Block15";
 import { Block16Props } from "../../blocks/block16/Block16";
 import { Block17Props } from "../../blocks/block17/Block17";
 import { Block18Props } from "../../blocks/block18/Block18";
+import { CSSDecorationProps } from "../../components/decorations/CSSDecoration";
 import { DecorationProps } from "../../components/decorations/Decoration";
 import { GenericBlockProps } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
@@ -107,8 +108,9 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
     if (b?.mobileImage) b.mobileImage.priority = true;
     if (b?.video) b.video.priority = true;
 
-    b.decorations?.map((decoration: DecorationProps) => {
-      const d = decoration;
+    b.decorations?.map((decoration: DecorationProps | CSSDecorationProps) => {
+      const d = decoration as any;
+      if (d?.image) d.image.priority = true;
       if (d?.mobile?.image) d.mobile.image.priority = true;
       if (d?.tablet?.image) d.tablet.image.priority = true;
       if (d?.desktop?.image) d.desktop.image.priority = true;

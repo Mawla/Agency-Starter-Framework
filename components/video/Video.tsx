@@ -1,4 +1,3 @@
-import { useInView } from "../../hooks/useInView";
 import { VideoType } from "../../types";
 import cx from "clsx";
 import React, { ComponentType, lazy, useRef } from "react";
@@ -22,6 +21,7 @@ const VideoPlayer = lazy<ComponentType<VideoType>>(
 export type VideoProps = {
   className?: string;
   cover?: boolean;
+  animate?: boolean;
 } & VideoType;
 
 export const Video = (props: VideoProps) => {
@@ -29,12 +29,6 @@ export const Video = (props: VideoProps) => {
   if (!className) className = "aspect-video relative";
 
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const lazyLoaded = useInView({
-    elementRef: wrapperRef,
-    threshold: 0.01,
-    once: true,
-  });
 
   const coverClassName = cover
     ? cx(
@@ -46,16 +40,12 @@ export const Video = (props: VideoProps) => {
       )
     : null;
 
-  if (!lazyLoaded)
-    return (
-      <div
-        ref={wrapperRef}
-        className={cx("bg-black bg-opacity-5", className)}
-      />
-    );
-
   return (
-    <div ref={wrapperRef} className={cx(coverClassName, className)}>
+    <div
+      ref={wrapperRef}
+      className={cx("video", coverClassName, className)}
+      data-animate={props.animate !== false ? "fade-in" : undefined}
+    >
       {provider === "youtube" && <YoutubePlayer {...props} />}
       {provider === "vimeo" && <VimeoPlayer {...props} />}
       {provider === "mux" && <MuxPlayer {...props} />}

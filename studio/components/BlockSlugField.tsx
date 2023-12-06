@@ -9,12 +9,18 @@ export type BlockSlugFieldProps = {
   document?: { _type: string; _id: string };
   renderDefault?: (props: any) => any;
   path: Path;
+  schemaType?: {
+    options?: {
+      prefix?: string;
+      useTitle?: boolean;
+    };
+  };
 };
 
 export const BlockSlugField: ComponentType<any> = (
   props: BlockSlugFieldProps,
 ) => {
-  const { value, renderDefault } = props;
+  const { value, renderDefault, schemaType } = props;
 
   const containerValue = useFormValue(props.path.slice(0, -1)) as any;
 
@@ -22,7 +28,12 @@ export const BlockSlugField: ComponentType<any> = (
     <Stack space={2}>
       {renderDefault && <div>{renderDefault(props)}</div>}
       <Text muted size={1}>
-        #{slugify((value as any)?.current || containerValue?.title)}
+        {schemaType?.options?.prefix ?? "#"}
+        {slugify(
+          (value as any)?.current || schemaType?.options?.useTitle
+            ? containerValue?.title
+            : "",
+        )}
       </Text>
     </Stack>
   );

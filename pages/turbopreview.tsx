@@ -145,11 +145,17 @@ export default function PreviewPage({
 
   const getQuery = () => {
     if (document._type === "navigation") {
-      return getNavigationQuery(language);
+      return getNavigationQuery(language).replace(
+        `_id == "navigation`,
+        `_id match "*navigation`,
+      );
     }
 
     if (document._type === "footer") {
-      return getFooterQuery(language);
+      return getFooterQuery(language).replace(
+        `_id == "footer`,
+        `_id match "*footer`,
+      );
     }
 
     if (document._type === "preset.button") {
@@ -200,7 +206,7 @@ export default function PreviewPage({
           {
             _id,
             title,
-            "csv": file.asset->url
+            "csv": coalesce(csv, file.asset->url),
           }
         ]
       }
@@ -278,6 +284,7 @@ export default function PreviewPage({
           config={config}
         />
       )}
+
       {previewType === "navigation" && previewDocument && (
         <Navigation {...previewDocument} />
       )}

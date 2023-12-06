@@ -34,7 +34,9 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
       if (!file) return;
       const Papa = (await import("papaparse")).default;
       Papa.parse(file, {
-        download: true,
+        download: Boolean(
+          file.startsWith("http") || file.endsWith(".csv"),
+        ) as any,
         header: true,
         skipEmptyLines: true,
         error: (err) => {
@@ -74,11 +76,11 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
     );
 
   return (
-    <div className="overflow-x-auto not-prose">
+    <div className="table overflow-x-auto not-prose w-full">
       <div className="text-sm sm:text-md min-w-[500px]">
         {data && (
           <table className="border-collapse table-auto w-full">
-            {data.meta.fields.length && (
+            {Boolean(data.meta.fields.length) && (
               <thead>
                 <tr>
                   {data.meta?.fields?.map((field) => (
@@ -89,7 +91,7 @@ export const Table = ({ file, fileName, textTransformers }: TableProps) => {
                 </tr>
               </thead>
             )}
-            {data.data.length && (
+            {Boolean(data.data.length) && (
               <tbody>
                 {data?.data?.map((row) => (
                   <tr

@@ -238,12 +238,15 @@ export const Block18 = ({
         }
       }
 
-      items.forEach((item) => {
+      items.forEach((item, i) => {
         if (shiftX) {
           item.style.transform = `translateX(${shiftX}px)`;
         } else {
           item.style.removeProperty("transform");
         }
+
+        // store column index on each item for animation delay
+        item.firstElementChild?.setAttribute("data-column", i.toString());
       });
     });
   }, [debouncedScreenWidth, items, theme?.block?.align]);
@@ -328,12 +331,17 @@ export const Block18 = ({
                     | ComposableCardProps
                     | TestimonialCardProps
                     | ImageCardProps,
+                  i: number,
                 ) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
                   }
                   return (
-                    <div key={item._key} className="h-full text-left">
+                    <div
+                      key={item._key}
+                      className="card h-full text-left"
+                      data-animate="zoom-in"
+                    >
                       <CardWrapper>
                         <Card {...item} />
                       </CardWrapper>
@@ -362,6 +370,7 @@ export const Block18 = ({
                     | ComposableCardProps
                     | TestimonialCardProps
                     | ImageCardProps,
+                  i: number,
                 ) => {
                   if (item.type === "card.composable") {
                     item.blockTitleLevel = theme?.title?.as || "h2";
@@ -376,9 +385,16 @@ export const Block18 = ({
                           colSpanClasses[item?.theme?.card?.columns],
                       )}
                     >
-                      <CardWrapper>
-                        <Card {...item} />
-                      </CardWrapper>
+                      <div
+                        className="card h-full"
+                        data-animate="zoom-in"
+                        data-animate-threshold=".25"
+                        data-duration="500"
+                      >
+                        <CardWrapper>
+                          <Card {...item} />
+                        </CardWrapper>
+                      </div>
                     </div>
                   );
                 },
