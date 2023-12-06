@@ -20,7 +20,7 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
   }
 
   return (
-    <div className="absolute inset-y-0 z-50">
+    <div className="preview-tools absolute inset-y-0 z-50">
       <div className="sticky top-0 p-1">
         <span className="absolute top-0.5 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
         <span className="absolute top-0.5 left-0.5 w-px h-20 bg-gradient-to-b from-black/10 to-black/0"></span>

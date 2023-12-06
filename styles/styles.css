@@ -159,6 +159,11 @@ script[type='application/ld+json'] {
 .preview-highlight-open:not(.absolute) {
   position: relative;
 }
+
+.is-taking-screenshot .preview-tools {
+  display: none;
+}
+
 /* 
 .preview-highlight-open .preview-block-edit-button {
   display: none !important;
