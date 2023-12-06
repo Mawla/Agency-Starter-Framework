@@ -164,11 +164,6 @@ script[type='application/ld+json'] {
   display: none;
 }
 
-/* 
-.preview-highlight-open .preview-block-edit-button {
-  display: none !important;
-} */
-
 /* Fancybox */
 .fancybox__content {
   padding: 0 !important;

@@ -1,6 +1,11 @@
 import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
-import BlockSelect from "./BlockSelect";
-import { deleteBlock, duplicateBlock, moveBlock } from "./Preview/actions";
+import BlockSelectDialog from "./BlockSelectDialog";
+import {
+  addBlock,
+  deleteBlock,
+  duplicateBlock,
+  moveBlock,
+} from "./Preview/actions";
 import { ComponentType, useEffect, useRef, useState } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
@@ -67,6 +72,14 @@ export const PageBuilder: ComponentType<any> = (props) => {
         });
       }
 
+      if (e.data.action === "block-add-after") {
+        return addBlock({
+          blockKey: e.data.blockKey,
+          value,
+          elementRef,
+        });
+      }
+
       // scroll to block in preview if it's not visible
       // sanity studio removes array elements that are not in view
       // so we need to scroll to it, and trigger a click on the edit button
@@ -87,8 +100,6 @@ export const PageBuilder: ComponentType<any> = (props) => {
               behavior: "instant",
               top: e.data.index * 96 + elementRef.current.offsetTop,
             });
-
-            console.log(1, e.data.index * 96 + elementRef.current.offsetTop);
 
             // edit
             if (
@@ -150,7 +161,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
           zIndex: 10,
         }}
       >
-        <BlockSelect
+        <BlockSelectDialog
           onChange={props.onChange}
           value={props.value}
           options={props.options}
@@ -192,6 +203,16 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
       { type: "preview-view-scroll-to-block", blockKey: props.value._key },
       import.meta.env.SANITY_STUDIO_PROJECT_PATH,
     );
+
+    setTimeout(() => {
+      const previewIframe = getIframe();
+      if (!previewIframe?.contentWindow) return;
+
+      previewIframe.contentWindow.postMessage(
+        { type: "preview-view-scroll-to-block", blockKey: props.value._key },
+        import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+      );
+    }, 100);
   }, [props.open, props.value?._key]);
 
   /**
