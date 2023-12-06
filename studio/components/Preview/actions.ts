@@ -8,7 +8,7 @@ type BlockActionType = {
 };
 
 export const deleteBlock = ({ blockKey, value, onChange }: BlockActionType) => {
-  if (!confirm("are you sure delete?")) return;
+  if (!confirm("Are you sure you want to delete this block?")) return;
   onChange(set([...value].filter((item) => item._key !== blockKey)));
 };
 

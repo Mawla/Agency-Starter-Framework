@@ -125,6 +125,10 @@ script[type='application/ld+json'] {
 }
 */
 
+:root {
+  --highlight-color: #2276fc;
+}
+
 .preview-highlight-hover:not(.absolute) {
   position: relative;
 }
@@ -135,15 +139,13 @@ script[type='application/ld+json'] {
   content: "";
   display: block;
   position: absolute;
-  inset: 0;
-  outline: 3px dashed rgba(65, 105, 225, 1);
-  outline-offset: -2px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--highlight-color);
   transition: opacity 0.25s;
   z-index: 999;
-}
-
-.preview-highlight-open:after {
-  outline-style: solid;
 }
 
 .preview-highlight-open:not(.absolute) {

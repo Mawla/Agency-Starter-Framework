@@ -23,7 +23,7 @@ export const ComponentPreviewTools = ({ data }: ComponentPreviewToolsProps) => {
 
   return (
     <button
-      className="absolute preview-edit-button rounded bg-[royalblue] text-white transition-colors hidden group-hover/component:block"
+      className="absolute preview-edit-button rounded bg-[var(--highlight-color)] text-white transition-colors hidden group-hover/component:block  text-[11px] font-[system-ui] font-normal gap-1 leading-none items-center"
       onClick={() => onActionClick("component-edit")}
     >
       <svg

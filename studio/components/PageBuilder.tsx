@@ -2,14 +2,35 @@ import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
 import { deleteBlock, duplicateBlock, moveBlock } from "./Preview/actions";
 import { ComponentType, useEffect, useRef, useState } from "react";
+import { useRouter } from "sanity/router";
 
 export const PageBuilder: ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const { value, onChange }: any = props;
+  const [disabled, setDisabled] = useState<Boolean>(true);
+
+  const router = useRouter();
+  console.log(router);
+
+  useEffect(() => {
+    if (!elementRef.current) return;
+    // don't respond to messages if element isn't visible
+    // if (elementRef.current.offsetParent === null) return;
+    if (
+      elementRef.current
+        .closest('[data-testid="change-connector-root"]')
+        ?.querySelector("iframe")
+    ) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, []);
 
   useEffect(() => {
     function onMessage(e: MessageEvent) {
+      if (disabled) return;
       if (!elementRef.current) return;
 
       // don't respond to messages if element isn't visible
@@ -55,7 +76,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
       // so we need to scroll to it, and trigger a click on the edit button
       // to open the form
       if (e.data.type == "preview-studio-action" && e.data.blockKey) {
-        const blockElement = document.querySelectorAll(
+        const blockElement = elementRef.current.querySelectorAll(
           `[data-key="${e.data.blockKey}"]`,
         )[1] as HTMLDivElement;
 
@@ -85,6 +106,7 @@ export const PageBuilder: ComponentType<any> = (props) => {
                   button.click();
                 }
 
+                // focus on field
                 if (e.data.action === "component-edit") {
                   setTimeout(() => {
                     const field = document.querySelector(
@@ -117,11 +139,11 @@ export const PageBuilder: ComponentType<any> = (props) => {
 
     window.addEventListener("message", onMessage, false);
     return () => window.removeEventListener("message", onMessage);
-  }, [value, onChange]);
+  }, [value, onChange, disabled]);
 
   return (
     <div ref={elementRef}>
-      {props.renderDefault(props)}
+      {!disabled && props.renderDefault(props)}
       <div
         style={{
           transform: "translateY(-100%)",

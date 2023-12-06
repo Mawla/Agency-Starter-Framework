@@ -116,7 +116,7 @@ export const BlockLoadInView = ({
       data-block={isPreview ? block : undefined}
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
-      className="group hover:outline-offset-[-2px] hover:outline-[royalblue] hover:outline-dashed"
+      className="group/block"
     >
       {isPreview && <BlockPreviewTools _key={_key} index={index} />}
 
