@@ -73,21 +73,22 @@ const schema = defineType({
     }),
     defineField({
       ...BLOCKS_FIELD,
+      components: null,
       group: null as any,
       title: "Block",
       description: null as any,
       of: Object.keys(BLOCK_SCHEMAS).map((type: any) => ({
         type,
-        components: {
-          preview: PageBuilderItemPreview as any,
-          item: PageBuilderItem as any,
-        },
+        // components: {
+        //   preview: PageBuilderItemPreview as any,
+        //   item: PageBuilderItem as any,
+        // },
       })),
-      options: {
-        filterType: /block|studio\./,
-        updateField: "blocks",
-        placeholder: "Add a block",
-      } as any,
+      // options: {
+      //   filterType: /block|studio\./,
+      //   updateField: "blocks",
+      //   placeholder: "Add a block",
+      // } as any,
     } as any),
     defineField({
       name: "image",
