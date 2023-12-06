@@ -133,8 +133,7 @@ script[type='application/ld+json'] {
   position: relative;
 }
 
-.preview-highlight-open:after,
-.preview-highlight-hover:after {
+[data-is-preview]:after {
   pointer-events: none;
   content: "";
   display: block;
@@ -144,8 +143,13 @@ script[type='application/ld+json'] {
   bottom: 0;
   width: 2px;
   background-color: var(--highlight-color);
-  transition: opacity 0.25s;
   z-index: 999;
+  opacity: 0;
+}
+
+.preview-highlight-open:after,
+.preview-highlight-hover:after {
+  opacity: 1;
 }
 
 .preview-highlight-open:not(.absolute) {

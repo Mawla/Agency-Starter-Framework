@@ -2,16 +2,12 @@ import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
 import { deleteBlock, duplicateBlock, moveBlock } from "./Preview/actions";
 import { ComponentType, useEffect, useRef, useState } from "react";
-import { useRouter } from "sanity/router";
 
 export const PageBuilder: ComponentType<any> = (props) => {
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const { value, onChange }: any = props;
   const [disabled, setDisabled] = useState<Boolean>(true);
-
-  const router = useRouter();
-  console.log(router);
 
   useEffect(() => {
     if (!elementRef.current) return;
@@ -89,8 +85,10 @@ export const PageBuilder: ComponentType<any> = (props) => {
           if (scrollElement) {
             scrollElement.scrollTo({
               behavior: "instant",
-              top: e.data.index * 96 + 450,
+              top: e.data.index * 96 + elementRef.current.offsetTop,
             });
+
+            console.log(1, e.data.index * 96 + elementRef.current.offsetTop);
 
             // edit
             if (

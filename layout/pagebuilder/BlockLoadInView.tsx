@@ -117,6 +117,7 @@ export const BlockLoadInView = ({
       className="group/block"
       data-inview={inView}
       data-no-animate={isPreview ? true : undefined}
+      data-is-preview={isPreview ? true : undefined}
     >
       {isPreview && <BlockPreviewTools _key={_key} index={index} />}
 
