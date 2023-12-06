@@ -1,12 +1,147 @@
 import { ArrayItemPreviewHighlight } from "./ArrayItemPreviewHighlight";
 import BlockSelect from "./BlockSelect";
-import { ComponentType, useEffect, useState } from "react";
+import { deleteBlock, duplicateBlock, moveBlock } from "./Preview/actions";
+import { ComponentType, useEffect, useRef, useState } from "react";
 
 export const PageBuilder: ComponentType<any> = (props) => {
-  return (
-    <div>
-      {props.renderDefault(props)}
+  const elementRef = useRef<HTMLDivElement | null>(null);
 
+  const { value, onChange }: any = props;
+  const [disabled, setDisabled] = useState<Boolean>(true);
+
+  useEffect(() => {
+    if (!elementRef.current) return;
+    // don't respond to messages if element isn't visible
+    // if (elementRef.current.offsetParent === null) return;
+    if (
+      elementRef.current
+        .closest('[data-testid="change-connector-root"]')
+        ?.querySelector("iframe")
+    ) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    function onMessage(e: MessageEvent) {
+      if (disabled) return;
+      if (!elementRef.current) return;
+
+      // don't respond to messages if element isn't visible
+      if (elementRef.current.offsetParent === null) return;
+
+      // delete
+      if (e.data.action === "block-delete") {
+        return deleteBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+        });
+      }
+
+      if (e.data.action === "block-duplicate") {
+        return duplicateBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+        });
+      }
+
+      if (e.data.action === "block-move-up") {
+        return moveBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+          direction: "up",
+        });
+      }
+
+      if (e.data.action === "block-move-down") {
+        return moveBlock({
+          blockKey: e.data.blockKey,
+          value,
+          onChange,
+          direction: "down",
+        });
+      }
+
+      // scroll to block in preview if it's not visible
+      // sanity studio removes array elements that are not in view
+      // so we need to scroll to it, and trigger a click on the edit button
+      // to open the form
+      if (e.data.type == "preview-studio-action" && e.data.blockKey) {
+        const blockElement = elementRef.current.querySelectorAll(
+          `[data-key="${e.data.blockKey}"]`,
+        )[1] as HTMLDivElement;
+
+        if (typeof blockElement === "undefined") {
+          // find the scroll area
+          const scrollElement = elementRef.current.closest(
+            '[data-testid="document-panel-scroller"]',
+          );
+
+          if (scrollElement) {
+            scrollElement.scrollTo({
+              behavior: "instant",
+              top: e.data.index * 96 + elementRef.current.offsetTop,
+            });
+
+            console.log(1, e.data.index * 96 + elementRef.current.offsetTop);
+
+            // edit
+            if (
+              e.data.action === "block-edit" ||
+              e.data.action === "component-edit"
+            ) {
+              setTimeout(() => {
+                // open block item
+                const button = document.querySelectorAll(
+                  `[data-key="${e.data.blockKey}"] button`,
+                )[1] as HTMLButtonElement;
+                if (button) {
+                  button.click();
+                }
+
+                // focus on field
+                if (e.data.action === "component-edit") {
+                  setTimeout(() => {
+                    const field = document.querySelector(
+                      `[data-testid='field-${e.data.path}']`,
+                    ) as HTMLDivElement;
+                    if (!field) return;
+
+                    let element: HTMLElement | null =
+                      field.querySelector("label") ||
+                      // inactive Portable Text field
+                      field.querySelector('[data-testid="activate-overlay"]') ||
+                      // Portable Text field
+                      field.querySelector(".pt-editable");
+
+                    if (element) {
+                      element.click();
+                      element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    }
+                  }, 0);
+                }
+              }, 100);
+            }
+          }
+        }
+      }
+    }
+
+    window.addEventListener("message", onMessage, false);
+    return () => window.removeEventListener("message", onMessage);
+  }, [value, onChange, disabled]);
+
+  return (
+    <div ref={elementRef}>
+      {!disabled && props.renderDefault(props)}
       <div
         style={{
           transform: "translateY(-100%)",
@@ -65,12 +200,13 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
 
   useEffect(() => {
     if (!props.value?._key) return;
+    if (props.value?.disabled) return;
 
     function onMessage(e: MessageEvent) {
-      if (
-        e.data.type == "preview-studio-highlight-block" &&
-        e.data.blockKey === props.value?._key
-      ) {
+      if (e.data.blockKey !== props.value?._key) return;
+
+      // highlight block in preview
+      if (e.data.type == "preview-studio-highlight-block") {
         setHighlight(e.data.enabled);
       }
     }
@@ -94,7 +230,7 @@ export const PageBuilderItem: React.ComponentType<any> = (props) => {
     requestInview();
 
     window.addEventListener("message", onMessage, false);
-    () => window.removeEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, [props.value?._key]);
 
   return (

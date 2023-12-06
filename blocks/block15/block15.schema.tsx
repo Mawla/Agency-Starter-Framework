@@ -21,10 +21,11 @@ const schema = defineType({
       title: "title",
       body: "body",
       intro: "intro",
+      cmsTitle: "cmsTitle",
     },
-    prepare({ title = "Split text", intro, body }: any) {
+    prepare({ title, cmsTitle, intro, body }: any) {
       return {
-        title,
+        title: title || cmsTitle || "Split text",
         subtitle: `${blocksToText(intro)} ${blocksToText(body)}`,
       };
     },

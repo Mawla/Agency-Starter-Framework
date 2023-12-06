@@ -139,6 +139,7 @@ export const BlockBuilder = ({ items }: BlockBuilderProps) => {
               block={item._type}
               _key={item._key}
               slug={item.slug}
+              index={i}
             >
               {/* all blocks */}
               {item._type === "block.block4" && (

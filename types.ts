@@ -310,6 +310,15 @@ export type PersonType = {
 };
 
 export type GenericBlockProps = {
-  _key?: string;
+  _key: string;
   [key: string]: any;
 };
+
+export type BlockPreviewToolAction =
+  | "block-edit"
+  | "block-delete"
+  | "block-duplicate"
+  | "block-move-down"
+  | "block-move-up";
+
+export type ComponentPreviewToolAction = "component-edit" | "component-delete";

@@ -136,7 +136,7 @@ export default function PreviewPage({
     }
 
     window.addEventListener("message", onMessage, false);
-    () => window.removeEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, []);
 
   /**
