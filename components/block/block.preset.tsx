@@ -1,8 +1,4 @@
 import CaptureScreenshot from "../../studio/components/CaptureScreenshot/CaptureScreenshot";
-import {
-  PageBuilderItem,
-  PageBuilderItemPreview,
-} from "../../studio/components/PageBuilder";
 import PresetUsage from "../../studio/components/Presets/PresetUsage";
 import DocumentPreview from "../../studio/components/Preview/DocumentPreview";
 import Warning from "../../studio/components/Warning";

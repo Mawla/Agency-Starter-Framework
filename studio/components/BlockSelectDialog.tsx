@@ -27,7 +27,7 @@ import React, {
 } from "react";
 import { FormSetPatch, set, useClient, useFormValue, useSchema } from "sanity";
 
-export type BlockSelectProps = {
+export type BlockSelectDialogProps = {
   onChange?: (set: FormSetPatch) => void;
   value?: any;
   document?: { _type: string; _id: string };
@@ -64,7 +64,9 @@ type BlockType = {
   blocks?: any[];
 };
 
-const BlockSelectDialog: ComponentType<any> = (props: BlockSelectProps) => {
+const BlockSelectDialog: ComponentType<any> = (
+  props: BlockSelectDialogProps,
+) => {
   const [open, setOpen] = useState(false);
   const [blockInsertIndex, setBlockInsertIndex] = useState<number | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
