@@ -256,6 +256,15 @@ module.exports = ${JSON.stringify(
       `${__dirname}/../../public/downloads/ogMetaFont.ttf`,
     );
   }
+
+  const favicon: string = await client.fetch(`
+  *[_id == "config_seo"][0] { 
+    "favicon": favicon.favicon_ico.asset->url,      
+  }.favicon`);
+
+  if (favicon) {
+    await download(favicon, `${__dirname}/../../public/favicon.ico`);
+  }
 }
 
 if (write) buildConfig();
