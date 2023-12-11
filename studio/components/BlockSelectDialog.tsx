@@ -426,10 +426,12 @@ const BlockDialog = ({
                     height: "100%",
                     borderRadius: 5,
                     gridColumn: width && width < 600 ? "span 2" : undefined,
+                    display: "block",
                   }}
                   key={image}
                   tone="primary"
                   onClick={() => onPresetSelect(_id)}
+                  padding={1}
                 >
                   <Box>
                     {image && (
@@ -439,9 +441,25 @@ const BlockDialog = ({
                         style={{ maxWidth: "100%" }}
                       />
                     )}
-                    <Inline style={{ position: "absolute", left: 4, top: 4 }}>
-                      {title && <Badge>{title}</Badge>}
-                    </Inline>
+
+                    {title && (
+                      <span
+                        style={{
+                          textTransform: "uppercase",
+                          padding: "2px 4px",
+                          fontSize: 11,
+                          borderRadius: "0 0 5px 0",
+                          fontWeight: 600,
+                          background: "white",
+                          color: "#111",
+                          position: "absolute",
+                          left: 4,
+                          top: 4,
+                        }}
+                      >
+                        {title}
+                      </span>
+                    )}
                   </Box>
                 </Button>
               ))}
