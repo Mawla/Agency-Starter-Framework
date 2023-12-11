@@ -40,3 +40,25 @@ export const moveBlock = ({
   clone.splice(newIndex, 0, block);
   onChange(set(clone));
 };
+
+export const addBlock = ({
+  blockKey,
+  value,
+  elementRef,
+}: {
+  blockKey: string;
+  value: { _key: string }[];
+  elementRef: React.RefObject<HTMLDivElement | null>;
+}) => {
+  const index = value.findIndex((item) => item._key === blockKey);
+  const addButton = elementRef?.current?.querySelector(
+    "#add-block",
+  ) as HTMLButtonElement;
+
+  if (addButton) {
+    const event = new CustomEvent("block-add-click", {
+      detail: { afterIndex: index },
+    });
+    addButton.dispatchEvent(event);
+  }
+};

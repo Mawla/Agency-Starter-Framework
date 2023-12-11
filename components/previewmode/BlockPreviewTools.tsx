@@ -20,31 +20,90 @@ const BlockPreviewTools = ({ _key, index }: BlockPreviewToolsProps) => {
   }
 
   return (
-    <div className="preview-tools absolute inset-y-0 z-50">
-      <div className="sticky top-0 p-1">
-        <span className="absolute top-0.5 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
-        <span className="absolute top-0.5 left-0.5 w-px h-20 bg-gradient-to-b from-black/10 to-black/0"></span>
-        <div className="inline-flex flex-col pointer ">
-          <button
-            className="preview-block-edit-button p-0.5 bg-white text-[#333] hover:text-[#111] hover:bg-[#eee]"
-            onClick={() => onActionClick("block-edit")}
-          >
-            <svg
-              fill="none"
-              viewBox="0 0 25 25"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-4 h-4"
+    <div className="preview-tools absolute inset-0 pointer-events-none z-[999]">
+      <div className="absolute inset-y-0">
+        <div className="sticky top-0 pl-1 pt-0.5 pointer-events-auto z-20">
+          {/* <span className="absolute top-0 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span> */}
+          {/* <span className="absolute top-0 left-0.5 w-px h-20 bg-gradient-to-b from-black/10 to-black/0"></span> */}
+          <div className="inline-flex flex-col pointer ">
+            {/* move up */}
+            {/* <button
+              className="bg-white text-[#333] hover:text-[#111] hover:bg-[#eee] grid place-items-center w-5 h-5"
+              onClick={() => onActionClick("block-move-up")}
+              title="Move block up"
             >
-              <path
-                stroke="currentColor"
-                d="m15 7 3 3m-12 9 1-4 10-10 3 3-10 10z"
-                strokeWidth="1"
-              />
-            </svg>
-          </button>
-          <ActionsDropdown onActionClick={onActionClick} />
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M4 9H11L7.5 4.5L4 9Z" fill="currentColor"></path>
+              </svg>
+            </button> */}
+
+            {/* edit button */}
+            <button
+              className="bg-white text-[#333] hover:text-[#111] hover:bg-[#eee] grid place-items-center w-5 h-5 shadow"
+              onClick={() => onActionClick("block-edit")}
+              title="Edit block"
+            >
+              <svg
+                fill="none"
+                viewBox="0 0 25 25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke="currentColor"
+                  d="m15 7 3 3m-12 9 1-4 10-10 3 3-10 10z"
+                />
+              </svg>
+            </button>
+
+            {/* move down */}
+            {/* <button
+              className="bg-white text-[#333] hover:text-[#111] hover:bg-[#eee] grid place-items-center w-5 h-5"
+              onClick={() => onActionClick("block-move-down")}
+              title="Move block down"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M4 6H11L7.5 10.5L4 6Z" fill="currentColor"></path>
+              </svg>
+            </button> */}
+
+            {/* actions */}
+            <ActionsDropdown onActionClick={onActionClick} />
+          </div>
         </div>
       </div>
+
+      {/* add new block button */}
+      <span className="absolute z-10 bottom-0 left-0.5 w-20 h-px bg-gradient-to-r from-black/10 to-black/0"></span>
+      {/* <span className="absolute bottom-0.5 left-0.5 w-px h-20 bg-gradient-to-t from-black/10 to-black/0"></span> */}
+      <button
+        className="bg-white text-[#333] hover:text-[#111] hover:bg-[#eee] grid place-items-center w-5 h-5 absolute bottom-1 left-1 pointer-events-auto shadow"
+        onClick={() => onActionClick("block-add-after")}
+        title="Add block here"
+      >
+        <svg
+          fill="none"
+          viewBox="0 0 15 15"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-3 h-3"
+        >
+          <path
+            d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </button>
     </div>
   );
 };
@@ -59,7 +118,10 @@ const ActionsDropdown = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="preview-theme-button p-0.5 bg-white text-[#333] hover:text-[#111] hover:bg-[#eee]">
+        <button
+          className="preview-theme-button bg-white text-[#333] hover:text-[#111] hover:bg-[#eee] grid place-items-center w-5 h-5 shadow"
+          title="More actions"
+        >
           <svg
             fill="none"
             viewBox="0 0 25 25"

@@ -319,6 +319,7 @@ export type BlockPreviewToolAction =
   | "block-delete"
   | "block-duplicate"
   | "block-move-down"
-  | "block-move-up";
+  | "block-move-up"
+  | "block-add-after";
 
 export type ComponentPreviewToolAction = "component-edit" | "component-delete";
