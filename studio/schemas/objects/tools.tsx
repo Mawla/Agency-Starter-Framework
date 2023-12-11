@@ -29,6 +29,14 @@ export const defaultBlockTools = [
     { strict: false },
   ),
   defineField({
+    name: "cmsTitle",
+    title: "CMS Title",
+    type: "string",
+    description:
+      "A title for this block, used in the CMS. Useful for blocks that don't have a title field.",
+    group: "tools",
+  }),
+  defineField({
     name: "swapSchema",
     title: "Swap schema",
     type: "swapSchema",

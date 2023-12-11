@@ -24,10 +24,11 @@ const schema = defineType({
   preview: {
     select: {
       title: "title",
+      cmsTitle: "cmsTitle",
     },
-    prepare({ title = "Pricing plans" }: any) {
+    prepare({ title, cmsTitle }: any) {
       return {
-        title: title,
+        title: title || cmsTitle || "Pricing plans",
       };
     },
   },

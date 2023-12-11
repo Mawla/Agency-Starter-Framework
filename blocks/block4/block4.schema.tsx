@@ -24,10 +24,11 @@ const schema = defineType({
       image: "image",
       body: "body",
       intro: "intro",
+      cmsTitle: "cmsTitle",
     },
-    prepare({ title = "Default content", intro, body, image }: any) {
+    prepare({ title, cmsTitle, intro, body, image }: any) {
       return {
-        title: title,
+        title: title || cmsTitle || "Default content",
         subtitle: `${blocksToText(intro)} ${blocksToText(body)}`,
         media: image || <AlignCenter weight="thin" />,
       };

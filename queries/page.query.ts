@@ -44,7 +44,7 @@ export type PageType = {
   hideFooter?: boolean;
   hideBreadcrumb?: boolean;
   seo: SeoType;
-  blocks: {}[];
+  blocks: { _key: string }[];
   locked?: boolean;
   homepage: FlatBreadcrumbItemType;
   breadcrumb: FlatBreadcrumbType;

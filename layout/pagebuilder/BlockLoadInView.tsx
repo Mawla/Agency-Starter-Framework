@@ -1,3 +1,4 @@
+import { BlockPreviewToolsProps } from "../../components/previewmode/BlockPreviewTools";
 import { slugify } from "../../helpers/utils/string";
 import { useInView } from "../../hooks/useInView";
 import { backgroundClasses } from "../../theme";
@@ -5,7 +6,7 @@ import { ColorType } from "../../types";
 import { BlockSchemaName } from "../../types.sanity";
 import cx from "clsx";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ComponentType, lazy } from "react";
 
 type BlockLoadInViewProps = {
   children?: React.ReactElement | React.ReactNode;
@@ -13,9 +14,17 @@ type BlockLoadInViewProps = {
   background?: ColorType | "transparent";
   block?: BlockSchemaName;
   slug?: string;
-  _key?: string;
+  _key: string;
   networkIdle?: boolean;
+  index: number;
 };
+
+const BlockPreviewTools = lazy<ComponentType<BlockPreviewToolsProps>>(
+  () =>
+    import(
+      /* webpackChunkName: "BlockPreviewTools" */ "../../components/previewmode/BlockPreviewTools"
+    ),
+);
 
 export const BlockLoadInView = ({
   children,
@@ -25,6 +34,7 @@ export const BlockLoadInView = ({
   slug,
   _key,
   networkIdle,
+  index,
 }: BlockLoadInViewProps) => {
   const router = useRouter();
   const isPreview = router.pathname.startsWith("/turbopreview");
@@ -44,6 +54,10 @@ export const BlockLoadInView = ({
 
   const [forceLoad, setForceLoad] = useState(!enabled);
 
+  /**
+   * Block Loading
+   */
+
   useEffect(() => {
     let idleCallback: number;
     if (forceLoad === true) return;
@@ -59,6 +73,10 @@ export const BlockLoadInView = ({
 
     () => cancelIdleCallback(idleCallback);
   }, [forceLoad, networkIdle]);
+
+  /**
+   * Preview highlight
+   */
 
   useEffect(() => {
     if (!isPreview) return;
@@ -87,7 +105,7 @@ export const BlockLoadInView = ({
     }
 
     window.addEventListener("message", onMessage, false);
-    () => window.removeEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, [inView, _key, isPreview, doLoad]);
 
   return (
@@ -96,9 +114,13 @@ export const BlockLoadInView = ({
       data-block={isPreview ? block : undefined}
       data-key={isPreview ? _key : undefined}
       id={slugify(slug)}
+      className="group/block"
       data-inview={inView}
       data-no-animate={isPreview ? true : undefined}
+      data-is-preview={isPreview ? true : undefined}
     >
+      {isPreview && <BlockPreviewTools _key={_key} index={index} />}
+
       {doLoad || forceLoad ? (
         children
       ) : (

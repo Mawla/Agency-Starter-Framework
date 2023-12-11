@@ -8,7 +8,7 @@ export const ScreenCapture = () => {
 
       const html2canvas = (await import("html2canvas")).default;
 
-      console.log("capturing screenshot");
+      document.body.classList.add("is-taking-screenshot");
 
       html2canvas(document.body, {
         width: event.data.width || 1024,
@@ -25,6 +25,8 @@ export const ScreenCapture = () => {
             event.origin as any,
           );
         });
+
+        document.body.classList.remove("is-taking-screenshot");
       });
     }
 

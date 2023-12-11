@@ -373,7 +373,7 @@ export const Block1 = ({
                 )}
               >
                 <div className="w-full">
-                  <div className="relative w-full h-auto aspect-video">
+                  <div className="relative w-full h-auto">
                     <Video
                       {...video}
                       className={cx(

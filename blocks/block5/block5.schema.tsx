@@ -20,10 +20,11 @@ const schema = defineType({
     select: {
       title: "title",
       intro: "intro",
+      cmsTitle: "cmsTitle",
     },
-    prepare({ title = "Pricing comparison tables", intro }: any) {
+    prepare({ title, cmsTitle, intro }: any) {
       return {
-        title: title,
+        title: title || cmsTitle || "Pricing comparison tables",
         subtitle: blocksToText(intro),
       };
     },
