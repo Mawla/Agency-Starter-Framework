@@ -129,7 +129,7 @@ export const ResourceCard = ({
         <div className="mt-auto flex flex-col gap-3">
           {authors && Boolean(authors?.length) ? (
             <div className="flex items-start">
-              {authors.map(
+              {authors?.filter(Boolean).map(
                 ({ image }) =>
                   image && (
                     <span
@@ -150,7 +150,7 @@ export const ResourceCard = ({
                   theme?.author && textClasses[theme?.author],
                 )}
               >
-                {joinList(authors.map((a) => a.name))}
+                {joinList(authors.filter(Boolean).map((a) => a.name))}
 
                 {date && (
                   <span

@@ -106,7 +106,7 @@ export const Block14 = ({
               {Boolean(tags?.length) && (
                 <div className="flex items-center mb-4 md:mb-6">
                   <div className="flex gap-1 flex-wrap">
-                    {tags?.map((tag) => (
+                    {tags?.filter(Boolean).map((tag) => (
                       <Tag key={tag.title} label={tag.title} href={tag.href} />
                     ))}
                   </div>
@@ -117,7 +117,7 @@ export const Block14 = ({
                 <address className="flex not-italic">
                   {authors && Boolean(authors?.length) && (
                     <div className="mr-3 inline-flex">
-                      {authors.map(
+                      {authors?.filter(Boolean).map(
                         ({ image }) =>
                           image && (
                             <span
@@ -136,7 +136,7 @@ export const Block14 = ({
                   <div>
                     {authors && Boolean(authors?.length) && (
                       <span className="block font-semibold">
-                        {joinList(authors.map((a) => a.name))}
+                        {joinList(authors.filter(Boolean).map((a) => a.name))}
                       </span>
                     )}
                     {date && (
