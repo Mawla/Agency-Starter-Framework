@@ -315,78 +315,80 @@ export default function PreviewPage({
         />
       )}
 
-      {previewType === "navigation" && previewDocument && (
-        <Navigation {...previewDocument} />
-      )}
-      {previewType === "footer" && previewDocument && (
-        <Footer {...previewDocument} />
-      )}
-      {previewType === "preset.button" && previewDocument && (
-        <div className="relative z-1">
-          <Button
-            presetTheme={previewDocument}
-            label={
-              previewDocument.preview?.text ||
-              previewDocument.title ||
-              "Click here"
-            }
-            href="/"
-          />
-        </div>
-      )}
-      {previewType === "preset.decoration" && previewDocument && (
-        <div className="bg-black/10">
+      <div data-no-animate>
+        {previewType === "navigation" && previewDocument && (
+          <Navigation {...previewDocument} />
+        )}
+        {previewType === "footer" && previewDocument && (
+          <Footer {...previewDocument} />
+        )}
+        {previewType === "preset.button" && previewDocument && (
+          <div className="relative z-1">
+            <Button
+              presetTheme={previewDocument}
+              label={
+                previewDocument.preview?.text ||
+                previewDocument.title ||
+                "Click here"
+              }
+              href="/"
+            />
+          </div>
+        )}
+        {previewType === "preset.decoration" && previewDocument && (
+          <div className="bg-black/10">
+            <Wrapper
+              theme={{
+                background: "white",
+                text: "white",
+                width: "inner",
+                margin: {
+                  top: "lg",
+                  bottom: "lg",
+                },
+                padding: {
+                  top: "xl",
+                  bottom: "xl",
+                },
+              }}
+              decorations={[previewDocument]}
+            />
+          </div>
+        )}
+        {previewType === "script" && previewDocument && (
+          <Scripts items={previewDocument?.items} />
+        )}
+        {previewType === "preset.theme.title" && previewDocument && (
+          <Title {...previewDocument.theme}>
+            {previewDocument.preview?.text || previewDocument.title}
+          </Title>
+        )}
+        {previewType === "preset.theme.text" && previewDocument && (
+          <Text
+            size={previewDocument.theme?.size}
+            color={previewDocument.theme?.color}
+            weight={previewDocument.theme?.weight}
+          >
+            <PortableText
+              content={previewDocument.preview?.text || previewDocument.title}
+            />
+          </Text>
+        )}
+        {previewType === "preset.theme.block" && previewDocument && (
           <Wrapper
             theme={{
-              background: "white",
-              text: "white",
-              width: "inner",
-              margin: {
-                top: "lg",
-                bottom: "lg",
-              },
-              padding: {
-                top: "xl",
-                bottom: "xl",
-              },
+              ...previewDocument?.theme,
             }}
-            decorations={[previewDocument]}
-          />
-        </div>
-      )}
-      {previewType === "script" && previewDocument && (
-        <Scripts items={previewDocument?.items} />
-      )}
-      {previewType === "preset.theme.title" && previewDocument && (
-        <Title {...previewDocument.theme}>
-          {previewDocument.preview?.text || previewDocument.title}
-        </Title>
-      )}
-      {previewType === "preset.theme.text" && previewDocument && (
-        <Text
-          size={previewDocument.theme?.size}
-          color={previewDocument.theme?.color}
-          weight={previewDocument.theme?.weight}
-        >
-          <PortableText
-            content={previewDocument.preview?.text || previewDocument.title}
-          />
-        </Text>
-      )}
-      {previewType === "preset.theme.block" && previewDocument && (
-        <Wrapper
-          theme={{
-            ...previewDocument?.theme,
-          }}
-        >
-          {previewDocument.preview?.text || previewDocument.title}
-        </Wrapper>
-      )}
-      {previewType === "pricing.feature" && previewDocument && (
-        <div className="p-10">
-          <PricingTable {...previewDocument} />
-        </div>
-      )}
+          >
+            {previewDocument.preview?.text || previewDocument.title}
+          </Wrapper>
+        )}
+        {previewType === "pricing.feature" && previewDocument && (
+          <div className="p-10">
+            <PricingTable {...previewDocument} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
