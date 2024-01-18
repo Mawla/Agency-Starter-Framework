@@ -110,7 +110,7 @@ export const swapSchema: ComponentType<any> = (props: swapSchemaProps) => {
   }, []);
 
   return (
-    <Card shadow={1} padding={3}>
+    <Card>
       <Stack space={2}>
         <Text size={1} weight="bold">
           Change block type

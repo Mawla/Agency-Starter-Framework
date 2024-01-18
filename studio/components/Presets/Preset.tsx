@@ -284,7 +284,7 @@ const Preset: ComponentType<any> = (props) => {
   }, [value?.ref]);
 
   return (
-    <Card shadow={1} padding={3}>
+    <Card>
       <Stack space={4}>
         <Stack space={2}>
           <Text size={1} weight="bold">

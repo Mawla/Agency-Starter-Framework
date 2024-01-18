@@ -1,3 +1,4 @@
+import { BlockJSONEditor } from "../../components/BlockJSONEditor";
 import BlockSlugField from "../../components/BlockSlugField";
 import { defineField } from "sanity";
 
@@ -37,6 +38,12 @@ export const defaultBlockTools = [
     group: "tools",
   }),
   defineField({
+    name: "copyPaste",
+    title: "Copy Paste",
+    type: "copyPaste",
+    group: "tools",
+  }),
+  defineField({
     name: "swapSchema",
     title: "Swap schema",
     type: "swapSchema",
@@ -49,17 +56,22 @@ export const defaultBlockTools = [
     group: "tools",
   }),
   defineField({
-    name: "copyPaste",
-    title: "Copy Paste",
-    type: "copyPaste",
-    group: "tools",
-  }),
-  defineField({
     name: "excludeFromSearchIndex",
     title: "Exclude from search index",
     description:
       "Exclude this block from the site search index. The code block, resources feed and related articles are always excluded. Warning: this isn't for search engines like Google.",
     type: "boolean",
+    group: "tools",
+  }),
+  defineField({
+    name: "codeMode",
+    title: "Change code",
+    description:
+      "Change the code of this block. Warning: this will overwrite the current code.",
+    type: "text",
+    components: {
+      input: BlockJSONEditor,
+    },
     group: "tools",
   }),
 ];

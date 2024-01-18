@@ -22,14 +22,19 @@ export const ArrayItemPreviewHighlight: React.ComponentType<any> = (props) => {
     if (!previewIframe?.contentWindow) return;
 
     if (props.open) {
-      previewIframe.contentWindow.postMessage(
-        {
-          type: "preview-view-highlight-open",
-          key: props.value._key,
-          enabled: true,
-        },
-        import.meta.env.SANITY_STUDIO_PROJECT_PATH,
-      );
+      setTimeout(() => {
+        const previewIframe = getPreviewIframe();
+        if (!previewIframe?.contentWindow) return;
+
+        previewIframe.contentWindow.postMessage(
+          {
+            type: "preview-view-highlight-open",
+            key: props.value._key,
+            enabled: true,
+          },
+          import.meta.env.SANITY_STUDIO_PROJECT_PATH,
+        );
+      }, 100);
     } else {
       previewIframe.contentWindow.postMessage(
         {

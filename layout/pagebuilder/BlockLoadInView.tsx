@@ -119,7 +119,9 @@ export const BlockLoadInView = ({
       data-no-animate={isPreview ? true : undefined}
       data-is-preview={isPreview ? true : undefined}
     >
-      {isPreview && <BlockPreviewTools _key={_key} index={index} />}
+      {isPreview && !(router.query.type === "preset.blocks") && (
+        <BlockPreviewTools _key={_key} index={index} />
+      )}
 
       {doLoad || forceLoad ? (
         children
