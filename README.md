@@ -8,6 +8,13 @@ The flexibility to change site structure
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMawla%2FAgency-Starter-Framework&env=SANITY_API_WRITE_TOKEN,SANITY_API_READ_TOKEN,SANITY_WEBHOOK_SECRET,SANITY_PREVIEW_SECRET,SANITY_STUDIO_PROJECT_PATH,SANITY_STUDIO_API_DATASET,NEXT_PUBLIC_SANITY_DATASET,SANITY_STUDIO_API_PROJECT_ID,NEXT_PUBLIC_SANITY_PROJECT_ID&envDescription=Sanity%20%26%20Vercel%20tokens&envLink=https%3A%2F%2Fgithub.com%2FMawla%2FAgency-Starter-Framework%2Fblob%2Fmain%2Fdocs%2FGetting%2520Started.md)
 
+To try out with images download this [zip](https://drive.google.com/file/d/13wd3yYpikq0lDSsGq5IyGa0zv24ruPRM/view?usp=sharing) and use import like below.
+
+To try out the demo site without images:
+```sanity dataset import production-1720544495.tar.gz production```
+
+
+
 Example Website:
 https://sgw-template-saas-1.vercel.app/
 
