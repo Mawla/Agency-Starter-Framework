@@ -9,10 +9,44 @@ The flexibility to change site structure
 Example Website:
 https://sgw-template-saas-1.vercel.app/
 
+
+# Features:
 ## In CMS theming
 https://github.com/Mawla/Agency-Starter-Framework/assets/1926968/6ef5fa6d-1e8c-4258-8124-92f4024d4563
 
-:
+## Block Building System
+
+* Empowering page building for common page types and comprehensive content variety
+* e.g. content pages, landing pages, blogs, case studies, pricing, press releases etc
+* 20 Common blocks (hero, feature list, pricing plan, card grid, article, faq, logo cloud, video etc)
+* Ready-made presets, or create your own
+
+https://github.com/Mawla/Agency-Starter-Framework/assets/1926968/26bde983-d3d5-40ea-8e27-be0811e4422d
+
+## Versatile Page Building
+
+* Global accessibility with Multi-language Support
+* Seamless page linking, guaranteed 0 broken internal links
+* Reusable document collections like pricing plans, people, faq's and testimonials
+* Advanced tagging and Algolia search
+* Fast live previews
+* Flexible theming from CMS
+
+https://github.com/Mawla/Agency-Starter-Framework/assets/1926968/7095e1f6-4147-44d2-88dd-e9c80bb959d4
+
+## Scalability
+* Unlimited pages
+* Fine grained SEO control, opengraph images, sitemaps, redirects, GTM integration
+* Effortless Deployment
+* Mobile first design, fully responsive
+* Fast load times, optimised images
+* Copy blocks between pages
+* Youtube, Vimeo and script embeds
+
+https://github.com/Mawla/Agency-Starter-Framework/assets/1926968/2365dd3f-f0f5-417f-ac0f-71455d3bae29
+
+![image](https://github.com/Mawla/Agency-Starter-Framework/assets/1926968/ec6bce5b-7db5-458b-9440-9171babf15ac)
+
 
 ```
 > yarn dev # next.js localhost:3000
